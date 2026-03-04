@@ -426,10 +426,6 @@ def fetch_all_domains_metadata_robust(
             log("ℹ️ Supabase 返回 0 条或不可用，回退本地 arXiv 抓取。")
             group_end()
 
-    # 当主流程注入 DPR_RUN_DATE 时，本地回退也应按本次运行窗口回溯，避免因为 latest/last_crawl 再次收窄。
-    run_token = str(os.getenv("DPR_RUN_DATE") or "").strip()
-    end_for_fetch = end_date
-
     # ignore_seen 语义：完全按 days_window 回溯，不使用 last_crawl_at / latest_published_at 作为起点
     if ignore_seen:
         log(
@@ -439,17 +435,6 @@ def fetch_all_domains_metadata_robust(
         seen_ids, latest_published_at = set(), None
         start_date = end_date - timedelta(days=days)
         source_desc = f"days_window={days} (ignore_seen)"
-
-    elif run_token:
-        # 回退模式下仍使用 run_token 窗口，避免“以最近一次抓取点”为准导致窗口变窄。
-        fallback_start, fallback_end, sb_window_label = resolve_supabase_time_window(
-            end_date=end_date,
-            days=int(days),
-        )
-        start_date = fallback_start
-        end_for_fetch = fallback_end
-        source_desc = f"fallback-window:{sb_window_label}"
-        seen_ids, latest_published_at = set(), None
     else:
         seen_ids, latest_published_at = load_seen_state()
         if latest_published_at:
@@ -464,21 +449,17 @@ def fetch_all_domains_metadata_robust(
                 start_date = end_date - timedelta(days=days)
                 source_desc = f"days_window={days}"
 
-    # 回退到本地抓取时，若存在 run_token 用回退窗口，否则保留“最大不早于最近days窗口”的增量语义。
-    if not run_token:
-        start_date = max(start_date, end_date - timedelta(days=days))
+    # 兜底：无论来源如何，都不早于 (now - days_window)
+    start_date = max(start_date, end_date - timedelta(days=days))
 
     # 安全兜底
-    if end_for_fetch <= start_date:
-        end_for_fetch = start_date + timedelta(days=1)
-
-    if start_date >= end_for_fetch:
-        start_date = end_for_fetch - timedelta(minutes=1)
+    if start_date >= end_date:
+        start_date = end_date - timedelta(minutes=1)
 
     # 按周拆分窗口，避免单次查询过大（尤其 cs* 这种大类）
-    windows = iter_time_windows(start_date, end_for_fetch, chunk_days=chunk_days)
+    windows = iter_time_windows(start_date, end_date, chunk_days=chunk_days)
     start_str = start_date.strftime("%Y%m%d%H%M")
-    end_str = end_for_fetch.strftime("%Y%m%d%H%M")
+    end_str = end_date.strftime("%Y%m%d%H%M")
     
     group_start("Step 1 - fetch arXiv")
     log(f"🌍 [Global Ingest] Window: {start_str} TO {end_str} ({source_desc})")
