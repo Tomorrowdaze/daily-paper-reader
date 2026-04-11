@@ -1,0 +1,103 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-11T19:55:01.750046+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-01-28-702347-v2",
+      "source": "biorxiv",
+      "title": "DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records",
+      "abstract": "Motivation: Electronic Health Records (EHRs) contain vast amounts of longitudinal patient medical history data, making them highly informative for early disease prediction. Numerous computational methods have been developed to leverage EHR data; however, many process multiple patient records simultaneously, resulting in high memory consumption and computational cost. Moreover, these models also often lack interpretability, limiting insight into the factors driving their predictions. Efficiently handling large-scale EHR data while maintaining predictive accuracy and interpretability therefore remains a critical challenge. To address this gap, we propose DyGraphTrans, a dynamic graph representation learning framework that represents patient EHR data as a sequence of temporal graphs. In this representation, nodes correspond to patients, node features encode temporal clinical attributes, and edges capture patient similarity. DyGraphTrans models both local temporal dependencies and long-range global trends, while a sliding-window mechanism reduces memory consumption without sacrificing essential temporal context. Unlike existing dynamic graph models, DyGraphTrans jointly captures patient similarity and temporal evolution in a memory-efficient and interpretable manner. Results: We evaluated DyGraphTrans on Alzheimer's Disease Neuroimaging Initiative (ADNI) and National Alzheimer's Coordinating Center (NACC) for disease progression prediction, as well as on the Medical Information Mart for Intensive Care (MIMIC-IV) dataset for early mortality prediction. We further assessed the model on multiple benchmark dynamic graph datasets to evaluate its generalizability. DyGraphTrans achieved strong predictive performance across diverse datasets. We also demonstrated interpretability of DyGraphTrans aligned with known clinical risk factors.",
+      "authors": [
+        "Rahman, M. T.",
+        "Al Olaimat, M.",
+        "Bozdag, S.",
+        "Alzheimer's Disease Neuroimaging Initiative,"
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.01.28.702347v2.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable temporal graph for disease prediction",
+      "llm_evidence_cn": "用于疾病预测的可解释时序图",
+      "llm_evidence": "用于疾病预测的可解释时序图",
+      "canonical_evidence": "用于疾病预测的可解释时序图",
+      "llm_tldr_en": "A temporal graph framework for disease prediction that emphasizes interpretability.",
+      "llm_tldr_cn": "一种强调可解释性的用于疾病预测的时序图框架。",
+      "llm_tldr": "一种强调可解释性的用于疾病预测的时序图框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-07-716505-v1",
+      "source": "biorxiv",
+      "title": "WildAlert: A Real-Time, AI-Driven Early Warning System for Wildlife Health and Ecological Threat Detection",
+      "abstract": "Emerging infections and environmental disruptions increasingly threaten wildlife and ecosystem health. Free-ranging wildlife often serve as early indicators of ecological instability, making timely detection of morbidity and mortality events critical for early warning. Yet, existing systems lack the analytical capacity for real-time outbreak detection. We present WildAlert, an AI-driven early warning system that integrates fine-tuned BERT-based natural language processing models with an unsupervised anomaly detection framework to identify unusual wildlife health events using real-time pre-diagnostic clinical data from wildlife rehabilitation organizations. The NLP module achieved high accuracy across clinical classifications and circumstances of admissions, enabling a pre-diagnostic syndromic surveillance framework. Retrospective validation demonstrated that WildAlert anomalies frequently coincided with or preceded confirmed morbidity events, including highly pathogenic avian influenza (HPAI), harmful algal bloom-associated toxicosis, cold-stunning in sea turtles, mass stranding events, West Nile virus, and mycoplasmosis. WildAlert establishes the world's largest standardized, near real-time wildlife health surveillance system, transforming wildlife rehabilitation clinical records into actionable intelligence capable of detecting anomalies across taxa and regions, often before other surveillance methods. WildAlert provides a transferable analytical framework and scalable One Health model linking biodiversity monitoring, zoonotic disease preparedness, and ecosystem-linked environmental threats, with implications for conservation, public health and environmental hazard response.",
+      "authors": [
+        "Pandit, P. S.",
+        "Ranjan, S.",
+        "dombrowski, D.",
+        "Avilla, R.",
+        "Ross, C.",
+        "Clifford, D.",
+        "Rogers, K.",
+        "Riner, J.",
+        "Perry, H.",
+        "Gilardi, K.",
+        "Rutti, M.",
+        "Flewelling, L.",
+        "Hubbard, K.",
+        "Kelly, T."
+      ],
+      "primary_category": "ecology",
+      "categories": [
+        "ecology"
+      ],
+      "published": "2026-04-10T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.07.716505v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "AI-driven early warning system for threat detection",
+      "llm_evidence_cn": "人工智能驱动的威胁检测早期预警系统",
+      "llm_evidence": "人工智能驱动的威胁检测早期预警系统",
+      "canonical_evidence": "人工智能驱动的威胁检测早期预警系统",
+      "llm_tldr_en": "An AI early warning system for real-time detection of ecological and health threats.",
+      "llm_tldr_cn": "一种用于实时检测生态和健康威胁的人工智能早期预警系统。",
+      "llm_tldr": "一种用于实时检测生态和健康威胁的人工智能早期预警系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

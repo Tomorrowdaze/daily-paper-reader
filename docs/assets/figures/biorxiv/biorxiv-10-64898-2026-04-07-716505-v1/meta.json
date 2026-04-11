@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-001.webp",
+      "caption": "Fig. 3: Sensitivity of anomaly detection models to perturbations in surveillance data. Comparison of anomaly detection model sensitivity to data perturbation parameters using standardized regression coefficients shown for four predictors (contamination level, outlier injection, trend strength, and window size) across two anomaly detection models: Autoencoder (left) and Isolation Forest (right). The x-axis represents the magnitude and direction of each coefficient on a logarithmic scale, indicating the relative influence of each parameter on the number of anomalies detected. Positive values denote increased anomaly detection with higher parameter values, while negative values indicate suppression.",
+      "page": 6,
+      "index": 1,
+      "width": 1025,
+      "height": 343
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-002.webp",
+      "caption": "Fig. 6: Time series of wildlife health signals illustrating diverse anomaly detection patterns in rare taxa-clinical classification targets. Subplots show: (a) Brown Pelicans with Nutritional Disease in California, (b) Cooper’s Hawk with Neurological disease in California, (c) All Greater Shearwaters admissions in Florida, (d) All Green sea turtles admissions in Florida, (e) All Procellariidae (Shearwaters) admissions in Florida, and (f) Raccoons with respiratory disease in Florida (g) Sanderlings with neurological disease in California (h) All Shearwater species admissions in Florida. Blue lines represent monthly admissions, black lines indicate the rolling mean, and gray shaded areas show the rolling standard deviation. Anomalies detected by the Isolation Forest model are marked with black stars, and anomalies identified by the Autoencoder model are shown as green circles.",
+      "page": 11,
+      "index": 2,
+      "width": 945,
+      "height": 587
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-003.webp",
+      "caption": "Fig. 4: Detection of HPAI-associated anomalies by WildAlert across regions and taxa. WildAlert anomaly signals for neurologic disease in raptors, shorebirds, and waterfowl across California and Florida, overlaid with USDAconfirmed HPAI detection periods (shaded regions). Each panel shows weekly case counts and anomaly intensities from Autoencoder (AE) and Isolation Forest (IOF) models. Green triangles and black crosses denote anomalies detected through autoencoder and isolation forest models, respectively. AE and IOF signal intensities are plotted on the secondary y-axis.",
+      "page": 7,
+      "index": 3,
+      "width": 962,
+      "height": 638
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-004.webp",
+      "caption": "Fig. 5: Time series of wildlife health signals illustrating diverse anomaly detection patterns in commonly foun taxa-clinical classification targets. Subplots show: (a) Columbids with neurological disease in California, (b) Finches with ocular disease in California (c) Laughing Gulls with neurological disease in Florida, (d) Laughing Gulls with nutritional disease in Florida, (e) Marine birds with neurological disease in California (f) Raccoons with neurologic disease in Florida, (g) Raptors with neurological disease in California, (h) Seabirds with neurological and nutritional disease in California, (i) All seabirds admissions in Florida, (j) Seabirds with neurologic disease in Florida, and (k) All shorebird admissions in Florida. Blue lines represent monthly admissions, black lines indicate the rolling mean, and gr shaded areas denote the",
+      "page": 10,
+      "index": 4,
+      "width": 1001,
+      "height": 815
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-005.webp",
+      "caption": "Fig. 1: WildAlert Early Warning System for Wildlife Health Monitoring and Response. Figure illustrates the flow of real-time data from wildlife rehabilitation organizations across Arizona, California, Florida, Pennsylvania, and Washington into the Wildlife Rehabilitation Medical Database (WRMD). Using natural language processing (NLP) and anomaly detection models, WildAlert identifies syndromic patterns and temporal anomalies in wildlife admissions, enabling early detection of potential events and supporting timely investigation and response efforts by wildlife health agencies.",
+      "page": 3,
+      "index": 5,
+      "width": 952,
+      "height": 429
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-006.webp",
+      "caption": "Fig. 7: Species-specific temporal associations between bird admissions and harmful algal bloom activity.",
+      "page": 13,
+      "index": 6,
+      "width": 991,
+      "height": 796
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-007.webp",
+      "caption": "Table 1: Real-world wildlife health events detected by WildAlert and independently confirmed. Select unusual wildlife health event alerts generated by WildAlert in Florida and California (2024-2025). The table includes date, affected taxa, clinical classifications, geographic locations, and confirmed event diagnoses. *Entries without a clinical classification represent all admissions for the given taxa, regardless of specific clinical signs.",
+      "page": 8,
+      "index": 7,
+      "width": 992,
+      "height": 589
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-07-716505-v1/fig-008.webp",
+      "caption": "Fig. 2: Performance of the NLP model for clinical classification across wildlife cases. The figure presents the confusion matrix for the model’s predictions across 11 clinical categories. Each cell represents the percentage of cases predicted for a given class (columns) relative to their true class (rows). The diagonal elements indicate correct classifications, while off-diagonal elements represent misclassifications.",
+      "page": 5,
+      "index": 8,
+      "width": 977,
+      "height": 786
+    }
+  ]
+}

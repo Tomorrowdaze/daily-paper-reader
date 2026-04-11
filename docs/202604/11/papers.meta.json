@@ -1,0 +1,39 @@
+{
+  "label": "2026-04-11",
+  "date": "2026-04-11",
+  "generated_at": "2026-04-11T19:55:28",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202604/11/biorxiv-10-64898-2026-01-28-702347-v2-dygraphtrans-a-temporal-graph-representation-learning-framework-for-modeling-disease-progression-from-electronic-health-records",
+      "section": "quick",
+      "title_en": "DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records",
+      "authors": "Rahman, M. T., Al Olaimat, M., Bozdag, S., Alzheimer's Disease Neuroimaging Initiative",
+      "date": "2026-04-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.01.28.702347v2.full.pdf",
+      "score": "6.0",
+      "evidence": "用于疾病预测的可解释时序图",
+      "tldr": "本文提出DyGraphTrans框架，将电子健康记录表示为时序图，通过动态建模患者相似性及时间演化，在保持高预测准确率的同时降低内存消耗，并提高模型可解释性。该方法在多种医疗数据上验证了其有效性与泛化性。",
+      "tags": "query:q5",
+      "abstract_en": "Motivation: Electronic Health Records (EHRs) contain vast amounts of longitudinal patient medical history data, making them highly informative for early disease prediction. Numerous computational methods have been developed to leverage EHR data; however, many process multiple patient records simultaneously, resulting in high memory consumption and computational cost. Moreover, these models also often lack interpretability, limiting insight into the factors driving their predictions. Efficiently handling large-scale EHR data while maintaining predictive accuracy and interpretability therefore remains a critical challenge. To address this gap, we propose DyGraphTrans, a dynamic graph representation learning framework that represents patient EHR data as a sequence of temporal graphs. In this representation, nodes correspond to patients, node features encode temporal clinical attributes, and edges capture patient similarity. DyGraphTrans models both local temporal dependencies and long-range global trends, while a sliding-window mechanism reduces memory consumption without sacrificing essential temporal context. Unlike existing dynamic graph models, DyGraphTrans jointly captures patient similarity and temporal evolution in a memory-efficient and interpretable manner. Results: We evaluated DyGraphTrans on Alzheimer's Disease Neuroimaging Initiative (ADNI) and National Alzheimer's Coordinating Center (NACC) for disease progression prediction, as well as on the Medical Information Mart for Intensive Care (MIMIC-IV) dataset for early mortality prediction. We further assessed the model on multiple benchmark dynamic graph datasets to evaluate its generalizability. DyGraphTrans achieved strong predictive performance across diverse datasets. We also demonstrated interpretability of DyGraphTrans aligned with known clinical risk factors.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/11/biorxiv-10-64898-2026-04-07-716505-v1-wildalert-a-real-time-ai-driven-early-warning-system-for-wildlife-health-and-ecological-threat-detection",
+      "section": "quick",
+      "title_en": "WildAlert: A Real-Time, AI-Driven Early Warning System for Wildlife Health and Ecological Threat Detection",
+      "authors": "Pandit, P. S., Ranjan, S., dombrowski, D., Avilla, R., Ross, C., Clifford, D., Rogers, K., Riner, J., Perry, H., Gilardi, K., Rutti, M., Flewelling, L., Hubbard, K., Kelly, T.",
+      "date": "2026-04-10",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.07.716505v1.full.pdf",
+      "score": "6.0",
+      "evidence": "人工智能驱动的威胁检测早期预警系统",
+      "tldr": "WildAlert是一种实时的人工智能早期预警系统，用于识别野生动物健康和生态威胁。通过结合微调的BERT自然语言处理模型和无监督异常检测算法，系统从野生动物救护机构的临床数据中实时发现异常事件，验证表明其能提前识别多种重要疾病与环境事件。",
+      "tags": "query:q5",
+      "abstract_en": "Emerging infections and environmental disruptions increasingly threaten wildlife and ecosystem health. Free-ranging wildlife often serve as early indicators of ecological instability, making timely detection of morbidity and mortality events critical for early warning. Yet, existing systems lack the analytical capacity for real-time outbreak detection. We present WildAlert, an AI-driven early warning system that integrates fine-tuned BERT-based natural language processing models with an unsupervised anomaly detection framework to identify unusual wildlife health events using real-time pre-diagnostic clinical data from wildlife rehabilitation organizations. The NLP module achieved high accuracy across clinical classifications and circumstances of admissions, enabling a pre-diagnostic syndromic surveillance framework. Retrospective validation demonstrated that WildAlert anomalies frequently coincided with or preceded confirmed morbidity events, including highly pathogenic avian influenza (HPAI), harmful algal bloom-associated toxicosis, cold-stunning in sea turtles, mass stranding events, West Nile virus, and mycoplasmosis. WildAlert establishes the world's largest standardized, near real-time wildlife health surveillance system, transforming wildlife rehabilitation clinical records into actionable intelligence capable of detecting anomalies across taxa and regions, often before other surveillance methods. WildAlert provides a transferable analytical framework and scalable One Health model linking biodiversity monitoring, zoonotic disease preparedness, and ecosystem-linked environmental threats, with implications for conservation, public health and environmental hazard response.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
