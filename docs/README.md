@@ -6,29 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-04-11
-- 运行时间：2026-04-11 19:55:25 UTC
+- 最新运行日期：2026-04-12
+- 运行时间：2026-04-12 19:19:25 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：1
 - 精读区：0
-- 速读区：2
+- 速读区：1
 
 ### 今日简报（AI）
-今天速读2篇AI与健康生态相关论文，聚焦疾病进展建模与野生动物预警。  
-两项研究均展示了时间图结构与实时监测在公共健康和生态安全中的潜力。  
-建议普通读者关注AI在环境与医疗数据融合应用的最新进展。
-- 详情：[/202604/11/README](/202604/11/README)
+今天速读了 1 篇关于在线多语多文化舆论极化检测的论文。  
+研究聚焦多事件跨语言极化识别的新任务，为多元社交语境下的情绪理解提供基准。  
+建议关注该方向在真实社交平台数据上的应用与泛化表现。
+- 详情：[/202604/12/README](/202604/12/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records](/202604/11/biorxiv-10-64898-2026-01-28-702347-v2-dygraphtrans-a-temporal-graph-representation-learning-framework-for-modeling-disease-progression-from-electronic-health-records)  
-   标签：评分：6.0/10、query:q5
-   evidence：用于疾病预测的可解释时序图
-2. [WildAlert: A Real-Time, AI-Driven Early Warning System for Wildlife Health and Ecological Threat Detection](/202604/11/biorxiv-10-64898-2026-04-07-716505-v1-wildalert-a-real-time-ai-driven-early-warning-system-for-wildlife-health-and-ecological-threat-detection)  
-   标签：评分：6.0/10、query:q5
-   evidence：人工智能驱动的威胁检测早期预警系统
+1. [SemEval-2026 Task 9: Detecting Multilingual, Multicultural and Multievent Online Polarization](/202604/12/2604.06817v1-semeval-2026-task-9-detecting-multilingual-multicultural-and-multievent-online-polarization)  
+   标签：评分：6.0/10、query:q4
+   evidence：检测跨多个事件和语言的在线极化
 
 
 <div class="dpr-home-promo-card">

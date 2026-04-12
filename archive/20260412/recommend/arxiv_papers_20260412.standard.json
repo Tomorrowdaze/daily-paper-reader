@@ -1,0 +1,85 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-12T19:19:00.413297+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2604.06817v1",
+      "source": "arxiv",
+      "title": "SemEval-2026 Task 9: Detecting Multilingual, Multicultural and Multievent Online Polarization",
+      "abstract": "We present SemEval-2026 Task 9, a shared task on online polarization detection, covering 22 languages and comprising over 110K annotated instances. Each data instance is multi-labeled with the presence of polarization, polarization type, and polarization manifestation. Participants were asked to predict labels in three sub-tasks: (1) detecting the presence of polarization, (2) identifying the type of polarization, and (3) recognizing the polarization manifestation. The three tasks attracted over 1,000 participants worldwide and more than 10k submission on Codabench. We received final submissions from 67 teams and 73 system description papers. We report the baseline results and analyze the performance of the best-performing systems, highlighting the most common approaches and the most effective methods across different subtasks and languages. The dataset of this task is publicly available.",
+      "authors": [
+        "Usman Naseem",
+        "Robert Geislinger",
+        "Juan Ren",
+        "Sarah Kohail",
+        "Rudy Garrido Veliz",
+        "P Sam Sahil",
+        "Yiran Zhang",
+        "Marco Antonio Stranisci",
+        "Idris Abdulmumin",
+        "Özge Alaçam",
+        "Cengiz Acartürk",
+        "Aisha Jabr",
+        "Saba Anwar",
+        "Abinew Ali Ayele",
+        "Elena Tutubalina",
+        "Aung Kyaw Htet",
+        "Xintong Wang",
+        "Surendrabikram Thapa",
+        "Tanmoy Chakraborty",
+        "Dheeraj Kodati",
+        "Sahar Moradizeyveh",
+        "Firoj Alam",
+        "Ye Kyaw Thu",
+        "Shantipriya Parida",
+        "Ihsan Ayyub Qazi",
+        "Lilian Wanzare",
+        "Nelson Odhiambo Onyango",
+        "Clemencia Siro",
+        "Ibrahim Said Ahmad",
+        "Adem Chanie Ali",
+        "Martin Semmann",
+        "Chris Biemann",
+        "Shamsuddeen Hassan Muhammad",
+        "Seid Muhie Yimam"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-04-08T08:34:55+00:00",
+      "link": "https://arxiv.org/pdf/2604.06817v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "detecting online polarization across multiple events and languages",
+      "llm_evidence_cn": "检测跨多个事件和语言的在线极化",
+      "llm_evidence": "检测跨多个事件和语言的在线极化",
+      "canonical_evidence": "检测跨多个事件和语言的在线极化",
+      "llm_tldr_en": "Presents a shared task for detecting multilingual and multicultural online polarization.",
+      "llm_tldr_cn": "提出了一个用于检测多语言和多文化在线极化现象的共享任务。",
+      "llm_tldr": "提出了一个用于检测多语言和多文化在线极化现象的共享任务。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

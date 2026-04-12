@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-001.webp",
+      "caption": "Table 4: Top three performing systems for each language in subtask 1 evaluated using macro-F1 score.",
+      "page": 6,
+      "index": 1,
+      "width": 950,
+      "height": 477
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-002.webp",
+      "caption": "Table 5: Top three performing systems for each language in subtask 2 evaluated using macro-F1 score.",
+      "page": 6,
+      "index": 2,
+      "width": 454,
+      "height": 717
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-003.webp",
+      "caption": "Figure 1: Languages represented in a world map covered by POLAR, covering diverse linguistic and regional contexts. The language and societal context can present itself across varied areas. Language assignments to countries and regions are approximate.",
+      "page": 2,
+      "index": 3,
+      "width": 461,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-004.webp",
+      "caption": "Table 1: Data distribution across the train, development, and test splits, along with inner agreement. Inner Agre. denotes inter-annotator agreement per language (Fleiss’s κ unless otherwise noted). ∗ denotes exceptions: German uses Krippendorff’s α; Punjabi reports identical Krippendorff’s α and Cohen’s κ; Urdu reports Fleiss’s κ / Cohen’s κ.",
+      "page": 2,
+      "index": 4,
+      "width": 390,
+      "height": 438
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-005.webp",
+      "caption": "Table 6: Top three performing systems for each language in subtask 3 evaluated using macro-F1 score.",
+      "page": 7,
+      "index": 5,
+      "width": 460,
+      "height": 750
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-006.webp",
+      "caption": "Table 3: Top-3 placements achieved by teams across the three subtasks. For each task, the table reports the total",
+      "page": 5,
+      "index": 6,
+      "width": 944,
+      "height": 398
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-007.webp",
+      "caption": "Table 7: Proportion of correct label = 1 for each topic across languages (ISO codes).",
+      "page": 16,
+      "index": 7,
+      "width": 946,
+      "height": 498
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06817v1/fig-008.webp",
+      "caption": "Table 8: Overview of participating teams, their attended subtasks, affiliations, and publications.",
+      "page": 16,
+      "index": 8,
+      "width": 948,
+      "height": 746
+    }
+  ]
+}
