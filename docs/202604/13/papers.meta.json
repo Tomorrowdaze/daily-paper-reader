@@ -1,0 +1,39 @@
+{
+  "label": "2026-04-13",
+  "date": "2026-04-13",
+  "generated_at": "2026-04-13T20:31:34",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202604/13/biorxiv-10-64898-2026-04-07-716505-v1-wildalert-a-real-time-ai-driven-early-warning-system-for-wildlife-health-and-ecological-threat-detection",
+      "section": "quick",
+      "title_en": "WildAlert: A Real-Time, AI-Driven Early Warning System for Wildlife Health and Ecological Threat Detection",
+      "authors": "Pandit, P. S., Ranjan, S., dombrowski, D., Avilla, R., Ross, C., Clifford, D., Rogers, K., Riner, J., Perry, H., Gilardi, K., Rutti, M., Flewelling, L., Hubbard, K., Kelly, T.",
+      "date": "2026-04-10",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.07.716505v1.full.pdf",
+      "score": "6.5",
+      "evidence": "用于威胁检测和异常识别的AI驱动预警系统",
+      "tldr": "本研究提出WildAlert系统，一种融合AI和自然语言处理的野生动物健康预警平台。通过BERT模型分析临床数据并结合异常检测框架，实现对野生动物疾病和生态威胁的实时识别，大幅提升预警的时效性和准确性。",
+      "tags": "query:q5",
+      "abstract_en": "Emerging infections and environmental disruptions increasingly threaten wildlife and ecosystem health. Free-ranging wildlife often serve as early indicators of ecological instability, making timely detection of morbidity and mortality events critical for early warning. Yet, existing systems lack the analytical capacity for real-time outbreak detection. We present WildAlert, an AI-driven early warning system that integrates fine-tuned BERT-based natural language processing models with an unsupervised anomaly detection framework to identify unusual wildlife health events using real-time pre-diagnostic clinical data from wildlife rehabilitation organizations. The NLP module achieved high accuracy across clinical classifications and circumstances of admissions, enabling a pre-diagnostic syndromic surveillance framework. Retrospective validation demonstrated that WildAlert anomalies frequently coincided with or preceded confirmed morbidity events, including highly pathogenic avian influenza (HPAI), harmful algal bloom-associated toxicosis, cold-stunning in sea turtles, mass stranding events, West Nile virus, and mycoplasmosis. WildAlert establishes the world's largest standardized, near real-time wildlife health surveillance system, transforming wildlife rehabilitation clinical records into actionable intelligence capable of detecting anomalies across taxa and regions, often before other surveillance methods. WildAlert provides a transferable analytical framework and scalable One Health model linking biodiversity monitoring, zoonotic disease preparedness, and ecosystem-linked environmental threats, with implications for conservation, public health and environmental hazard response.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/13/2604.08834v1-bracketrank-large-language-model-document-ranking-via-reasoning-based-competitive-elimination",
+      "section": "quick",
+      "title_en": "BracketRank: Large Language Model Document Ranking via Reasoning-based Competitive Elimination",
+      "authors": "Abdelrahman Abdallah, Mohammed Ali, Bhawna Piryani, Adam Jatowt",
+      "date": "2026-04-10",
+      "pdf": "https://arxiv.org/pdf/2604.08834v1",
+      "score": "6.0",
+      "evidence": "基于推理的分步相关性解释排序",
+      "tldr": "BracketRank提出一种基于推理的竞赛式文档重排序框架，通过自适应分组、逐步推理提示和淘汰结构提升LLM在复杂语义检索中的表现，在多个数据集上显著优于现有方法。",
+      "tags": "query:q5",
+      "abstract_en": "Reasoning-intensive retrieval requires deep semantic inference beyond surface-level keyword matching, posing a challenge for current LLM-based rerankers limited by context constraints and order sensitivity. We propose \\textbf{\\BracketRank}, a framework that treats document reranking as a reasoning-driven competitive tournament. Our approach introduces three key innovations: (1) adaptive grouping based on model context limits, (2) reasoning-enhanced prompts that mandate step-by-step relevance explanations, and (3) a bracket-style elimination structure with winner and loser tracks. This design ensures robust document advancement while enabling parallel processing across competition stages. Evaluation on the BRIGHT reasoning benchmark shows that \\BracketRank achieves \\textbf{26.56 nDCG@10}, significantly outperforming state-of-the-art baselines including RankGPT-4 (17.0) and Rank-R1-14B (20.5). On TREC datasets, BracketRank achieves 77.90 nDCG@5 on DL 19 and 75.85 nDCG@5 on DL 20, exceeding all baselines, establishing that explicit reasoning within competitive elimination is a powerful paradigm for complex, multi-step retrieval tasks. https://github.com/DataScienceUIBK/BracketRank",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
