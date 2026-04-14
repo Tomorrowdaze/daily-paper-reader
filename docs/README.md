@@ -6,29 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-04-13
-- 运行时间：2026-04-13 20:31:23 UTC
+- 最新运行日期：2026-04-14
+- 运行时间：2026-04-14 20:10:53 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：3
 - 精读区：0
-- 速读区：2
+- 速读区：3
 
 ### 今日简报（AI）
-今日速览两篇论文：AI野生动物预警系统与基于推理淘汰的文档排序方法。  
-WildAlert展示AI在生态监测中的实时预警潜力，BracketRank探索LLM提升信息检索排名的新策略。  
-建议关注AI模型在跨领域实时决策与信息筛选中的可扩展应用。
-- 详情：[/202604/13/README](/202604/13/README)
+聚焦健康数据建模主题，一口气速读了三篇时序与纵向分析相关论文。  
+电子病历疾病进展建模、纵向单细胞差异分析是最具应用潜力的方向。  
+建议下步关注这些方法在真实临床数据中的验证与可解释性提升。
+- 详情：[/202604/14/README](/202604/14/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [WildAlert: A Real-Time, AI-Driven Early Warning System for Wildlife Health and Ecological Threat Detection](/202604/13/biorxiv-10-64898-2026-04-07-716505-v1-wildalert-a-real-time-ai-driven-early-warning-system-for-wildlife-health-and-ecological-threat-detection)  
-   标签：评分：6.5/10、query:q5
-   evidence：用于威胁检测和异常识别的AI驱动预警系统
-2. [BracketRank: Large Language Model Document Ranking via Reasoning-based Competitive Elimination](/202604/13/2604.08834v1-bracketrank-large-language-model-document-ranking-via-reasoning-based-competitive-elimination)  
+1. [DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records](/202604/14/biorxiv-10-64898-2026-01-28-702347-v2-dygraphtrans-a-temporal-graph-representation-learning-framework-for-modeling-disease-progression-from-electronic-health-records)  
    标签：评分：6.0/10、query:q5
-   evidence：基于推理的分步相关性解释排序
+   evidence：该论文提出了一种用于疾病预测的动态图表示学习框架，强调了模型的可解释性。
+2. [sctrial: Participant-Level Differential Analysis for Longitudinal Single-Cell Experiments](/202604/14/biorxiv-10-64898-2026-04-02-716219-v1-sctrial-participant-level-differential-analysis-for-longitudinal-single-cell-experiments)  
+   标签：评分：6.0/10、query:q6
+   evidence：使用参与者层面估计量的纵向研究因果推断框架
+3. [LGTM: Gaussian Process Modulated Neural Topic Modeling for Longitudinal Microbiome](/202604/14/biorxiv-10-64898-2026-04-10-717451-v1-lgtm-gaussian-process-modulated-neural-topic-modeling-for-longitudinal-microbiome)  
+   标签：评分：6.0/10、query:q6
+   evidence：用于纵向建模的可解释主题表示
 
 
 <div class="dpr-home-promo-card">

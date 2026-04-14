@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-02-716219-v1/fig-001.webp",
+      "caption": "Table 1. Summary of datasets and analyzable subsets used in sctrial analyses. ICB: immune checkpoint blockade; QC: quality control; DFO: days from onset; AML: acute myeloid leukemia.",
+      "page": 6,
+      "index": 1,
+      "width": 988,
+      "height": 838
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-02-716219-v1/fig-002.webp",
+      "caption": "Figure 3. Robustness, benchmarking, and cross-dataset effect sizes. (A) Scatter plot comparing analytical (cluster-robust) standard errors (x-axis) with wild cluster bootstrap standard errors (y-axis) across immune signatures in the melanoma cohort. Pearson correlation coefficient is shown; the dashed line indicates perfect agreement. (B) Range plot showing the distribution of DiD coefficients when each participant is systematically excluded, for the four most influential signatures. Diamonds indicate the full sample estimate; circles indicate leave-one-out estimates. (C) Empirical power curves; for each dataset, the relationship between the number of analyzable participants (x-axis) and statistical power (y-axis) was estimated by subsampling participants and computing the fraction of iterations in which the pre-specified endpoint reached significance. Shaded ribbons indicate Wilson confidence intervals; dashed lines show isotonic regression fits. The horizontal dashed line marks 80% power. (D) Bar plot comparing cell-level standard errors with participant-level bootstrap standard errors. (E) Forest plot showing Cohen’s d with 95% confidence intervals for the primary endpoint in each dataset, grouped by study. Sample sizes per dataset are annotated. Vertical dashed lines indicate conventional effect-size thresholds (±0.2, ±0.5, ±0.8).",
+      "page": 11,
+      "index": 2,
+      "width": 952,
+      "height": 1061
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-02-716219-v1/fig-003.webp",
+      "caption": "Figure 2. Participant-level analysis of the melanoma immunotherapy cohort. (A) Grouped bar chart showing the number of cells per participant stratified by visit and response status. (B) Scatter plot of celllevel versus the participant-level DiD coefficients for each immune signature. Pearson correlation coefficient and p-value are shown. (C) Bar charts comparing –log₁₀(p) from cell-level and participant-level analyses. (D) Forest plot of signatures’ DiD coefficient with 95% bootstrap-t confidence intervals. (E) Line plots for the six most significant signatures showing individual participant trajectories and group means from pre- to post-treatment, stratified by response. (F) Heatmap of per-participant change (Δ = Post − Pre) for each immune signature. (G) Horizontal bars showing the mean post-minus-pre change (Δ) for responders and non-responders with standard error bars, for each signature. (H) Lollipop chart of Cohen’s d (responder − non-responder) for each signature, sorted by magnitude.",
+      "page": 8,
+      "index": 3,
+      "width": 950,
+      "height": 1129
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-04-02-716219-v1/fig-004.webp",
+      "caption": "Figure 5. Permutation-based validation, participant-level heterogeneity, and temporal severity dynamics. (A) Histograms of DiD coefficients from 1,000 participant-level label permutations for the three signatures with the smallest permutation p-values in the melanoma cohort. Vertical lines indicate the observed effects. (B) Observed effects versus permutation null range. For each signature, the horizontal grey bar spans the 2.5th–97.5th percentiles of the permutation distribution. Points falling outside the grey band (red) indicate effects exceeding the 95% permutation null; points within (blue) indicate effects consistent with label shuffling. (C) Strip plot of per-participant post-minus-pre changes across 16 immunerelated genes, stratified by clinical response. Horizontal lines indicate group means. (D) Box plots of participant-level effects for the eight genes with the highest inter-participant standard deviation, comparing responders and non-responders. (E–F) Temporal severity dynamics in the COVID-19 severity cohort. (E) Mean signature scores for severe and mild groups across three temporal bins (DFO 0–7, 8– 14, and 15+ days) for four representative signatures. (F) Severity divergence (severe minus mild) over time for the same four signatures. (G) Temporal divergence heatmap. All 12 immune signatures (rows) × three DFO bins (columns), with color encoding the severe-minus-mild difference. (H) Grouped horizontal bar chart of Hedges’ g (severe minus mild) for each signature within each temporal bin.",
+      "page": 16,
+      "index": 4,
+      "width": 949,
+      "height": 1050
+    }
+  ]
+}

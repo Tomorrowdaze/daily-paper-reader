@@ -1,0 +1,54 @@
+{
+  "label": "2026-04-14",
+  "date": "2026-04-14",
+  "generated_at": "2026-04-14T20:10:58",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202604/14/biorxiv-10-64898-2026-01-28-702347-v2-dygraphtrans-a-temporal-graph-representation-learning-framework-for-modeling-disease-progression-from-electronic-health-records",
+      "section": "quick",
+      "title_en": "DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records",
+      "authors": "Rahman, M. T., Al Olaimat, M., Bozdag, S., Alzheimer's Disease Neuroimaging Initiative",
+      "date": "2026-04-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.01.28.702347v2.full.pdf",
+      "score": "6.0",
+      "evidence": "该论文提出了一种用于疾病预测的动态图表示学习框架，强调了模型的可解释性。",
+      "tldr": "本研究针对电子健康记录分析中高内存消耗与低可解释性问题，提出了DyGraphTrans时间动态图学习框架，通过滑动窗口建模患者相似性与时间演化，在多个临床数据集上实现高精度、可解释的疾病进展预测。",
+      "tags": "query:q5",
+      "abstract_en": "Motivation: Electronic Health Records (EHRs) contain vast amounts of longitudinal patient medical history data, making them highly informative for early disease prediction. Numerous computational methods have been developed to leverage EHR data; however, many process multiple patient records simultaneously, resulting in high memory consumption and computational cost. Moreover, these models also often lack interpretability, limiting insight into the factors driving their predictions. Efficiently handling large-scale EHR data while maintaining predictive accuracy and interpretability therefore remains a critical challenge. To address this gap, we propose DyGraphTrans, a dynamic graph representation learning framework that represents patient EHR data as a sequence of temporal graphs. In this representation, nodes correspond to patients, node features encode temporal clinical attributes, and edges capture patient similarity. DyGraphTrans models both local temporal dependencies and long-range global trends, while a sliding-window mechanism reduces memory consumption without sacrificing essential temporal context. Unlike existing dynamic graph models, DyGraphTrans jointly captures patient similarity and temporal evolution in a memory-efficient and interpretable manner. Results: We evaluated DyGraphTrans on Alzheimer's Disease Neuroimaging Initiative (ADNI) and National Alzheimer's Coordinating Center (NACC) for disease progression prediction, as well as on the Medical Information Mart for Intensive Care (MIMIC-IV) dataset for early mortality prediction. We further assessed the model on multiple benchmark dynamic graph datasets to evaluate its generalizability. DyGraphTrans achieved strong predictive performance across diverse datasets. We also demonstrated interpretability of DyGraphTrans aligned with known clinical risk factors.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/14/biorxiv-10-64898-2026-04-02-716219-v1-sctrial-participant-level-differential-analysis-for-longitudinal-single-cell-experiments",
+      "section": "quick",
+      "title_en": "sctrial: Participant-Level Differential Analysis for Longitudinal Single-Cell Experiments",
+      "authors": "Vasanthakumari, P., Valencia, I., Aghmiouni, M. R., Magana, B., Omar, M. N.",
+      "date": "2026-04-06",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.02.716219v1.full.pdf",
+      "score": "6.0",
+      "evidence": "使用参与者层面估计量的纵向研究因果推断框架",
+      "tldr": "本研究提出sctrial，一种用于临床和转化队列纵向单细胞RNA测序数据的参与者层面差异分析框架。它采用设计特定的估计量及小样本集群不确定性量化，纠正了传统细胞层级分析的假阳性膨胀问题，并在多个数据集中验证了其稳健性和生物学解释力。",
+      "tags": "query:q6",
+      "abstract_en": "Longitudinal single-cell RNA sequencing studies in clinical trials and translational cohorts offer a powerful view of treatment response, disease progression, and cellular dynamics, but their hierarchical structure poses a major inferential challenge: thousands of cells are measured within the same participants across repeated time points, whereas the participant, not the cell, is the true unit of biological replication. Conventional cell-level workflows can therefore yield inflated significance and misleading confidence in reported associations. Here, we present sctrial, an open source analytical framework for repeated-measures single-cell studies that uses design-specific participant-level estimands, including difference-in-differences for two-group longitudinal comparisons, and small-cluster-aware uncertainty quantification. In simulation benchmarks using a hierarchical gamma-Poisson generative model, sctrial maintained well-calibrated error rates in mixed-signal gene panels where established multi-subject methods showed inflated false positive rates among unaffected genes. We applied sctrial to five independent datasets spanning melanoma immunotherapy, COVID-19 severity, BNT162b2 vaccination, AML chemotherapy, and CAR-T therapy. Across these studies, sctrial identified immune programs whose direction and magnitude differed across therapeutic and disease contexts, while benchmarking analyses showed that many associations highlighted by conventional cell-level workflows were attenuated or no longer supported when inference was performed at the participant level. These analyses illustrate how participant-aware inference can reduce pseudoreplication-driven signal inflation and provide a more rigorous basis for interpreting longitudinal single-cell data. sctrial enables reproducible participant-level analysis of longitudinal single-cell experiments and facilitates more reliable biological interpretation in translational and clinical studies. The software is implemented in Python and compatible the AnnData/scverse ecosystem.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/14/biorxiv-10-64898-2026-04-10-717451-v1-lgtm-gaussian-process-modulated-neural-topic-modeling-for-longitudinal-microbiome",
+      "section": "quick",
+      "title_en": "LGTM: Gaussian Process Modulated Neural Topic Modeling for Longitudinal Microbiome",
+      "authors": "Yuan, X., Arany, A., Formanek, A., Moreau, Y., Lähdesmäki, H., Vatanen, T.",
+      "date": "2026-04-10",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.10.717451v1.full.pdf",
+      "score": "6.0",
+      "evidence": "用于纵向建模的可解释主题表示",
+      "tldr": "本文提出LGTM框架，融合高斯过程调制与神经主题建模，以同时捕捉微生物群落的时间动态及其与宿主、环境协变量的关系。该方法在多个纵向肠道微生物数据上验证了其有效性和可解释性，能发现稳定的微生物子群并提升预测表现。",
+      "tags": "query:q6",
+      "abstract_en": "Longitudinal microbiome data are key to understanding the dynamics of microbial communities and their relationships with the host and environment. However, analysis of such data is challenging due to high dimensionality, compositionality, irregular sampling and temporal dependencies on external covariates. Existing analytical approaches typically address only subsets of these challenges, limiting their ability to yield biologically interpretable insights. We introduce LGTM, a probabilistic modeling framework that combines flexible non-linear longitudinal modeling with interpretable topic-based representations of the microbiome. LGTM simultaneously discovers coherent microbial subcommunities (\"topics\") and models how their abundances change over time and in relation to host and environmental covariates. Using multiple longitudinal human gut microbiome datasets, we demonstrate that LGTM identifies diverse and stable microbial topics while achieving competitive performance in imputation and forecasting tasks. A key strength of the framework is its interpretability: LGTM discovers biologically coherent microbial topics and directly quantifies associations between covariates and microbial dynamics. LGTM is available at https://github.com/yuanx749/lgtm.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
