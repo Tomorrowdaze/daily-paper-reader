@@ -1,0 +1,54 @@
+{
+  "label": "2026-04-15",
+  "date": "2026-04-15",
+  "generated_at": "2026-04-15T20:44:31",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202604/15/2604.09237v1-schematiq-from-research-question-to-structured-data-through-interactive-schema-discovery",
+      "section": "quick",
+      "title_en": "ScheMatiQ: From Research Question to Structured Data through Interactive Schema Discovery",
+      "authors": "Shahar Levy, Eliya Habba, Reshef Mintz, Barak Raveh, Renana Keydar, Gabriel Stanovsky",
+      "date": "2026-04-10",
+      "pdf": "https://arxiv.org/pdf/2604.09237v1",
+      "score": "6.0",
+      "evidence": "从文档集合中提取结构化证据的交互式模式发现",
+      "tldr": "本文提出ScheMatiQ，一个可将自然语言研究问题转化为结构化数据的交互式系统，通过LLM生成注释模式和数据库，并配合网页界面供专家调整。系统在法律与生物学研究中表现出良好效果并已开源。",
+      "tags": "query:q6",
+      "abstract_en": "Many disciplines pose natural-language research questions over large document collections whose answers typically require structured evidence, traditionally obtained by manually designing an annotation schema and exhaustively labeling the corpus, a slow and error-prone process. We introduce ScheMatiQ, which leverages calls to a backbone LLM to take a question and a corpus to produce a schema and a grounded database, with a web interface that lets steer and revise the extraction. In collaboration with domain experts, we show that ScheMatiQ yields outputs that support real-world analysis in law and computational biology. We release ScheMatiQ as open source with a public web interface, and invite experts across disciplines to use it with their own data. All resources, including the website, source code, and demonstration video, are available at: www.ScheMatiQ-ai.com",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/15/2604.11384v1-statehood-without-capacity",
+      "section": "quick",
+      "title_en": "Statehood Without Capacity",
+      "authors": "Rok Spruk",
+      "date": "2026-04-13",
+      "pdf": "https://arxiv.org/pdf/2604.11384v1",
+      "score": "6.0",
+      "evidence": "分析了国家软弱的机制以及国家地位的政治经济理论",
+      "tldr": "本文提出“无能力的国家地位”理论，解释在特定制度与地缘政治条件下国家如何陷入仅具名义主权而缺乏治理能力的均衡。通过政治经济学模型揭示精英利益分裂、外部援助与国际承认如何削弱制度整合激励，并以巴勒斯坦为示例说明此机制的广泛意义。",
+      "tags": "query:q6",
+      "abstract_en": "This paper develops a political-economy theory of statehood without capacity. I argue that under specific institutional and geopolitical conditions, a polity can become trapped in an equilibrium of nominal statehood: a state in which claims to sovereignty, external recognition, and symbolic legitimacy persist or even strengthen while the coercive, fiscal, administrative, and legal capacities required for effective statehood remain weak. The mechanism is driven by three forces. First, fragmented elites may privately benefit from preserving autonomous control, patronage, and localized rent extraction rather than consolidating authority into a unified state. Second, externally mediated transfers can reduce the immediate costs of institutional non-consolidation and thereby stabilize a low-capacity equilibrium. Third, international recognition and symbolic endorsement may be only weakly conditioned on domestic administrative performance, allowing recognition capital to accumulate more rapidly than capacity capital. The theory generates a dynamic divergence between juridical or symbolic statehood and effective statehood, with implications for investment, fiscal fragility, corruption, and vulnerability to conflict shocks. The paper derives testable predictions and then interprets Palestine as a flagship application of the broader mechanism. The central implication is that statehood is not only a question of recognition or territorial claim but an equilibrium outcome of institutional consolidation. Where the incentives to consolidate remain weak, sovereignty may be asserted without becoming viable.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/15/biorxiv-10-64898-2026-01-28-702347-v2-dygraphtrans-a-temporal-graph-representation-learning-framework-for-modeling-disease-progression-from-electronic-health-records",
+      "section": "quick",
+      "title_en": "DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records",
+      "authors": "Rahman, M. T., Al Olaimat, M., Bozdag, S., Alzheimer's Disease Neuroimaging Initiative",
+      "date": "2026-04-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.01.28.702347v2.full.pdf",
+      "score": "6.0",
+      "evidence": "该论文提出了一种动态图表示学习框架，在保持预测准确性的同时兼顾了可解释性。",
+      "tldr": "本研究提出动态图表示学习框架DyGraphTrans，将电子病历转化为时间图序列，利用滑动窗口捕捉局部与全局时间特征，降低内存消耗并增强可解释性。实验在多个医学数据集上验证了其在疾病进展和早期死亡预测中的高性能与临床合理性。",
+      "tags": "query:q5",
+      "abstract_en": "Motivation: Electronic Health Records (EHRs) contain vast amounts of longitudinal patient medical history data, making them highly informative for early disease prediction. Numerous computational methods have been developed to leverage EHR data; however, many process multiple patient records simultaneously, resulting in high memory consumption and computational cost. Moreover, these models also often lack interpretability, limiting insight into the factors driving their predictions. Efficiently handling large-scale EHR data while maintaining predictive accuracy and interpretability therefore remains a critical challenge. To address this gap, we propose DyGraphTrans, a dynamic graph representation learning framework that represents patient EHR data as a sequence of temporal graphs. In this representation, nodes correspond to patients, node features encode temporal clinical attributes, and edges capture patient similarity. DyGraphTrans models both local temporal dependencies and long-range global trends, while a sliding-window mechanism reduces memory consumption without sacrificing essential temporal context. Unlike existing dynamic graph models, DyGraphTrans jointly captures patient similarity and temporal evolution in a memory-efficient and interpretable manner. Results: We evaluated DyGraphTrans on Alzheimer's Disease Neuroimaging Initiative (ADNI) and National Alzheimer's Coordinating Center (NACC) for disease progression prediction, as well as on the Medical Information Mart for Intensive Care (MIMIC-IV) dataset for early mortality prediction. We further assessed the model on multiple benchmark dynamic graph datasets to evaluate its generalizability. DyGraphTrans achieved strong predictive performance across diverse datasets. We also demonstrated interpretability of DyGraphTrans aligned with known clinical risk factors.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
