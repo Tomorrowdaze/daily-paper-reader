@@ -1,0 +1,51 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-17T19:55:05.358640+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2604.11384v1",
+      "source": "arxiv",
+      "title": "Statehood Without Capacity",
+      "abstract": "This paper develops a political-economy theory of statehood without capacity. I argue that under specific institutional and geopolitical conditions, a polity can become trapped in an equilibrium of nominal statehood: a state in which claims to sovereignty, external recognition, and symbolic legitimacy persist or even strengthen while the coercive, fiscal, administrative, and legal capacities required for effective statehood remain weak. The mechanism is driven by three forces. First, fragmented elites may privately benefit from preserving autonomous control, patronage, and localized rent extraction rather than consolidating authority into a unified state. Second, externally mediated transfers can reduce the immediate costs of institutional non-consolidation and thereby stabilize a low-capacity equilibrium. Third, international recognition and symbolic endorsement may be only weakly conditioned on domestic administrative performance, allowing recognition capital to accumulate more rapidly than capacity capital. The theory generates a dynamic divergence between juridical or symbolic statehood and effective statehood, with implications for investment, fiscal fragility, corruption, and vulnerability to conflict shocks. The paper derives testable predictions and then interprets Palestine as a flagship application of the broader mechanism. The central implication is that statehood is not only a question of recognition or territorial claim but an equilibrium outcome of institutional consolidation. Where the incentives to consolidate remain weak, sovereignty may be asserted without becoming viable.",
+      "authors": [
+        "Rok Spruk"
+      ],
+      "primary_category": "econ.GN",
+      "categories": [
+        "econ.GN"
+      ],
+      "published": "2026-04-13T12:24:29+00:00",
+      "link": "https://arxiv.org/pdf/2604.11384v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "political-economy theory of statehood and institutional non-consolidation",
+      "llm_evidence_cn": "国家地位的政治经济理论与制度非整合机制",
+      "llm_evidence": "国家地位的政治经济理论与制度非整合机制",
+      "canonical_evidence": "国家地位的政治经济理论与制度非整合机制",
+      "llm_tldr_en": "Develops a theory on why states remain weak due to fragmented elites and geopolitical conditions.",
+      "llm_tldr_cn": "探讨了由于精英分裂和地缘政治条件导致国家能力长期疲软的政治经济理论。",
+      "llm_tldr": "探讨了由于精英分裂和地缘政治条件导致国家能力长期疲软的政治经济理论。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

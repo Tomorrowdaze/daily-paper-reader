@@ -1,0 +1,24 @@
+{
+  "label": "2026-04-17",
+  "date": "2026-04-17",
+  "generated_at": "2026-04-17T19:55:30",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202604/17/2604.11384v1-statehood-without-capacity",
+      "section": "quick",
+      "title_en": "Statehood Without Capacity",
+      "authors": "Rok Spruk",
+      "date": "2026-04-13",
+      "pdf": "https://arxiv.org/pdf/2604.11384v1",
+      "score": "7.0",
+      "evidence": "国家地位的政治经济理论与制度非整合机制",
+      "tldr": "本文提出“无能力国家化”的政治经济学理论，说明在特定的制度与地缘环境中，碎片化精英、外部援助及象征性承认会形成名义国家而非有效国家。论文通过理论模型与巴勒斯坦案例揭示国家主权与实际治理能力的结构性分化。",
+      "tags": "query:q6",
+      "abstract_en": "This paper develops a political-economy theory of statehood without capacity. I argue that under specific institutional and geopolitical conditions, a polity can become trapped in an equilibrium of nominal statehood: a state in which claims to sovereignty, external recognition, and symbolic legitimacy persist or even strengthen while the coercive, fiscal, administrative, and legal capacities required for effective statehood remain weak. The mechanism is driven by three forces. First, fragmented elites may privately benefit from preserving autonomous control, patronage, and localized rent extraction rather than consolidating authority into a unified state. Second, externally mediated transfers can reduce the immediate costs of institutional non-consolidation and thereby stabilize a low-capacity equilibrium. Third, international recognition and symbolic endorsement may be only weakly conditioned on domestic administrative performance, allowing recognition capital to accumulate more rapidly than capacity capital. The theory generates a dynamic divergence between juridical or symbolic statehood and effective statehood, with implications for investment, fiscal fragility, corruption, and vulnerability to conflict shocks. The paper derives testable predictions and then interprets Palestine as a flagship application of the broader mechanism. The central implication is that statehood is not only a question of recognition or territorial claim but an equilibrium outcome of institutional consolidation. Where the incentives to consolidate remain weak, sovereignty may be asserted without becoming viable.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

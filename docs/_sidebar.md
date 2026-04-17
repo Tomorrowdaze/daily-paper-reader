@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-04-17 <!--dpr-date:20260417-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/17/2604.11384v1-statehood-without-capacity" data-sidebar-item="{&quot;title&quot;: &quot;Statehood Without Capacity&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2604.11384v1-statehood-without-capacity&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;国家地位的政治经济理论与制度非整合机制&quot;}">Statehood Without Capacity</a>
   * 2026-04-15 <!--dpr-date:20260415-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/15/2604.09237v1-schematiq-from-research-question-to-structured-data-through-interactive-schema-discovery" data-sidebar-item="{&quot;title&quot;: &quot;ScheMatiQ: From Research Question to Structured Data through Interactive Schema Discovery&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2604.09237v1-schematiq-from-research-question-to-structured-data-through-interactive-schema-discovery&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;从文档集合中提取结构化证据的交互式模式发现&quot;}">ScheMatiQ: From Research Question to Structured Data through Interactive Schema Discovery</a>
