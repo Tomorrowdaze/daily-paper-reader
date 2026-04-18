@@ -1,0 +1,89 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-18T19:32:56.692804+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2604.11384v1",
+      "source": "arxiv",
+      "title": "Statehood Without Capacity",
+      "abstract": "This paper develops a political-economy theory of statehood without capacity. I argue that under specific institutional and geopolitical conditions, a polity can become trapped in an equilibrium of nominal statehood: a state in which claims to sovereignty, external recognition, and symbolic legitimacy persist or even strengthen while the coercive, fiscal, administrative, and legal capacities required for effective statehood remain weak. The mechanism is driven by three forces. First, fragmented elites may privately benefit from preserving autonomous control, patronage, and localized rent extraction rather than consolidating authority into a unified state. Second, externally mediated transfers can reduce the immediate costs of institutional non-consolidation and thereby stabilize a low-capacity equilibrium. Third, international recognition and symbolic endorsement may be only weakly conditioned on domestic administrative performance, allowing recognition capital to accumulate more rapidly than capacity capital. The theory generates a dynamic divergence between juridical or symbolic statehood and effective statehood, with implications for investment, fiscal fragility, corruption, and vulnerability to conflict shocks. The paper derives testable predictions and then interprets Palestine as a flagship application of the broader mechanism. The central implication is that statehood is not only a question of recognition or territorial claim but an equilibrium outcome of institutional consolidation. Where the incentives to consolidate remain weak, sovereignty may be asserted without becoming viable.",
+      "authors": [
+        "Rok Spruk"
+      ],
+      "primary_category": "econ.GN",
+      "categories": [
+        "econ.GN"
+      ],
+      "published": "2026-04-13T12:24:29+00:00",
+      "link": "https://arxiv.org/pdf/2604.11384v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Develops a political-economy theory and mechanism for statehood capacity and institutional non-consolidation.",
+      "llm_evidence_cn": "开发了关于国家能力和制度非整合的政治经济学理论和机制。",
+      "llm_evidence": "开发了关于国家能力和制度非整合的政治经济学理论和机制。",
+      "canonical_evidence": "开发了关于国家能力和制度非整合的政治经济学理论和机制。",
+      "llm_tldr_en": "This paper theorizes why some states remain weak despite external recognition, relevant to conflict mechanisms.",
+      "llm_tldr_cn": "本文探讨了尽管获得外部承认但国家能力依然薄弱的理论，与冲突爆发机制相关。",
+      "llm_tldr": "本文探讨了尽管获得外部承认但国家能力依然薄弱的理论，与冲突爆发机制相关。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-01-28-702347-v2",
+      "source": "biorxiv",
+      "title": "DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records",
+      "abstract": "MotivationElectronic Health Records (EHRs) contain vast amounts of longitudinal patient medical history data, making them highly informative for early disease prediction. Numerous computational methods have been developed to leverage EHR data; however, many process multiple patient records simultaneously, resulting in high memory consumption and computational cost. Moreover, these models also often lack interpretability, limiting insight into the factors driving their predictions. Efficiently handling large-scale EHR data while maintaining predictive accuracy and interpretability therefore remains a critical challenge. To address this gap, we propose DyGraphTrans, a dynamic graph representation learning framework that represents patient EHR data as a sequence of temporal graphs. In this representation, nodes correspond to patients, node features encode temporal clinical attributes, and edges capture patient similarity. DyGraphTrans models both local temporal dependencies and long-range global trends, while a sliding-window mechanism reduces memory consumption without sacrificing essential temporal context. Unlike existing dynamic graph models, DyGraphTrans jointly captures patient similarity and temporal evolution in a memory-efficient and interpretable manner.\n\nResultsWe evaluated DyGraphTrans on Alzheimers Disease Neuroimaging Initiative (ADNI) and National Alzheimers Coordinating Center (NACC) for disease progression prediction, as well as on the Medical Information Mart for Intensive Care (MIMIC-IV) dataset for early mortality prediction. We further assessed the model on multiple benchmark dynamic graph datasets to evaluate its generalizability. DyGraphTrans achieved strong predictive performance across diverse datasets. We also demonstrated interpretability of DyGraphTrans aligned with known clinical risk factors.\n\nThe source code and datasets are available at https://github.com/bozdaglab/DyGraphTrans.\n\nContactSerdar.Bozdag@unt.edu\n\nSupplementaryUploaded as an attachment.",
+      "authors": [
+        "Rahman, M. T.",
+        "Al Olaimat, M.",
+        "Bozdag, S.",
+        "Alzheimer's Disease Neuroimaging Initiative,"
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.01.28.702347v2.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable predictive modeling for longitudinal data",
+      "llm_evidence_cn": "针对纵向数据的可解释预测建模",
+      "llm_evidence": "针对纵向数据的可解释预测建模",
+      "canonical_evidence": "针对纵向数据的可解释预测建模",
+      "llm_tldr_en": "Proposes DyGraphTrans for interpretable disease progression prediction from EHR data using dynamic graphs.",
+      "llm_tldr_cn": "提出DyGraphTrans框架，利用动态图对电子健康记录进行具有可解释性的疾病进展预测。",
+      "llm_tldr": "提出DyGraphTrans框架，利用动态图对电子健康记录进行具有可解释性的疾病进展预测。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

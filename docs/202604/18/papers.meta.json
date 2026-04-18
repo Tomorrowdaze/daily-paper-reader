@@ -1,0 +1,39 @@
+{
+  "label": "2026-04-18",
+  "date": "2026-04-18",
+  "generated_at": "2026-04-18T19:33:16",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202604/18/2604.11384v1-statehood-without-capacity",
+      "section": "quick",
+      "title_en": "Statehood Without Capacity",
+      "authors": "Rok Spruk",
+      "date": "2026-04-13",
+      "pdf": "https://arxiv.org/pdf/2604.11384v1",
+      "score": "6.0",
+      "evidence": "开发了关于国家能力和制度非整合的政治经济学理论和机制。",
+      "tldr": "本文建立一个政治经济学理论解释“无能力状态”的形成机制，指出在碎片化精英利益、外部资源转移和国际认可条件下，一个政体可能陷入名义国家而非实质国家的均衡，揭示国家能力与合法性之间的动态分离及对经济与政治稳定的影响。",
+      "tags": "query:q6",
+      "abstract_en": "This paper develops a political-economy theory of statehood without capacity. I argue that under specific institutional and geopolitical conditions, a polity can become trapped in an equilibrium of nominal statehood: a state in which claims to sovereignty, external recognition, and symbolic legitimacy persist or even strengthen while the coercive, fiscal, administrative, and legal capacities required for effective statehood remain weak. The mechanism is driven by three forces. First, fragmented elites may privately benefit from preserving autonomous control, patronage, and localized rent extraction rather than consolidating authority into a unified state. Second, externally mediated transfers can reduce the immediate costs of institutional non-consolidation and thereby stabilize a low-capacity equilibrium. Third, international recognition and symbolic endorsement may be only weakly conditioned on domestic administrative performance, allowing recognition capital to accumulate more rapidly than capacity capital. The theory generates a dynamic divergence between juridical or symbolic statehood and effective statehood, with implications for investment, fiscal fragility, corruption, and vulnerability to conflict shocks. The paper derives testable predictions and then interprets Palestine as a flagship application of the broader mechanism. The central implication is that statehood is not only a question of recognition or territorial claim but an equilibrium outcome of institutional consolidation. Where the incentives to consolidate remain weak, sovereignty may be asserted without becoming viable.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/18/biorxiv-10-64898-2026-01-28-702347-v2-dygraphtrans-a-temporal-graph-representation-learning-framework-for-modeling-disease-progression-from-electronic-health-records",
+      "section": "quick",
+      "title_en": "DyGraphTrans: A temporal graph representation learning framework for modeling disease progression from Electronic Health Records",
+      "authors": "Rahman, M. T., Al Olaimat, M., Bozdag, S., Alzheimer's Disease Neuroimaging Initiative",
+      "date": "2026-04-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.01.28.702347v2.full.pdf",
+      "score": "6.0",
+      "evidence": "针对纵向数据的可解释预测建模",
+      "tldr": "该研究提出DyGraphTrans框架，将电子健康记录转化为时间图，通过滑动窗口机制高效建模患者相似性与时间演化，减少内存消耗并保持预测精度与可解释性，在多项疾病进展任务中表现优异。",
+      "tags": "query:q5",
+      "abstract_en": "MotivationElectronic Health Records (EHRs) contain vast amounts of longitudinal patient medical history data, making them highly informative for early disease prediction. Numerous computational methods have been developed to leverage EHR data; however, many process multiple patient records simultaneously, resulting in high memory consumption and computational cost. Moreover, these models also often lack interpretability, limiting insight into the factors driving their predictions. Efficiently handling large-scale EHR data while maintaining predictive accuracy and interpretability therefore remains a critical challenge. To address this gap, we propose DyGraphTrans, a dynamic graph representation learning framework that represents patient EHR data as a sequence of temporal graphs. In this representation, nodes correspond to patients, node features encode temporal clinical attributes, and edges capture patient similarity. DyGraphTrans models both local temporal dependencies and long-range global trends, while a sliding-window mechanism reduces memory consumption without sacrificing essential temporal context. Unlike existing dynamic graph models, DyGraphTrans jointly captures patient similarity and temporal evolution in a memory-efficient and interpretable manner.\n\nResultsWe evaluated DyGraphTrans on Alzheimers Disease Neuroimaging Initiative (ADNI) and National Alzheimers Coordinating Center (NACC) for disease progression prediction, as well as on the Medical Information Mart for Intensive Care (MIMIC-IV) dataset for early mortality prediction. We further assessed the model on multiple benchmark dynamic graph datasets to evaluate its generalizability. DyGraphTrans achieved strong predictive performance across diverse datasets. We also demonstrated interpretability of DyGraphTrans aligned with known clinical risk factors.\n\nThe source code and datasets are available at https://github.com/bozdaglab/DyGraphTrans.\n\nContactSerdar.Bozdag@unt.edu\n\nSupplementaryUploaded as an attachment.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
