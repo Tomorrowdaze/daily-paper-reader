@@ -1,6 +1,10 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-04-21 <!--dpr-date:20260421-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/21/2604.11384v1-statehood-without-capacity" data-sidebar-item="{&quot;title&quot;: &quot;Statehood Without Capacity&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2604.11384v1-statehood-without-capacity&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;国家地位与制度能力的政治经济学理论&quot;}">Statehood Without Capacity</a>
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/21/biorxiv-10-1101-2025-11-04-686393-v2-harnessing-interpretable-deep-learning-to-predict-resistance-in-klebsiella-pneumoniae" data-sidebar-item="{&quot;title&quot;: &quot;Harnessing Interpretable Deep Learning to Predict Resistance in Klebsiella pneumoniae&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/biorxiv-10-1101-2025-11-04-686393-v2-harnessing-interpretable-deep-learning-to-predict-resistance-in-klebsiella-pneumoniae&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;用于预测模型的可解释深度学习&quot;}">Harnessing Interpretable Deep Learning to Predict Resistance in Klebsiella pneumoniae</a>
   * 2026-04-19 <!--dpr-date:20260419-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/19/2604.11384v1-statehood-without-capacity" data-sidebar-item="{&quot;title&quot;: &quot;Statehood Without Capacity&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2604.11384v1-statehood-without-capacity&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;关于国家地位和冲突的政治经济理论与机制&quot;}">Statehood Without Capacity</a>

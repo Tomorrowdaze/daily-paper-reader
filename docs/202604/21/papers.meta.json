@@ -1,0 +1,39 @@
+{
+  "label": "2026-04-21",
+  "date": "2026-04-21",
+  "generated_at": "2026-04-21T20:42:54",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202604/21/2604.11384v1-statehood-without-capacity",
+      "section": "quick",
+      "title_en": "Statehood Without Capacity",
+      "authors": "Rok Spruk",
+      "date": "2026-04-13",
+      "pdf": "https://arxiv.org/pdf/2604.11384v1",
+      "score": "7.0",
+      "evidence": "国家地位与制度能力的政治经济学理论",
+      "tldr": "本文提出“无能力的国家主权”理论，阐述在特定制度与地缘政治条件下，国家可陷入仅具名义主权的低能力均衡。通过政治经济学机制分析碎片化精英、外部援助及国际承认的作用，解释国家能力与主权象征的动态分离，以巴勒斯坦为案例说明理论适用性。",
+      "tags": "query:q6",
+      "abstract_en": "This paper develops a political-economy theory of statehood without capacity. I argue that under specific institutional and geopolitical conditions, a polity can become trapped in an equilibrium of nominal statehood: a state in which claims to sovereignty, external recognition, and symbolic legitimacy persist or even strengthen while the coercive, fiscal, administrative, and legal capacities required for effective statehood remain weak. The mechanism is driven by three forces. First, fragmented elites may privately benefit from preserving autonomous control, patronage, and localized rent extraction rather than consolidating authority into a unified state. Second, externally mediated transfers can reduce the immediate costs of institutional non-consolidation and thereby stabilize a low-capacity equilibrium. Third, international recognition and symbolic endorsement may be only weakly conditioned on domestic administrative performance, allowing recognition capital to accumulate more rapidly than capacity capital. The theory generates a dynamic divergence between juridical or symbolic statehood and effective statehood, with implications for investment, fiscal fragility, corruption, and vulnerability to conflict shocks. The paper derives testable predictions and then interprets Palestine as a flagship application of the broader mechanism. The central implication is that statehood is not only a question of recognition or territorial claim but an equilibrium outcome of institutional consolidation. Where the incentives to consolidate remain weak, sovereignty may be asserted without becoming viable.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/21/biorxiv-10-1101-2025-11-04-686393-v2-harnessing-interpretable-deep-learning-to-predict-resistance-in-klebsiella-pneumoniae",
+      "section": "quick",
+      "title_en": "Harnessing Interpretable Deep Learning to Predict Resistance in Klebsiella pneumoniae",
+      "authors": "Araujo, N. d. M. F., Chagas, M., Santos, M. F., Pereira, R. F. A., Brum, R. C., Pinheiro, F. R., Silveira, M. C., Dure, F. M., Muller, B. d. L. A., de Souza, A. A. A., Souza, A. B. S. R., de Souza, A. F., Carvalho-Assef, A. P., Moreira, A. d. S., dos Santos, M. T., Cortes, A. M. d. A., Penna, B., Chagas, T., Aguiar-Alves, F., Silva, F. A. B. d.",
+      "date": "2026-04-20",
+      "pdf": "https://www.biorxiv.org/content/10.1101/2025.11.04.686393v2.full.pdf",
+      "score": "6.0",
+      "evidence": "用于预测模型的可解释深度学习",
+      "tldr": "本研究针对抗菌药物耐药性的全球健康挑战，提出了一个可解释的深度学习模型DeepMDC，用于通过全基因组数据预测克雷伯氏肺炎菌对多种抗生素的耐药性。该模型基于多实例学习框架，将基因组表示为实例集合，并利用现代Hopfield网络与注意力机制实现特征识别和生物学解释，在多种药物测试中表现优异。",
+      "tags": "query:q5",
+      "abstract_en": "Antimicrobial resistance constitutes an escalating global health threat, complicating therapeutic management and increasing morbidity and mortality. Deep learning approaches have emerged as promising tools for bacterial profiling based on omics data, particularly for predicting antimicrobial susceptibility from genomic information. This task relies on identifying genomic signatures associated with resistance mechanisms. Here, DeepMDC is introduced as a deep learning architecture designed for bacterial profiling using whole-genome data. Given that precise annotation at the gene or mutation level is often costly and ambiguous, phenotypic classification is formulated as a Multiple Instance Learning (MIL) problem, in which each genome is represented as a bag of instances with a single associated label. The core of DeepMDC is a Modern Hopfield Network that processes all open reading frames (ORFs), including small ones, derived from genomic data. A key feature of the architecture is its interpretability, enabled by attention mechanisms that facilitate biological insight and hypothesis generation. The model was evaluated against Klebsiella pneumoniae and four clinically relevant antibiotics (meropenem, cefepime, ceftazidime, and gentamicin), achieving strong performance in several metrics. Notably, genes associated with resistance consistently received high attention scores during inference, which validates the architecture and eventually may generate new hypotheses.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

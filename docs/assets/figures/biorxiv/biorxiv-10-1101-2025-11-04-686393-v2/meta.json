@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-001.webp",
+      "caption": "Figure 2 - (a) Performance metrics in validation stage for the meropenem model; (b) Performance metrics from test dataset for the meropenem model.",
+      "page": 15,
+      "index": 1,
+      "width": 889,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-002.webp",
+      "caption": "Table 2 – Hyperparameter space search used to generate the models. n_updates: corresponds to the total number of parameter updates during training; evaluate_at: indicates the evaluation frequency on the validation set; kernel_size: denotes the size of the convolutional filters applied to the sequences; n_kernels: represents the number of convolutional filters; learning_rate: is the learning rate used by the optimizer; rnd_seed: sets the random seed for reproducibility; Convolutional layers is the number of layers of the convolutional (embedding) network; attention SNN layers: defines the number of layers in the attention module; attention SNN units: corresponds to the number of internal units in the attention mechanism; output_layers: indicates the number of layers in the output network; output_units: represents the number of units in these layers; SNN stands for self-normalizing neural network (Klambauer et al., 2017), part of the Hopfield layer. Each run comprises multiple executions with each set of parameters listed.",
+      "page": 7,
+      "index": 2,
+      "width": 773,
+      "height": 496
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-003.webp",
+      "caption": "Figure 1. DeepMDC architecture for processing bacterial whole-genome sequences. We evaluated this architecture to classify bacterial strains into antimicrobial-susceptible/resistant phenotypes. We treated intermediate strains as susceptible, yielding a binary classifier. In this work, the encoder was a 1D convolutional neural network (CNN). A 1D CNN is more computationally efficient than transformer-based or LSTM encoders and requires less VRAM on a GPU for training and inference. However, it yields good results, as shown below.",
+      "page": 14,
+      "index": 3,
+      "width": 889,
+      "height": 322
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-004.webp",
+      "caption": "Figure 6 - (a) Performance metrics in validation stage for the ceftazidime model; (b) Performance metrics from test dataset for the ceftazidime model.",
+      "page": 18,
+      "index": 4,
+      "width": 889,
+      "height": 222
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-005.webp",
+      "caption": "Figure 7 - (a) Highest attention coefficients for the ceftazidime antibiotic in model 1 within group S-S; (b) Highest attention coefficients for the ceftazidime antibiotic in model 1 within group R-R.",
+      "page": 18,
+      "index": 5,
+      "width": 889,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-006.webp",
+      "caption": "Table 4 Final hyperparameter configurations selected for each antimicrobial model.",
+      "page": 8,
+      "index": 6,
+      "width": 975,
+      "height": 660
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-007.webp",
+      "caption": "Table 3 - Positive weights used on training for each antimicrobial.",
+      "page": 8,
+      "index": 7,
+      "width": 746,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-008.webp",
+      "caption": "Figure 8 - (a) Performance metrics in validation stage for the gentamicin model; (b) Performance metrics from test dataset for the gentamicin model.",
+      "page": 19,
+      "index": 8,
+      "width": 889,
+      "height": 222
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-009.webp",
+      "caption": "Figure 9 - (a) Highest attention coefficients for the gentamicin antibiotic in model 1 within group S-S; (b) Highest attention coefficients for the gentamicin antibiotic in model 1 within group R-R.",
+      "page": 19,
+      "index": 9,
+      "width": 889,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-010.webp",
+      "caption": "Figure 4 - (a) Performance metrics in validation stage for the cefepime model; (b) Performance metrics from test dataset for the cefepime model.",
+      "page": 17,
+      "index": 10,
+      "width": 889,
+      "height": 222
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-011.webp",
+      "caption": "Figure 5 - (a) Highest attention coefficients for the cefepime antibiotic in model 1 within group S-S; (b) Highest attention coefficients for the cefepime antibiotic in model 1 within group R-R.",
+      "page": 17,
+      "index": 11,
+      "width": 889,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-1101-2025-11-04-686393-v2/fig-012.webp",
+      "caption": "Figure 3 - (a) Highest attention coefficients for the meropenem antibiotic in model 2 within group S-S; (b) Highest attention coefficients for the meropenem antibiotic in model 2 within group R-R. The identification of these elements suggests that DeepMDC captures both canonical resistance determinants and broader genomic contexts associated with antimicrobial susceptibility. Transposable elements, such as those from the Tn3 family, are known to mediate the dissemination of resistance genes across strains and species (Cuzon et al., 2011), while porins such as OmpK36 are directly involved in antibiotic influx and have been repeatedly associated with altered susceptibility profiles (Sugawara et al., 2016). This indicates that the model does not rely on isolated genetic markers but instead integrates signals from multiple genomic features that collectively contribute to the resistance phenotype.",
+      "page": 16,
+      "index": 12,
+      "width": 889,
+      "height": 222
+    }
+  ]
+}
