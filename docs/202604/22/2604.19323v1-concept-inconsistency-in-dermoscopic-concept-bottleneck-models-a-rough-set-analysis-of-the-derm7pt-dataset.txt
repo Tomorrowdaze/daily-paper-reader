@@ -1,0 +1,731 @@
+Title: Concept Inconsistency in Dermoscopic Concept Bottleneck Models: A Rough-Set Analysis of the Derm7pt Dataset
+
+URL Source: https://arxiv.org/pdf/2604.19323v1
+
+Published Time: Wed, 22 Apr 2026 00:56:31 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+# Concept Inconsistency in Dermoscopic Concept Bottleneck Models: A Rough-Set Analysis of the Derm7pt Dataset 
+
+# Gonzalo N ´ apoles 1, Isel Grau 2, and Yamisleydi Salgueiro 3* 
+
+> 1
+
+Department of Intelligent Systems, Tilburg University, 5037 AB Tilburg, The Netherlands; g.r.napoles@tilburguniversity.edu 
+
+> 2
+
+Information Systems Group, Eindhoven University of Technology, 5600 MB Eindhoven, The Netherlands; i.d.c.grau.garcia@tue.nl 
+
+> 3
+
+Department of Industrial Engineering, Faculty of Engineering, Universidad de Talca, Campus Curic ´ o, Curic ´ o3340000, Chile; ysalgueiro@utalca.cl 
+
+# ABSTRACT 
+
+Concept Bottleneck Models (CBMs) route predictions exclusively through a clinically grounded concept layer, binding inter-pretability to concept-label consistency. When a dataset contains concept-level inconsistencies, identical concept profiles mapped to conflicting diagnosis labels create an unresolvable bottleneck that imposes a hard ceiling on achievable accuracy. In this paper, we apply rough set theory to the Derm7pt dermoscopy benchmark and characterize, for the first time, the full extent and clinical structure of this inconsistency. Among 305 unique concept profiles formed by the 7 dermoscopic criteria of the 7-point melanoma checklist, 50 (16.4%) are inconsistent, spanning 306 images (30.3% of the dataset). This yields a theoretical accuracy ceiling of 92.1%, independent of backbone architecture or training strategy for CBMs that exclusively operate with hard concepts. In addition, we characterize the conflict-severity distribution, identify the clinical features most responsible for boundary ambiguity, and evaluate two filtering strategies with quantified effects on dataset composition and CBM interpretability. Symmetric removal of all boundary-region images yields Derm7pt+, a fully consistent benchmark subset of 705 images with perfect quality of classification and no hard accuracy ceiling. Building on this filtered dataset, we present a hard CBM evaluated across 19 backbone architectures from the EfficientNet, DenseNet, ResNet, and Wide ResNet families. Under symmetric filtering, explored for completeness, EfficientNet-B5 achieves the best label F1 score (0.85) and label accuracy (0.90) on the held-out test set, with a concept accuracy of 0.70. Under asymmetric filtering, EfficientNet-B7 leads across all four metrics, reaching a label F1 score of 0.82 and concept accuracy of 0.70. These results establish reproducible baselines for concept-consistent CBM evaluation on dermoscopic data. 
+
+# 1 Introduction 
+
+Concept Bottleneck Models (CBMs) were introduced by Koh et al. 1 as a class of two-stage neural architectures that route all predictions through an intermediate layer of human-interpretable concepts before producing a final label. In their original formulation, the backbone first maps the raw input to a vector of concept predictions, and a downstream predictor maps that concept vector to the output class. This design admits two principal variants: soft CBMs, in which the label predictor receives continuous probability scores over each concept, and hard CBMs, in which those scores are discretized into binary or categorical assignments before being passed downstream 2. While soft CBMs achieve higher task accuracy, they suffer from concept leakage , a phenomenon in which the label predictor implicitly encodes information beyond the intended concept values 3. Hard CBMs are resilient to leakage by construction since the bottleneck is a stop-gradient discrete tensor, so the label predictor can only access information that a clinician would observe by reading the concept assignments. Both variants support test-time human interventions, where an expert corrects a mispredicted concept, and the updated prediction propagates forward through the label head, a capability that has been shown to improve accuracy substantially 4. Extensions of the original framework include Concept Embedding Models 5, which go beyond the accuracy-vs-interpretability trade-off by learning high-dimensional concept representations. Similarly, Post-hoc Concept Bottleneck Models 6 retrofit the bottleneck onto already-trained networks by transferring concepts from other datasets without requiring concept-annotated training data. More recent variants, such as Label-free CBMs 7 or the UCBM architecture 8, automate concept set construction using vision-language models or latent concept discovery, respectively. These architectures are part of a broader effort to reconcile the accuracy of deep neural networks with the transparency demands of symbolic and logic-based reasoning 9.Concept-based models have attracted attention in medical image analysis, where clinicians reason in terms of structured, 
+
+> arXiv:2604.19323v1 [cs.LG] 21 Apr 2026
+
+domain-specific attributes. In dermatology, convolutional neural networks trained end-to-end have achieved accuracy compa-rable to board-certified dermatologists on skin lesion classification 10 , yet their black-box nature limits clinical adoption. A systematic review of XAI in skin cancer recognition 11 found that the overwhelming majority of published studies rely on post-hoc saliency methods, with inherently interpretable approaches remaining substantially underrepresented. Post-hoc methods are widely used because they require no expert-annotated concept data and are readily available in standard deep learning libraries. However, they are frequently rejected as solutions to the transparency problem in clinical settings due to the risk of introducing confirmation bias 11 . CBMs address this gap by grounding predictions in dermoscopic criteria that dermatologists use in practice, such as pigment network morphology, vascular patterns, and the presence of a blue-whitish veil. Lucieri et al. 12 
+
+showed that deep classifiers trained on dermoscopic images encode disease-related concepts in their latent space in a manner consistent with dermatological descriptions. Recent work has extended this to inherently interpretable frameworks, showing that CBMs trained on curated concept annotations can be applied to skin lesion diagnosis without sacrificing classification performance 13 . Moreover, concept-grounded approaches yield explanations that post-hoc saliency methods cannot guarantee 14 .When concept-grounded XAI explanations are provided alongside predictions, clinicians’ diagnostic accuracy, confidence, and trust in the system increase compared to support from a standard non-explainable AI 15 .In terms of data, several dermoscopic image datasets have been released to support automated skin lesion classification. The PH 2 dataset 16 provides 200 annotated images of melanocytic lesions with expert segmentations, clinical diagnoses, and dermoscopic criteria. HAM10000 17 supplies 10,015 multi-source dermatoscopic images across seven diagnostic categories and has become the most widely used benchmark for pigmented lesion classifiers. The BCN20000 dataset 18 extends the diversity of available data with approximately 19,000 dermoscopic images from Hospital Clínic Barcelona, covering challenging lesions such as those in nail and mucosal locations, and was a primary contributor to the ISIC 2019 challenge training set 19 . The ISIC 2020 challenge introduced a patient-centric collection of over 33,000 images 20 that explicitly encodes multiple lesions per patient to support the ugly-duckling diagnostic heuristic. More recently, DERM12345 21 released 12,345 images spanning 40 fine-grained subclasses, providing a detailed taxonomic coverage currently available in the open literature. Among all these resources, the 7-Point Checklist dataset, Derm7pt 22 , occupies a unique position. Its 1,011 paired clinical and dermoscopic images are annotated not only with diagnosis labels but also with the seven dermoscopic criteria of the 7-point melanoma checklist. It allows for more interpretable model predictions through the inclusion of intermediate semantic attributes 23 . This makes Derm7pt the natural choice for developing and evaluating concept-bottleneck classifiers in dermoscopy, as highlighted in recent concept-based work 15 . However, this dataset is far from perfect. In this paper, we propose a formal analysis of concept-level inconsistency in the Derm7pt dataset and its consequences for CBMs trained on dermoscopic data. Using rough set theory 24, 25 , we characterize the full extent of the inconsistency. Among 305 unique concept profiles formed by the seven dermoscopic criteria of the 7-point checklist, 50 (16.4%) are inconsistent, spanning 306 images (30.3% of the dataset). This analysis yields a provable theoretical accuracy ceiling of 92.1% for any classifier depending exclusively on hard concept representations, regardless of backbone architecture, training procedure, or regularization strategy. The bound is tight and holds for any pure CBM variant. A particularly concerning finding is that 136 of the 252 melanoma images (54.0%) reside in the boundary region, far exceeding the overall boundary fraction of 30.3%. The ramification of this fact is that the seven checklist concepts are less discriminative for melanoma than for non-melanoma lesions. The concepts most responsible for this boundary ambiguity are irregular dots and globules and irregular streaks, which appear in 79% and 39% of boundary-region images compared to 29% and 19% of consistent-profile images. To correct the inconsistency, we propose and discuss two filtering strategies. The symmetric strategy removes all boundary images to produce Derm7pt+, a fully consistent subset of 705 images with no hard accuracy ceiling. The asymmetric strategy retains all melanoma images from the boundary while removing only the conflicting non-melanoma samples, yielding 841 images and preserving sensitivity at the cost of partial residual inconsistency. Towards the end of our study, we evaluate a hard CBM across 19 backbone architectures from the EfficientNet, DenseNet, ResNet, and Wide ResNet families. The remainder of this paper is organized as follows. Section 2 presents the theoretical and statistical analysis of concept inconsistency in Derm7pt using rough set theory, including the derivation of the accuracy ceiling theorem and the characterization of the boundary region. Section 3 describes and evaluates two filtering strategies to remove inconsistencies, resulting in the construction of the cleaned Derm7pt+ dataset 1. Section 4 details the hard CBM architecture used for numerical validation, the data preparation pipeline, and the empirical evaluation across 19 CNN-based backbone architectures. Section 5 concludes with a summary of findings, limitations, and directions for future work. 
+
+# 2 Dataset Analysis 
+
+This section conducts a rough set analysis of the Derm7pt dataset to characterize concept-level inconsistency and its implications for hard CBM architectures. First, we derive a provable accuracy ceiling for any classifier operating exclusively on hard  
+
+> 1The resulting Derm7pt+ dataset and the code supporting the experiments of this paper are publicly available at https://github.com/gnapoles/ Consistent-Derm7pt
+> 2/14
+
+concepts and the whole dataset. Second, we quantify the extent of inconsistency across profiles and images, and identify the dermoscopic criteria most responsible for boundary ambiguity. 
+
+2.1 Theoretical analysis 
+
+Let U be the universe of discourse for the Derm7pt dataset, which contains |U| = 1, 011 dermoscopy images. Each image 
+
+x ∈ U is described by a set of clinical concepts C = {a1, . . . , a7}, where ai denotes one of the seven dermoscopic criteria of the 7-point melanoma checklist: pigment network, streaks, pigmentation, regression structures, dots and globules, blue-whitish veil, and vascular structures . In its binary form, each image also carries a binary diagnosis label d(x) ∈ { 0, 1}, where 0 encodes non-melanoma, and 1 encodes melanoma. The tuple S = ( U,C ∪ { d}) is an information system in the sense of rough set theory. The indiscernibility relation induced by C creates a partition of U into equivalence classes of dermoscopic images that are identical with respect to all concepts. Such an indiscernibility relation is given by: IND (C) = (x, y) ∈ U ×U : ∀ ai ∈ C, ai(x) = ai(y) . (1) The quotient set E = U/IND (C) is the partition of U into equivalence classes. In this regard, Derm7pt yields |E| = 305 distinct concept profiles. Each class [x]C ∈ E constitutes a concept profile: the complete signature of dermoscopic features observable through the concept bottleneck. Two images belonging to the same profile are indistinguishable by any concept-only classifier, such as pure bottleneck models that operate with hard concept representations. A concept profile is consistent if all images it contains share the same diagnosis label, and inconsistent otherwise. The positive region of decision d with respect to C is the union of all consistent profiles: POS C(d) = [    
+
+> [x]C∈E
+> ∃ℓ∈{ 0,1}:[x]C⊆d−1(ℓ)
+
+[x]C. (2) such that d−1(ℓ) = {x ∈ U : d(x) = ℓ} is the pre-image of label ℓ ∈ { 0, 1}. In a binary setting, the boundary region for a given decision class collects all images whose profile contains both diagnosis values: BND C(d) = U \ POS C(d). (3) The quality of classification, which is an RST metric, is defined as follows: 
+
+γ(C, d) = |POS C(d)||U| . (4) It measures the fraction of images that can be correctly and unambiguously classified by a concept-only rule. A value γ < 1signals that the dataset is inconsistent, meaning that no concept-based classifier can perfectly separate the two classes regardless of architecture, training procedure, or supervision scheme. Let Π denote the set of inconsistent concept profiles. For profile ek ∈ Π, let nmel  
+
+> k
+
+and nnmel  
+
+> k
+
+be the melanoma and non-melanoma image counts, respectively, with total size nk = nmel  
+
+> k
+
++ nnmel  
+
+> k
+
+. The conflict ratio is defined as follows: 
+
+γk = min  nmel  
+
+> k
+
+, nnmel 
+
+> k
+
+
+
+nk
+
+, γk ∈ (0, 0.5]. (5) A value γk = 0.5 indicates a perfectly ambiguous profile, while γk → 0 indicates a near-consistent profile where a single annotation outlier creates the conflict. Let nmaj  
+
+> k
+
+= max (nmel  
+
+> k
+
+, nnmel  
+
+> k
+
+) be the majority-class count in profile k. Therefore, the concept-based accuracy ceiling is given by the following expression: acc ∗ =
+
+|POS C(d)| + ∑
+
+> k∈Π
+
+nmaj 
+
+> k
+
+|U| . (6) 
+
+Theorem (Accuracy Ceiling) . For the Derm7pt dataset and the binary settings explained above, any classifier h : U → { 0, 1}
+
+that exclusively only on the dermoscopic concepts in C (i.e., h (x) = h(y) whenever (x, y) ∈ IND (C)) satisfies: 
+
+acc (h) ≤ 0.921 (92 .1% ). (7) 
+
+In addition, this performance bound is tight. 
+
+> 3/14
+
+Proof. For every class e ⊆ POS C(d), all images in e share the same label. Because h is constant on e, it assigns the correct label to every member of e, giving exactly |POS C(d)| = 705 correct predictions on the positive region. For each inconsistent concept profile ek ∈ Π, the classifier h must assign a single label to all images in ek, so it correctly classifies at most nmaj  
+
+> k
+
+of them. Summing over all 50 inconsistent concept profiles and using the explicit enumeration of the Derm7pt boundary region, we get the following expression: 
+
+|{ x ∈ BND C(d) : h(x) = d(x)}| ≤ ∑
+
+> k∈Π
+
+nmaj  
+
+> k
+
+= 226 . (8) Adding both regions: |{ x ∈ U : h(x) = d(x)}| ≤ 705 + 226 = 931 , and dividing by |U| = 1011 gives the stated bound (7). Tightness follows from the majority-vote classifier, which assigns the unique label on each consistent profile and the majority label on each inconsistent profile, achieving exactly 931 correct predictions and attaining the bound. 
+
+Corollary . No Concept Bottleneck Model using hard inputs, regardless of training procedure, concept supervision, or regularization, can exceed 92 .1% accuracy on the unfiltered Derm7pt dataset for melanoma/non-melanoma classification, because its final decision layer is a deterministic function of the concept vector alone. 
+
+Remark . The theoretical accuracy ceiling is a tight upper bound that applies to any hard CBM determining class labels exclusively from the seven dermoscopic concepts. This bound is computed globally, treating the entire dataset as a single pool before any partitioning is performed. The local ceiling will vary across training, validation, and test splits depending on how inconsistent concept profiles are distributed among them. A split concentrating boundary-region images in the training set imposes a tighter local ceiling on training accuracy while leaving the test ceiling relatively relaxed. 
+
+2.2 Statistical Analysis 
+
+Applying the rough-set formalization to the Derm7pt dataset for melanoma/non-melanoma classification yields insightful statistics. Of the 305 unique concept profiles, 50 are inconsistent ( |Π| = 50 , 16.4%), and 306 images reside in BND C(d) (30.3%). The quality of classification is γ(C, d) = 705 /1011 ≈ 0.697 , and the accuracy ceiling evaluates to acc ∗ = 931 /1011 ≈ 0.921 ,as established in the theorem above. This exceeds the majority-class baseline of 75.1% by 17 percentage points, yet constitutes a non-trivial upper limit. Any CBM reporting accuracy above 92.1% on the unfiltered dataset is exploiting information that leaks outside the concept bottleneck. A notable finding is that 136 of the 252 melanoma images (54.0%) fall in BND C(d),far exceeding the overall boundary fraction of 30.3%. This disproportionate representation indicates that the seven checklist concepts in C are systematically less discriminative for melanoma than for non-melanoma lesions. Figure 1(a) shows the profile- and image-level partition. The conflict-ratio distribution is shown in Figure 1(b), where we can see a markedly non-uniform distribution. A cluster of profiles near γk ≈ 0.25 represents cases where one class predominates with a small number of outlier annotations, while 9 profiles (18.0% of inconsistent profiles) reach the maximum ambiguity 
+
+γk = 0.5 , meaning the concept signature provides no discriminative signal. The distribution mean ( ¯γ = 0.31 , s = 0.13 ) is above the annotation-noise range ( γk < 0.2), which would indicate genuine uncertainty. Table 1 lists the five most ambiguous profiles observed in the dataset (reaching the highest γk score possible). These profiles involve irregular dots and globules frequently in combination with a blue-whitish veil or irregular streaks, pairings that are known to overlap clinically between melanoma and pigmented Spitz nevi 26 . The morphological continuum between regular and irregular globules and the visual similarity between melanoma blue-whitish veil and the blue-gray peppering of regressing nevi are well-documented sources of inter-observer disagreement in dermoscopy 27 .
+
+Table 1. Five inconsistent concept profiles with the highest conflict ratio γk, where nk is the total number of images in profile k,melanoma count is nmel  
+
+> k
+
+, and non-melanoma count is nnmel  
+
+> k
+
+. Only active concept values are listed.                               
+
+> #nknmel
+> knnmel
+> kγkKey concept values 14220.5 Irregular streaks, irregular dots and globules, blue-whitish veil 22110.5 Diffuse irregular pigmentation, white areas regression 32110.5 Diffuse irregular pigmentation, regular dots and globules, hairpin vascular 42110.5 Atypical pigment network, irregular streaks, blue areas regression, regular dots and globules 52110.5 Atypical pigment network, irregular streaks, localized irregular pigmentation
+
+Figure 2 shows the melanoma prevalence ˆp for each concept value with 95% Wilson confidence intervals 28 , where ˆp denotes the estimated proportion of melanoma cases among all images carrying that concept value. Three concept values stand out at high melanoma rate with sufficient sample sizes: irregular streaks ( ˆp = 0.61 , n = 251 ), blue-whitish veil present ( ˆp = 0.62 ,
+
+n = 195 ), and atypical pigment network ( ˆp = 0.60 , n = 230 ). The high-risk concept values are enriched in the boundary region,  
+
+> 4/14 Concept Profiles Images
+> 0
+> 250
+> 500
+> 750
+> 1000
+> Count
+
+16% 
+
+30%  
+
+> Inconsistent
+> Consistent (a) Dataset partition
+
+0.1 0.2 0.3 0.4 0.5 
+
+0
+
+2
+
+4
+
+6
+
+8
+
+10  
+
+> Number of profiles
+> k= 0.5
+
+KDE (b) Distribution of γk
+
+Figure 1. Rough set partition of the Derm7pt dataset. (a) Stacked bar chart showing the consistent (blue) and inconsistent (red) split at the concept-profile level and the image level. (b) Histogram of conflict ratio γk across all 50 inconsistent profiles, with kernel density estimate. The dashed vertical line marks maximum ambiguity γk = 0.5. where irregular dots and globules appear in 79% of inconsistent profile images compared to 29% of consistent profile images. Irregular streaks appear in 39% versus 19%, and blue-whitish veil is present in 29% versus 15%. Figure 3 shows joint melanoma rate heatmaps for two high-information concept pairs. In this visualization, each cell reports the estimated joint probability ˆP(melanoma ) for dermoscopic images carrying both concept values. The combination blue-whitish veil present × irregular dots and globules yields ˆP(melanoma ) = 0.73 (n = 159 ). However, the single most frequent boundary-region entry in this heatmap is absent blue-whitish veil × irregular dots and globules. This scenario accounts for 154 of the 306 boundary images despite a lower joint melanoma probability of 0.36. For the pigment network × streaks pair, the atypical × irregular cell reaches ˆ P = 0.74 ( n = 134) and is also the most boundary-concentrated cell with 85 images. The fact that these high-risk cells contribute disproportionately to the boundary region BND C(d) confirms that inconsistency is concentrated precisely where diagnostic stakes are highest. Figure 4 illustrates the inconsistency with a concrete example involving two images. Image Ael/Ael498.jpg is labeled as melanoma, while image Ael/Ael427.jpg is labeled as seborrheic keratosis. Both share the identical concept signature under C where all seven dermoscopic attributes a1, . . . , a7 are absent except for hairpin vascular structures. Because these two images are indiscernible under IND (C), they belong to the same equivalence class [x]C, and no CBM can correctly classify both. Profile P1 has γ1 = 0.5 such that the concept signature provides no discriminative signal. In these cases, the accuracy-ceiling contribution of this profile is determined by a coin flip over two equally represented classes. Image Ael/Ael427.jpg , diagnosed as seborrheic keratosis, shows dermoscopic traits that align well with classical descriptions of keratinizing lesions. The lesion has a waxy, yellow-brown appearance with a lobulated surface pattern and several peripheral loop vessels surrounded by a pale halo. These vessels correspond to the well-known hairpin morphology frequently reported in seborrheic keratosis. Pigment network structures are not visible, and streaks are absent. Pigmentation is present but confined to localized keratin areas rather than distributed irregularly across the lesion. No regression structures are visible, globules are absent, and the blue-whitish veil is not observed. The lesion also appears dome-shaped and elevated relative to the surrounding skin. A concept vector that matches these visual characteristics could therefore be written as pigment network =absent, streaks =absent, pigmentation =localized regular, regression structures =absent, dots and globules =absent, blue whitish veil =absent, vascular structures =hairpin. Yet, this must be validated by dermatologists. In contrast, image Ael/Ael498.jpg , labeled melanoma, presents a markedly different dermoscopic morphology. The lesion displays strong asymmetry, extensive red coloration, and multiple irregular hemorrhagic areas. Pigment network structures are not visible, and streaks are absent. Pigmentation is clearly present and distributed in an irregular, diffuse manner rather than being absent. Regression structures and globules are not evident, and a blue-whitish veil is not visible in the photograph. The vascular morphology does not correspond to symmetric loop hairpin vessels. Instead, the visible vessels appear fragmented and irregular, a pattern compatible with linear irregular vessels frequently associated with melanoma. A concept vector that reflects these observations can therefore be written as pigment network =absent, streaks =absent, pigmentation =diffuse irregular, regression structures =absent, dots and globules =absent, blue-whitish veil =absent, vascular structures =linear irregular.      
+
+> 5/14 0.0 0.2 0.4 0.6 0.8 1.0
+
+Melanoma prevalence with 95% Wilson CI 
+
+> Pigment Network
+> Streaks
+> Pigmentation
+> Regression Struct.
+> Dots & Globules
+> Blue-Whitish Veil
+> Vascular Struct.
+
+9% (n=381) 
+
+20% (n=400) 
+
+60% (n=230) 
+
+6% (n=107) 
+
+14% (n=653) 
+
+61% (n=251) 
+
+2% (n=115) 
+
+18% (n=588) 
+
+33% (n=3) 
+
+35% (n=40) 
+
+48% (n=265) 
+
+19% (n=758) 
+
+30% (n=116) 
+
+39% (n=38) 
+
+61% (n=99) 
+
+3% (n=334) 
+
+9% (n=229) 
+
+49% (n=448) 
+
+16% (n=816) 
+
+62% (n=195) 
+
+0% (n=23) 
+
+0% (n=2) 
+
+6% (n=31) 
+
+21% (n=823) 
+
+27% (n=15) 
+
+55% (n=53) 
+
+61% (n=46) 
+
+94% (n=18) 
+
+prevalence       
+
+> Low ( p0.20 )Moderate ( 0.20 < p0.40 )High ( p> 0.40 )
+> typical
+> absent
+> atypical
+> regular
+> absent
+> irregular
+> diffuse regular
+> absent
+> localized regular
+> localized irregular
+> diffuse irregular
+> absent
+> blue areas
+> white areas
+> combinations
+> regular
+> absent
+> irregular
+> absent
+> present
+> comma
+> wreath
+> arborizing
+> absent
+> hairpin
+> dotted
+> within regression
+> linear irregular
+
+Figure 2. Melanoma prevalence per concept value with 95% Wilson confidence intervals, where ˆp is the estimated melanoma proportion for each concept value. Color encodes risk tier: high ( ˆp > 0.40 ), moderate ( 0.20 < ˆp ≤ 0.40 ), low ( ˆp ≤ 0.20 ). The dotted vertical line marks the dataset-level melanoma prevalence (24.9%). Right-axis labels group concept values by their parent attribute in the set of dermoscopic concepts C.As in the previous case, such an annotation should be approved by experts. Dataset inconsistency undermines the semantic validity of concept attributions. The CBM requires that the composition 
+
+h ◦ ˆv : U → { 0, 1} be well-defined, where ˆv(x) ∈ { 0, 1}7 is the predicted concept vector (the values predicted by the model for each attribute in C) and h maps concept vectors to a diagnosis. Inconsistency violates this requirement since there exist pairs 
+
+xi, x j ∈ BND C(d) such that ˆv(xi) = ˆv(x j) but d(xi)̸ = d(x j), making h undefined on those inputs at the concept level. When the model must simultaneously predict both labels from the same concept vector, gradient-based attribution methods will attribute 
+
+6/14 absent irregular regular 
+
+Dots & Globules 
+
+> absent present
+> Blue-Whitish Veil
+
+0.08 
+
+(n=220) 
+
+0.36 
+
+(n=289) 
+
+0.03 
+
+(n=307) 
+
+0.33 
+
+(n=9) 
+
+0.73 
+
+(n=159) 
+
+0.04 
+
+(n=27)   
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> P(Melanoma) (a) absent irregular regular
+
+Streaks 
+
+> absent atypical typical
+> Pigment Network
+
+0.15 
+
+(n=249) 
+
+0.48 
+
+(n=85) 
+
+0.05 
+
+(n=66) 
+
+0.45 
+
+(n=84) 
+
+0.74 
+
+(n=134) 
+
+0.08 
+
+(n=12) 
+
+0.06 
+
+(n=320) 
+
+0.38 
+
+(n=32) 
+
+0.07 
+
+(n=29)  
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> P(Melanoma) (b)
+
+Figure 3. Joint melanoma rate heatmaps. Each cell shows the estimated probability ˆP(melanoma ) and the sample count n for images that carry both concept values. Cells with n < 3 are omitted. (a) Blue-whitish veil × dots and globules. (b) Pigment network × streaks. The color scale is shared across both panels.    
+
+> (a) seborrheic keratosis (b) melanoma
+
+Figure 4. Inconsistent pair from profile P1 ( γ1 = 0.50). Despite identical concept descriptions, the left image is labeled as seborrheic keratosis ( d = 0), whereas the right image is labeled as melanoma ( d = 1). the difference to feature correlations that bypass the bottleneck, producing explanations that capture artifacts rather than clinical insight and silently violating the core CBM interpretability guarantee. 
+
+# 3 Adressing Inconsistency 
+
+We acknowledge that inconsistencies in concept annotations are an inherent reality of real-world medical datasets. It often arises from inter-observer variability, ambiguous lesion morphology, and the inherent subjectivity of dermoscopic interpretation. However, boundary region images should not be used as training data for CBMs, since exposing the model to contradictory supervision undermines the core guarantee that the concept bottleneck functions as a well-defined mapping. The appropriate choice is to train on clean, consistent data and allow the model to generalize to ambiguous real-world cases at inference time. Several strategies exist to address concept inconsistency at the dataset level. Reannotation by domain experts is the most solid option, but it is costly, requires specialized dermoscopic knowledge, and risks introducing new disagreements. Expanding the concept set could break existing inconsistencies by making previously indistinguishable profiles separable, but it requires the new annotations to be collected exhaustively across the entire dataset. A third and more practical direction is to remove the inconsistent instances from the dataset entirely. In this section, we explore two strategies that follow this direction, both 
+
+> 7/14
+
+yielding a cleaner version of the benchmark that we refer to as Derm7pt+. 
+
+3.1 Filtering Strategies 
+
+The existence of BND C(d) means that any CBM trained on the raw dataset will be exposed to contradictory supervision where the same concept prediction vector ˆv is paired with both d = 1 and d = 0 labels. In this subsection, we will discuss two filtering strategies rooted in the presumably correct reasoning 29 to remove inconsistent samples from the dataset. It should be highlighted that we do not seek to remove difficult instances from the dataset, but those that are impossible to classify by a CBM that determines the class labels solely from the concept heads. The first strategy concerns symmetric removal, which restricts the dataset to POS C(d), removing all samples in BND C(d)
+
+regardless of label. This can be formalized as follows: 
+
+U′ = x ∈ U : [x]C ⊆ d−1(0) ∪ x ∈ U : [x]C ⊆ d−1(1) . (9) Symmetric filtering gives |U′| = 705 (−30 .3% ), and by construction γ(C, d)|U′ = 1.0. Hence, every concept profile maps to a unique, unambiguous label, which fully restores the CBM guarantee that h ◦ ˆv is a valid function. The cost is the removal of 136 melanoma images (54.0% of all melanoma), worsening the class imbalance from 1:3.0 to 1:5.1. Asymmetric removal retains melanoma-labeled images in inconsistent profiles, removing only the conflicting non-melanoma samples. This embeds the clinical prior that false negatives carry a higher cost than false positives in a screening setting. It can be seen as an undersampling method and can be formalized as follows: 
+
+U′′ = U′ ∪ x ∈ BND C(d) : d(x) = 1 . (10) The asymmetric filtering approach gives |U′′ | = 841 (−16 .8% ). All 252 melanoma images are retained, and the class ratio improves slightly to 1:2.3. The dataset remains partially inconsistent, but the decision boundary shifts in the clinically conservative direction. The hard accuracy ceiling on U′′ rises to 83.2%. Table 2 summarizes the trade-offs, while Figure 5 visualizes the ceilings and post-filter compositions. 
+
+Table 2. Comparison of filtering strategies such that γ(C, d) is the quality of classification defined in Equation (4), acc ∗ is the accuracy ceiling defined in Equation (6), and M:NM is the melanoma to non-melanoma class ratio.                           
+
+> Property No filter Asymmetric Symmetric Number of dermoscopic images 1,011 841 705 Number of melanoma samples retained 252 252 116 Class imbalance ratio (M:NM) 1:3.0 1:2.3 1:5.1 Quality of classification γ(C,d)0.697 >0.697 1.000 Accuracy ceiling score acc ∗92.1% 83.2% 100% All melanoma samples preserved Yes Yes No Concept consistency assessment No Partial Full
+
+For rigorous interpretability benchmarking, symmetric removal ( U′) is preferred since it yields a fully consistent dataset with γ = 1 and a well-defined accuracy ceiling of 100%. For clinical screening applications, asymmetric removal ( U′′ ) is preferred since it retains all melanoma training signal, preserves sensitivity, and imposes only bounded residual inconsistency. Neither strategy is universally optimal since both come at the cost of losing valuable data, so the choice should be documented explicitly in any publication using Derm7pt+ for CBM evaluation. Beyond filtering the concept annotations to remove inconsistent patterns, we manually cropped all images to remove border artifacts and better center the lesion within the frame. All images were saved at 384×384 pixels. In principle, a CNN backbone trained with enough samples and epochs would learn to distinguish diagnostically relevant regions from noise at the image borders. However, both filtering strategies substantially reduce the number of available training samples, implying that longer training schedules risk overfitting rather than improving generalization. This motivated our choice of a conservative training setup, as described in the next section. 
+
+# 4 Hard Concept Bottleneck Model 
+
+We now build and evaluate a hard CBM to assess how well concept-based classifiers perform on Derm7pt+ under both filtering strategies. The original unfiltered Derm7pt dataset is not considered in this evaluation since it has been sufficiently explored in the literature 30–32 . Moreover, as the analysis in Section 2 makes clear, training a CBM on concept-inconsistent data exposes the model to contradictory signals that undermine the core guarantee of the bottleneck. 
+
+> 8/14
+
+No Filter Asymmetric Symmetric 
+
+70 
+
+75 
+
+80 
+
+85 
+
+90 
+
+95 
+
+100 
+
+> Accuracy ceiling (%)
+
+92.1% 
+
+83.2% 
+
+100.0% (a) Theoretical accuracy ceiling Original Asymmetric Symmetric 
+
+400 
+
+500 
+
+600 
+
+700 
+
+800 
+
+900 
+
+1000 
+
+1100 
+
+> Sample count
+
+n=1011 
+
+n=841 
+
+n=705 
+
+Non-Melanoma 
+
+Melanoma (b) Post-filter dataset composition 
+
+Figure 5. Filtering strategy comparison. (a) Theoretical accuracy ceiling for each configuration. The dashed line marks the majority-class baseline (75.1%). (b) Post-filter dataset composition by class. 
+
+4.1 Data Preparation 
+
+All experiments use the symmetric filtering strategy defined in Equation (9), which restricts the dataset to the positive region POS C(d) by removing every image whose concept profile belongs to BND C(d). As reported in Table 2, this yields |U′| = 705 images with a quality of classification γ(C, d) = 1.0, guaranteeing that every concept profile maps unambiguously to a unique diagnosis label. The theoretical accuracy ceiling on U′ is therefore 100%, removing the hard constraint that would otherwise limit any concept-only classifier trained on the raw dataset. The Derm7pt benchmark provides predefined training, validation, and test splits. The symmetric filtering defined in Equation (9) is applied to each split, removing every image whose concept profile belongs to BND C(d) as identified from the full dataset. The official partition is otherwise preserved exactly, so no resplitting or pooling is performed. Training images undergo a stochastic augmentation pipeline comprising random resized cropping (scale ∈ [0.75 , 1.0],output size 224 × 224 ), horizontal and vertical flips, random rotation up to 90 ◦, random affine transforms (translation up to 10%, shear up to 15 ◦, applied with probability 0.5), color jitter (brightness 0.4, contrast 0.4, saturation 0.3, hue 0.1), random grayscale conversion (probability 0.05), and a randomly selected sharpening, Gaussian blur, or identity transform. Validation and test images are resized to 224 × 224 and normalized only, using ImageNet statistics μ = ( 0.485 , 0.456 , 0.406 )
+
+and σ = ( 0.229 , 0.224 , 0.225 ). Class imbalance in the label space is handled through balanced class weights computed on the training set via the inverse-frequency formula depicted below: 
+
+wℓ = |Ptrain |
+
+2 · | d−1(ℓ) ∩ Ptrain | , ℓ ∈ { 0, 1}, (11) Analogously, per-class weights are computed independently for each concept attribute in C to address concept-level imbalance. Such a strategy is necessary since some concept states are underspecified in the annotations. 
+
+4.2 Hard CBM Architecture 
+
+The model follows the hard Concept Bottleneck architecture introduced by 1. It comprises three components: (i) a backbone feature extractor φθ , (ii) a set of concept prediction heads {gc}c∈C, and (iii) a final label classifier hψ . Given an input image 
+
+x ∈ U, the backbone produces a feature vector z = pool (φθ (x)) ∈ RD via global average pooling. For each concept c ∈ C, a linear head maps z to a vector of logits over the concept categories: 
+
+lc = gc(z) = Wc z + bc ∈ R|Vc|, (12) where Vc represents the set of possible values for concept c. The bottleneck representation is obtained by converting each logit vector into a hard one-hot encoding, as shown below: ˆvc = one-hot 
+
+
+
+arg max  
+
+> j
+
+[lc] j
+
+
+
+∈ { 0, 1}|Vc|. (13) 
+
+> 9/14
+
+The full concept bottleneck vector is the concatenation ˆv = [ ˆvc1 , . . . , ˆvc7 ] ∈ { 0, 1}M , where M = ∑c∈C |Vc|. This hard binarization ensures that the label classifier receives only the discrete concept assignments that a clinician would observe. The label classifier hψ is a two-layer network applied to ˆv, composed of a linear layer of hidden dimension 128 followed by layer normalization, ReLU activation, a dropout layer, and a final linear layer. The backbone φθ , concept heads {gc}, and label classifier hψ are trained jointly in a single stage, avoiding the sequential two-stage procedure of the original CBM formulation. However, joint training introduces the risk of label leakage where gradient signals from the label loss could propagate back through ˆv and distort the concept representations. To prevent this, the gradient flow through the hard bottleneck is severed by treating ˆv as a stop-gradient tensor during the backward pass, ˆvsg = sg (ˆv), so that the label classifier loss does not reach the backbone or the concept heads. As a result, φθ and {gc} are updated exclusively by the concept supervision signal, preserving the semantic alignment of the bottleneck without sacrificing training efficiency. Figure 6 shows the blueprint of the hard CBM explored in this paper. Output (𝑌𝑌 )
+
+Diagnosis 
+
+Concept 1 
+
+Concept 2 
+
+Concept 7 
+
+Concept 5 
+
+Concept 6 
+
+Concept 3 
+
+Concept 4 
+
+Classifier Backbone 
+
+Extraction of hard concepts 
+
+ℒ𝐶𝐶  ℒ𝑌𝑌 
+
+Input (𝑋𝑋 )
+
+Concept-based classification 
+
+Figure 6. Architecture of our hard CBM with stop-gradient. An input image x is passed through a backbone φθ to produce a feature vector z. Separate concept heads {gc} predict logits for each dermoscopic concept. These logits are converted into a single hard, discrete concept vector ˆv via argmax and one-hot encoding. To prevent label leakage, the gradient flow is detached at the bottleneck, ensuring the label classifier hψ and its loss LY do not influence the feature extractor. The backbone and concept heads are updated solely by the concept loss LC, preserving the semantic purity of the bottleneck. The total training loss combines a concept prediction term and a label prediction term: 
+
+L = 1
+
+N
+
+> N
+
+# ∑
+
+> i=1
+
+λ1 LC(xi, vi) + λ2 LY (xi, yi), (14) where λ1, λ2 ≥ 0 are balancing coefficients. The concept loss is the mean of per-concept weighted cross-entropies: 
+
+LC(xi, vi) = 1
+
+|C| ∑
+
+> c∈C
+
+CE 
+
+
+
+l(i) 
+
+> c
+
+, v(i) 
+
+> c
+
+, wc
+
+
+
+, (15) where v(i) 
+
+> c
+
+∈ Vc is the ground-truth value for concept c and wc ∈ R|Vc| is the vector of class weights computed via Equation (11) for concept c. The label loss is a weighted cross-entropy: 
+
+LY (xi, yi) = CE 
+
+
+
+ˆy(i), yi, wy
+
+
+
+, (16) with wy = ( w0, w1) computed from Equation (11). 
+
+4.3 Empirical Results 
+
+Nineteen backbone architectures are evaluated: EfficientNet-B0 through B7 (8 models) 33 , DenseNet-121, 161, 169, and 201 (4 models) 34 , ResNet-18, 34, 50, 101, and 152 (5 models) 35 , and Wide ResNet-50-2 and 101-2 (2 models) 36 . All backbones are 
+
+> 10/14
+
+initialized with ImageNet pretrained weights. The fraction of tunable backbone layers, the batch size, and the initial learning rate were treated as hyperparameters and selected by grid search on the validation set over the ranges {50% , 75% , 100% }, {16 , 32 },and {10 −3, 5 × 10 −4, 10 −4}, respectively. The remaining hyperparameters were fixed after preliminary experimentation, resulting in weight decay 10 −4 for the backbone, dropout rate 0.3, hidden dimension 128 for the label classifier, cosine annealing with ηmin = 10 −6, and loss balancing coefficients λ1 = λ2 = 1.0 . All models are trained for up to 20 epochs since we observed that longer training leads to overfitting, even using early stopping. The best checkpoint, defined as the one that achieves the highest macro-averaged F1 on the validation label set, is used for test set evaluation. Label performance is measured by both accuracy and macro-averaged F1. F1 is the primary evaluation criterion because the test set remains class-imbalanced after filtering, and accuracy can be misleading under imbalance. For concept prediction, accuracy is the primary metric, as the concept prediction task does not require every concept to be correctly identified simultaneously for the final label to be correct. Furthermore, the concept annotations in Derm7pt carry intrinsic noise from inter-observer variability in dermoscopic attribute assignment, so macro-averaged concept accuracy captures overall correctness across attributes without penalizing modest disagreement on noisy categories as heavily as F1 would. Results are reported separately for the symmetric and asymmetric filtering strategies. The symmetric test set contains only concept-consistent images, while the asymmetric test set also includes melanoma images from the boundary region. Note that performance scores across strategies are not directly comparable since they lead to different datasets. Table 3 reports performance under the symmetric strategy. Label accuracy ranges from 0.74 (DenseNet-121) to 0.90 (EfficientNet-B5), and label F1 from 0.67 (DenseNet-121) to 0.85 (EfficientNet-B5). Concept accuracy ranges from 0.45 (DenseNet-121) to 0.70 (EfficientNet-B5 and others), and concept F1 from 0.39 (DenseNet-121) to 0.56 (EfficientNet-B5 and others). The EfficientNet family achieves the highest label F1 scores across all four families, with EfficientNet-B5 attaining the best performance overall. DenseNet models lag in label F1, with the best result (DenseNet-169, F1 = 0.78) falling seven points below EfficientNet-B5. ResNet-152 achieves the best label F1 within the ResNet family (0.81), while ResNet-34 is the weakest across all architectures in both label accuracy (0.80) and label F1 (0.71). It can be concluded that Wide ResNet models offer no advantage over their standard-width counterparts on this task. 
+
+Table 3. Backbone comparison on the Derm7pt test set under symmetric filtering (concept-consistent images only). The best checkpoint by validation label F1 is used for evaluation. Bold values indicate the best results overall.                                                                                                       
+
+> Family Backbone Best Epoch Label Acc. Label F1 Concept Acc. Concept F1
+> EfficientNet
+> efficientnet_b0 19 0.85 0.77 0.70 0.56 efficientnet_b1 14 0.88 0.82 0.70 0.56 efficientnet_b2 10 0.85 0.77 0.66 0.53 efficientnet_b3 11 0.89 0.82 0.67 0.53 efficientnet_b4 12 0.89 0.78 0.70 0.53 efficientnet_b5 13 0.90 0.85 0.70 0.56
+> efficientnet_b6 80.89 0.79 0.65 0.50 efficientnet_b7 20 0.87 0.80 0.69 0.54
+> DenseNet
+> densenet121 40.74 0.67 0.45 0.39 densenet161 16 0.86 0.77 0.62 0.50 densenet169 15 0.86 0.78 0.64 0.51 densenet201 12 0.86 0.77 0.64 0.50
+> ResNet
+> resnet18 90.84 0.74 0.63 0.49 resnet34 16 0.80 0.71 0.57 0.46 resnet50 11 0.80 0.73 0.61 0.49 resnet101 14 0.88 0.80 0.69 0.53 resnet152 18 0.89 0.81 0.69 0.54
+> Wide ResNet wide_resnet50_2 16 0.87 0.75 0.70 0.53 wide_resnet101_2 10 0.84 0.72 0.66 0.49
+
+The observed spread between the best and worst concept accuracy scores (0.70 versus 0.45) suggests that concept prediction quality is less sensitive to backbone choice than label prediction quality. This pattern aligns with the noisy nature of Derm7pt concept annotations, where inter-observer disagreements impose a floor on concept accuracy that is not subject to the backbone choice. However, such a precision level is not required for accurate label approximation. Table 4 reports performance under the asymmetric strategy, which retains all melanoma images from the boundary region and removes only the conflicting non-melanoma samples. Label accuracy ranges from 0.72 (ResNet-18) to 0.85 (EfficientNet-B1 
+
+> 11/14
+
+and B7), and label F1 from 0.68 (ResNet-18) to 0.82 (EfficientNet-B7). Concept accuracy ranges from 0.55 (DenseNet-161) to 0.70 (EfficientNet-B7), and concept F1 from 0.43 (DenseNet-161) to 0.56 (EfficientNet-B7). EfficientNet-B7 achieves the best results across all four metrics under asymmetric filtering. DenseNet-161 is the weakest architecture under this strategy across all metrics, a reversal from its relatively competitive concept F1 under symmetric filtering. ResNet-18, which performed reasonably well under symmetric filtering, drops sharply in label F1 (0.68) under asymmetric filtering, which suggests sensitivity to the residual inconsistency introduced by the retained boundary melanoma images. 
+
+Table 4. Backbone comparison on the Derm7pt test set under asymmetric filtering (all melanoma images retained). The best checkpoint by validation label F1 is used for evaluation. Bold values indicate the best results overall.                                                                                                       
+
+> Family Backbone Best Epoch Label Acc. Label F1 Concept Acc. Concept F1
+> EfficientNet
+> efficientnet_b0 70.80 0.77 0.67 0.54 efficientnet_b1 12 0.85 0.81 0.69 0.56 efficientnet_b2 90.83 0.82 0.66 0.54 efficientnet_b3 11 0.81 0.79 0.66 0.53 efficientnet_b4 15 0.84 0.81 0.68 0.54 efficientnet_b5 12 0.83 0.80 0.68 0.54 efficientnet_b6 12 0.83 0.80 0.69 0.55 efficientnet_b7 18 0.85 0.82 0.70 0.56
+> DenseNet
+> densenet121 14 0.80 0.75 0.65 0.52 densenet161 70.77 0.73 0.55 0.43 densenet169 19 0.81 0.77 0.69 0.55 densenet201 16 0.83 0.81 0.66 0.55
+> ResNet
+> resnet18 50.72 0.68 0.55 0.45 resnet34 20 0.77 0.72 0.61 0.49 resnet50 17 0.81 0.75 0.70 0.55 resnet101 13 0.81 0.76 0.67 0.53 resnet152 19 0.82 0.77 0.70 0.54
+> Wide ResNet wide_resnet50_2 13 0.81 0.76 0.67 0.53 wide_resnet101_2 20 0.81 0.77 0.68 0.54
+
+The concept accuracy spread under asymmetric filtering (0.70 versus 0.55) is narrower than under symmetric filtering once DenseNet-121 is excluded, and the best concept accuracy values are similar across both strategies. This reinforces the view that the bottleneck quality relies on concept annotation rather than backbone capacity. However, it must be highlighted that we do not need perfect concept accuracy to achieve accurate diagnosis. 
+
+# 5 Concluding Remarks 
+
+We presented Derm7pt+, a concept-consistent dermoscopy benchmark derived from Derm7pt through rough set analysis and symmetric filtering of all boundary-region images. The dataset guarantees perfect quality of classification, meaning every concept profile maps unambiguously to a single diagnosis label, removing the hard accuracy ceiling that afflicts any classifier operating exclusively on hard concepts. Alongside the dataset, we presented a hard CBM architecture that trains the backbone, concept heads, and label classifier jointly while severing gradient flow through the hard bottleneck via a stop-gradient operation, which prevents label leakage into the concept representations. The inconsistency analysis revealed that irregular dots and globules and irregular streaks are highly responsible for boundary ambiguity, appearing in 79% and 39% of inconsistent-profile images, respectively, compared to 29% and 19% in consistent profiles. The most ambiguous profiles combine these attributes with a blue-whitish veil or atypical pigment network ,producing concept signatures with no discriminative signal. At the other end of the spectrum, irregular streaks , a present 
+
+blue-whitish veil , and atypical pigment network are the strongest melanoma indicators, each carrying a melanoma prevalence above 60%. Irregular dots and globules without a blue-whitish veil are often found in the boundary region, contributing 154 of the 306 boundary images. These findings confirm that inconsistency is concentrated where diagnostic stakes are highest. Among the 19 backbones evaluated under symmetric filtering, EfficientNet-B5 achieved the best results overall, with a label F1 score of 0.85, a label accuracy of 0.90, a concept accuracy of 0.70, and a concept F1 of 0.56. Under asymmetric filtering, EfficientNet-B7 led across all four metrics with a label accuracy of 0.85, a label F1 of 0.82, a concept accuracy of 0.70, and a concept F1 of 0.56. The modest spread across architectures in both settings suggests that concept annotation noise, rather than backbone choice, is the binding constraint on bottleneck quality. 
+
+> 12/14
+
+The primary limitation of this work is the loss of training data imposed by symmetric filtering, which removes 306 images and eliminates 54.0% of melanoma cases, worsening class imbalance from 1:3.0 to 1:5.1. Asymmetric filtering mitigates this cost by retaining all melanoma images but introduces residual inconsistency. Therefore, neither strategy is universally optimal for all evaluation settings. Future work should investigate soft and probabilistic concept representations that can accommodate annotation uncertainty without discarding data. A further open direction concerns (i) the interpretability of the learned concept bottleneck, which includes the clinical validity of concept attributions, (ii) their alignment with dermatologist reasoning, and (iii) their utility for actionable explanations in screening settings. These aspects remain largely unexplored and constitute a natural extension of the framework proposed in this paper. 
+
+# Acknowledgement 
+
+Y. Salgueiro would like to acknowledge the support provided by ANID Fondecyt Regular 1240293 and National Center for Artificial Intelligence CENIA FB210017, Basal ANID. 
+
+# References 
+
+1. Koh, P. W. et al. Concept bottleneck models. In Proceedings of the 37th International Conference on Machine Learning ,vol. 119 of Proceedings of Machine Learning Research , 5338–5348, DOI: 10.5555/3524938.3525433 (PMLR, 2020). 
+
+2. Havasi, M., Parbhoo, S. & Doshi-Velez, F. Addressing leakage in concept bottleneck models. In Advances in Neural Information Processing Systems , vol. 35, 23386–23397 (2022). 
+
+3. Mahinpei, A., Clark, J., Lage, I., Doshi-Velez, F. & Pan, W. Promises and pitfalls of black-box concept learning models. In ICML 2021 Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI , DOI: 10.48550/arXiv.2106.13314 (2021). 
+
+4. Shin, S., Jo, Y., Ahn, S. & Lee, N. A closer look at the intervention procedure of concept bottleneck models. In Proceedings of the 40th International Conference on Machine Learning , vol. 202 of Proceedings of Machine Learning Research ,31504–31520, DOI: 10.48550/arXiv.2302.14260 (PMLR, 2023). 
+
+5. Espinosa Zarlenga, M. et al. Concept embedding models: Beyond the accuracy-explainability trade-off. In Advances in Neural Information Processing Systems , vol. 35, 21400–21413, DOI: 10.48550/arXiv.2209.09056 (2022). 
+
+6. Yuksekgonul, M., Wang, M. & Zou, J. Post-hoc concept bottleneck models. In The Eleventh International Conference on Learning Representations , DOI: 10.48550/arXiv.2205.15480 (2023). 
+
+7. Oikarinen, T., Das, S., Nguyen, L. M. & Weng, T.-W. Label-free concept bottleneck models. In The Eleventh International Conference on Learning Representations , DOI: 10.48550/arXiv.2304.06129 (2023). 
+
+8. Schrodi, S., Schur, J., Argus, M. & Brox, T. Concept bottleneck models without predefined concepts. Transactions on Mach. Learn. Res. (2025). 
+
+9. Ciravegna, G. et al. Logic explained networks. Artif. Intell. 314 , 103822, DOI: 10.1016/j.artint.2022.103822 (2023). 
+
+10. Esteva, A. et al. Dermatologist-level classification of skin cancer with deep neural networks. Nature 542 , 115–118, DOI: 10.1038/nature21056 (2017). 
+
+11. Hauser, K. et al. Explainable artificial intelligence in skin cancer recognition: A systematic review. Eur. J. Cancer 167 ,54–69, DOI: 10.1016/j.ejca.2022.02.025 (2022). 
+
+12. Lucieri, A. et al. On interpretability of deep learning based skin lesion classifiers using concept activation vectors. In 2020 International Joint Conference on Neural Networks (IJCNN) , 1–10, DOI: 10.1109/IJCNN48605.2020.9206946 (2020). 
+
+13. Patrício, C., Neves, J. C. & Teixeira, L. F. Coherent concept-based explanations in medical image and its application to skin lesion diagnosis. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW) , 3798–3807, DOI: 10.1109/CVPRW59228.2023.10208381 (2023). 
+
+14. Patrício, C., Teixeira, L. F. & Neves, J. C. A two-step concept-based approach for enhanced interpretability and trust in skin lesion diagnosis. Comput. Struct. Biotechnol. J. 28 , 71–79, DOI: 10.1016/j.csbj.2025.02.013 (2025). 
+
+15. Chanda, T. et al. Dermatologist-like explainable AI enhances melanoma diagnosis accuracy: Eye-tracking study. Nat. Commun. 16 , 4739, DOI: 10.1038/s41467-025-59532-5 (2025). 
+
+16. Mendonça, T., Ferreira, P. M., Marques, J. S., Marçal, A. R. S. & Rozeira, J. PH2 – a dermoscopic image database for research and benchmarking. In 2013 35th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) , 5437–5440, DOI: 10.1109/EMBC.2013.6610779 (2013). 
+
+> 13/14
+
+17. Tschandl, P., Rosendahl, C. & Kittler, H. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. Sci. Data 5, 180161, DOI: 10.1038/sdata.2018.161 (2018). 
+
+18. Hernández-Pérez, C. et al. BCN20000: Dermoscopic lesions in the wild. Sci. Data 11 , 641, DOI: 10.1038/ s41597-024-03387-w (2024). 
+
+19. Combalia, M. et al. BCN20000: Dermoscopic lesions in the wild, DOI: 10.48550/arXiv.1908.02288 (2019). 
+
+20. Rotemberg, V. et al. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. 
+
+Sci. Data 8, 34, DOI: 10.1038/s41597-021-00815-z (2021). 
+
+21. Yilmaz, A., Yasar, S. P., Gencoglan, G. & Temelkuran, B. DERM12345: A large, multisource dermatoscopic skin lesion dataset with 40 subclasses. Sci. Data 11 , 1302, DOI: 10.1038/s41597-024-04104-3 (2024). 
+
+22. Kawahara, J., Daneshvar, S., Argenziano, G. & Hamarneh, G. Seven-point checklist and skin lesion classification using multitask multimodal neural nets. IEEE J. Biomed. Heal. Informatics 23 , 538–546, DOI: 10.1109/JBHI.2018.2824327 (2019). 
+
+23. Saeed, M. A., Afify, Y. M., Badr, N. L. & Helal, N. A. Multimodal deep learning ensemble framework for skin cancer detection. Sci. Reports 15 , 45660, DOI: 10.1038/s41598-025-30534-z (2025). 
+
+24. Pawlak, Z. Rough sets. Int. J. Comput. Inf. Sci. 11 , 341–356, DOI: 10.1007/BF01001956 (1982). 
+
+25. Pawlak, Z. Rough Sets: Theoretical Aspects of Reasoning about Data . Theory and Decision Library D (Springer, Dordrecht, 1991). 
+
+26. Massone, C., Hofman-Wellenhof, R., Chiodi, S. & Sola, S. Dermoscopic criteria, histopathological correlates and genetic findings of thin melanoma on non-volar skin. Genes 12 , 1288 (2021). 
+
+27. Rodríguez-Lomba, E. et al. Concordance analysis of dermoscopic features between five observers in a sample of 200 dermoscopic images. Anais Brasileiros de Dermatol. 97 , 382–384 (2022). 
+
+28. Wilson, E. B. Probable inference, the law of succession, and statistical inference. J. Am. Stat. Assoc. 22 , 209–212, DOI: 10.1080/01621459.1927.10502953 (1927). 
+
+29. Nápoles, G., Grau, I., Jastrzebska, A. & Salgueiro, Y. Presumably correct decision sets. Pattern Recognit. 141 , 1–35, DOI: 10.1016/j.patcog.2023.109640 (2023). 
+
+30. Hou, J., Xu, J. & Chen, H. Concept-attention whitening for interpretable skin lesion diagnosis. In Medical Image Computing and Computer Assisted Intervention – MICCAI 2024 , vol. 15010 of Lecture Notes in Computer Science ,109–119, DOI: 10.1007/978-3-031-72117-5_11 (Springer, 2024). 
+
+31. Lucieri, A. et al. ExAID: A multimodal explanation framework for computer-aided diagnosis of skin lesions. Comput. Methods Programs Biomed. 215 , 106620, DOI: 10.1016/j.cmpb.2022.106620 (2022). 
+
+32. Bie, Y., Luo, L. & Chen, H. MICA: Towards explainable skin lesion diagnosis via multi-level image-concept alignment. In 
+
+Proceedings of the AAAI Conference on Artificial Intelligence , 837–845, DOI: 10.1609/aaai.v38i2.27842 (2024). 
+
+33. Tan, M. & Le, Q. EfficientNet: Rethinking model scaling for convolutional neural networks. In Chaudhuri, K. & Salakhutdinov, R. (eds.) Proceedings of the 36th International Conference on Machine Learning , vol. 97 of Proceedings of Machine Learning Research , 6105–6114 (PMLR, 2019). 
+
+34. Huang, G., Liu, Z., van der Maaten, L. & Weinberger, K. Q. Densely connected convolutional networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (2017). 
+
+35. He, K., Zhang, X., Ren, S. & Sun, J. Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) (2016). 
+
+36. Zagoruyko, S. & Komodakis, N. Wide residual networks. CoRR abs/1605.07146 (2016).

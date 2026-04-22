@@ -1,0 +1,262 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-22T20:31:24.032730+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 6,
+    "quick_skim_target": 11,
+    "quick_selected": 6
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2604.17943v1",
+      "source": "arxiv",
+      "title": "Domain-oriented RAG Assessment (DoRA): Synthetic Benchmarking for RAG-based Question Answering on Defense Documents",
+      "abstract": "Open-domain RAG benchmarks over public corpora can overestimate deployment performance due to pretraining overlap and weak attribution requirements. We present DoRA (Domain-oriented RAG Assessment), a domain-grounded benchmark built from defense documents that pairs synthetic, intent-conditioned QA (question answering) with auditable evidence passages for attribution. DoRA covers five question types (find, explain, summarize, generate, provide) and contains 6.5K curated instances. In end-to-end evaluation with a fixed dense retriever, general-purpose Language Models (LMs) perform similarly, while a model trained on DoRA (DoRA SFT) yields large gains over the base model (Llama3.1-8B-Instruct): up to 26% improvement in QA task success, while reducing the hallucination rate by 47% in RAG faithfulness scores, supporting contamination-aware regression testing under domain shift.",
+      "authors": [
+        "Bao Gia Doan",
+        "Aditya Joshi",
+        "Pantelis Elinas",
+        "Aarya Bodhankar",
+        "Oscar Leslie",
+        "Tom Marchant",
+        "Flora Salim"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-04-20T08:22:15+00:00",
+      "link": "https://arxiv.org/pdf/2604.17943v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "RAG assessment on defense documents with auditable evidence for attribution",
+      "llm_evidence_cn": "针对国防文档的RAG评估，提供可审计的归因证据",
+      "llm_evidence": "针对国防文档的RAG评估，提供可审计的归因证据",
+      "canonical_evidence": "针对国防文档的RAG评估，提供可审计的归因证据",
+      "llm_tldr_en": "A benchmark for defense document QA that emphasizes auditable evidence and explainable attribution.",
+      "llm_tldr_cn": "一个强调可审计证据和可解释归因的国防文档问答基准。",
+      "llm_tldr": "一个强调可审计证据和可解释归因的国防文档问答基准。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.19323v1",
+      "source": "arxiv",
+      "title": "Concept Inconsistency in Dermoscopic Concept Bottleneck Models: A Rough-Set Analysis of the Derm7pt Dataset",
+      "abstract": "Concept Bottleneck Models (CBMs) route predictions exclusively through a clinically grounded concept layer, binding interpretability to concept-label consistency. When a dataset contains concept-level inconsistencies, identical concept profiles mapped to conflicting diagnosis labels create an unresolvable bottleneck that imposes a hard ceiling on achievable accuracy. In this paper, we apply rough set theory to the Derm7pt dermoscopy benchmark and characterize the full extent and clinical structure of this inconsistency. Among 305 unique concept profiles formed by the 7 dermoscopic criteria of the 7-point melanoma checklist, 50 (16.4%) are inconsistent, spanning 306 images (30.3% of the dataset). This yields a theoretical accuracy ceiling of 92.1%, independent of backbone architecture or training strategy for CBMs that exclusively operate with hard concepts. In addition, we characterize the conflict-severity distribution, identify the clinical features most responsible for boundary ambiguity, and evaluate two filtering strategies with quantified effects on dataset composition and CBM interpretability. Symmetric removal of all boundary-region images yields Derm7pt+, a fully consistent benchmark subset of 705 images with perfect quality of classification and no hard accuracy ceiling. Building on this filtered dataset, we present a hard CBM evaluated across 19 backbone architectures from the EfficientNet, DenseNet, ResNet, and Wide ResNet families. Under symmetric filtering, explored for completeness, EfficientNet-B5 achieves the best label F1 score (0.85) and label accuracy (0.90) on the held-out test set, with a concept accuracy of 0.70. Under asymmetric filtering, EfficientNet-B7 leads across all four metrics, reaching a label F1 score of 0.82 and concept accuracy of 0.70. These results establish reproducible baselines for concept-consistent CBM evaluation on dermoscopic data.",
+      "authors": [
+        "Gonzalo Nápoles",
+        "Isel Grau",
+        "Yamisleydi Salgueiro"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-04-21T10:45:50+00:00",
+      "link": "https://arxiv.org/pdf/2604.19323v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable concept bottleneck models",
+      "llm_evidence_cn": "可解释的概念瓶颈模型",
+      "llm_evidence": "可解释的概念瓶颈模型",
+      "canonical_evidence": "可解释的概念瓶颈模型",
+      "llm_tldr_en": "Analyzes concept-label consistency in interpretable Concept Bottleneck Models using rough set theory.",
+      "llm_tldr_cn": "使用粗糙集理论分析了可解释概念瓶颈模型中的概念-标签一致性。",
+      "llm_tldr": "使用粗糙集理论分析了可解释概念瓶颈模型中的概念-标签一致性。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-1101-2023-11-23-568428-v5",
+      "source": "biorxiv",
+      "title": "Interpretable models for scRNA-seq data embedding with multi-scale structure preservation",
+      "abstract": "The ability to explore high-dimensional single-cell transcriptomics data efficiently is crucial in many biological studies. Dimensionality reduction techniques have therefore emerged as a basic building block of analytical workflows. They generate low-dimensional embeddings that capture important structures in the data, and are often used in discovery, quality control, and downstream analysis. However, the trustworthiness of current methods and the rigour of popular evaluation criteria are limited. We tackle this in an empirical study of structure-preserving data embeddings, delivering two tools. First, we introduce ViScore: a robust scoring framework that improves both unsupervised and supervised quality metrics, with emphasis on scalability and fairness. Second, we introduce ViVAE : a deep learning model that achieves better multi-scale structure preservation and is equipped with new tools for interpretability. We demonstrate the potential of these contributions to advance the trustworthiness of single-cell dimensionality reduction in a quantitative comparison and focused case studies.",
+      "authors": [
+        "Novak, D.",
+        "de Bodt, C.",
+        "Lambert, P.",
+        "Lee, J. A.",
+        "Van Gassen, S.",
+        "Saeys, Y."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-17T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2023.11.23.568428v5.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interpretable models for high-dimensional data embedding and structure preservation",
+      "llm_evidence_cn": "用于高维数据嵌入和结构保留的可解释模型",
+      "llm_evidence": "用于高维数据嵌入和结构保留的可解释模型",
+      "canonical_evidence": "用于高维数据嵌入和结构保留的可解释模型",
+      "llm_tldr_en": "Introduces ViScore, a framework for evaluating interpretable embeddings in high-dimensional biological data.",
+      "llm_tldr_cn": "引入了 ViScore 框架，用于评估高维生物数据中可解释嵌入的质量。",
+      "llm_tldr": "引入了 ViScore 框架，用于评估高维生物数据中可解释嵌入的质量。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-1101-2025-11-04-686393-v2",
+      "source": "biorxiv",
+      "title": "Harnessing Interpretable Deep Learning to Predict Resistance in Klebsiella pneumoniae",
+      "abstract": "Antimicrobial resistance constitutes an escalating global health threat, complicating therapeutic management and increasing morbidity and mortality. Deep learning approaches have emerged as promising tools for bacterial profiling based on omics data, particularly for predicting antimicrobial susceptibility from genomic information. This task relies on identifying genomic signatures associated with resistance mechanisms. Here, DeepMDC is introduced as a deep learning architecture designed for bacterial profiling using whole-genome data. Given that precise annotation at the gene or mutation level is often costly and ambiguous, phenotypic classification is formulated as a Multiple Instance Learning (MIL) problem, in which each genome is represented as a bag of instances with a single associated label. The core of DeepMDC is a Modern Hopfield Network that processes all open reading frames (ORFs), including small ones, derived from genomic data. A key feature of the architecture is its interpretability, enabled by attention mechanisms that facilitate biological insight and hypothesis generation. The model was evaluated against Klebsiella pneumoniae and four clinically relevant antibiotics (meropenem, cefepime, ceftazidime, and gentamicin), achieving strong performance in several metrics. Notably, genes associated with resistance consistently received high attention scores during inference, which validates the architecture and eventually may generate new hypotheses.",
+      "authors": [
+        "Araujo, N. d. M. F.",
+        "Chagas, M.",
+        "Santos, M. F.",
+        "Pereira, R. F. A.",
+        "Brum, R. C.",
+        "Pinheiro, F. R.",
+        "Silveira, M. C.",
+        "Dure, F. M.",
+        "Muller, B. d. L. A.",
+        "de Souza, A. A. A.",
+        "Souza, A. B. S. R.",
+        "de Souza, A. F.",
+        "Carvalho-Assef, A. P.",
+        "Moreira, A. d. S.",
+        "dos Santos, M. T.",
+        "Cortes, A. M. d. A.",
+        "Penna, B.",
+        "Chagas, T.",
+        "Aguiar-Alves, F.",
+        "Silva, F. A. B. d."
+      ],
+      "primary_category": "systems biology",
+      "categories": [
+        "systems biology"
+      ],
+      "published": "2026-04-20T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.11.04.686393v2.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable deep learning for risk prediction",
+      "llm_evidence_cn": "用于风险预测的可解释深度学习",
+      "llm_evidence": "用于风险预测的可解释深度学习",
+      "canonical_evidence": "用于风险预测的可解释深度学习",
+      "llm_tldr_en": "Introduces DeepMDC, an interpretable deep learning architecture for predicting bacterial resistance.",
+      "llm_tldr_cn": "引入了DeepMDC，一种用于预测细菌耐药性的可解释深度学习架构。",
+      "llm_tldr": "引入了DeepMDC，一种用于预测细菌耐药性的可解释深度学习架构。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-12-717909-v1",
+      "source": "biorxiv",
+      "title": "scDisent: disentangled representation learning with causal structure for multi-omic single-cell analysis",
+      "abstract": "Single-cell multi-omic technologies measure complementary aspects of cellular identity and regulatory state, yet most integration models compress these signals into one entangled latent space. Such representations are useful for clustering but poorly suited for mechanistic interpretation or perturbation-oriented analysis. We present scDisent (https://github.com/xiguoren/scDisent), a generative framework for disentangled representation learning that separates expression-associated variables (zexpr) from regulation-associated variables (zreg) and links them through a sparse directed mapping. scDisent combines modality-specific encoding, variational disentanglement with total-correlation and orthogonality constraints, and a Gumbelgated causal module protected by detach-based gradient isolation. Evaluated on benchmark datasets with matched modalities, scDisent achieved best-in-benchmark integration performance while exposing regulatory structure that competing integration methods do not model explicitly. The learned causal atlas remained sparse, perturbation analyses recovered biologically coherent lineage-associated programs, and cross-dataset discovery analyses highlighted interpretable immune, neural and developmental signatures. Quantitative branch-separation analyses further showed that benchmark-label information concentrated in zexpr rather than zreg. Together, these results position scDisent as a computational method that improves not only integration quality but also biological interpretability, making single-cell multi-omic representations better suited to biological question answering and in silico hypothesis generation.",
+      "authors": [
+        "Xi, G."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-16T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.12.717909v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "disentangled representation learning with causal structure for mechanistic interpretation",
+      "llm_evidence_cn": "具有因果结构的解耦表示学习，用于机制解释",
+      "llm_evidence": "具有因果结构的解耦表示学习，用于机制解释",
+      "canonical_evidence": "具有因果结构的解耦表示学习，用于机制解释",
+      "llm_tldr_en": "A generative framework using causal structures for mechanistic interpretation of complex data.",
+      "llm_tldr_cn": "一种利用因果结构对复杂数据进行机制解释的生成框架。",
+      "llm_tldr": "一种利用因果结构对复杂数据进行机制解释的生成框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-13-718335-v1",
+      "source": "biorxiv",
+      "title": "Interpretable Biological Sequence Clustering with iClust",
+      "abstract": "Biological sequence clustering is a fundamental problem in bioinformatics, yet most existing methods mainly optimize clustering quality or efficiency while offering limited insight into why sequences are grouped together. This restricts their usefulness in downstream analysis, where representative sequences and clear cluster boundaries are often needed. To address this issue, we propose iClust, an interpretable clustering method that characterizes each cluster by a representative prototype and an adaptive radius. By adapting to local sequence structure rather than relying on a single global threshold, iClust produces clusters that are both meaningful and explainable. A final consolidation step further reduces tiny fragments and improves structural stability. Experiments on simulated and real biological sequence datasets show that iClust achieves competitive clustering performance while providing clearer cluster-level explanations than conventional threshold-based methods. In addition to its empirical impact as a practical clustering method for biological sequences, this article opens up new avenues for developing biological sequence clustering approaches from the viewpoint of interpretable machine learning.",
+      "authors": [
+        "Zhang, S.",
+        "Liu, X.",
+        "Lou, J.",
+        "Jiang, M.",
+        "He, Z."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-16T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.13.718335v1.full.pdf",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable clustering method for explainable grouping",
+      "llm_evidence_cn": "可解释的聚类方法用于提供可解释的分组",
+      "llm_evidence": "可解释的聚类方法用于提供可解释的分组",
+      "canonical_evidence": "可解释的聚类方法用于提供可解释的分组",
+      "llm_tldr_en": "Proposes iClust, an interpretable clustering method that provides prototypes and radii for explainable results.",
+      "llm_tldr_cn": "提出iClust，一种通过原型和半径提供可解释结果的生物序列聚类方法。",
+      "llm_tldr": "提出iClust，一种通过原型和半径提供可解释结果的生物序列聚类方法。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

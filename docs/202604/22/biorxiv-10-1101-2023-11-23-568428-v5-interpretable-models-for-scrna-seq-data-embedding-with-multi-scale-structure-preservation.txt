@@ -1,0 +1,2654 @@
+Title: 49304870
+
+URL Source: https://www.biorxiv.org/content/10.1101/2023.11.23.568428v5.full.pdf
+
+Number of Pages: 36
+
+Markdown Content:
+Interpretable models for scRNA-seq data embedding with multi-scale structure 1
+
+preservation 2
+
+David Novak 1,2,3,*, , Cyril de Bodt 4,5, , Pierre Lambert 6, , John Aldo Lee 7, , Sofie 3
+
+Van Gassen 1,2, , and Yvan Saeys 1,2, 4
+
+> 1
+
+Department of Mathematics, Computer Science and Statistics, Ghent University, Ghent, 5
+
+Belgium 6
+
+> 2
+
+Data Mining and Modeling for Biomedicine, Center for Inflammation Research, VIB-UGent, 7
+
+Ghent, Belgium 8
+
+> 3
+
+Division of Medical Oncology, Department of Medicine, Keck School of Medicine, University of 9
+
+Southern California, Los Angeles, CA, USA 10 
+
+> 4
+
+Mathematics Department, Universit ´ e de Namur, Namur, Belgium 11 
+
+> 5
+
+Namur Institute for Complex Systems (naXys), Universit ´ e de Namur, Namur, Belgium 12 
+
+> 6
+
+ICTEAM/ELEN, Universit ´ e catholique de Louvain, Louvain-la-Neuve, Belgium 13 
+
+> 7
+
+IREC/MIRO, Universit ´ e catholique de Louvain, Brussesls, Belgium 14 
+
+> *
+
+Correspondence: davidnovak9000@gmail.com 15 
+
+# SUMMARY 16 
+
+The ability to explore high-dimensional single-cell transcriptomics data efficiently is crucial in 17 
+
+many biological studies. Dimensionality reduction techniques have therefore emerged as a basic 18 
+
+building block of analytical workflows. They generate low-dimensional embeddings that capture 19 
+
+important structures in the data, and are often used in discovery, quality control, and downstream 20 
+
+analysis. However, the trustworthiness of current methods and the rigour of popular evaluation 21 
+
+criteria are limited. We tackle this in an empirical study of structure-preserving data embeddings, 22 
+
+delivering two tools. First, we introduce ViScore : a robust scoring framework that improves 23 
+
+both unsupervised and supervised quality metrics, with emphasis on scalability and fairness. 24 
+
+Second, we introduce ViVAE : a deep learning model that achieves better multi-scale structure 25 
+
+preservation and is equipped with new tools for interpretability. We demonstrate the potential 26 
+
+of these contributions to advance the trustworthiness of single-cell dimensionality reduction in a 27 
+
+quantitative comparison and focused case studies. 28 
+
+# KEYWORDS 29 
+
+scRNA-seq, interpretability, dimensionality reduction, deep learning 30 
+
+# INTRODUCTION 31 
+
+Data embedding using dimensionality reduction (DR) is common in the computational analysis of 32 
+
+single-cell RNA-sequencing (scRNA-seq) data 1,2 . DR converts high-dimensional (HD) gene ex- 33 
+
+pression data to low-dimensional (LD) embeddings (Figure 1 A). These embeddings are suitable 34 
+
+for describing cell type diversity 2, quality control (QC) after data integration 3, or representing ten- 35 
+
+tative trajectory structures 4. They generally improve the interpretability of single-cell datasets, 36 
+
+which are sparse and noise-prone 5. DR is therefore crucial for effective exploratory data analysis 37 
+
+in the single-cell bioinformatics domain. 38 
+
+Current methods differ considerably in the criteria they optimise. Principal component analy- 39 
+
+sis (PCA) is a popular deterministic method that obtains ordered orthogonal vectors explaining 40 
+
+1
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+the most variance in the data: principal components (PCs). To reduce dimensionality, a set num- 41 
+
+ber of top PCs is taken as the basis for a LD vector space, used for projection. PCA is widely 42 
+
+applied to preprocess HD sparse data, including scRNA-seq 6. It is typically used to generate 50- 43 
+
+to 100-dimensional representations amenable to downstream processing, including further DR. 44 
+
+Alternatively, the top 2 or 3 PCs can be taken directly as the embedding. However, this inherently 45 
+
+limits the ability to capture complex non-linear relationships between features, as PCA only uses 46 
+
+linear transformations. 47 
+
+Non-linear DR methods overcome this, with t-SNE 7 and UMAP 8 having gained special promi- 48 
+
+nence in single-cell biology 2,9 . They both fall into the family of neighbour embedding (NE) al- 49 
+
+gorithms, and can be formulated as optimising point positions via attractive and/or repulsive 50 
+
+forces 10 . NE algorithms aim to preserve local point neighbourhoods, and are suitable for visu- 51 
+
+alising clusters and comparing alternative labellings. However, their inherent ‘locality bias’ can 52 
+
+distort the relative positions of cohesive cell clusters, introducing artificial gaps and arbitrary 53 
+
+global layouts 11 . By locality bias , we mean that local structures in the data (bounded by some 54 
+
+‘scale’ parameter that governs size of the point neighbourhoods of interest), are optimised (see 55 
+
+Figure 1 B). While scale can be increased ( e.g. , the perplexity parameter in t-SNE or neighbour- 56 
+
+hood count in UMAP ), the limitation to local structures remains. Some initialisation strategies 57 
+
+partially compensate for this, yielding better preservation of large-scale structures 2. 58 
+
+Current single-cell bioinformatics literature lacks formal definitions of the terms ‘local’ and 59 
+
+‘global’ that would lend themselves clearly to extensive comparative evaluation across many 60 
+
+datasets. There has been an emphasis on evaluation metrics that are straightforward to use 61 
+
+in benchmarks involving representative data 12–14 . This has been in lieu of extensive descrip- 62 
+
+tions of the underlying data manifolds, their intrinsic dimensionality, and dataset-specific topolo- 63 
+
+gies, which is infeasible with much of single-cell omics. The present study, similarly, focuses on 64 
+
+broadly applicable strategies that make few assumptions about the dataset in hand. 65 
+
+Our work here, while focused on application more than on theory, offers a conceptual frame- 66 
+
+work for the local/global dichotomy. By ‘local structures’ we refer to structures in some close 67 
+
+neighbourhood of any given vantage point in the input data, with neighbourhood size governed 68 
+
+by the scale parameter described above. Conversely, global structures are not limited by a 69 
+
+scale parameter (Figure 1 C) and can extend further across the point cloud under this conceptual 70 
+
+framework. The term ‘structure preservation’ (SP) is then used to indicate a measure of how well 71 
+
+the original HD structures are preserved in the LD embeddings (despite inherent constraints due 72 
+
+to reduced dimensionality). 73 
+
+A number of recent methods have set out to increase the preservation of global structures, or 74 
+
+to find a favourable local-global balance. Some, including TriMap 15 and PaCMAP 16 , are variants 75 
+
+of NE. While NE methods are typically susceptible to partitioning data points into artificial ‘islands’ 76 
+
+(Figure 1 D), both TriMap and PaCMAP sample some points outside of local neighbourhoods in 77 
+
+the optimisation process to improve the global layout of embeddings. 78 
+
+SQuad-MDS 17 is a recent adaptation of multidimensional scaling (MDS), which preserves 79 
+
+relative HD pairwise distances between some points regardless of neighbourhood or structure 80 
+
+scales. In practice, this optimises the global layout of embeddings, similarly to PCA despite 81 
+
+algorithmic differences (Figure 1 E). 82 
+
+Models such as scvis 18 and ivis 12 are examples of variational autoencoders (VAEs; 19 ), a 83 
+
+flexible neural network architecture. VAEs embed HD data in a smooth latent space, favourable 84 
+
+for representing continuous transitions between cell states (Figure 1 F). 85 
+
+Overall, the trend of attempting to better balance local and global SP can reduce misinter- 86 
+
+pretations of t-SNE and UMAP , which are often applied to data with important global or hierar- 87 
+
+chical structures, despite not being optimised to represent them faithfully 20,21 . However, a major 88 
+
+open problem remains. This is the issue of systematically evaluating the accuracy of embed- 89 
+
+dings. Recent comparisons apply both unsupervised and supervised scores 13,14,22 , often via 90 
+
+2
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+measuring performance in downstream inference tasks, such as clustering or classification 12,23 . 91 
+
+These approaches exhibit some shortcomings. First, when scoring local structure preservation 92 
+
+(SP), setting a hard threshold for a ‘local’ neighbourhood 13 is potentially heavy-handed. Second, 93 
+
+to assess global SP some metrics effectively downsample data, computing distances between 94 
+
+representative points determined via clustering 13 , thus sacrificing rigour. Third, evaluation of 95 
+
+embeddings via downstream tasks 14 yields a proxy score, fundamentally dependent on the clas- 96 
+
+sification or clustering algorithm used. 97 
+
+More broadly, a recent critique 24 questioned the usefulness of single-cell DR due to failures to 98 
+
+preserve distances between points. A response to it 25 demonstrated that t-SNE and UMAP pre- 99 
+
+serve point neighbourhoods and separate biologically relevant clusters. This further underscores 100 
+
+a need for clear and fair evaluation criteria and indicators of embedding trustworthiness. 101 
+
+Our ViScore framework addresses the concerns regarding evaluation and builds on the con- 102 
+
+ceptual ‘local-versus-global’ distinction we drew above. ViScore introduces highly scalable un- 103 
+
+supervised SP scoring with few assumptions on the data and embeddings (novel RNX curve ap- 104 
+
+proximations), an improved qualitative supervised evaluation method ( Extended Neighbourhood- 105 
+
+Proportion-Error ; xNPE), and a fully-fledged benchmarking framework, all of which we describe 106 
+
+in this paper. 107 
+
+With an empirical evaluation framework in place, we set out to develop a DR model for rep- 108 
+
+resenting both local and global structures faithfully. ViVAE , our flexible deep learning-based 109 
+
+method, exhibits a favourable balance between the two criteria. Furthermore, it incorporates 110 
+
+encoder indicatrices (EIs): a tool for visualising unwanted distortions in existing embeddings. 111 
+
+Grounded in previous work within differential geometry 26 , EIs serve as a straightforward QC 112 
+
+check that is model- and dataset-specific and allows the investigator to pinpoint specific parts 113 
+
+of the embedding that are artificially expanded, shrunk, or stretched. The aim of EIs is to boost 114 
+
+the adoption of quality-control and explainability measures in DR, which has been limited so far. 115 
+
+They are a flexible approach that represents as much information about embedding distortions 116 
+
+in a 2-dimensional projections as possible, while remaining easy to interpret. 117 
+
+The following Results section describes our methodological contributions and validates them 118 
+
+in an empirical study. First, we present the ViScore approach to SP scoring. Second, we employ 119 
+
+it in a quantitative comparison of ViVAE to other DR methods. Third, we perform a case study 120 
+
+with a longitudinal developmental dataset 4 to validate the capacity for multi-scale SP by ViVAE 121 
+
+in an applied context with known trajectory structures. Fourth, we demonstrate the use of EIs 122 
+
+as a tool for on-demand detection of distortions, using the same dataset. Finally, we compare 123 
+
+meaningful differences between t-SNE, UMAP , and ViVAE on a non-developmental dataset 27 , 124 
+
+evaluating localised distortions with the use of more focused, supervised evaluation measures 125 
+
+also implemented in ViScore . 126 
+
+3
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Concepts of ‘local’ and ‘global’ across disciplines and applications 127 
+
+The notions of local and global scale are highly pertinent to the presented work. We note that understanding of these terms differs across disciplines of study. 
+
+> 128 129
+
+In topology and graph theory, ‘local’ and ‘global’ are complementary scales of description: the local focuses on what happens in a small neighbourhood, while the global asks how those parts fit into an entire system. In topology, the distinction is central to the difference between neighbourhood-level geometric information and whole-space invariants such as connected components or holes 28 . In graph theory, it appears in the contrast between measures based on a node’s immediate neighbours, such as degree ( i.e. , number of connections), and measures that depend on paths or structure across the entire graph, such as centrality 29 .
+
+> 130 131 132 133 134 135 136
+
+In applied topology and topological data analysis (TDA), local methods are used to capture fine-scale geometric variation, noise structure, and neighbourhood connectivity in data. In graphs and networks, local structure usually means the direct neighbourhood of a node: adjacent node counts, how tightly those neighbours connect, and how clustered the surrounding subgraph is. 
+
+> 137 138 139 140 141
+
+A global perspective, on the other hand, asks about properties of the entire space that cannot be recovered from one neighbourhood alone. In topology, classic invariants such as connected components and loops are global because they describe the overall shape of the object rather than one local region. In graphs and networks, global measures depend on relationships spanning much or all of the graph, so they reflect a node’s position in network-wide flow, connectivity, or integration. Graph-theoretic work on local-global convergence makes this distinction precise by separating descriptions that depend only on bounded neighbourhoods from those that incorporate larger-scale organization 30 .
+
+> 142 143 144 145 146 147 148 149
+
+In single-cell bioinformatics, ‘local’ and ‘global’ are used in multiple contexts. Some previous studies have applied notions from topological data analysis to describe local and global scales in the context of gene expression data 31,32 . However, within the subfield of dimensionality reduction (DR) and visualisation, the distinction in scale is often used in a highly operational way, with less focus on theoretical underpinnings. Here, local structure broadly refers to preserving relative neighbourhoods of similar cells, whereas global structure means preserving broader relationships among more distant cell populations, such as developmental branches, trajectories, or inter-cluster separation 13,14 .
+
+> 150 151 152 153 154 155 156 157
+
+The terms usually refer to the faithfulnesss of an embedding or manifold representation with respect to the original input data, not directly to topological invariants or network metrics. By contrast, in topology the local/global distinction is about the mathematical scale at which a property is defined, and in graph theory it is about whether a measure depends on immediate neighbourhoods or on the graph as a whole. 
+
+> 158 159 160 161 162 163
+
+4
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+# RESULTS 164 
+
+First, we present a framework for evaluating DR in both supervised and unsupervised settings 165 
+
+(with and without the use of cell labels, respectively). This is implemented in the ViScore Python 166 
+
+package, which includes an automated large-scale benchmarking solution. 167 
+
+Figure 2 A introduces RNX curves 33 as the basis for assessing structure preservation (SP). 168 
+
+This is a mathematical framework for quantifying preservation of structure at any given scale. 169 
+
+Crucially, we solve the outstanding issue of poor scalability of RNX with a custom approximation 170 
+
+algorithm that extends their use to large scRNA-seq data. This has been unfeasible previously, 171 
+
+thus dramatically restricting the evaluation of single-cell DR. We use RNX to derive two metrics 172 
+
+which score, respectively, local (locally biased) and global (scale-agnostic) SP, and use them to 173 
+
+compare ViVAE to other methods. 174 
+
+Figure 2 B (left side) shows the Extended Neighbourhood-Proportion-Error (xNPE): a pro- 175 
+
+posed score for supervised (cell label-based) evaluation. xNPE, based on the NPE 22 , measures 176 
+
+embedding quality per cell population. It captures distortions that change the relative positions 177 
+
+between labelled cell populations. Providing cell population-level scores instead of embedding- 178 
+
+level ones, xNPE serves as a QC check especially for comparing multiple candidate embeddings 179 
+
+of the same dataset. 180 
+
+Another QC tool shown in Figure 2 B (right side) are neighbourhood composition plots (NCPs), 181 
+
+which diagnose sources of mis-embedding. They provide a qualitative description of errors, in 182 
+
+contrast to the quantitative approach of the xNPE. NCPs visualise, for a given population of inter- 183 
+
+est, which cells surround it, respectively, in the HD input space and in the evaluated embedding. 184 
+
+This is done using a range of local neighbourhood scales. 185 
+
+Second, with a suitable evaluation framework in place we developed ViVAE : a DR model 186 
+
+for balanced local and global structure preservation. This is a regularised variational autoen- 187 
+
+coder (VAE) that learns non-linear transformations of scRNA-seq data (Figure 2 C). The input 188 
+
+data is first denoised to prevent the model fitting to noise. Next, the model is trained on the 189 
+
+denoised data with the use of a proposed stochastic multidimensional scaling ( stochastic-MDS ) 190 
+
+regulariser. Stochastic-MDS is a fundamental extension of the ‘stochastic quartet’ approach 34 , 191 
+
+making adaptations to yield a differentiable loss function that is usable in a deep learning con- 192 
+
+text. In practice, stochastic-MDS improves the preservation of global structures and embedding 193 
+
+distortions (as shown further). 194 
+
+The trained model can generate data embeddings (Figure 2 D) and map previously unseen 195 
+
+data points from the same domain as training data, facilitating the assessment of technical arti- 196 
+
+facts by comparing data batches. 197 
+
+Figure 2 E introduces encoder indicatrices (EIs): a QC tool that allows the investigator to vi- 198 
+
+sually inspect unwanted distortions which the model introduces into the embedding. Appearing 199 
+
+as ellipses in the figure, EIs denote both the direction and the magnitude of unwanted expan- 200 
+
+sion, shrinkage, or stretching of parts of the embedding space, to the extent that these can be 201 
+
+visualised in 2-d. 202 
+
+Additionally, ViVAE integrates with FlowSOM 35 , which couples clustering and graph embed- 203 
+
+ding via minimum spanning trees (MSTs), as shown in Figure 2 F (left side). This helps in validat- 204 
+
+ing the MST topology against the embedding, and vice versa, and examining whether expected 205 
+
+ontologies, hierarchies, or developmental lineages are reflected. Projecting values from the input 206 
+
+feature space onto representative clusters also quickly captures major sources of variability, as 207 
+
+a dataset-specific explanatory mechanism (right side). 208 
+
+Both ViScore and ViVAE are available in dedicated online repositories, with several guided 209 
+
+tutorials, experiments, and benchmarking guidelines provided alongside the software itself. 210 
+
+5
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+ViScore evaluates structure preservation across multiple scales 211 
+
+The proposed ViScore methodology assesses the preservation of high-dimensional (HD) struc- 212 
+
+tures in their low-dimensional (LD) embeddings across different scales. The term ‘Structure 213 
+
+Preservation’ (SP) is taken to denote the degree to which an embedding retains the neigh- 214 
+
+bourhood structures between HD points in the original data. The choice to focus on Euclidean 215 
+
+distance-induced neighbourhoods, rather than distances themselves, is motivated by a previous 216 
+
+analysis demonstrating their conceptual relevance within single-cell DR 25 . 217 
+
+Figure 3 A shows an example of 4 alternative embeddings of a developmental dataset 4. A sin- 218 
+
+gle ‘vantage-point’ cell is chosen (orange cross); a colour gradient shows the true neighbourhood- 219 
+
+ranks of all other cells with respect to the vantage point. These neighbourhood-ranks are com- 220 
+
+puted from the HD input data, not the embeddings. 221 
+
+t-SNE and UMAP separate the data into islands, achieving a high level of detail (note that 222 
+
+these separations always need to be validated as non-artificial). On the other hand, the gradi- 223 
+
+ent of neighbour ranks is inconsistent: this demonstrates failure to preserve some structures. 224 
+
+SQuad-MDS , at the other extreme, shows minimal separation into islands, but the gradient is 225 
+
+preserved better. Finally, ViVAE balances these two criteria (as examined further in the following 226 
+
+section). 227 
+
+Despite under-defined notions of ‘local’ and ‘global’ in relevant literature, we devise exact def- 228 
+
+initions for a Global SP score and Local SP score, both based on RNX curves 33 (see Methods ). 229 
+
+This is shown in Figure 3 B. It is crucial that we avoid setting a hard neighbourhood-size cut-off 230 
+
+for what constitutes a ‘local‘ structure, and we compute Global SP as a truly scale-agnostic score 231 
+
+(i.e. , small-scale and large-scale structures are treated as equally important), thereby reducing 232 
+
+arbitrary designs. 233 
+
+In overview, both SP scores measure the preservation across all possible scales; for any 234 
+
+point in a dataset of size N , these are scales from 1 to N − 1. While Global SP treats all 235 
+
+scales as equally important for the final score ( scale-agnostic ), Local SP applies a log 10 rescaling 236 
+
+of neighbourhood scales, which upweights the importance of smaller-scale structures ( locally 237 
+
+biased , as proposed in an earlier study 33 ). 238 
+
+The SP scores are upper-bounded by 1, with 0 corresponding to a random embedding (base- 239 
+
+line), and negative values to a worse-than-random representation of neighbourhood structures. 240 
+
+A realistic upper bound, however, is dataset-specific, since full preservation of neighbourhoods 241 
+
+would only be possible for some cases of noiseless data lying on a 2-manifold that can be flat- 242 
+
+tened. Determining this upper bound would translate to describing the true manifold of each 243 
+
+single-cell dataset; this is not currently feasible. However, based on comparative analyses pre- 244 
+
+sented here and elsewhere 13,14 , we know some DR methods to effectively prioritise Global SP 245 
+
+(PCA, SQuad-MDS ) while others (mainly t-SNE) focus on Local SP. This knowledge serves as 246 
+
+an empirically determined anchor for good performance with respect to each criterion. 247 
+
+ViVAE is a parametric model that balances local and global structure 248 
+
+We compare 12 DR models run on 8 publicly available scRNA-seq datasets with respect to 249 
+
+Local and Global SP. These models are PCA, UMAP 8, DensMAP (a UMAP variant), t-SNE 7, 250 
+
+PHATE 23 , PaCMAP 16 , TriMAP 15 , SQuad-MDS 34 , ivis 12 , VAE (a standard variational autoen- 251 
+
+coder) and our own: ViVAE (default) and ViVAE-EncoderOnly . While default ViVAE is trained 252 
+
+using reconstruction loss, a variational regulariser, and stochastic-MDS, ViVAE-EncoderOnly 253 
+
+omits reconstruction loss (and does not have a decoder). This yields a loss function for the 254 
+
+ViVAE and ViVAE-EncoderOnly , respectively: 255 
+
+lViVAE = lrecon + lkldiv + 100 lMDS 
+
+6
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+lViVAE −EncoderOnly = lkldiv + 100 lMDS 
+
+where lrecon is the autoencoder reconstruction loss (mean squared error), lkldiv is the Kullback- 256 
+
+Leibler divergence from an isotropic latent prior standard to VAEs and lMDS is the proposed 257 
+
+stochastic-MDS loss. Figure S5 displays the values of lrecon , lkldiv , and lMDS during training 258 
+
+per epoch, comparing a vanilla VAE model, ViVAE , and ViVAE-EncoderOnly using 2 training 259 
+
+datasets. We elaborate on the used models, their hyperparameters, and the comparative analy- 260 
+
+sis set-up in Methods . 261 
+
+We test the DR methods on the following datasets: 262 
+
+• Qiu 36 : 89 k T cells from mouse embryos. Chosen as immunologically relevant data from a 263 
+
+common model organism. 264 
+
+• Reed 27 : 25 k immune cells from human breast. Chosen due to containing widely studied 265 
+
+immune cell compartments, and because DR methods struggle to separate some of the 266 
+
+labelled cell populations clearly ( e.g. , NK cells within the T+NK compartment, which we 267 
+
+evaluate in a corresponding case study). Also as a representative of non-developmental 268 
+
+data, for which cluster-forming embeddings ( t-SNE, UMAP ) are traditionally used. 269 
+
+• Suo 37 : 908 k human pre-natal T and NK cells across organs. Chosen as a recent repre- 270 
+
+sentative of a large multi-organ dataset with developmental gradients. 271 
+
+• Strati 38 : 33 k human bone marrow cells from healthy donors. Chosen due to the promi- 272 
+
+nence of bone marrow lymphopoiesis as use case in trajectory inference, as well as its 273 
+
+relevance in immunology and haematology. 274 
+
+• TabulaMuris (subset) 39 : 40 k mouse bone marrow cells. Chosen as a popular mouse 275 
+
+dataset complementary to Strati . 276 
+
+• TabulaSapiens (subset) 40 : 22 k human thymic cells. Similarly to Strati , chosen due to the 277 
+
+prominence of T-lymphopoiesis as a use case in TI analysis and its relevance in immunol- 278 
+
+ogy and hematology. 279 
+
+• Shekhar 41 : 45 k cells from mouse retina. Chosen as a popular transcriptomic dataset 280 
+
+where a documented batch effect can be revealed by non-linear DR. 281 
+
+• Farrell 4: 39 k cells from zebrafish embryos at different developmental stages. Chosen 282 
+
+to evaluate the preservation of smooth gradients and discontinuities, both of which are 283 
+
+present, due to a longitudinal component. The provided annotation of developmental lin- 284 
+
+eages allowed us to validate embeddings of developmental pathways in a dedicated case 285 
+
+study. 286 
+
+Following a standard preprocessing protocol 2,12 , we normalise and scale expression matrices 287 
+
+from each dataset and apply PCA to extract orthogonal components as input features, retaining 288 
+
+100 PCs (as a more conservative approach). The full preprocessing workflow is given in Methods 289 
+
+and the online ViScore repository. 290 
+
+Figure 3 C compares Local and Global SP by dataset, averaged across 5 repeated runs. 291 
+
+For all datasets, at least one of the ViVAE models lies on the Pareto front, meaning no other 292 
+
+model outperforms it at both tasks. Notably, t-SNE gives the highest Local SP wherever applied 293 
+
+(training timed out at 4 hours for the largest Suo dataset) and SQuad-MDS gives the highest 294 
+
+Global SP across all datasets. TriMap , on the Pareto front in 6 out of 8 experiments, achieves 295 
+
+similar Local SP to UMAP , while improving Global SP, which aligns generally with previously 296 
+
+published results 14 . 297 
+
+7
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Table S1 contains results with and without the use of denoising of input data for each method, 298 
+
+which amounts to an ablation study that demonstrates a boost to Local SP with denoising with 299 
+
+VAE-based models. Additionally, the ViVAE and VAE models in our comparison use the same 300 
+
+architecture, therefore comparing them yields an ablation study that demonstrates a boost to 301 
+
+Global SP with stochastic-MDS. Table S2 gives p-values from one-sided Wilcoxon tests compar- 302 
+
+ing the default and encoder-only variant of ViVAE with each other method per dataset for Local 303 
+
+SP, Global SP, and a tentative ‘Balanced SP’ metric (computed as the harmonic mean between 304 
+
+the two, as described in Methods ). The Local, Global, and Balanced SP means and standard 305 
+
+deviations are plotted separately in Figure S1 . The change to RNX curves induced by input data 306 
+
+denoising is shown in Figure S2 . Additionally, Figure S3 shows the impact of varying target di- 307 
+
+mensionality (from 2 to 3, 5, and 10 dimensions) on structure-preservation capacity of different 308 
+
+models using the Farrell dataset, with higher latent dimensionality generally yielding higher SP. 309 
+
+Figure S4 shows the effects on SP of varying the ‘scale’ parameter for those methods that have 310 
+
+one, again with the Farrell dataset. 311 
+
+While these SP results give an overview of different methods’ capabilities to represent data 312 
+
+faithfully, there are other notable aspects of ViVAE . Based on a VAE architecture, ViVAE is a 313 
+
+parametric model with a latent space that is amenable to QC and explainability measures. This 314 
+
+includes encoder indicatrices (as demonstrated below) and integration with FlowSOM (demon- 315 
+
+strated in online materials). Furthermore, ViVAE does not have an effective ‘scale’ hyperparame- 316 
+
+ter determining the size of relevant point neighbourhoods for which structures are optimised dur- 317 
+
+ing training, unlike t-SNE, UMAP , DensMAP , PaCMAP , TriMap , PHATE , or ivis . This approach, 318 
+
+using the truly multi-scale stochastic-MDS loss, simplifies potential hyperparameter tuning. 319 
+
+In the following sections, we demonstrate ways in which ViVAE meaningfully outperforms 320 
+
+its alternatives in two case studies: one with the developmental Farrell data and one with the 321 
+
+non-developmental Reed data. The Farrell case study shows clearly why the local-global SP 322 
+
+balance achieved by ViVAE is advantageous. 323 
+
+Stochastic-MDS regularisation in ViVAE achieves more faithful embeddings 324 
+
+of developing cell lineages in zebrafish embryos 325 
+
+The Farrell Drop-Seq dataset 4 aggregates 38,731 cells from 12 annotated developmental stages 326 
+
+across 694 zebrafish embryos, from 3.3 to 12 hours post-fertilisation ( hpf ). In addition to hpf - 327 
+
+sorted embryonic stage labels, the authors provide annotations of developmental lineages and 328 
+
+inferred pseudotime values inducing the ordering of cells within each lineage. As shown in our 329 
+
+comparison results, the ‘ ViVAE ’ and ‘ ViVAE-EncoderOnly ’ models achieve high Global SP, lower 330 
+
+only than SQuad-MDS , which they exceed at Local SP. Both ViVAE models improve Local and 331 
+
+Global SP over a standard VAE. 332 
+
+Figure 4 A compares embeddings from t-SNE and UMAP (examples of neighbour-embedding; 333 
+
+NE), SQuad-MDS (example of multidimensional scaling; MDS), and VAE, default ViVAE , and 334 
+
+ViVAE-EncoderOnly (examples of variational autoencoders; VAEs). Embryonic stages are marked 335 
+
+by colour and schematic annotation bubbles with arrows in the direction of development (increas- 336 
+
+ing cell differentiation). As a generally known phenomenon, the NE methods separate data into 337 
+
+clusters, with the rest forming smoother embeddings. Of the smooth embeddings, SQuad-MDS 338 
+
+shows the least separation of 11- and 12-hpf cells into distinct branches, with VAE or default Vi- 339 
+
+VAE separating them the most; panel B maps these separations onto trajectory endpoints. The 340 
+
+smooth embeddings place most 6-hpf (‘shield phase’) cells clearly along the major trajectory, in 341 
+
+contrast to NE embedding separating them out. The correctness of the smoother embeddings 342 
+
+is supported by lower Extended Neighbourhood-Proportion-Error (xNPE) embedding errors for 343 
+
+shield phase cells: ranging from 0.781 in t-SNE, 0.858 in UMAP and 0.620 in SQuad-MDS to 344 
+
+8
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+0.243 in VAE, 0.242 in ViVAE , and 0.128 in ViVAE-EncoderOnly . Lower xNPE indicates a more 345 
+
+accurate layout of this population with respect to others (see Methods ). 346 
+
+Figure 4 B shows 6 distinctive developmental lineages, with cells coloured by normalised 347 
+
+ranks along the progression. Terminal cells in each lineage are highlighted in red. Of particular 348 
+
+interest is the challenge of embedding the enveloping layer cell (ELC) and primordial germ cell 349 
+
+(PGC) lineages, terminating at 10.0-hpf . They contain few cells and are distinct from other 350 
+
+lineages, as described in the original study. All 6 embeddings reflect this, with both lineages 351 
+
+partially separating from others. Additionally, both lineages show some degree of bifurcation. 352 
+
+The pathways are highly fragmented in t-SNE and UMAP , while in the smooth embeddings they 353 
+
+retain more continuity, despite the low cell counts. 354 
+
+This raises the question of whether smooth embeddings represent transitional states cor- 355 
+
+rectly. Consider that this data is longitudinal, still allowing for gaps in trajectories between hpf 356 
+
+stages. To test this, we quantify how continuous or fragmented each lineage is in the input (HD) 357 
+
+space. In Figure 4 C, we show Euclidean distances between cells ordered by pseudotime (‘tran- 358 
+
+sitions’) within the prechordal plate lineage. This is computed for input space and for each of 359 
+
+the embeddings, and transformed to account for scale differences (via min-max and log1p scal- 360 
+
+ing). Large distance values at the 3.3- and 3.8-hpf stages in input space validate that the less 361 
+
+dense representation of these cell subsets by smooth embeddings is correct; t-SNE and UMAP 362 
+
+collapse them artificially. 363 
+
+To measure the distortion of these transitions by each embedding, we report L1 distances 364 
+
+between the input and embedded distance distributions, normalised by each lineage’s total cell 365 
+
+count. These values (Figure 4 D) show that the smooth DR models indeed achieve a more faithful 366 
+
+representation of the lineages. Furthermore, Figure 4 E shows transition distances in the ELC 367 
+
+lineage to validate the bifurcation observed in embeddings. The real separation is shown to be 368 
+
+gradual, more similar to the representation by the smooth embeddings. 369 
+
+Encoder indicatrices reveal distortions in VAE model space 370 
+
+We propose encoder indicatrices (EIs): a tool to visualise distortions of (V)AE-based latent 371 
+
+spaces, and use them to analyse VAE, default ViVAE , and ViVAE-EncoderOnly embeddings 372 
+
+of the Farrell data. Figure 5 A gives an overview of the algorithm. In each case, an embedding is 373 
+
+generated by a trained encoder model. Representative points are sampled from the embedding 374 
+
+using a uniform grid. They are then mapped to their coordinates in the input (HD) space. For 375 
+
+each sampled point, a small hypersphere around it forms its HD indicatrix . Here, ‘indicatrix’ de- 376 
+
+notes a shape that helps us describe how the particular part of the point cloud gets projected by 377 
+
+the trained model. Using a local linearisation of the encoding, we then flatten the indicatrix and 378 
+
+transform it using the encoder again. 379 
+
+This transformation introduces size and shape distortions, which get mapped onto the em- 380 
+
+bedding coordinates. In this way, we objectively describe local embedding artifacts throughout 381 
+
+the latent space, to the extent that this is achievable in a 2-dimensional visualisation. In line 382 
+
+with previous related work 26 , we adopt the use of ellipses superimposed on the embedding for a 383 
+
+readily interpretable visual description of artifacts. 384 
+
+Figure 5 B uses EIs to highlight commonly observed embedding distortions in VAEs. First, 385 
+
+scale inconsistences make some parts of the latent space artificially sparser. Second, a ‘run- 386 
+
+away’ effect causes directed stretching of some point subsets. Third, some sparse regions are 387 
+
+ill-defined, showing drastic extension where the embedding should be smoother. 388 
+
+Figure 5 C shows that the default ViVAE model, with denoising and stochastic-MDS regular- 389 
+
+isation, gives more uniform indicatrices, reducing scale inconsistencies and run-away effects. 390 
+
+Some instabilities in sparse regions as seen with VAEs remain. Figure 5 D shows that the 391 
+
+9
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+encoder-only ViVAE model creates a latent space with some gradual scale and shape distor- 392 
+
+tion, but further reduces instabilities due to sparsity. Overall, this shows a notable reduction of 393 
+
+latent space distortion in ViVAE over a standard VAE. 394 
+
+ViVAE achieves structure-preserving reduction of non-developmental im- 395 
+
+mune cell data dimensionality 396 
+
+Here we demonstrate the usefulness of ViVAE as a general-purpose DR algorithm for other than 397 
+
+developmental data, where Global Structure Preservation (SP) by smoother embedding algo- 398 
+
+rithms is less of a focus. To that end, we demonstrate novel supervised (label-based) evaluation 399 
+
+tools from ViScore : the Extended Neighbourhood-Proportion-Error (xNPE) and neighbourhood 400 
+
+composition plots (NCPs). 401 
+
+Specifically, we use the Reed immune cell dataset, originating from a single-cell transcrip- 402 
+
+tomic atlas of the adult human breast 27 . As opposed to the Farrell embryological data (in pre- 403 
+
+vious section), we expect more discontinuity between cell types, as the breast tissue is seeded 404 
+
+with distinct populations of mature immune cells, likely presenting a challenge to our smoother 405 
+
+VAE-based embedding method. 406 
+
+Figure 6 A compares ViVAE to the prevalent NE methods ( t-SNE and UMAP ), showing a de- 407 
+
+gree of major cell-compartment separation in each. Since DR invariably introduces artifacts, we 408 
+
+seek to quantify and describe them here, using a higher-resolution approach than embedding- 409 
+
+level SP scoring. Figure 6 B quantifies population-level embedding errors using xNPE, which 410 
+
+leverages the provided cell labelling. For each population of interest (POI), the xNPE aggre- 411 
+
+gates the distribution of ‘self versus non-self’ neighbours (how many neighbouring cells belong 412 
+
+to the POI itself, versus a different population) over all the cells in the POI. It does so separately 413 
+
+in the HD input space and each LD embedding, ending up with two distributions. These two 414 
+
+distributions are then compared using the earth mover’s distance (EMD). The lower the EMD 415 
+
+value, the lower the distribution of the POI is with respect to the ground truth. 416 
+
+By this metric, t-SNE fares less well than UMAP for 8 of 14 populations and less well than 417 
+
+ViVAE for 12 of 14 populations, despite a high Local SP score based in an unsupervised setting. 418 
+
+Importantly, in contrast to Local SP, xNPE only focuses on how each population interfaces with 419 
+
+the others around it; small positional inaccuracies or swapping positions within the population are 420 
+
+not penalised. (The online ViScore repository includes a dedicated proof-of-concept experiment 421 
+
+with synthetic data.) 422 
+
+We investigate how the natural killer (NK) cells population is distributed in different embed- 423 
+
+dings, picking them as the POI because all three embeddings place them within the same com- 424 
+
+partment as T cells (marked ‘†’ in panel A), but assign them somewhat scattered positions within 425 
+
+it (orange points in panel C). Both UMAP and ViVAE outperform t-SNE in terms of xNPE. To de- 426 
+
+rive a more meaningful interpretation, we generate neighbourhood composition plots (NCPs) 427 
+
+for the NK-cell population (Figure 6 D). These are stacked area plots showing smoothed pro- 428 
+
+portions of neighbouring populations across different neighbourhood sizes (up to 1000), using a 429 
+
+sliding-window approach. These proportions can be compared between input (high-dimensional, 430 
+
+non-reduced) data and the different embdeddings, and they exclude neighbouring cells from the 431 
+
+POI itself. 432 
+
+According to the top NCP, the NK cell population is close to a CD8 + - T-cell population 433 
+
+(olive green) in input space. All three embeddings underestimate this (the population is under- 434 
+
+represented), but ViVAE does so the least. Notably, t-SNE and UMAP show an intrusion of 435 
+
+mature NK T cells (light blue) into a close neighbourhood of the NK cells, meaning their prox- 436 
+
+imity is exaggerated; ViVAE avoids this artifact. The proximity to CD4 + helper T cells (orange), 437 
+
+relative to the HD expression data, is artificially reduced by t-SNE and UMAP and increased in 438 
+
+10 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+ViVAE . t-SNE and UMAP also mis-embed NK cells with respect to effector memory CD8 + - T 439 
+
+cells, in contrast to ViVAE . 440 
+
+This case study shows separation of major immune cell compartments by ViVAE and low 441 
+
+population embedding errors, validating its competitiveness at general-purpose single-cell data 442 
+
+embedding, and thus extending its functionality beyond visualising trajectory data. The super- 443 
+
+vised evaluation metrics presented here can leverage known cell population labelling, making it 444 
+
+possible for the domain expert to examine embeddings of single-cell data more meaningfully, in 445 
+
+an ad-hoc setting. 446 
+
+# DISCUSSION 447 
+
+We have shown ViVAE to achieve favourable multi-scale structure preservation and faithful em- 448 
+
+bedding of both trajectory and non-trajectory data, according to comparisons with other methods 449 
+
+on an array of real biological datasets as well as focused case studies. Integrating denoising of 450 
+
+inputs and a novel stochastic-MDS component with a VAE model, ViVAE balances the continu- 451 
+
+ous nature of VAE latent spaces with an ability to separate major cell compartments. To improve 452 
+
+interpretability, we equip ViVAE with QC functionality in the form of encoder indicatrices ; cru- 453 
+
+cially, these can be implemented for any differentiable DR model. In addition to a regularised 454 
+
+VAE, we propose and evaluate a decoder-less model ( ‘ViVAE-EncoderOnly’ ). We take the full 455 
+
+model as default due to mostly slightly better preservation of local structures, but evaluate both. 456 
+
+We have demonstrated that balancing local and global structure preservation can lead to 457 
+
+more faithful embeddings of developmental, longitudinal, but also non-trajectory (single-snapshot) 458 
+
+data. In essence, the proposed methodology is designed for a broad range of exploratory data 459 
+
+analysis workflows. 460 
+
+Throughout the work, we use Euclidean distances in PCA-reduced input space, which yield 461 
+
+evaluations that are generally congruent with the known trade-offs between local and global 462 
+
+structure preservation by established methods. However, for adaptability to sparser and higher- 463 
+
+dimensional data ( e.g. , expression of a filtered gene set, without initial PCA reduction), we im- 464 
+
+plement the use of cosine distances as an alternative for use with the stochastic-MDS loss, as 465 
+
+well as in the unsupervised structure-preservation scoring. 466 
+
+The development of ViVAE followed our initial implementation of model-agnostic structure 467 
+
+preservation scores in ViScore , which were necessary for a quantitative evaluation. Overcom- 468 
+
+ing previous conceptual and computational limitations, we coin unsupervised embedding-level 469 
+
+scores that quantify structure preservation without using hard local/global cut-offs, landmark 470 
+
+points based on clustering, or other previously proposed proxy measures. In addition, we intro- 471 
+
+duce supervised population-level evaluation metrics for comparing embeddings and explaining 472 
+
+artifacts. 473 
+
+Our contributions to evaluation and interpretability are motivated by increasing sizes of single- 474 
+
+cell datasets, the availability of large public databases and atlases 42–44 , and ongoing efforts to 475 
+
+systematically evaluate single-cell data analysis algorithms 11 . DR currently aids in exploration 476 
+
+and hypothesis formulation, and its usage will likely rise with more public data. This will require 477 
+
+efforts to prevent erroneous conclusions from spurious patterns or artifacts in embeddings. 478 
+
+Having adapted notions from differential geometry 26 to visualise distortions in the model 479 
+
+space using encoder indicatrices , we estimate that an increased use of such explainability tools 480 
+
+will help in describing method-specific artifacts. Future endeavours in interpretable non-linear 481 
+
+single-cell DR may involve hierarchical embeddings 45 and interactive tools for evaluating em- 482 
+
+bedding quality at local levels 46,47 . 483 
+
+11 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Limitations of this study 484 
+
+Another major avenue of research involves topological data analysis (TDA) to describe point 485 
+
+clouds. We acknowledge that concepts such as local and global structure have undergone thor- 486 
+
+ough and formal examination within this field 28 . Further, some studies have sought to tackle the 487 
+
+problem of interesting structures existing at multiple scales in single-cell data 48,49 . Nonetheless, 488 
+
+this work within TDA has not been fully incorporated within the single-cell DR field. While inter- 489 
+
+esting work on topology-preserving autoencoders exists 50 , our familiarity with a recent study on 490 
+
+topological regularisation of autoencoders for single-cell DR 51 emphasises to us that dataset- 491 
+
+specific descriptions of topologies can prove cumbersome and non-trivial. 492 
+
+More broadly, describing the true manifolds of real biological data is currently intractable. 493 
+
+Therefore, the focus of our study here, and a handful of others that compare DR methodolo- 494 
+
+gies 12–14,25 , is instead on empirical evaluation across different datasets that are representative 495 
+
+of a range of real-world scenarios. 496 
+
+In line with this approach, our work seeks to provide ways to measure and optimise multi- 497 
+
+scale structure preservation without requiring too much tuning or too many assumptions on un- 498 
+
+derlying structures. This is why our current study does not use TDA and remains restricted to 499 
+
+the use of nearest-neighbour graphs in lieu of more elaborate topologies. 500 
+
+Nonetheless, our ongoing research is focusing on alternative graph structures for both de- 501 
+
+noising and DR evaluation, such as networks from the Louvain algorithm 52 , witness complexes 49 , 502 
+
+or branched spanning trees robust to noise 53 . Our integration of ViVAE with FlowSOM 54 (shown 503 
+
+in Figure 1) is a tentative step toward the use of graphs together with embedded point clouds to 504 
+
+capture relevant structures. 505 
+
+# RESOURCE AVAILABILITY 506 
+
+Lead contact 507 
+
+Requests for further information and resources should be directed to and will be fulfilled by the 508 
+
+lead contact, David Novak (davidnovak9000@gmail.com). 509 
+
+Materials availability 510 
+
+The proposed software packages are implemented in Python and available in dedicated GitHub 511 
+
+repositories: github.com/saeyslab/ViVAE and github.com/saeyslab/ViScore 512 
+
+Data and code availability 513 
+
+This paper analyzes existing, publicly available data. Sources of datasets are listed in the key 514 
+
+resources table (KRT). 515 
+
+All original code has been deposited at GitHub and is publicly available as of the date of 516 
+
+publication. The dedicated repositories are listed below. 517 
+
+• The ViVAE software package and code required to reproduce all case studies in this paper 518 
+
+are publicly available in the saeyslab/ViVAE GitHub repository as of the date of publication. 519 
+
+• The ViScore software package and code required to reproduce the quantitative compar- 520 
+
+ison of ViVAE and other dimensionality reduction methods are publicly available in the 521 
+
+saeyslab/ViScore GitHub repository as of the date of publication. 522 
+
+12 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Any additional information required to reanalyze the data reported in this paper is available 523 
+
+from the lead contact upon request. 524 
+
+# ACKNOWLEDGMENTS 525 
+
+D.N. was funded by the FWO (Fonds Wetenschappelijk Onderzoek) and this research was con- 526 
+
+ducted as part of the FWO Strategic Basic research project 1S40421N. C.d.B. was a beneficiary 527 
+
+of an FSR Incoming Post-doctoral Fellowship from UCLouvain during part of this work. P.L. is a 528 
+
+FRIA grantee with the Belgian FNRS (Fonds National de la Recherche Scientifique). J.A.L. is a 529 
+
+Research Director with the Belgian F.R.S.-FNRS (Fonds National de la Recherche Scientifique). 530 
+
+S.V.G. is supported by an FWO postdoctoral research grant (1272823N, Research Foundation – 531 
+
+Flanders). This work was supported by the Flemish Government under the Flanders AI Research 532 
+
+Program (Project 174K02325). 533 
+
+We thank Sebastian Damrich for his invaluable advice regarding the implementation of en- 534 
+
+coder indicatrices and Anna Konstorum for her advice and guidance regarding supervised eval- 535 
+
+uation that allowed us to build on top of the Neighborhood Proportion Error algorithm. 536 
+
+# AUTHOR CONTRIBUTIONS 537 
+
+D.N. conceived of and implemented the ViVAE methodology, supervised evaluation metrics in 538 
+
+ViScore , and the large-scale evaluation framework, designed and ran experiments, and drafted 539 
+
+the manuscript. C.d.B. conceived of and implemented the RNX curve approximation and wrote 540 
+
+the corresponding manuscript section. C.d.B., P.L., J.A.L., S.V.G., and Y.S. provided extensive 541 
+
+feedback on the manuscript. Y.S. edited the manuscript. S.V.G. and Y.S. supervised the study. 542 
+
+# DECLARATION OF INTERESTS 543 
+
+The authors declare no competing interests. 544 
+
+# SUPPLEMENTAL INFORMATION INDEX 545 
+
+Document S1 . PDF file with supplemental figures and notes. Figure S1 : visualization of 546 
+
+structure-preservation results as means and standard deviations per score. Figure S2 : vi- 547 
+
+sualization of R NX curves per dataset and method. Figure S3 : visualization of the effects of 548 
+
+varying target dimensionality on the structure-preservation (SP) scores. Figure S4 : visu- 549 
+
+alization of the effects of varying the ‘scale’ hyperparameter on the structure-preservation 550 
+
+(SP) scores. Figure S5 : values of different loss function terms during training for a VAE, 551 
+
+ViVAE , and ViVAE-EncoderOnly model. Note S1 : pseudocode for the Denoising algo- 552 
+
+rithm. Note S2 : pseudocode for the Encoder Indicatrices algorithm. Note S3 : pseudocode 553 
+
+for the Extended Neighbourhood-Proportion-Error algorithm. Note S4 : Python code for 554 
+
+scRNA-seq data preprocessing. Note S5 : key resources table (KRT) 555 
+
+Table S1 . Full results of structure-preservation comparative analysis of dimensionality reduc- 556 
+
+tion methods 557 
+
+13 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Table S2 . p-values from one-sided Wilcoxon tests for the ViVAE and ViVAE-EncoderOnly mod- 558 
+
+els, corresponding to results in Table S1 559 
+
+Table S3 . Specification of dimensionality reduction methods, their Python implementations, 560 
+
+and hyperparameter values used for training 561 
+
+14 
+
+.CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint MAIN FIGURE TITLES AND LEGENDS 562 
+
+Figure 1. Schematic overview of dimensionality reduction and structure 563 
+
+preservation 564 
+
+(A) Tabular d-dimensional input data is transformed into a z-dimensional embedding by DR. 565 
+
+While the original d features correspond to specific genes or principal components (PCs), the 566 
+
+z features of the embedding do not. The number of data points n does not change between 567 
+
+the inputs and the embedding. (B, C) DR can focus on preserving neighbourhood relationships 568 
+
+between points, respectively, at a localised scale or globally. (D) Neighbour embedding (NE) 569 
+
+methods are typically ‘cluster-forming’. (E) Principal component analysis (PCA) and methods 570 
+
+based on multidimensional scaling (MDS) do not have a locality bias and favour global (multi- 571 
+
+scale) structure preservation. (F) Methods based on variational autoencoders (VAEs) are highly 572 
+
+flexible in the objectives they optimise. The models’ embedding spaces tend to introduce geo- 573 
+
+metric distortions with respect to the input data. 574 
+
+Figure 2. Schematic overview of proposed workflows 575 
+
+(A) Unsupervised evaluation based on RNX curve analysis quantifies neighbourhood preser- 576 
+
+vation for local and global structures. (B) (Left side.) Supervised evaluation via Extended 577 
+
+Neighbourhood-Proportion-Error (xNPE) quantifies embedding error per cell population. (Right 578 
+
+side.) Neighbourhood composition plots (NCPs) reveal inaccuracies in relative positions of cell 579 
+
+populations in evaluated embeddings. (C) Input data is denoised and used to train a regularised 580 
+
+VAE model. (D) The trained model is used to produce a low-dimensional embedding for visu- 581 
+
+alisation. (E) Encoder indicatrices (EIs) evaluate distortions of the latent space learned by the 582 
+
+model’s encoder. (F) The model can be used to validate a FlowSOM tree topology (left side) and 583 
+
+project input feature values onto representative clusters (right side) . 584 
+
+Figure 3. Farrell dataset embeddings with developmental lineages in ze- 585 
+
+brafish embryos 586 
+
+(A) 2-d embeddings of Farrell data 4 by t-SNE, UMAP , SQuad-MDS , VAE, ViVAE , and ViVAE- 587 
+
+EncoderOnly are shown, with colour-coding by embryonic stage. The layout of cell subsets by 588 
+
+stage is indicated in each embedding, showing major developmental gradients using hpf labels 589 
+
+and arrows indicating progression. (B) Six annotated developmental lineages are projected onto 590 
+
+each embedding, using colouring by pseudotime-derived rank, with terminal cells in the highest 591 
+
+one percent highlighted in red. (C) Scaled distances between cells along the prechordal plate 592 
+
+lineage are shown for input data and the embeddings. (D) Average L1 distances between input- 593 
+
+space and embedding distances for lineages shown in B. are plotted in a heatmap. (E) Transition 594 
+
+distances for the enveloping layer lineage validate that trajectories start diverging around the 4.3- 595 
+
+or 4.8-hpf stage. 596 
+
+Figure 4. Analysis of latent space distortion in VAE-based embeddings of 597 
+
+the Farrell dataset 598 
+
+(A) Overview of encoder indicatrix (EI) computation, using an embedding of the Farrell dataset 4. 599 
+
+Points in input space are obtained via grid-sampling from the embedding. Using local linearisa- 600 
+
+tions of the trained encoder, HD indicatrices for the points are flattened along corresponding 601 
+
+15 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+horizontal tangent spaces, yielding a piecewise approximation of the embedding 2-manifold. 602 
+
+Flattened indicatrices are transformed by the encoder and are plotted over the embedding. (B) 603 
+
+EIs reveal commonly observed distortions of VAE latent space: scale inconsistencies, run-away 604 
+
+effect inducing directed stretching and instabilities in sparse regions. (C) The default ViVAE 605 
+
+model gives less varied indicatrices but some instabilities in sparse regions remain. (D) The 606 
+
+additionally evaluated encoder-only ViVAE model learns a latent space that exhibits gradual dis- 607 
+
+tortion of scale and shape and less drastic instabilities due to sparsity (less stretching and fewer 608 
+
+changes in direction of the stretching across different parts of the embedding space). 609 
+
+Figure 5. Reed dataset embedding and analysis of population-wise error 610 
+
+(A) 2-d embeddings of the Reed data 27 from t-SNE, UMAP , and ViVAE are shown, with pop- 611 
+
+ulations indicated by colour, according to legend on the right. Symbols mark the the T- and 612 
+
+NK-cell (†) and B-cell (‡) compartments. (B) xNPE (population-wise embedding error) is com- 613 
+
+puted using 1000-nearest-neighbour relations in input space and embeddings. Distributions of 614 
+
+neighbour identities in terms of self and non-self are compared. (C) NK cells are highlighted 615 
+
+in orange as population-of-interest in each embedding. (D) Neighbourhood composition plots 616 
+
+(k = 1000 ) show distribution of other populations in the neighbourhoods of the population-of- 617 
+
+interest. Colour-coding from panel A is used, along with text annotations. 618 
+
+16 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+# References 619 
+
+1. Becht, E., McInnes, L., Healy, J., Dutertre, C.A., Kwok, I.W.H., Ng, L.G., Ginhoux, F., 620 
+
+and Newell, E.W. (2019). Dimensionality reduction for visualizing single-cell data using 621 
+
+UMAP. Nature Biotechnology 37 , 38–44. URL: https://doi.org/10.1038/nbt.4314 . doi: 622 
+
+10.1038/nbt.4314 . 623 
+
+2. Kobak, D., and Berens, P. (2019). The art of using t-SNE for single-cell transcriptomics. 624 
+
+Nature Communications 10 . doi: 10.1038/s41467-019-13056-x . 625 
+
+3. Stuart, T., Butler, A., Hoffman, P., Hafemeister, C., Papalexi, E., Mauck, W.M., 3rd, Hao, Y., 626 
+
+Stoeckius, M., Smibert, P., and Satija, R. (2019). Comprehensive integration of Single-Cell 627 
+
+data. Cell 177 , 1888–1902.e21. 628 
+
+4. Farrell, J.A., Wang, Y., Riesenfeld, S.J., Shekhar, K., Regev, A., and Schier, A.F. (2018). 629 
+
+Single-cell reconstruction of developmental trajectories during zebrafish embryogenesis. 630 
+
+Science 360 . doi: 10.1126/science.aar3131 . 631 
+
+5. Eling, N., Morgan, M.D., and Marioni, J.C. (2019). Challenges in measuring and under- 632 
+
+standing biological noise. Nature Publishing Group. doi: 10.1038/s41576-019-0130-6 . 633 
+
+6. Hu, J., Wang, Y., Zhou, X., and Chen, M. (2022). Pre-processing, Dimension Reduction, 634 
+
+and Clustering for Single-Cell RNA-seq Data. In H.H.S. Lu, B. Sch ¨ olkopf, M.T. Wells, 635 
+
+and H. Zhao, eds. Handbook of Statistical Bioinformatics. Berlin, Heidelberg: Springer 636 
+
+Berlin Heidelberg. ISBN 978-3-662-65902-1 pp. 37–51. URL: https://doi.org/10.1007/ 637 
+
+978-3-662-65902-1_2 . doi: 10.1007/978-3-662-65902-1_2 . 638 
+
+7. Maaten, L.V.D., and Hinton, G. (2008). Visualizing Data using t-SNE. Journal of Machine 639 
+
+Learning Research 9, 2579–2605. 640 
+
+8. McInnes, L., Healy, J., and Melville, J. (2018). UMAP: Uniform Manifold Approximation and 641 
+
+Projection for Dimension Reduction. URL: http://arxiv.org/abs/1802.03426 . 642 
+
+9. Xiang, R., Wang, W., Yang, L., Wang, S., Xu, C., and Chen, X. (2021). A Comparison 643 
+
+for Dimensionality Reduction Methods of Single-Cell RNA-seq Data. Frontiers in Ge- 644 
+
+netics 12 , 646936. URL: https://www.frontiersin.org/articles/10.3389/fgene.2021. 645 
+
+646936/full . doi: 10.3389/fgene.2021.646936 . 646 
+
+10. B ¨ ohm, J.N., Berens, P., and Kobak, D. (2022). Attraction-repulsion spectrum in neighbor 647 
+
+embeddings. Journal of Machine Learning Research 23 , 1–32. URL: http://jmlr.org/ 648 
+
+papers/v23/21-0055.html . 649 
+
+11. Luecken, M.D., and Theis, F.J. (2019). Current best practices in single-cell rna-seq 650 
+
+analysis: a tutorial. Molecular Systems Biology 15 , e8746. URL: https://www. 651 
+
+embopress.org/doi/abs/10.15252/msb.20188746 . doi: 10.1371/journal.pcbi.1011288 . 652 
+
+arXiv:https://www.embopress.org/doi/pdf/10.15252/msb.20188746 . 653 
+
+12. Szubert, B., Cole, J.E., Monaco, C., and Drozdov, I. (2019). Structure-preserving visu- 654 
+
+alisation of high dimensional single-cell datasets. Scientific Reports 9. doi: 10.1038/ 655 
+
+s41598-019-45301-0 . 656 
+
+13. Wang, K., Yang, Y., Wu, F., Song, B., Wang, X., and Wang, T. (2023). Comparative analysis 657 
+
+of dimension reduction methods for cytometry by time-of-flight data. Nature Communica- 658 
+
+tions. doi: 10.1038/s41467-023-37478-w . 659 
+
+17 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+14. Huang, H., Wang, Y., Rudin, C., and Browne, E.P. (2022). Towards a comprehensive evalua- 660 
+
+tion of dimension reduction methods for transcriptomic data visualization. Communications 661 
+
+Biology 5. doi: 10.1038/s42003-022-03628-x . 662 
+
+15. Amid, E., and Warmuth, M.K. (2019). TriMap: Large-scale Dimensionality Reduction Using 663 
+
+Triplets. URL: http://arxiv.org/abs/1910.00204 . 664 
+
+16. Wang, Y., Huang, H., Rudin, C., and Shaposhnik, Y. (2021). Understanding How Dimension 665 
+
+Reduction Tools Work: An Empirical Approach to Deciphering t-SNE, UMAP, TriMap, and 666 
+
+PaCMAP for Data Visualization. . URL: http://jmlr.org/papers/v22/20-1061.html. 667 
+
+17. Lambert, P., de Bodt, C., Verleysen, M., and Lee, J.A. (2022). SQuadMDS: A lean Stochas- 668 
+
+tic Quartet MDS improving global structure preservation in neighbor embedding like t-SNE 669 
+
+and UMAP. Neurocomputing 503 , 17–27. doi: 10.1016/j.neucom.2022.06.108 . 670 
+
+18. Ding, J., Condon, A., and Shah, S.P. (2018). Interpretable dimensionality reduction 671 
+
+of single cell transcriptome data with deep generative models. Nature Communi- 672 
+
+cations 9, 2002. URL: https://doi.org/10.1038/s41467-018-04368-5 . doi: 10.1038/ 673 
+
+s41467-018-04368-5 . 674 
+
+19. Kingma, D.P., and Welling, M. (2022). Auto-encoding variational bayes. . URL: https: 675 
+
+//arxiv.org/abs/1312.6114 . arXiv:1312.6114 . 676 
+
+20. Tasic, B., Yao, Z., Graybuck, L.T., Smith, K.A., Nguyen, T.N., Bertagnolli, D., Goldy, J., 677 
+
+Garren, E., Economo, M.N., Viswanathan, S., Penn, O., Bakken, T., Menon, V., Miller, 678 
+
+J., Fong, O., Hirokawa, K.E., Lathia, K., Rimorin, C., Tieu, M., Larsen, R., Casper, T., 679 
+
+Barkan, E., Kroll, M., Parry, S., Shapovalova, N.V., Hirschstein, D., Pendergraft, J., Sullivan, 680 
+
+H.A., Kim, T.K., Szafer, A., Dee, N., Groblewski, P., Wickersham, I., Cetin, A., Harris, J.A., 681 
+
+Levi, B.P., Sunkin, S.M., Madisen, L., Daigle, T.L., Looger, L., Bernard, A., Phillips, J., 682 
+
+Lein, E., Hawrylycz, M., Svoboda, K., Jones, A.R., Koch, C., and Zeng, H. (2018). Shared 683 
+
+and distinct transcriptomic cell types across neocortical areas. Nature 563 , 72–78. URL: 684 
+
+https://doi.org/10.1038/s41586-018-0654-5 . doi: 10.1038/s41586-018-0654-5 . 685 
+
+21. Triana, S., Vonficht, D., Jopp-Saile, L., Raffel, S., Lutz, R., Leonce, D., Antes, M., 686 
+
+Hern ´ andez-Malmierca, P., Ordo ˜ nez-Rueda, D., Ramasz, B., Boch, T., Jann, J.C., Nowak, 687 
+
+D., Hofmann, W.K., M ¨ uller-Tidow, C., H ¨ ubschmann, D., Alexandrov, T., Benes, V., Trumpp, 688 
+
+A., Paulsen, M., Velten, L., and Haas, S. (2021). Single-cell proteo-genomic reference maps 689 
+
+of the hematopoietic system enable the purification and massive profiling of precisely de- 690 
+
+fined cell states. Nature Immunology 22 , 1577–1589. URL: https://doi.org/10.1038/ 691 
+
+s41590-021-01059-0 . doi: 10.1038/s41590-021-01059-0 . 692 
+
+22. Konstorum, A., Jekel, N., Vidal, E., and Laubenbacher, R. (2018). Comparative Analysis 693 
+
+of Linear and Nonlinear Dimension Reduction Techniques on Mass Cytometry Data. URL: 694 
+
+https://doi.org/10.1101/273862 . doi: 10.1101/273862 . 695 
+
+23. Moon, K.R., van Dijk, D., Wang, Z., Gigante, S., Burkhardt, D.B., Chen, W.S., Yim, K., 696 
+
+van den Elzen, A., Hirn, M.J., Coifman, R.R., Ivanova, N.B., Wolf, G., and Krishnaswamy, 697 
+
+S. (2019). Visualizing structure and transitions in high-dimensional biological data. Nature 698 
+
+Biotechnology 37 , 1482–1492. 699 
+
+24. Chari, T., and Pachter, L. (2023). The specious art of single-cell genomics. PLOS Com- 700 
+
+putational Biology 19 , 1–20. URL: https://doi.org/10.1371/journal.pcbi.1011288 . doi: 701 
+
+10.1371/journal.pcbi.1011288 . 702 
+
+18 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+25. Lause, J., Kobak, D., and Berens, P. The art of seeing the elephant in the room: 2D 703 
+
+embeddings of single-cell data do make sense (2024). 704 
+
+26. Nazari, P., Damrich, S., and Hamprecht, F.A. (2023). Geometric Autoencoders - What You 705 
+
+See is What You Decode. In A. Krause, E. Brunskill, K. Cho, B. Engelhardt, S. Sabato, 706 
+
+and J. Scarlett, eds. Proceedings of the 40th International Conference on Machine Learning 707 
+
+vol. 202 of Proceedings of Machine Learning Research . PMLR pp. 25834–25857. URL: 708 
+
+https://proceedings.mlr.press/v202/nazari23a.html . 709 
+
+27. Reed, A.D., Pensa, S., Steif, A., Stenning, J., Kunz, D.J., Porter, L.J., Hua, K., He, P., 710 
+
+Twigger, A.J., Siu, A.J.Q., Kania, K., Barrow-McGee, R., Goulding, I., Gomm, J.J., Speirs, 711 
+
+V., Jones, J.L., Marioni, J.C., and Khaled, W.T. (2024). A single-cell atlas enables mapping 712 
+
+of homeostatic cellular shifts in the adult human breast. Nature Genetics 56 , 652–662. URL: 713 
+
+https://doi.org/10.1038/s41588-024-01688-9 . doi: 10.1038/s41588-024-01688-9 . 714 
+
+28. Adams, H., and Moy, M. (2021). Topology applied to machine learning: From global to local. 715 
+
+Frontiers in Artificial Intelligence 4, 668302. 716 
+
+29. Mukhtar, M.F., Abal Abas, Z., Baharuddin, A.S., Norizan, M.N., Fakhruddin, W.F.W.W., Mi- 717 
+
+nato, W., Rasib, A.H.A., Abidin, Z.Z., Rahman, A.F.N.A., and Anuar, S.H.H. (2023). Integrat- 718 
+
+ing local and global information to identify influential nodes in complex networks. Scientific 719 
+
+Reports 13 , 11411. 720 
+
+30. Hatami, H., Lov ´ asz, L., and Szegedy, B. (2021). Limits of local-global convergent graph 721 
+
+sequences (2012). arXiv preprint arXiv:1205.4356. 722 
+
+31. Vandaele, R., De Bie, T., and Saeys, Y. (2018). Local topological data analysis to uncover 723 
+
+the global structure of data approaching graph-structured topologies. In Joint European 724 
+
+Conference on Machine Learning and Knowledge Discovery in Databases. Springer pp. 725 
+
+19–36. 726 
+
+32. Huynh, T., and Cang, Z. (2024). Topological and geometric analysis of cell states in single- 727 
+
+cell transcriptomic data. Briefings in Bioinformatics 25 , bbae176. 728 
+
+33. Lee, J.A., Peluffo-Ord ´ o ˜ nez, D.H., and Verleysen, M. (2015). Multi-scale similarities in 729 
+
+stochastic neighbour embedding: Reducing dimensionality while preserving both local and 730 
+
+global structure. Neurocomputing 169 , 246–261. doi: 10.1016/j.neucom.2014.12.095 . 731 
+
+34. Lambert, P., de Bodt, C., Verleysen, M., and Lee, J.A. (2021). Stochastic quartet approach 732 
+
+for fast multidimensional scaling. In European Symposium on Artificial Neural Networks, 733 
+
+Computational Intelligence and Machine Learning. ISBN 9782875870827 pp. 417–422. 734 
+
+URL: http://hdl.handle.net/2078.1/252550 . 735 
+
+35. Gassen, S.V., Callebaut, B., Helden, M.J.V., Lambrecht, B.N., Demeester, P., Dhaene, T., 736 
+
+and Saeys, Y. (2015). FlowSOM: Using self-organizing maps for visualization and interpre- 737 
+
+tation of cytometry data. Cytometry Part A 87 , 636–645. doi: 10.1002/cyto.a.22625 . 738 
+
+36. Qiu, C., Martin, B.K., Welsh, I.C., Daza, R.M., Le, T.M., Huang, X., Nichols, E.K., Taylor, 739 
+
+M.L., Fulton, O., O’Day, D.R., Gomes, A.R., Ilcisin, S., Srivatsan, S., Deng, X., Disteche, 740 
+
+C.M., Noble, W.S., Hamazaki, N., Moens, C.B., Kimelman, D., Cao, J., Schier, A.F., Spiel- 741 
+
+mann, M., Murray, S.A., Trapnell, C., and Shendure, J. (2024). A single-cell time-lapse 742 
+
+of mouse prenatal development from gastrula to birth. Nature 626 , 1084–1093. URL: 743 
+
+https://doi.org/10.1038/s41586-024-07069-w . doi: 10.1038/s41586-024-07069-w . 744 
+
+19 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+37. Suo, C., Dann, E., Goh, I., Jardine, L., Kleshchevnikov, V., Park, J.E., Botting, 745 
+
+R.A., Stephenson, E., Engelbert, J., Tuong, Z.K., Polanski, K., Yayon, N., Xu, 746 
+
+C., Suchanek, O., Elmentaite, R., Conde, C.D., He, P., Pritchard, S., Miah, M., 747 
+
+Moldovan, C., Steemers, A.S., Mazin, P., Prete, M., Horsfall, D., Marioni, J.C., 748 
+
+Clatworthy, M.R., Haniffa, M., and Teichmann, S.A. (2022). Mapping the develop- 749 
+
+ing human immune system across organs. Science 376 , eabo0510. URL: https: 750 
+
+//www.science.org/doi/abs/10.1126/science.abo0510 . doi: 10.1126/science.abo0510 . 751 
+
+arXiv:https://www.science.org/doi/pdf/10.1126/science.abo0510 . 752 
+
+38. Strati, P., Li, X., Deng, Q., Marques-Piubelli, M.L., Henderson, J., Watson, G., Deaton, 753 
+
+L., Cain, T., Yang, H., Ravanmehr, V., Fayad, L.E., Iyer, S.P., Nastoupil, L.J., Hagemeis- 754 
+
+ter, F.B., Parra, E.R., Saini, N., Takahashi, K., Fowler, N.H., Westin, J.R., Steiner, R.E., 755 
+
+Nair, R., Flowers, C.R., Wang, L., Ahmed, S., Al-Atrash, G., Vega, F., Neelapu, S.S., and 756 
+
+Green, M.R. (2023). Prolonged cytopenia following CD19 CAR T cell therapy is linked 757 
+
+with bone marrow infiltration of clonally expanded IFN-expressing CD8 T cells. Cell Re- 758 
+
+ports Medicine 4, 101158. URL: https://www.sciencedirect.com/science/article/pii/ 759 
+
+S2666379123003117 . doi: https://doi.org/10.1016/j.xcrm.2023.101158 . 760 
+
+39. Almanzar, N., Antony, J., Baghel, A.S., Bakerman, I., Bansal, I., Barres, B.A., Beachy, P.A., 761 
+
+Berdnik, D., Bilen, B., Brownfield, D., Cain, C., Chan, C.K.F., Chen, M.B., Clarke, M.F., 762 
+
+Conley, S.D., Darmanis, S., Demers, A., Demir, K., de Morree, A., Divita, T., du Bois, H., 763 
+
+Ebadi, H., Espinoza, F.H., Fish, M., Gan, Q., George, B.M., Gillich, A., G ` omez-Sj ¨ oberg, R., 764 
+
+Green, F., Genetiano, G., Gu, X., Gulati, G.S., Hahn, O., Haney, M.S., Hang, Y., Harris, 765 
+
+L., He, M., Hosseinzadeh, S., Huang, A., Huang, K.C., Iram, T., Isobe, T., Ives, F., Jones, 766 
+
+R., Kao, K.S., Karkanias, J., Karnam, G., Keller, A., Kershner, A.M., Khoury, N., Kim, S.K., 767 
+
+Kiss, B.M., Kong, W., Krasnow, M.A., Kumar, M.E., Kuo, C.S., Lam, J., Lee, D.P., Lee, 768 
+
+S.E., Lehallier, B., Leventhal, O., Li, G., Li, Q., Liu, L., Lo, A., Lu, W.J., Lugo-Fagundo, 769 
+
+M.F., Manjunath, A., May, A.P., Maynard, A., McGeever, A., McKay, M., McNerney, M.W., 770 
+
+Merrill, B., Metzger, R.J., Mignardi, M., Min, D., Nabhan, A.N., Neff, N.F., Ng, K.M., Nguyen, 771 
+
+P.K., Noh, J., Nusse, R., P ´ alovics, R., Patkar, R., Peng, W.C., Penland, L., Pisco, A.O., 772 
+
+Pollard, K., Puccinelli, R., Qi, Z., Quake, S.R., Rando, T.A., Rulifson, E.J., Schaum, N., 773 
+
+Segal, J.M., Sikandar, S.S., Sinha, R., Sit, R.V. et al. (2020). A single-cell transcriptomic 774 
+
+atlas characterizes ageing tissues in the mouse. Nature 583 , 590–595. URL: https://doi. 775 
+
+org/10.1038/s41586-020-2496-1 . doi: 10.1038/s41586-020-2496-1 . 776 
+
+40. Jones, R.C., Karkanias, J., Krasnow, M.A., Pisco, A.O., Quake, S.R., Salzman, J., Yosef, 777 
+
+N., Bulthaup, B., Brown, P., Harper, W., Hemenez, M., Ponnusamy, R., Salehi, A., Sana- 778 
+
+gavarapu, B.A., Spallino, E., Aaron, K.A., Concepcion, W., Gardner, J.M., Kelly, B., Nei- 779 
+
+dlinger, N., Wang, Z., Crasta, S., Kolluru, S., Morri, M., Tan, S.Y., Travaglini, K.J., Xu, 780 
+
+C., Alc ´ antara-Hern ´ andez, M., Almanzar, N., Antony, J., Beyersdorf, B., Burhan, D., Cal- 781 
+
+cuttawala, K., Carter, M.M., Chan, C.K.F., Chang, C.A., Chang, S., Colville, A., Culver, 782 
+
+R.N., Cvijovi´ c, I., D’Amato, G., Ezran, C., Galdos, F.X., Gillich, A., Goodyer, W.R., Hang, 783 
+
+Y., Hayashi, A., Houshdaran, S., Huang, X., Irwin, J.C., Jang, S., Juanico, J.V., Kershner, 784 
+
+A.M., Kim, S., Kiss, B., Kong, W., Kumar, M.E., Kuo, A.H., Leylek, R., Li, B., Loeb, G.B., 785 
+
+Lu, W.J., Mantri, S., Markovic, M., McAlpine, P.L., de Morree, A., Mrouj, K., Mukherjee, S., 786 
+
+Muser, T., Neuh ¨ ofer, P., Nguyen, T.D., Perez, K., Phansalkar, R., Puluca, N., Qi, Z., Rao, 787 
+
+P., Raquer-McKay, H., Schaum, N., Scott, B., Seddighzadeh, B., Segal, J., Sen, S., Sikan- 788 
+
+dar, S., Spencer, S.P., Steffes, L.C., Subramaniam, V.R., Swarup, A., Swift, M., Treuren, 789 
+
+W.V., Trimm, E., Veizades, S., Vijayakumar, S., Vo, K.C., Vorperian, S.K., Wang, W., Wein- 790 
+
+stein, H.N.W., Winkler, J., Wu, T.T.H., Xie, J. et al. (2022). The Tabula Sapiens: A multiple- 791 
+
+organ, single-cell transcriptomic atlas of humans. Science 376 , eabl4896. URL: https: 792 
+
+20 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+//www.science.org/doi/abs/10.1126/science.abl4896 . doi: 10.1126/science.abl4896 . 793 
+
+arXiv:https://www.science.org/doi/pdf/10.1126/science.abl4896 . 794 
+
+41. Shekhar, K., Lapan, S.W., Whitney, I.E., Tran, N.M., Macosko, E.Z., Kowalczyk, M., Adico- 795 
+
+nis, X., Levin, J.Z., Nemesh, J., Goldman, M., McCarroll, S.A., Cepko, C.L., Regev, A., and 796 
+
+Sanes, J.R. (2016). Comprehensive Classification of Retinal Bipolar Neurons by Single-Cell 797 
+
+Transcriptomics. Cell 166 , 1308–1323.e30. doi: 10.1016/j.cell.2016.07.054 . 798 
+
+42. Tarhan, L., Bistline, J., Chang, J., Galloway, B., Hanna, E., and Weitz, E. (2023). Single Cell 799 
+
+Portal: an interactive home for single-cell genomics data. BioRxiv. 800 
+
+43. Megill, C., Martin, B., Weaver, C., Bell, S., Prins, L., Badajoz, S., McCandless, B., 801 
+
+Pisco, A.O., Kinsella, M., Griffin, F., Kiggins, J., Haliburton, G., Mani, A., Weiden, 802 
+
+M., Dunitz, M., Lombardo, M., Huang, T., Smith, T., Chambers, S., Freeman, J., 803 
+
+Cool, J., and Carr, A. (2021). cellxgene: a performant, scalable exploration plat- 804 
+
+form for high dimensional sparse matrices. bioRxiv. URL: https://www.biorxiv. 805 
+
+org/content/early/2021/04/06/2021.04.05.438318 . doi: 10.1101/2021.04.05.438318 . 806 
+
+arXiv:https://www.biorxiv.org/content/early/2021/04/06/2021.04.05.438318.full.pdf .807 
+
+44. Elmentaite, R., Dom´ ınguez Conde, C., Yang, L., and Teichmann, S.A. (2022). Single- 808 
+
+cell atlases: shared and tissue-specific cell types across human organs. Nature Re- 809 
+
+views Genetics 23 , 395–410. URL: https://doi.org/10.1038/s41576-022-00449-w . doi: 810 
+
+10.1038/s41576-022-00449-w . 811 
+
+45. van Unen, V., H ¨ ollt, T., Pezzotti, N., Li, N., Reinders, M.J.T., Eisemann, E., Koning, F., 812 
+
+Vilanova, A., and Lelieveldt, B.P.F. (2017). Visual analysis of mass cytometry data by 813 
+
+hierarchical stochastic neighbour embedding reveals rare cell types. Nature Commu- 814 
+
+nications 8, 1740. URL: https://doi.org/10.1038/s41467-017-01689-9 . doi: 10.1038/ 815 
+
+s41467-017-01689-9 . 816 
+
+46. Ovchinnikova, S., and Anders, S. (2020). Exploring dimension-reduced embeddings with 817 
+
+Sleepwalk. Genome research 30 , 749–756. 818 
+
+47. Heiter, E., Martens, L., Seurinck, R., Guilliams, M., Bie, T.D., Saeys, Y., and Lijffijt, J. (2024). 819 
+
+Pattern or Artifact? Interactively Exploring Embedding Quality with TRACE. . URL: https: 820 
+
+//arxiv.org/abs/2406.12953 . arXiv:2406.12953 . 821 
+
+48. Venkat, A., Bhaskar, D., and Krishnaswamy, S. (2023). Multiscale geometric and topological 822 
+
+analyses for characterizing and predicting immune responses from single cell data. Trends 823 
+
+in Immunology 44 , 551–563. URL: https://www.sciencedirect.com/science/article/ 824 
+
+pii/S1471490623000844 . doi: https://doi.org/10.1016/j.it.2023.05.003 . Special is- 825 
+
+sue: Systems immunology II. 826 
+
+49. Stuchly, J., Novak, D., Brdickova, N., Hadlova, P., Iksi, A., Kuzilkova, D., Svaton, M., Saad, 827 
+
+G.A., Engel, P., Luche, H., Sousa, A.E., Almeida, A.R.M., and Kalina, T. (2023). Decon- 828 
+
+structing Complexity: A Computational Topology Approach to Trajectory Inference in the 829 
+
+Human Thymus with tviblindi. URL: http://dx.doi.org/10.1101/2023.07.13.547329 . doi: 830 
+
+10.1101/2023.07.13.547329 . 831 
+
+50. Moor, M., Horn, M., Rieck, B., and Borgwardt, K. (2020). Topological Autoencoders. In 832 
+
+H.D. III, and A. Singh, eds. Proceedings of the 37th International Conference on Machine 833 
+
+Learning vol. 119 of Proceedings of Machine Learning Research . PMLR pp. 7045–7054. 834 
+
+URL: https://proceedings.mlr.press/v119/moor20a.html . 835 
+
+21 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+51. Heiter, E., Vandaele, R., De Bie, T., Saeys, Y., and Lijffijt, J. (2023). Topologically regularized 836 
+
+data embeddings. arXiv preprint arXiv:2301.03338. 837 
+
+52. Blondel, V.D., Guillaume, J.L., Lambiotte, R., and Lefebvre, E. (2008). Fast unfolding of 838 
+
+communities in large networks. Journal of Statistical Mechanics: Theory and Experiment 839 
+
+2008 , P10008. URL: http://dx.doi.org/10.1088/1742-5468/2008/10/P10008 . doi: 10. 840 
+
+1088/1742-5468/2008/10/p10008 . 841 
+
+53. Sanmart´ ın, E.F., Schn ¨ orr, C., and Hamprecht, F.A. (2024). The Central Spanning Tree 842 
+
+Problem. . URL: https://arxiv.org/abs/2404.06447 . arXiv:2404.06447 . 843 
+
+54. Couckuyt, A., Rombaut, B., Saeys, Y., and Van Gassen, S. (2024). Effi- 844 
+
+cient cytometry analysis with FlowSOM in Python boosts interoperability with 845 
+
+other single-cell tools. Bioinformatics 40 , btae179. URL: https://doi.org/ 846 
+
+10.1093/bioinformatics/btae179 . doi: 10.1093/bioinformatics/btae179 . 847 
+
+arXiv:https://academic.oup.com/bioinformatics/article-pdf/40/4/btae179/57341836/btae17 848 
+
+55. Carlsson, G., Ishkhanov, T., Silva, V.D., and Zomorodian, A. (2008). On the local behavior 849 
+
+of spaces of natural images. International Journal of Computer Vision 76 , 1–12. doi: 10. 850 
+
+1007/s11263-007-0056-x . 851 
+
+56. Comaniciu, D., and Meer, P. (2002). Mean shift: a robust approach toward feature space 852 
+
+analysis. IEEE Transactions on Pattern Analysis and Machine Intelligence 24 , 603–619. 853 
+
+doi: 10.1109/34.1000236 . 854 
+
+57. Dong, W., Moses, C., and Li, K. (2011). Efficient k-nearest neighbor graph construction for 855 
+
+generic similarity measures. In Proceedings of the 20th international conference on World 856 
+
+wide web. ACM pp. 577–586. 857 
+
+58. Graving, J.M., and Couzin, I.D. (2020). VAE-SNE: a deep generative model for simultaneous 858 
+
+dimensionality reduction and clustering. BioRxiv. 859 
+
+59. Novak, D., Gassen, S.V., and Saeys, Y. (2023). GroupEnc: encoder with group 860 
+
+loss for global structure preservation. . URL: https://arxiv.org/abs/2309.02917 . 861 
+
+arXiv:2309.02917 . 862 
+
+60. Brun, A., and Knutsson, H. (2009). Tensor Glyph Warping: Visualizing Metric Tensor Fields 863 
+
+using Riemannian Exponential Maps. In D. Laidlaw, and J. Weickert, eds. Visualization 864 
+
+and Processing of Tensor Fields: Advances and Perspectives. Berlin, Heidelberg: Springer 865 
+
+Berlin Heidelberg. ISBN 978-3-540-88378-4 pp. 139–160. URL: https://doi.org/10. 866 
+
+1007/978-3-540-88378-4_7 . doi: 10.1007/978-3-540-88378-4_7 . 867 
+
+61. Lee, J.A., and Verleysen, M. (2009). Quality assessment of dimensionality reduction: Rank- 868 
+
+based criteria. Neurocomputing 72 , 1431–1443. doi: 10.1016/j.neucom.2008.12.017 . 869 
+
+62. Lee, J.A., and Verleysen, M. (2010). Scale-independent quality criteria for dimensionality 870 
+
+reduction. Pattern Recognition Letters 31 , 2248–2257. 871 
+
+63. de Bodt, C., Mulders, D., Verleysen, M., and Lee, J.A. (2022). Fast Multiscale 872 
+
+Neighbor Embedding. IEEE Transactions on Neural Networks and Learning Systems 873 
+
+33 , 1546–1560. URL: https://ieeexplore.ieee.org/document/9308987 . doi: 10.1109/ 874 
+
+TNNLS.2020.3042807 . 875 
+
+22 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+64. Yianilos, P.N. (1993). Data structures and algorithms for nearest neighbor search in general 876 
+
+metric spaces. In SODA vol. 93. pp. 311–321. 877 
+
+65. Muja, M., and Lowe, D.G. (2014). Scalable nearest neighbor algorithms for high dimensional 878 
+
+data. IEEE transactions on pattern analysis and machine intelligence 36 , 2227–2240. 879 
+
+66. Uhlmann, J.K. (1991). Satisfying general proximity/similarity queries with metric trees. In- 880 
+
+formation processing letters 40 , 175–179. 881 
+
+67. Yang, Z., Peltonen, J., and Kaski, S. (2013). Scalable Optimization of Neighbor Embedding 882 
+
+for Visualization. In ICML (2). pp. 127–135. 883 
+
+68. Maaten, L.v.d. (2014). Accelerating t-SNE using tree-based algorithms. Journal of machine 884 
+
+learning research 15 , 3221–3245. 885 
+
+69. Cormen, T.H., Leiserson, C.E., Rivest, R.L., and Stein, C. (2009). Introduction to algorithms. 886 
+
+MIT press. 887 
+
+70. Tang, J., Liu, J., Zhang, M., and Mei, Q. (2016). Visualizing large-scale and high- 888 
+
+dimensional data. In Proceedings of the 25th international conference on world wide web. 889 
+
+International World Wide Web Conferences Steering Committee pp. 287–297. 890 
+
+71. Pele, O., and Werman, M. (2008). A linear time histogram metric for improved sift matching. 891 
+
+In Computer Vision–ECCV 2008. Springer pp. 495–508. 892 
+
+72. Pele, O., and Werman, M. (2009). Fast and robust earth mover’s distances. In 2009 IEEE 893 
+
+12th International Conference on Computer Vision. IEEE pp. 460–467. 894 
+
+73. Wolf, F.A., Angerer, P., and Theis, F.J. (2018). SCANPY: Large-scale single-cell gene ex- 895 
+
+pression data analysis. Genome Biology 19 . doi: 10.1186/s13059-017-1382-0 . 896 
+
+23 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+# STAR METHODS 897 
+
+Key resources table 898 
+
+Key resources table (KRT) is provided as Note S5 . 899 
+
+Method details 900 
+
+Variational autoencoders for dimensionality reduction 901 
+
+An autoencoder (AE) is a type of neural network trained to reconstruct an input Xn×d ∈ X as 902 
+
+an approximation ˆXn×d while compressing X into a lower-dimensional representation Zn×z ∈ Z 903 
+
+(where X = Rd, Z = Rz , z < d )19 . It consists of two stacked feed-forward networks: the encoder 904 
+
+EΦ : X → Z , which transforms X to Z, and the decoder Dθ : Z → X , which transforms Z to 905 
+
+ˆX. The network parameters (encoder weights Φ and decoder weights Θ) are learned so as to 906 
+
+reduce a reconstruction loss: in ViVAE , input data is scaled and reconstruction loss is computed 907 
+
+as the mean square error lrecon (x, ˆx) = 1
+
+> hh
+
+P
+
+> i=1
+
+(xi − ˆxi)2 for x and ˆx being points or batches of 908 
+
+points drawn, respectively, from X and ˆX. Each node of the network transforms inputs using a 909 
+
+non-linear activation function, allowing for learning complex, non-linear patterns through back- 910 
+
+propagation of error at output. 911 
+
+The variational autoencoder (VAE) is a generative model based on the AE. Instead of encod- 912 
+
+ing and decoding a latent representation Z directly, a distribution D in latent space is learned, 913 
+
+and a sampler generates a non-deterministic representation Z and decodes it. The dissimilarity 914 
+
+(Kullback-Leibler divergence) between D and a latent prior distribution (typically isotropic Gaus- 915 
+
+sian) is used as an additional loss term lkldiv during training. The model is trained in mini-batches 916 
+
+drawn from X to minimise lrecon and lkldiv jointly. 917 
+
+Since the VAE learns a salient representation Z of the original data X, we can use Z for visu- 918 
+
+alisation of important high-dimensional structures in X that are initially obscured. This gives us a 919 
+
+parametric DR model. By default, our ViVAE model uses the Gaussian error linear unit (GELU) 920 
+
+activation function and a symmetric architecture of 32,64,128 32, and 2 ( z) nodes, respectively, 921 
+
+in consecutive encoder layers, and a reverse of this for the decoder. The model generalises 922 
+
+to higher latent space dimensionalities. The default optimiser used in training is Adam, with a 923 
+
+learning rate of 0.001 and weight decay of 0.0001. 924 
+
+PCA-initialisation using imitation loss 925 
+
+In our online ViVAE repository, we implement an optional pre-training procedure for PCA initiali- 926 
+
+sation of (V)AEs. We devise the imitation loss , which computes L2 distances between embedded 927 
+
+points and the first two PCs of the input dataset. In practice, pre-training the model to imitate 928 
+
+PCA prior to the full training stabilises results, reducing variability between repeated runs of the 929 
+
+training. 930 
+
+Input denoising 931 
+
+The denoising algorithm used here is based on an approach described in 55 and applied pre- 932 
+
+viously in 49 ; it is equivalent to the mean shift algorithm 56 . The procedure is written out using 933 
+
+pseudocode in Note S1 . Denoising requires a k-nearest-neighbour graph ( k-NNG) over prepro- 934 
+
+cessed input data; to this end, we use a fast approximate k-NNG construction algoritm 57 . By 935 
+
+24 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+default, we take k = 100 . Each point is then moved closer toward the average coordinates of 936 
+
+its k nearest neighbours, where a hyperparameter λ determines size of the shift. This can be 937 
+
+done in multiple iterations, each shift potentially exposing the underlying manifold and making 938 
+
+the point cloud less scattered. In our workflow, we use λ = 1 and apply 1 iteration of denoising 939 
+
+to input data. One may experiment with these parameters, or apply denoising to LD embeddings 940 
+
+(using the k-NNG in input space) to achieve a sharper defined shape of embedded cell clusters 941 
+
+or pathways. 942 
+
+According to ablations conducted in our full comparative analysis (results in Table S1 ), the 943 
+
+regularised VAE model used in ViVAE is particularly amenable to input denoising, achieving 944 
+
+better Local SP in the resulting embedding. Crucially, we still use the original (preprocessed, 945 
+
+but non-denoised) input data as ground truth in evaluating the embeddings, so as to ensure a 946 
+
+fair comparison between set-ups. We test all of the evaluated methods with and without de- 947 
+
+noising, further concluding that the structure-preserving properties of ViVAE are not exclusively 948 
+
+attributable to the denoising step. 949 
+
+Stochastic-MDS loss and encoder-only model 950 
+
+Similarly to some other VAE-based DR algorithms ( scvis 18 , ivis 12 , VAE-SNE 58 ), ViVAE formu- 951 
+
+lates constraints on the LD embedding with respect to HD inputs. We achieve this using a 952 
+
+stochastic multidimensional scaling (stochastic-MDS ) loss function. This is an adaptation of 953 
+
+the stochastic quartet loss introduced in SQuad-MDS 17,34 , which we previously generalised and 954 
+
+reimplemented as group loss for use in differentiable models in a preliminary study 59 . 955 
+
+For stochastic-MDS, samples in each training mini-batch drawn from X are divided randomly 956 
+
+into quartets (group of 4 points) and a cost value is computed based on the difference between 957 
+
+normalised distances within the quartet in X and within the corresponding embedded quartet in 958 
+
+Z. An update to each sample’s position in LD is computed by differentiating a cost function with 959 
+
+respect to all of the 6 intra-quartet distances. Therefore, each sample’s position in LD moves 960 
+
+to jointly minimise the error of its quartet as a whole. For data points indexed by i and j, we 961 
+
+use pairwise Euclidean distance functions, δij in HD and dij in LD (an option of using cosine 962 
+
+distances is also given). We compute relative distances between pairs of points among quartets 963 
+
+as 964 
+
+δrij = δij 
+
+P3
+
+> a=1
+
+P4 
+
+> b=a+1
+
+δab 
+
+, d rij = dij 
+
+P3
+
+> a=1
+
+P4 
+
+> b=a+1
+
+dab 
+
+(1) The loss function is then defined as 965 
+
+lMDS =
+
+> 3
+
+X
+
+> a=1 4
+
+X
+
+> b=a+1
+
+(δrab − drab )2 (2) To increase coverage of different parts of the point cloud, we re-sample quartets multiple times 966 
+
+(4 times by default) and average out the computed gradients at each pass. Regarding our fixed 967 
+
+choice of 4 points as group size, our past experiments 59 showed no improvement in terms of 968 
+
+structure preservation when group size was increased. 969 
+
+For our default ‘ ViVAE ’ model (labelled that way in our comparative analysis results), we use 970 
+
+a weight factor of 1 for lrecon , 1 for lkldiv and 100 for lMDS : this amounts to a combination of the 971 
+
+structure-preserving capabilities of a VAE and the MDS model. We also evaluate a ‘ ViVAE- 972 
+
+EncoderOnly ’ model, which assigns a weight of 0 to lrecon , 1 to lkldiv and 100 to lMDS . In this case 973 
+
+the decoder is not used, and we obtain a probabilistic MDS model consisting only of an encoder 974 
+
+and a sampler. Technically, this is then not an autoencoder, but we use the name ViVAE because 975 
+
+other parameters of the model are kept fixed between this model and the default one, yielding 976 
+
+an ablation experiment for the use of reconstruction error. 977 
+
+25 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Regarding our choice of loss term weights, we observe and report good performance with 978 
+
+these default weights across the datasets included in our comparison, at least as long as a 979 
+
+consistent data preprocessing workflow is used. We ensure that the scale of the stochastic-MDS 980 
+
+loss term is invariant with respect to chosen batch size and number of quartet re-samplings. 981 
+
+Our software implementation enables the usage of cosine distances in HD for computing the 982 
+
+stochastic-MDS loss. This is explored in the online ViVAE repository. 983 
+
+Encoder indicatrices for detection of local distortion 984 
+
+During training, AEs and VAEs both learn a smooth latent space, defined by the encoder. The 985 
+
+parametric nature of these models, along with the fact that the transformations they learn are 986 
+
+differentiable, allow us to explore properties of this latent space. Specifically, we can detect local 987 
+
+contraction, expansion and directed stretching of its different parts. 988 
+
+Our methodology extends the work on geometric regularisation for (non-variational) AEs 26 . 989 
+
+To visualise undesirable artifacts, the use of indicatrices 60 is proposed to quantify latent space 990 
+
+distortion. An indicatrix can be understood, in a simplified way, as a circle on the surface of a 991 
+
+small hypersphere in the original (HD) ambient space, embedded into the (LD) latent space. In a 992 
+
+previously published study 26 , multiple indicatrices from different parts of the HD point cloud are 993 
+
+sampled and then pulled back into the latent space through the decoder, to reveal distortions 994 
+
+introduced by the model. 995 
+
+A perfect, non-distorted embedding results in all indicatrices remaining circular and identical 996 
+
+(circular because shape is preserved and identical because there are no scale inconsistencies 997 
+
+across different parts of the latent space). The distortion that each indicatrix reveals is specific 998 
+
+with respect to the ambient space, transformation function and the coordinates of the sampled 999 
+
+point. In the previous study we reference 26 , indicatrices are computed for the transformation 1000 
+
+learned by the decoder: we can refer to them therefore as ‘decoder indicatrices’. Crucially, 1001 
+
+decoder indicatrices quantify distortion of latent space specifically with respect to the decoded 1002 
+
+reconstruction ˆX. 1003 
+
+In contrast, we derive a solution to the ‘encoder indicatrix’ problem, i.e. , quantifying local em- 1004 
+
+bedding (and latent space) distortion with respect to the original high-dimensional inputs. Since 1005 
+
+a general analytical solution is not feasible (essentially due to the encoder not being injective), 1006 
+
+we provide a numerical solution, described in Note S2 . A schematic overview of the algorithm is 1007 
+
+given in Figure 5 A. 1008 
+
+To compute encoder indicatrices, we begin by sampling points from the existing embedding 1009 
+
+closest to uniform grid over it and mapping them onto the respective high-dimensional inputs Xs. 1010 
+
+For each point x ∈ Xs, we compute the Jacobian matrix J(x, Φ) = 
+
+h∂E Φ(x) 
+
+> ∂x 1
+
+, ..., ∂E Φ(x)
+
+> ∂x n
+
+i
+
+which, when 1011 
+
+developed, has dimensions z × d (z being latent dimension and d being input dimension), and 1012 
+
+gives a local linearisation of the encoder with respect to this point. Under the assumption that 1013 
+
+the EΦ function is approximately linear for very small neighbourhoods of any given x ∈ Xs, only 1014 
+
+z vectors from a small hypersphere around it are needed. This is because all other orthogonal 1015 
+
+vectors will be sent to zero by EΦ. 1016 
+
+We obtain the z useful vectors as the bases of the horizontal tangent space specific to the 1017 
+
+given point and the encoder. The horizontal tangent space is approximated using singular value 1018 
+
+decomposition of the Jacobian matrix. We then sample points from a small circle in this approxi- 1019 
+
+mation of the horizontal tangent space for the queried point. The sampled points are taken as the 1020 
+
+flattened indicatrix, which is then transformed by the encoder to reveal the local size and shape 1021 
+
+distortions with respect to input data. Same as in the decoder indicatrix case, non-distortion 1022 
+
+yields identical, circular indicatrices. In practice, the indicatrices differ in size and are stretched 1023 
+
+into ovals. Note that the use of indicatrices with a linear AE would result in a degenerate case 26 . 1024 
+
+26 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Integration with FlowSOM 1025 
+
+To boost interpretability of ViVAE embeddings for practitioners familiar with FlowSOM , we pro- 1026 
+
+vide the option to superimpose the topology of a FlowSOM minimum spanning tree (MST) along 1027 
+
+with median marker expression, proportion of manually labelled population, or metacluster as- 1028 
+
+signment of clusters over the ViVAE embedding. This is demonstrated in our online ViVAE 1029 
+
+repository. In practice, we adapt code from the recent Python clone of FlowSOM 54 to enable the 1030 
+
+projection of clusters into the latent space of a trained model. 1031 
+
+Rank-based neighbourhood preservation scoring 1032 
+
+We base our unsupervised quality-assessment measures on widely adopted rank-based DR 1033 
+
+evaluation criteria 61 . The basis for these is the concept of a co-ranking matrix , which quanti- 1034 
+
+fies the changes of ranks of neighbours to each point in terms of pairwise distances in LD, as 1035 
+
+compared to HD. 1036 
+
+For any pair of HD points, we denote distance from ϵi to ϵj as δij . Conversely, we denote 1037 
+
+the distance from an LD point xi to xj as dij . We define the rank in HD of ϵj with respect to ϵi 1038 
+
+as the set cardinality ρij = |{ k : δik < δ ij ∨ (δik = δij ∧ k < j )}| . (This can be re-stated more 1039 
+
+simply as ‘ ϵj is the ρij -th neighbour to ϵi’.) The corresponding rank in LD is similarly defined as 1040 
+
+rij = |{ k : dik < d ij ∨ (dik = dij ∧ k < j )}| . The non-reflexive (non-self) neighbourhoods of ϵi 1041 
+
+and xi are then written as νKi = {j : 1 ≤ ρij ≤ K} and vKi = {j : 1 ≤ rij ≤ K} respectively, 1042 
+
+for a neighbourhood size of K. We then define the co-ranking matrix for a dataset of size N as 1043 
+
+Q = [ qkl ]1≤k,l ≤N −1, where qkl = |{ (i, j ) : ρij = k ∧ rij = l}| . Any off-diagonal positive values in 1044 
+
+this matrix indicate a change of rank in the LD embedding versus the HD input dataset, and are 1045 
+
+undesirable. The co-ranking matrix records changes in the order of relative distances between 1046 
+
+points as we go from the original, high-dimensional data, toward a lower-dimensional embedding. 1047 
+
+A reduction in rank is labelled an intrusion and is recorded left of the diagonal, whereas an 1048 
+
+increase is termed an extrusion , and is recorded right of the diagonal. A change in rank that 1049 
+
+crosses a given close-neighbourhood upper bound of K (a sample enters or leaves the K-ary 1050 
+
+neighbourhood of its reference) is termed a hard-K intrusion or hard-K extrusion , respectively. 1051 
+
+Based on 33 , we measure structure preservation at different scales by recording the changes 1052 
+
+in rank within a limited neighbourhood size K as we expand size from 1 to N -1. We start with 1053 
+
+defining the average structure preservation in a K-ary neighbourhood as 1054 
+
+QNX (K) = 1
+
+KN 
+
+> N
+
+X
+
+> i=1
+
+|νKi ∩ vKi | (3) and record these values for the different values of K. We denote this as the QNX curve. A 1055 
+
+rescaling of the QNX curve is the RNX curve; it shows improvement of neighbourhood preservation 1056 
+
+over a random embedding, which would result in an average QNX (K) ≈ KN −1 . This is given by 1057 
+
+RNX (K) = (N − 1) QNX (K) − KN − 1 − K (4) for 1 ≤ K ≤ N − 2. The RNX curve helps evaluate how the structure of the HD dataset is 1058 
+
+preserved across different scales in the LD embedding. 1059 
+
+Multi-scale evalution of structure preservation 1060 
+
+In reference to concepts introduced in the previous section, we denote the area under the RNX 1061 
+
+curve with a linear (non-transformed) scaling of K as the global structure-preservation score ( sg, 1062 
+
+27 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+or ‘Global SP’). We also report the area under the RNX curve with a logarithmic ( log 2) scale for K, 1063 
+
+up-weighting local point neighbourhoods, as the local structure-preservation score ( sl, or ‘Local 1064 
+
+SP’). The Global SP score is computed as the area-under-curve 1065 
+
+AUC = 
+
+> N−2
+
+X
+
+> K=1
+
+K−1
+
+!−1
+
+· 
+
+> N−2
+
+X
+
+> K=1
+
+RNX (K)
+
+K (5) while the Local SP uses log 2K instead of K (otherwise the same equation is used). Addition- 1066 
+
+ally, we compute a balanced structure-preservation score (‘Balanced SP’) sb, calculated as the 1067 
+
+harmonic mean ( F -measure) between the sl and sg: 1068 
+
+sb = 2 · sl · sg
+
+sl + sg
+
+(6) However, we recommend looking at the values of sl and sg separately when possible, since 1069 
+
+overwhelming performance in only one of them can still result in high sb in cases where this is 1070 
+
+unintuitive. 1071 
+
+It is noteworthy that evaluating QNX and RNX curves for K ranging from 1 to N − 2 entails a 1072 
+
+O (N 2 log N ) time complexity. Their computation requires sorting, for each data point, its HD and 1073 
+
+LD distances with respect to all N − 1 remaining data points 62 . These criteria, in their original 1074 
+
+implementation, are hence exhaustive and slow to assess the low-dimensional embeddings of 1075 
+
+very large datasets. We address this below by presenting a novel algorithm that circumvents 1076 
+
+scaling issues. 1077 
+
+QNX and R NX curve approximation 1078 
+
+The O (N 2 log N ) time complexity required to evaluate the unsupervised DR quality criteria for 1079 
+
+all neighbourhood sizes, reviewed above, is unaffordable in big data contexts. One could trivially 1080 
+
+display the quality curves for very small neighbourhood sizes only, smaller than K ≪ N 63 . The 1081 
+
+ensued time complexity would scale as O  KN log N , thanks to dedicated algorithms for fast 1082 
+
+nearest neighbour searches 57,64,65 . Nevertheless, such a trick cannot enable fairly comparing 1083 
+
+several DR methods, which may preserve structures and trends at different scales. Methods 1084 
+
+with global properties such as PCA would be systematically disadvantaged with respect to local 1085 
+
+schemes such as t-SNE. For this reason, quality curves should still be computed for a much 1086 
+
+wider proportion of neighbourhood sizes, to grasp the behaviour of DR methods at different data 1087 
+
+scales. We hence introduce an algorithm to approximate QNX and RNX curves for large datasets 1088 
+
+quickly and with high precision, based on repeated sub-sampling via vantage-point trees. 1089 
+
+One can first note that QNX gives a score computed with respect to each data point index i ∈ 1090 
+
+I, with the set I = {1, . . . , N } containing all point indices, averaged over the entire dataset. This 1091 
+
+score evaluates, for each data point, the proportion of its K nearest HD neighbours preserved 1092 
+
+in the LD embedding. Faithfully estimating this score average, however, may only require relying 1093 
+
+on a fraction of the data samples, instead of the whole dataset. In this view, a set eI ⊂ I indexing 1094 
+
+data representatives could be defined to summarise the data cloud. A candidate approximation 1095 
+
+of QNX hence develops as 1096 
+
+eQNX (K) = 1
+
+n
+
+X
+
+> i∈eI
+
+νKi ∩ vKi
+
+K ∈ [0 , 1] , (7) where n = eI . Compared to QNX , the time complexity of evaluating eQNX (K) for all neighbour- 1097 
+
+hood sizes K ∈ { 1, . . . , N − 1} drops to O (nN log N ); one must indeed only compute the N − 1 1098 
+
+28 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+HD and LD distances with respect to each data representative indexed in eI, instead of all N data 1099 
+
+samples. From eQNX (K), an approximation of RNX (K) is obtained as 1100 
+
+eRNX (K) = (N − 1) eQNX (K) − KN − 1 − K . (8) To define the set eI, a first option consists in randomly sampling n representatives among the 1101 
+
+N data samples. Nevertheless, to ensure the consistency of the approximation of QNX (K) by 1102 
+
+eQNX (K), the samples indexed in eI should faithfully represent the HD data distribution. On the 1103 
+
+other hand, the number n of representatives should remain small to keep the lowest possible time 1104 
+
+complexity. In this view, defining eI through pure random sampling indeed well summarises the 1105 
+
+HD data distribution, but only as soon as n gets sufficiently large, which undesirably increases 1106 
+
+running times. To keep the n value as small as possible while enforcing the representatives to 1107 
+
+cover the entire HD distribution, a well-balanced partition of the HD data distribution may first 1108 
+
+be computed. Space-partitioning trees such as vantage-point (VP) trees are extremely fast and 1109 
+
+efficient for this purpose 64,66 , being widely used to speed up nearest neighbour searches in big 1110 
+
+datasets 67,68 . 1111 
+
+At each non-leaf node of a VP tree, a vantage point is first selected and the distances be- 1112 
+
+tween the vantage point and the remaining data points are computed. The median distance is 1113 
+
+then computed in linear time, thanks to a quick-select procedure 69 . Two child nodes are finally 1114 
+
+created, respectively storing the remaining data points closer and further to the vantage point 1115 
+
+than the median. The median threshold ensures that the tree remains complete and balanced, 1116 
+
+with similar proportions of data points in all parts of the tree. Constructing the whole VP tree has 1117 
+
+O (N log N ) time complexity 64 . However, as only n representatives need to be determined, we 1118 
+
+may only grow the tree up to depth ⌊log 2 n⌋, in O (N log n) time. Indeed, the 2⌊log 2 n⌋ leaves of the 1119 
+
+resulting tree define a balanced partition of the HD data, with each leaf containing a subset of 1120 
+
+the database. One can hence randomly sample a representative in each leaf, or possibly two if 1121 
+
+2⌊log 2 n⌋ < n , yielding n representatives which summarise the HD distribution well. Furthermore, 1122 
+
+only the leaves of the tree need to be stored, since only the latter are required to sample the 1123 
+
+representatives. The VP tree can thus be iteratively created in-place in a single array. In each 1124 
+
+node, the vantage point is selected as the furthest datum from the most central one. 1125 
+
+Note that neighbour searches in VP trees do not scale well with the HD dimension due to 1126 
+
+the distance concentration 70 , which annihilates their time complexity advantage. Nevertheless, 1127 
+
+this only concerns neighbour searches performed in these trees, not their construction since 1128 
+
+in this case, data points are evenly spread with respect to the median distance to the vantage 1129 
+
+point. As we only seek to construct VP trees to partition the HD distribution without performing 1130 
+
+neighbour searches, they can be safely employed in our context without suffering from increasing 1131 
+
+HD dimension. As another advantage, VP trees solely require to be able to evaluate distances 1132 
+
+between the HD data points, without constraining them to be expressed as HD vectors. These 1133 
+
+trees can hence be generally computed even with complex data formats, unlike k-d trees for 1134 
+
+instance 66 , which involve Cartesian coordinates of the Euclidean space. For this reason, the 1135 
+
+size of k-d trees grows exponentially with the HD dimension, whereas the median threshold in 1136 
+
+VP trees prevents such increase, with depths scaling at most as O (log 2 N ). 1137 
+
+Preliminary experiments revealed that n values between log N and 10 log N dramatically ac- 1138 
+
+celerate the DR quality criteria computation, while yielding close to perfect approximations of 1139 
+
+QNX and RNX ; when considering big datasets with N growing to very large numbers, average 1140 
+
+scores estimated on small yet representative subsets of the database indeed intuitively quickly 1141 
+
+converge towards the actual average computed over the entire dataset. Values of ⌊10 log N ⌉ 1142 
+
+are hence subsequently employed for n, with ⌊·⌉ denoting rounding. Therefore, the time com- 1143 
+
+plexity required to evaluate eQNX for all neighbourhood sizes scales as O  N log 2 N , which is 1144 
+
+considerably more affordable than the O  N 2 log N  time required to evaluate QNX . 1145 
+
+29 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+Extended Neighbourhood-Proportion-Error 1146 
+
+The Neighbourhood Proportion Error (NPE) 13,22 , quantifies preservation of the structure of man- 1147 
+
+ually defined populations of cells. We coin the Extended Neighbourhood-Proportion-Error (xNPE) 1148 
+
+as a modification of the NPE. 1149 
+
+For each labelled population, NPE iterates over all the points it contains as vantage points. 1150 
+
+For each vantage point, the number of points in its k-ary neighbourhood belonging to the same 1151 
+
+population is counted. This is done for the HD input data, as well as the LD embeddings. The 1152 
+
+distribution of counts of same-population neighbours per vantange point is computed, and it is 1153 
+
+compared between HD and LD using total variation distance (TVD), resulting in a population- 1154 
+
+wise error score. The sum of these population-wise error scores is then returned as a measure 1155 
+
+of error for the entire embedding. 1156 
+
+In xNPE, we use proportions of same-population neighbours rather than counts. Further, 1157 
+
+we use Earth mover’s distance (EMD) 71,72 to compute differences between distributions, since it 1158 
+
+uses the entire distribution instead of the (more likely spurious) single largest difference between 1159 
+
+distributions, and return population-wise scores to avoid an assumption of consistent resolution 1160 
+
+of the cell population labelling. 1161 
+
+Additionally, we scale each population-wise score. This is first done such that a score of 0 1162 
+
+(best) is perfect and 1 (worst) is the upper bound which represents largest possible EMD value. 1163 
+
+By default, we then adjust the score again such that 1 corresponds to a random embedding 1164 
+
+baseline (as described in the corresponding pseudocode in Note S3 ). 1165 
+
+Rather than summing or averaging population-wise errors to obtain an embedding-wise score, 1166 
+
+we inspect and compare the population errors to detect which parts of the input point cloud are 1167 
+
+the most mis-embedded. A proof-of-concept with synthetic data that compares xNPE to the 1168 
+
+unsupervised Local and Global SP scores is presented in the online ViScore repository. 1169 
+
+Neighbourhood composition plots 1170 
+
+To identify and visualise sources of embedding error at a population level, we use neighbour- 1171 
+
+hood composition plots (NCPs). These plots visualise the composition of different-size neigh- 1172 
+
+bourhoods of a chosen labelled population of interest (POI) in HD data and its embeddings. 1173 
+
+This enables us to compare the position of the POI relative to other populations and how it is 1174 
+
+preserved in a given embedding. 1175 
+
+For this, we query k nearest neighbours ( k = 1000 by default) of each point in the POI, over- 1176 
+
+looking points in the POI itself. This is distinct from the xNPE approach described earlier, which 1177 
+
+makes the binary distinction between ‘self’ and ‘non-self‘. While neighbourhood composition 1178 
+
+plots do not directly quantify introduced errors, they visualise the type of error ( e.g. , intrusion or 1179 
+
+extrusion of a specific population into or out of the neighbourhood of the POI). Composition of 1180 
+
+different-size ( K-ary) neighbourhoods (1 to 100, with step size 10 by default) in terms of popula- 1181 
+
+tion labels is plotted for the POI as a stacked area chart, where each distribution of labels across 1182 
+
+the K axis is pooled for a range of neighbourhood ranks and for all points in the POI. 1183 
+
+Model and hyperparameter specification 1184 
+
+Model specifications and hyperparameters used in our quantitative comparisons of structure 1185 
+
+preservation (SP) by 12 DR methods, presented in Results , are given in Table S3 . 1186 
+
+The full configuration for our comparative analysis of structure preservation by different DR 1187 
+
+methods (as presented in Results ) is available in the ViScore GitHub repository. It includes 1188 
+
+installation scripts for each method and instructions for deployment on a high-performance com- 1189 
+
+puting (HPC) cluster. We use default hyperparameters for running each method, except for larger 1190 
+
+30 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+batch size of 1024 for VAE-based models. For consistency, PCA-reduced data is used as input 1191 
+
+to each method, with reference to previously published standard preprocessing procedures 2,6 . 1192 
+
+While PHATE can be applied directly to the sparse count matrices from scRNA-seq experiments, 1193 
+
+it performs an initial PCA reduction anyway. 1194 
+
+For ‘ VAE ´, ‘ ViVAE ’, and ‘ ViVAE-EncoderOnly ’ we use 50 training epochs as default, because 1195 
+
+this training procedure is typically feasible on a consumer laptop within a few minutes even with- 1196 
+
+out the use of a dedicated GPU for acceleration. However, a higher number of training epochs 1197 
+
+typically leads to better convergence and structure preservation with many datasets. ‘ VAE ’ uses 1198 
+
+the same architecture and hyperparameters as ‘ ViVAE ’, so as to serve as a fair reference in 1199 
+
+an ablation experiment for the stochastic-MDS loss regularisation. Furthermore, for the com- 1200 
+
+parison to simultaneously serve as ablation study for denoising, each method is evaluated both 1201 
+
+on non-denoised and denoised inputs. CPU-based methods (PCA, t-SNE ( scikit-learn imple- 1202 
+
+mentation), UMAP and DensMAP (umap-learn implementation), PaCMAP , PHATE , TriMap , and 1203 
+
+SQuad-MDS ) were trained on a CPU cluster with an Intel Xeon Gold 6140 processor. 16 GB of 1204 
+
+RAM were allocated for the processing of all datasets except Suo , for which 32 GB of RAM were 1205 
+
+allocated. GPU-based methods (VAE, ivis , ViVAE , and ViVAE-EncoderOnly ) were trained on a 1206 
+
+GPU cluster with Intel Xeon Gold 6242 and an NVIDIA Volta V100 graphics card. 2 cores with 8 1207 
+
+GB of GPU memory each were allocated. 1208 
+
+scRNA-seq data preprocessing 1209 
+
+Code and data to reproduce our study are openly available. We include instructions for down- 1210 
+
+loading and preprocessing scRNA-seq datasets we used in our qualitative comparison in the 1211 
+
+ViScore GitHub repository, and in a Python code snippet in Note S4 . The scanpy Python pack- 1212 
+
+age (version 1.9.8) 73 is used, and the preprocessing procedure is based on a previous study 2, 1213 
+
+with the scaling step parametrised the same way as in the ivis workflow 12 . 1214 
+
+Changes to this procedure or use of other data modalities may require corresponding changes 1215 
+
+to method hyperparameters, including individual loss term weights in ViVAE , for good perfor- 1216 
+
+mance. 1217 
+
+Quantification and statistical analysis 1218 
+
+Table S2 includes p-values from one-sided Wilcoxon tests comparing the default and encoder- 1219 
+
+only variant of ViVAE with each other method per dataset for Local SP, Global SP, and a tentative 1220 
+
+‘Balanced SP’ metric. These were computed using the R programming language wilcox.test 1221 
+
+function. 1222 
+
+Additional resources 1223 
+
+ViVAE repository: github.com/saeyslab/ViVAE 1224 
+
+ViScore repository: github.com/saeyslab/ViScore 1225 
+
+31 
+
+> .CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
+
+.CC-BY-NC 4.0 International license made available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is The copyright holder for this preprint this version posted April 17, 2026. ;https://doi.org/10.1101/2023.11.23.568428 doi: bioRxiv preprint
