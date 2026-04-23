@@ -1,0 +1,169 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-23T20:06:51.432345+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-04-12-717909-v1",
+      "source": "biorxiv",
+      "title": "scDisent: disentangled representation learning with causal structure for multi-omic single-cell analysis",
+      "abstract": "Single-cell multi-omic technologies measure complementary aspects of cellular identity and regulatory state, yet most integration models compress these signals into one entangled latent space. Such representations are useful for clustering but poorly suited for mechanistic interpretation or perturbation-oriented analysis. We present scDisent (https://github.com/xiguoren/scDisent), a generative framework for disentangled representation learning that separates expression-associated variables (zexpr) from regulation-associated variables (zreg) and links them through a sparse directed mapping. scDisent combines modality-specific encoding, variational disentanglement with total-correlation and orthogonality constraints, and a Gumbelgated causal module protected by detach-based gradient isolation. Evaluated on benchmark datasets with matched modalities, scDisent achieved best-in-benchmark integration performance while exposing regulatory structure that competing integration methods do not model explicitly. The learned causal atlas remained sparse, perturbation analyses recovered biologically coherent lineage-associated programs, and cross-dataset discovery analyses highlighted interpretable immune, neural and developmental signatures. Quantitative branch-separation analyses further showed that benchmark-label information concentrated in zexpr rather than zreg. Together, these results position scDisent as a computational method that improves not only integration quality but also biological interpretability, making single-cell multi-omic representations better suited to biological question answering and in silico hypothesis generation.",
+      "authors": [
+        "Xi, G."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-16T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.12.717909v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "disentangled representation learning with causal structure for mechanistic interpretation",
+      "llm_evidence_cn": "具有因果结构的解耦表示学习，用于机制解释",
+      "llm_evidence": "具有因果结构的解耦表示学习，用于机制解释",
+      "canonical_evidence": "具有因果结构的解耦表示学习，用于机制解释",
+      "llm_tldr_en": "A generative framework using causal structures for interpretable multi-omic analysis.",
+      "llm_tldr_cn": "一种利用因果结构进行可解释多组学分析的生成框架。",
+      "llm_tldr": "一种利用因果结构进行可解释多组学分析的生成框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.17943v1",
+      "source": "arxiv",
+      "title": "Domain-oriented RAG Assessment (DoRA): Synthetic Benchmarking for RAG-based Question Answering on Defense Documents",
+      "abstract": "Open-domain RAG benchmarks over public corpora can overestimate deployment performance due to pretraining overlap and weak attribution requirements. We present DoRA (Domain-oriented RAG Assessment), a domain-grounded benchmark built from defense documents that pairs synthetic, intent-conditioned QA (question answering) with auditable evidence passages for attribution. DoRA covers five question types (find, explain, summarize, generate, provide) and contains 6.5K curated instances. In end-to-end evaluation with a fixed dense retriever, general-purpose Language Models (LMs) perform similarly, while a model trained on DoRA (DoRA SFT) yields large gains over the base model (Llama3.1-8B-Instruct): up to 26% improvement in QA task success, while reducing the hallucination rate by 47% in RAG faithfulness scores, supporting contamination-aware regression testing under domain shift.",
+      "authors": [
+        "Bao Gia Doan",
+        "Aditya Joshi",
+        "Pantelis Elinas",
+        "Aarya Bodhankar",
+        "Oscar Leslie",
+        "Tom Marchant",
+        "Flora Salim"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-04-20T08:22:15+00:00",
+      "link": "https://arxiv.org/pdf/2604.17943v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "synthetic benchmarking for RAG-based QA on defense documents with auditable evidence",
+      "llm_evidence_cn": "基于国防文件的RAG问答合成基准，具有可审计的证据",
+      "llm_evidence": "基于国防文件的RAG问答合成基准，具有可审计的证据",
+      "canonical_evidence": "基于国防文件的RAG问答合成基准，具有可审计的证据",
+      "llm_tldr_en": "Presents a defense-grounded RAG benchmark with auditable evidence for explainable domain-specific reasoning.",
+      "llm_tldr_cn": "提出了一个基于国防文件的RAG基准，通过可审计证据支持可解释的领域推理。",
+      "llm_tldr": "提出了一个基于国防文件的RAG基准，通过可审计证据支持可解释的领域推理。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.19323v1",
+      "source": "arxiv",
+      "title": "Concept Inconsistency in Dermoscopic Concept Bottleneck Models: A Rough-Set Analysis of the Derm7pt Dataset",
+      "abstract": "Concept Bottleneck Models (CBMs) route predictions exclusively through a clinically grounded concept layer, binding interpretability to concept-label consistency. When a dataset contains concept-level inconsistencies, identical concept profiles mapped to conflicting diagnosis labels create an unresolvable bottleneck that imposes a hard ceiling on achievable accuracy. In this paper, we apply rough set theory to the Derm7pt dermoscopy benchmark and characterize the full extent and clinical structure of this inconsistency. Among 305 unique concept profiles formed by the 7 dermoscopic criteria of the 7-point melanoma checklist, 50 (16.4%) are inconsistent, spanning 306 images (30.3% of the dataset). This yields a theoretical accuracy ceiling of 92.1%, independent of backbone architecture or training strategy for CBMs that exclusively operate with hard concepts. In addition, we characterize the conflict-severity distribution, identify the clinical features most responsible for boundary ambiguity, and evaluate two filtering strategies with quantified effects on dataset composition and CBM interpretability. Symmetric removal of all boundary-region images yields Derm7pt+, a fully consistent benchmark subset of 705 images with perfect quality of classification and no hard accuracy ceiling. Building on this filtered dataset, we present a hard CBM evaluated across 19 backbone architectures from the EfficientNet, DenseNet, ResNet, and Wide ResNet families. Under symmetric filtering, explored for completeness, EfficientNet-B5 achieves the best label F1 score (0.85) and label accuracy (0.90) on the held-out test set, with a concept accuracy of 0.70. Under asymmetric filtering, EfficientNet-B7 leads across all four metrics, reaching a label F1 score of 0.82 and concept accuracy of 0.70. These results establish reproducible baselines for concept-consistent CBM evaluation on dermoscopic data.",
+      "authors": [
+        "Gonzalo Nápoles",
+        "Isel Grau",
+        "Yamisleydi Salgueiro"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-04-21T10:45:50+00:00",
+      "link": "https://arxiv.org/pdf/2604.19323v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Concept Bottleneck Models for interpretability and consistency",
+      "llm_evidence_cn": "概念瓶颈模型用于可解释性和一致性分析",
+      "llm_evidence": "概念瓶颈模型用于可解释性和一致性分析",
+      "canonical_evidence": "概念瓶颈模型用于可解释性和一致性分析",
+      "llm_tldr_en": "Analyzes Concept Bottleneck Models for interpretability, which is a transferable method for explainable prediction.",
+      "llm_tldr_cn": "分析了概念瓶颈模型的可解释性，这是一种可迁移到冲突预测的可解释预测方法。",
+      "llm_tldr": "分析了概念瓶颈模型的可解释性，这是一种可迁移到冲突预测的可解释预测方法。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-1101-2023-11-23-568428-v5",
+      "source": "biorxiv",
+      "title": "Interpretable models for scRNA-seq data embedding with multi-scale structure preservation",
+      "abstract": "The ability to explore high-dimensional single-cell transcriptomics data efficiently is crucial in many biological studies. Dimensionality reduction techniques have therefore emerged as a basic building block of analytical workflows. They generate low-dimensional embeddings that capture important structures in the data, and are often used in discovery, quality control, and downstream analysis. However, the trustworthiness of current methods and the rigour of popular evaluation criteria are limited. We tackle this in an empirical study of structure-preserving data embeddings, delivering two tools. First, we introduce ViScore: a robust scoring framework that improves both unsupervised and supervised quality metrics, with emphasis on scalability and fairness. Second, we introduce ViVAE : a deep learning model that achieves better multi-scale structure preservation and is equipped with new tools for interpretability. We demonstrate the potential of these contributions to advance the trustworthiness of single-cell dimensionality reduction in a quantitative comparison and focused case studies.",
+      "authors": [
+        "Novak, D.",
+        "de Bodt, C.",
+        "Lambert, P.",
+        "Lee, J. A.",
+        "Van Gassen, S.",
+        "Saeys, Y."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-17T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2023.11.23.568428v5.full.pdf",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interpretable models for high-dimensional data embedding",
+      "llm_evidence_cn": "高维数据嵌入的可解释模型",
+      "llm_evidence": "高维数据嵌入的可解释模型",
+      "canonical_evidence": "高维数据嵌入的可解释模型",
+      "llm_tldr_en": "Develops interpretable models for data embedding, providing methodological bridges for explainable AI tasks.",
+      "llm_tldr_cn": "开发了用于数据嵌入的可解释模型，为可解释人工智能任务提供了方法论桥梁。",
+      "llm_tldr": "开发了用于数据嵌入的可解释模型，为可解释人工智能任务提供了方法论桥梁。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

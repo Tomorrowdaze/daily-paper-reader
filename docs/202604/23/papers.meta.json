@@ -1,0 +1,69 @@
+{
+  "label": "2026-04-23",
+  "date": "2026-04-23",
+  "generated_at": "2026-04-23T20:07:45",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202604/23/biorxiv-10-64898-2026-04-12-717909-v1-scdisent-disentangled-representation-learning-with-causal-structure-for-multi-omic-single-cell-analysis",
+      "section": "quick",
+      "title_en": "scDisent: disentangled representation learning with causal structure for multi-omic single-cell analysis",
+      "authors": "Xi, G.",
+      "date": "2026-04-16",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.12.717909v1.full.pdf",
+      "score": "6.5",
+      "evidence": "具有因果结构的解耦表示学习，用于机制解释",
+      "tldr": "本文提出scDisent，一种可将单细胞多组学数据中表达和调控变量解耦的生成框架，通过稀疏因果映射和变分解耦提高数据整合质量并增强生物学可解释性，在基准数据上验证了其优越性能。",
+      "tags": "query:q6",
+      "abstract_en": "Single-cell multi-omic technologies measure complementary aspects of cellular identity and regulatory state, yet most integration models compress these signals into one entangled latent space. Such representations are useful for clustering but poorly suited for mechanistic interpretation or perturbation-oriented analysis. We present scDisent (https://github.com/xiguoren/scDisent), a generative framework for disentangled representation learning that separates expression-associated variables (zexpr) from regulation-associated variables (zreg) and links them through a sparse directed mapping. scDisent combines modality-specific encoding, variational disentanglement with total-correlation and orthogonality constraints, and a Gumbelgated causal module protected by detach-based gradient isolation. Evaluated on benchmark datasets with matched modalities, scDisent achieved best-in-benchmark integration performance while exposing regulatory structure that competing integration methods do not model explicitly. The learned causal atlas remained sparse, perturbation analyses recovered biologically coherent lineage-associated programs, and cross-dataset discovery analyses highlighted interpretable immune, neural and developmental signatures. Quantitative branch-separation analyses further showed that benchmark-label information concentrated in zexpr rather than zreg. Together, these results position scDisent as a computational method that improves not only integration quality but also biological interpretability, making single-cell multi-omic representations better suited to biological question answering and in silico hypothesis generation.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/23/2604.17943v1-domain-oriented-rag-assessment-dora-synthetic-benchmarking-for-rag-based-question-answering-on-defense-documents",
+      "section": "quick",
+      "title_en": "Domain-oriented RAG Assessment (DoRA): Synthetic Benchmarking for RAG-based Question Answering on Defense Documents",
+      "authors": "Bao Gia Doan, Aditya Joshi, Pantelis Elinas, Aarya Bodhankar, Oscar Leslie, Tom Marchant, Flora Salim",
+      "date": "2026-04-20",
+      "pdf": "https://arxiv.org/pdf/2604.17943v1",
+      "score": "6.0",
+      "evidence": "基于国防文件的RAG问答合成基准，具有可审计的证据",
+      "tldr": "本文提出了 DoRA（面向领域的RAG评估），一个基于国防文档的合成问答基准，用于评估检索增强生成模型在特定领域下的表现，通过包含可审计证据片段的6.5K实例提高真实性与鲁棒性，并显著提升模型的准确性与可靠性。",
+      "tags": "query:q5",
+      "abstract_en": "Open-domain RAG benchmarks over public corpora can overestimate deployment performance due to pretraining overlap and weak attribution requirements. We present DoRA (Domain-oriented RAG Assessment), a domain-grounded benchmark built from defense documents that pairs synthetic, intent-conditioned QA (question answering) with auditable evidence passages for attribution. DoRA covers five question types (find, explain, summarize, generate, provide) and contains 6.5K curated instances. In end-to-end evaluation with a fixed dense retriever, general-purpose Language Models (LMs) perform similarly, while a model trained on DoRA (DoRA SFT) yields large gains over the base model (Llama3.1-8B-Instruct): up to 26% improvement in QA task success, while reducing the hallucination rate by 47% in RAG faithfulness scores, supporting contamination-aware regression testing under domain shift.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/23/2604.19323v1-concept-inconsistency-in-dermoscopic-concept-bottleneck-models-a-rough-set-analysis-of-the-derm7pt-dataset",
+      "section": "quick",
+      "title_en": "Concept Inconsistency in Dermoscopic Concept Bottleneck Models: A Rough-Set Analysis of the Derm7pt Dataset",
+      "authors": "Gonzalo Nápoles, Isel Grau, Yamisleydi Salgueiro",
+      "date": "2026-04-21",
+      "pdf": "https://arxiv.org/pdf/2604.19323v1",
+      "score": "6.0",
+      "evidence": "概念瓶颈模型用于可解释性和一致性分析",
+      "tldr": "本研究针对皮肤镜诊断中概念瓶颈模型的概念不一致问题，用粗糙集理论分析Derm7pt数据集，发现存在显著概念冲突，并通过筛除边界样本构建一致数据子集Derm7pt+，评估多种网络架构，建立可重现的概念一致性基准。",
+      "tags": "query:q5",
+      "abstract_en": "Concept Bottleneck Models (CBMs) route predictions exclusively through a clinically grounded concept layer, binding interpretability to concept-label consistency. When a dataset contains concept-level inconsistencies, identical concept profiles mapped to conflicting diagnosis labels create an unresolvable bottleneck that imposes a hard ceiling on achievable accuracy. In this paper, we apply rough set theory to the Derm7pt dermoscopy benchmark and characterize the full extent and clinical structure of this inconsistency. Among 305 unique concept profiles formed by the 7 dermoscopic criteria of the 7-point melanoma checklist, 50 (16.4%) are inconsistent, spanning 306 images (30.3% of the dataset). This yields a theoretical accuracy ceiling of 92.1%, independent of backbone architecture or training strategy for CBMs that exclusively operate with hard concepts. In addition, we characterize the conflict-severity distribution, identify the clinical features most responsible for boundary ambiguity, and evaluate two filtering strategies with quantified effects on dataset composition and CBM interpretability. Symmetric removal of all boundary-region images yields Derm7pt+, a fully consistent benchmark subset of 705 images with perfect quality of classification and no hard accuracy ceiling. Building on this filtered dataset, we present a hard CBM evaluated across 19 backbone architectures from the EfficientNet, DenseNet, ResNet, and Wide ResNet families. Under symmetric filtering, explored for completeness, EfficientNet-B5 achieves the best label F1 score (0.85) and label accuracy (0.90) on the held-out test set, with a concept accuracy of 0.70. Under asymmetric filtering, EfficientNet-B7 leads across all four metrics, reaching a label F1 score of 0.82 and concept accuracy of 0.70. These results establish reproducible baselines for concept-consistent CBM evaluation on dermoscopic data.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/23/biorxiv-10-1101-2023-11-23-568428-v5-interpretable-models-for-scrna-seq-data-embedding-with-multi-scale-structure-preservation",
+      "section": "quick",
+      "title_en": "Interpretable models for scRNA-seq data embedding with multi-scale structure preservation",
+      "authors": "Novak, D., de Bodt, C., Lambert, P., Lee, J. A., Van Gassen, S., Saeys, Y.",
+      "date": "2026-04-17",
+      "pdf": "https://www.biorxiv.org/content/10.1101/2023.11.23.568428v5.full.pdf",
+      "score": "6.0",
+      "evidence": "高维数据嵌入的可解释模型",
+      "tldr": "本文针对单细胞转录组学数据分析中降维结果可信度不足的问题，提出了ViScore评分框架以改进质量指标的公正性与可扩展性，并提出可解释的深度学习模型ViVAE以更好地保持多尺度数据结构，从而提升单细胞数据嵌入的可靠性。",
+      "tags": "query:q5",
+      "abstract_en": "The ability to explore high-dimensional single-cell transcriptomics data efficiently is crucial in many biological studies. Dimensionality reduction techniques have therefore emerged as a basic building block of analytical workflows. They generate low-dimensional embeddings that capture important structures in the data, and are often used in discovery, quality control, and downstream analysis. However, the trustworthiness of current methods and the rigour of popular evaluation criteria are limited. We tackle this in an empirical study of structure-preserving data embeddings, delivering two tools. First, we introduce ViScore: a robust scoring framework that improves both unsupervised and supervised quality metrics, with emphasis on scalability and fairness. Second, we introduce ViVAE : a deep learning model that achieves better multi-scale structure preservation and is equipped with new tools for interpretability. We demonstrate the potential of these contributions to advance the trustworthiness of single-cell dimensionality reduction in a quantitative comparison and focused case studies.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
