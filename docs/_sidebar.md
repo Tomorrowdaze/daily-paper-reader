@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-04-26 <!--dpr-date:20260426-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/26/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction" data-sidebar-item="{&quot;title&quot;: &quot;The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用基于形状的模型分析时空冲突死亡数据以进行预测。&quot;}">The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction</a>
   * 2026-04-23 <!--dpr-date:20260423-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202604/23/biorxiv-10-64898-2026-04-12-717909-v1-scdisent-disentangled-representation-learning-with-causal-structure-for-multi-omic-single-cell-analysis" data-sidebar-item="{&quot;title&quot;: &quot;scDisent: disentangled representation learning with causal structure for multi-omic single-cell analysis&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/biorxiv-10-64898-2026-04-12-717909-v1-scdisent-disentangled-representation-learning-with-causal-structure-for-multi-omic-single-cell-analysis&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;具有因果结构的解耦表示学习，用于机制解释&quot;}">scDisent: disentangled representation learning with causal structure for multi-omic single-cell analysis</a>

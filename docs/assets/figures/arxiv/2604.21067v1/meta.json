@@ -1,0 +1,166 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-001.webp",
+      "caption": "Figure 9: Outcome of the ShapeFinder model for the Kenya-Somalia example, discussed in Figure 2. Four examples of past futures, and the corresponding Forecasted and Observed values. The left side of the figure displays four “following values” examples (also referred to as past futures) of similar historical sequences. The right side of the figure represents the forecasted and actual observed values. The 3D sequence uses longitude on the x-axis, latitude on the y-axis, and time on the z-axis. Each point represents the fatality value for a Prio-Grid cell in a specific month. Darker red points indicate higher fatality values, while gray links between points assist in visualizing the 3D structure but carry no interpretative meaning. Accompanying each 3D sequence is a map with accumulated fatalities over the period per Prio-Grid cell. The black grid represents the event’s location, and the colored squares indicate the total fatalities accumulated during the entire period within the Prio-Grid cells.",
+      "page": 26,
+      "index": 1,
+      "width": 922,
+      "height": 522
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-002.webp",
+      "caption": "Figure 7: Rolling Window Scheme for historical search. The red cube represents the input sequence, while the gray cubes show the historical dataset, covering a range from 0 to n in longitude, 0 to m in latitude, and 0 to o in time. The dark green cube represents a similar case to the input, with the light green cube showing its following values.",
+      "page": 21,
+      "index": 2,
+      "width": 740,
+      "height": 418
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-003.webp",
+      "caption": "Figure B.1: Examples of four Pattern ShapeFinder Forecast (left), Views Forecast (middle), and Observed values (right). The darker the red, the higher the fatality value. The values are aggregated per Prio-Grid over the 6-month period.",
+      "page": 47,
+      "index": 3,
+      "width": 831,
+      "height": 1109
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-004.webp",
+      "caption": "Figure I.1: Log ratio in Mean Squared Error of the original ShapeFinder model and the threedimensional adaptation. A positive value corresponds to a lower error from the adaptation, in contrast to a negative value that corresponds to a better performance from the original model. The grey points represent the ratio for one Prio-Grid cell, while the black point and line represent the average value with the 95% confidence interval, calculated using the standard error divided by the square root of the number of observations.",
+      "page": 58,
+      "index": 4,
+      "width": 740,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-005.webp",
+      "caption": "Figure 12: Scatter plot of the log ratio of Raw Error (in x) and EMD (in y) at the zone level, as introduced in Figure 4, of Views model over ShapeFinder model. If the ratio is positive, the ShapeFinder model shows better performance. The red point is the mean value with the 95% Confidence Interval, calculated with the standard error divided by the square root of the number of observations.",
+      "page": 30,
+      "index": 5,
+      "width": 740,
+      "height": 571
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-006.webp",
+      "caption": "Figure 11: Log ratio of Mean Squared Error (MSE) between the Views model and the ShapeFinder (SF) model at the Prio-Grid level and Mean and 95% of the Confidence level, calculated with the standard error divided by the square root of the number of observations. The units in the two subfigures (bottom left of the figure) are the metrics calculated for the 6-month prediction period and Prio-Grid. Along with this, the map (center of the figure) displays cumulative MSE per cell over four analysis periods. Red indicates better performance by the SF model, blue by the Views model, and gray denotes similar predictions.",
+      "page": 29,
+      "index": 6,
+      "width": 832,
+      "height": 758
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-007.webp",
+      "caption": "Figure 8: Example of scenario creation using clustering. The 3D sequence uses longitude on the x-axis, latitude on the y-axis, and time on the z-axis. Each point represents the fatality value for a Prio-Grid cell in a specific month. Darker red points indicate higher fatality values, while gray links between points assist in visualizing the 3D structure but carry no interpretative meaning. Three similar patterns were identified in the historical data (left) and created two scenarios (right) with their associated probability, based on the number of observations in each cluster.",
+      "page": 22,
+      "index": 7,
+      "width": 740,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-008.webp",
+      "caption": "Figure 2: 3D sequences that happened at the border of Kenya and Somalia in 2022 (left section) and four similar cases found in the historical dataset by the model (right section). The 3D sequence uses longitude on the x-axis, latitude on the y-axis, and time on the z-axis. Each point represents the fatality value for a Prio-Grid cell in a specific month. Darker red points indicate higher fatality values, while gray links between points assist in visualizing the 3D structure but carry no interpretative meaning. Accompanying each 3D sequence is a map with accumulated fatalities over the period per Prio-Grid cell. The black grid represents the event’s location, and the colored squares indicate the total fatalities accumulated during the entire period within the Prio-Grid cells.",
+      "page": 10,
+      "index": 8,
+      "width": 922,
+      "height": 465
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-009.webp",
+      "caption": "Figure 4: Four steps of the identification of active conflict zone patterns in 2022 in Africa and the Middle East. The red shading represents the intensity of conflict, with darker red indicating higher numbers of fatalities in (a) and (d).",
+      "page": 14,
+      "index": 9,
+      "width": 840,
+      "height": 939
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-010.webp",
+      "caption": "Figure 14: Scatter plots showing the relationship between input sequence characteristics and prediction error at the zone level using the ShapeFinder model. The y-axis in all three plots represents the Mean Absolute Percentage Error (MAPE), with a log-modulus transformation, where positive values indicate overpredictions and negative values indicate underpredictions. The x-axes represent: (left) the ratio of increase Rinc, (center) the total number of fatalities in the input pattern (referred to as Magnitude), and (right) the number of active cells in the pattern (referred to as Dimension). The dotted horizontal line at 0 on the y-axis indicates a perfect prediction.",
+      "page": 33,
+      "index": 10,
+      "width": 922,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-011.webp",
+      "caption": "Figure A.1: Examples of best (top) and worst (bottom) Prio-Grid MSE scores. The red line is the SF values, the grey is Views, and the black is the observed values.",
+      "page": 46,
+      "index": 11,
+      "width": 922,
+      "height": 797
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-012.webp",
+      "caption": "Figure 6: Diagram of the overall method of the model. First, we extracted the 3D sequence of interest as mentioned before, called input sequence in the figure. Then, we look for similar cases in the historical data using a rolling window, by calculating two distance metrics, Earth Moving Distance (EMD) and ratio of active cells (R). If those two metrics are lower than a threshold, the historical sequence is classified as a similar case to the input one. Finally, the values that follow similar cases are clustered to produce the forecast values.",
+      "page": 18,
+      "index": 12,
+      "width": 786,
+      "height": 595
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-013.webp",
+      "caption": "Figure 10: The mean and 95% confidence interval for sequences’ similarity metric EMDpattern (x-axis) and the differences in their ratio of increase ∆Rinc on the left part and EMD for their past futures EMDpf on the right (y-axis). The confidence interval is computed as the standard error divided by the square root of the number of observations.",
+      "page": 28,
+      "index": 13,
+      "width": 922,
+      "height": 391
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-014.webp",
+      "caption": "Figure D.1: Projection of fatalities values over the Longitude (left), Latitude (middle), and Time (right). The black line corresponds to the observed values, the green to the Views prediction, and the red to the ShapeFinder prediction.",
+      "page": 49,
+      "index": 14,
+      "width": 922,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-015.webp",
+      "caption": "Figure 13: Scatter plot of the ratio of increase Rinc (in x) and Mean Average Percentage Error (MAPE) of Views (in y) at the active zone level, with a log-modulus transformation. The color of the point represents the difference in performance between the two models. The darker red, the SF performs better, and the darker blue, the Views model.",
+      "page": 32,
+      "index": 15,
+      "width": 648,
+      "height": 533
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-016.webp",
+      "caption": "Figure 3: Three patterns on a 5×5 grid over three months. The x-axis represents longitude, and the y-axis represents latitude. The cell color indicates the number of fatalities per month, ranging from 0 (white) to 9 (dark red), with darker shades representing higher values.",
+      "page": 12,
+      "index": 16,
+      "width": 648,
+      "height": 648
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-017.webp",
+      "caption": "Figure 1: Conflict predictions for the Kenya–Somalia border during the first half of 2023, from Views (b), the ShapeFinder model (c) alongside the previous year’s cumulative fatalities used as model input (a) and the actual observed fatalities (d). Each colored square represents the cumulative fatalities in a PRIO grid cell—darker red indicates more fatalities; transparent cells had none. The numbers in the rows and columns are only included for reference and do not carry any meaning.",
+      "page": 9,
+      "index": 17,
+      "width": 840,
+      "height": 869
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-018.webp",
+      "caption": "Figure C.2: Boxplot of the Maximum Percentage Error for both models, SF and Views. A positive value corresponds to an overprediction, in contrast to a negative value.",
+      "page": 48,
+      "index": 18,
+      "width": 648,
+      "height": 387
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-019.webp",
+      "caption": "Figure C.1: Boxplot of the Mean Average Percentage Error (MAPE) for both models, SF and Views. A positive value corresponds to an overprediction, in contrast to a negative value.",
+      "page": 48,
+      "index": 19,
+      "width": 648,
+      "height": 381
+    },
+    {
+      "url": "assets/figures/arxiv/2604.21067v1/fig-020.webp",
+      "caption": "Figure 5: Data transformation process illustrated through three steps. (1-left) Active zones are identified in the previous 12-month aggregated 2D grid of active cells (2-middle) 3D sequences of linked neighboring cells with conflict fatalities are extracted and represented in a “molecular” format, where Longitude is on the x-axis, Latitude on the y-axis, and Time on the z-axis. Darker red shades indicate higher fatality values. Gray links between cells aid in 3D visualization but do not signify any meaningful connections. (3-right) The extracted sequences are transformed into density cubes, with each side representing a single normalized value and the intensity of conflict as the density value. As in (2), darker red indicates higher density values.",
+      "page": 16,
+      "index": 20,
+      "width": 922,
+      "height": 452
+    }
+  ]
+}
