@@ -1,0 +1,54 @@
+{
+  "label": "2026-04-27",
+  "date": "2026-04-27",
+  "generated_at": "2026-04-27T20:41:03",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202604/27/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction",
+      "section": "deep",
+      "title_en": "The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction",
+      "authors": "Thomas Schincariol",
+      "date": "2026-04-22",
+      "pdf": "https://arxiv.org/pdf/2604.21067v1",
+      "score": "9.5",
+      "evidence": "使用时空模式和基于形状的模型预测冲突伤亡",
+      "tldr": "本文提出基于三维时空模式的冲突致死事件预测方法，利用ShapeFinder模型和EMD算法在Prio-Grid层级分析冲突扩散形态，并通过历史相似模式实现预测。结果表明，该方法在预测准确性上优于主流模型，为冲突预警提供新思路。",
+      "tags": "query:q4",
+      "abstract_en": "Understanding how conflict events spread over time and space is crucial for predicting and mitigating future violence. However, progress in this area has been limited by the lack of methods capable of capturing the intricate, dynamic patterns of conflict diffusion. The complex nature of those trends needs flexibility in the models to untangle them. This study addresses this gap by analyzing spatio-temporal conflict fatality data using an innovative approach that transforms the data into three-dimensional patterns at the Prio-Grid level. In this paper, a shape-based model called ShapeFinder is adapted. By applying the Earth Movers Distance (EMD) algorithm, we detect and classify these patterns, allowing us to compare and match patterns with high adaptive capacity in all dimensions. Using historical similar patterns, we generate predictions of conflict fatalities and compare these with forecasts from the Views ensemble model, a leading benchmark. Our findings demonstrate that recognizing and analyzing conflict diffusion patterns significantly improves predictive accuracy, outperforming the benchmark model. This research contributes to the study of conflict dynamics by introducing a novel pattern recognition framework that enhances the analysis of spatio-temporal data and offers practical applications for early warning systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/27/2604.17943v1-domain-oriented-rag-assessment-dora-synthetic-benchmarking-for-rag-based-question-answering-on-defense-documents",
+      "section": "quick",
+      "title_en": "Domain-oriented RAG Assessment (DoRA): Synthetic Benchmarking for RAG-based Question Answering on Defense Documents",
+      "authors": "Bao Gia Doan, Aditya Joshi, Pantelis Elinas, Aarya Bodhankar, Oscar Leslie, Tom Marchant, Flora Salim",
+      "date": "2026-04-20",
+      "pdf": "https://arxiv.org/pdf/2604.17943v1",
+      "score": "7.5",
+      "evidence": "基于国防文档构建的具有可审计证据归因的RAG基准",
+      "tldr": "论文提出Domain-oriented RAG Assessment（DoRA），针对防务文档构建合成问答基准，解决开放域RAG评测中性能高估问题。DoRA通过可审核证据和多类问题类型评测模型归因与可靠性，实验显示在防务场景下显著提升问答准确度并降低幻觉率。",
+      "tags": "query:q5",
+      "abstract_en": "Open-domain RAG benchmarks over public corpora can overestimate deployment performance due to pretraining overlap and weak attribution requirements. We present DoRA (Domain-oriented RAG Assessment), a domain-grounded benchmark built from defense documents that pairs synthetic, intent-conditioned QA (question answering) with auditable evidence passages for attribution. DoRA covers five question types (find, explain, summarize, generate, provide) and contains 6.5K curated instances. In end-to-end evaluation with a fixed dense retriever, general-purpose Language Models (LMs) perform similarly, while a model trained on DoRA (DoRA SFT) yields large gains over the base model (Llama3.1-8B-Instruct): up to 26% improvement in QA task success, while reducing the hallucination rate by 47% in RAG faithfulness scores, supporting contamination-aware regression testing under domain shift.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/27/biorxiv-10-64898-2026-04-19-719454-v1-expanding-p-net-a-multi-purpose-biologically-informed-deep-learning-framework",
+      "section": "quick",
+      "title_en": "Expanding P-NET, a multi-purpose biologically informed deep learning framework",
+      "authors": "Elmarakeby, H., Glettig, M., Zhou, A., Zhou, C., Tarantino, G., Aprati, T., Van Allen, E., Liu, D.",
+      "date": "2026-04-22",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.19.719454v1.full.pdf",
+      "score": "6.0",
+      "evidence": "基于生物信息的深度学习框架，用于可解释的预测",
+      "tldr": "本文介绍了扩展版的P-NET，一个基于生物路径信息的多用途深度学习框架，用于计算生物学任务。该模型结合基因与通路信息进行可解释预测，在基因组和转录组任务中取得了竞争性表现，并提供理解复杂生物过程的新视角。",
+      "tags": "query:q5",
+      "abstract_en": "We present expanded P-NET, a versatile frame-work for deep learning in computational biology based on P-NET, leveraging biological pathways for interpretable predictions. Our framework achieves competitive performance in genomic & transcriptomic prediction tasks. We demonstrate its stability and interpretability compared to traditional machine learning models. P-NET 2.0 incorporates gene and pathway information, providing valuable insights into complex biological processes. The framework is publicly available, enabling its application to various computational biology tasks.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
