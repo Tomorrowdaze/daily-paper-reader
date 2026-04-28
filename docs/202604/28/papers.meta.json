@@ -1,0 +1,69 @@
+{
+  "label": "2026-04-28",
+  "date": "2026-04-28",
+  "generated_at": "2026-04-28T20:35:20",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202604/28/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction",
+      "section": "deep",
+      "title_en": "The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction",
+      "authors": "Thomas Schincariol",
+      "date": "2026-04-22",
+      "pdf": "https://arxiv.org/pdf/2604.21067v1",
+      "score": "9.5",
+      "evidence": "使用时空模式和ShapeFinder模型预测冲突伤亡",
+      "tldr": "本研究提出利用ShapeFinder模型和EMD算法对冲突致死数据进行三维时空模式分析，识别与匹配冲突扩散模式，从而提升了预测的准确度，优于现有Views模型，为冲突预警提供了新的分析框架。",
+      "tags": "query:q4",
+      "abstract_en": "Understanding how conflict events spread over time and space is crucial for predicting and mitigating future violence. However, progress in this area has been limited by the lack of methods capable of capturing the intricate, dynamic patterns of conflict diffusion. The complex nature of those trends needs flexibility in the models to untangle them. This study addresses this gap by analyzing spatio-temporal conflict fatality data using an innovative approach that transforms the data into three-dimensional patterns at the Prio-Grid level. In this paper, a shape-based model called ShapeFinder is adapted. By applying the Earth Movers Distance (EMD) algorithm, we detect and classify these patterns, allowing us to compare and match patterns with high adaptive capacity in all dimensions. Using historical similar patterns, we generate predictions of conflict fatalities and compare these with forecasts from the Views ensemble model, a leading benchmark. Our findings demonstrate that recognizing and analyzing conflict diffusion patterns significantly improves predictive accuracy, outperforming the benchmark model. This research contributes to the study of conflict dynamics by introducing a novel pattern recognition framework that enhances the analysis of spatio-temporal data and offers practical applications for early warning systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/28/2604.19323v1-concept-inconsistency-in-dermoscopic-concept-bottleneck-models-a-rough-set-analysis-of-the-derm7pt-dataset",
+      "section": "quick",
+      "title_en": "Concept Inconsistency in Dermoscopic Concept Bottleneck Models: A Rough-Set Analysis of the Derm7pt Dataset",
+      "authors": "Gonzalo Nápoles, Isel Grau, Yamisleydi Salgueiro",
+      "date": "2026-04-21",
+      "pdf": "https://arxiv.org/pdf/2604.19323v1",
+      "score": "6.0",
+      "evidence": "临床诊断中由解释性驱动的概念瓶颈模型",
+      "tldr": "本文通过粗糙集理论分析Derm7pt皮肤镜数据中的概念瓶颈不一致问题，揭示其导致CBM准确率上限，并提出两种过滤策略构建Derm7pt+一致子集，建立了多个EfficientNet架构的可重现基准，为未来皮肤镜诊断的可解释模型研究提供参考。",
+      "tags": "query:q5",
+      "abstract_en": "Concept Bottleneck Models (CBMs) route predictions exclusively through a clinically grounded concept layer, binding interpretability to concept-label consistency. When a dataset contains concept-level inconsistencies, identical concept profiles mapped to conflicting diagnosis labels create an unresolvable bottleneck that imposes a hard ceiling on achievable accuracy. In this paper, we apply rough set theory to the Derm7pt dermoscopy benchmark and characterize the full extent and clinical structure of this inconsistency. Among 305 unique concept profiles formed by the 7 dermoscopic criteria of the 7-point melanoma checklist, 50 (16.4%) are inconsistent, spanning 306 images (30.3% of the dataset). This yields a theoretical accuracy ceiling of 92.1%, independent of backbone architecture or training strategy for CBMs that exclusively operate with hard concepts. In addition, we characterize the conflict-severity distribution, identify the clinical features most responsible for boundary ambiguity, and evaluate two filtering strategies with quantified effects on dataset composition and CBM interpretability. Symmetric removal of all boundary-region images yields Derm7pt+, a fully consistent benchmark subset of 705 images with perfect quality of classification and no hard accuracy ceiling. Building on this filtered dataset, we present a hard CBM evaluated across 19 backbone architectures from the EfficientNet, DenseNet, ResNet, and Wide ResNet families. Under symmetric filtering, explored for completeness, EfficientNet-B5 achieves the best label F1 score (0.85) and label accuracy (0.90) on the held-out test set, with a concept accuracy of 0.70. Under asymmetric filtering, EfficientNet-B7 leads across all four metrics, reaching a label F1 score of 0.82 and concept accuracy of 0.70. These results establish reproducible baselines for concept-consistent CBM evaluation on dermoscopic data.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/28/2604.23779v1-glier-generative-legal-inference-and-evidence-ranking-for-legal-case-retrieval",
+      "section": "quick",
+      "title_en": "GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval",
+      "authors": "Minghan Li, Tianrui Lv, Chao Zhang, Guodong Zhou",
+      "date": "2026-04-26",
+      "pdf": "https://arxiv.org/pdf/2604.23779v1",
+      "score": "6.0",
+      "evidence": "解释性驱动的法律案例检索生成式推理",
+      "tldr": "本文提出GLIER框架，针对法律案例检索中用户查询与法律文档间的语义差距问题，将检索过程建模为对潜在法律变量的推理。GLIER通过生成式法律推理模块生成法律指示因素，并通过多视角证据融合提升排序准确度，在主流数据集上取得优异表现。",
+      "tags": "query:q6",
+      "abstract_en": "The semantic gap between colloquial user queries and professional legal documents presents a fundamental challenge in Legal Case Retrieval (LCR). Existing dense retrieval methods typically treat LCR as a black-box semantic matching process, neglecting the explicit juridical logic that underpins legal relevance. To address this, we propose GLIER (Generative Legal Inference and Evidence Ranking), a framework that reformulates retrieval as an inference process over latent legal variables. GLIER decomposes the task into two interpretability-driven stages. First, a Joint Generative Inference module translates raw queries into latent legal indicators, including charges and legal elements, using a unified sequence-to-sequence strategy that jointly generates charges and elements to enforce logical consistency. Second, a Multi-View Evidence Fusion mechanism aggregates generative confidence with structural and lexical signals for precise ranking. Extensive experiments on LeCaRD and LeCaRDv2 demonstrate that GLIER outperforms strong baselines such as SAILER and KELLER. Notably, GLIER exhibits strong data efficiency, maintaining robust performance even when trained with only 10% of the data.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/28/biorxiv-10-1101-2024-10-23-619844-v6-ai-readiness-criteria-for-biomedical-data",
+      "section": "quick",
+      "title_en": "AI-readiness criteria for biomedical data",
+      "authors": "Clark, T., Caufield, H., Parker, J. A., Al Manir, S., Amorim, E., Eddy, J., Gim, N., Gow, B., Goar, W., Hansen, J. N., Harris, N., Hermjakob, H., Joachimiak, M., Jordan, G., Lee, I.-H., McWeeney, S. K., Nebeker, C., Nikolov, M., Reese, J., Shaffer, J., Sheffield, N., Sheynkman, G., Stevenson, J., Chen, J. Y., Mungall, C., Wagner, A., Kong, S. W., Ghosh, S. S., Patel, B., Williams, A., Munoz-Torres, M. C.",
+      "date": "2026-04-24",
+      "pdf": "https://www.biorxiv.org/content/10.1101/2024.10.23.619844v6.full.pdf",
+      "score": "6.0",
+      "evidence": "定义了复杂数据中可解释人工智能(XAI)和模型前可解释性的标准。",
+      "tldr": "本文针对生物医学AI应用中数据准备复杂、伦理和可解释性不足的问题，提出了一套涵盖FAIR性、溯源、特征、伦理、预模型可解释性、可持续性和计算性七个维度的AI准备度标准，并在多个NIH Bridge2AI数据集上验证其有效性，为AI建模前阶段的数据质量和伦理治理提供统一框架。",
+      "tags": "query:q5",
+      "abstract_en": "Biomedical research is rapidly adopting artificial intelligence (AI). Yet the inherent complexity of biomedical data preparation requires implementing actionable, robust criteria for ethical and explainable AI (XAI) at the \"pre-model\" stage, encompassing data acquisition, detailed transformations, and ethical governance. Simple conformance to FAIR (Findable, Accessible, Interoperable, Reusable) Principles is insufficient.\n\nHere, we define criteria and practices for reliable AI-readiness of biomedical data, developed by the NIH Bridge to Artificial Intelligence (Bridge2AI) Standards Working Group across seven core dimensions of dataset AI-readiness: FAIRness, Provenance, Characterization, Ethics, Pre-model Explainability, Sustainability, and Computability. Conformance to these criteria provides a basis for pre-model scientific rigor and ethical integrity, mitigating downstream risks of bias and error prior to AI modeling. We apply and evaluate these standards across all four Bridge2AI flagship datasets, spanning functional genomics to clinical medicine, and encode them in machine-actionable metadata bound to the datasets.\n\nThis framework sets a benchmark for preparing ethical, reusable datasets in biomedical AI and provides standardized methods for reliable pre-model data evaluation.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
