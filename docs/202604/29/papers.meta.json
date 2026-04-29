@@ -1,0 +1,39 @@
+{
+  "label": "2026-04-29",
+  "date": "2026-04-29",
+  "generated_at": "2026-04-29T20:31:39",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202604/29/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction",
+      "section": "deep",
+      "title_en": "The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction",
+      "authors": "Thomas Schincariol",
+      "date": "2026-04-22",
+      "pdf": "https://arxiv.org/pdf/2604.21067v1",
+      "score": "9.5",
+      "evidence": "使用3D时空模式和ShapeFinder模型预测冲突伤亡",
+      "tldr": "本文通过将冲突死亡数据转化为三维时空模式，利用改进的ShapeFinder模型和地球移动者距离算法识别和分类冲突扩散特征，生成更精准的预测，在冲突动态研究和预警系统应用中实现突破。",
+      "tags": "query:q4",
+      "abstract_en": "Understanding how conflict events spread over time and space is crucial for predicting and mitigating future violence. However, progress in this area has been limited by the lack of methods capable of capturing the intricate, dynamic patterns of conflict diffusion. The complex nature of those trends needs flexibility in the models to untangle them. This study addresses this gap by analyzing spatio-temporal conflict fatality data using an innovative approach that transforms the data into three-dimensional patterns at the Prio-Grid level. In this paper, a shape-based model called ShapeFinder is adapted. By applying the Earth Movers Distance (EMD) algorithm, we detect and classify these patterns, allowing us to compare and match patterns with high adaptive capacity in all dimensions. Using historical similar patterns, we generate predictions of conflict fatalities and compare these with forecasts from the Views ensemble model, a leading benchmark. Our findings demonstrate that recognizing and analyzing conflict diffusion patterns significantly improves predictive accuracy, outperforming the benchmark model. This research contributes to the study of conflict dynamics by introducing a novel pattern recognition framework that enhances the analysis of spatio-temporal data and offers practical applications for early warning systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202604/29/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes",
+      "section": "deep",
+      "title_en": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "authors": "Aditya Basarkar, Emmett B. Kendall, David Randahl, Jonathan P. Williams, Gudmund H. Hermansen",
+      "date": "2026-04-28",
+      "pdf": "https://arxiv.org/pdf/2604.25139v1",
+      "score": "9.0",
+      "evidence": "专注于使用马尔可夫过程的符合性预测进行冲突预测和战争状态预测。",
+      "tldr": "本文研究利用共形预测方法对基于马尔可夫过程的国家冲突状态进行预测，相比传统的基于似然的预测策略，共形预测能够在模型假设不完备的情况下提供有效的不确定性量化，并在多国冲突动态预测中表现出较强的可靠性。",
+      "tags": "query:q4",
+      "abstract_en": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
