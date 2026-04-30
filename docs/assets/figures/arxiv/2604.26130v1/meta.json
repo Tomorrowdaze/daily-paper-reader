@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-001.webp",
+      "caption": "Figure 3: Cross-model trajectory overlay. Normalised preference differential as a function of fractional layer depth for Skywork and ArmoRM on three dimensions.",
+      "page": 11,
+      "index": 1,
+      "width": 907,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-002.webp",
+      "caption": "Figure 2: Attribution vs. patching, Skywork helpfulness. Late-MLP components dominate attribution; early-layer components dominate patching.",
+      "page": 10,
+      "index": 2,
+      "width": 567,
+      "height": 560
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-003.webp",
+      "caption": "Figure 5: Concept dose-response curves. Skywork responds linearly at unit scale; ArmoRM responds at ∼1% the magnitude.",
+      "page": 13,
+      "index": 3,
+      "width": 903,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-004.webp",
+      "caption": "Table 1: Reward Lens crystallisation depth (fractional layer index, mean ± std over n = 200 pairs per dimension; n = 95 for verbosity) and mean final-differential magnitude in each model’s native reward units. Skywork crystallises uniformly late (∼0.90); ArmoRM crystallises earlier and with much higher across-pair variance.",
+      "page": 8,
+      "index": 4,
+      "width": 618,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-005.webp",
+      "caption": "Figure 4: Hacking-detector effect sizes. Positive d rewards the biased variant; negative d penalises it.",
+      "page": 12,
+      "index": 5,
+      "width": 667,
+      "height": 399
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-006.webp",
+      "caption": "Table 5: Concept reward alignment (cosine of concept direction with wr) and causal slope (regression of ∆ reward on α over the dose-response curve), per model.",
+      "page": 12,
+      "index": 6,
+      "width": 666,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-007.webp",
+      "caption": "Table 3: Spearman rank correlation between |attribution| and |patching effect| across the 64 components of each preference pair. n = 64 components; p-values are two-sided. No per-dimension correlation exceeds |0.3| on the positive side; three of six are negative; the two significant correlations are both negative.",
+      "page": 9,
+      "index": 7,
+      "width": 494,
+      "height": 282
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-008.webp",
+      "caption": "Table 2: Top three components by attribution frequency across pairs. Frequencies are out of 200 pairs. The last three MLPs (mlp_L29-31) dominate observational attribution near-universally on Skywork; ArmoRM shows the same dominance for its very last MLP but more dispersion below the top.",
+      "page": 9,
+      "index": 8,
+      "width": 902,
+      "height": 224
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26130v1/fig-009.webp",
+      "caption": "Table 6: The adapter contract. Implementing these eleven entries (plus the standard __init__) is sufficient to bring up a new model family.",
+      "page": 20,
+      "index": 9,
+      "width": 879,
+      "height": 328
+    }
+  ]
+}

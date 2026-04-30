@@ -1,0 +1,206 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-30T20:10:04.526436+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2604.25139v1",
+      "source": "arxiv",
+      "title": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "abstract": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "authors": [
+        "Aditya Basarkar",
+        "Emmett B. Kendall",
+        "David Randahl",
+        "Jonathan P. Williams",
+        "Gudmund H. Hermansen"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "stat.AP",
+        "stat.ML"
+      ],
+      "published": "2026-04-28T02:29:07+00:00",
+      "link": "https://arxiv.org/pdf/2604.25139v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Conflict forecasting via conformal prediction for future conflict state-sequences",
+      "llm_evidence_cn": "通过符合预测进行冲突状态序列的预测",
+      "llm_evidence": "通过符合预测进行冲突状态序列的预测",
+      "canonical_evidence": "通过符合预测进行冲突状态序列的预测",
+      "llm_tldr_en": "Uses conformal prediction on Markov processes to provide reliable sets of future conflict state predictions.",
+      "llm_tldr_cn": "利用马尔可夫过程的符合预测，为未来冲突状态提供可靠的预测集。",
+      "llm_tldr": "利用马尔可夫过程的符合预测，为未来冲突状态提供可靠的预测集。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2604.21067v1",
+      "source": "arxiv",
+      "title": "The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction",
+      "abstract": "Understanding how conflict events spread over time and space is crucial for predicting and mitigating future violence. However, progress in this area has been limited by the lack of methods capable of capturing the intricate, dynamic patterns of conflict diffusion. The complex nature of those trends needs flexibility in the models to untangle them. This study addresses this gap by analyzing spatio-temporal conflict fatality data using an innovative approach that transforms the data into three-dimensional patterns at the Prio-Grid level. In this paper, a shape-based model called ShapeFinder is adapted. By applying the Earth Movers Distance (EMD) algorithm, we detect and classify these patterns, allowing us to compare and match patterns with high adaptive capacity in all dimensions. Using historical similar patterns, we generate predictions of conflict fatalities and compare these with forecasts from the Views ensemble model, a leading benchmark. Our findings demonstrate that recognizing and analyzing conflict diffusion patterns significantly improves predictive accuracy, outperforming the benchmark model. This research contributes to the study of conflict dynamics by introducing a novel pattern recognition framework that enhances the analysis of spatio-temporal data and offers practical applications for early warning systems.",
+      "authors": [
+        "Thomas Schincariol"
+      ],
+      "primary_category": "stat.AP",
+      "categories": [
+        "stat.AP"
+      ],
+      "published": "2026-04-22T20:20:58+00:00",
+      "link": "https://arxiv.org/pdf/2604.21067v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Spatio-temporal patterns in fatalities prediction for conflict events",
+      "llm_evidence_cn": "冲突事件伤亡预测的时空模式分析",
+      "llm_evidence": "冲突事件伤亡预测的时空模式分析",
+      "canonical_evidence": "冲突事件伤亡预测的时空模式分析",
+      "llm_tldr_en": "Analyzes 3D spatio-temporal patterns to predict conflict fatalities using a shape-based model.",
+      "llm_tldr_cn": "通过分析三维时空模式，利用基于形状的模型预测冲突伤亡。",
+      "llm_tldr": "通过分析三维时空模式，利用基于形状的模型预测冲突伤亡。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2604.26130v1",
+      "source": "arxiv",
+      "title": "reward-lens: A Mechanistic Interpretability Library for Reward Models",
+      "abstract": "Every RLHF-trained language model is shaped by a reward model, yet the mechanistic interpretability toolkit -- logit lens, direct logit attribution, activation patching, sparse autoencoders -- was built for generative LLMs whose primitives all project onto a vocabulary unembedding. Reward models replace that with a scalar regression head, breaking each tool. We present reward-lens, an open-source library that ports this toolkit to reward models, organised around one observation: the reward head's weight vector $w_r$ is the natural axis for every interpretability question. The library provides a Reward Lens, component attribution, three-mode activation patching, a reward-hacking probe suite, TopK SAE feature attribution, cross-model comparison, and five theory-grounded extensions (distortion index, divergence-aware patching, misalignment cascade detection, reward-term conflict analysis, concept-vector analysis). A ten-method adapter protocol covers Llama, Mistral, Gemma-2, and ArmoRM multi-objective heads, with a generic adapter for any HuggingFace sequence classification model. We validate on two production reward models across ~695 RewardBench pairs. The central empirical finding is negative: linear attribution does not predict causal patching effects (mean Spearman $ρ= -0.256$ on Skywork, $-0.027$ on ArmoRM). The framework treats this disagreement as a property to expose, not a bug -- motivating a design that keeps observational and causal views first-class and directly comparable.",
+      "authors": [
+        "Mohammed Suhail B Nadaf"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-04-28T21:38:10+00:00",
+      "link": "https://arxiv.org/pdf/2604.26130v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "mechanistic interpretability library for reward models",
+      "llm_evidence_cn": "奖励模型的机械可解释性库",
+      "llm_evidence": "奖励模型的机械可解释性库",
+      "canonical_evidence": "奖励模型的机械可解释性库",
+      "llm_tldr_en": "A library for mechanistic interpretability of reward models, useful for explaining AI risk predictions.",
+      "llm_tldr_cn": "一个用于奖励模型机械可解释性的库，可用于解释人工智能风险预测。",
+      "llm_tldr": "一个用于奖励模型机械可解释性的库，可用于解释人工智能风险预测。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.23779v1",
+      "source": "arxiv",
+      "title": "GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval",
+      "abstract": "The semantic gap between colloquial user queries and professional legal documents presents a fundamental challenge in Legal Case Retrieval (LCR). Existing dense retrieval methods typically treat LCR as a black-box semantic matching process, neglecting the explicit juridical logic that underpins legal relevance. To address this, we propose GLIER (Generative Legal Inference and Evidence Ranking), a framework that reformulates retrieval as an inference process over latent legal variables. GLIER decomposes the task into two interpretability-driven stages. First, a Joint Generative Inference module translates raw queries into latent legal indicators, including charges and legal elements, using a unified sequence-to-sequence strategy that jointly generates charges and elements to enforce logical consistency. Second, a Multi-View Evidence Fusion mechanism aggregates generative confidence with structural and lexical signals for precise ranking. Extensive experiments on LeCaRD and LeCaRDv2 demonstrate that GLIER outperforms strong baselines such as SAILER and KELLER. Notably, GLIER exhibits strong data efficiency, maintaining robust performance even when trained with only 10% of the data.",
+      "authors": [
+        "Minghan Li",
+        "Tianrui Lv",
+        "Chao Zhang",
+        "Guodong Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-04-26T16:02:59+00:00",
+      "link": "https://arxiv.org/pdf/2604.23779v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretability-driven stages and latent legal indicators for inference",
+      "llm_evidence_cn": "解释性驱动的阶段和用于推理的潜在法律指标",
+      "llm_evidence": "解释性驱动的阶段和用于推理的潜在法律指标",
+      "canonical_evidence": "解释性驱动的阶段和用于推理的潜在法律指标",
+      "llm_tldr_en": "Proposes an interpretable legal retrieval framework using generative inference over latent variables.",
+      "llm_tldr_cn": "提出了一种通过潜在变量进行生成式推理的可解释法律检索框架。",
+      "llm_tldr": "提出了一种通过潜在变量进行生成式推理的可解释法律检索框架。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-19-719454-v1",
+      "source": "biorxiv",
+      "title": "Expanding P-NET, a multi-purpose biologically informed deep learning framework",
+      "abstract": "We present expanded P-NET, a versatile frame-work for deep learning in computational biology based on P-NET, leveraging biological pathways for interpretable predictions. Our framework achieves competitive performance in genomic & transcriptomic prediction tasks. We demonstrate its stability and interpretability compared to traditional machine learning models. P-NET 2.0 incorporates gene and pathway information, providing valuable insights into complex biological processes. The framework is publicly available, enabling its application to various computational biology tasks.",
+      "authors": [
+        "Elmarakeby, H.",
+        "Glettig, M.",
+        "Zhou, A.",
+        "Zhou, C.",
+        "Tarantino, G.",
+        "Aprati, T.",
+        "Van Allen, E.",
+        "Liu, D."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-22T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.19.719454v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable deep learning framework for complex predictions",
+      "llm_evidence_cn": "用于复杂预测的可解释深度学习框架",
+      "llm_evidence": "用于复杂预测的可解释深度学习框架",
+      "canonical_evidence": "用于复杂预测的可解释深度学习框架",
+      "llm_tldr_en": "P-NET 2.0 provides a biologically informed interpretable deep learning framework for complex prediction tasks.",
+      "llm_tldr_cn": "P-NET 2.0 提供了一个基于生物信息的深度学习框架，用于实现复杂预测任务的可解释性。",
+      "llm_tldr": "P-NET 2.0 提供了一个基于生物信息的深度学习框架，用于实现复杂预测任务的可解释性。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
