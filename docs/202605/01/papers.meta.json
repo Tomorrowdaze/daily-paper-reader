@@ -1,0 +1,69 @@
+{
+  "label": "2026-05-01",
+  "date": "2026-05-01",
+  "generated_at": "2026-05-01T20:34:59",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202605/01/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction",
+      "section": "deep",
+      "title_en": "The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction",
+      "authors": "Thomas Schincariol",
+      "date": "2026-04-22",
+      "pdf": "https://arxiv.org/pdf/2604.21067v1",
+      "score": "9.5",
+      "evidence": "预测未来暴力并分析时空冲突死亡数据",
+      "tldr": "本研究针对传统方法难以揭示冲突传播复杂时空模式的问题，提出基于ShapeFinder与EMD算法的三维形态识别模型，分析和分类冲突死亡数据的空间时间扩散形态，结果显示该方法能显著提升对冲突死亡数量的预测准确性。",
+      "tags": "query:q4",
+      "abstract_en": "Understanding how conflict events spread over time and space is crucial for predicting and mitigating future violence. However, progress in this area has been limited by the lack of methods capable of capturing the intricate, dynamic patterns of conflict diffusion. The complex nature of those trends needs flexibility in the models to untangle them. This study addresses this gap by analyzing spatio-temporal conflict fatality data using an innovative approach that transforms the data into three-dimensional patterns at the Prio-Grid level. In this paper, a shape-based model called ShapeFinder is adapted. By applying the Earth Movers Distance (EMD) algorithm, we detect and classify these patterns, allowing us to compare and match patterns with high adaptive capacity in all dimensions. Using historical similar patterns, we generate predictions of conflict fatalities and compare these with forecasts from the Views ensemble model, a leading benchmark. Our findings demonstrate that recognizing and analyzing conflict diffusion patterns significantly improves predictive accuracy, outperforming the benchmark model. This research contributes to the study of conflict dynamics by introducing a novel pattern recognition framework that enhances the analysis of spatio-temporal data and offers practical applications for early warning systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/01/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes",
+      "section": "deep",
+      "title_en": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "authors": "Aditya Basarkar, Emmett B. Kendall, David Randahl, Jonathan P. Williams, Gudmund H. Hermansen",
+      "date": "2026-04-28",
+      "pdf": "https://arxiv.org/pdf/2604.25139v1",
+      "score": "9.5",
+      "evidence": "使用符合预测方法对时间序列数据进行未来冲突状态序列预测",
+      "tldr": "本研究旨在利用保形预测方法对国家冲突状态进行未来预测，针对马尔可夫过程的时序依赖数据提出了一种能量化预测不确定性的机器学习方案。通过与传统似然预测的对比及实证数据分析，结果表明该方法具有鲁棒性并能在模型偏差存在时提供有效预测。",
+      "tags": "query:q4",
+      "abstract_en": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/01/2604.26130v1-reward-lens-a-mechanistic-interpretability-library-for-reward-models",
+      "section": "quick",
+      "title_en": "reward-lens: A Mechanistic Interpretability Library for Reward Models",
+      "authors": "Mohammed Suhail B Nadaf",
+      "date": "2026-04-28",
+      "pdf": "https://arxiv.org/pdf/2604.26130v1",
+      "score": "6.5",
+      "evidence": "用于奖励模型的机械可解释性库，使用归因和修补技术",
+      "tldr": "本文提出reward-lens，一个针对奖励模型的开源机制可解释性库，解决了以往工具无法直接作用于标量回归头的问题，通过定义奖励权重轴构建多种可解释性和诊断工具，并在生产级模型上验证其有效性及对因果与观测差异的揭示作用。",
+      "tags": "query:q5",
+      "abstract_en": "Every RLHF-trained language model is shaped by a reward model, yet the mechanistic interpretability toolkit -- logit lens, direct logit attribution, activation patching, sparse autoencoders -- was built for generative LLMs whose primitives all project onto a vocabulary unembedding. Reward models replace that with a scalar regression head, breaking each tool. We present reward-lens, an open-source library that ports this toolkit to reward models, organised around one observation: the reward head's weight vector $w_r$ is the natural axis for every interpretability question. The library provides a Reward Lens, component attribution, three-mode activation patching, a reward-hacking probe suite, TopK SAE feature attribution, cross-model comparison, and five theory-grounded extensions (distortion index, divergence-aware patching, misalignment cascade detection, reward-term conflict analysis, concept-vector analysis). A ten-method adapter protocol covers Llama, Mistral, Gemma-2, and ArmoRM multi-objective heads, with a generic adapter for any HuggingFace sequence classification model. We validate on two production reward models across ~695 RewardBench pairs. The central empirical finding is negative: linear attribution does not predict causal patching effects (mean Spearman $ρ= -0.256$ on Skywork, $-0.027$ on ArmoRM). The framework treats this disagreement as a property to expose, not a bug -- motivating a design that keeps observational and causal views first-class and directly comparable.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/01/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering",
+      "section": "quick",
+      "title_en": "TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering",
+      "authors": "An-Yang Ji, Jun-Peng Jiang, De-Chuan Zhan, Han-Jia Ye",
+      "date": "2026-04-30",
+      "pdf": "https://arxiv.org/pdf/2604.28076v1",
+      "score": "6.5",
+      "evidence": "基于历史模式的预测性推理和因果效应分析",
+      "tldr": "本文提出TopBench，一个专为隐式预测性表格问答设计的基准，用于评估大语言模型在理解隐含意图与推理预测中的能力，包括四个子任务与779个样本。研究表明现有模型在意图识别与预测推理上仍存在显著挑战。",
+      "tags": "query:q6",
+      "abstract_en": "Large Language Models (LLMs) have advanced Table Question Answering, where most queries can be answered by extracting information or simple aggregation. However, a common class of real-world queries is implicitly predictive, requiring the inference of unobserved answers from historical patterns rather than mere retrieval. These queries introduce two challenges: recognizing latent intent and reliable predictive reasoning over massive tables. To assess LLMs in such Tabular questiOn answering with implicit Prediction tasks, we introduce TopBench, a benchmark consisting of 779 samples across four sub-tasks, ranging from single-point prediction to decision making, treatment effect analysis, and complex filtering, requiring models to generate outputs spanning reasoning text and structured tables. We evaluate diverse models under both text-based and agentic workflows. Experiments reveal that current models often struggle with intent recognition, defaulting to just lookups. Deeper analysis identifies that accurate intent disambiguation serves as the prerequisite for leading these predictive behaviors. Furthermore, elevating the upper bound of prediction precision requires the integration of more sophisticated modeling or reasoning capabilities.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
