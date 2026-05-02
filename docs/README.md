@@ -6,34 +6,34 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-01
-- 运行时间：2026-05-01 20:30:47 UTC
+- 最新运行日期：2026-05-02
+- 运行时间：2026-05-02 20:20:51 UTC
 - 运行状态：成功
 - 本次总论文数：4
-- 精读区：2
-- 速读区：2
+- 精读区：1
+- 速读区：3
 
 ### 今日简报（AI）
-1) 今日聚焦冲突预测与模型可解释性，共完成 4 篇论文阅读。  
-2) 3D 时空建模与共形预测方法在冲突风险预测中展现出最高潜力。  
-3) 建议下阶段深入比较这些方法在实时地缘数据上的表现与泛化能力。
-- 详情：[/202605/01/README](/202605/01/README)
+今日聚焦冲突预测与智能检索，完成 4 篇论文阅读。  
+最亮点是通过保形预测提高马尔可夫过程冲突预测可靠性，法律与生医 AI 应用也展现新潜力。  
+下一步建议关注预测模型的不确定性评估与跨领域自动化整合趋势。
+- 详情：[/202605/02/README](/202605/02/README)
 
 ### 精读区论文标签
-1. [The geometry of conflict : 3D Spatio-temporal patterns in fatalities prediction](/202605/01/2604.21067v1-the-geometry-of-conflict--3d-spatio-temporal-patterns-in-fatalities-prediction)  
+1. [Conflict Forecasting via Conformal Prediction for Markov Processes](/202605/02/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes)  
    标签：评分：9.5/10、query:q4
-   evidence：预测未来暴力并分析时空冲突死亡数据
-2. [Conflict Forecasting via Conformal Prediction for Markov Processes](/202605/01/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes)  
-   标签：评分：9.5/10、query:q4
-   evidence：使用符合预测方法对时间序列数据进行未来冲突状态序列预测
+   evidence：使用符合预测对战争状态序列进行冲突预测
 
 ### 速读区论文标签
-1. [reward-lens: A Mechanistic Interpretability Library for Reward Models](/202605/01/2604.26130v1-reward-lens-a-mechanistic-interpretability-library-for-reward-models)  
+1. [GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval](/202605/02/2604.23779v1-glier-generative-legal-inference-and-evidence-ranking-for-legal-case-retrieval)  
+   标签：评分：6.5/10、query:profile-1
+   evidence：解释性驱动的阶段和潜在变量推理
+2. [Interpretable sequence-based machine learning consolidates candidate H3N2 hemagglutinin antigenic sites](/202605/02/biorxiv-10-64898-2026-04-28-721429-v1-interpretable-sequence-based-machine-learning-consolidates-candidate-h3n2-hemagglutinin-antigenic-sites)  
    标签：评分：6.5/10、query:q5
-   evidence：用于奖励模型的机械可解释性库，使用归因和修补技术
-2. [TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering](/202605/01/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering)  
-   标签：评分：6.5/10、query:q6
-   evidence：基于历史模式的预测性推理和因果效应分析
+   evidence：使用基于SHAP的可解释梯度提升树模型进行预测归因。
+3. [NEURA: An agentic system for autonomous neuroimaging workflows](/202605/02/biorxiv-10-64898-2026-04-27-721217-v1-neura-an-agentic-system-for-autonomous-neuroimaging-workflows)  
+   标签：评分：6.0/10、query:profile-1
+   evidence：可追溯的推理和基于证据的分析计划
 
 
 <div class="dpr-home-promo-card">

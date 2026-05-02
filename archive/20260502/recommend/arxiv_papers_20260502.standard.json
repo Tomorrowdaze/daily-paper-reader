@@ -1,0 +1,176 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-02T20:20:14.888623+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2604.25139v1",
+      "source": "arxiv",
+      "title": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "abstract": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "authors": [
+        "Aditya Basarkar",
+        "Emmett B. Kendall",
+        "David Randahl",
+        "Jonathan P. Williams",
+        "Gudmund H. Hermansen"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "stat.AP",
+        "stat.ML"
+      ],
+      "published": "2026-04-28T02:29:07+00:00",
+      "link": "https://arxiv.org/pdf/2604.25139v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 9.5,
+      "llm_evidence_en": "Conflict forecasting using conformal prediction for war-status sequences",
+      "llm_evidence_cn": "使用符合预测对战争状态序列进行冲突预测",
+      "llm_evidence": "使用符合预测对战争状态序列进行冲突预测",
+      "canonical_evidence": "使用符合预测对战争状态序列进行冲突预测",
+      "llm_tldr_en": "This paper applies conformal prediction to Markov processes for reliable conflict and war-status forecasting.",
+      "llm_tldr_cn": "本文将符合预测应用于马尔可夫过程，以实现可靠的冲突和战争状态预测。",
+      "llm_tldr": "本文将符合预测应用于马尔可夫过程，以实现可靠的冲突和战争状态预测。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2604.23779v1",
+      "source": "arxiv",
+      "title": "GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval",
+      "abstract": "The semantic gap between colloquial user queries and professional legal documents presents a fundamental challenge in Legal Case Retrieval (LCR). Existing dense retrieval methods typically treat LCR as a black-box semantic matching process, neglecting the explicit juridical logic that underpins legal relevance. To address this, we propose GLIER (Generative Legal Inference and Evidence Ranking), a framework that reformulates retrieval as an inference process over latent legal variables. GLIER decomposes the task into two interpretability-driven stages. First, a Joint Generative Inference module translates raw queries into latent legal indicators, including charges and legal elements, using a unified sequence-to-sequence strategy that jointly generates charges and elements to enforce logical consistency. Second, a Multi-View Evidence Fusion mechanism aggregates generative confidence with structural and lexical signals for precise ranking. Extensive experiments on LeCaRD and LeCaRDv2 demonstrate that GLIER outperforms strong baselines such as SAILER and KELLER. Notably, GLIER exhibits strong data efficiency, maintaining robust performance even when trained with only 10% of the data.",
+      "authors": [
+        "Minghan Li",
+        "Tianrui Lv",
+        "Chao Zhang",
+        "Guodong Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-04-26T16:02:59+00:00",
+      "link": "https://arxiv.org/pdf/2604.23779v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretability-driven stages and latent variable inference",
+      "llm_evidence_cn": "解释性驱动的阶段和潜在变量推理",
+      "llm_evidence": "解释性驱动的阶段和潜在变量推理",
+      "canonical_evidence": "解释性驱动的阶段和潜在变量推理",
+      "llm_tldr_en": "GLIER uses an interpretability-driven framework for legal retrieval that could offer methodological bridges for conflict prediction.",
+      "llm_tldr_cn": "GLIER采用解释性驱动的法律检索框架，其方法论可为冲突预测提供借鉴。",
+      "llm_tldr": "GLIER采用解释性驱动的法律检索框架，其方法论可为冲突预测提供借鉴。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-28-721429-v1",
+      "source": "biorxiv",
+      "title": "Interpretable sequence-based machine learning consolidates candidate H3N2 hemagglutinin antigenic sites",
+      "abstract": "Vaccine strain selection for seasonal influenza A(H3N2) depends on knowing which hemagglutinin (HA) substitutions are most likely to erode neutralizing antibody recognition, yet published antigenic site sets disagree substantially on which positions matter most. We applied interpretable gradient-boosted tree models with SHAP-based site attribution to two complementary hemagglutination inhibition (HI) datasets to produce a more consolidated ranking of candidate antigenic positions. Models trained on a Neher/Bedford benchmark dataset recover the canonical cluster-transition sites established by prior analyses. Moreover, after filtering the WIC dataset for confounding factors, our models recover the majority of positions from four major prior reference sets (Koel, Neher/Bedford, Harvey, and Shah) and improve concordance between rankings derived from the Neher/Bedford and WIC datasets. Rankings from our models also agree more strongly with models trained to predict sampling time or passage identity than with standard evolutionary metrics used to detect diversifying selection. Our results show that interpretable sequence-based models can provide a more integrative ranking of candidate antigenic positions across different data sources and modeling approaches. This work should aid efforts to prioritize H3N2 substitutions for epidemic surveillance.",
+      "authors": [
+        "Meyer, A. G.",
+        "Santillana, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-01T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.28.721429v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Uses interpretable gradient-boosted tree models with SHAP-based site attribution for prediction.",
+      "llm_evidence_cn": "使用基于SHAP的可解释梯度提升树模型进行预测归因。",
+      "llm_evidence": "使用基于SHAP的可解释梯度提升树模型进行预测归因。",
+      "canonical_evidence": "使用基于SHAP的可解释梯度提升树模型进行预测归因。",
+      "llm_tldr_en": "Applies interpretable ML and SHAP to identify key antigenic sites in influenza, demonstrating explainable prediction.",
+      "llm_tldr_cn": "应用可解释机器学习和SHAP识别流感抗原位点，展示了可解释预测方法的应用。",
+      "llm_tldr": "应用可解释机器学习和SHAP识别流感抗原位点，展示了可解释预测方法的应用。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-27-721217-v1",
+      "source": "biorxiv",
+      "title": "NEURA: An agentic system for autonomous neuroimaging workflows",
+      "abstract": "Neuroimaging is essential for studying the human brain; however, the deep interdisciplinary expertise required imposes a very high threshold, limiting its broader clinical and scientific applications. We introduce NEURA, a large language model (LLM)-powered agentic system for automated neuroimaging workflow planning and analysis. NEURA processes free-text research questions and multimodal neuroimaging datasets to generate evidence-grounded analysis plans, executable scripts, validated statistical results and structured reports, with traceable reasoning linked to intermediate artefacts and full execution records. Through extensive evaluations on a curated benchmark, NEURA achieved an 89.5% planning accuracy and substantially outperformed direct LLM queries, with average gains of 30.5% in planning accuracy, 25.6% in tool selection and 36.7% in tool ordering. In case studies of spinocerebellar ataxia type 3, NEURA autonomously identified cerebellar atrophy and abnormal diffusivity patterns consistent with established pathologies and expert manual analyses. Collectively, these results demonstrate that our work advances from pipeline automation to rigorous, scalable and interpretable neuroimaging research systems.",
+      "authors": [
+        "Xie, J.",
+        "Wang, J.",
+        "Wu, X.",
+        "Liu, X.",
+        "Mi, Y.",
+        "Liu, Q.",
+        "Xu, T.",
+        "Liu, C.",
+        "Chen, H.",
+        "Guo, J."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-04-30T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.27.721217v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "traceable reasoning and evidence-grounded analysis plans",
+      "llm_evidence_cn": "可追溯的推理和基于证据的分析计划",
+      "llm_evidence": "可追溯的推理和基于证据的分析计划",
+      "canonical_evidence": "可追溯的推理和基于证据的分析计划",
+      "llm_tldr_en": "NEURA provides an agentic system for traceable scientific analysis, offering a methodological bridge for explainable modeling.",
+      "llm_tldr_cn": "NEURA提供了一个可追溯科学分析的智能体系统，为可解释建模提供了方法论桥梁。",
+      "llm_tldr": "NEURA提供了一个可追溯科学分析的智能体系统，为可解释建模提供了方法论桥梁。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

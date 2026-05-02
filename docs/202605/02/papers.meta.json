@@ -1,0 +1,69 @@
+{
+  "label": "2026-05-02",
+  "date": "2026-05-02",
+  "generated_at": "2026-05-02T20:20:54",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202605/02/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes",
+      "section": "deep",
+      "title_en": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "authors": "Aditya Basarkar, Emmett B. Kendall, David Randahl, Jonathan P. Williams, Gudmund H. Hermansen",
+      "date": "2026-04-28",
+      "pdf": "https://arxiv.org/pdf/2604.25139v1",
+      "score": "9.5",
+      "evidence": "使用符合预测对战争状态序列进行冲突预测",
+      "tldr": "本文针对国家冲突状态预测问题，提出将保序预测方法用于时间相关的马尔可夫过程，以获得未来冲突序列的预测集合。相比传统的似然预测策略，该方法能提供稳健的不确定性量化，适用于模型存在偏差的情况，并在多国冲突动态数据中验证其预测能力与局限。",
+      "tags": "query:q4",
+      "abstract_en": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/02/2604.23779v1-glier-generative-legal-inference-and-evidence-ranking-for-legal-case-retrieval",
+      "section": "quick",
+      "title_en": "GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval",
+      "authors": "Minghan Li, Tianrui Lv, Chao Zhang, Guodong Zhou",
+      "date": "2026-04-26",
+      "pdf": "https://arxiv.org/pdf/2604.23779v1",
+      "score": "6.5",
+      "evidence": "解释性驱动的阶段和潜在变量推理",
+      "tldr": "本文提出GLIER框架，通过生成式法律推理和证据排序来改进法律案例检索，弥合用户查询与专业法律文本的语义差距。该方法通过联合生成法律指示变量并融合多视角证据信号，提高了检索准确性和可解释性，在多个数据集上表现优异且具数据效率。",
+      "tags": "query:profile-1",
+      "abstract_en": "The semantic gap between colloquial user queries and professional legal documents presents a fundamental challenge in Legal Case Retrieval (LCR). Existing dense retrieval methods typically treat LCR as a black-box semantic matching process, neglecting the explicit juridical logic that underpins legal relevance. To address this, we propose GLIER (Generative Legal Inference and Evidence Ranking), a framework that reformulates retrieval as an inference process over latent legal variables. GLIER decomposes the task into two interpretability-driven stages. First, a Joint Generative Inference module translates raw queries into latent legal indicators, including charges and legal elements, using a unified sequence-to-sequence strategy that jointly generates charges and elements to enforce logical consistency. Second, a Multi-View Evidence Fusion mechanism aggregates generative confidence with structural and lexical signals for precise ranking. Extensive experiments on LeCaRD and LeCaRDv2 demonstrate that GLIER outperforms strong baselines such as SAILER and KELLER. Notably, GLIER exhibits strong data efficiency, maintaining robust performance even when trained with only 10% of the data.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/02/biorxiv-10-64898-2026-04-28-721429-v1-interpretable-sequence-based-machine-learning-consolidates-candidate-h3n2-hemagglutinin-antigenic-sites",
+      "section": "quick",
+      "title_en": "Interpretable sequence-based machine learning consolidates candidate H3N2 hemagglutinin antigenic sites",
+      "authors": "Meyer, A. G., Santillana, M.",
+      "date": "2026-05-01",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.28.721429v1.full.pdf",
+      "score": "6.5",
+      "evidence": "使用基于SHAP的可解释梯度提升树模型进行预测归因。",
+      "tldr": "本研究通过解释性序列机器学习模型分析两项血凝抑制数据集，整合不同文献中对H3N2血凝素抗原位点的差异性认知，以基于SHAP特征归因的方式生成一致的抗原位点排名，为流感疫苗毒株选择提供更可靠的参考。",
+      "tags": "query:q5",
+      "abstract_en": "Vaccine strain selection for seasonal influenza A(H3N2) depends on knowing which hemagglutinin (HA) substitutions are most likely to erode neutralizing antibody recognition, yet published antigenic site sets disagree substantially on which positions matter most. We applied interpretable gradient-boosted tree models with SHAP-based site attribution to two complementary hemagglutination inhibition (HI) datasets to produce a more consolidated ranking of candidate antigenic positions. Models trained on a Neher/Bedford benchmark dataset recover the canonical cluster-transition sites established by prior analyses. Moreover, after filtering the WIC dataset for confounding factors, our models recover the majority of positions from four major prior reference sets (Koel, Neher/Bedford, Harvey, and Shah) and improve concordance between rankings derived from the Neher/Bedford and WIC datasets. Rankings from our models also agree more strongly with models trained to predict sampling time or passage identity than with standard evolutionary metrics used to detect diversifying selection. Our results show that interpretable sequence-based models can provide a more integrative ranking of candidate antigenic positions across different data sources and modeling approaches. This work should aid efforts to prioritize H3N2 substitutions for epidemic surveillance.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/02/biorxiv-10-64898-2026-04-27-721217-v1-neura-an-agentic-system-for-autonomous-neuroimaging-workflows",
+      "section": "quick",
+      "title_en": "NEURA: An agentic system for autonomous neuroimaging workflows",
+      "authors": "Xie, J., Wang, J., Wu, X., Liu, X., Mi, Y., Liu, Q., Xu, T., Liu, C., Chen, H., Guo, J.",
+      "date": "2026-04-30",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.04.27.721217v1.full.pdf",
+      "score": "6.0",
+      "evidence": "可追溯的推理和基于证据的分析计划",
+      "tldr": "本文提出NEURA，一个由大型语言模型驱动的智能系统，用于自动化处理神经影像学工作流程。它能从自然语言研究问题和多模态数据中生成分析计划、执行脚本和结果报告，并保持可追踪推理。实验显示其规划准确率达89.5%，在多项指标显著优于直接使用LLM查询，展示出在自动化、可扩展和可解释的脑影像研究中的潜力。",
+      "tags": "query:profile-1",
+      "abstract_en": "Neuroimaging is essential for studying the human brain; however, the deep interdisciplinary expertise required imposes a very high threshold, limiting its broader clinical and scientific applications. We introduce NEURA, a large language model (LLM)-powered agentic system for automated neuroimaging workflow planning and analysis. NEURA processes free-text research questions and multimodal neuroimaging datasets to generate evidence-grounded analysis plans, executable scripts, validated statistical results and structured reports, with traceable reasoning linked to intermediate artefacts and full execution records. Through extensive evaluations on a curated benchmark, NEURA achieved an 89.5% planning accuracy and substantially outperformed direct LLM queries, with average gains of 30.5% in planning accuracy, 25.6% in tool selection and 36.7% in tool ordering. In case studies of spinocerebellar ataxia type 3, NEURA autonomously identified cerebellar atrophy and abnormal diffusivity patterns consistent with established pathologies and expert manual analyses. Collectively, these results demonstrate that our work advances from pipeline automation to rigorous, scalable and interpretable neuroimaging research systems.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
