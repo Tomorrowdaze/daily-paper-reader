@@ -1,0 +1,247 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-03T20:06:45.412873+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2604.25139v1",
+      "source": "arxiv",
+      "title": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "abstract": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "authors": [
+        "Aditya Basarkar",
+        "Emmett B. Kendall",
+        "David Randahl",
+        "Jonathan P. Williams",
+        "Gudmund H. Hermansen"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "stat.AP",
+        "stat.ML"
+      ],
+      "published": "2026-04-28T02:29:07+00:00",
+      "link": "https://arxiv.org/pdf/2604.25139v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "conflict forecasting via conformal prediction for Markov processes",
+      "llm_evidence_cn": "通过马尔可夫过程的符合预测进行冲突预测",
+      "llm_evidence": "通过马尔可夫过程的符合预测进行冲突预测",
+      "canonical_evidence": "通过马尔可夫过程的符合预测进行冲突预测",
+      "llm_tldr_en": "Uses conformal prediction to provide uncertainty-aware state-sequence forecasts for national conflict.",
+      "llm_tldr_cn": "利用符合预测为国家冲突提供具有不确定性认知的状态序列预测。",
+      "llm_tldr": "利用符合预测为国家冲突提供具有不确定性认知的状态序列预测。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2604.23779v1",
+      "source": "arxiv",
+      "title": "GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval",
+      "abstract": "The semantic gap between colloquial user queries and professional legal documents presents a fundamental challenge in Legal Case Retrieval (LCR). Existing dense retrieval methods typically treat LCR as a black-box semantic matching process, neglecting the explicit juridical logic that underpins legal relevance. To address this, we propose GLIER (Generative Legal Inference and Evidence Ranking), a framework that reformulates retrieval as an inference process over latent legal variables. GLIER decomposes the task into two interpretability-driven stages. First, a Joint Generative Inference module translates raw queries into latent legal indicators, including charges and legal elements, using a unified sequence-to-sequence strategy that jointly generates charges and elements to enforce logical consistency. Second, a Multi-View Evidence Fusion mechanism aggregates generative confidence with structural and lexical signals for precise ranking. Extensive experiments on LeCaRD and LeCaRDv2 demonstrate that GLIER outperforms strong baselines such as SAILER and KELLER. Notably, GLIER exhibits strong data efficiency, maintaining robust performance even when trained with only 10% of the data.",
+      "authors": [
+        "Minghan Li",
+        "Tianrui Lv",
+        "Chao Zhang",
+        "Guodong Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-04-26T16:02:59+00:00",
+      "link": "https://arxiv.org/pdf/2604.23779v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretability-driven stages and generative legal inference for complex case retrieval",
+      "llm_evidence_cn": "解释性驱动的阶段和生成式法律推理用于复杂案件检索",
+      "llm_evidence": "解释性驱动的阶段和生成式法律推理用于复杂案件检索",
+      "canonical_evidence": "解释性驱动的阶段和生成式法律推理用于复杂案件检索",
+      "llm_tldr_en": "GLIER uses interpretable generative inference to bridge semantic gaps in legal document retrieval.",
+      "llm_tldr_cn": "GLIER利用可解释的生成式推理来弥补法律文件检索中的语义鸿沟。",
+      "llm_tldr": "GLIER利用可解释的生成式推理来弥补法律文件检索中的语义鸿沟。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.28076v1",
+      "source": "arxiv",
+      "title": "TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering",
+      "abstract": "Large Language Models (LLMs) have advanced Table Question Answering, where most queries can be answered by extracting information or simple aggregation. However, a common class of real-world queries is implicitly predictive, requiring the inference of unobserved answers from historical patterns rather than mere retrieval. These queries introduce two challenges: recognizing latent intent and reliable predictive reasoning over massive tables. To assess LLMs in such Tabular questiOn answering with implicit Prediction tasks, we introduce TopBench, a benchmark consisting of 779 samples across four sub-tasks, ranging from single-point prediction to decision making, treatment effect analysis, and complex filtering, requiring models to generate outputs spanning reasoning text and structured tables. We evaluate diverse models under both text-based and agentic workflows. Experiments reveal that current models often struggle with intent recognition, defaulting to just lookups. Deeper analysis identifies that accurate intent disambiguation serves as the prerequisite for leading these predictive behaviors. Furthermore, elevating the upper bound of prediction precision requires the integration of more sophisticated modeling or reasoning capabilities.",
+      "authors": [
+        "An-Yang Ji",
+        "Jun-Peng Jiang",
+        "De-Chuan Zhan",
+        "Han-Jia Ye"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-04-30T16:22:51+00:00",
+      "link": "https://arxiv.org/pdf/2604.28076v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "treatment effect analysis and predictive reasoning over historical patterns",
+      "llm_evidence_cn": "历史模式的预测推理与处理效应分析",
+      "llm_evidence": "历史模式的预测推理与处理效应分析",
+      "canonical_evidence": "历史模式的预测推理与处理效应分析",
+      "llm_tldr_en": "A benchmark for implicit prediction and treatment effect analysis in tabular data using LLMs.",
+      "llm_tldr_cn": "一个用于评估大模型在表格数据上进行隐式预测和处理效应分析能力的基准。",
+      "llm_tldr": "一个用于评估大模型在表格数据上进行隐式预测和处理效应分析能力的基准。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.26130v1",
+      "source": "arxiv",
+      "title": "reward-lens: A Mechanistic Interpretability Library for Reward Models",
+      "abstract": "Every RLHF-trained language model is shaped by a reward model, yet the mechanistic interpretability toolkit -- logit lens, direct logit attribution, activation patching, sparse autoencoders -- was built for generative LLMs whose primitives all project onto a vocabulary unembedding. Reward models replace that with a scalar regression head, breaking each tool. We present reward-lens, an open-source library that ports this toolkit to reward models, organised around one observation: the reward head's weight vector $w_r$ is the natural axis for every interpretability question. The library provides a Reward Lens, component attribution, three-mode activation patching, a reward-hacking probe suite, TopK SAE feature attribution, cross-model comparison, and five theory-grounded extensions (distortion index, divergence-aware patching, misalignment cascade detection, reward-term conflict analysis, concept-vector analysis). A ten-method adapter protocol covers Llama, Mistral, Gemma-2, and ArmoRM multi-objective heads, with a generic adapter for any HuggingFace sequence classification model. We validate on two production reward models across ~695 RewardBench pairs. The central empirical finding is negative: linear attribution does not predict causal patching effects (mean Spearman $ρ= -0.256$ on Skywork, $-0.027$ on ArmoRM). The framework treats this disagreement as a property to expose, not a bug -- motivating a design that keeps observational and causal views first-class and directly comparable.",
+      "authors": [
+        "Mohammed Suhail B Nadaf"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-04-28T21:38:10+00:00",
+      "link": "https://arxiv.org/pdf/2604.26130v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Mechanistic interpretability library for reward models using attribution and patching",
+      "llm_evidence_cn": "用于奖励模型的可解释性库，包含归因和修补技术",
+      "llm_evidence": "用于奖励模型的可解释性库，包含归因和修补技术",
+      "canonical_evidence": "用于奖励模型的可解释性库，包含归因和修补技术",
+      "llm_tldr_en": "Introduces reward-lens, a library for mechanistic interpretability of reward models in RLHF.",
+      "llm_tldr_cn": "推出了reward-lens，一个用于RLHF奖励模型机械可解释性分析的开源库。",
+      "llm_tldr": "推出了reward-lens，一个用于RLHF奖励模型机械可解释性分析的开源库。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-28-721329-v1",
+      "source": "biorxiv",
+      "title": "DCAFA: Differential Community Abundance and Feature Analysis for Histological Images",
+      "abstract": "Histological images are composed of diverse local structures such as cells, glands, or tissue patches, whose organisation and relative abundance reflect underlying biological processes. While most computational approaches focus on analysing individual features, many clinically relevant signals arise from changes in the composition of these structures rather than isolated measurements. This motivates the need for explicitly modelling how groups of similar instances vary across samples and relate to outcomes. We present DCAFA (Differential Community Abundance and Feature Attribution Analysis), a regression-based framework for analysing hierarchical biomedical data through both compositional and feature-level perspectives. DCAFA groups instances into latent communities representing recurring morphological or phenotypic patterns, and then performs two complementary analyses: (i) community composition analysis, which identifies groups that are enriched or depleted across outcomes, and (ii) feature attribution analysis, which quantifies how instance-level features relate to outcomes directly or within specific communities. Both use generalised linear and mixed-effects models, enabling covariate adjustment and inference through effect sizes, confidence intervals, and false discovery rate control. We demonstrate the utility of DCAFA across multiple biomedical settings, including endometrial histopathology, spatial transcriptomics, multiplex immunofluorescence imaging, and predefined cell-type analyses in colorectal cancer. These examples identify interpretable compositional shifts and context-specific feature associations that are not captured by conventional feature-based approaches. By unifying differential abundance testing and feature attribution within a single statistical framework, DCAFA serves as an openly available toolbox that provides a practical and interpretable means of linking tissue composition with clinical or molecular outcomes in biomedical imaging data. Code available at: https://github.com/wgrgwrght/DCAFA",
+      "authors": [
+        "Wright, G.",
+        "Keller, P.",
+        "Muter, J.",
+        "Brosens, J.",
+        "Tejpar, S.",
+        "Minhas, F."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-04-30T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.28.721329v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "regression-based framework for feature attribution analysis",
+      "llm_evidence_cn": "基于回归的特征归因分析框架",
+      "llm_evidence": "基于回归的特征归因分析框架",
+      "canonical_evidence": "基于回归的特征归因分析框架",
+      "llm_tldr_en": "Introduces a framework for hierarchical biomedical data analysis using feature attribution.",
+      "llm_tldr_cn": "提出一种利用特征归因分析分层生物医学数据的回归框架。",
+      "llm_tldr": "提出一种利用特征归因分析分层生物医学数据的回归框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-28-721429-v1",
+      "source": "biorxiv",
+      "title": "Interpretable sequence-based machine learning consolidates candidate H3N2 hemagglutinin antigenic sites",
+      "abstract": "Vaccine strain selection for seasonal influenza A(H3N2) depends on knowing which hemagglutinin (HA) substitutions are most likely to erode neutralizing antibody recognition, yet published antigenic site sets disagree substantially on which positions matter most. We applied interpretable gradient-boosted tree models with SHAP-based site attribution to two complementary hemagglutination inhibition (HI) datasets to produce a more consolidated ranking of candidate antigenic positions. Models trained on a Neher/Bedford benchmark dataset recover the canonical cluster-transition sites established by prior analyses. Moreover, after filtering the WIC dataset for confounding factors, our models recover the majority of positions from four major prior reference sets (Koel, Neher/Bedford, Harvey, and Shah) and improve concordance between rankings derived from the Neher/Bedford and WIC datasets. Rankings from our models also agree more strongly with models trained to predict sampling time or passage identity than with standard evolutionary metrics used to detect diversifying selection. Our results show that interpretable sequence-based models can provide a more integrative ranking of candidate antigenic positions across different data sources and modeling approaches. This work should aid efforts to prioritize H3N2 substitutions for epidemic surveillance.",
+      "authors": [
+        "Meyer, A. G.",
+        "Santillana, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-01T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.28.721429v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable machine learning with SHAP-based site attribution",
+      "llm_evidence_cn": "基于SHAP归因的可解释机器学习模型",
+      "llm_evidence": "基于SHAP归因的可解释机器学习模型",
+      "canonical_evidence": "基于SHAP归因的可解释机器学习模型",
+      "llm_tldr_en": "Applies interpretable gradient-boosted trees to identify key antigenic sites in influenza viruses.",
+      "llm_tldr_cn": "应用可解释梯度提升树模型识别流感病毒的关键抗原位点。",
+      "llm_tldr": "应用可解释梯度提升树模型识别流感病毒的关键抗原位点。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
