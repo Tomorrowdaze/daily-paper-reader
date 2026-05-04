@@ -1,0 +1,241 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-04T20:08:52.908893+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2604.25139v1",
+      "source": "arxiv",
+      "title": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "abstract": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "authors": [
+        "Aditya Basarkar",
+        "Emmett B. Kendall",
+        "David Randahl",
+        "Jonathan P. Williams",
+        "Gudmund H. Hermansen"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "stat.AP",
+        "stat.ML"
+      ],
+      "published": "2026-04-28T02:29:07+00:00",
+      "link": "https://arxiv.org/pdf/2604.25139v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 9.5,
+      "llm_evidence_en": "Predicting future conflict state-sequences using conformal prediction on temporal data.",
+      "llm_evidence_cn": "使用符合预测法对时间序列数据进行冲突状态序列预测。",
+      "llm_evidence": "使用符合预测法对时间序列数据进行冲突状态序列预测。",
+      "canonical_evidence": "使用符合预测法对时间序列数据进行冲突状态序列预测。",
+      "llm_tldr_en": "Applies conformal prediction to Markov processes for reliable conflict forecasting and state-sequence estimation.",
+      "llm_tldr_cn": "将符合预测应用于马尔可夫过程，以实现可靠的冲突预测和状态序列估计。",
+      "llm_tldr": "将符合预测应用于马尔可夫过程，以实现可靠的冲突预测和状态序列估计。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.00631v1",
+      "source": "arxiv",
+      "title": "H-RAG at SemEval-2026 Task 8: Hierarchical Parent-Child Retrieval for Multi-Turn RAG Conversations",
+      "abstract": "We present H-RAG, our submission to SemEval-2026 Task 8 (MTRAGEval), addressing both Task A (Retrieval) and Task C (Generation with Retrieved Passages). Task A evaluates standalone retrieval quality, while Task C assesses end-to-end retrieval-augmented generation (RAG) in multi-turn conversational settings, requiring both accurate answer generation and faithful grounding in retrieved evidence. Our approach implements a hierarchical parent-child RAG pipeline that separates fine-grained child-level retrieval from parent-level context reconstruction during generation. Documents are segmented into overlapping sentence-based child chunks, while full documents are preserved as parent units to provide coherent context. Retrieval combines hybrid dense-sparse search, tunable weighting, and embedding-based similarity rescoring over child chunks. Retrieved evidence is aggregated at the parent level and supplied to an instruction-tuned language model for response generation. H-RAG achieves an nDCG@5 score of 0.4271 on Task A and a harmonic mean score of 0.3241 on Task C (RB_agg: 0.2488, RL_F: 0.2703, RB_llm: 0.6508), underscoring the importance of retrieval configuration and parent-level aggregation in multi-turn RAG performance.",
+      "authors": [
+        "Passant Elchafei",
+        "Hossam Emam",
+        "Mohamed Alansary",
+        "Monorama Swain",
+        "Markus Schedl"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-05-01T13:07:19+00:00",
+      "link": "https://arxiv.org/pdf/2605.00631v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Addresses Task C (Generation with Retrieved Passages) in RAG",
+      "llm_evidence_cn": "在RAG中处理任务C（使用检索到的段落进行生成）",
+      "llm_evidence": "在RAG中处理任务C（使用检索到的段落进行生成）",
+      "canonical_evidence": "在RAG中处理任务C（使用检索到的段落进行生成）",
+      "llm_tldr_en": "Introduces H-RAG, a hierarchical retrieval-augmented generation pipeline for multi-turn conversations.",
+      "llm_tldr_cn": "介绍H-RAG，一种用于多轮对话的分层检索增强生成流水线。",
+      "llm_tldr": "介绍H-RAG，一种用于多轮对话的分层检索增强生成流水线。",
+      "llm_tags": [
+        "query:q3"
+      ],
+      "matched_query_tag": "query:q3",
+      "matched_query_text": "C",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2604.26130v1",
+      "source": "arxiv",
+      "title": "reward-lens: A Mechanistic Interpretability Library for Reward Models",
+      "abstract": "Every RLHF-trained language model is shaped by a reward model, yet the mechanistic interpretability toolkit -- logit lens, direct logit attribution, activation patching, sparse autoencoders -- was built for generative LLMs whose primitives all project onto a vocabulary unembedding. Reward models replace that with a scalar regression head, breaking each tool. We present reward-lens, an open-source library that ports this toolkit to reward models, organised around one observation: the reward head's weight vector $w_r$ is the natural axis for every interpretability question. The library provides a Reward Lens, component attribution, three-mode activation patching, a reward-hacking probe suite, TopK SAE feature attribution, cross-model comparison, and five theory-grounded extensions (distortion index, divergence-aware patching, misalignment cascade detection, reward-term conflict analysis, concept-vector analysis). A ten-method adapter protocol covers Llama, Mistral, Gemma-2, and ArmoRM multi-objective heads, with a generic adapter for any HuggingFace sequence classification model. We validate on two production reward models across ~695 RewardBench pairs. The central empirical finding is negative: linear attribution does not predict causal patching effects (mean Spearman $ρ= -0.256$ on Skywork, $-0.027$ on ArmoRM). The framework treats this disagreement as a property to expose, not a bug -- motivating a design that keeps observational and causal views first-class and directly comparable.",
+      "authors": [
+        "Mohammed Suhail B Nadaf"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-04-28T21:38:10+00:00",
+      "link": "https://arxiv.org/pdf/2604.26130v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Mechanistic interpretability library for reward models",
+      "llm_evidence_cn": "奖励模型的可解释性分析工具库",
+      "llm_evidence": "奖励模型的可解释性分析工具库",
+      "canonical_evidence": "奖励模型的可解释性分析工具库",
+      "llm_tldr_en": "Presents reward-lens, a library for mechanistic interpretability of reward models in RLHF.",
+      "llm_tldr_cn": "推出reward-lens，一个用于RLHF奖励模型机械可解释性分析的开源库。",
+      "llm_tldr": "推出reward-lens，一个用于RLHF奖励模型机械可解释性分析的开源库。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.23734v1",
+      "source": "arxiv",
+      "title": "Prism-Reranker: Beyond Relevance Scoring -- Jointly Producing Contributions and Evidence for Agentic Retrieval",
+      "abstract": "Modern retrieval pipelines increasingly serve downstream consumers like retrieval-augmented generation (RAG) and autonomous agents that need more than a scalar relevance score. A reranker that only tells the caller \"how relevant\" forces the agent to dump entire documents into the language-model context, wasting tokens on tangential passages and boilerplate. We introduce Prism-Reranker, a family of reranker models built on Qwen3.5 at four sizes (0.8B, 2B, 4B, 9B) that goes beyond scalar scoring. In addition to the standard yes/no relevance judgement, whenever the verdict is yes the model emits (i) a contribution statement summarizing how the document helps the query, and (ii) an evidence passage: a self-contained rewrite that preserves every query-relevant signal while discarding noise. Prism-Reranker is trained with a hybrid objective combining point-wise distillation from a strong commercial reranker API with supervised fine-tuning on contribution and evidence targets. We curate training data from KaLM-Embedding's open-source aggregation, augmented with real web documents retrieved via commercial search APIs for open-domain queries and LLM-synthesized variants, and rewrite a portion of queries into keyword-style reformulations to adapt the model to agent-issued traffic. To reconcile inconsistent labels across open corpora and obtain crisp binary supervision, we relabel data with an LLM-as-Judge ensemble aggregating votes from five frontier LLMs. On a QA subset of BEIR and on an LLM-judged evaluation of contribution and evidence quality, Prism-Reranker attains solid results across all four sizes. We further show that the same recipe extends existing LLM-based rerankers, augmenting Qwen3-Reranker-4B with contribution and evidence capabilities while improving its average BEIR-QA NDCG@10 by +1.54 over the base model. Model weights, training recipe, and evaluation suite are released.",
+      "authors": [
+        "Dun Zhang"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-04-26T14:28:48+00:00",
+      "link": "https://arxiv.org/pdf/2604.23734v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Produces evidence and contribution statements for retrieval transparency",
+      "llm_evidence_cn": "为检索透明度生成证据和贡献陈述",
+      "llm_evidence": "为检索透明度生成证据和贡献陈述",
+      "canonical_evidence": "为检索透明度生成证据和贡献陈述",
+      "llm_tldr_en": "A reranker that provides evidence and summaries to improve interpretability in retrieval tasks.",
+      "llm_tldr_cn": "一种提供证据和摘要以提高检索任务可解释性的重排序模型。",
+      "llm_tldr": "一种提供证据和摘要以提高检索任务可解释性的重排序模型。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.23779v1",
+      "source": "arxiv",
+      "title": "GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval",
+      "abstract": "The semantic gap between colloquial user queries and professional legal documents presents a fundamental challenge in Legal Case Retrieval (LCR). Existing dense retrieval methods typically treat LCR as a black-box semantic matching process, neglecting the explicit juridical logic that underpins legal relevance. To address this, we propose GLIER (Generative Legal Inference and Evidence Ranking), a framework that reformulates retrieval as an inference process over latent legal variables. GLIER decomposes the task into two interpretability-driven stages. First, a Joint Generative Inference module translates raw queries into latent legal indicators, including charges and legal elements, using a unified sequence-to-sequence strategy that jointly generates charges and elements to enforce logical consistency. Second, a Multi-View Evidence Fusion mechanism aggregates generative confidence with structural and lexical signals for precise ranking. Extensive experiments on LeCaRD and LeCaRDv2 demonstrate that GLIER outperforms strong baselines such as SAILER and KELLER. Notably, GLIER exhibits strong data efficiency, maintaining robust performance even when trained with only 10% of the data.",
+      "authors": [
+        "Minghan Li",
+        "Tianrui Lv",
+        "Chao Zhang",
+        "Guodong Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-04-26T16:02:59+00:00",
+      "link": "https://arxiv.org/pdf/2604.23779v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretability-driven inference over latent variables and evidence ranking",
+      "llm_evidence_cn": "基于潜变量和证据排序的可解释性驱动推理",
+      "llm_evidence": "基于潜变量和证据排序的可解释性驱动推理",
+      "canonical_evidence": "基于潜变量和证据排序的可解释性驱动推理",
+      "llm_tldr_en": "A framework for legal retrieval using interpretable generative inference and evidence ranking.",
+      "llm_tldr_cn": "一种利用可解释生成式推理和证据排序进行法律检索的框架。",
+      "llm_tldr": "一种利用可解释生成式推理和证据排序进行法律检索的框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-28-721429-v1",
+      "source": "biorxiv",
+      "title": "Interpretable sequence-based machine learning consolidates candidate H3N2 hemagglutinin antigenic sites",
+      "abstract": "Vaccine strain selection for seasonal influenza A(H3N2) depends on knowing which hemagglutinin (HA) substitutions are most likely to erode neutralizing antibody recognition, yet published antigenic site sets disagree substantially on which positions matter most. We applied interpretable gradient-boosted tree models with SHAP-based site attribution to two complementary hemagglutination inhibition (HI) datasets to produce a more consolidated ranking of candidate antigenic positions. Models trained on a Neher/Bedford benchmark dataset recover the canonical cluster-transition sites established by prior analyses. Moreover, after filtering the WIC dataset for confounding factors, our models recover the majority of positions from four major prior reference sets (Koel, Neher/Bedford, Harvey, and Shah) and improve concordance between rankings derived from the Neher/Bedford and WIC datasets. Rankings from our models also agree more strongly with models trained to predict sampling time or passage identity than with standard evolutionary metrics used to detect diversifying selection. Our results show that interpretable sequence-based models can provide a more integrative ranking of candidate antigenic positions across different data sources and modeling approaches. This work should aid efforts to prioritize H3N2 substitutions for epidemic surveillance.",
+      "authors": [
+        "Meyer, A. G.",
+        "Santillana, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-01T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.28.721429v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable machine learning with SHAP-based attribution",
+      "llm_evidence_cn": "基于SHAP属性的可解释机器学习",
+      "llm_evidence": "基于SHAP属性的可解释机器学习",
+      "canonical_evidence": "基于SHAP属性的可解释机器学习",
+      "llm_tldr_en": "Applies interpretable gradient-boosted trees and SHAP to identify influenza antigenic sites.",
+      "llm_tldr_cn": "应用可解释梯度提升树和SHAP识别流感抗原位点。",
+      "llm_tldr": "应用可解释梯度提升树和SHAP识别流感抗原位点。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
