@@ -6,40 +6,37 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-04
-- 运行时间：2026-05-04 20:10:40 UTC
+- 最新运行日期：2026-05-05
+- 运行时间：2026-05-05 20:22:11 UTC
 - 运行状态：成功
-- 本次总论文数：6
-- 精读区：2
+- 本次总论文数：5
+- 精读区：1
 - 速读区：4
 
 ### 今日简报（AI）
-聚焦预测与检索两大主题，今日完成 6 篇论文阅读。  
-重点推荐冲突预测的统计保序方法与层级检索在多轮对话中的新用法。  
-建议普通读者关注预测模型的稳健性及检索系统的语义层级优化趋势。
-- 详情：[/202605/04/README](/202605/04/README)
+预测研究专场：冲突趋势与隐式推理齐聚。  
+重点可看高分论文《Conflict Forecasting via Conformal Prediction for Markov Processes》，揭示马尔可夫过程下的冲突预测新方法。  
+建议读者关注预测可靠性与模型可解释性，逐步了解前沿推断框架。
+- 详情：[/202605/05/README](/202605/05/README)
 
 ### 精读区论文标签
-1. [Conflict Forecasting via Conformal Prediction for Markov Processes](/202605/04/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes)  
+1. [Conflict Forecasting via Conformal Prediction for Markov Processes](/202605/05/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes)  
    标签：评分：9.5/10、query:q4
-   evidence：使用符合预测法对时间序列数据进行冲突状态序列预测。
-2. [H-RAG at SemEval-2026 Task 8: Hierarchical Parent-Child Retrieval for Multi-Turn RAG Conversations](/202605/04/2605.00631v1-h-rag-at-semeval-2026-task-8-hierarchical-parent-child-retrieval-for-multi-turn-rag-conversations)  
-   标签：评分：9.0/10、query:q3
-   evidence：在RAG中处理任务C（使用检索到的段落进行生成）
+   evidence：使用符合性预测进行冲突状态序列预测
 
 ### 速读区论文标签
-1. [reward-lens: A Mechanistic Interpretability Library for Reward Models](/202605/04/2604.26130v1-reward-lens-a-mechanistic-interpretability-library-for-reward-models)  
+1. [Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases](/202605/05/2605.02286v1-empirical-evaluation-of-deadline-resolved-information-leakage-on-documented-polymarket-insider-cases)  
    标签：评分：7.0/10、query:q5
-   evidence：奖励模型的可解释性分析工具库
-2. [Prism-Reranker: Beyond Relevance Scoring -- Jointly Producing Contributions and Evidence for Agentic Retrieval](/202605/04/2604.23734v1-prism-reranker-beyond-relevance-scoring----jointly-producing-contributions-and-evidence-for-agentic-retrieval)  
+   evidence：评估了关于美伊冲突集群预测市场中的信息泄露。
+2. [ReMedi: Reasoner for Medical Clinical Prediction](/202605/05/2605.01474v1-remedi-reasoner-for-medical-clinical-prediction)  
+   标签：评分：6.5/10、query:q5
+   evidence：使用理由-答案对的可解释临床预测
+3. [TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering](/202605/05/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering)  
+   标签：评分：6.0/10、query:q4
+   evidence：对表格数据进行隐式预测和推理，包括处理效应分析
+4. [NEURA: An agentic system for autonomous neuroimaging workflows](/202605/05/biorxiv-10-64898-2026-04-27-721217-v1-neura-an-agentic-system-for-autonomous-neuroimaging-workflows)  
    标签：评分：6.0/10、query:q5
-   evidence：为检索透明度生成证据和贡献陈述
-3. [GLIER: Generative Legal Inference and Evidence Ranking for Legal Case Retrieval](/202605/04/2604.23779v1-glier-generative-legal-inference-and-evidence-ranking-for-legal-case-retrieval)  
-   标签：评分：6.0/10、query:q6
-   evidence：基于潜变量和证据排序的可解释性驱动推理
-4. [Interpretable sequence-based machine learning consolidates candidate H3N2 hemagglutinin antigenic sites](/202605/04/biorxiv-10-64898-2026-04-28-721429-v1-interpretable-sequence-based-machine-learning-consolidates-candidate-h3n2-hemagglutinin-antigenic-sites)  
-   标签：评分：6.0/10、query:q5
-   evidence：基于SHAP属性的可解释机器学习
+   evidence：可追溯的推理和基于证据的分析计划
 
 
 <div class="dpr-home-promo-card">

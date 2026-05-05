@@ -1,0 +1,215 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-05T20:19:57.342794+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2604.25139v1",
+      "source": "arxiv",
+      "title": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "abstract": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "authors": [
+        "Aditya Basarkar",
+        "Emmett B. Kendall",
+        "David Randahl",
+        "Jonathan P. Williams",
+        "Gudmund H. Hermansen"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "stat.AP",
+        "stat.ML"
+      ],
+      "published": "2026-04-28T02:29:07+00:00",
+      "link": "https://arxiv.org/pdf/2604.25139v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 9.5,
+      "llm_evidence_en": "Conflict forecasting using conformal prediction for state-sequences",
+      "llm_evidence_cn": "使用符合性预测进行冲突状态序列预测",
+      "llm_evidence": "使用符合性预测进行冲突状态序列预测",
+      "canonical_evidence": "使用符合性预测进行冲突状态序列预测",
+      "llm_tldr_en": "Applies conformal prediction to Markov processes for reliable conflict state-sequence forecasting.",
+      "llm_tldr_cn": "将符合性预测应用于马尔可夫过程，以实现可靠的冲突状态序列预测。",
+      "llm_tldr": "将符合性预测应用于马尔可夫过程，以实现可靠的冲突状态序列预测。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.02286v1",
+      "source": "arxiv",
+      "title": "Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases",
+      "abstract": "This paper reports an end-to-end empirical evaluation of the deadline-Information Leakage Score (ILS-dl) extension introduced in the companion methodology paper. The deadline-ILS extends the original ILS to deadline-resolved prediction-market contracts, the dominant structural form of publicly documented insider trading on Polymarket. We anchor the evaluation in the 2026 U.S.-Iran conflict cluster of the ForesightFlow Insider Cases (FFIC) inventory, the largest documented deadline cluster. The evaluation has four parts: per-category exponential-hazard estimation, a single-case ILS-dl computation, cross-market wallet analysis, and methodological refinements.   Hazard-rate estimation produces an adequate exponential fit for military-geopolitics markets (KS p = 0.609, half-life 2.3 days) and a preliminary fit for corporate-disclosure markets (n = 5). The regulatory-decision category is rejected as bimodal (p = 0.013). On the largest applicable FFIC contract (\"US forces enter Iran by April 30,\" $269M volume), the article-derived public-event timestamp yields ILS-dl = +0.113 versus a resolution-anchored proxy value of -0.331: a 0.444 shift in magnitude on opposite sides of zero, demonstrating that the extension distinguishes signal from proxy artefact. Pre-event drift is mild, and short-window variants (30-min, 2-hour) are exactly zero. Cross-market wallet analysis identifies 332 wallets active in both major Iran-cluster markets, but the available trade history covers only the resolution-settlement window.",
+      "authors": [
+        "Maksym Nechepurenko"
+      ],
+      "primary_category": "q-fin.TR",
+      "categories": [
+        "q-fin.TR",
+        "q-fin.GN"
+      ],
+      "published": "2026-05-04T07:22:13+00:00",
+      "link": "https://arxiv.org/pdf/2605.02286v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Evaluates information leakage in prediction markets regarding the U.S.-Iran conflict cluster.",
+      "llm_evidence_cn": "评估了关于美伊冲突集群预测市场中的信息泄露。",
+      "llm_evidence": "评估了关于美伊冲突集群预测市场中的信息泄露。",
+      "canonical_evidence": "评估了关于美伊冲突集群预测市场中的信息泄露。",
+      "llm_tldr_en": "Empirical evaluation of prediction market dynamics during geopolitical conflicts like the U.S.-Iran tension.",
+      "llm_tldr_cn": "对美伊紧张局势等地缘政治冲突期间预测市场动态的实证评估。",
+      "llm_tldr": "对美伊紧张局势等地缘政治冲突期间预测市场动态的实证评估。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.01474v1",
+      "source": "arxiv",
+      "title": "ReMedi: Reasoner for Medical Clinical Prediction",
+      "abstract": "Predicting future clinical outcomes from electronic health records (EHR) remains challenging due to the complexity and heterogeneity of patient data. LLMs have shown strong potential for such predictive tasks, yet existing approaches mainly focus on enhancing medical knowledge through distillation or RAG while relying on the model's internal ability to interpret contextual information. In this work, we present ReMedi (Reasoner for Medical Clinical Prediction), a framework for improving clinical outcome prediction from EHR. ReMedi generates rationale-answer pairs using a challenging sample regeneration mechanism for complex clinical questions, which leverages ground-truth answers as hints to enhance reasoning for further fine-tuning and preference tuning. ReMedi integrates ground-truth outcome guidance into the preference data construction loop, regenerating rationale-answer variants. By tuning on these rationale-answer pairs, the model improves its predictive performance. Experiments on multiple EHR prediction tasks demonstrate substantial gains of up to 19.9 percent over state-of-the-art baselines in terms of F1 score, underscoring ReMedi's effectiveness in real-world clinical prediction.",
+      "authors": [
+        "Yushi Cao",
+        "Yiming Chen",
+        "Hongchao Jiang",
+        "Hung-yi Lee",
+        "Robby T. Tan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-05-02T14:44:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.01474v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable clinical prediction using rationale-answer pairs",
+      "llm_evidence_cn": "使用理由-答案对的可解释临床预测",
+      "llm_evidence": "使用理由-答案对的可解释临床预测",
+      "canonical_evidence": "使用理由-答案对的可解释临床预测",
+      "llm_tldr_en": "ReMedi improves clinical prediction by generating rationales to enhance reasoning and interpretability.",
+      "llm_tldr_cn": "ReMedi通过生成推理过程来提高临床预测的准确性和可解释性。",
+      "llm_tldr": "ReMedi通过生成推理过程来提高临床预测的准确性和可解释性。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.28076v1",
+      "source": "arxiv",
+      "title": "TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering",
+      "abstract": "Large Language Models (LLMs) have advanced Table Question Answering, where most queries can be answered by extracting information or simple aggregation. However, a common class of real-world queries is implicitly predictive, requiring the inference of unobserved answers from historical patterns rather than mere retrieval. These queries introduce two challenges: recognizing latent intent and reliable predictive reasoning over massive tables. To assess LLMs in such Tabular questiOn answering with implicit Prediction tasks, we introduce TopBench, a benchmark consisting of 779 samples across four sub-tasks, ranging from single-point prediction to decision making, treatment effect analysis, and complex filtering, requiring models to generate outputs spanning reasoning text and structured tables. We evaluate diverse models under both text-based and agentic workflows. Experiments reveal that current models often struggle with intent recognition, defaulting to just lookups. Deeper analysis identifies that accurate intent disambiguation serves as the prerequisite for leading these predictive behaviors. Furthermore, elevating the upper bound of prediction precision requires the integration of more sophisticated modeling or reasoning capabilities.",
+      "authors": [
+        "An-Yang Ji",
+        "Jun-Peng Jiang",
+        "De-Chuan Zhan",
+        "Han-Jia Ye"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-04-30T16:22:51+00:00",
+      "link": "https://arxiv.org/pdf/2604.28076v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "implicit prediction and reasoning over tabular data including treatment effect analysis",
+      "llm_evidence_cn": "对表格数据进行隐式预测和推理，包括处理效应分析",
+      "llm_evidence": "对表格数据进行隐式预测和推理，包括处理效应分析",
+      "canonical_evidence": "对表格数据进行隐式预测和推理，包括处理效应分析",
+      "llm_tldr_en": "A benchmark for implicit prediction and causal reasoning over tabular data, applicable to conflict modeling.",
+      "llm_tldr_cn": "一个用于表格数据隐式预测和因果推理的基准，可应用于冲突建模。",
+      "llm_tldr": "一个用于表格数据隐式预测和因果推理的基准，可应用于冲突建模。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-04-27-721217-v1",
+      "source": "biorxiv",
+      "title": "NEURA: An agentic system for autonomous neuroimaging workflows",
+      "abstract": "Neuroimaging is essential for studying the human brain; however, the deep interdisciplinary expertise required imposes a very high threshold, limiting its broader clinical and scientific applications. We introduce NEURA--a large language model (LLM)-powered agentic system for automated neuroimaging workflow planning and analysis. NEURA processes free-text research questions and multimodal neuroimaging datasets to generate evidence-grounded analysis plans, executable scripts, validated statistical results and structured reports, with traceable reasoning linked to intermediate artefacts and full execution records. Through extensive evaluations on a curated benchmark, NEURA achieved an 89.5% planning accuracy and substantially outperformed direct LLM queries, with average gains of 30.5% in planning accuracy, 25.6% in tool selection and 36.7% in tool ordering. In case studies of spinocerebellar ataxia type 3, NEURA autonomously identified cerebellar atrophy and abnormal diffusivity patterns consistent with established pathologies and expert manual analyses. Collectively, these results demonstrate that our work advances from pipeline automation to rigorous, scalable and interpretable neuroimaging research systems.",
+      "authors": [
+        "Xie, J.",
+        "Wang, J.",
+        "Wu, X.",
+        "Liu, X.",
+        "Mi, Y.",
+        "Liu, Q.",
+        "Xu, T.",
+        "Liu, C.",
+        "Chen, H.",
+        "Guo, J."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-04-30T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.04.27.721217v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "traceable reasoning and evidence-grounded analysis plans",
+      "llm_evidence_cn": "可追溯的推理和基于证据的分析计划",
+      "llm_evidence": "可追溯的推理和基于证据的分析计划",
+      "canonical_evidence": "可追溯的推理和基于证据的分析计划",
+      "llm_tldr_en": "NEURA uses LLMs for autonomous neuroimaging analysis with traceable reasoning and structured reports.",
+      "llm_tldr_cn": "NEURA利用大模型实现具有可追溯推理过程的自动化神经影像分析系统。",
+      "llm_tldr": "NEURA利用大模型实现具有可追溯推理过程的自动化神经影像分析系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
