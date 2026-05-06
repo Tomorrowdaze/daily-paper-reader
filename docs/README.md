@@ -6,37 +6,34 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-05
-- 运行时间：2026-05-05 20:22:11 UTC
+- 最新运行日期：2026-05-06
+- 运行时间：2026-05-06 20:33:28 UTC
 - 运行状态：成功
-- 本次总论文数：5
+- 本次总论文数：4
 - 精读区：1
-- 速读区：4
+- 速读区：3
 
 ### 今日简报（AI）
-预测研究专场：冲突趋势与隐式推理齐聚。  
-重点可看高分论文《Conflict Forecasting via Conformal Prediction for Markov Processes》，揭示马尔可夫过程下的冲突预测新方法。  
-建议读者关注预测可靠性与模型可解释性，逐步了解前沿推断框架。
-- 详情：[/202605/05/README](/202605/05/README)
+今天聚焦于冲突预测与推理建模方向，共阅读 4 篇前沿论文。  
+最值得关注的是基于马尔可夫过程的保形预测方法，可显著提升复杂系统中的冲突风险预判。  
+建议下步重点跟进预测模型的稳健性评估及其在社会、经济场景中的应用潜力。
+- 详情：[/202605/06/README](/202605/06/README)
 
 ### 精读区论文标签
-1. [Conflict Forecasting via Conformal Prediction for Markov Processes](/202605/05/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes)  
+1. [Conflict Forecasting via Conformal Prediction for Markov Processes](/202605/06/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes)  
    标签：评分：9.5/10、query:q4
-   evidence：使用符合性预测进行冲突状态序列预测
+   evidence：使用符合预测进行冲突状态序列预测并量化不确定性
 
 ### 速读区论文标签
-1. [Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases](/202605/05/2605.02286v1-empirical-evaluation-of-deadline-resolved-information-leakage-on-documented-polymarket-insider-cases)  
-   标签：评分：7.0/10、query:q5
-   evidence：评估了关于美伊冲突集群预测市场中的信息泄露。
-2. [ReMedi: Reasoner for Medical Clinical Prediction](/202605/05/2605.01474v1-remedi-reasoner-for-medical-clinical-prediction)  
+1. [reward-lens: A Mechanistic Interpretability Library for Reward Models](/202605/06/2604.26130v1-reward-lens-a-mechanistic-interpretability-library-for-reward-models)  
    标签：评分：6.5/10、query:q5
-   evidence：使用理由-答案对的可解释临床预测
-3. [TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering](/202605/05/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering)  
+   evidence：奖励模型的可解释性工具包和特征归因
+2. [TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering](/202605/06/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering)  
    标签：评分：6.0/10、query:q4
-   evidence：对表格数据进行隐式预测和推理，包括处理效应分析
-4. [NEURA: An agentic system for autonomous neuroimaging workflows](/202605/05/biorxiv-10-64898-2026-04-27-721217-v1-neura-an-agentic-system-for-autonomous-neuroimaging-workflows)  
-   标签：评分：6.0/10、query:q5
-   evidence：可追溯的推理和基于证据的分析计划
+   evidence：基于历史模式的隐式预测和处理效应分析
+3. [Verbal-R3: Verbal Reranker as the Missing Bridge between Retrieval and Reasoning](/202605/06/2605.01399v1-verbal-r3-verbal-reranker-as-the-missing-bridge-between-retrieval-and-reasoning)  
+   标签：评分：6.0/10、query:q6
+   evidence：通过口头注释阐明查询与上下文之间的逻辑联系
 
 
 <div class="dpr-home-promo-card">

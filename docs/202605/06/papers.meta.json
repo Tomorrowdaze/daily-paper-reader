@@ -1,0 +1,69 @@
+{
+  "label": "2026-05-06",
+  "date": "2026-05-06",
+  "generated_at": "2026-05-06T20:33:31",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202605/06/2604.25139v1-conflict-forecasting-via-conformal-prediction-for-markov-processes",
+      "section": "deep",
+      "title_en": "Conflict Forecasting via Conformal Prediction for Markov Processes",
+      "authors": "Aditya Basarkar, Emmett B. Kendall, David Randahl, Jonathan P. Williams, Gudmund H. Hermansen",
+      "date": "2026-04-28",
+      "pdf": "https://arxiv.org/pdf/2604.25139v1",
+      "score": "9.5",
+      "evidence": "使用符合预测进行冲突状态序列预测并量化不确定性",
+      "tldr": "本文探讨了利用保序预测方法对马尔可夫过程建模的国家冲突状态进行预测，以弥补传统点预测的不确定性问题。研究比较了保序预测与似然预测的表现，并通过多国冲突数据验证其效果，展示了该方法在提供可靠预测区间与量化不确定性方面的优势。",
+      "tags": "query:q4",
+      "abstract_en": "Whether or not a country is at war, or experiencing escalating or deescalating levels of conflict, has massive ramifications on a country's national and foreign policy. Given a country's history of conflict, or lack thereof, future predictions about the war-status of a country are valuable information. In this paper, we present the use of conformal prediction on temporally-dependent data to obtain prediction sets of possible future conflict state-sequences. More specifically, we compare the results of conformal prediction to a likelihood-based prediction strategy when the data are assumed to come from a discrete-state Markov process. A point-prediction may not supply sufficient information because the penalty for a wrong prediction is extreme, and so we consider a machine learning alternative that gives valid uncertainty quantification and is robust to model misspecification. In the data analysis, we present real forecasts of conflict dynamics across multiple countries. Lastly, we comment on the possible limitations of existing approaches for applying conformal prediction to Markovian data, where the exchangeability assumption is violated.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/06/2604.26130v1-reward-lens-a-mechanistic-interpretability-library-for-reward-models",
+      "section": "quick",
+      "title_en": "reward-lens: A Mechanistic Interpretability Library for Reward Models",
+      "authors": "Mohammed Suhail B Nadaf",
+      "date": "2026-04-28",
+      "pdf": "https://arxiv.org/pdf/2604.26130v1",
+      "score": "6.5",
+      "evidence": "奖励模型的可解释性工具包和特征归因",
+      "tldr": "本文提出 reward-lens，一个针对 RLHF 奖励模型的机制可解释性库，将现有解释工具适配到标量奖励头结构，并验证其在多个模型上的有效性。研究发现线性归因与因果打补丁结果相背离，为奖励模型解释提供新的框架与视角。",
+      "tags": "query:q5",
+      "abstract_en": "Every RLHF-trained language model is shaped by a reward model, yet the mechanistic interpretability toolkit -- logit lens, direct logit attribution, activation patching, sparse autoencoders -- was built for generative LLMs whose primitives all project onto a vocabulary unembedding. Reward models replace that with a scalar regression head, breaking each tool. We present reward-lens, an open-source library that ports this toolkit to reward models, organised around one observation: the reward head's weight vector $w_r$ is the natural axis for every interpretability question. The library provides a Reward Lens, component attribution, three-mode activation patching, a reward-hacking probe suite, TopK SAE feature attribution, cross-model comparison, and five theory-grounded extensions (distortion index, divergence-aware patching, misalignment cascade detection, reward-term conflict analysis, concept-vector analysis). A ten-method adapter protocol covers Llama, Mistral, Gemma-2, and ArmoRM multi-objective heads, with a generic adapter for any HuggingFace sequence classification model. We validate on two production reward models across ~695 RewardBench pairs. The central empirical finding is negative: linear attribution does not predict causal patching effects (mean Spearman $ρ= -0.256$ on Skywork, $-0.027$ on ArmoRM). The framework treats this disagreement as a property to expose, not a bug -- motivating a design that keeps observational and causal views first-class and directly comparable.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/06/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering",
+      "section": "quick",
+      "title_en": "TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering",
+      "authors": "An-Yang Ji, Jun-Peng Jiang, De-Chuan Zhan, Han-Jia Ye",
+      "date": "2026-04-30",
+      "pdf": "https://arxiv.org/pdf/2604.28076v1",
+      "score": "6.0",
+      "evidence": "基于历史模式的隐式预测和处理效应分析",
+      "tldr": "本文提出TopBench基准，用于评估大语言模型在表格问答中的隐式预测与推理能力，涵盖四类任务，实验发现现有模型在识别潜在意图与执行预测推理方面表现不足，指出需改进模型的推理机制以提升预测水平。",
+      "tags": "query:q4",
+      "abstract_en": "Large Language Models (LLMs) have advanced Table Question Answering, where most queries can be answered by extracting information or simple aggregation. However, a common class of real-world queries is implicitly predictive, requiring the inference of unobserved answers from historical patterns rather than mere retrieval. These queries introduce two challenges: recognizing latent intent and reliable predictive reasoning over massive tables. To assess LLMs in such Tabular questiOn answering with implicit Prediction tasks, we introduce TopBench, a benchmark consisting of 779 samples across four sub-tasks, ranging from single-point prediction to decision making, treatment effect analysis, and complex filtering, requiring models to generate outputs spanning reasoning text and structured tables. We evaluate diverse models under both text-based and agentic workflows. Experiments reveal that current models often struggle with intent recognition, defaulting to just lookups. Deeper analysis identifies that accurate intent disambiguation serves as the prerequisite for leading these predictive behaviors. Furthermore, elevating the upper bound of prediction precision requires the integration of more sophisticated modeling or reasoning capabilities.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/06/2605.01399v1-verbal-r3-verbal-reranker-as-the-missing-bridge-between-retrieval-and-reasoning",
+      "section": "quick",
+      "title_en": "Verbal-R3: Verbal Reranker as the Missing Bridge between Retrieval and Reasoning",
+      "authors": "Sangkwon Park, Donghun Kang, Jisoo Mok, Sungroh Yoon",
+      "date": "2026-05-02",
+      "pdf": "https://arxiv.org/pdf/2605.01399v1",
+      "score": "6.0",
+      "evidence": "通过口头注释阐明查询与上下文之间的逻辑联系",
+      "tldr": "本文针对传统RAG框架无法充分利用检索信息的问题，提出了Verbal-R3，一个融合生成与语言重排序的代理式RAG模型。该模型通过Verbal Annotations显式表达查询与检索内容的逻辑关联，结合迭代推理与测试时相关性引导，实现更高效的推理路径扩展和更优质的答案生成。",
+      "tags": "query:q6",
+      "abstract_en": "The conventional Retrieval-Augmented Generation (RAG) paradigm of injecting raw retrieved texts into the Large Language Model (LLM)'s context often results in suboptimal integration of retrieved information. This paper proposes to bridge retrieval results and the LLM's reasoning ability through Verbal Annotations, analytic narratives that explicitly articulate the logical connection between a search query and retrieved contexts. Our empirical investigation reveals the potential of Verbal Annotations to substantially enhance the LLM's ability to generate accurate, contextually-grounded responses. Motivated by this finding, we introduce Verbal-R3, a novel agentic RAG framework that consists of a Generator and a Verbal Reranker. The Generator performs iterative retrieval and reasoning, while the Verbal Reranker returns relevance scores and Verbal Annotations to guide the reasoning and answering process of the Generator. The inference process of Verbal-R3 is further refined through relevance-guided test-time scaling, which efficiently allocates test-time compute for effective trajectory expansion. Verbal-R3 achieves state-of-the-art performance on complex Question Answering benchmarks, validating the effectiveness of the proposed framework.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
