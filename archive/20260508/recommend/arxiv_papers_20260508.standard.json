@@ -1,0 +1,134 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-08T20:00:19.204287+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2604.28076v1",
+      "source": "arxiv",
+      "title": "TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering",
+      "abstract": "Large Language Models (LLMs) have advanced Table Question Answering, where most queries can be answered by extracting information or simple aggregation. However, a common class of real-world queries is implicitly predictive, requiring the inference of unobserved answers from historical patterns rather than mere retrieval. These queries introduce two challenges: recognizing latent intent and reliable predictive reasoning over massive tables. To assess LLMs in such Tabular questiOn answering with implicit Prediction tasks, we introduce TopBench, a benchmark consisting of 779 samples across four sub-tasks, ranging from single-point prediction to decision making, treatment effect analysis, and complex filtering, requiring models to generate outputs spanning reasoning text and structured tables. We evaluate diverse models under both text-based and agentic workflows. Experiments reveal that current models often struggle with intent recognition, defaulting to just lookups. Deeper analysis identifies that accurate intent disambiguation serves as the prerequisite for leading these predictive behaviors. Furthermore, elevating the upper bound of prediction precision requires the integration of more sophisticated modeling or reasoning capabilities.",
+      "authors": [
+        "An-Yang Ji",
+        "Jun-Peng Jiang",
+        "De-Chuan Zhan",
+        "Han-Jia Ye"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-04-30T16:22:51+00:00",
+      "link": "https://arxiv.org/pdf/2604.28076v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "treatment effect analysis and predictive reasoning over tabular data",
+      "llm_evidence_cn": "针对表格数据的处理效应分析和预测性推理",
+      "llm_evidence": "针对表格数据的处理效应分析和预测性推理",
+      "canonical_evidence": "针对表格数据的处理效应分析和预测性推理",
+      "llm_tldr_en": "A benchmark for implicit prediction and treatment effect analysis in tabular data, useful for causal inference.",
+      "llm_tldr_cn": "一个针对表格数据隐式预测和处理效应分析的基准，有助于因果推断研究。",
+      "llm_tldr": "一个针对表格数据隐式预测和处理效应分析的基准，有助于因果推断研究。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.01474v1",
+      "source": "arxiv",
+      "title": "ReMedi: Reasoner for Medical Clinical Prediction",
+      "abstract": "Predicting future clinical outcomes from electronic health records (EHR) remains challenging due to the complexity and heterogeneity of patient data. LLMs have shown strong potential for such predictive tasks, yet existing approaches mainly focus on enhancing medical knowledge through distillation or RAG while relying on the model's internal ability to interpret contextual information. In this work, we present ReMedi (Reasoner for Medical Clinical Prediction), a framework for improving clinical outcome prediction from EHR. ReMedi generates rationale-answer pairs using a challenging sample regeneration mechanism for complex clinical questions, which leverages ground-truth answers as hints to enhance reasoning for further fine-tuning and preference tuning. ReMedi integrates ground-truth outcome guidance into the preference data construction loop, regenerating rationale-answer variants. By tuning on these rationale-answer pairs, the model improves its predictive performance. Experiments on multiple EHR prediction tasks demonstrate substantial gains of up to 19.9 percent over state-of-the-art baselines in terms of F1 score, underscoring ReMedi's effectiveness in real-world clinical prediction.",
+      "authors": [
+        "Yushi Cao",
+        "Yiming Chen",
+        "Hongchao Jiang",
+        "Hung-yi Lee",
+        "Robby T. Tan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-05-02T14:44:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.01474v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "generates rationale-answer pairs for complex clinical prediction",
+      "llm_evidence_cn": "为复杂的临床预测生成理由-答案对",
+      "llm_evidence": "为复杂的临床预测生成理由-答案对",
+      "canonical_evidence": "为复杂的临床预测生成理由-答案对",
+      "llm_tldr_en": "ReMedi uses LLMs to generate rationales for clinical predictions, offering a transferable explainable AI framework.",
+      "llm_tldr_cn": "ReMedi利用大模型为临床预测生成解释，提供了一种可迁移的可解释人工智能框架。",
+      "llm_tldr": "ReMedi利用大模型为临床预测生成解释，提供了一种可迁移的可解释人工智能框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-1101-2020-07-14-203208-v3",
+      "source": "biorxiv",
+      "title": "Metastatic Site Prediction in Breast Cancer using Kirchhoff's Law and Omics Knowledge Graph",
+      "abstract": "Predicting the anatomical site of metastasis from a primary tumour remains an unsolved problem in breast cancer (BRCA) and metastatic disease more broadly. The difficulty is structural: metastatic biology is multi-site (bone, lung, liver, brain), multi-omics (genomics, proteomics, methylomics, drug response), and multi-modal (CNV, gene expression, DNA methylation, pathways, clinical associations). Existing classifiers either collapse this heterogeneity into a single feature vector or rely on a single omics layer, both of which discard the mechanistic structure that drives metastatic tropism. We introduce Kirchhoff Knowledge Graphs (K-KG), a framework that imports the conservation laws of electrical-circuit theory into knowledge graph reasoning. Our contributions are: (1) a layered RDF Cancer Decision Network integrating 36 polyomics datasets across mutations, pathways, drugs, diseases, and reactions; (2) two novel conservation laws - the Knowledge-Graph Voltage Law (KGVL) and Knowledge-Graph Current Law (KGCL) - that govern information flow during traversal and yield a principled measure of graph completeness; (3) topological motif mining on the conserved graph, replacing expression-based feature selection by identifying triangular sub-structures whose rewiring marks metastatic transition; (4) a Graph Convolutional Neural Network whose hidden layers are the omics layers themselves, predicting site-specific metastasis as a continuous percentage rather than a binary label. On TCGA-BRCA training plus one validation and four independent test cohorts from GEO, K-KG achieves 83.8% AUC for relapse prediction and up to 0.87 AUC / 0.91 F1 for brain-site-specific prediction, outperforming Random Forest, Neural Network, and SVM baselines by 8-20 AUC points. To our knowledge this is the first application of Kirchhoff's laws (1845, 1847) to graph-based machine learning, and the first metastasis predictor that returns a per-site contribution profile rather than a single label.",
+      "authors": [
+        "Jha, A.",
+        "Khan, Y.",
+        "Sahay, R.",
+        "d'Aquin, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-07T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2020.07.14.203208v3.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "uses knowledge graphs to preserve mechanistic structure for prediction",
+      "llm_evidence_cn": "使用知识图谱保留预测的机制结构",
+      "llm_evidence": "使用知识图谱保留预测的机制结构",
+      "canonical_evidence": "使用知识图谱保留预测的机制结构",
+      "llm_tldr_en": "Introduces Kirchhoff Knowledge Graphs to model mechanistic structures in complex multi-modal prediction tasks.",
+      "llm_tldr_cn": "引入基尔霍夫知识图谱，在复杂的多模态预测任务中对机制结构进行建模。",
+      "llm_tldr": "引入基尔霍夫知识图谱，在复杂的多模态预测任务中对机制结构进行建模。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

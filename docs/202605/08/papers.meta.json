@@ -1,0 +1,54 @@
+{
+  "label": "2026-05-08",
+  "date": "2026-05-08",
+  "generated_at": "2026-05-08T20:01:01",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202605/08/2604.28076v1-topbench-a-benchmark-for-implicit-prediction-and-reasoning-over-tabular-question-answering",
+      "section": "quick",
+      "title_en": "TopBench: A Benchmark for Implicit Prediction and Reasoning over Tabular Question Answering",
+      "authors": "An-Yang Ji, Jun-Peng Jiang, De-Chuan Zhan, Han-Jia Ye",
+      "date": "2026-04-30",
+      "pdf": "https://arxiv.org/pdf/2604.28076v1",
+      "score": "6.5",
+      "evidence": "针对表格数据的处理效应分析和预测性推理",
+      "tldr": "本文提出TopBench基准，用于评估大语言模型在表格隐含预测与推理任务中的表现。研究发现，现有模型难以正确识别预测意图并进行有效推理，揭示了当前系统在复杂表格预测任务上仍存在明显不足。",
+      "tags": "query:q6",
+      "abstract_en": "Large Language Models (LLMs) have advanced Table Question Answering, where most queries can be answered by extracting information or simple aggregation. However, a common class of real-world queries is implicitly predictive, requiring the inference of unobserved answers from historical patterns rather than mere retrieval. These queries introduce two challenges: recognizing latent intent and reliable predictive reasoning over massive tables. To assess LLMs in such Tabular questiOn answering with implicit Prediction tasks, we introduce TopBench, a benchmark consisting of 779 samples across four sub-tasks, ranging from single-point prediction to decision making, treatment effect analysis, and complex filtering, requiring models to generate outputs spanning reasoning text and structured tables. We evaluate diverse models under both text-based and agentic workflows. Experiments reveal that current models often struggle with intent recognition, defaulting to just lookups. Deeper analysis identifies that accurate intent disambiguation serves as the prerequisite for leading these predictive behaviors. Furthermore, elevating the upper bound of prediction precision requires the integration of more sophisticated modeling or reasoning capabilities.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/08/2605.01474v1-remedi-reasoner-for-medical-clinical-prediction",
+      "section": "quick",
+      "title_en": "ReMedi: Reasoner for Medical Clinical Prediction",
+      "authors": "Yushi Cao, Yiming Chen, Hongchao Jiang, Hung-yi Lee, Robby T. Tan",
+      "date": "2026-05-02",
+      "pdf": "https://arxiv.org/pdf/2605.01474v1",
+      "score": "6.0",
+      "evidence": "为复杂的临床预测生成理由-答案对",
+      "tldr": "本文提出ReMedi框架来改进基于电子健康记录的临床结果预测，通过使用挑战性样本再生成机制生成理由-答案对，并结合真实结果进行微调，显著提升LLM在多项EHR预测任务中的性能。",
+      "tags": "query:q5",
+      "abstract_en": "Predicting future clinical outcomes from electronic health records (EHR) remains challenging due to the complexity and heterogeneity of patient data. LLMs have shown strong potential for such predictive tasks, yet existing approaches mainly focus on enhancing medical knowledge through distillation or RAG while relying on the model's internal ability to interpret contextual information. In this work, we present ReMedi (Reasoner for Medical Clinical Prediction), a framework for improving clinical outcome prediction from EHR. ReMedi generates rationale-answer pairs using a challenging sample regeneration mechanism for complex clinical questions, which leverages ground-truth answers as hints to enhance reasoning for further fine-tuning and preference tuning. ReMedi integrates ground-truth outcome guidance into the preference data construction loop, regenerating rationale-answer variants. By tuning on these rationale-answer pairs, the model improves its predictive performance. Experiments on multiple EHR prediction tasks demonstrate substantial gains of up to 19.9 percent over state-of-the-art baselines in terms of F1 score, underscoring ReMedi's effectiveness in real-world clinical prediction.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/08/biorxiv-10-1101-2020-07-14-203208-v3-metastatic-site-prediction-in-breast-cancer-using-kirchhoffs-law-and-omics-knowledge-graph",
+      "section": "quick",
+      "title_en": "Metastatic Site Prediction in Breast Cancer using Kirchhoff's Law and Omics Knowledge Graph",
+      "authors": "Jha, A., Khan, Y., Sahay, R., d'Aquin, M.",
+      "date": "2026-05-07",
+      "pdf": "https://www.biorxiv.org/content/10.1101/2020.07.14.203208v3.full.pdf",
+      "score": "6.0",
+      "evidence": "使用知识图谱保留预测的机制结构",
+      "tldr": "本文提出Kirchhoff知识图谱（K-KG），将电路守恒定律融入图推理，构建多层次癌症决策网络，实现跨多组学层次的信息流守恒与拓扑特征挖掘。结合图卷积网络，该方法在乳腺癌转移部位预测中显著优于现有模型，为多组学机制解析提供新方向。",
+      "tags": "query:q6",
+      "abstract_en": "Predicting the anatomical site of metastasis from a primary tumour remains an unsolved problem in breast cancer (BRCA) and metastatic disease more broadly. The difficulty is structural: metastatic biology is multi-site (bone, lung, liver, brain), multi-omics (genomics, proteomics, methylomics, drug response), and multi-modal (CNV, gene expression, DNA methylation, pathways, clinical associations). Existing classifiers either collapse this heterogeneity into a single feature vector or rely on a single omics layer, both of which discard the mechanistic structure that drives metastatic tropism. We introduce Kirchhoff Knowledge Graphs (K-KG), a framework that imports the conservation laws of electrical-circuit theory into knowledge graph reasoning. Our contributions are: (1) a layered RDF Cancer Decision Network integrating 36 polyomics datasets across mutations, pathways, drugs, diseases, and reactions; (2) two novel conservation laws - the Knowledge-Graph Voltage Law (KGVL) and Knowledge-Graph Current Law (KGCL) - that govern information flow during traversal and yield a principled measure of graph completeness; (3) topological motif mining on the conserved graph, replacing expression-based feature selection by identifying triangular sub-structures whose rewiring marks metastatic transition; (4) a Graph Convolutional Neural Network whose hidden layers are the omics layers themselves, predicting site-specific metastasis as a continuous percentage rather than a binary label. On TCGA-BRCA training plus one validation and four independent test cohorts from GEO, K-KG achieves 83.8% AUC for relapse prediction and up to 0.87 AUC / 0.91 F1 for brain-site-specific prediction, outperforming Random Forest, Neural Network, and SVM baselines by 8-20 AUC points. To our knowledge this is the first application of Kirchhoff's laws (1845, 1847) to graph-based machine learning, and the first metastasis predictor that returns a per-site contribution profile rather than a single label.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
