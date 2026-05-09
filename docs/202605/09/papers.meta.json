@@ -1,0 +1,54 @@
+{
+  "label": "2026-05-09",
+  "date": "2026-05-09",
+  "generated_at": "2026-05-09T19:48:14",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202605/09/2605.02177v1-the-causal-description-gap-information-theoretic-separations-across-pearls-hierarchy",
+      "section": "quick",
+      "title_en": "The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy",
+      "authors": "Seyed Morteza Emadi",
+      "date": "2026-05-04",
+      "pdf": "https://arxiv.org/pdf/2605.02177v1",
+      "score": "6.5",
+      "evidence": "Pearl因果层次结构中查询类的信息论分离研究",
+      "tldr": "本文利用信息论与Kolmogorov复杂度框架量化Pearl因果层级中的描述差距，构造了具有常量观察描述长度但Θ(n²)干预描述长度的模型，并证明这一分离在不同复杂度条件下保持成立，揭示了高层因果信息的残余不确定性。",
+      "tags": "query:q6",
+      "abstract_en": "Pearl's causal hierarchy shows that observational, interventional, and counterfactual queries are qualitatively distinct. We ask a quantitative version of this question: how many additional bits are needed to specify higher-rung causal answers once lower-rung answers are known? We formalize this via query-class description length, the Kolmogorov complexity of the answer oracle induced by an SCM for a class of queries. Our main construction gives binary acyclic SCMs whose observational distribution has constant description length, while the single-variable interventional answer oracle has description length $Θ(n^2)$. A degree-sensitive upper bound shows that finite-gate-schema SCMs of indegree $d$ have observational-interventional gap at most $O(nd \\log(en/d) + n \\log n)$, making the quadratic construction order-optimal in the dense regime and a rooted-tree construction order-optimal for bounded indegree. The quadratic separation persists under $\\varepsilon$-accurate total-variation descriptions for every fixed $\\varepsilon < 1/4$. At the next rung, the full hard-do interventional oracle can still leave a $Θ(n)$ counterfactual description gap. A general ambiguity-to-bits theorem and Shannon analogue show that these gaps equal the logarithm of residual higher-rung ambiguity up to lower-order terms.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/09/2605.01474v1-remedi-reasoner-for-medical-clinical-prediction",
+      "section": "quick",
+      "title_en": "ReMedi: Reasoner for Medical Clinical Prediction",
+      "authors": "Yushi Cao, Yiming Chen, Hongchao Jiang, Hung-yi Lee, Robby T. Tan",
+      "date": "2026-05-02",
+      "pdf": "https://arxiv.org/pdf/2605.01474v1",
+      "score": "6.0",
+      "evidence": "该论文关注临床结果预测，使用带有理由生成的可解释推理框架 (ReMedi)。",
+      "tldr": "本研究提出ReMedi框架，通过利用真实临床结果指导生成理由-答案对，结合微调与偏好优化策略，加强LLM在复杂EHR数据上的推理与预测能力，在多项临床预测任务中显著优于现有方法，性能提升达19.9%。",
+      "tags": "query:q5",
+      "abstract_en": "Predicting future clinical outcomes from electronic health records (EHR) remains challenging due to the complexity and heterogeneity of patient data. LLMs have shown strong potential for such predictive tasks, yet existing approaches mainly focus on enhancing medical knowledge through distillation or RAG while relying on the model's internal ability to interpret contextual information. In this work, we present ReMedi (Reasoner for Medical Clinical Prediction), a framework for improving clinical outcome prediction from EHR. ReMedi generates rationale-answer pairs using a challenging sample regeneration mechanism for complex clinical questions, which leverages ground-truth answers as hints to enhance reasoning for further fine-tuning and preference tuning. ReMedi integrates ground-truth outcome guidance into the preference data construction loop, regenerating rationale-answer variants. By tuning on these rationale-answer pairs, the model improves its predictive performance. Experiments on multiple EHR prediction tasks demonstrate substantial gains of up to 19.9 percent over state-of-the-art baselines in terms of F1 score, underscoring ReMedi's effectiveness in real-world clinical prediction.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/09/2605.02286v1-empirical-evaluation-of-deadline-resolved-information-leakage-on-documented-polymarket-insider-cases",
+      "section": "quick",
+      "title_en": "Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases",
+      "authors": "Maksym Nechepurenko",
+      "date": "2026-05-04",
+      "pdf": "https://arxiv.org/pdf/2605.02286v1",
+      "score": "6.0",
+      "evidence": "评估了关于2026年美伊冲突集群的预测市场中的信息泄漏。",
+      "tldr": "本文实证评估了Deadline-ILS信息泄漏指标在Polymarket内部交易案例中的表现，以2026年美伊冲突集群为例，通过危险率估计、个案测度与跨市场分析发现新方法能显著区分真实信息泄漏信号，为预测市场监管提供支持。",
+      "tags": "query:q5",
+      "abstract_en": "This paper reports an end-to-end empirical evaluation of the deadline-Information Leakage Score (ILS-dl) extension introduced in the companion methodology paper. The deadline-ILS extends the original ILS to deadline-resolved prediction-market contracts, the dominant structural form of publicly documented insider trading on Polymarket. We anchor the evaluation in the 2026 U.S.-Iran conflict cluster of the ForesightFlow Insider Cases (FFIC) inventory, the largest documented deadline cluster. The evaluation has four parts: per-category exponential-hazard estimation, a single-case ILS-dl computation, cross-market wallet analysis, and methodological refinements.   Hazard-rate estimation produces an adequate exponential fit for military-geopolitics markets (KS p = 0.609, half-life 2.3 days) and a preliminary fit for corporate-disclosure markets (n = 5). The regulatory-decision category is rejected as bimodal (p = 0.013). On the largest applicable FFIC contract (\"US forces enter Iran by April 30,\" $269M volume), the article-derived public-event timestamp yields ILS-dl = +0.113 versus a resolution-anchored proxy value of -0.331: a 0.444 shift in magnitude on opposite sides of zero, demonstrating that the extension distinguishes signal from proxy artefact. Pre-event drift is mild, and short-window variants (30-min, 2-hour) are exactly zero. Cross-market wallet analysis identifies 332 wallets active in both major Iran-cluster markets, but the available trade history covers only the resolution-settlement window.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
