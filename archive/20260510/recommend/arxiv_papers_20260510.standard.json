@@ -1,0 +1,166 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-10T20:01:24.470762+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2605.02286v1",
+      "source": "arxiv",
+      "title": "Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases",
+      "abstract": "This paper reports an end-to-end empirical evaluation of the deadline-Information Leakage Score (ILS-dl) extension introduced in the companion methodology paper. The deadline-ILS extends the original ILS to deadline-resolved prediction-market contracts, the dominant structural form of publicly documented insider trading on Polymarket. We anchor the evaluation in the 2026 U.S.-Iran conflict cluster of the ForesightFlow Insider Cases (FFIC) inventory, the largest documented deadline cluster. The evaluation has four parts: per-category exponential-hazard estimation, a single-case ILS-dl computation, cross-market wallet analysis, and methodological refinements.   Hazard-rate estimation produces an adequate exponential fit for military-geopolitics markets (KS p = 0.609, half-life 2.3 days) and a preliminary fit for corporate-disclosure markets (n = 5). The regulatory-decision category is rejected as bimodal (p = 0.013). On the largest applicable FFIC contract (\"US forces enter Iran by April 30,\" $269M volume), the article-derived public-event timestamp yields ILS-dl = +0.113 versus a resolution-anchored proxy value of -0.331: a 0.444 shift in magnitude on opposite sides of zero, demonstrating that the extension distinguishes signal from proxy artefact. Pre-event drift is mild, and short-window variants (30-min, 2-hour) are exactly zero. Cross-market wallet analysis identifies 332 wallets active in both major Iran-cluster markets, but the available trade history covers only the resolution-settlement window.",
+      "authors": [
+        "Maksym Nechepurenko"
+      ],
+      "primary_category": "q-fin.TR",
+      "categories": [
+        "q-fin.TR",
+        "q-fin.GN"
+      ],
+      "published": "2026-05-04T07:22:13+00:00",
+      "link": "https://arxiv.org/pdf/2605.02286v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Evaluation of prediction market contracts regarding the 2026 U.S.-Iran conflict cluster",
+      "llm_evidence_cn": "评估关于2026年美伊冲突集群的预测市场合约",
+      "llm_evidence": "评估关于2026年美伊冲突集群的预测市场合约",
+      "canonical_evidence": "评估关于2026年美伊冲突集群的预测市场合约",
+      "llm_tldr_en": "Evaluates information leakage in prediction markets using a conflict cluster as a primary case study.",
+      "llm_tldr_cn": "利用冲突案例研究评估预测市场中的信息泄漏，涉及冲突风险预测。",
+      "llm_tldr": "利用冲突案例研究评估预测市场中的信息泄漏，涉及冲突风险预测。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.02177v1",
+      "source": "arxiv",
+      "title": "The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy",
+      "abstract": "Pearl's causal hierarchy shows that observational, interventional, and counterfactual queries are qualitatively distinct. We ask a quantitative version of this question: how many additional bits are needed to specify higher-rung causal answers once lower-rung answers are known? We formalize this via query-class description length, the Kolmogorov complexity of the answer oracle induced by an SCM for a class of queries. Our main construction gives binary acyclic SCMs whose observational distribution has constant description length, while the single-variable interventional answer oracle has description length $Θ(n^2)$. A degree-sensitive upper bound shows that finite-gate-schema SCMs of indegree $d$ have observational-interventional gap at most $O(nd \\log(en/d) + n \\log n)$, making the quadratic construction order-optimal in the dense regime and a rooted-tree construction order-optimal for bounded indegree. The quadratic separation persists under $\\varepsilon$-accurate total-variation descriptions for every fixed $\\varepsilon < 1/4$. At the next rung, the full hard-do interventional oracle can still leave a $Θ(n)$ counterfactual description gap. A general ambiguity-to-bits theorem and Shannon analogue show that these gaps equal the logarithm of residual higher-rung ambiguity up to lower-order terms.",
+      "authors": [
+        "Seyed Morteza Emadi"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.AI",
+        "cs.IT",
+        "cs.LG"
+      ],
+      "published": "2026-05-04T03:13:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.02177v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Information-theoretic separations across Pearl's causal hierarchy for query-class description length.",
+      "llm_evidence_cn": "Pearl因果层次结构中查询类描述长度的信息论分离研究。",
+      "llm_evidence": "Pearl因果层次结构中查询类描述长度的信息论分离研究。",
+      "canonical_evidence": "Pearl因果层次结构中查询类描述长度的信息论分离研究。",
+      "llm_tldr_en": "Explores quantitative gaps in Pearl's causal hierarchy using information theory and Kolmogorov complexity.",
+      "llm_tldr_cn": "利用信息论和柯尔莫哥洛夫复杂度探讨了Pearl因果层次结构中的定量差距。",
+      "llm_tldr": "利用信息论和柯尔莫哥洛夫复杂度探讨了Pearl因果层次结构中的定量差距。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.01351v1",
+      "source": "arxiv",
+      "title": "rAIson: Developing Reliable Decision-Making Agents",
+      "abstract": "This paper presents the rAIson platform, a high-level technological environment for the development of automated, reliable and explainable decision-making agents. The research underlying the platform and its technological progress has now reached a mature stage that allows the platform to be used for the development of complex real-life applications without writing a single line of code.",
+      "authors": [
+        "Pavlos Moraitis",
+        "Nikolaos Spanoudakis",
+        "Antonis Kakas"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-05-02T09:51:16+00:00",
+      "link": "https://arxiv.org/pdf/2605.01351v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Platform for developing reliable and explainable decision-making agents",
+      "llm_evidence_cn": "开发可靠且可解释的决策代理平台",
+      "llm_evidence": "开发可靠且可解释的决策代理平台",
+      "canonical_evidence": "开发可靠且可解释的决策代理平台",
+      "llm_tldr_en": "Presents rAIson, a platform for building automated, reliable, and explainable decision-making agents.",
+      "llm_tldr_cn": "介绍了rAIson平台，用于构建自动化、可靠且可解释的决策代理。",
+      "llm_tldr": "介绍了rAIson平台，用于构建自动化、可靠且可解释的决策代理。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.01474v1",
+      "source": "arxiv",
+      "title": "ReMedi: Reasoner for Medical Clinical Prediction",
+      "abstract": "Predicting future clinical outcomes from electronic health records (EHR) remains challenging due to the complexity and heterogeneity of patient data. LLMs have shown strong potential for such predictive tasks, yet existing approaches mainly focus on enhancing medical knowledge through distillation or RAG while relying on the model's internal ability to interpret contextual information. In this work, we present ReMedi (Reasoner for Medical Clinical Prediction), a framework for improving clinical outcome prediction from EHR. ReMedi generates rationale-answer pairs using a challenging sample regeneration mechanism for complex clinical questions, which leverages ground-truth answers as hints to enhance reasoning for further fine-tuning and preference tuning. ReMedi integrates ground-truth outcome guidance into the preference data construction loop, regenerating rationale-answer variants. By tuning on these rationale-answer pairs, the model improves its predictive performance. Experiments on multiple EHR prediction tasks demonstrate substantial gains of up to 19.9 percent over state-of-the-art baselines in terms of F1 score, underscoring ReMedi's effectiveness in real-world clinical prediction.",
+      "authors": [
+        "Yushi Cao",
+        "Yiming Chen",
+        "Hongchao Jiang",
+        "Hung-yi Lee",
+        "Robby T. Tan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-05-02T14:44:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.01474v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable clinical prediction framework using rationale generation",
+      "llm_evidence_cn": "使用理由生成的临床预测可解释框架",
+      "llm_evidence": "使用理由生成的临床预测可解释框架",
+      "canonical_evidence": "使用理由生成的临床预测可解释框架",
+      "llm_tldr_en": "ReMedi improves clinical prediction by generating rationales to explain model reasoning.",
+      "llm_tldr_cn": "ReMedi通过生成理由来解释模型推理，从而改进临床预测。",
+      "llm_tldr": "ReMedi通过生成理由来解释模型推理，从而改进临床预测。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

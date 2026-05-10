@@ -1,0 +1,69 @@
+{
+  "label": "2026-05-10",
+  "date": "2026-05-10",
+  "generated_at": "2026-05-10T20:01:39",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202605/10/2605.02286v1-empirical-evaluation-of-deadline-resolved-information-leakage-on-documented-polymarket-insider-cases",
+      "section": "quick",
+      "title_en": "Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases",
+      "authors": "Maksym Nechepurenko",
+      "date": "2026-05-04",
+      "pdf": "https://arxiv.org/pdf/2605.02286v1",
+      "score": "7.0",
+      "evidence": "评估关于2026年美伊冲突集群的预测市场合约",
+      "tldr": "本文评估了扩展的截止期信息泄露评分（deadline-ILS）在Polymarket内幕交易中的表现，基于2026美伊冲突集群数据，通过风险率估计与案例分析发现该方法能有效区分真实信号与代理噪声，并提供了预测市场信息泄露研究的新实证依据。",
+      "tags": "query:q5",
+      "abstract_en": "This paper reports an end-to-end empirical evaluation of the deadline-Information Leakage Score (ILS-dl) extension introduced in the companion methodology paper. The deadline-ILS extends the original ILS to deadline-resolved prediction-market contracts, the dominant structural form of publicly documented insider trading on Polymarket. We anchor the evaluation in the 2026 U.S.-Iran conflict cluster of the ForesightFlow Insider Cases (FFIC) inventory, the largest documented deadline cluster. The evaluation has four parts: per-category exponential-hazard estimation, a single-case ILS-dl computation, cross-market wallet analysis, and methodological refinements.   Hazard-rate estimation produces an adequate exponential fit for military-geopolitics markets (KS p = 0.609, half-life 2.3 days) and a preliminary fit for corporate-disclosure markets (n = 5). The regulatory-decision category is rejected as bimodal (p = 0.013). On the largest applicable FFIC contract (\"US forces enter Iran by April 30,\" $269M volume), the article-derived public-event timestamp yields ILS-dl = +0.113 versus a resolution-anchored proxy value of -0.331: a 0.444 shift in magnitude on opposite sides of zero, demonstrating that the extension distinguishes signal from proxy artefact. Pre-event drift is mild, and short-window variants (30-min, 2-hour) are exactly zero. Cross-market wallet analysis identifies 332 wallets active in both major Iran-cluster markets, but the available trade history covers only the resolution-settlement window.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/10/2605.02177v1-the-causal-description-gap-information-theoretic-separations-across-pearls-hierarchy",
+      "section": "quick",
+      "title_en": "The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy",
+      "authors": "Seyed Morteza Emadi",
+      "date": "2026-05-04",
+      "pdf": "https://arxiv.org/pdf/2605.02177v1",
+      "score": "6.5",
+      "evidence": "Pearl因果层次结构中查询类描述长度的信息论分离研究。",
+      "tldr": "本文在Pearl的因果层次框架下提出了量化因果描述差距的新方法，通过结构因果模型分析了从观测到干预及反事实所需的附加信息量，发现存在可达二次级别的描述长度分离并给出了相应的理论界与最优性证明。",
+      "tags": "query:q6",
+      "abstract_en": "Pearl's causal hierarchy shows that observational, interventional, and counterfactual queries are qualitatively distinct. We ask a quantitative version of this question: how many additional bits are needed to specify higher-rung causal answers once lower-rung answers are known? We formalize this via query-class description length, the Kolmogorov complexity of the answer oracle induced by an SCM for a class of queries. Our main construction gives binary acyclic SCMs whose observational distribution has constant description length, while the single-variable interventional answer oracle has description length $Θ(n^2)$. A degree-sensitive upper bound shows that finite-gate-schema SCMs of indegree $d$ have observational-interventional gap at most $O(nd \\log(en/d) + n \\log n)$, making the quadratic construction order-optimal in the dense regime and a rooted-tree construction order-optimal for bounded indegree. The quadratic separation persists under $\\varepsilon$-accurate total-variation descriptions for every fixed $\\varepsilon < 1/4$. At the next rung, the full hard-do interventional oracle can still leave a $Θ(n)$ counterfactual description gap. A general ambiguity-to-bits theorem and Shannon analogue show that these gaps equal the logarithm of residual higher-rung ambiguity up to lower-order terms.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/10/2605.01351v1-raison-developing-reliable-decision-making-agents",
+      "section": "quick",
+      "title_en": "rAIson: Developing Reliable Decision-Making Agents",
+      "authors": "Pavlos Moraitis, Nikolaos Spanoudakis, Antonis Kakas",
+      "date": "2026-05-02",
+      "pdf": "https://arxiv.org/pdf/2605.01351v1",
+      "score": "6.0",
+      "evidence": "开发可靠且可解释的决策代理平台",
+      "tldr": "本文介绍了rAIson平台，这是一种用于开发自动化、可靠且可解释的决策代理的高层次技术环境。研究旨在提升自动决策系统的可靠性与可解释性。rAIson现已成熟，可支持在无代码条件下建设复杂的现实应用。",
+      "tags": "query:q5",
+      "abstract_en": "This paper presents the rAIson platform, a high-level technological environment for the development of automated, reliable and explainable decision-making agents. The research underlying the platform and its technological progress has now reached a mature stage that allows the platform to be used for the development of complex real-life applications without writing a single line of code.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/10/2605.01474v1-remedi-reasoner-for-medical-clinical-prediction",
+      "section": "quick",
+      "title_en": "ReMedi: Reasoner for Medical Clinical Prediction",
+      "authors": "Yushi Cao, Yiming Chen, Hongchao Jiang, Hung-yi Lee, Robby T. Tan",
+      "date": "2026-05-02",
+      "pdf": "https://arxiv.org/pdf/2605.01474v1",
+      "score": "6.0",
+      "evidence": "使用理由生成的临床预测可解释框架",
+      "tldr": "ReMedi旨在提升电子健康记录数据的临床结果预测能力，通过利用真实结果生成推理-答案对并进行再训练，实现模型的推理增强和预测优化；实验结果显示其在多个任务上显著超越现有方法。",
+      "tags": "query:q4",
+      "abstract_en": "Predicting future clinical outcomes from electronic health records (EHR) remains challenging due to the complexity and heterogeneity of patient data. LLMs have shown strong potential for such predictive tasks, yet existing approaches mainly focus on enhancing medical knowledge through distillation or RAG while relying on the model's internal ability to interpret contextual information. In this work, we present ReMedi (Reasoner for Medical Clinical Prediction), a framework for improving clinical outcome prediction from EHR. ReMedi generates rationale-answer pairs using a challenging sample regeneration mechanism for complex clinical questions, which leverages ground-truth answers as hints to enhance reasoning for further fine-tuning and preference tuning. ReMedi integrates ground-truth outcome guidance into the preference data construction loop, regenerating rationale-answer variants. By tuning on these rationale-answer pairs, the model improves its predictive performance. Experiments on multiple EHR prediction tasks demonstrate substantial gains of up to 19.9 percent over state-of-the-art baselines in terms of F1 score, underscoring ReMedi's effectiveness in real-world clinical prediction.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
