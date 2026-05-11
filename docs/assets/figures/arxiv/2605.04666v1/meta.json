@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-001.webp",
+      "caption": "Figure 4. The most influential temporal lab feature categories for predicting lab order decisions with the same lab features.",
+      "page": 3,
+      "index": 1,
+      "width": 496,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-002.webp",
+      "caption": "Figure 3. The importance of labs, meds, procedures, demographics and support device information for lab order decisions.",
+      "page": 3,
+      "index": 2,
+      "width": 496,
+      "height": 359
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-003.webp",
+      "caption": "Figure 2. A subset of temporal features generated for continuous valued lab tests.",
+      "page": 2,
+      "index": 3,
+      "width": 485,
+      "height": 567
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-004.webp",
+      "caption": "Figure 5. The most influential temporal feature categories for predicting lab order decisions with other lab features.",
+      "page": 4,
+      "index": 4,
+      "width": 496,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-005.webp",
+      "caption": "Figure 8. The importance of temporal features for predicting medication order decisions with other medication features.",
+      "page": 4,
+      "index": 5,
+      "width": 496,
+      "height": 372
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-006.webp",
+      "caption": "Figure 6. The importance of labs, meds, procedures, demographics, and support device information for medication commissions.",
+      "page": 4,
+      "index": 6,
+      "width": 496,
+      "height": 354
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04666v1/fig-007.webp",
+      "caption": "Figure 7. The most important temporal lab features for predicting medication commissions.",
+      "page": 4,
+      "index": 7,
+      "width": 496,
+      "height": 373
+    }
+  ]
+}

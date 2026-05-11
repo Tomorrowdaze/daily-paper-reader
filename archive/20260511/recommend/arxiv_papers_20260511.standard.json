@@ -1,0 +1,165 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-11T20:40:30.197891+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2605.02177v1",
+      "source": "arxiv",
+      "title": "The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy",
+      "abstract": "Pearl's causal hierarchy shows that observational, interventional, and counterfactual queries are qualitatively distinct. We ask a quantitative version of this question: how many additional bits are needed to specify higher-rung causal answers once lower-rung answers are known? We formalize this via query-class description length, the Kolmogorov complexity of the answer oracle induced by an SCM for a class of queries. Our main construction gives binary acyclic SCMs whose observational distribution has constant description length, while the single-variable interventional answer oracle has description length $Θ(n^2)$. A degree-sensitive upper bound shows that finite-gate-schema SCMs of indegree $d$ have observational-interventional gap at most $O(nd \\log(en/d) + n \\log n)$, making the quadratic construction order-optimal in the dense regime and a rooted-tree construction order-optimal for bounded indegree. The quadratic separation persists under $\\varepsilon$-accurate total-variation descriptions for every fixed $\\varepsilon < 1/4$. At the next rung, the full hard-do interventional oracle can still leave a $Θ(n)$ counterfactual description gap. A general ambiguity-to-bits theorem and Shannon analogue show that these gaps equal the logarithm of residual higher-rung ambiguity up to lower-order terms.",
+      "authors": [
+        "Seyed Morteza Emadi"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.AI",
+        "cs.IT",
+        "cs.LG"
+      ],
+      "published": "2026-05-04T03:13:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.02177v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "causal hierarchy and information-theoretic separations for causal queries",
+      "llm_evidence_cn": "因果层级与因果查询的信息论分离",
+      "llm_evidence": "因果层级与因果查询的信息论分离",
+      "canonical_evidence": "因果层级与因果查询的信息论分离",
+      "llm_tldr_en": "Quantifies the complexity gap between observational, interventional, and counterfactual queries in causal models.",
+      "llm_tldr_cn": "量化了因果模型中观察、干预和反事实查询之间的复杂性差异。",
+      "llm_tldr": "量化了因果模型中观察、干预和反事实查询之间的复杂性差异。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.04666v1",
+      "source": "arxiv",
+      "title": "Feature importance analysis for patient management decisions",
+      "abstract": "The objective of this paper is to understand what characteristics and features of clinical data influence physician's decision about ordering laboratory tests or prescribing medications the most. We conduct our analysis on data and decisions extracted from electronic health records of 4486 post-surgical cardiac patients. The summary statistics for 335 different lab order decisions and 407 medication decisions are reported. We show that in many cases, physician's lab-order and medication decisions can be well predicted from a small subset of all features.",
+      "authors": [
+        "Michal Valko",
+        "Milos Hauskrecht"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-05-06T09:12:27+00:00",
+      "link": "https://arxiv.org/pdf/2605.04666v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Feature importance analysis for predicting decisions from clinical data",
+      "llm_evidence_cn": "用于从临床数据预测决策的特征重要性分析",
+      "llm_evidence": "用于从临床数据预测决策的特征重要性分析",
+      "canonical_evidence": "用于从临床数据预测决策的特征重要性分析",
+      "llm_tldr_en": "Analyzes feature importance in clinical decision prediction, offering a transferable explainability method.",
+      "llm_tldr_cn": "分析临床决策预测中的特征重要性，提供了一种可迁移的可解释性方法。",
+      "llm_tldr": "分析临床决策预测中的特征重要性，提供了一种可迁移的可解释性方法。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.02286v1",
+      "source": "arxiv",
+      "title": "Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases",
+      "abstract": "This paper reports an end-to-end empirical evaluation of the deadline-Information Leakage Score (ILS-dl) extension introduced in the companion methodology paper. The deadline-ILS extends the original ILS to deadline-resolved prediction-market contracts, the dominant structural form of publicly documented insider trading on Polymarket. We anchor the evaluation in the 2026 U.S.-Iran conflict cluster of the ForesightFlow Insider Cases (FFIC) inventory, the largest documented deadline cluster. The evaluation has four parts: per-category exponential-hazard estimation, a single-case ILS-dl computation, cross-market wallet analysis, and methodological refinements.   Hazard-rate estimation produces an adequate exponential fit for military-geopolitics markets (KS p = 0.609, half-life 2.3 days) and a preliminary fit for corporate-disclosure markets (n = 5). The regulatory-decision category is rejected as bimodal (p = 0.013). On the largest applicable FFIC contract (\"US forces enter Iran by April 30,\" $269M volume), the article-derived public-event timestamp yields ILS-dl = +0.113 versus a resolution-anchored proxy value of -0.331: a 0.444 shift in magnitude on opposite sides of zero, demonstrating that the extension distinguishes signal from proxy artefact. Pre-event drift is mild, and short-window variants (30-min, 2-hour) are exactly zero. Cross-market wallet analysis identifies 332 wallets active in both major Iran-cluster markets, but the available trade history covers only the resolution-settlement window.",
+      "authors": [
+        "Maksym Nechepurenko"
+      ],
+      "primary_category": "q-fin.TR",
+      "categories": [
+        "q-fin.TR",
+        "q-fin.GN"
+      ],
+      "published": "2026-05-04T07:22:13+00:00",
+      "link": "https://arxiv.org/pdf/2605.02286v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Evaluates prediction market data related to the U.S.-Iran conflict cluster.",
+      "llm_evidence_cn": "评估与美伊冲突集群相关的预测市场数据。",
+      "llm_evidence": "评估与美伊冲突集群相关的预测市场数据。",
+      "canonical_evidence": "评估与美伊冲突集群相关的预测市场数据。",
+      "llm_tldr_en": "Empirical evaluation of information leakage scores using U.S.-Iran conflict prediction market data.",
+      "llm_tldr_cn": "利用美伊冲突预测市场数据对信息泄漏评分进行实证评估。",
+      "llm_tldr": "利用美伊冲突预测市场数据对信息泄漏评分进行实证评估。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.06058v1",
+      "source": "arxiv",
+      "title": "Towards Self-Explainable Document Visual Question Answering with Chain-of-Explanation Predictions",
+      "abstract": "Document Visual Question Answering (DocVQA) requires vision-language models to reason not only about what information in a document is relevant to a question, but also where the answer is grounded on the page. Existing DocVQA models entangle question-relevant evidence and answer localization and operate largely as black boxes, offering limited means to verify how predictions depend on visual evidence. We propose CoExVQA, a self-explainable DocVQA framework with a grounded reasoning process through a chain-of-explanation design. CoExVQA first identifies question-relevant evidence, then explicitly localizes the answer region, and finally decodes the answer exclusively from the grounded region. Prediction via CoExVQA's chain-of-explanation enables direct inspection and verification of the reasoning process across modalities. Empirical results show that restricting decoding to grounded evidence achieves SotA explainable DocVQA performance on PFL-DocVQA, improving ANLS by 12% over the current explainable baselines while providing transparent and verifiable predictions.",
+      "authors": [
+        "Kjetil Indrehus",
+        "Adrian Duric",
+        "Changkyu Choi",
+        "Ali Ramezani-Kebrya"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-05-07T11:42:23+00:00",
+      "link": "https://arxiv.org/pdf/2605.06058v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-explainable framework with chain-of-explanation for grounded reasoning",
+      "llm_evidence_cn": "具有解释链的自解释框架，用于落地推理",
+      "llm_evidence": "具有解释链的自解释框架，用于落地推理",
+      "canonical_evidence": "具有解释链的自解释框架，用于落地推理",
+      "llm_tldr_en": "Proposes CoExVQA, a self-explainable framework that uses a chain-of-explanation for visual question answering.",
+      "llm_tldr_cn": "提出CoExVQA，一种通过解释链实现视觉问答自解释性的框架。",
+      "llm_tldr": "提出CoExVQA，一种通过解释链实现视觉问答自解释性的框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
