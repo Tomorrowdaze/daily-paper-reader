@@ -1,0 +1,54 @@
+{
+  "label": "2026-05-12",
+  "date": "2026-05-12",
+  "generated_at": "2026-05-12T20:44:28",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202605/12/biorxiv-10-64898-2026-05-06-723244-v1-talk2qsp-deriving-executable-scenarios-from-unstructured-literature-via-human-in-the-loop-agents",
+      "section": "quick",
+      "title_en": "Talk2QSP: Deriving Executable Scenarios from Unstructured Literature via Human-in-the-Loop Agents",
+      "authors": "Kazemeini, A., Prieto, J., Balaji Kuttae, S., Siokis, A., Singh, G., Passban, P., Andreani, T.",
+      "date": "2026-05-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.05.06.723244v1.full.pdf",
+      "score": "6.5",
+      "evidence": "用于模拟就绪模型干预的可执行因果系统",
+      "tldr": "本文提出Talk2QSP框架，用多智能体和人机交互机制自动从文献中提取并执行QSP场景，将非结构化描述转为可验证的模拟参数，在多模型和多场景测试中均取得可靠效果，显著增强QSP模型在药物研发中的可用性。",
+      "tags": "query:q6",
+      "abstract_en": "Quantitative Systems Pharmacology (QSP) models play an inherently interventional role in pharmaceutical research and development, functioning as executable causal systems for designing, evaluating, and replacing clinical trials. However, deploying QSP as an experimental planning engine remains constrained by the difficulty of translating unstructured literature descriptions of clinical or preclinical scenarios into reproducible, simulation-ready model interventions. Motivated by this issue, we propose an agent-based framework that operationalizes QSP models as intervention-ready experimental systems by automatically extracting and executing literature-derived scenarios. The framework combines semantic grounding of model entities with a large language model (LLM)-driven Scenario Extractor and a dual-agent Scenario Mapper. Rather than relying on opaque, single-shot reasoning, our pipeline converts free-text interventions into precise parameter configurations through discrete, verifiable work orders. Moreover, our dynamic Human-in-the-Loop (HITL) strategy empowers modelers to resolve biological ambiguities interactively. Across four diverse kinetic ordinary differential equation (ODE)/QSP models and seven Subject Matter Expert (SME)-curated literature scenarios, our model resolved all selected scenarios into correct executable parameter changes, including multi-dose interventions, unit conversions, no-op scenarios, and ambiguity-triggered HITL cases, demonstrating that structured collaboration between experts and agentic systems can resolve scenarios that standalone raw Systems Biology Markup Language (SBML) reasoning LLM calls handle unreliably.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/12/biorxiv-10-64898-2026-01-26-701684-v2-entropy-sorting-feature-selection-information-theoretic-gene-set-identification-improves-single-cell-rna-sequencing-data-interpretability",
+      "section": "quick",
+      "title_en": "Entropy Sorting Feature Selection: information-theoretic gene set identification improves single-cell RNA sequencing data interpretability",
+      "authors": "Radley, A., Boezio, G., Shand, C., Perez-Carrasco, R., Briscoe, J.",
+      "date": "2026-05-10",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.01.26.701684v2.full.pdf",
+      "score": "6.0",
+      "evidence": "通过信息论特征选择提高数据可解释性",
+      "tldr": "本研究针对单细胞RNA测序数据特征选择方法不足的问题，提出了熵排序特征选择（ESFS）框架。该方法通过信息论原理全面筛选关键基因，提高数据可解释性，在胚胎发育、肿瘤微环境及神经系统分析中均展现出优异效果。",
+      "tags": "query:q6",
+      "abstract_en": "Single-cell RNA sequencing (scRNA-seq) has transformed our ability to resolve cellular heterogeneity, but extracting meaningful signals remains challenging due to technical noise and batch effects. Most methods for denoising scRNA-seq data have focused on using latent representations such as principal component analysis and deep learning to prioritise biological signals. By contrast, despite its influence on downstream analyses, feature selection has received relatively limited attention, leading to widespread reliance on the comparatively simplistic strategy of highly variable gene selection. Here we present Entropy Sorting Feature Selection (ESFS), a modular, user-friendly framework that substantially improves the interpretability of scRNA-seq data. Notably, ESFS reveals complex expression dynamics that are obscured in latent representations. We demonstrate the utility of ESFS in diverse data: identifying coherent developmental programs across eight independent human embryo datasets without batch integration; resolving spatial gene expression in mouse colon missed by conventional analyses; disambiguating shared and tumour-specific microenvironments in glioblastoma; and disentangling spatial, temporal, and neurogenic programs in the developing mouse neural tube. Beyond delivering a powerful and user-friendly software that deepens insight into complex biological systems, our work establishes Entropy Sorting as a novel information theoretic for advanced data analysis methods.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/12/biorxiv-10-64898-2026-05-07-723535-v1-conmition-an-r-package-adjusting-confounding-factors-for-associations-in-multi-omics",
+      "section": "quick",
+      "title_en": "conMItion: an R package adjusting confounding factors for associations in multi-omics",
+      "authors": "Wang, G., Liu, F., Chen, Z., Davoli, T.",
+      "date": "2026-05-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.05.07.723535v1.full.pdf",
+      "score": "6.0",
+      "evidence": "使用条件互信息评估关联并处理混杂因素",
+      "tldr": "本研究针对癌症多组学关联分析中混杂因素造成的偏差，提出并实现了基于条件互信息的R包conMItion，可灵活调整混杂因素并显著提高关联分析的准确性，在膀胱癌和肺癌数据中验证了其实用性。",
+      "tags": "query:q6",
+      "abstract_en": "Association measurements, such as mutual information (MI), are fundamental in the analysis of cancer multi-omics data for identifying cancer-related genes, gene signatures, and gene regulatory networks, thereby shedding light on tumor development, progression, and treatment. Confounding factors, including tumor purity and mutation burden, can bias association measurements in MI, potentially leading to the misclassification of passenger events as drivers. Conditional mutual information (CMI) provides a robust framework for assessing both linear and non-linear associations while effectively accounting for different confounding factors. An R package called conMItion is introduced to estimate CMI and its statistical significance for multi-omics data, with flexibility to adjust for one or two confounding factors. We demonstrated the utilization of conMItion through two use cases. First, we identified co-occurring somatic alterations in bladder cancer genomic data. Second, we applied conMItion to a single-cell RNA sequencing dataset of lung cancer patients and identified positively or negatively associated cell types within the lung cancer tumor microenvironment.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

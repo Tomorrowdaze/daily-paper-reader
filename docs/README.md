@@ -6,35 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-11
-- 运行时间：2026-05-11 20:40:52 UTC
+- 最新运行日期：2026-05-12
+- 运行时间：2026-05-12 20:44:24 UTC
 - 运行状态：成功
-- 本次总论文数：4
+- 本次总论文数：3
 - 精读区：0
-- 速读区：4
+- 速读区：3
 
 ### 今日简报（AI）
-今天速读了 4 篇论文，涵盖因果推理信息差、内幕信息泄露度量与医疗特征重要性分析。  
-值得关注的是因果层级的信息论分界与实际市场泄露评估，为量化系统决策不透明性提供思路。  
-建议下步挑选一篇高分论文深入精读，结合实例理解信息传播与因果解释的连接。
-- 详情：[/202605/11/README](/202605/11/README)
+探索多组学与文献信息生成领域的新进展，速读完成三篇论文。  
+智能文献解析与多组学因果校正方法成为今日亮点方向。  
+建议关注AI助力科研流程自动化及数据解释力提升的后续应用。
+- 详情：[/202605/12/README](/202605/12/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy](/202605/11/2605.02177v1-the-causal-description-gap-information-theoretic-separations-across-pearls-hierarchy)  
-   标签：评分：7.0/10、query:q6
-   evidence：因果层级与因果查询的信息论分离
-2. [Empirical Evaluation of Deadline-Resolved Information Leakage on Documented Polymarket Insider Cases](/202605/11/2605.02286v1-empirical-evaluation-of-deadline-resolved-information-leakage-on-documented-polymarket-insider-cases)  
-   标签：评分：7.0/10、query:q4
-   evidence：评估与美伊冲突集群相关的预测市场数据。
-3. [Feature importance analysis for patient management decisions](/202605/11/2605.04666v1-feature-importance-analysis-for-patient-management-decisions)  
-   标签：评分：6.0/10、query:q4
-   evidence：用于从临床数据预测决策的特征重要性分析
-4. [Towards Self-Explainable Document Visual Question Answering with Chain-of-Explanation Predictions](/202605/11/2605.06058v1-towards-self-explainable-document-visual-question-answering-with-chain-of-explanation-predictions)  
-   标签：评分：6.0/10、query:q5
-   evidence：具有解释链的自解释框架，用于落地推理
+1. [Talk2QSP: Deriving Executable Scenarios from Unstructured Literature via Human-in-the-Loop Agents](/202605/12/biorxiv-10-64898-2026-05-06-723244-v1-talk2qsp-deriving-executable-scenarios-from-unstructured-literature-via-human-in-the-loop-agents)  
+   标签：评分：6.5/10、query:q6
+   evidence：用于模拟就绪模型干预的可执行因果系统
+2. [Entropy Sorting Feature Selection: information-theoretic gene set identification improves single-cell RNA sequencing data interpretability](/202605/12/biorxiv-10-64898-2026-01-26-701684-v2-entropy-sorting-feature-selection-information-theoretic-gene-set-identification-improves-single-cell-rna-sequencing-data-interpretability)  
+   标签：评分：6.0/10、query:q6
+   evidence：通过信息论特征选择提高数据可解释性
+3. [conMItion: an R package adjusting confounding factors for associations in multi-omics](/202605/12/biorxiv-10-64898-2026-05-07-723535-v1-conmition-an-r-package-adjusting-confounding-factors-for-associations-in-multi-omics)  
+   标签：评分：6.0/10、query:q6
+   evidence：使用条件互信息评估关联并处理混杂因素
 
 
 <div class="dpr-home-promo-card">

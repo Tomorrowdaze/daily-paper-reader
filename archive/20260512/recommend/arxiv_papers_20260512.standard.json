@@ -1,0 +1,135 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-12T20:44:12.046340+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-05-06-723244-v1",
+      "source": "biorxiv",
+      "title": "Talk2QSP: Deriving Executable Scenarios from Unstructured Literature via Human-in-the-Loop Agents",
+      "abstract": "Quantitative Systems Pharmacology (QSP) models play an inherently interventional role in pharmaceutical research and development, functioning as executable causal systems for designing, evaluating, and replacing clinical trials. However, deploying QSP as an experimental planning engine remains constrained by the difficulty of translating unstructured literature descriptions of clinical or preclinical scenarios into reproducible, simulation-ready model interventions. Motivated by this issue, we propose an agent-based framework that operationalizes QSP models as intervention-ready experimental systems by automatically extracting and executing literature-derived scenarios. The framework combines semantic grounding of model entities with a large language model (LLM)-driven Scenario Extractor and a dual-agent Scenario Mapper. Rather than relying on opaque, single-shot reasoning, our pipeline converts free-text interventions into precise parameter configurations through discrete, verifiable work orders. Moreover, our dynamic Human-in-the-Loop (HITL) strategy empowers modelers to resolve biological ambiguities interactively. Across four diverse kinetic ordinary differential equation (ODE)/QSP models and seven Subject Matter Expert (SME)-curated literature scenarios, our model resolved all selected scenarios into correct executable parameter changes, including multi-dose interventions, unit conversions, no-op scenarios, and ambiguity-triggered HITL cases, demonstrating that structured collaboration between experts and agentic systems can resolve scenarios that standalone raw Systems Biology Markup Language (SBML) reasoning LLM calls handle unreliably.",
+      "authors": [
+        "Kazemeini, A.",
+        "Prieto, J.",
+        "Balaji Kuttae, S.",
+        "Siokis, A.",
+        "Singh, G.",
+        "Passban, P.",
+        "Andreani, T."
+      ],
+      "primary_category": "systems biology",
+      "categories": [
+        "systems biology"
+      ],
+      "published": "2026-05-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.06.723244v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "executable causal systems for simulation-ready model interventions",
+      "llm_evidence_cn": "用于模拟就绪模型干预的可执行因果系统",
+      "llm_evidence": "用于模拟就绪模型干预的可执行因果系统",
+      "canonical_evidence": "用于模拟就绪模型干预的可执行因果系统",
+      "llm_tldr_en": "Talk2QSP extracts executable causal scenarios from literature for pharmaceutical simulation.",
+      "llm_tldr_cn": "Talk2QSP从文献中提取可执行的因果场景，用于药物研发模拟。",
+      "llm_tldr": "Talk2QSP从文献中提取可执行的因果场景，用于药物研发模拟。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-01-26-701684-v2",
+      "source": "biorxiv",
+      "title": "Entropy Sorting Feature Selection: information-theoretic gene set identification improves single-cell RNA sequencing data interpretability",
+      "abstract": "Single-cell RNA sequencing (scRNA-seq) has transformed our ability to resolve cellular heterogeneity, but extracting meaningful signals remains challenging due to technical noise and batch effects. Most methods for denoising scRNA-seq data have focused on using latent representations such as principal component analysis and deep learning to prioritise biological signals. By contrast, despite its influence on downstream analyses, feature selection has received relatively limited attention, leading to widespread reliance on the comparatively simplistic strategy of highly variable gene selection. Here we present Entropy Sorting Feature Selection (ESFS), a modular, user-friendly framework that substantially improves the interpretability of scRNA-seq data. Notably, ESFS reveals complex expression dynamics that are obscured in latent representations. We demonstrate the utility of ESFS in diverse data: identifying coherent developmental programs across eight independent human embryo datasets without batch integration; resolving spatial gene expression in mouse colon missed by conventional analyses; disambiguating shared and tumour-specific microenvironments in glioblastoma; and disentangling spatial, temporal, and neurogenic programs in the developing mouse neural tube. Beyond delivering a powerful and user-friendly software that deepens insight into complex biological systems, our work establishes Entropy Sorting as a novel information theoretic for advanced data analysis methods.",
+      "authors": [
+        "Radley, A.",
+        "Boezio, G.",
+        "Shand, C.",
+        "Perez-Carrasco, R.",
+        "Briscoe, J."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-10T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.01.26.701684v2.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Information-theoretic feature selection to improve data interpretability",
+      "llm_evidence_cn": "通过信息论特征选择提高数据可解释性",
+      "llm_evidence": "通过信息论特征选择提高数据可解释性",
+      "canonical_evidence": "通过信息论特征选择提高数据可解释性",
+      "llm_tldr_en": "Proposes a feature selection framework to improve the interpretability of complex biological data.",
+      "llm_tldr_cn": "提出了一个特征选择框架，以提高复杂生物数据的可解释性。",
+      "llm_tldr": "提出了一个特征选择框架，以提高复杂生物数据的可解释性。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-07-723535-v1",
+      "source": "biorxiv",
+      "title": "conMItion: an R package adjusting confounding factors for associations in multi-omics",
+      "abstract": "Association measurements, such as mutual information (MI), are fundamental in the analysis of cancer multi-omics data for identifying cancer-related genes, gene signatures, and gene regulatory networks, thereby shedding light on tumor development, progression, and treatment. Confounding factors, including tumor purity and mutation burden, can bias association measurements in MI, potentially leading to the misclassification of passenger events as drivers. Conditional mutual information (CMI) provides a robust framework for assessing both linear and non-linear associations while effectively accounting for different confounding factors. An R package called conMItion is introduced to estimate CMI and its statistical significance for multi-omics data, with flexibility to adjust for one or two confounding factors. We demonstrated the utilization of conMItion through two use cases. First, we identified co-occurring somatic alterations in bladder cancer genomic data. Second, we applied conMItion to a single-cell RNA sequencing dataset of lung cancer patients and identified positively or negatively associated cell types within the lung cancer tumor microenvironment.",
+      "authors": [
+        "Wang, G.",
+        "Liu, F.",
+        "Chen, Z.",
+        "Davoli, T."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.07.723535v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Conditional mutual information for assessing associations while accounting for confounding factors",
+      "llm_evidence_cn": "使用条件互信息评估关联并处理混杂因素",
+      "llm_evidence": "使用条件互信息评估关联并处理混杂因素",
+      "canonical_evidence": "使用条件互信息评估关联并处理混杂因素",
+      "llm_tldr_en": "Introduces an R package for robust association analysis by adjusting for confounding factors.",
+      "llm_tldr_cn": "介绍了一个通过调整混杂因素进行稳健关联分析的R包。",
+      "llm_tldr": "介绍了一个通过调整混杂因素进行稳健关联分析的R包。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
