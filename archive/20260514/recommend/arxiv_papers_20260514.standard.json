@@ -1,0 +1,122 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-14T21:23:01.809944+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-05-05-723069-v1",
+      "source": "biorxiv",
+      "title": "Autoresearch Discovery of Interpretable Filter Rules for Antibody Binder Classification",
+      "abstract": "Antibody design campaigns increasingly generate many candidates before only a small subset can be tested experimentally, making candidate filtering a central bottleneck. We study whether an autoresearch loop can discover better training-free filters for antibody binder classification by iteratively proposing rule variants, evaluating them under a fixed Leave-One-System-Out protocol, recording each experiment in version control, and using the results to guide the next iteration. Across 75 unique logged filter variants on seven antibody-antigen systems, the loop improves average ROC-AUC from 0.6371 for the initial baseline to 0.8060 for a compact final rule that we call the RMSD-Tuned Triad rule, an absolute gain of 0.1689 and a relative improvement of 26.5%. The discovered filter is competitive with supervised machine learning baselines and prompted LLM baselines evaluated on the same systems: it exceeds logistic regression (0.7144), feature-selected balanced logistic regression (0.7536), and GPT-4o tabular few-shot prompting (0.7640), and it comes within 0.0044 ROC-AUC of the strongest GPT-5 tabular few-shot result (0.8104). Unlike the LLM baseline, the final rule requires no prompted examples and no LLM inference once the numeric structure-derived features are available. These results show that systematic autoresearch can turn simple structural-confidence signals into compact, interpretable filters that are useful when target-specific training data are scarce.",
+      "authors": [
+        "Landajuela, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.05.723069v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Discovery of interpretable filter rules for classification using an automated research loop",
+      "llm_evidence_cn": "使用自动化研究循环发现用于分类的可解释过滤规则",
+      "llm_evidence": "使用自动化研究循环发现用于分类的可解释过滤规则",
+      "canonical_evidence": "使用自动化研究循环发现用于分类的可解释过滤规则",
+      "llm_tldr_en": "An automated loop discovers interpretable rules for classification, offering a method for explainable risk modeling.",
+      "llm_tldr_cn": "该研究通过自动化循环发现可解释的分类规则，为构建可解释风险预测模型提供了方法参考。",
+      "llm_tldr": "该研究通过自动化循环发现可解释的分类规则，为构建可解释风险预测模型提供了方法参考。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.08964v1",
+      "source": "arxiv",
+      "title": "Trustworthy AI: Ensuring Reliability and Accountability from Models to Agents",
+      "abstract": "In this thesis, we develop algorithms with theoretical guarantees for ensuring reliability and accountability of Machine Learning (ML) systems. As ML systems evolve from predictive models to generative models and autonomous agents, the landscape of trustworthy AI has shifted. This thesis introduces tools grounded in information theory, optimization, and statistical learning to mitigate bias, reduce arbitrary decisions, ensure content provenance, and evaluate LLM-driven agents in autonomous settings. Towards mitigating bias and arbitrariness in traditional ML models, we introduce a kernel-based method to achieve multiaccuracy across complex subpopulations that traditional demographic categories may overlook. We also develop methods to address predictive multiplicity, where equally accurate models yield conflicting individual predictions. We ensure the accountability in generative AI through watermarking large language models (LLMs). We characterize the information-theoretic trade-off between watermark detection and text distortion and derive optimal watermarking strategies by leveraging optimal transport and coding theory. Empirical evaluations show our watermarks achieve a superior detection-quality tradeoff across language generation and coding tasks. Finally, we evaluate autonomous LLM agents in multi-agent environments through the first simulator of a fully LLM-driven supply chain. LLM agents offer significant performance gains, outperforming human teams and reducing costs by up to 67%, but also introduce systemic risks, including costly tail events.",
+      "authors": [
+        "Carol Xuan Long"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-05-09T14:11:36+00:00",
+      "link": "https://arxiv.org/pdf/2605.08964v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Trustworthy AI algorithms for reliability and accountability in predictive models and agents",
+      "llm_evidence_cn": "用于预测模型和智能体可靠性与问责制的可信人工智能算法",
+      "llm_evidence": "用于预测模型和智能体可靠性与问责制的可信人工智能算法",
+      "canonical_evidence": "用于预测模型和智能体可靠性与问责制的可信人工智能算法",
+      "llm_tldr_en": "Introduces tools for trustworthy AI to mitigate bias and ensure accountability in predictive and autonomous systems.",
+      "llm_tldr_cn": "介绍了用于减轻偏差并确保预测和自主系统中问责制的可信人工智能工具。",
+      "llm_tldr": "介绍了用于减轻偏差并确保预测和自主系统中问责制的可信人工智能工具。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.12435v1",
+      "source": "arxiv",
+      "title": "Environment-Adaptive Preference Optimization for Wildfire Prediction",
+      "abstract": "Predicting rare extreme events such as wildfires from meteorological data requires models that remain reliable under evolving environmental conditions. This problem is inherently long-tailed: wildfire events are rare but high-impact, while most observations correspond to non-fire conditions, causing standard learning objectives to underemphasize the minority class (fire) that matters most. In addition, models trained on historical distributions often fail under distribution shifts, exhibiting degraded performance in new environments. To this end, we propose Environment-Adaptive Preference Optimization (EAPO), a framework that adapts prediction to the target environment with long-tail distribution. Given a new input distribution, we first construct distribution-aligned datasets via $k$-nearest neighbor retrieval. We then perform a hybrid fine-tuning procedure on this local manifold, combining supervised learning with preference optimization, as well as emphasizing on rare extreme events. EAPO refines decision boundaries while avoiding conflicting signals from heterogeneous training data. We evaluate EAPO on a real-world wildfire prediction task with environmental shifts. EAPO achieves robust performance (ROC-AUC 0.7310) and improves detection in extreme regimes, demonstrating its effectiveness in dynamic wildfire prediction systems.",
+      "authors": [
+        "Enyi Jiang",
+        "Wu Sun"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CE"
+      ],
+      "published": "2026-05-12T17:31:00+00:00",
+      "link": "https://arxiv.org/pdf/2605.12435v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Predicting rare extreme events under distribution shifts",
+      "llm_evidence_cn": "在分布偏移下预测稀有极端事件",
+      "llm_evidence": "在分布偏移下预测稀有极端事件",
+      "canonical_evidence": "在分布偏移下预测稀有极端事件",
+      "llm_tldr_en": "Proposes a framework for predicting rare events like wildfires that adapts to new environments.",
+      "llm_tldr_cn": "提出了一种预测野火等稀有事件的框架，能够适应环境变化和长尾分布。",
+      "llm_tldr": "提出了一种预测野火等稀有事件的框架，能够适应环境变化和长尾分布。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -6,22 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-13
-- 运行时间：2026-05-13 20:29:49 UTC
+- 最新运行日期：2026-05-14
+- 运行时间：2026-05-14 21:23:48 UTC
 - 运行状态：成功
-- 本次总论文数：0
+- 本次总论文数：3
 - 精读区：0
-- 速读区：0
+- 速读区：3
 
 ### 今日简报（AI）
-> 今日无新推荐，系统未产出可展示论文。
-- 详情：[/202605/13/README](/202605/13/README)
+探索三篇速读论文，聚焦抗体结合预测、可信AI与野火风险建模。  
+关键进展在可解释过滤规则与环境自适应优化，为AI应用可靠性提供新角度。  
+建议关注这些方法在医疗与灾害预警中的落地潜力。
+- 详情：[/202605/14/README](/202605/14/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [Autoresearch Discovery of Interpretable Filter Rules for Antibody Binder Classification](/202605/14/biorxiv-10-64898-2026-05-05-723069-v1-autoresearch-discovery-of-interpretable-filter-rules-for-antibody-binder-classification)  
+   标签：评分：6.5/10、query:q5
+   evidence：使用自动化研究循环发现用于分类的可解释过滤规则
+2. [Trustworthy AI: Ensuring Reliability and Accountability from Models to Agents](/202605/14/2605.08964v1-trustworthy-ai-ensuring-reliability-and-accountability-from-models-to-agents)  
+   标签：评分：6.0/10、query:q5
+   evidence：用于预测模型和智能体可靠性与问责制的可信人工智能算法
+3. [Environment-Adaptive Preference Optimization for Wildfire Prediction](/202605/14/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction)  
+   标签：评分：6.0/10、query:profile-1
+   evidence：在分布偏移下预测稀有极端事件
 
 
 <div class="dpr-home-promo-card">

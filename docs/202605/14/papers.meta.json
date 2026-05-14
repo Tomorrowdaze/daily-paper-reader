@@ -1,0 +1,54 @@
+{
+  "label": "2026-05-14",
+  "date": "2026-05-14",
+  "generated_at": "2026-05-14T21:23:54",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202605/14/biorxiv-10-64898-2026-05-05-723069-v1-autoresearch-discovery-of-interpretable-filter-rules-for-antibody-binder-classification",
+      "section": "quick",
+      "title_en": "Autoresearch Discovery of Interpretable Filter Rules for Antibody Binder Classification",
+      "authors": "Landajuela, M.",
+      "date": "2026-05-11",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.05.05.723069v1.full.pdf",
+      "score": "6.5",
+      "evidence": "使用自动化研究循环发现用于分类的可解释过滤规则",
+      "tldr": "该研究针对抗体设计中筛选瓶颈问题，提出一个自我研究循环系统，迭代生成和评估无训练的筛选规则。在七个抗体-抗原系统上取得显著性能提升，最终RMSD调优三联规则在保持可解释性的同时接近最强LLM性能，展示了自动化自研究发现可解释筛选规则的潜力。",
+      "tags": "query:q5",
+      "abstract_en": "Antibody design campaigns increasingly generate many candidates before only a small subset can be tested experimentally, making candidate filtering a central bottleneck. We study whether an autoresearch loop can discover better training-free filters for antibody binder classification by iteratively proposing rule variants, evaluating them under a fixed Leave-One-System-Out protocol, recording each experiment in version control, and using the results to guide the next iteration. Across 75 unique logged filter variants on seven antibody-antigen systems, the loop improves average ROC-AUC from 0.6371 for the initial baseline to 0.8060 for a compact final rule that we call the RMSD-Tuned Triad rule, an absolute gain of 0.1689 and a relative improvement of 26.5%. The discovered filter is competitive with supervised machine learning baselines and prompted LLM baselines evaluated on the same systems: it exceeds logistic regression (0.7144), feature-selected balanced logistic regression (0.7536), and GPT-4o tabular few-shot prompting (0.7640), and it comes within 0.0044 ROC-AUC of the strongest GPT-5 tabular few-shot result (0.8104). Unlike the LLM baseline, the final rule requires no prompted examples and no LLM inference once the numeric structure-derived features are available. These results show that systematic autoresearch can turn simple structural-confidence signals into compact, interpretable filters that are useful when target-specific training data are scarce.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/14/2605.08964v1-trustworthy-ai-ensuring-reliability-and-accountability-from-models-to-agents",
+      "section": "quick",
+      "title_en": "Trustworthy AI: Ensuring Reliability and Accountability from Models to Agents",
+      "authors": "Carol Xuan Long",
+      "date": "2026-05-09",
+      "pdf": "https://arxiv.org/pdf/2605.08964v1",
+      "score": "6.0",
+      "evidence": "用于预测模型和智能体可靠性与问责制的可信人工智能算法",
+      "tldr": "本论文旨在构建具有理论保证的算法，以增强机器学习系统从预测模型到生成模型及自主代理的可靠性与可问责性。研究包括多准确性偏差缓解、预测多重性处理、生成模型水印与自主LLM代理评估，系统性提升可信AI性能。",
+      "tags": "query:q5",
+      "abstract_en": "In this thesis, we develop algorithms with theoretical guarantees for ensuring reliability and accountability of Machine Learning (ML) systems. As ML systems evolve from predictive models to generative models and autonomous agents, the landscape of trustworthy AI has shifted. This thesis introduces tools grounded in information theory, optimization, and statistical learning to mitigate bias, reduce arbitrary decisions, ensure content provenance, and evaluate LLM-driven agents in autonomous settings. Towards mitigating bias and arbitrariness in traditional ML models, we introduce a kernel-based method to achieve multiaccuracy across complex subpopulations that traditional demographic categories may overlook. We also develop methods to address predictive multiplicity, where equally accurate models yield conflicting individual predictions. We ensure the accountability in generative AI through watermarking large language models (LLMs). We characterize the information-theoretic trade-off between watermark detection and text distortion and derive optimal watermarking strategies by leveraging optimal transport and coding theory. Empirical evaluations show our watermarks achieve a superior detection-quality tradeoff across language generation and coding tasks. Finally, we evaluate autonomous LLM agents in multi-agent environments through the first simulator of a fully LLM-driven supply chain. LLM agents offer significant performance gains, outperforming human teams and reducing costs by up to 67%, but also introduce systemic risks, including costly tail events.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202605/14/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction",
+      "section": "quick",
+      "title_en": "Environment-Adaptive Preference Optimization for Wildfire Prediction",
+      "authors": "Enyi Jiang, Wu Sun",
+      "date": "2026-05-12",
+      "pdf": "https://arxiv.org/pdf/2605.12435v1",
+      "score": "6.0",
+      "evidence": "在分布偏移下预测稀有极端事件",
+      "tldr": "本文针对气象数据中罕见的极端野火事件预测问题提出了环境自适应偏好优化（EAPO）框架，通过分布对齐数据构建与混合微调策略提高模型在动态环境下的鲁棒性与对稀有事件的检测能力。",
+      "tags": "query:profile-1",
+      "abstract_en": "Predicting rare extreme events such as wildfires from meteorological data requires models that remain reliable under evolving environmental conditions. This problem is inherently long-tailed: wildfire events are rare but high-impact, while most observations correspond to non-fire conditions, causing standard learning objectives to underemphasize the minority class (fire) that matters most. In addition, models trained on historical distributions often fail under distribution shifts, exhibiting degraded performance in new environments. To this end, we propose Environment-Adaptive Preference Optimization (EAPO), a framework that adapts prediction to the target environment with long-tail distribution. Given a new input distribution, we first construct distribution-aligned datasets via $k$-nearest neighbor retrieval. We then perform a hybrid fine-tuning procedure on this local manifold, combining supervised learning with preference optimization, as well as emphasizing on rare extreme events. EAPO refines decision boundaries while avoiding conflicting signals from heterogeneous training data. We evaluate EAPO on a real-world wildfire prediction task with environmental shifts. EAPO achieves robust performance (ROC-AUC 0.7310) and improves detection in extreme regimes, demonstrating its effectiveness in dynamic wildfire prediction systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
