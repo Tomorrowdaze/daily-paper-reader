@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.12918v1/fig-001.webp",
+      "caption": "Table 2: Performance comparison on Long-Tail and Head subsets of CommonWhy across different LLMs and KGQA methods.",
+      "page": 6,
+      "index": 1,
+      "width": 1048,
+      "height": 232
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12918v1/fig-002.webp",
+      "caption": "Figure 1: Overview of theCommonWhy dataset construction pipeline. (1) Commonsense axioms extracted from existing datasets",
+      "page": 2,
+      "index": 2,
+      "width": 934,
+      "height": 459
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12918v1/fig-003.webp",
+      "caption": "Figure 2: Distribution of reasoning skills in CommonWhy.",
+      "page": 4,
+      "index": 3,
+      "width": 490,
+      "height": 321
+    }
+  ]
+}

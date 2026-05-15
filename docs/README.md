@@ -6,32 +6,35 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-14
-- 运行时间：2026-05-14 21:23:48 UTC
+- 最新运行日期：2026-05-15
+- 运行时间：2026-05-15 21:18:22 UTC
 - 运行状态：成功
-- 本次总论文数：3
+- 本次总论文数：4
 - 精读区：0
-- 速读区：3
+- 速读区：4
 
 ### 今日简报（AI）
-探索三篇速读论文，聚焦抗体结合预测、可信AI与野火风险建模。  
-关键进展在可解释过滤规则与环境自适应优化，为AI应用可靠性提供新角度。  
-建议关注这些方法在医疗与灾害预警中的落地潜力。
-- 详情：[/202605/14/README](/202605/14/README)
+今天聚焦逻辑推理与检索增强方向，速读了 4 篇相关论文。  
+重点关注离散逻辑原生求解器 Dsat 与因果常识推理数据集 CommonWhy 的新进展。  
+建议普通读者关注这些方法如何提升大模型的逻辑一致性与知识应用能力。
+- 详情：[/202605/15/README](/202605/15/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Autoresearch Discovery of Interpretable Filter Rules for Antibody Binder Classification](/202605/14/biorxiv-10-64898-2026-05-05-723069-v1-autoresearch-discovery-of-interpretable-filter-rules-for-antibody-binder-classification)  
+1. [Dsat: A Native SAT Solver for Discrete Logic](/202605/15/2605.09347v1-dsat-a-native-sat-solver-for-discrete-logic)  
+   标签：评分：6.5/10、query:q6
+   evidence：用于可解释人工智能和符号推理的原生SAT求解器
+2. [CommonWhy: A Dataset for Evaluating Entity-Based Causal Commonsense Reasoning in Large Language Models](/202605/15/2605.12918v1-commonwhy-a-dataset-for-evaluating-entity-based-causal-commonsense-reasoning-in-large-language-models)  
+   标签：评分：6.5/10、query:q6
+   evidence：评估关于因果关系的溯因推理并生成解释
+3. [Derivation Prompting: A Logic-Based Method for Improving Retrieval-Augmented Generation](/202605/15/2605.14053v1-derivation-prompting-a-logic-based-method-for-improving-retrieval-augmented-generation)  
    标签：评分：6.5/10、query:q5
-   evidence：使用自动化研究循环发现用于分类的可解释过滤规则
-2. [Trustworthy AI: Ensuring Reliability and Accountability from Models to Agents](/202605/14/2605.08964v1-trustworthy-ai-ensuring-reliability-and-accountability-from-models-to-agents)  
-   标签：评分：6.0/10、query:q5
-   evidence：用于预测模型和智能体可靠性与问责制的可信人工智能算法
-3. [Environment-Adaptive Preference Optimization for Wildfire Prediction](/202605/14/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction)  
-   标签：评分：6.0/10、query:profile-1
-   evidence：在分布偏移下预测稀有极端事件
+   evidence：用于受控生成的解释性推导树
+4. [Environment-Adaptive Preference Optimization for Wildfire Prediction](/202605/15/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction)  
+   标签：评分：6.0/10、query:q4
+   evidence：使用环境自适应优化预测长尾分布中的稀有极端事件
 
 
 <div class="dpr-home-promo-card">

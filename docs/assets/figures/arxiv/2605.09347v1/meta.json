@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.09347v1/fig-001.webp",
+      "caption": "Figure 1 Random 3-CNFs with discrete variables of cardinality C = 2, 4, 8, 16, 32, 48, and 64.",
+      "page": 13,
+      "index": 1,
+      "width": 831,
+      "height": 363
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09347v1/fig-002.webp",
+      "caption": "Figure 2 Comparison of Dsat, Cadical, Gluecard4, and PicatSAT on CNFs for blocks world planning problems. X-axis is the number of blocks in the planning problem. Y-axis is the geometric mean runtime plotted on a log-scale. Problems with 7 blocks have an average of 315 variables and 9, 653 clauses. Problems with 23 blocks have an average of 3, 552 variables and 663, 693 clauses.",
+      "page": 15,
+      "index": 2,
+      "width": 541,
+      "height": 334
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09347v1/fig-003.webp",
+      "caption": "Figure 3 Comparison between Dsat and Cadical for compiling NNF circuits into CNFs. Top row shows the compilation runtime. The bottom row is the size of the output CNF.",
+      "page": 16,
+      "index": 3,
+      "width": 832,
+      "height": 375
+    }
+  ]
+}
