@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-05-18 <!--dpr-date:20260518-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/18/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction" data-sidebar-item="{&quot;title&quot;: &quot;Environment-Adaptive Preference Optimization for Wildfire Prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用自适应模型预测分布偏移下的稀有极端事件。&quot;}">Environment-Adaptive Preference Optimization for Wildfire Prediction</a>
   * 2026-05-16 <!--dpr-date:20260516-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/16/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction" data-sidebar-item="{&quot;title&quot;: &quot;Environment-Adaptive Preference Optimization for Wildfire Prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;使用环境自适应偏好优化预测稀有极端事件&quot;}">Environment-Adaptive Preference Optimization for Wildfire Prediction</a>

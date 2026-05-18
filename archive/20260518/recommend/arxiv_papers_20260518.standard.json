@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-18T20:39:45.284269+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2605.12435v1",
+      "source": "arxiv",
+      "title": "Environment-Adaptive Preference Optimization for Wildfire Prediction",
+      "abstract": "Predicting rare extreme events such as wildfires from meteorological data requires models that remain reliable under evolving environmental conditions. This problem is inherently long-tailed: wildfire events are rare but high-impact, while most observations correspond to non-fire conditions, causing standard learning objectives to underemphasize the minority class (fire) that matters most. In addition, models trained on historical distributions often fail under distribution shifts, exhibiting degraded performance in new environments. To this end, we propose Environment-Adaptive Preference Optimization (EAPO), a framework that adapts prediction to the target environment with long-tail distribution. Given a new input distribution, we first construct distribution-aligned datasets via $k$-nearest neighbor retrieval. We then perform a hybrid fine-tuning procedure on this local manifold, combining supervised learning with preference optimization, as well as emphasizing on rare extreme events. EAPO refines decision boundaries while avoiding conflicting signals from heterogeneous training data. We evaluate EAPO on a real-world wildfire prediction task with environmental shifts. EAPO achieves robust performance (ROC-AUC 0.7310) and improves detection in extreme regimes, demonstrating its effectiveness in dynamic wildfire prediction systems.",
+      "authors": [
+        "Enyi Jiang",
+        "Wu Sun"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CE"
+      ],
+      "published": "2026-05-12T17:31:00+00:00",
+      "link": "https://arxiv.org/pdf/2605.12435v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Predicting rare extreme events using adaptive models for distribution shifts.",
+      "llm_evidence_cn": "使用自适应模型预测分布偏移下的稀有极端事件。",
+      "llm_evidence": "使用自适应模型预测分布偏移下的稀有极端事件。",
+      "canonical_evidence": "使用自适应模型预测分布偏移下的稀有极端事件。",
+      "llm_tldr_en": "Proposes a framework for wildfire prediction that adapts to environmental distribution shifts.",
+      "llm_tldr_cn": "提出了一种适应环境分布偏移的野火预测框架。",
+      "llm_tldr": "提出了一种适应环境分布偏移的野火预测框架。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
