@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-07T21:37:31.281388+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-07-03-736448-v1",
+      "source": "biorxiv",
+      "title": "RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification",
+      "abstract": "Peptides are increasingly explored as therapeutic candidates, delivery vectors, and functional biomolecules, but experimental screening of peptide activity and safety remains costly because the sequence space is vast and small sequence changes can alter functionality. Computational peptide classification can therefore help prioritize candidates. However, many protein-language-model-based classifiers achieve strong performance using opaque prediction heads, making it difficult to determine which learned evidence supports or opposes a prediction. We present RulePep, an ESM-2-guided neural-symbolic classifier for peptide-function prediction. RulePep maps frozen ESM-2 sequence representation to learned latent predicates, polarity-constrained differentiable rules, and an additive symbolic logit whose components can be inspected at the case level. We evaluate RulePep on three biologically distinct peptide classification tasks: blood-brain barrier penetration, hemolytic potency, and anticancer activity. On the BBPpredict, HemoPI3, and AntiCP 2.0 alternate benchmark datasets, RulePep achieved AUROC/MCC values of 0.8869/0.6850, 0.9155/0.6820, and 0.9765/0.8633, respectively. Ablation experiments supported the contributions of multi-layer representation pooling, rule polarity, mined-rule initialization, symbolic capacity, and rule-derived aggregation. RulePep combines competitive predictive performance with additive logit reconstruction, rule-level evidence reporting, and predicate-suppression auditing, providing a transparent sequence-based framework for peptide candidate prioritization.",
+      "authors": [
+        "Midjani, F.",
+        "Ghelich, R.",
+        "Keshtkar, F. Z.",
+        "Malekpour, M.",
+        "Lee, H."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-07-06T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.07.03.736448v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interpretable neural-symbolic classification for risk prediction",
+      "llm_evidence_cn": "用于风险预测的可解释神经符号分类",
+      "llm_evidence": "用于风险预测的可解释神经符号分类",
+      "canonical_evidence": "用于风险预测的可解释神经符号分类",
+      "llm_tldr_en": "RulePep uses neural-symbolic AI for interpretable peptide classification, providing a method for explainable risk.",
+      "llm_tldr_cn": "RulePep使用神经符号AI进行可解释的肽分类，提供了一种可解释风险预测的方法。",
+      "llm_tldr": "RulePep使用神经符号AI进行可解释的肽分类，提供了一种可解释风险预测的方法。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

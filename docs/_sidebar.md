@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-07 <!--dpr-date:20260707-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/07/biorxiv-10-64898-2026-07-03-736448-v1-rulepep-interpretable-esm-guided-neural-symbolic-peptide-classification" data-sidebar-item="{&quot;title&quot;: &quot;RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/biorxiv-10-64898-2026-07-03-736448-v1-rulepep-interpretable-esm-guided-neural-symbolic-peptide-classification&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;用于风险预测的可解释神经符号分类&quot;}">RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification</a>
   * 2026-05-18 <!--dpr-date:20260518-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/18/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction" data-sidebar-item="{&quot;title&quot;: &quot;Environment-Adaptive Preference Optimization for Wildfire Prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.12435v1-environment-adaptive-preference-optimization-for-wildfire-prediction&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用自适应模型预测分布偏移下的稀有极端事件。&quot;}">Environment-Adaptive Preference Optimization for Wildfire Prediction</a>

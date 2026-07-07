@@ -1,0 +1,902 @@
+Title: RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification
+
+URL Source: https://www.biorxiv.org/content/10.64898/2026.07.03.736448v1.full.pdf
+
+Published Time: Tue, 07 Jul 2026 21:37:32 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+## RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification 
+
+Farzad Midjani 1, Reza Ghelich 2,3, Fateme Zahra Keshtkar 1, Mahdi Malekpour 1, Heewook Lee 4,5,∗
+
+> 1
+
+Systems Medicine Research Core, Shiraz University of Medical Sciences, Shiraz, Iran 
+
+> 2
+
+Biodesign Center for Mechanisms of Evolution, Arizona State University, Tempe, AZ, USA 
+
+> 3
+
+School of Life Sciences, Arizona State University, Tempe, AZ, USA 
+
+> 4
+
+Biodesign Center for Biocomputing, Security and Society, Arizona State University, Tempe, AZ, USA 
+
+> 5
+
+School of Computing and Augmented Intelligence, Arizona State University, Tempe, AZ, USA 
+
+> ∗
+
+Corresponding author 
+
+Abstract 
+
+Peptides are increasingly explored as therapeutic candidates, delivery vectors, and functional biomolecules, but experimental screening of peptide activity and safety remains costly because the sequence space is vast and small sequence changes can alter functionality. Computational peptide classification can therefore help prioritize candidates. However, many protein-language-model-based classifiers achieve strong performance using opaque prediction heads, making it difficult to determine which learned evidence supports or opposes a prediction. We present RulePep, an ESM-2-guided neural-symbolic classifier for peptide-function prediction. RulePep maps frozen ESM-2 sequence representation to learned latent predicates, polarity-constrained differentiable rules, and an additive symbolic logit whose components can be inspected at the case level. We evaluate RulePep on three biologically distinct peptide classification tasks: blood-brain barrier penetration, hemolytic potency, and anticancer activity. On the BBPpredict, HemoPI3, and AntiCP 2.0 alternate benchmark datasets, RulePep achieved AUROC/MCC values of 0.8869/0.6850, 0.9155/0.6820, and 0.9765/0.8633, respectively. Ablation experiments supported the contributions of multi-layer representation pooling, rule polarity, mined-rule initialization, symbolic capacity, and rule-derived aggregation. RulePep combines competitive predictive performance with additive logit reconstruction, rule-level evidence reporting, and predicate-suppression auditing, providing a transparent sequence-based framework for peptide candidate prioritization. 
+
+1 Introduction 
+
+Peptides are an important class of biological molecules with growing relevance in therapeutic discovery, molecular delivery, and functional screening. Their relatively small size, sequence programmability, and ability to mediate selective molecular or membrane interactions make them attractive candidates for drug development and biotechnology. At the same time, peptide activity is highly sequence dependent: changes in change distribution, hydrophobicity, aromatic content, amphipathicity, or local motifs can substantially alter biological function, toxicity, and stability. Because the possible peptide sequence space is enormous, experimental testing alone cannot exhaustively evaluate candidate peptides. Sequence-based machine learning can therefore serve as an important triage step by prioritizing candidates before synthesis and experimental evaluation. This need arises across several biologically distinct peptide-design problems. lood–brain barrier (BBB) penetration is a major obstacle for central nervous system drug delivery, and BBB-penetrating peptides may help identify molecules or carrier sequences capable of reaching neural tissue. Hemolytic potency is an important safety endpoint because membrane-active peptides can damage red blood cells, limiting their therapeutic utility even when they show desirable antimicrobial or anticancer activity. Anticancer peptides are of interest as potential therapeutic agents because some peptides can selectively disrupt cancer cells or interfere with tumor-associated biological processes. Although BBB penetration, hemolysis, and anticancer activity represent different biological properties, each can be formulated as a binary peptide-classification task in which the input is an amino-acid sequence and the output is a task-specific activity label. This shared formulation allows a common sequence-modeling architecture to be trained and evaluated across functionally different peptide benchmarks. Transfer learning and large-scale sequence pretraining have established protein language models (PLMs) as effective biological sequence encoders [ 1 , 2 ]. Models such as ProteinBERT [ 3], ProtTrans [ 4 ], ESM [ 5 ], and peptide-specific transformer models [ 6 ] have extended this paradigm to protein and peptide property prediction. However, many peptide classifiers still attach dense, recurrent, convolutional or ensemble prediction heads to PLM embeddings. Such models may perform well, but their final scores are often difficult to decompose into positive and negative evidence. This limitation is important in peptide discovery, where users may want to understand not only whether a candidate is predicted to be active, but also which learned 1
+
+> .CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint
+
+sequence-derived evidence supports activity, which evidence raises safety concerns, and how competing signals affect the final score. Neural-symbolic learning can provide more transparent sequence classifiers by introducing explicit rule-like structures into trainable models, including neural-symbolic reasoning foundations [ 7], differentiable logic layers [ 9, 11], probabilistic logic programming [ 10], and rule learning from noisy data [ 8]. We therefore investigate whether a shared PLM-based neural-symbolic architecture can support multiple peptide-classification endpoints while retaining a decomposable decision path. We present RulePep, a neural-symbolic classifier that maps frozen ESM-2 representations to learned latent predicates, expands those predicates into presence and absence literals, initializes polarity-constrained rule banks, and combines direct and higher-order rule-derived evidence into an additive symbolic logit. We evaluate the proposed model on three benchmark peptide-classification tasks: BBPpredict benchmark dataset [12], the HemoPI3 benchmark dataset [13], and the AntiCP 2.0 alternate benchmark dataset [25]. 
+
+2 Materials and Methods 
+
+Figure 1 summarizes the three-stage pipeline: ESM-based representation learning, symbolic rule induction, and prediction with evidence reporting. ... 
+
+1 27 28 29 30 ... 
+
+Backbone weights are frozen; 4 final transformer layers provide hidden states. 
+
+Input Peptide Sequence Layer-statistics pooling 
+
+H27 
+
+H28 
+
+H29 
+
+H30 
+
+Frozen ESM-2 encoder 
+
+> mean
+> max
+
+std 
+
+> mean
+> max
+
+std 
+
+> mean
+> max
+
+std 
+
+> mean
+> max
+
+std 
+
+Final 4 ESM-2 layers 
+
+→ mean / max / std 
+
+→ one sequence representation 
+
+pool per layer 
+
+Concat 
+
+X = (a 1, ..., a L)
+
+variable-length amino-acid token strip 
+
+PCA-initialized trainable adapter 
+
+Pooled vector 
+
+> PCA initialization
+
+Trainable adapter 
+
+Two gated residual refinement blocks Refined latent space 
+
+Starts from training-split PCA coordinates; PCA sets initial geometry, adapter parameters are then trained end-to-end. 
+
+z(x) = Aθ(s(x)) ∈ R¹⁶⁰ 
+
+ESM-derived learned latent predicates 
+
+... 
+
+144 trainable predicates 
+
+72 positive-seeded 72 negative-seeded 
+
+Predicate truth: 
+
+pₖ(x) = σ((cos(z(x), vₖ) + ρₖ(z(x)) − τₖ) / γₖ) 
+
+where z(x) is the adapter representation, vₖ is the learned latent predicate prototype, ρₖ is a residual predicate correction, τₖ is the activation threshold, γₖ controls smoothness, and σ maps the score to a fuzzy truth value. 
+
+Literal expansion 
+
+pk
+
+high truth low truth 
+
+present: p k
+
+absent: 1 - p k
+
+expanded symbolic input q 
+
+Each learned latent predicate contributes both presence and absence literals. 
+
+> Predicate truth matrix
+> Candidate literals
+> 1-3 literal clauses
+> coverage / separation / average precision
+> MMR diversity + polarity
+> Selected rule candidates
+
+Training-split rule-mining funnel  
+
+> Candidate symbolic rules are induced from the training split by filtering predicate-derived clauses for coverage, class separation, predictive quality, and redundancy.
+
+Polarity-constrained rule banks 
+
+Positive bank  24 rules     
+
+> cipresent cjabsent signed evidence
+
+Negative bank  24 rules     
+
+> cipresent cjabsent signed evidence
+
+Learned gates and signed rule weights 
+
+Soft rule truth and exception modulation 
+
+Learnable soft-min fuzzy conjunction Rule truth: 
+
+tᵣ(x) = SoftMinβ(cᵢ(x), 1 − cⱼ(x)), β < 0 
+
+> cᵢ(x) represents the presence of learned latent predicate i, while 1−cⱼ(x) represents NOT cⱼ SoftMinβ combines them as a fuzzy AND.
+
+Hierarchical symbolic evidence aggregation 
+
++ rule - rule rule pair meta group 
+
+direct rule margin m r(x) 
+
+pairwise interaction margin  mp(x) 
+
+meta-rule margin m g(x) 
+
+residual rule-evidence margin m s(x) 
+
+Additive symbolic logit 
+
+All aggregation branches are computed from the learned rule activations. 
+
+cardinality-normalized log-mean-exp margin  me(x) 
+
+Signed evidence accumulation 
+
++
+
++
+
+_
+
++ +
+
+bias rules pairwise meta residual final 
+
+ℓ(x) = b + m r(x) + m p(x) + m g(x) + m s(x) + m e(x) 
+
+Positive-class probability 
+
+ŷ(x) = σ(ℓ(x)) 
+
+The signed symbolic logit ℓ(x) is mapped through a sigmoid function to obtain the predicted probability of the positive peptide class. 
+
+Prediction and explanation  
+
+> Class
+
+: positive / negative Score : probability + threshold  
+
+> Supports
+
+: top positive evidence Opposes : top negative evidence  
+
+> Learned latent predicates
+
+: highest activations 
+
+Per-sample additive logit decomposition 
+
+Zero logit 
+
+bias direct rules 
+
+pairwise interaction meta-rules existential evidence 
+
+> final logit
+
+STAGE 1  Representation learning from peptide sequence 
+
+STAGE 2  Symbolic rule induction and rule-evidence aggregation 
+
+STAGE 3  Decision and explanation 
+
++
+
+> existential
+
+residual evidence 
+
+Figure 1: Architecture of RulePep. Final-layer ESM-2 representations are pooled, adapted, and mapped to 144 learned latent predicates. Training-split mining initializes polarity-specific rule banks whose direct and higher-order terms form the final logit. The displayed two-literal equation is a simplified illustration of the implemented one- to three-literal rules. Rule-bank sizes denote initialization capacity before validation-based pruning. 
+
+2.1 Problem definition and data handling 
+
+All three case studies are treated as binary peptide-classification tasks. For a peptide sequence xi =(a1, . . . , aLi ), the binary label yi ∈ { 0, 1} specifies class membership for the corresponding task: yi = 1represents the task-specific positive class, namely BBB-penetrating peptides in BBPpredict, highly hemolytic peptides in HemoPI3, and anticancer peptides in the AntiCP 2.0 alternate dataset, while yi = 0 represents the 2
+
+.CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint corresponding negative class. The same model architecture, representation pipeline, symbolic classifier, and evaluation procedure are used across the three datasets; the training sequences and label semantics differ by task. Preprocessing was limited to task-agnostic sequence cleaning. Non-standard residues were mapped to X, and sequences outside the 2-200 residue range were removed. Exact duplicates were collapsed, and conflicting duplicate sequences were excluded. The final cleaned dataset sizes were 844 sequences for BBPpredict (421 positive, 423 negative), 1623 sequences for HemoPI3 (885 positive, 738 negative), and 1940 sequences for the AntiCP 2.0 alternate dataset (970 positive, 970 negative). Across the three case studies, the cleaned data are partitioned once using a 70/15/15 train/validation/test design with class-stratified splitting. The training partition fits the ESM adapter, learned latent predicates, differentiable rules, rule interactions, rule-derived aggregation branches, and train-split rule-mining initializa-tion. The validation partition is reserved for checkpoint, threshold, and pruning decisions, and the held-out test partition is evaluated after these choices have been fixed. 
+
+2.2 ESM representation, adapter, and learned latent predicates 
+
+A frozen ESM-2 encoder, esm2_t30_150M_UR50D , maps each peptide into contextual residue representations [5 ]. Let H(k) ∈ RL×d denote the ESM representation at transformer layer k. The representation uses the final four layers, K = {27 , 28 , 29 , 30 }, and forms a sequence vector by concatenating residue-wise mean, maximum, and standard-deviation statistics over these layers, 
+
+s(x) = 
+
+h
+
+mean i H(k) 
+
+> i
+
+, max i H(k) 
+
+> i
+
+, std i H(k)
+
+> i
+
+i 
+
+> k∈K
+
+. (1) The predicate layer maps the ESM-2 representation to trainable fuzzy activation values. These latent predicates are initialized from class-conditional representation structure and do not correspond to human-annotated biological concepts. The pooled training representations are standardized using training-split statistics and projected by principal component analysis (PCA) into a 160-dimensional initialization space [20]. Let es(x) ∈ Rds denote the standardized form of the pooled representation in Eq. 1. The trainable adapter produces the refined latent representation 
+
+z(x) = Aθ (es(x)) ∈ R160 , (2) where Aθ denotes the PCA-initialized adapter with parameters θ . At initialization, 
+
+Aθ 0 (es(x)) = PPCA es(x), (3) where PPCA ∈ R160 ×ds was fitted only to the training representations. The adapter contains two gated residual blocks with zero-initialized output layers; it therefore begins as the PCA projection and subsequently learns nonlinear corrections jointly with the symbolic classifier. RulePep contains 144 learned latent predicates arranged as 72 positive-seeded and 72 negative-seeded predicates. In each bank, 47 prototypes were initialized by training-split k-means centroids and 25 by diverse class-boundary examples [ 21]. Boundary examples were ranked by proximity to the opposite-class centroid, distance from their own-class centroid, and redundancy. Predicate k has prototype vk, threshold τk,temperature γk, and residual correction ρk:
+
+pk(x) = σ
+
+ cos (z(x), vk) + ρk(z(x)) − τk
+
+γk
+
+
+
+, (4) where ρk(z) is a trainable residual predicate score regularized toward zero. All predicate and adapter parameters are then optimized jointly with the symbolic classifier; the rule layer therefore receives trainable fuzzy predicate values rather than fixed cluster assignments. 
+
+2.3 Predicate literals and train-split rule induction 
+
+The learned latent predicate vector is expanded into a literal vector containing both predicate-presence and predicate-absence literals, 
+
+q(x) = p1(x), . . . , pK (x), 1 − p1(x), . . . , 1 − pK (x). (5) 3
+
+> .CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint
+
+The model maintains separate positive and negative rule banks. Positive rules may select positive-seeded predicate-presence and negative-seeded predicate-absence literals; negative rules may select negative-seeded predicate-presence and positive-seeded predicate-absence literals. This constraint preserves the class-oriented initialization and ensures that positive-bank and negative-bank rules contribute with predefined logit direc-tions. Candidate clauses containing one to three literals were mined exclusively from the training split. Eligible clauses required class separation ≥ 0.05 , average precision ≥ 0.60 , target-class coverage ≥ 0.05 , and at least 15 activated training samples. Maximum marginal relevance with λMMR = 0.45 selected nonredundant clauses using rule-truth similarity and literal overlap [ 22 ]. The selected clauses initialized 24 positive and 24 negative rules, whose gates, confidences, literal-selection logits, and non-negative evidence weights were optimized end-to-end. Rule r is evaluated using the learnable negative-order generalized mean in Eq. 6. Here, ar j = σ (αr j ) denotes the selection strength of literal j, and the learned β < 0 produces a differentiable soft-min aggregation dominated by the least-satisfied selected literal, consistent with fuzzy conjunction [23]: 
+
+tr(x) = ∑ j a2 
+
+> r j
+
+fr j (x)β
+
+∑ j a2 
+
+> r j
+
++ ε
+
+!1/β
+
+, (6) where 
+
+fr j (x) = clip (1 − ar j + ar j q j(x), ε, 1) , ε = 10 −6.
+
+The exponent is parameterized as 
+
+β = − softplus (θβ ) + 10 −3 < 0,
+
+yielding a differentiable approximation to the minimum of the selected literal values. Squaring ar j reduces the influence of nearly inactive literals. Rules without an effectively selected literal are assigned the neutral conjunction value, and the final rule truth is clipped to [ε, 1 − ε].
+
+2.4 Symbolic scoring, conflict handling, and rule-derived aggregation branches 
+
+Let etr(x) denote the rule truth after cross-polarity exception modulation. For positive-class-supporting rules 
+
+R+ and negative-class-supporting rules R−, the direct rule margin is 
+
+mr(x) = ∑
+
+> r∈R+
+
+grhrwretr(x) − ∑
+
+> r∈R−
+
+grhrwretr(x), (7) where gr is the rule gate, hr is the rule confidence, and wr ≥ 0 is the contribution scale. The bank assignment determines the sign of each contribution; the learned weights themselves are non-negative. In addition to the direct rule margin, the classifier contains four rule-derived components: signed pairwise interactions, positive- and negative-class meta-rule groups, a residual aggregation branch, and a cardinality-normalized, temperature-scaled log-mean-exp aggregation of class-specific active-rule supports. All four operate on the same exception-modulated rule activations rather than on an independent neural prediction head. For direction d ∈ { +, −} , let R(d) 
+
+> act
+
+denote the rules that remain active after validation-based pruning and optional intervention masking. The confidence-weighted support of rule r is 
+
+ur(x) = clip  hretr(x), ε, 1 , (8) where hr is the learned rule confidence and etr(x) is the exception-modulated rule truth. The normalized class-specific log-support is 
+
+s(d) 
+
+> e
+
+(x) = T
+
+log ∑
+
+> r∈R(d)
+> act
+
+exp 
+
+ log ur(x)
+
+T
+
+
+
+− log R(d)
+
+> act
+
+ , (9) 4
+
+> .CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint
+
+where T > 0 is the existential aggregation temperature. The existential margin is 
+
+me(x) = α+ 
+
+> e
+
+s(+)  
+
+> e
+
+(x) − α− 
+
+> e
+
+s(−) 
+
+> e
+
+(x). (10) The normalization removes the additive rule-count term produced by unnormalized log-sum-exp aggregation. Because each normalized class-specific log-support is non-positive, the combined margin me(x), rather than either term alone, determines whether the existential branch increases or decreases the positive-class logit. The final logit is the additive sum of the symbolic components used during inference: 
+
+ℓ(x) = b + mr(x) + mp(x) + mg(x) + ms(x) + me(x), (11) where mp denotes the pairwise rule-interaction margin, mg the gated meta-rule margin, ms the residual rule-evidence aggregation margin, and me the cardinality-normalized existential log-support contrast defined in Eq. 10. The positive-class probability is ˆ p(y = 1 | x) = σ (ℓ(x)) .
+
+2.5 Training objective and model selection 
+
+The training objective combines class-weighted binary cross-entropy with ranking, evidence-alignment, branch-supervision, predicate-regularization, rule-regularization, sparsity, and logit-stability terms: 
+
+L = Lcls + λrank Lrank + λevid Levid + λcontr Lcontr 
+
++ λbranch Lbranch + λpred Lpred + λrule Lrule + λsparse Lsparse + λstab Lstab . (12) Here, Lrank is a pairwise logit-ranking term; Levid aligns positive and negative evidence with the correspond-ing labels; Lcontr penalizes simultaneous positive and negative evidence; and Lbranch supervises the residual and existential rule-aggregation margins. Lpred combines predicate-group separation, contradiction, diversity, residual-correction, and usage penalties. Lrule combines rule-diversity, rule-coverage, polarity-balance, and conjunction-regularization terms. Lsparse regularizes selection, confidence, exception, interaction, meta-rule, and binarization parameters, whereas Lstab controls logit magnitude. During training, rule activations were subjected to dropout with probability 0.015 [ 24]. Models were implemented in PyTorch [ 18] and optimized with AdamW. Experiments used a maximum sequence length of 200 residues, ESM batch size of 8, validation-selected checkpointing, and gradient clipping. Post-training pruning was accepted only when the validation composite score decreased by no more than 0.002. When pruning was accepted, the retained bank contained at most 22 rules, including at least four positive and four negative rules when available. If pruning failed this criterion, the unpruned 48-rule model was retained. Accepted pruned models were fine-tuned for at most 20 epochs with patience 8 and a learning-rate multiplier of 0.35; otherwise, the pre-pruning model was restored. 
+
+2.6 Evaluation and comparison protocol 
+
+Performance was evaluated using accuracy, precision, recall (sensitivity), specificity, F1-score, AUROC, and Matthews correlation coefficient (MCC). 
+
+2.7 Ablation configurations 
+
+Ten ablation variants were evaluated on the BBPpredict dataset using the same data split, optimization, validation-based checkpoint selection, and threshold-selection procedure as the full model. Representation ablations used only the final ESM layer or halved each predicate bank from 72 to 36 predicates. Rule-capacity ablations halved each rule bank from 24 to 12 rules, disabled rule dropout, removed polarity constraints, removed residual or existential aggregation, replaced the symbolic classifier with a neural head, disabled mined-rule initialization, or used product conjunction without exceptions, pairwise interactions, or meta-rules. 
+
+2.8 Evidence reporting and decision-path auditing 
+
+For each peptide, the model reports the predicted positive-class probability, the additive components of Eq. 11, the activated predicates and rules, and the changes produced by individual rule removal. Decision-path auditing comprised algebraic reconstruction and rule removal. Algebraic reconstruction compared the inference logit with 
+
+b + mr(x) + mp(x) + mg(x) + ms(x) + me(x).
+
+For rule r, the total removal effect was 
+
+∆ℓr(x) = ℓ(x) − ℓ−r(x),
+
+5
+
+> .CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint
+
+where all rule-dependent branches were recomputed after disabling r. Its dependency-mediated component was 
+
+dr(x) = ∆ℓr(x) − cr(x),
+
+with cr(x) denoting the rule’s direct additive contribution. 
+
+2.9 Sequence-level predicate suppression and residue-window localization 
+
+For each test peptide, the ordinary pooled ESM-2 representation was passed through the trained adapter and predicate layer to obtain the sequence-level predicate vector p(x) = [ p1(x), . . . , pK (x)] . The predicates selected for intervention were the eight predicates with the highest sequence-level truth values for that peptide. For an intervention on predicate j, its sequence-level truth value was suppressed according to 
+
+ep j(x) = ( 1 − λ )p j(x), λ = 1, (13) while all other predicate values and all trained parameters were held fixed. The modified predicate vector was then passed through the same literal-expansion, rule-activation, evidence-aggregation, logit, and probability computations used during standard inference. The signed intervention effect was defined as 
+
+∆p j(x) = pmodel (x) − p(− j)
+
+> model
+
+(x), (14) where p(− j)
+
+> model
+
+(x) is the probability after suppressing predicate j.Residue-level scores were computed separately for localization. For residue i, a proxy representation was constructed from the final four ESM-2 layers: 
+
+ui(x) = 
+
+h
+
+H(k) 
+
+> i
+
+, H(k) 
+
+> i
+
+− μ(k) , σ (k)i 
+
+> k∈K
+
+, K = {27 , 28 , 29 , 30 }. (15) After standardization with the training-split scaler, ui(x) was passed through the trained adapter and predicate function to obtain a token-level proxy truth p j,i(x). Presence literals were localized by maximizing p j,i(x),whereas absence literals were localized by maximizing 1 − p j,i(x). A radius-two residue window was displayed around the maximizing position: 
+
+Wj(x) = xs j :e j , s j = max (1, i∗ 
+
+> j
+
+− 2), e j = min (L, i∗ 
+
+> j
+
++ 2). (16) Token-level proxy scores were used to identify residue windows; all baseline and post-suppression prob-abilities were computed from sequence-level predicate values. The windows therefore represent proxy associations with predicate activation. 
+
+3 Results and Discussion 
+
+3.1 Held-out performance across peptide functions 
+
+RulePep achieved held-out MCC values of 0.6850, 0.6820, and 0.8633 on the BBPpredict, HemoPI3, and AntiCP 2.0 alternate datasets, respectively (Table 1). 
+
+Table 1: Held-out test performance of RulePep across the three benchmark datasets.                         
+
+> Benchmark dataset Accuracy AUROC Precision Recall F1 MCC BBPpredict dataset 0.8425 0.8869 0.8413 0.8413 0.8413 0.6850 HemoPI3 dataset 0.8410 0.9155 0.8713 0.8302 0.8502 0.6820 AntiCP 2.0 alternate dataset 0.9313 0.9765 0.9496 0.9103 0.9296 0.8633
+> Note: Values are reported as the means of three independent runs with different random seeds. The standard deviation across runs did not exceed 0.02 for any reported metric.
+
+3.2 Learned symbolic rule-bank composition 
+
+Validation retained all 48 initialized rules for the BBPpredict, HemoPI3 and AntiCP 2.0 alternate datasets. Figure 2 details the BBPpredict rule bank, and Table 2 summarizes rule-bank composition across all three benchmark datasets. 6     
+
+> .CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint 020 40 60 80 100
+> Composition within each stage (%)
+> Mined candidates
+> Selected initial rules
+> Final learned rules
+> 16
+> 6
+> 6
+> 151
+> 29
+> 29
+> 333
+> 13
+> 13
+
+A. Candidate-to-final rule complexity     
+
+> 1-literal 2-literal 3-literal
+> Positive rules Negative rules
+> 0
+> 3
+> 6
+> 9
+> 12
+> 15
+> 18
+> 21
+> 24
+> Number of rules
+> 4
+> 2
+> 12 17
+> 8
+> 5
+
+B. Final rule length by class    
+
+> 1-literal 2-literal 3-literal
+> Positive rules Negative rules
+> 0
+> 6
+> 12
+> 18
+> 24
+> 30
+> 36
+> 42
+> 48
+> 54
+> Number of literals
+> 34
+> 14
+> 18
+> 37
+
+C. Literal polarity by class      
+
+> presence literals absence literals
+> 01234
+> Literal occurrences across final rules
+> Predicate 11
+> Predicate 105
+> Predicate 101
+> Predicate 63
+> Predicate 64
+> Predicate 30
+> Predicate 26
+> Predicate 104
+> Predicate 62
+> Predicate 33
+> Predicate 43
+> Predicate 29
+> 1
+> 1
+> 1
+> 1
+> 1
+> 1
+> 1
+> 2
+> 2
+> 2
+> 2
+> 1
+> 1
+> 1
+> 3
+> 2
+> 2
+> 2
+> 2
+> 1
+> 1
+> 2
+> 2
+
+D. Most reused learned latent predicates in the rule bank  
+
+> presence literal absence literal
+
+Figure 2: Symbolic rule-bank composition on BBPpredict. (A) Clause lengths among the top 500 eligible candidates and 48 validation-retained rules. (B) Rule lengths by positive and negative banks. (C) Presence and absence literals by bank. (D) Most frequently reused learned latent predicates. Labels show raw counts. 
+
+Table 2: Cross-dataset composition of mined candidates and learned symbolic rule banks. 
+
+Benchmark dataset Mined candidates Selected initial rules Final active rules Positive rule bank Negative rule bank BBPpredict dataset 500 (16/151/333) 48 (6/29/13) 48 (6/29/13) 24 (4/12/8; 34/18) 24 (2/17/5; 14/37) HemoPI3 dataset 500 (34/408/58) 48 (20/14/14) 48 (20/14/14) 24 (9/11/4; 20/23) 24 (11/3/10; 27/20) AntiCP 2.0 alternate dataset 500 (23/310/167) 48 (13/30/5) 48 (13/30/5) 24 (5/18/1; 25/19) 24 (8/12/4; 17/27) 
+
+Note: Parenthetical triplets denote the numbers of one-, two-, and three-literal clauses, respectively. In the positive- and negative-rule-bank columns, the pair after the semicolon denotes the numbers of presence and absence literals, respectively. 
+
+Table 3: Decision-path checks for the final validation-selected neural-symbolic classifier. 
+
+Dataset Active rules Active-rule corr. Active-rule mean |∆ℓ| Active-rule mean discrepancy BBPpredict 48 0.9958 0.0510 0.0095 HemoPI3 48 0.9917 0.0329 0.0070 AntiCP 2.0 alternate dataset 48 0.9942 0.0605 0.0101 −2.0 −1.5 −1.0 −0.5 0.0 0.5 1.0 1.5 2.0 
+
+Signed contribution to BBB-penetrating logit 
+
+> Bias
+> Direct BBB-penetrating rule contribution
+> Direct non-BBB-penetrating rule contribution
+> Pairwise rule-interaction contribution
+> BBB-penetrating meta-rule contribution
+> Non-BBB-penetrating meta-rule contribution
+> BBB-penetrating residual contribution
+> Non-BBB-penetrating residual contribution
+> BBB-penetrating existential term
+> Non-BBB-penetrating existential term
+> +0.015
+> +1.517
+> -0.302
+> +0.00117
+> +0.00033
+> -0.00008
+> +0.117
+> -0.025
+> -0.056
+> +0.404
+
+Sample 61: GANYPFP | prediction=BBB-penetrating, p=0.842, 
+
+threshold=0.675, logit=1.672         
+
+> −1.00 −0.75 −0.50 −0.25 0.00 0.25 0.50 0.75 1.00
+
+Signed contribution to BBB-penetrating logit 
+
+> Bias
+> Direct BBB-penetrating rule contribution
+> Direct non-BBB-penetrating rule contribution
+> Pairwise rule-interaction contribution
+> BBB-penetrating meta-rule contribution
+> Non-BBB-penetrating meta-rule contribution
+> BBB-penetrating residual contribution
+> Non-BBB-penetrating residual contribution
+> BBB-penetrating existential term
+> Non-BBB-penetrating existential term
+> +0.015
+> +0.711
+> -0.518
+> +0.00102
+> +0.00016
+> -0.00013
+> +0.056
+> -0.041
+> -0.163
+> +0.224
+
+Sample 91: PASDSGFLRDP | prediction=non-BBB-penetrating, 
+
+p=0.571, threshold=0.675, logit=0.284 
+
+Case-Level Additive Symbolic Logit Decomposition 
+
+Figure 3: Case-level decomposition of the BBB-penetrating logit for two BBPpredict test peptides. Bars show signed contributions from all additive components. Sample 61 was classified as BBB-penetrating ( ˆp = 0.842 ), whereas Sample 91 was classified as non-BBB-penetrating because ˆp = 0.571 was below the validation-selected threshold of 0.675. Contributions sum to the reported logits up to rounding. 
+
+3.3 Additive-logit reconstruction and contribution-intervention concordance 
+
+Additive-logit reconstruction and rule-removal agreement were evaluated for the final validation-selected model on each benchmark dataset (Table 3). Figures 3 and 4 show, respectively, case-level logit decomposition and predicate-suppression localization for representative BBPpredict test samples. Figure 5 summarizes sequence-level predicate-suppression effects for the proposed model on the BBPpredict benchmark dataset. Across the three benchmark datasets, the intervention analysis evaluated only predicates that appeared among the eight highest-truth predicates for at least one test peptide. 
+
+3.4 Ablation analysis 
+
+Table 4 compares the full model with ten matched ablations on the BBPpredict benchmark dataset. 7
+
+.CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint Learned Latent Predicate Intervention and Residue-Window Localization 
+
+Peptide sequence reference G R K K R R Q R R R C S T R I R R Q L
+
+Predicate Top residue-window localization Change in intervention-audit probability 
+
+Predicate 29 
+
+17-19: RQL 
+
++0.073 
+
+Predicate 43 
+
+4-8: KRRQR 
+
++0.056 
+
+Predicate 64 
+
+1-5: GRKKR 
+
++0.055 
+
+Predicate 30 
+
+3-7: KKRRQ 
+
++0.053 
+
+Predicate 17 
+
+3-7: KKRRQ 
+
++0.053 
+
+Predicate 46 
+
+7-11: QRRRC 
+
++0.050 
+
+Predicate 40 
+
+9-13: RRCST 
+
++0.014 
+
+Predicate 7 
+
+6-10: RQRRR 
+
++0.00489 Figure 4: Predicate-suppression audit with residue-window localization for BBPpredict test peptide (sample 67). For each predicate, ∆p = pbaseline − psuppressed was computed after setting its sequence-level truth to zero. Residue windows indicate the highest-scoring radius-two token-level localization. 0 20 40 60 80 100 120 140 
+
+Predicate index 
+
+0.00 
+
+0.01 
+
+0.02 
+
+0.03 
+
+0.04 
+
+0.05 
+
+0.06 
+
+0.07 
+
+> Mean absolute change in BBB-penetrating probability (|Δp|)
+
+A) Evaluated learned latent predicates by intervention effect 
+
+supports BBB-penetrating 
+
+supports non-BBB-penetrating 
+
+Within zero-effect tolerance 
+
+positive-seeded 
+
+negative-seeded 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 
+
+Mean absolute probability change (|Δp|) 
+
+Predicate 13 
+
+Predicate 62 
+
+Predicate 33 
+
+Predicate 99 
+
+Predicate 17 
+
+Predicate 105 
+
+Predicate 29 
+
+Predicate 79 
+
+Predicate 104 
+
+Predicate 46 
+
+Predicate 67 
+
+Predicate 30 
+
+Predicate 43 
+
+Predicate 64 
+
+Predicate 2 
+
+> effect size=0.021; Δp=+0.021
+> effect size=0.028; Δp=+0.028
+> effect size=0.031; Δp=+0.031
+> effect size=0.031; Δp=-0.031
+> effect size=0.035; Δp=+0.035
+> effect size=0.036; Δp=-0.036
+> effect size=0.041; Δp=+0.041
+> effect size=0.046; Δp=-0.046
+> effect size=0.046; Δp=-0.046
+> effect size=0.046; Δp=+0.046
+> effect size=0.050; Δp=+0.050
+> effect size=0.052; Δp=+0.052
+> effect size=0.052; Δp=+0.052
+> effect size=0.057; Δp=+0.057
+> effect size=0.058; Δp=+0.058
+
+B) Top 15 learned latent predicates by |Δp| effect size 
+
+Predicate Operational role Residue windows Effect                      
+
+> Predicate 2 BBB-penetrating
+> support YACP, HGWWR effect size=0.058
+> Δp=+0.058
+> Predicate 64 BBB-penetrating
+> support GRKKR, CRSGK effect size=0.057
+> Δp=+0.057
+> Predicate 43 BBB-penetrating
+> support RGKRN, YGRPR effect size=0.052
+> Δp=+0.052
+> Predicate 30 BBB-penetrating
+> support YPEN, RGKRN effect size=0.052
+> Δp=+0.052
+> Predicate 67 BBB-penetrating
+> support TLLQE, CKGK effect size=0.050
+> Δp=+0.050
+> Predicate 46 BBB-penetrating
+> support RGKRN, QNC effect size=0.046
+> Δp=+0.046
+> Predicate 104 non-BBB-penetrating
+> support FLRF, FSPQ effect size=0.046
+> Δp=-0.046
+> supports BBB-penetrating
+> 24 evaluated predicates
+> supports non-BBB-penetrating
+> 6 evaluated predicates
+> Within zero-effect
+> tolerance
+> 9 evaluated predicates
+> Not selected for
+> intervention
+> 105 predicates
+
+C) Operational meaning of strongest learned latent predicates 
+
+Figure 5: Predicate-suppression analysis for the proposed model on the BBPpredict dataset. (A) Mean absolute probability changes across learned latent predicates, with colors indicating signed effects and marker shapes indicating initialization. (B) The 15 predicates with the largest |∆p|, where ∆p = pbaseline − psuppressed . (C) Operational roles, representative residue windows, and effects of the strongest predicates. Of 144 predicates, 39 were evaluated. 
+
+Table 4: Matched ablation results on the BBPpredict independent test partition. Values are means across the same three training seeds used to evaluate the full model. 
+
+Configuration Accuracy AUROC Precision Recall MCC ∆MCC Full model 0.8425 0.8869 0.8413 0.8413 0.6850 0.0000 Final ESM layer only 0.7647 0.8447 0.7872 0.7255 0.5310 -0.1540 Compact learned latent predicate bank 0.7745 0.8677 0.7917 0.7451 0.5500 -0.1350 Shallow rule base 0.7647 0.8285 0.7872 0.7255 0.5310 -0.1540 No symbolic rule dropout 0.8137 0.8812 0.8077 0.8235 0.6276 -0.0574 No strict rule polarity 0.7549 0.8562 0.7407 0.7843 0.5107 -0.1743 No residual evidence-aggregation branch 0.7451 0.8085 0.7451 0.7451 0.4902 -0.1948 No existential evidence-aggregation branch 0.7549 0.8401 0.7708 0.7255 0.5107 -0.1743 Neural-only head 0.7549 0.8589 0.7826 0.7059 0.5123 -0.1727 No mined-rule initialization 0.7953 0.8795 0.7846 0.8095 0.5909 -0.0941 Minimal symbolic layer 0.7638 0.8752 0.7538 0.7778 0.5279 -0.1571 
+
+8
+
+.CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint All ten ablations had lower MCC than the full model on the fixed BBPpredict test split. The largest reductions followed removal of the residual aggregation branch ( ∆MCC = −0.1948 ), strict rule polarity ( −0.1743 ), the existential aggregation branch ( −0.1743 ), and the symbolic classifier ( −0.1727 ). These point estimates identify polarity constraints and rule-derived aggregation as the most influential tested components under this split. 
+
+3.5 Contextual comparison with published benchmark results 
+
+Table 5 compares the proposed model with source-reported benchmark results for the corresponding peptide-classification tasks. 
+
+Table 5: Benchmark comparator metrics for the three peptide-classification case studies. Each comparator row is attributed to the source paper that reported or introduced the corresponding model.                                                      
+
+> Benchmark case study Comparator model Source Acc. Rec. Spec. MCC
+> BBPpredict: BBB-penetrating vs. non-BBB peptide prediction
+> BBPpredict dataset RulePep This work 0.8425 0.8413 0.8438 0.6850 BBPpredict dataset BBB-PEP-prediction [16] 0.8240 0.8310 0.9110 0.6630 BBPpredict dataset BBPpredict RF [12] 0.7727 0.7677 0.7778 0.5455 BBPpredict dataset BBPpredict rbfSVM [12] 0.7626 0.7879 0.7374 0.5259 BBPpredict dataset LogitBoost [12] 0.7273 0.6768 0.7778 0.4569 BBPpredict dataset GentleBoost [12] 0.7071 0.7475 0.6667 0.4155
+> HemoPI3: highly hemolytic vs. poorly hemolytic peptide prediction
+> HemoPI3 dataset RulePep This work 0.8410 0.8302 0.8539 0.6820 HemoPI3 dataset HemoPI dipeptide-composition SVM [13] 0.8238 0.8193 0.8306 0.6400 HemoPI3 dataset HEPAD-XGBoost [17] 0.8060 0.8250 0.7840 0.6090 HemoPI3 dataset CNN sequence model [19] 0.8031 0.8294 -0.6051 HemoPI3 dataset HemoPred [15, 17] 0.7980 0.8500 0.7330 0.5900 HemoPI3 dataset HLPpred-Fuse [14] 0.7920 0.8210 0.7620 0.5850
+> AntiCP 2.0 alternate: anticancer vs. non-anticancer peptide prediction
+> AntiCP 2.0 alternate dataset RulePep This work 0.9313 0.9103 0.9521 0.8633 AntiCP 2.0 alternate dataset AntiC P2.0 AAC-ETree [25] 0.9201 0.9227 0.9175 0.8400 AntiCP 2.0 alternate dataset ACP-MHCNN [28, 30] 0.9000 0.8650 0.9330 0.8000 AntiCP 2.0 alternate dataset AI4ACP [26] 0.8940 0.8710 0.9180 0.7900 AntiCP 2.0 alternate dataset iACP-FSCM [26, 27] 0.8890 0.8760 0.9020 0.7790 AntiCP 2.0 alternate dataset ACP-DL [28, 29] 0.8300 0.8290 0.8290 0.6600
+> Note: Comparator values are source-reported results obtained under study-specific evaluation protocols. Some results originate from later studies that re-evaluated publicly available implementations; in these cases, both the original model paper and the re-evaluation source are cited.
+
+The RulePep point estimates compare favorably with several historical comparator values in Table 5, while differences in data partitioning, threshold selection, and evaluation protocols should be considered. 
+
+3.6 Implications and limitations 
+
+The reported contributions are computed directly from the inference path and describe how the model forms its score. They do not establish biochemical mechanisms. The current evidence is also limited by random sequence-level splitting, incomplete calibration analysis, validation-selected thresholds, and the absence of external experimental validation. 
+
+4 Conclusion 
+
+We proposed an ESM-guided neural-symbolic classifier for binary peptide-function prediction that combines frozen PLM representations, learned latent predicates, differentiable rules, and logit-level evidence recon-struction. Our results further show that frozen PLM embeddings can be decomposed into a set of interpretable latent predicates that support symbolic decision rules without compromising predictive performance. 
+
+5 Code and Data Availability 
+
+The source code supporting the findings of this study is publicly available in the RulePep GitHub repository at https://github.com/Farzad-Midjani/RulePep , and the benchmark datasets used in the three case studies are publicly available through the resources associated with the original studies. 9
+
+.CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint References 
+
+[1] Rao R, Bhattacharya N, Thomas N, Duan Y, Chen X, Canny J, Abbeel P, Song YS. Evaluating protein transfer learning with TAPE. In: Advances in Neural Information Processing Systems . 2019;32:9689-9701. [2] Rives A, Meier J, Sercu T, Goyal S, Lin Z, Liu J, et al. Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences. Proceedings of the National Academy of Sciences .2021;118(15):e2016239118. doi:10.1073/pnas.2016239118. [3] Brandes N, Ofer D, Peleg Y, Rappoport N, Linial M. ProteinBERT: a universal deep-learning model of protein sequence and function. Bioinformatics . 2022;38(8):2102-2110. doi:10.1093/bioinformatics/btac020. [4] Elnaggar A, Heinzinger M, Dallago C, Rehawi G, Wang Y, Jones L, et al. ProtTrans: Toward Understanding the Language of Life Through Self-Supervised Learning. IEEE Transactions on Pattern Analysis and Machine Intelligence . 2022;44(10):7112-7127. doi:10.1109/TPAMI.2021.3095381. [5] Lin Z, Akin H, Rao R, Hie B, Zhu Z, Lu W, et al. Evolutionary-scale prediction of atomic-level protein structure with a language model. Science . 2023;379(6637):1123-1130. doi:10.1126/science.ade2574. [6] Guntuboina C, Das A, Mollaei P, Kim S, Barati Farimani A. PeptideBERT: a language model based on transformers for peptide property prediction. The Journal of Physical Chemistry Letters .2023;14(46):10427-10434. doi:10.1021/acs.jpclett.3c02398. [7] d’Avila Garcez AS, Lamb LC, Gabbay DM. Neural-Symbolic Cognitive Reasoning . Berlin, Heidelberg: Springer; 2009. doi:10.1007/978-3-540-73246-4. [8] Evans R, Grefenstette E. Learning explanatory rules from noisy data. Journal of Artificial Intelligence Research .2018;61:1-64. doi:10.1613/jair.5714. [9] Badreddine S, d’Avila Garcez A, Serafini L, Spranger M. Logic Tensor Networks. Artificial Intelligence .2022;303:103649. doi:10.1016/j.artint.2021.103649. [10] Manhaeve R, Dumanˇ ci´ c S, Kimmig A, Demeester T, De Raedt L. DeepProbLog: Neural probabilistic logic programming. In: Advances in Neural Information Processing Systems . 2018;31:3749-3759. [11] Serafini L, d’Avila Garcez AS. Logic Tensor Networks: Deep Learning and Logical Reasoning from Data and Knowledge. arXiv preprint . 2016;arXiv:1606.04422. [12] Chen X, Zhang Q, Li B, Lu C, Yang S, Long J, et al. BBPpredict: A web service for identifying blood-brain barrier penetrating peptides. Frontiers in Genetics . 2022;13:845747. doi:10.3389/fgene.2022.845747. [13] Chaudhary K, Kumar R, Singh S, Tuknait A, Gautam A, Mathur D, Anand P, Varshney GC, Raghava GPS. A web server and mobile app for computing hemolytic potency of peptides. Scientific Reports . 2016;6:22843. doi:10.1038/srep22843. [14] Hasan MM, Schaduangrat N, Basith S, Lee G, Shoombuatong W, Manavalan B. HLPpred-Fuse: improved and robust prediction of hemolytic peptide and its activity by fusing multiple feature representation. Bioinformatics .2020;36(11):3350-3356. doi:10.1093/bioinformatics/btaa160. [15] Win TS, Malik AA, Prachayasittikul V, Wikberg JES, Nantasenamat C, Shoombuatong W. HemoPred: A web server for predicting the hemolytic activity of peptides. Future Medicinal Chemistry . 2017;9(3):275-291. doi:10.4155/fmc-2016-0188. [16] Naseem A, Alturise F, Alkhalifah T, Khan YD. BBB-PEP-prediction: improved computational model for identification of blood-brain barrier peptides using blending position relative composition specific features and ensemble modeling. Journal of Cheminformatics . 2023;15(1):110. doi:10.1186/s13321-023-00773-1. [17] Chen SH, Yu JC, Lin YH, Kuo SC, Ni K, Chen CT. HEPAD: enhancing hemolytic peptide prediction with adaptive feature engineering and diverse sequence descriptors. BMC Bioinformatics . 2025;26:234. doi:10.1186/s12859-025-06254-6. [18] Paszke A, Gross S, Massa F, Lerer A, Bradbury J, Chanan G, et al. PyTorch: An imperative style, high-performance deep learning library. In: Advances in Neural Information Processing Systems .2019;32:8024-8035. [19] Abdelbaky I, Elhakeem M, Tayara H, Badr E, Abdul Salam M. Enhanced prediction of hemolytic activity in antimicrobial peptides using deep learning-based sequence analysis. BMC Bioinformatics . 2024;25(1):368. doi:10.1186/s12859-024-05983-4. 
+
+10 
+
+> .CC-BY 4.0 International license available under a was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint (which this version posted July 6, 2026. ;https://doi.org/10.64898/2026.07.03.736448 doi: bioRxiv preprint
+
+[20] Jolliffe IT, Cadima J. Principal component analysis: a review and recent developments. Philosophical Transactions of the Royal Society A . 2016;374(2065):20150202. doi:10.1098/rsta.2015.0202. [21] MacQueen J. Some methods for classification and analysis of multivariate observations. In: Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability . Vol. 1. Berkeley: University of California Press; 1967. p. 281-297. [22] Carbonell J, Goldstein J. The use of MMR, diversity-based reranking for reordering documents and producing summaries. In: Proceedings of the 21st Annual International ACM SIGIR Conference on Research and Development in Information Retrieval . 1998. p. 335-336. doi:10.1145/290941.291025. [23] Klement EP, Mesiar R, Pap E. Triangular Norms . Dordrecht: Springer; 2000. doi:10.1007/978-94-015-9540-7. [24] Srivastava N, Hinton G, Krizhevsky A, Sutskever I, Salakhutdinov R. Dropout: a simple way to prevent neural networks from overfitting. Journal of Machine Learning Research . 2014;15:1929-1958. [25] Agrawal P, Bhagat D, Mahalwal M, Sharma N, Raghava GPS. AntiCP 2.0: an updated model for predicting anticancer peptides. Briefings in Bioinformatics . 2021;22(3):bbaa153. doi:10.1093/bib/bbaa153. [26] Sun YY, Lin TT, Cheng WC, Lu IH, Lin CY, Chen SH. Peptide-based drug predictions for cancer therapy using deep learning. Pharmaceuticals . 2022;15(4):422. doi:10.3390/ph15040422. [27] Charoenkwan P, Chiangjong W, Lee VS, Nantasenamat C, Hasan MM, Shoombuatong W. Improved prediction and characterization of anticancer activities of peptides using a novel flexible scoring card method. Scientific Reports . 2021;11:3017. doi:10.1038/s41598-021-82513-9. [28] Ahmed S, Muhammod R, Khan ZH, Adilina S, Sharma A, Shatabda S, Dehzangi A. ACP-MHCNN: an accurate multi-headed deep-convolutional neural network to predict anticancer peptides. Scientific Reports . 2021;11:23676. doi:10.1038/s41598-021-02703-3. [29] Yi HC, You ZH, Zhou X, Cheng L, Li X, Jiang TH, Chen ZH. ACP-DL: a deep learning long short-term memory model to predict anticancer peptides using high-efficiency feature representation. Molecular Therapy-Nucleic Acids . 2019;17:1-9. doi:10.1016/j.omtn.2019.04.025. [30] Liu M, Wu T, Li X, Zhu Y, Chen S, Huang J, Zhou F, Liu H. ACPPfel: explainable deep ensemble learning for anticancer peptides prediction based on feature optimization. Frontiers in Genetics . 2024;15:1352504. doi:10.3389/fgene.2024.1352504. 
+
+11
