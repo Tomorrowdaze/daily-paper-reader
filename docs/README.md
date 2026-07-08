@@ -6,26 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-07
-- 运行时间：2026-07-07 21:37:49 UTC
+- 最新运行日期：2026-07-08
+- 运行时间：2026-07-08 20:56:39 UTC
 - 运行状态：成功
 - 本次总论文数：1
 - 精读区：0
 - 速读区：1
 
 ### 今日简报（AI）
-今日速读聚焦可解释蛋白/肽分类方向，关注《RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification》。
-值得关注的是，将 ESM 表征与神经符号方法结合，强调“可解释性”在肽分类任务中的应用潜力。
-如果你关注 AI+生物计算，下一步可重点了解 ESM 蛋白语言模型与可解释机器学习在生物序列分析中的结合趋势。
-- 详情：[/202607/07/README](/202607/07/README)
+今日聚焦 AI 干预策略优化，速读了 1 篇关于 COALA 反事实优化框架的机器学习论文。  
+最值得关注的是：研究尝试从机器学习模型中自动识别可执行的干预策略，把“预测结果”进一步转向“行动建议”。  
+下步可重点关注反事实学习、因果推断与决策优化结合方向，适合想理解 AI 如何辅助真实决策的读者继续跟进。
+- 详情：[/202607/08/README](/202607/08/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [RulePep: Interpretable ESM-Guided Neural-Symbolic Peptide Classification](/202607/07/biorxiv-10-64898-2026-07-03-736448-v1-rulepep-interpretable-esm-guided-neural-symbolic-peptide-classification)  
-   标签：评分：6.0/10、query:q5
-   evidence：用于风险预测的可解释神经符号分类
+1. [Identifying intervention strategies from machine learning models with COALA: a counterfactual optimization framework](/202607/08/biorxiv-10-1101-2025-07-18-664723-v2-identifying-intervention-strategies-from-machine-learning-models-with-coala-a-counterfactual-optimization-framework)  
+   标签：评分：7.5/10、query:q6
+   evidence：用于机器学习中可操作解释性的反事实优化框架
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-08T20:56:23.771576+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-1101-2025-07-18-664723-v2",
+      "source": "biorxiv",
+      "title": "Identifying intervention strategies from machine learning models with COALA: a counterfactual optimization framework",
+      "abstract": "Motivation: Machine learning models in biomedicine have become increasingly complex, often functioning as black boxes. However, understanding contributors to disease and making actionable health interventions requires interpretable models. Common explainable AI methods like SHAP focus on feature importance but fall short in explaining why features contribute in certain patterns or what interventions to take. Counterfactual explanations address this by proposing \"what if\" scenarios but current tools focus on individual predictions and fail to generalize complex trends. Results: We introduce the framework Counterfactual Optimization for Actionable interpretabiLity in AI (COALA). COALA interprets models by identifying optimal counterfactuals across user-defined mutable feature subsets and constraining remaining features to reveal how constraint features determine what interventions are optimal. By analyzing counterfactual profiles of features rather than individual features, COALA reveals holistic patterns. Using synthetic and real datasets, COALA reveals simple and complex model trends and provides more intuitive, multi-feature interventions than SHAP. Availability and Implementation: Code for COALA implementation, synthetic data, models trained on synthetic data, and code to replicate results and figures are available at https://github.com/brt-solo/COALA.",
+      "authors": [
+        "Han, B.",
+        "Duan, Q.",
+        "Hu, T."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-07-07T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.07.18.664723v2.full.pdf",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "Counterfactual optimization framework for actionable interpretability in machine learning",
+      "llm_evidence_cn": "用于机器学习中可操作解释性的反事实优化框架",
+      "llm_evidence": "用于机器学习中可操作解释性的反事实优化框架",
+      "canonical_evidence": "用于机器学习中可操作解释性的反事实优化框架",
+      "llm_tldr_en": "Introduces COALA, a framework for identifying intervention strategies using counterfactual explanations in ML.",
+      "llm_tldr_cn": "介绍了 COALA，一个在机器学习中使用反事实解释来识别干预策略的框架。",
+      "llm_tldr": "介绍了 COALA，一个在机器学习中使用反事实解释来识别干预策略的框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
