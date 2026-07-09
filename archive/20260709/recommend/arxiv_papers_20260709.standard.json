@@ -1,0 +1,172 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-09T21:43:33.766012+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-06-26-734857-v1",
+      "source": "biorxiv",
+      "title": "Conflict-Mediated Group Size Regulation: A Theory of Supraoptimal and Suboptimal Group Size",
+      "abstract": "Observed group sizes rarely match the size that would maximize what each member gets from belonging. We propose a two-part theory in which group size is regulated by two related conflicts: insider-outsider conflict over admission, and within-group conflict as crowding, competition, and social tensions intensify with size. Three strategies are available: admission, exclusion, and fission. The first part shows that even when exclusion is unavailable, fission dynamics alone drive group size away from the optimum in both directions, with the pattern set by how prospective joiners encounter groups and by the geometry of fission. When joiners compare groups across a shared landscape and fission is asymmetric, the standing distribution is bimodal: supra-optimal large groups coexisting with a sub-optimal mode of small groups, the pattern characteristic of fission-fusion societies. The second part promotes exclusion and fission to active decisions: incumbents weigh the per-capita cost of accommodating entry ({beta}) against the costs of coordinated exclusion (c +{gamma} N*) and fissioning (F). A single inequality, {beta} > c +{gamma} N*, partitions populations into two regimes: where it holds, exclusion is viable and groups lock at the optimum size; where it fails, groups grow past the optimum and cycle through recurrent fission. Modal group size, fission frequency, and exclusion behavior together identify which regime governs a population -- a set of predictions applicable across fishes, social insects, birds, and mammals including primates and human foragers.",
+      "authors": [
+        "Schniter, E."
+      ],
+      "primary_category": "evolutionary biology",
+      "categories": [
+        "evolutionary biology"
+      ],
+      "published": "2026-07-01T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.26.734857v1.full.pdf",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Analyzes mechanisms of group conflict and social tensions",
+      "llm_evidence_cn": "分析群体冲突和社会紧张局势的机制",
+      "llm_evidence": "分析群体冲突和社会紧张局势的机制",
+      "canonical_evidence": "分析群体冲突和社会紧张局势的机制",
+      "llm_tldr_en": "Develops a theory on how internal and external conflicts regulate group size and fission.",
+      "llm_tldr_cn": "建立关于内外冲突如何调节群体规模和分裂的理论。",
+      "llm_tldr": "建立关于内外冲突如何调节群体规模和分裂的理论。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.00597v1",
+      "source": "arxiv",
+      "title": "Multi-Turn Agentic Scientific Literature Search via Workflow Induction",
+      "abstract": "Scientific literature search often requires more than retrieving papers from a single query: users' intents are underspecified, preference-dependent, and evolve through interaction. Existing search agents typically rely on fixed pipelines or implicit language-only reasoning, making their search strategies difficult to control, inspect, and refine. We introduce PaperPilot, a multi-turn literature search agent that frames scientific search as workflow induction. Given an anchor paper and a user query, PaperPilot constructs an executable DAG of paper-search operators, including keyword search, citation expansion, filtering, scoring, reranking, and evidence extraction. User feedback is then used to refine both the query and the workflow itself. We train PaperPilot with supervised workflow imitation and preference optimization over controlled workflow corruptions. Experiments show that PaperPilot-9B improves over the base Qwen3.5-9B toolset agent under multi-turn interaction, increasing Hit@5 from 58.0 to 77.0, MRR from 47.5 to 59.4, and nDCG@10 from 26.8 to 32.5, while reducing workflow execution errors from 9.5% to 0%. These results show that explicit, editable search workflows provide an effective and controllable interface for aligning literature search agents with complex scientific intent.",
+      "authors": [
+        "Jisen Li",
+        "Bingxuan Li",
+        "Nanyi Jiang",
+        "Xuying Ning",
+        "Xiyao Wang",
+        "Yifan Shen",
+        "Heng Wang",
+        "Yuqing Jian",
+        "Xiaoxia Wu",
+        "Ben Athiwaratkun",
+        "Pan Lu",
+        "Jiaxuan You",
+        "Bingxin Zhao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-07-01T08:21:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.00597v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Agentic scientific literature search for complex user intents",
+      "llm_evidence_cn": "针对复杂用户意图的智能科学文献搜索",
+      "llm_evidence": "针对复杂用户意图的智能科学文献搜索",
+      "canonical_evidence": "针对复杂用户意图的智能科学文献搜索",
+      "llm_tldr_en": "Introduces PaperPilot, an agent for multi-turn scientific search using workflow induction.",
+      "llm_tldr_cn": "引入了PaperPilot，一个通过工作流归纳进行多轮科学搜索的智能体。",
+      "llm_tldr": "引入了PaperPilot，一个通过工作流归纳进行多轮科学搜索的智能体。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.07380v1",
+      "source": "arxiv",
+      "title": "Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering",
+      "abstract": "Large language models (LLMs) achieve a strong performance in question answering (QA), but remain prone to hallucinations and suffer from limited transparency. Retrieval-augmented generation (RAG) can improve factuality, yet decisions about when and how to retrieve from external resources are typically based on opaque policies or computationally inefficient multi-step prompting procedures. We propose an uncertainty-aware framework for adaptive QA based on explicit signals derived from LLM internal representations. We distinguish between knowledge insufficiency and knowledge ambiguity or conflict, and efficiently estimate these from hidden states in a single forward pass. These signals guide system behaviour: RAG is triggered when knowledge is insufficient, while additional reasoning is applied when ambiguity or conflict is high. By grounding adaptive decisions in decomposed and efficiently estimable uncertainty signals, this approach provides a transparent and practical alternative to existing retrieval and reasoning strategies supporting the design of interpretable user-facing tools.",
+      "authors": [
+        "Ritajit Dey",
+        "Iadh Ounis",
+        "Graham McDonald"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-07-08T13:12:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.07380v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Proposes interpretable uncertainty signals for AI reasoning",
+      "llm_evidence_cn": "为人工智能推理提出可解释的不确定性信号",
+      "llm_evidence": "为人工智能推理提出可解释的不确定性信号",
+      "canonical_evidence": "为人工智能推理提出可解释的不确定性信号",
+      "llm_tldr_en": "Introduces an uncertainty-aware framework for interpretable and adaptive question answering.",
+      "llm_tldr_cn": "引入一种用于可解释和自适应问答的不确定性感知框架。",
+      "llm_tldr": "引入一种用于可解释和自适应问答的不确定性感知框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-30-735590-v1",
+      "source": "biorxiv",
+      "title": "Delaying the onset of aided target recognition highlights allows for a more dispersed allocation of overt attention",
+      "abstract": "Visual search is a critical component of many professions such as military operations, baggage screening, and radiology. Aided Target Recognition (AiTR) systems are designed to highlight potential threats across the operators visual field in real-time, directing attention and improving accuracy. However, these systems may impact search and, consequently, situational awareness by diverting attentional resources from non-highlighted, yet relevant, locations. Previous work suggests that scene gist is extracted within the first 250 ms of scene onset (Vo & Henderson, 2010). As such, this study examined whether a 250 ms AiTR onset delay could encourage a more even distribution of attention. Participants searched synthetically generated scenes and classified each person in the scene as armed or unarmed. Depending on their condition, participants either saw the scenes unaugmented (No AiTR condition), with AiTR highlights consisting of red bounding boxes around armed people and yellow boxes around unarmed (AiTR condition), or with AiTR highlights presented 250 ms post scene onset (Delayed AiTR condition). A surprise memory test of background objects presented in the search scenes was administered to all participants upon completion of the search task. As predicted and preregistered, results showed less overt attentional deployment to background information (anything other than the people themselves) in the AiTR condition compared to No AiTR, however, decreased overt attentional deployment was not seen in the Delayed AiTR group. A similar pattern was observed in the memory data (with the AiTR condition having a lower score than the No AiTR condition and the Delayed AiTR condition), this difference was not significant.\n\nSignificance statementAided target recognition (AiTR) systems are designed to augment a users field of view with salient highlights at locations containing task-relevant or threatening information in the environment. As computer vision models advance, such technologies will become an even more critical tool for people that perform visual search professionally (e.g. Soldiers, baggage screeners, radiologists). In a military context especially, having a system that potentially improves threat detection accuracy and reduces response times could be lifesaving. However, such benefits can only be realized if AiTR systems are designed to be integrated with the cognitive mechanisms of the human user. Without this, displays run the risk of being distracting, creating attentional blind spots, and generally producing a poorer user experience and performance. The current work, motivated by findings in the literature, tested the introduction of a short delay between scene onset and the onset of AiTR highlights. It was found that this very brief delay (250 ms) was sufficient to allow participants to direct overt attention to areas of the scene not highlighted by the AiTR system. This finding is critical because, while the purpose of AiTR highlights is to encourage the placement of attentional resources across the visual field, it is imperative that the human operator ultimately be able to attend to non-highlighted locations in the event of system failures (e.g. threats missed by the AiTR). Moreover, this work demonstrates how cognitive research can be used to systematically explore complex application spaces for improve human-machine integration.",
+      "authors": [
+        "Callahan-Flintoft, C.",
+        "Larkin, G. B."
+      ],
+      "primary_category": "animal behavior and cognition",
+      "categories": [
+        "animal behavior and cognition"
+      ],
+      "published": "2026-07-06T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.30.735590v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Discusses AI-aided recognition in military operations",
+      "llm_evidence_cn": "讨论军事行动中的AI辅助识别",
+      "llm_evidence": "讨论军事行动中的AI辅助识别",
+      "canonical_evidence": "讨论军事行动中的AI辅助识别",
+      "llm_tldr_en": "Examines how delaying AI target recognition highlights affects human attentional allocation.",
+      "llm_tldr_cn": "研究延迟AI目标识别高亮显示如何影响人类注意力的分配。",
+      "llm_tldr": "研究延迟AI目标识别高亮显示如何影响人类注意力的分配。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -1,0 +1,2261 @@
+Title: Conflict-Mediated Group Size Regulation: A Theory of Supraoptimal and Suboptimal Group Size
+
+URL Source: https://www.biorxiv.org/content/10.64898/2026.06.26.734857v1.full.pdf
+
+Published Time: Sat, 04 Jul 2026 02:55:56 GMT
+
+Number of Pages: 32
+
+Markdown Content:
+1
+
+# Conflict -Mediated Group Size Regulation: A Theory of Supraoptimal and 1
+
+# Suboptimal Group Size 2
+
+Eric Schniter (ORCID: 0000 -0002 -2381 -3616) ¹,²3
+
+¹Department of Anthropology, California State University Fullerton, Fullerton, CA 92831, USA 4
+
+²Economic Science Institute, Chapman University, Orange, CA 92866, USA 5
+
+6
+
+## Abstract 7
+
+Observed group sizes rarely match the size that would maximize what each member gets from 8
+
+belonging. We propose a two -part theory in which group size is regulated by two related conflicts: 9
+
+insider -outsider conflict over admission, and within -group conflict as crowding, competition, and 10 
+
+social tensions intensify with size. Three strategies are available: admission, exclusion, and fission. 11 
+
+The first part shows that even when exclusion is unavailable, fission dynamics alone drive group 12 
+
+size away from the optimum in both directions, with the pattern set by how prospective joiners 13 
+
+encounter groups and by the geometry of fission. When joiners compare groups across a shared 14 
+
+landscape and fission is asymmetric , the standing distribution is bimodal: supra -optimal large 15 
+
+groups coexisting with a sub -optimal mode of small groups , the pattern characteristic of fission -16 
+
+fusion societies. The second part promotes exclusion and fission to active decisions: incumbents 17 
+
+weigh the per -capita cost of accommodating entry ( β) against the costs of coordinated exclusion 18 
+
+(c + γN *) and fissioning ( F). A single inequality, β > c + γN *, partitions populations into two 19 
+
+regimes: where it holds, exclusion is viable and groups lock at the optimum size; where it fails, 20 
+
+groups grow past the optimum and cycle through recurrent fission. Modal group size, fission 21 
+
+frequency, and exclusion behavior together identify which regime governs a population — a set 22 
+
+of predictions applicable across fishes, social insects, birds, and mammals including primates and 23 
+
+human foragers. 24 
+
+Keywords: group size; fission –fusion dynamics; insider –outsider conflict; optimal group size; 25 
+
+collective action; coagulation –fragmentation 26 
+
+## Introduction 27 
+
+Understanding why animal groups deviate from their optimal size is one of the enduring problems 28 
+
+in behavioral ecology. The benefits of group living, such as shared vigilance, cooperative foraging, 29 
+
+and collective defense, are well established, as is the observation that per -capita returns from these 30 
+
+benefits follow a hump -shaped function of group size: rising initially as groups grow, then 31 
+
+declining as crowding and within -group competition erode the gains. The group size at which per -32 
+
+capita returns are maximized is the nominal optimum, N* . Yet observed group sizes routinely 33 
+
+deviate from N* , in both directions and often substantially, and the conditions under which they 34 
+
+do so remain incompletely understood. 35 2
+
+The supraoptimal case (groups larger than N* ) is the more theorized of the two. Sibly 36 
+
+(1983) demonstrated that N* is individually unstable: groups grow beyond it through individually 37 
+
+rational joining and settle at a larger Nash equilibrium size. Sibly’s result has become a cornerstone 38 
+
+of group size theory and is broadly supported empirically. 39 
+
+Sibly’s instability result was challenged shortly after publication by Giraldeau and Gillis 40 
+
+(1985) , who showed that whether N* is stable depends on the shape of the per -capita fitness 41 
+
+function: when the declining slope is steeper than the rising slope, groups do not grow past the 42 
+
+optimum. We make this qualitative insight quantitatively precise below. Kramer (1985) extended 43 
+
+the same debate to colonial breeders, a paradigmatic empirical test case for the supraoptimal -group 44 
+
+hypothesis. 45 
+
+The suboptimal case, groups smaller than N*, is empirically well documented and has been 46 
+
+theorized mainly through exclusion. In wild baboon troops , for example , small groups bear greater 47 
+
+costs relative to intermediate sizes (Markham et al. 2015) . Higashi and Yamamura (1993) 48 
+
+formalized insider –outsider conflict as a strategic membership game in which equilibrium group 49 
+
+size depends on the costs of joining versus exclusion: groups may settle below N* when the cost 50 
+
+of defending the optimum exceeds the cost of preserving a smaller group. 51 
+
+We argue that this framing overlooks a mechanism capable of generating suboptimal modal 52 
+
+group size without any exclusion at all: the interaction between fission dynamics and joiner pool 53 
+
+ecology. When a group splits, it produces a smaller resulting daughter below N*; the larger may 54 
+
+remain above it, particularly when the split sheds only a small number of members. What happens 55 
+
+next depends critically on whether prospective joiners arrive independently at each group from 56 
+
+local catchments, or whether they choose among all available groups across a shared landscape. 57 
+
+Under local joiner pools, daughters grow autonomously and modal group size settles above N* —58 
+
+consistent with Sibly. Under a global joiner pool, daughters compete for the same joiner stream; if 59 
+
+the split was symmetric this drives both daughters toward the fission threshold, leaving modal size 60 
+
+supraoptimal rather than sub. Sub -optimal sizes instead emerge when fission is asymmetric: a 61 
+
+crowded group sheds a few members while the bulk persists, and the resulting small daughter, far 62 
+
+below N*, is the least attractive group in the pool and is bypassed by joiners while large groups 63 
+
+continue to recruit. Suboptimal modal group size emerges from fission dynamics alone, with no 64 
+
+exclusion required, when fission is asymmetric rather than symmetric. 65 
+
+We develop the framework in two stages. The first treats fission as the sole regulatory 66 
+
+mechanism and shows how the structure of the joiner pool (local versus global, preference -based 67 
+
+versus random) determines whether the standing distribution of group sizes is unimodal near the 68 
+
+optimum, bimodal with coexisting sub - and supra -optimal modes, or broadly over -dispersed. The 69 
+
+same payoff function, fission threshold, and individual rationality assumptions produce opposite 70 
+
+directional predictions depending on a single ecological parameter. The second extends the fission -71 
+
+only model by introducing exclusion as a second regulatory mechanism, derives a viability 72 
+
+condition that partitions a parameter space defined by exclusion costs, coordination burden, and 73 3
+
+fission costs into two qualitatively distinct dynamic regimes, and shows how joiner pool ecology 74 
+
+from the first part shapes which regime governs any given population. Together, the two models 75 
+
+provide a unified framework for understanding the full range of observed group size deviations 76 
+
+from the nominal optimum. 77 
+
+## Background 78 
+
+Optimal group size and the payoff function 79 
+
+The theoretical foundation for group size research rests on a simple observation: per -capita benefits 80 
+
+of group living are a non -monotonic function of group size. Pulliam and Caraco (1984) synthesized 81 
+
+the early formal treatments, showing that per -capita returns rise from a solo baseline R1 as group 82 
+
+size increases (e.g., because of shared vigilance, cooperative foraging, and collective defense) 83 
+
+reach a maximum at the nominal optimum N* , and decline thereafter as crowding, within -group 84 
+
+competition, and resource dilution intensify. The nominal optimum is thus the group size that 85 
+
+maximizes individual fitness under steady ecological conditions. 86 
+
+Throughout this manuscript, the per -capita payoff function Pᵢ( n) is treated as a component 87 
+
+of inclusive fitness attributable to group membership at size n, following the phenotypic gambit 88 
+
+(Grafen 1984) . Empirical tests of this framework span taxa from fish shoals (Pitcher 1986; Buston 89 
+
+2003) to social insects (Grinsted and Field 2018a) to cooperatively breeding birds (Sturrock et al. 90 
+
+2022) to rodents (Waterman 2002) to primates (Markham and Gesquiere 2017) to human foragers 91 
+
+(Smith 1981) . The general shape of the payoff function is well supported, though estimates of N* 92 
+
+vary substantially across populations and ecological contexts (Rodman 1981; Pulliam and Caraco 93 
+
+1984) . What has proven more challenging to explain is not the location of N* but the systematic 94 
+
+bidirectional divergence of realized modal group size from it. Recent reviews of the primate 95 
+
+literature have flagged this divergence as an unresolved puzzle: long -term monitoring of wild 96 
+
+populations shows groups persisting above their predicted optima, despite the theoretical 97 
+
+expectation that prospective joiners should preferentially affiliate with optimally -sized groups 98 
+
+(Markham and Gesquiere 2017) . Among human foragers, parallel puzzles have motivated active 99 
+
+inquiry: the average forager group size far exceeds any non -human primate analog (David -Barrett 100 
+
+2023) . Here we develop a theoretical account of why such persistence above and below the 101 
+
+optimum is not anomalous but expected, under specified conditions on joiner pool ecology and the 102 
+
+costs of coordinated exclusion. 103 
+
+Supraoptimal group size: Sibly’s result and its extensions 104 
+
+Clark and Mangel (1984) elaborated this logic in a more general setting, and the result has since 105 
+
+been treated as the canonical prediction for social groups in which members cannot or do not 106 
+
+exclude newcomers. It is broadly consistent with empirical findings that realized group sizes 107 
+
+frequently exceed the group size at which per -capita fitness is maximized (Smith 1981; Markham 108 4
+
+et al. 2015) . This logic is especially relevant to fission -fusion species: groups that repeatedly split 109 
+
+and regrow will spend most of their cycle above N* , approaching the fission threshold before 110 
+
+splitting again. 111 
+
+Suboptimal group size: insider -outsider conflict and exclusion 112 
+
+Subsequent theoretical work has refined the conditions under which exclusion succeeds (Shen et 113 
+
+al. 2023, 2017) . Empirically, viable exclusion has been documented in taxonomically distant 114 
+
+systems. A particularly clear case is the Cape ground squirrel (Waterman 2002) , in which 115 
+
+matrilineal kin groups maintain a stable cap of approximately three breeding females through 116 
+
+coordinated reproductive suppression of younger females, with fission occurring only when this 117 
+
+active regulatory mechanism is overwhelmed by group growth — an empirical instance of viable 118 
+
+exclusion holding group size below the size at which fission would otherwise be triggered. A 119 
+
+second clear case is the clown anemonefish (Buston 2003) , in which dominant breeders regulate 120 
+
+group size through forcible eviction of existing subordinates and active prevention of new 121 
+
+recruitment, demonstrating viable exclusion in a phylogenetically distant taxon and through a 122 
+
+different behavioral mechanism. But exclusion is costly, imperfect, and subject to free -riding 123 
+
+among incumbents — conditions that limit how reliably it can hold group size at or below N* .124 
+
+What the insider -outsider conflict framework does not address is the possibility that 125 
+
+suboptimal modal group size could arise without exclusion at all, as a consequence of fission 126 
+
+dynamics interacting with joiner pool ecology. This gap is one of the motivations for the present 127 
+
+paper; we take it up alongside several additional problems that have remained unresolved in the 128 
+
+joint analysis of admission, exclusion, and fission. 129 
+
+Fission as a regulatory mechanism: what the literature has and has not addressed 130 
+
+Fission, the splitting of an oversized group into two daughter groups, is recognized as the primary 131 
+
+mechanism by which groups regulate upper size bounds in many taxa (Aureli, Schaffner, Boesch, 132 
+
+Bearder, Call, Chapman, Connor, Fiore, Dunbar, Henzi, Holekamp, Korstjens, Layton, Lee, 133 
+
+Lehmann, Manson, Ramos‐Fernandez, et al. 2008) . Seno (2006) modeled group size dynamics via 134 
+
+fission and fusion with inclusive fitness considerations, recovering several of the qualitative 135 
+
+predictions of Sibly’s framework. The broader fission -fusion literature has examined the 136 
+
+behavioral and ecological triggers of splitting events and the consequences of fission for social 137 
+
+structure (Sandel et al. 2026; Feder et al. 2025) .138 
+
+A particularly direct theoretical precursor to the present framework is Smith’s (1985) 139 
+
+analysis of Inuit foraging groups, which formalized the conflict of interest between current group 140 
+
+members and prospective joiners. Smith showed that where the alternative to group membership 141 
+
+is low -return solitary foraging, joiners prefer group sizes that exceed the per -capita optimum for 142 
+
+incumbent members, with the conflict resolved in favor of joiner preferences in the absence of 143 
+
+effective exclusion. We build on this foundation in two directions: by treating fission as an 144 5
+
+additional regulatory mechanism that responds to dilution beyond the joiner -admission decision, 145 
+
+and by promoting exclusion from a possibility weighed against admission to an active decision 146 
+
+subject to coordination costs and free -riding. We also formalize how joiner pool structure (i.e., 147 
+
+whether prospective joiners can compare available groups or encounter them sequentially) 148 
+
+interacts with the conflict to determine the magnitude and direction of deviation from the optimum. 149 
+
+Smith's relatedness weighting of payoffs is a natural extension within the inclusive -fitness framing 150 
+
+adopted here: when r > 0, incumbents partially internalize fitness benefits flowing to related group 151 
+
+members and related prospective joiners, raising the effective payoff of admission and attenuating 152 
+
+the insider -outsider conflict that drives the present model's dynamics. The baseline analyses below 153 
+
+treat r = 0 to isolate the structural results, but the directional prediction is clear — higher within -154 
+
+group relatedness pushes modal group size upward relative to the r = 0 baseline. 155 
+
+A separate body of theory addresses group -size distributions from the opposite direction, 156 
+
+specifying rates of splitting and merging directly at the population level rather than deriving them 157 
+
+from individual decisions. Lerch and Abbott (2024) and the coagulation -fragmentation tradition 158 
+
+(Ma et al. 2011) are complementary in scope here, both characterizing population -level group -size 159 
+
+distributions from specified between -group rates. Safran et al. (2007) identified this 160 
+
+individual/population separation as a major gap in the group -living literature and called for models 161 
+
+that link the two; the present framework supplies that link, using individual admit -exclude -fission 162 
+
+decisions to predict the population -level signatures these distributional approaches characterize. 163 
+
+What the prior literature has not examined is the population -level distribution of group 164 
+
+sizes that emerges when fission interacts with different joiner ecologies. Earlier theoretical work, 165 
+
+including Sibly's original analysis, implicitly assumed that each group attracts joiners from a local 166 
+
+catchment independently of other groups. Under this Case 1 assumption (which we examine first 167 
+
+below before relaxing), post -fission daughters each grow autonomously and the population -level 168 
+
+modal size reflects the fission -regrowth cycle of individual groups: above N* for most of the cycle, 169 
+
+settling near the fission threshold. This is the ecologically appropriate model for relatively isolated 170 
+
+groups or for species in which prospective joiners encounter single groups rather than assessing 171 
+
+multiple options simultaneously; Cases 2 and 3 below relax that assumption. 172 
+
+## The fission -only model 173 
+
+Setup 174 
+
+The fission -only model of group size regulation allows us to ask what determines modal group 175 
+
+size when fission is the only available regulatory mechanism (i.e., exclusion is not viable). The 176 
+
+declining slope of the payoff function, captured by the parameter β introduced below, already 177 
+
+embeds the ambient costs of group life (e.g., within -group competition, conflict, crowding, and 178 
+
+disease) as passive costs that accumulate automatically with group size. The fission -and -exclusion 179 
+
+model builds on this fission -only foundation by asking what happens when groups can actively 180 6
+
+respond to those costs through exclusion, treating membership regulation as a strategic collective -181 
+
+action problem rather than a fixed environmental parameter, while fission remains governed by 182 
+
+the threshold and cost parameters established in Part 1. 183 
+
+The payoff function 184 
+
+Let R1 denote the per -capita return available to a solitary individual — the outside option against 185 
+
+which group membership is evaluated. Let PI(n) denote the per -capita payoff of an intact group of 186 
+
+size n. We model PI(n) as a piecewise linear function consisting of two line segments meeting at 187 
+
+the nominal optimum N* : a rising segment below N* with slope α, and a declining segment above 188 
+
+N* with slope β:189 
+
+PI(n) = R1 + α(n − 1) for n ≤ N* 190 
+
+PI(n) = Pmax − β(n − N* ) for n > N* 191 
+
+where Pmax = R1 + α(N* − 1) is the peak per -capita payoff at the nominal optimum. The 192 
+
+two slopes α and β are independent positive parameters. When α = β the function is symmetric, we 193 
+
+get the classic tent shape used in most prior treatments. When α ≠ β the function is asymmetric: 194 
+
+the rate at which membership becomes more valuable as the group grows toward N* differs from 195 
+
+the rate at which it becomes less valuable as the group grows beyond it. Both slopes are empirically 196 
+
+meaningful and, as we show below, their ratio determines the direction of modal group size 197 
+
+deviation from N* under local joiner pool conditions. The piecewise linear form is adopted for 198 
+
+analytical tractability; qualitatively identical results hold for smooth, continuously differentiable 199 
+
+payoff functions with the same slope asymmetry. 200 
+
+The two slopes capture a distinction that the symmetric model conceals: the processes that 201 
+
+make groups valuable as they grow need not mirror the processes that make them costly as they 202 
+
+grow further. On the rising side, benefits such as shared vigilance, cooperative foraging, and 203 
+
+collective defense accumulate as new members contribute to public goods. On the declining side, 204 
+
+costs such as within -group competition, conflict, crowding, and disease transmission accumulate 205 
+
+as the group exceeds the size at which resources and social tolerance are comfortably shared. There 206 
+
+is no theoretical reason these should be symmetric, and in practice they rarely are. 207 
+
+Sources of payoff asymmetry: why α and β differ 208 
+
+Understanding what drives slope asymmetry matters because, as the fission threshold derivation 209 
+
+below shows, the ratio α/β determines the direction of modal group size deviation in a local joiner 210 
+
+pool system. Giraldeau and Gillis (1985) first noted that slope asymmetry governs the direction of 211 
+
+deviation from N*. We make their qualitative insight quantitatively precise by deriving the 212 
+
+analytical relationship between α, β, and modal group size. Two broad classes of asymmetry 213 
+
+generate the two directions of deviation; each is illustrated by familiar empirical systems. 214 7
+
+Steep decline, shallow rise ( β > α): costs escalate faster than benefits accumulate. 215 
+
+Several well -documented mechanisms generate the β > α asymmetry: density -dependent pathogen 216 
+
+and parasite transmission, whose contact rates scale roughly with the square of group size (Altizer 217 
+
+et al. 2003) ; intensifying within -group competition for rank and resources, with measurable fitness 218 
+
+costs (slower infant development, longer interbirth intervals) in larger primate groups (Borries et 219 
+
+al. 2008) ; and range -mediated predation exposure, as in Cape ground squirrels, where juveniles 220 
+
+foraging farther from the refuge burrow suffer disproportionate mortality (Waterman 2002) . In 221 
+
+each, the payoff function falls more steeply than it rises and the fission threshold is reached sooner 222 
+
+than the symmetric model predicts. 223 
+
+Shallow decline, steep rise ( α > β): benefits accumulate faster than costs escalate. The 224 
+
+opposite asymmetry , α > β, arises where early members add large marginal benefits that saturate 225 
+
+quickly while crowding costs stay flat across a wide supraoptimal range — as in cooperative 226 
+
+predator defense, where each additional defender matters most at small group sizes (McNamara 227 
+
+and Houston 1992) , and cooperative breeding, where scarce helpers contribute disproportionately 228 
+
+to reproduction (Grinsted and Field 2018; Sturrock et al. 2022) . This raises the fission threshold 229 
+
+above the symmetric baseline, so groups grow larger before splitting. 230 
+
+How α/β maps onto conflict 231 
+
+The α and β parameters have a natural interpretation in terms of two related conflicts that arise as 232 
+
+groups grow. Below N*, adding a member benefits both incumbents and the newcomer at rate α ,233 
+
+such that interests are aligned and there is no conflict. At N* and above, two conflicts emerge 234 
+
+simultaneously and are both captured by β. The first is an insider -outsider conflict: adding a 235 
+
+member benefits the joiner (whose alternative is solitary low -return existence) but harms each 236 
+
+incumbent by β per added entry. The second is a within -group conflict: as the group exceeds N*, 237 
+
+all current members face accumulating costs of crowding, competition for resources, social 238 
+
+tension, and disease transmission, growing at the same rate β. The two conflicts are coupled, each 239 
+
+new joiner intensifies within -group conflict for everyone present; but they are conceptually 240 
+
+distinct, and the three mechanisms developed in this paper target them differently. 241 
+
+The two models in this paper formalize three responses, distinguished by whether incumbents 242 
+
+passively accept the resulting costs or actively bear a coordination cost to resolve them. Admission 243 
+
+is a passive response to insider -outsider conflict: when n < N* , it realizes mutual benefit, and when 244 
+
+n ≥ N*, it accommodates the joiner’s preference and lets each incumbent absorb the β cost rather 245 
+
+than resolve it. Exclusion is the active counterpart: incumbents pay the per -capita coordination 246 
+
+cost c + γN * to suppress insider -outsider conflict by enforcing their preference against further 247 
+
+entry. Fission primarily targets within -group conflict, dissolving the shared social space when 248 
+
+accumulated within -group costs exceed the per -capita cost of splitting; per -capita payoff recovers 249 
+
+in each daughter, and within -group conflict is distributed between the now -smaller groups. The 250 
+
+viable exclusion condition β > c + γN * identifies when exclusion is preferred over passive 251 8
+
+accommodation; bringing the cost of fission into that comparison then determines when fission is 252 
+
+preferable to either response. 253 
+
+The joiner condition and why exclusion fails 254 
+
+A prospective newcomer joins if and only if group membership yields a higher return than the 255 
+
+outside option. This gives the joiner entry condition: 256 
+
+join if PI(n + 1) > R1257 
+
+On the rising side of the payoff function this condition is always satisfied for n < N* . On 258 
+
+the declining side it remains satisfied until PI(n) returns to R1, which occurs at the Nash equilibrium 259 
+
+size nNash = N* + ( Pmax – R1)/β – 1, one entrant below the size at which an incumbent’s payoff 260 
+
+would itself fall to R1 (a joiner evaluates the post -entry payoff PI(n + 1), not PI(n)). In the 261 
+
+symmetric case this is 2 N* − 1; with a steeper decline ( β > α) it is closer to N* ; with a shallower 262 
+
+decline ( β < α) it is further above N* . Joining remains individually rational across this entire range. 263 
+
+The admit option in the fission -and -exclusion model below adopts the same convention: the payoff 264 
+
+to admitting one more member at size n is WA(n) = PI(n + 1), so the viable -exclusion comparison 265 
+
+there is already evaluated post -entry. 266 
+
+Incumbents prefer the group not grow beyond N* , since per -capita payoff declines above 267 
+
+the nominal optimum. But any single incumbent considering resistance faces an asymmetric cost 268 
+
+structure: exclusion costs (e.g., monitoring, signaling, aggression, coalition -building) fall privately 269 
+
+on the excluder while the benefit of a less diluted group is shared by all. Exclusion is therefore a 270 
+
+public good, undersupplied by individually rational actors. Without a mechanism for coordinating 271 
+
+joint exclusion, the group cannot resist entry. The fission -and -exclusion model addresses what 272 
+
+happens when such coordination becomes possible; in the fission -only model it does not exist. 273 
+
+The fission threshold 274 
+
+The fission threshold NF = N*·2( α+β)/( α+2 β) follows directly from solving PI(n/2) > PI(n) for the 275 
+
+piecewise linear payoff function; the full derivation is given in Appendix A. The model treats 276 
+
+fission as a symmetric split into two comparable daughters of roughly half the parent’s size. This 277 
+
+is a tractable idealization at one end of a continuum; at the other end a single individual dissociates, 278 
+
+sometimes drawing followers, to form a much smaller group that may later re -fuse. The threshold 279 
+
+logic does not require the split to be exactly equal — asymmetric or partial fission alters the post -280 
+
+split size distribution and how quickly the regrowth cycle resets, but not the existence of a size 281 
+
+above which splitting becomes individually rational. 282 9
+
+283 Figure 1. Per -capita payoff as a function of group size under the fission -only model, shown for three cases: 284       
+
+> symmetric slopes ( α=β, solid lines), steeper decline ( β>α, dashed), and shallower decline ( α>β, dotted).
+
+285  
+
+> In each case the payoff function consists of two line segments meeting at the nominal optimum N* . The
+
+286   
+
+> fission threshold NF(i.e., the group size at which splitting into two equal daughters first yields a higher per -
+
+287 
+
+> capita return than remaining intact ) shifts leftward when the decline slope is steep and rightward when it is
+
+288  
+
+> shallow. Post -fission daughter size (= NF/2) and time -averaged group size over the fission -regrowth cycle
+
+289 
+
+> shift accordingly. The preferred -state envelope (thick line) follows whichever payoff (intact or post -fission)
+
+290 
+
+> is higher at each group size.
+
+291 
+
+Fission costs and the realized fission threshold 292 
+
+The fission threshold derived above assumes that splitting is costless. In practice, fission carries 293 
+
+direct costs: groups must physically separate, often losing access to part of their territory; social 294 
+
+bonds are disrupted; coalitional alliances formed within the parent group may not survive the split; 295 
+
+and newly separated daughter groups face heightened intergroup threat during the period of 296 
+
+reduced size. Let F denote the per -capita cost of fission, borne by all members of both daughters 297 
+
+at the moment of splitting. The realized fission threshold NF(F) is the smallest group size at which 298 
+
+the post -fission payoff net of fission costs first exceeds the intact -group payoff: 299 
+
+NF(F) = min { n : PI(n/2) − F > PI(n) } 300 
+
+Because fission costs reduce the post -fission payoff, they delay the point at which splitting 301 
+
+becomes worthwhile. The realized threshold NF(F) therefore lies at or above the costless threshold 302 
+
+NF: equal when F = 0, and strictly above for any F > 0, increasing monotonically with F. At F =303 10 
+
+0, the realized threshold equals the payoff -optimal threshold derived above. As F increases, the 304 
+
+realized threshold rises toward the Nash equilibrium size — and as fission costs become 305 
+
+prohibitively large, the realized threshold reaches the Nash equilibrium and the group never 306 
+
+fissions. This limiting case recovers Sibly’s (1983) result: groups grow to the Nash equilibrium 307 
+
+size under open -access conditions and stabilize there, without any fission regulatory mechanism 308 
+
+operating. 309 
+
+Fission costs thus trace a continuum from the payoff -optimal threshold (costless fission) to 310 
+
+the Nash equilibrium (prohibitively costly fission), with real systems occupying intermediate 311 
+
+positions depending on the ecological and social costs of splitting. Notably, fission costs and slope 312 
+
+asymmetry are independent parameters that can push in the same or opposite directions: a system 313 
+
+with β > α (steep decline, low NF) and low fission costs may produce a lower realized threshold 314 
+
+than a symmetric system with high fission costs, even though both have the same N* . The 315 
+
+interaction of these two parameters determines the realized fission threshold and, through it, the 316 
+
+time -averaged modal group size in a population. 317 
+
+One clarification is essential for what follows. Throughout the fission -only model, F is 318 
+
+treated as a fixed threshold parameter rather than a strategic decision variable. Groups do not 319 
+
+choose whether to fission by actively weighing F against alternatives at each step; they fission 320 
+
+when size crosses NF(F), with F determining where that threshold falls. This is a deliberate 321 
+
+simplification that isolates the effect of fission costs on the group size cycle without requiring 322 
+
+groups to make active cost comparisons. The fission -and -exclusion model, which follows, treats 323 
+
+fission instead as an active decision that incumbent members must weigh against other options. 324 
+
+There, fission enters as one of three genuine decision costs (alongside admitting a newcomer and 325 
+
+paying to exclude one) and its strategic consequences become fully visible: when does excluding 326 
+
+become cheaper than fissioning, and when does fissioning become the dominant response to a 327 
+
+group that can no longer be cheaply regulated from within? These are the questions the fission -328 
+
+and -exclusion model is built to answer. 329 
+
+Time -averaged modal group size under local joiner pools 330 
+
+With fission costs and slope asymmetry both in hand, we can now derive the time -averaged modal 331 
+
+group size for a population of groups under local joiner pool conditions — the Case 1 regime in 332 
+
+which each group draws from its own joiner stream independently. Under a constant joining rate 333 
+
+of one new member per unit time, a group grows linearly from its post -fission starting size NF(F)/2 334 
+
+to its realized fission threshold NF(F). The time -averaged group size over this cycle is the midpoint 335 
+
+of the growth range: 336 
+
+⟨n⟩ = (3/4) · NF(F)337 
+
+This can be expressed in terms of the underlying parameters. For the baseline case with 338 
+
+symmetric slopes and no fission costs, ⟨n⟩ = (3/4)(4/3) N* = N* , the time average coincides exactly 339 
+
+with the optimum, even though groups range from 2/3 N* to 4/3 N* at any given moment. 340 11 
+
+The direction of deviation from N* depends on the two parameters jointly. Fission costs 341 
+
+always push ⟨n⟩ above N* : as F increases, NF(F) rises, and the entire growth cycle shifts upward. 342 
+
+The group spends more time at supraoptimal sizes before the realized threshold triggers a split. 343 
+
+Slope asymmetry pushes in a direction determined by the ratio α/β. When α > β (benefits 344 
+
+accumulate faster than costs escalate), NF is high and the group spends more time above N* than 345 
+
+below it: ⟨n⟩ > N* . When β > α (costs escalate faster than benefits accumulate), NF is low and the 346 
+
+group spends more time below N* than above it: ⟨n⟩ < N* . These two parameters are additive in 347 
+
+their directional effects on modal group size: when both push in the same direction — high fission 348 
+
+costs together with α > β — modal size deviates strongly upward; when they oppose (e.g., steep 349 
+
+decline but high fission costs), they partly counteract one another, with the dominant parameter 350 
+
+determining the direction. 351 
+
+The full expression for time -averaged modal size under costless fission and asymmetric 352 
+
+slopes is: 353 
+
+⟨n⟩ = (3/2) · N* · ( α + β) / ( α + 2 β)354 
+
+This exceeds N* when α > β, equals N* when α = β, and falls below N* when β > α. The 355 
+
+slope ratio α/β is therefore the key structural parameter governing modal group size in local joiner 356 
+
+pool systems under costless fission, with fission costs providing an independent upward shift that 357 
+
+applies regardless of slope asymmetry. 358 
+
+Post -fission dynamics and the role of joiner pool structure 359 
+
+The payoff parameters α, β, and F established above determine the mechanics of the fission cycle 360 
+
+for any single group: when it splits, how large its daughters are, and how long the group spends 361 
+
+above versus below N* before splitting again. Two aspects of fission matter here and recur below. 362 
+
+The first is the size at which a group fissions , which the threshold conditions above treat as 363 
+
+symmetric halving, the tractable baseline retained throughout for NF, NAF , and nEF . The second is 364 
+
+its geometry: how the parent’s mass divides. Symmetric halving is only the special case; real 365 
+
+fissions extend to the asymmetric, in which a small group dissociates from a crowded group , while 366 
+
+the bulk persists. This too follows from the individual rationality that governs joining, once one 367 
+
+notes that α and β are merely group averages: a group is not homogeneous but a set of individuals 368 
+
+in shifting dyadic relationships, and the costs of crowding fall unevenly . As such , a member 369 
+
+bearing a private cost well above the mean can rationally leave , alone if need be , even when the 370 
+
+group -average payoff looks tolerable. We hold split geometry at symmetric halving for the 371 
+
+threshold results below and let it vary when we turn to the population distribution, where it proves 372 
+
+decisive. These parameters, however, say nothing about what happens to those daughters in a 373 
+
+landscape that may contain other groups competing for the same prospective joiners. That question 374 
+
+is governed by a second, independent dimension of the model: the structure of the joiner pool. 375 
+
+These two dimensions (payoff parameters and joiner pool structure) interact to produce the full 376 
+
+range of modal group size outcomes that the fission -only model predicts. The payoff parameters 377 12 
+
+set the size and duration of the fission cycle; the joiner pool structure determines whether post -378 
+
+fission daughters each run their own cycle autonomously or compete for the same joiners , and 379 
+
+therefore whether the population distribution of group sizes is driven primarily by within -group 380 
+
+fission -regrowth dynamics or by differential daughter growth across a shared landscape. We 381 
+
+consider three cases, each internally consistent with the payoff assumptions above and each 382 
+
+producing a qualitatively distinct population -level outcome. 383 
+
+After fission at NF(F), two daughter groups exist, both starting at NF(F)/2 — below the 384 
+
+nominal optimum and therefore attractive to prospective joiners under the entry condition. 385 
+
+Case 1: Local joiner pools, independent growth. 386 
+
+When prospective joiners arrive at each group independently from local catchments (e.g., 387 
+
+because groups occupy separate territories, are rarely encountered simultaneously, or because 388 
+
+joiners assess only one group at a time), post -fission daughters each draw from their own joiner 389 
+
+streams. Both daughters grow autonomously and the population -level modal size is determined by 390 
+
+the cycle -averaged formula derived above. Under symmetric slopes and costless fission, modal 391 
+
+size is N* ; under asymmetric slopes or positive fission costs, it deviates in the directions described. 392 
+
+The population at any snapshot contains groups distributed across the growth cycle from NF(F)/2 393 
+
+to NF(F), with the time average as the central tendency. This is the appropriate model for relatively 394 
+
+isolated groups or taxa in which prospective joiners encounter groups sequentially rather than 395 
+
+comparatively. 396 
+
+Case 2: Global joiner pool, asymmetric fission (the bimodal mechanism). 397 
+
+When prospective joiners can assess and compare multiple groups across a shared 398 
+
+landscape, Ideal Free Distribution logic applies: joiners prefer the group offering the highest post -399 
+
+entry per -capita return. Under symmetric fission this does not strand the smaller daughter for long 400 
+
+— joiners are pulled to whichever group is climbing toward the optimum, so both daughters pile 401 
+
+up just below the fission threshold, leaving the standing distribution supra -optimal rather than sub -402 
+
+optimal. Permanent stranding of daughter groups results only at the costless symmetric limit ( F =403 
+
+0), where the unstranded, growing daughter reaches the fission threshold exactly as its post -entry 404 
+
+payoff would fall to the smaller daughter — instructive, but biologically unexpected. The generic, 405 
+
+robust route to sub -optimal sizes is asymmetric fission: more commonly, one or more members 406 
+
+dissociate from a crowded group while the bulk persists. The per -capita payoff that defines 407 
+
+crowding is a group average, but the underlying costs of conflict are not — a group is a set of 408 
+
+individuals in shifting dyadic relationships, and a member bearing a private cost well above the 409 
+
+mean does better by leaving, alone if need be, than by staying. A small daughter formed this way 410 
+
+sits far below N* and is the least attractive option in the pool for joiners; it lingers at small size 411 
+
+while large groups keep recruiting and drift to or beyond N*, producing a bimodal standing 412 
+
+distribution: supra -optimal large groups coexisting with a sub -optimal mode of small daughters. 413 13 
+
+Mechanically this is a coagulation –fragmentation balance (Ma et al. 2011; Lerch and 414 
+
+Abbott 2024) : asymmetric fission continually produces small group fragment s while joining 415 
+
+allows fragments to coagulate back into larger groups , so any one small group is transient even 416 
+
+though the low group size mode it populates is permanent and continually refilled. Coordinating 417 
+
+departure of a larger group is harder than dissociating alone — the fission -side analogue of the 418 
+
+coordination cost that governs exclusion — so departures concentrate at the smallest sizes, and the 419 
+
+height of the low mode is set by two observable quantities, the dissociation rate and the residence 420 
+
+time of small groups , largely independent of slope asymmetry and fission cost, which instead 421 
+
+govern the position of the supra -optimal mode as in Case 1 (Figure 2). The pattern reproduces the 422 
+
+coexistence of large groups with lone individuals and small groups characteristic of fission -fusion 423 
+
+societies  across taxa (Couzin and Laidre 2009) and well documented among primates  (Aureli, et 424 
+
+al. 2008; Lehmann and Boesch 2004) .425 
+
+Case 3: Global joiner pool, stochastic choice under weak discrimination. 426 
+
+Joiners may be unable to reliably distinguish small payoff differences between available 427 
+
+groups. After fission, daughters may differ only slightly in size and per -capita return; those 428 
+
+differences may be too subtle to detect from a distance, too slow to manifest in observable cues, 429 
+
+or too easily swamped by proximity and chance encounter. Where this is so, joining is probabilistic 430 
+
+rather than strictly payoff -maximizing. Both daughters receive joiners but not in equal proportion: 431 
+
+the larger daughter is more likely to be preferred in any given encounter, so it grows faster in 432 
+
+expectation. The strength of this amplification depends on the ratio of payoff difference to 433 
+
+assessment noise. When daughters are nearly equal, noise dominates and joiners distribute close 434 
+
+to randomly; as size differences grow, joiner discrimination becomes more decisive and the 435 
+
+dynamics approach Case 2. 436 
+
+The Case 1 –2 continuum can be formalized with a logit choice rule in which a noise 437 
+
+parameter σ indexes joiner discrimination precision; the full treatment including equilibrium 438 
+
+dynamics and empirical estimation of 1/σ is given in Appendix D. 439 
+
+Central result of the fission -only model 440 
+
+The fission -only model maps modal group size onto two independent sets of parameters: the payoff 441 
+
+function parameters ( α, β, and fission cost F) that govern the fission cycle, and the joiner pool 442 
+
+structure (local versus global, and discrimination precision) that governs how post -fission 443 
+
+daughters compete for joiners . The two sets interact to produce a parameter space with distinct 444 
+
+regions corresponding to different modal group sizes. 445 
+
+The key empirical implication is that the direction of modal group size deviation from N* 446 
+
+is not fixed by group size theory but is system -specific, determined by identifiable ecological and 447 
+
+behavioral parameters. Groups in systems dominated by rapidly escalating internal costs ( β > α)448 
+
+and global joiner pools should show strong suboptimal modal sizes; groups in systems with slowly 449 14 
+
+accumulating costs ( α > β), high fission costs, and local joiner pools should show supraoptimal 450 
+
+modal sizes. The same payoff -function logic, the same individual rationality, and the same fission 451 
+
+mechanism produce opposite directional predictions depending on parameters that are in principle 452 
+
+observable. The result is a comparative empirical program: predict the direction in which any given 453 
+
+population’s modal size deviates from its nominal optimum from a small set of ecological and 454 
+
+behavioral parameters that can be measured in the field — α/β slope asymmetry, joiner pool 455 
+
+structure, and fission cost. 456 
+
+A further implication concerns within -population variance in group size. Case 1 predicts a 457 
+
+unimodal distribution of group sizes across the fission -regrowth cycle, centered at ⟨n⟩ with spread 458 
+
+determined by NF(F) – NF(F)/2. Case 2 predicts a bimodal distribution: a sub -optimal mode of 459 
+
+small groups alongside a supra -optimal mode of large groups , with the small mode’s height set by 460 
+
+the dissociation rate and group residence time. Case 3 predicts a broad, over -dispersed distribution 461 
+
+spanning sub - and supra -optimal sizes. These distributional signatures are empirically 462 
+
+distinguishable and provide a test of which regime a population is in, independently of the mean 463 
+
+modal size. Figure 2 shows the three predicted signatures side by side. 464 
+
+465   
+
+> Figure 2.Predicted standing distributions of group size under the fission -only model, for three combinations
+
+466   
+
+> of joiner -pool structure and fission geometry (optimum N* dashed; symmetric, costless baseline). In Case 1
+
+467 
+
+> (local pools, symmetric fission), independent fission –regrowth cycles give a unimodal distribution centered
+
+468     
+
+> on the cycle -averaged size ⟨n⟩= (3/4) NF, which equals N* in this baseline. In Case 2 (global pool, asymmetric
+
+469  
+
+> fission), a small number of members leave larger, crowded groups while large groups continue to recruit
+
+470 
+
+> under deterministic best -response joining, yielding a bimodal distribution: supra -optimal large groups
+
+471  
+
+> together with a sub -optimal mode of small groups (orange). The small mode is continually refilled by
+
+472   
+
+> asymmetric fission , and its height is set by the dissociation rate and the residence time of groups ; a
+
+473  
+
+> coordination cost that rises with the size of the departing group concentrates departures at the smallest sizes.
+
+474  
+
+> In Case 3 (global pool, weak discrimination), stochastic (logit) choice among all groups yields a broad, over -
+
+475            
+
+> dispersed distribution spanning sub -and supra -optimal sizes. Distributions are simulations of the
+
+476    
+
+> corresponding dynamics; see Zenodo repository for the accompanying code ( Figure 2.py).
+
+477 
+
+## The fission -and -exclusion model and the viable exclusion condition 478 
+
+Setup 479 15 
+
+The fission -only model treated group maintenance as a passive cost environment: the declining 480 
+
+slope β of the payoff function captured the ambient effects of within -group competition, conflict, 481 
+
+crowding, and disease as costs that accumulate automatically with group size, regardless of what 482 
+
+incumbents do. Within the fission -only model, fission cost F was also treated passively — as a 483 
+
+threshold parameter that shifts the realized fission point NF(F), but not as a strategic decision 484 
+
+weighed at each joiner arrival. The fission -and -exclusion model promotes both the cost of resisting 485 
+
+unwanted joiners and the decision to fission from passive to active. Incumbent groups can now 486 
+
+respond to dilution by attempting coordinated exclusion at a real per -capita cost, and the decision 487 
+
+to fission is itself weighed against exclusion at every step rather than triggered automatically at a 488 
+
+threshold. The model now contains three genuine decision costs operating at every joiner arrival: 489 
+
+the cost of admitting (a per -capita payoff loss β at sizes above N* ), the cost of excluding ( CE(n), a 490 
+
+coordination cost rising with group size), and the cost of fissioning ( F, the one -time per -capita 491 
+
+penalty of splitting). Incumbents compare these three costs and act on the smallest. 492 
+
+The three -decision framework 493 
+
+When a prospective joiner arrives at a group of size n, the per -joiner decision is whether to admit 494 
+
+or exclude that individual. Running underneath this binary choice is a group -level question that 495 
+
+does not concern any single joiner: whether cumulative dilution has made splitting the whole group 496 
+
+preferable to continuing under the better policy: admit or exclude. We write all three resulting 497 
+
+payoffs on a common per -capita scale so that the two tiers can be compared directly, but they are 498 
+
+not three interchangeable responses to one arrival — admit and exclude act on the joiner in front 499 
+
+of the group, whereas fission is a threshold the group monitors as it grows: 500 
+
+WA(n) = PI(n + 1) admit 501 
+
+WE(n) = PI(n) − CE(n) exclude 502 
+
+WF(n) = PI(n/2) − F fission 503 
+
+Admit allows the group to grow by one member; all incumbents and the newcomer share 504 
+
+the diluted payoff PI(n + 1). Exclude maintains size at n, but incumbents collectively bear the per -505 
+
+capita cost CE(n) of organizing resistance. Fission splits the group equally into two daughters of 506 
+
+size n/2 and imposes the per -capita fission cost F on every member. The optimal decision at any 507 
+
+group size is whichever of WA, WE, and WF is largest. As n varies, the maximum can shift among 508 
+
+the three options, partitioning the size range into zones of preferred action. Precisely , the model is 509 
+
+a two -tier hierarchy. At each arrival, incumbents first resolve the per -joiner contest between 510 
+
+admission and exclusion, comparing WA with WE; separately, they track whether growth has 511 
+
+carried the group to the size at which fission first dominates the better of the two per -joiner options, 512 
+
+i.e. whether WF exceeds max( WA, WE). That second comparison is a threshold test of exactly the 513 
+
+form used in the fission -only model, with the admit -or -exclude winner replacing intact 514 
+
+membership as the baseline. 515 16 
+
+The decision rule is one -step and local: at each joiner arrival, the group evaluates the three 516 
+
+payoffs at its current size and acts on the maximum. The cumulative trajectory of a group across 517 
+
+time emerges from repeated application of this rule as joiners arrive. We assume a constant arrival 518 
+
+rate of one prospective joiner per unit time, as in the fission -only model. 519 
+
+Exclusion cost as a coordination problem 520 
+
+Exclusion is a public good: when it succeeds, every incumbent enjoys the smaller, less diluted 521 
+
+group, whether or not they helped achieve it. Exclusion requires effort (e.g., monitoring, signaling, 522 
+
+aggression, or coalition maintenance ) that is often coordinated and borne privately by those who 523 
+
+do the excluding . As group size grows, the number of incumbents whose must be coordinated 524 
+
+around exclusion increases , and the temptation to free -ride on others’ effort grows 525 
+
+correspondingly. The per -capita cost of exclusion rises with group size as a result. 526 
+
+We capture this with a simple linear cost function: 527 
+
+CE(n) = c + γn 528 
+
+The γn term in CE(n) represents the expected cost of a coordination attempt that succeeds 529 
+
+with a size -declining probability; the volunteer’s -dilemma micro -foundation is given in Appendix 530 
+
+C. Together , c and γ specify how the second -order collective -action problem of exclusion translates 531 
+
+into the cost paid by each willing excluder in a group of size n. Low c and low γ describe a system 532 
+
+where coordination is cheap and free -riding is mild — small, well -organized groups or systems 533 
+
+with clear sanctioning mechanisms. High c or high γ describe systems where coordination is costly 534 
+
+or free -riding dominates as size grows. That larger groups secure collective goods less reliably, as 535 
+
+individual willingness to contribute falls with size, is well -established (Archetti 2009) . The link 536 
+
+between failed within -group coordination and fission is not a hypothetical construct: free -riding in 537 
+
+coordinated exclusion is an experimentally documented driver of fission in human task groups 538 
+
+(Hart and Van Vugt 2006) , where groups subject to within -group free -riding split along their pre -539 
+
+existing internal divisions. 540 
+
+The viable exclusion condition β > c + γN * follows from comparing WA(N* ) with 541 
+
+WE(N* ); the derivation is given in Appendix B. Figure 3 plots WA, WE, and WF against group 542 
+
+size for both regimes, showing the group locking at N* when exclusion is viable and fissioning 543 
+
+at NAF when it is not. 544 17 
+
+545 Figure 3. The three decision payoffs WA(n) (admit), WE(n) (exclude), and WF(n) (fission) are plotted as 546 
+
+> functions of group size in two parameter regimes. The preferred -state envelope (the payoff -maximizing
+
+547           
+
+> option at each n) is traced by whichever of WA,WE, and WFis highest. Panel A: WEcrosses above WAat N*
+
+548 
+
+> and the preferred -state envelope switches from admit to exclude. Under sequential growth, the group reaches
+
+549   
+
+> N* and locks there indefinitely; no further joiners are admitted and fission is suppressed. Panel B: WElies
+
+550    
+
+> below WAthroughout the relevant range and never enters the envelope. The group admits past N* until the
+
+551      
+
+> admit -fission crossing at NAF , where WFrises above WAand the envelope switches to fission; the fission -only
+
+552      
+
+> dynamics are recovered. The transition between the two regimes is sharp at the boundary β=c+γN *.
+
+553 
+
+Two regimes of modal group size 554 
+
+The viability condition partitions parameter space into two regimes. Each yields a qualitatively 555 
+
+distinct prediction about modal group size. 556 
+
+Non -viable exclusion ( β < c + γN*).  When exclusion is too expensive to beat admission 557 
+
+at N* , the group never excludes. Joiners are admitted past N* until fission becomes preferred over 558 
+
+admission. The admit -fission crossing NAF is the smallest n at which WF > WA. Solving: 559 
+
+NAF = 2 · [ N* (α + β) + F − β] / ( α + 2 β)560 
+
+When F = 0, this is the costless fission threshold NF from the fission -only model, up to a 561 
+
+small discrete -step correction (because admission moves the group by one whereas fission halves 562 
+
+it). For positive F, NAF shifts upward as in the fission -only model. Within this regime, the 563 
+
+introduction of exclusion as an option changes nothing: WE is never on the envelope, the policy is 564 
+
+identical to the fission -only model’s admit -only -then -fission policy, and modal group size is the 565 
+
+value averaged over the fission -regrowth cycle (weighted by how many joiner -arrivals the group 566 
+
+experiences at each size). The fission -only model’s full case structure (i.e., local pools, global pool 567 
+
+with preference, weak discrimination) applies unchanged. 568 18 
+
+Viable exclusion ( β > c + γN *). When exclusion is sufficiently cheap, WE rises above WA569 
+
+at N* . A group growing from below first encounters this crossing at n = N* : the joiner arriving 570 
+
+when the group has just reached the nominal optimum is excluded rather than admitted. The group 571 
+
+does not grow further. Under steady joiner arrival, the group remains at N* indefinitely, excluding 572 
+
+every joiner that arrives. Modal group size in the viable regime is: 573 
+
+⟨n⟩ = N* 574 
+
+Fission never occurs in steady state. The group locks at N* before it has any opportunity to 575 
+
+reach the fission threshold, and the fission decision is therefore never invoked under sequential 576 
+
+growth dynamics. For completeness, the size at which exclusion would give way to fission if the 577 
+
+group were pushed there by some external perturbation (e.g., demographic shock, environmental 578 
+
+disturbance, or predation) is given by the exclude -fission crossing: 579 
+
+nEF = 2 · [ N* (α + β) + F − c] / ( α + 2 β + 2 γ)580 
+
+Under sequential growth from below N* , the group locks at N* and never approaches nEF .581 
+
+The exclude -fission crossing therefore characterizes a hypothetical policy boundary rather than a 582 
+
+realized group size, and matters only when groups are placed above N* by exogenous factors —583 
+
+historical fission events that occurred before exclusion became viable, environmental shocks, or 584 
+
+internal birth rates that outpace the rate at which exclusion can repel them. 585 
+
+The sharp regime transition. The shift between regimes is discontinuous: infinitesimal 586 
+
+changes in c, γ, or β across the boundary β = c + γN* qualitatively reorganize the population 587 
+
+dynamics. This has no counterpart in the fission -only model, where modal size varies continuously 588 
+
+with payoff parameters; here, viable exclusion creates a sharp boundary across which dynamics 589 
+
+restructure abruptly. 590 
+
+Joiner pool structure within the two regimes 591 
+
+The joiner pool structure introduced in the fission -only model (i.e., local pools, global pool with 592 
+
+strong preference, and global pool with weak discrimination ) interacts with the regime to 593 
+
+determine population -level group size distributions. Within each case, the population dynamics 594 
+
+depend on whether exclusion is viable, and the resulting distributions differ qualitatively across 595 
+
+the six combinations, which Table 1 summarizes. 596    
+
+> Table 1. Steady -state group -size distributions in the two exclusion regimes for each joiner -pool case. N* is the nominal
+
+597         
+
+> optimum, NAF the admit –fission crossing, and nEF the exclude –fission crossing. Non -viable exclusion ( β<c+γN* )
+
+598      
+
+> reproduces the fission -only dynamics; viable exclusion ( β>c+γN* ) pins any group that can grow by accretion at N*
+
+599 
+
+> and suppresses fission in steady state.
+
+600                
+
+> Joiner -pool case Non -viable exclusion
+> (β<c+γN*)
+> Viable exclusion
+> (β>c+γN *)
+> Case 1. Local pools
+> (independent growth)
+> Fission -only dynamics: each group
+> cycles between NAF /2 and NAF .
+> Every group grows to N* and locks.
+> Unimodal at N* exactly. Fission absent
+
+19                                     
+
+> Joiner -pool case Non -viable exclusion
+> (β<c+γN*)
+> Viable exclusion
+> (β>c+γN *)
+> Unimodal; time -averaged modal size
+> (3/4) NAF , shifted by slope asymmetry
+> and fission cost. Fission recurrent.
+> in steady state (at most one transient
+> split for groups initialized above nEF ).
+> Case 2. Global pool,
+> asymmetric fission
+> (bimodal)
+> Fission in crowded groups produces
+> small daughter groups while large
+> daughter group s cycle toward NAF ;
+> small daughter groups sit below N* .
+> Bimodal: a sub -optimal mode of small
+> group s below N* plus a cycling mode
+> near NAF . S mall daughters continually
+> minted; fission recurrent.
+> Larger daughter accretes to N* and
+> locks; pre -existing daughter groups
+> remain below N* . Stable bimodal: one
+> mode pinned at N* , one small -daughter
+> mode below N* . No further fission;
+> small -daughter fraction set by pre -
+> viability history.
+> Case 3. Global pool, weak
+> discrimination (stochastic
+> choice)
+> Both daughters recruit, the larger faster.
+> Modal size near N* with bimodal
+> transients, increasingly left -skewed as
+> discrimination sharpens. Fission
+> recurrent.
+> Both daughters accrete and lock at N* .
+> Unimodal at N* at equilibrium
+> (transient bimodality); slower approach
+> than Case 1. No further fission.
+
+601 
+
+Two regularities cut across Table 1. First, viable exclusion collapses the differences among joiner -602 
+
+pool cases: any group that can grow by accretion is pinned at N* , so the three cases converge on a 603 
+
+mode at N* (Case 2 retaining only a residual small -daughter mode inherited from fission events 604 
+
+that predate viability). Second, the viability boundary toggles fission frequency — recurrent 605 
+
+throughout the non -viable column, absent from the steady state of the viable column. Joiner -pool 606 
+
+structure therefore shapes the distribution only when exclusion is non -viable; once exclusion 607 
+
+becomes viable it overrides that structure for every group not stranded below N* .608 
+
+Central result of the fission -and -exclusion model 609 
+
+The fission -and -exclusion model maps modal group size onto five independent parameters: the 610 
+
+payoff function parameters α and β (from the fission -only model), the fission cost F (from the 611 
+
+fission -only model), the exclusion cost parameters c and γ (from the fission -and -exclusion model), 612 
+
+and the joiner pool structure (also from the fission -only model). The five -parameter space is 613 
+
+partitioned by a single inequality, the viable exclusion condition β > c + γN* , into two regimes 614 
+
+with qualitatively distinct dynamics. 615 
+
+Three empirically tractable predictions follow. First, the direction of modal group size 616 
+
+deviation from N* is determined by the viability condition: systems satisfying β > c + γN* should 617 
+
+show modal sizes at N* regardless of the joiner pool case, while systems violating it should show 618 
+
+the case -specific deviations. Second, fission frequency drops to zero across the viability boundary: 619 
+
+systems just inside the viable regime should show effectively no fission events in steady state, 620 
+
+while systems just outside should show recurrent fission cycles. Third, the bimodal distribution of 621 
+
+Case 2 persists in both regimes but its larger mode shifts from a cycling time -average (non -viable) 622 20 
+
+to a pinned value at N* (viable), and the minting of new sub -optimal daughter s halts when the 623 
+
+system enters the viable regime. 624 
+
+The viability condition itself is empirically tractable. The slope β of the declining payoff 625 
+
+function can be estimated from the rate at which per -capita measures of fitness, foraging success, 626 
+
+or reproductive output fall as observed group size rises above the nominal optimum (Borries et al. 627 
+
+2008) . The exclusion cost parameters c and γ can be estimated from behavioral measures of 628 
+
+resistance effort and from the rate at which that effort fails as group size increases. Comparative 629 
+
+tests across taxa or social systems can then map populations onto either side of the viability 630 
+
+boundary and compare predicted to observed group size distributions. The framework provides 631 
+
+not just a description of variation but a quantitative criterion for predicting it. 632 
+
+## Discussion 633 
+
+The framework's empirical reach spans the major taxonomic groups in which fission -fusion 634 
+
+dynamics have been studied, including the skewed and often bimodal group -size distributions 635 
+
+documented across many taxa (Couzin and Laidre 2009) . The fission -only model and the fission -636 
+
+and -exclusion model together unify predictions that have been derived independently across fishes 637 
+
+(Pitcher 1986; Buston 2003) , social insects (Grinsted and Field 2018a) , cooperatively breeding 638 
+
+birds (Sturrock et al. 2022) , rodents (Waterman 2002) , primates (Borries et al. 2008; Markham et 639 
+
+al. 2015; Wakeford and Cords 2025; Sandel et al. 2026a) , and human forager groups (Walker and 640 
+
+Hill 2014) . We focus the comparative discussion that follows on chimpanzee ( Pan troglodytes )641 
+
+and human forager cases, where the empirical literature on group -size dynamics is most developed 642 
+
+and where we can directly examine the framework's predicted regime signatures. What unifies 643 
+
+these cases methodologically is a single question, made tractable by the framework: how is the 644 
+
+distribution of group sizes positioned and shaped relative to the nominal optimum, and why? Four 645 
+
+measurable parameters do the work: the slope asymmetry α/β of the per -capita payoff function, 646 
+
+the structure of the joiner pool, the per -capita cost of coordinated exclusion, and the fission cost. 647 
+
+Each governs how readily one of the three modes of conflict resolution (admission, exclusion, and 648 
+
+fission) becomes the dominant response in a given system. The se cases also set up a prediction the 649 
+
+framework makes that no prior account does: that the paired daughters of a single fission should 650 
+
+diverge systematically in how readily they admit newcomers, a comparative prediction we develop 651 
+
+below .652 
+
+Among wild primates, the puzzle of modal group sizes that deviate systematically from 653 
+
+per -capita optima has remained an active concern of the field (Markham and Gesquiere 2017) .654 
+
+Chimpanzees are a natural test case, because the size and composition of their parties deviate from 655 
+
+per -capita optima and reorganize far more than food supply alone would predict — exactly the 656 
+
+directional deviation the framework addresses. The framework treats two things as one process at 657 
+
+different timescales: the everyday flux in which parties form, grow, shed members, and dissolve, 658 
+
+and the rare permanent fission in which a whole community divides. The first is where the model's 659 21 
+
+machinery operates directly; the second is its limiting case, reached when the same conflict, 660 
+
+accumulated over years, hardens party boundaries into a community split . Food sets the stage for 661 
+
+party size : its distribution governs where females range and how contestable access to them 662 
+
+becomes (Pusey et al. 1997; Emery Thompson et al. 2007; Murray et al. 2007) , which is why party 663 
+
+size responds more to how food is distributed than to its overall abundance, and why food's 664 
+
+influence wanes where food is plentiful (Newton -Fisher et al. 2000; Lehmann and Boesch 2004) .665 
+
+Protective benefits set the stage for community size: a larger community holds a larger territory 666 
+
+and faces less pressure from neighbors, so between -group competition pushes community size 667 
+
+upward and holds communities together above their nominal optimum (Lemoine et al. 2020; 668 
+
+Wilson et al. 2014) . But what regulates party size on that stage is the conflict over mating access 669 
+
+that the resulting distribution of estrous females generates: their presence draws larger parties even 670 
+
+as the competition it provokes among males can drive some apart, so party size reflects how that 671 
+
+conflict is mediated, moment to moment, through who is admitted, tolerated, and driven out 672 
+
+(Goodall 1986). 673 
+
+What our framework identifies is a balance between the conflict that accumulates within a 674 
+
+group and the ease with which individuals resolve it by regrouping. The decisions the model 675 
+
+formalizes are played out moment to moment at the party level, where individuals aggregate with 676 
+
+a subgroup, are tolerated or not, and dissociate to join or form others. The base model's fission into 677 
+
+comparable daughters is one end of a continuum; at its other extreme, a single individual 678 
+
+dissociates, sometimes drawing followers, to form a smaller party that may later re -fuse, an 679 
+
+asymmetric and impermanent fission (Aureli, et al. 2008) . Such dissociation is the joiner -pool 680 
+
+dynamic running in real time: the flexible, arousal -sensitive party composition that field studies 681 
+
+describe, featuring a male core whose membership shifts within and across days (Goodall 1986; 682 
+
+Kawanaka 1984) . The cost that regulates it is borne by the dissociating individual who forfeits 683 
+
+access to contested resources and is exposed to threats that a larger party buffers (Boesch 1991; 684 
+
+Lehmann and Boesch 2004) . A daughter party formed this way can therefore inherit a lower per -685 
+
+capita payoff than its parent. Community size sets how readily the party level reabsorbs an 686 
+
+individual who dissociates: small communities sustain larger, longer -lasting parties with closer 687 
+
+association between the sexes, while large communities sustain smaller, shorter -lasting parties 688 
+
+with weaker association, and beyond some point these parties stop exchanging members (Lehmann 689 
+
+and Boesch 2004) . Permanent community fission is the rare limiting case of this same process, 690 
+
+when mating -access conflict intensifies faster than the party level can absorb it, which is why such 691 
+
+splits are separated by roughly 500 years (Langergraber et al. 2014) . Ngogo, the largest community 692 
+
+ever recorded at roughly 190 individuals, is the best -documented: association between two clusters 693 
+
+progressively broke down until it split permanently into antagonistic factions (Sandel et al. 2026) .694 
+
+Fission therefore forfeits this protective advantage: a daughter community holds a smaller territory 695 
+
+and can, at the extreme, be destroyed by its neighbors, as the Kahama community was after 696 
+
+splitting from Kasekela (Goodall 1986; Wilson et al. 2014) . The framework thus supplies a single 697 
+
+account in which the admission, exclusion, and fission (dis sociation) decisions that shape a party 698 22 
+
+from hour to hour are the same decisions that, accumulated and hardened, determine whether a 699 
+
+community holds together or divides, wherever such decisions are made .700 
+
+Smith's (1985) analysis of Inuit foragers was foundational in directing attention to conflict -701 
+
+mediated gr oup size regulation . Since then, work across diverse forager populations has mapped 702 
+
+how resource distribution, kinship structure, and sources of conflict shape group size and when 703 
+
+groups fission, fuse, and reassemble (Hamilton et al. 2007; Hill et al. 2011) . Among these, kinship 704 
+
+and protection determine where group size sits before conflict regulates the variation around it. 705 
+
+Kinship works through relatedness: shared production, alliance, and cooperation accrue along kin 706 
+
+lines, so that denser kin networks and shared production, effectively raising α relative to β, settle 707 
+
+at larger optima (Walker 2014) ; ecological models predict these optima closely, as when Janssen 708 
+
+and Hill (2014) derive an optimal 7 –8 hunters for the Ache. Protection works through numbers: 709 
+
+intergroup lethal violence was a regular feature of mobile forager life and tracked resource scarcity 710 
+
+(Allen et al. 2016; Glowacki 2025) , so where neighboring groups are hostile, the advantage of 711 
+
+greater numbers holds communities together above their within -group optimum, the human 712 
+
+parallel to the between -group force in chimpanzees. On these foundations the same conflict -713 
+
+mediated regulation operates. Kinship sets the lines along which a community can divide, but what 714 
+
+drives it to divide is conflict over mating and reproductive partners: when that conflict outgrows 715 
+
+what the kinship and marriage alliances can contain, the community fissions, and it fissions along 716 
+
+those kin lines. Walker and Hill's (2014) cross -cultural analysis bears this out, finding that most 717 
+
+human group fissions are driven primarily by internal political conflict and only secondarily by 718 
+
+resource scarcity, matching the prediction that fission resolves accumulated intra group conflict. 719 
+
+The Yanomamö are the clearest case. Villages grow in part as raiding brings in women as captured 720 
+
+wives and, across a generation, their offspring, even as that same concentration of contested 721 
+
+reproductive partners intensifies the competition that kinship and marriage alliances must contain; 722 
+
+when those alliances can no longer contain it, the village fissions along lineage lines (Chagnon 723 
+
+1979) . Across these cases, what explains variation in group size around its optimum is neither 724 
+
+kinship nor protection alone but the conflict -mediated regulation those forces give rise to: the same 725 
+
+accumulat ed intra group conflict, resolved by fission, that the framework formalizes. 726 
+
+The fission -only and fission -and -exclusion models combine to produce a prediction about 727 
+
+post -fission behavior that neither part anticipates alone. After fission, paired daughters face 728 
+
+asymmetric incentives regarding admission of newcomers. The larger daughter — closer to N*729 
+
+and preferred by joiners — has reason to become selectively restrictive: unchecked growth will 730 
+
+move it to the fission threshold, so the benefits of coordinating exclusion are real and immediate. 731 
+
+The smaller daughter faces the opposite incentive structure: it is below N*, unattractive relative to 732 
+
+its paired daughter, and liable to linger as a small, sub -optimal group . Admitting joiners freely —733 
+
+lowering effective entry costs, tolerating individuals it might otherwise exclude — is its best 734 
+
+available strategy for growing back toward the optimum. The two daughters should therefore 735 
+
+diverge in admission behavior in the period immediately following fission, with the larger 736 
+
+becoming more restrictive and the smaller more permissive, even when they were drawn from the 737 23 
+
+same parent group under identical ecological conditions. The prediction is empirically tractable: 738 
+
+recently fissioned daughter groups of similar ecological quality should differ in their tolerance of 739 
+
+newcomers, with the smaller daughter showing systematically lower effective entry barriers 740 
+
+following the split. To our knowledge, no existing theory produces this prediction and no empirical 741 
+
+analysis tests for it; the framework therefore generates a tractable comparative question in fission -742 
+
+fusion research. 743 
+
+Several extensions are tractable but lie beyond the scope of this paper. The framework 744 
+
+treats joiner arrival as a constant -rate process with one prospective joiner at a time. Where many 745 
+
+joiners arrive simultaneously and compete for entry, the bargaining structure inverts: incumbent 746 
+
+groups gain power over candidates, the cost of selectivity shifts onto applicants, and the 747 
+
+appropriate model becomes a matching market with two -sided preferences (Gale and Shapley 748 
+
+1962; Noë and Hammerstein 1994) . The framework also treats the joiner pool as homogeneous; in 749 
+
+practice joiners vary along multiple dimensions — spatial proximity, kinship, age and sex 750 
+
+composition, skill and knowledge, behavioral profile (Bowler and Benton 2005; Widdig et al. 751 
+
+2006; Wakeford and Cords 2025; Schniter et al. 2015, 2018; Sih et al. 2004) — and daughter groups 752 
+
+facing heterogeneous pools should differentiate to occupy distinct niches, a Hotelling -style 753 
+
+dynamic that adds a second axis of post -fission divergence orthogonal to the size -based axis above. 754 
+
+The relatedness extension introduced by Smith (1985) folds naturally into the framework as a 755 
+
+reweighting of per -capita payoffs by within -group relatedness, though we have set that step aside 756 
+
+here to isolate the structural results. The framework also defines a comparative test across the 757 
+
+viable exclusion boundary that we do not run here: field estimation of the exclusion -cost 758 
+
+parameters c and γ would place real systems on one side or the other, a tractable next step the 759 
+
+model makes precise. Finally, the framework does not address how groups acquire the capacity 760 
+
+for coordinated exclusion in the first place, nor does it treat fission as the extended social process 761 
+
+documented in long -term studies of permanent splits (Feder et al. 2025; Sandel et al. 2026) ; these 762 
+
+are also natural targets for future work. 763 
+
+## Conclusion 764 
+
+Observed group sizes are best understood not as failed approximations to a static optimum but as 765 
+
+outcomes of conflict -mediated regulation through admission, exclusion, and fission decisions. 766 
+
+Whether a group sits below, at, or above its nominal optimum depends on a small set of measurable 767 
+
+parameters: the slope asymmetry of the per -capita payoff function, the structure of the joiner pool, 768 
+
+and the cost of coordinated exclusion. A single inequality, the viable exclusion condition, separates 769 
+
+two qualitatively distinct dynamic regimes, with implications for the modal group sizes observed 770 
+
+across non -human animal groups, primate fission -fusion societies, and human foragers. The 771 
+
+framework thus offers a way to read variation in group size across taxa as the systematic signature 772 
+
+of underlying ecological and behavioral parameters rather than as evidence of optimization failure. 773 
+
+774 24 
+
+## Funding 775 
+
+This research received no specific grant from any funding agency in the public, commercial, or 776 
+
+not -for -profit sectors. 777 
+
+Conflict of Interest 778 
+
+The author declares no conflict of interest. 779 
+
+Data and Code Accessibility 780 
+
+This paper presents theoretical models only; no empirical data were collected or analyzed . All code 781 
+
+used to produce the figures and simulations in this paper is archived in a public repository at 782 
+
+Zenodo:  https://doi.org/10.5281/zenodo.20358982  The repository includes Figure1.py, 783 
+
+Figure2.py, Figure3.py for generation of the manuscript figures , and a README.md describing 784 
+
+all files, parameters, and usage instructions. The repository is publicly available (Schniter 2026) ;785 
+
+the DOI is permanent and will not change. 786 
+
+References 787 
+
+Allen, Mark W., Robert Lawrence Bettinger, Brian F. Codding, Terry L. Jones, and Al W. 788 
+
+Schwitalla. 2016. “Resource Scarcity Drives Lethal Aggression among Prehistoric 789 
+
+Hunter -Gatherers in Central California.” Proceedings of the National Academy of 790 
+
+Sciences 113 (43): 12120 –25. https://doi.org/10.1073/pnas.1607996113. 791 
+
+Altizer, Sonia, Charles L. Nunn, Peter H. Thrall, et al. 2003. “Social Organization and Parasite 792 
+
+Risk in Mammals: Integrating Theory and Empirical Studies.” Annual Review of 793 
+
+Ecology, Evolution, and Systematics 34 (Volume 34, 2003): 517 –47. 794 
+
+https://doi.org/10.1146/annurev.ecolsys.34.030102.151725. 795 
+
+Archetti, M. 2009. “Cooperation as a Volunteer’s Dilemma and the Strategy of Conflict in Public 796 
+
+Goods Games.” Journal of Evolutionary Biology 22 (11): 2192 –200. 797 
+
+https://doi.org/10.1111/j.1420 -9101.2009.01835.x. 798 
+
+Aureli, Filippo, Colleen M. Schaffner, Christophe Boesch, Simon K. Bearder, Josep Call, Colin 799 
+
+A. Chapman, Richard Connor, Anthony Di Fiore, Robin I. M. Dunbar, S. Peter Henzi, 800 
+
+Kay Holekamp, Amanda H. Korstjens, Robert Layton, Phyllis Lee, Julia Lehmann, 801 
+
+Joseph H. Manson, Gabriel Ramos‐Fernandez, et al. 2008. “Fission‐Fusion Dynamics: 802 
+
+New Research Frameworks.” Current Anthropology 49 (4): 627 –54. 803 
+
+https://doi.org/10.1086/586708. 804 
+
+Boesch, C. 1991. “Symbolic Communication in Wild Chimpanzees?” Human Evolution 6 (1): 805 
+
+81 –89. https://doi.org/10.1007/BF02435610. 806 25 
+
+Borries, Carola, Eileen Larney, Amy Lu, Kerry Ossi, and Andreas Koenig. 2008. “Costs of 807 
+
+Group Size: Lower Developmental and Reproductive Rates in Larger Groups of Leaf 808 
+
+Monkeys.” Behavioral Ecology 19 (6): 1186 –91. https://doi.org/10.1093/beheco/arn088. 809 
+
+Bowler, Diana E., and Tim G. Benton. 2005. “Causes and Consequences of Animal Dispersal 810 
+
+Strategies: Relating Individual Behaviour to Spatial Dynamics.” Biological Reviews 80 811 
+
+(2): 205 –25. https://doi.org/10.1017/S1464793104006645. 812 
+
+Buston, Peter. 2003. “Forcible Eviction and Prevention of Recruitment in the Clown 813 
+
+Anemonefish.” Behavioral Ecology 14 (4): 576 –82. 814 
+
+https://doi.org/10.1093/beheco/arg036. 815 
+
+Chagnon, Napoleon A. 1979. “Mate Competition, Favoring Close Kin, and Village Fissioning 816 
+
+Among the Yanomamo Indians.” In Evolutionary Biology and Human Social Behavior .817 
+
+Duxbury Press. FDAHRM, Tallahassee, Florida [10046]. 818 
+
+Clark, Colin W., and Marc Mangel. 1984. “Foraging and Flocking Strategies: Information in an 819 
+
+Uncertain Environment.” The American Naturalist 123 (5): 626 –41. 820 
+
+https://doi.org/10.1086/284228. 821 
+
+Couzin, Iain D., and Mark E. Laidre. 2009. “Fission –Fusion Populations.” Current Biology 19 822 
+
+(15): R633 –35. https://doi.org/10.1016/j.cub.2009.05.034. 823 
+
+David -Barrett, Tamas. 2023. “Human Group Size Puzzle: Why It Is Odd That We Live in Large 824 
+
+Societies.” Royal Society Open Science 10 (8): 230559. 825 
+
+https://doi.org/10.1098/rsos.230559. 826 
+
+Emery Thompson, Melissa, Sonya M. Kahlenberg, Ian C. Gilby, and Richard W. Wrangham. 827 
+
+2007. “Core Area Quality Is Associated with Variance in Reproductive Success among 828 
+
+Female Chimpanzees at Kibale National Park.” Animal Behaviour 73 (3): 501 –12. 829 
+
+https://doi.org/10.1016/j.anbehav.2006.09.007. 830 
+
+Feder, Jacob A., Shirley C. Strum, and Joan B. Silk. 2025. “Social Patterns Underlying a New 831 
+
+Group Formation in Olive Baboons.” PLOS ONE 20 (10): e0333541. 832 
+
+https://doi.org/10.1371/journal.pone.0333541. 833 
+
+Gale, D., and L. S. Shapley. 1962. “College Admissions and the Stability of Marriage.” The 834 
+
+American Mathematical Monthly 69 (1): 9 –15. 835 
+
+https://doi.org/10.1080/00029890.1962.11989827. 836 
+
+Giraldeau, Luc -Alain, and Darren Gillis. 1985. “Optimal Group Size Can Be Stable: A Reply to 837 
+
+Sibly.” Animal Behaviour 33 (2): 666 –67. https://doi.org/10.1016/S0003 -3472(85)80091 -838 
+
+9. 839 
+
+Glowacki, Luke. 2025. “Robust Evidence That Mobile Hunter -Gatherers Participated in War: 840 
+
+Comment on Fry (2025).” Evolution and Human Behavior 46 (2): 106658. 841 
+
+https://doi.org/10.1016/j.evolhumbehav.2025.106658. 842 26 
+
+Goodall, Jane. 1986. “The Chimpanzees of Gombe: Patterns of Behavior.” Cambridge Mass .843 
+
+Grafen, A. 1984. “Natural Selection, Kin Selection and Group Selection.” In J. R. Krebs & N. B. 844 
+
+Davies (Eds.), Behavioural Ecology: An Evolutionary Approach , 2nd ed. Blackwell 845 
+
+Scientific Publications. 846 
+
+Grinsted, Lena, and Jeremy Field. 2018. “Predictors of Nest Growth: Diminishing Returns for 847 
+
+Subordinates in the Paper Wasp Polistes Dominula.” Behavioral Ecology and 848 
+
+Sociobiology 72 (6): 88. https://doi.org/10.1007/s00265 -018 -2502 -x. 849 
+
+Hamilton, Marcus J., Bruce T. Milne, Robert S. Walker, Oskar Burger, and James H. Brown. 850 
+
+2007. “The Complex Structure of Hunter –Gatherer Social Networks.” Proceedings of the 851 
+
+Royal Society B: Biological Sciences 274 (1622): 2195 –203. 852 
+
+https://doi.org/10.1098/rspb.2007.0564. 853 
+
+Hart, Claire M., and Mark Van Vugt. 2006. “From Fault Line to Group Fission: Understanding 854 
+
+Membership Changes in Small Groups.” Personality and Social Psychology Bulletin 32 855 
+
+(3): 392 –404. https://doi.org/10.1177/0146167205282149. 856 
+
+Higashi, M., and N. Yamamura. 1993. “What Determines Animal Group Size? Insider -Outsider 857 
+
+Conflict and Its Resolution.” The American Naturalist 142 (3): 553 –63. 858 
+
+https://doi.org/10.1086/285555. 859 
+
+Hill, Kim R., Robert S. Walker, Miran Božičević, et al. 2011. “Co -Residence Patterns in Hunter -860 
+
+Gatherer Societies Show Unique Human Social Structure.” Science 331 (6022): 1286 –89. 861 
+
+https://doi.org/10.1126/science.1199071. 862 
+
+Janssen, Marco A., and Kim Hill. 2014. “Benefits of Grouping and Cooperative Hunting Among 863 
+
+Ache Hunter –Gatherers: Insights from an Agent -Based Foraging Model.” Human 864 
+
+Ecology 42 (6): 823 –35. https://doi.org/10.1007/s10745 -014 -9693 -1. 865 
+
+Kawanaka, Kenji. 1984. “Association, Ranging, and the Social Unit in Chimpanzees of the 866 
+
+Mahale Mountains, Tanzania.” International Journal of Primatology 5 (5): 411 –34. 867 
+
+https://doi.org/10.1007/BF02692268. 868 
+
+Kramer, Donald L. 1985. “Are Colonies Supraoptimal Groups?” Animal Behaviour 33 (3): 869 
+
+1031 –32. https://doi.org/10.1016/S0003 -3472(85)80041 -5. 870 
+
+Langergraber, Kevin E., Carolyn Rowney, Grit Schubert, et al. 2014. “How Old Are Chimpanzee 871 
+
+Communities? Time to the Most Recent Common Ancestor of the Y -Chromosome in 872 
+
+Highly Patrilocal Societies.” Journal of Human Evolution 69 (April): 1 –7. 873 
+
+https://doi.org/10.1016/j.jhevol.2013.12.005. 874 
+
+Lehmann, Julia, and Christophe Boesch. 2004. “To Fission or to Fusion: Effects of Community 875 
+
+Size on Wild Chimpanzee (Pan Troglodytes Verus) Social Organisation.” Behavioral 876 
+
+Ecology and Sociobiology 56 (3): 207 –16. https://doi.org/10.1007/s00265 -004 -0781 -x. 877 27 
+
+Lemoine, Sylvain, Christophe Boesch, Anna Preis, Liran Samuni, Catherine Crockford, and 878 
+
+Roman M. Wittig. 2020. “Group Dominance Increases Territory Size and Reduces 879 
+
+Neighbour Pressure in Wild Chimpanzees.” Royal Society Open Science 7 (5): 200577. 880 
+
+https://doi.org/10.1098/rsos.200577. 881 
+
+Lerch, Brian A., and Karen C. Abbott. 2024. “A Flexible Theory for the Dynamics of Social 882 
+
+Populations: Within -Group Density Dependence and between -Group Processes.” 883 
+
+Ecological Monographs 94 (2): e1604. https://doi.org/10.1002/ecm.1604. 884 
+
+Ma, Qi, Anders Johansson, and David J. T. Sumpter. 2011. “A First Principles Derivation of 885 
+
+Animal Group Size Distributions.” Journal of Theoretical Biology 283 (1): 35 –43. 886 
+
+https://doi.org/10.1016/j.jtbi.2011.04.031. 887 
+
+Markham, A. Catherine, and Laurence R. Gesquiere. 2017. “Costs and Benefits of Group Living 888 
+
+in Primates: An Energetic Perspective.” Philosophical Transactions of the Royal Society 889 
+
+B: Biological Sciences 372 (1727): 20160239. https://doi.org/10.1098/rstb.2016.0239. 890 
+
+Markham, A. Catherine, Laurence R. Gesquiere, Susan C. Alberts, and Jeanne Altmann. 2015. 891 
+
+“Optimal Group Size in a Highly Social Mammal.” Proceedings of the National Academy 892 
+
+of Sciences 112 (48): 14882 –87. https://doi.org/10.1073/pnas.1517794112. 893 
+
+McNamara, John M., and Alasdair I. Houston. 1992. “Evolutionarily Stable Levels of Vigilance 894 
+
+as a Function of Group Size.” Animal Behaviour 43 (4): 641 –58. 895 
+
+https://doi.org/10.1016/S0003 -3472(05)81023 -1. 896 
+
+Murray, Carson M., Sandeep V. Mane, and Anne E. Pusey. 2007. “Dominance Rank Influences 897 
+
+Female Space Use in Wild Chimpanzees, Pan Troglodytes : Towards an Ideal Despotic 898 
+
+Distribution.” Animal Behaviour 74 (6): 1795 –804. 899 
+
+https://doi.org/10.1016/j.anbehav.2007.03.024. 900 
+
+Newton -Fisher, Nicholas E., Vernon Reynolds, and Andrew J. Plumptre. 2000. “Food Supply 901 
+
+and Chimpanzee (Pan Troglodytes Schweinfurthii) Party Size in the Budongo Forest 902 
+
+Reserve, Uganda.” International Journal of Primatology 21 (4): 613 –28. 903 
+
+https://doi.org/10.1023/A:1005561203763. 904 
+
+Noë, Ronald, and Peter Hammerstein. 1994. “Biological Markets: Supply and Demand 905 
+
+Determine the Effect of Partner Choice in Cooperation, Mutualism and Mating.” 906 
+
+Behavioral Ecology and Sociobiology 35 (1): 1 –11. https://doi.org/10.1007/BF00167053. 907 
+
+Pitcher, Tony J. 1986. “Functions of Shoaling Behaviour in Teleosts.” In The Behaviour of 908 
+
+Teleost Fishes , edited by Tony J. Pitcher. Springer US. https://doi.org/10.1007/978 -1-909 
+
+4684 -8261 -4_12. 910 
+
+Pulliam, H. Ronald, and Thomas Caraco. 1984. “Living in Groups: Is There an Optimal Group 911 
+
+Size?” In Behavioural Ecology: An Evolutionary Approach, J.R. Krebs, N.B. Davies 912 
+
+(Eds.) , 2nd ed. 913 28 
+
+Pusey, Anne, Jennifer Williams, and Jane Goodall. 1997. “The Influence of Dominance Rank on 914 
+
+the Reproductive Success of Female Chimpanzees.” Science 277 (5327): 828 –31. 915 
+
+https://doi.org/10.1126/science.277.5327.828. 916 
+
+Rodman, Peter S. 1981. “Inclusive Fitness and Group Size with a Reconsideration of Group 917 
+
+Sizes in Lions and Wolves.” The American Naturalist 118 (2): 275 –83. 918 
+
+https://doi.org/10.1086/283819. 919 
+
+Safran, Rebecca J., Veronica Doerr, Paul W. Sherman, Erik Doerr, Samuel M. Flaxman, and 920 
+
+David W. Winkler. 2007. Group Breeding in Vertebrates: Linking Individual - and 921 
+
+Population -Level Approaches . http://hdl.handle.net/1885/52977. 922 
+
+Sandel, Aaron A., Yixuan He, Junpeng Ren, et al. 2026. “Lethal Conflict after Group Fission in 923 
+
+Wild Chimpanzees.” Science 392 (6794): 216 –20. 924 
+
+https://doi.org/10.1126/science.adz4944. 925 
+
+Schniter, Eric. 2026. Code for: “Conflict -Mediated Group Size Regulation: A Theory of 926 
+
+Supraoptimal and Suboptimal Group Size.” Zenodo, released May. 927 
+
+https://doi.org/10.5281/zenodo.20358982. 928 
+
+Schniter, Eric, Michael Gurven, Hillard S. Kaplan, Nathaniel T. Wilcox, and Paul L. Hooper. 929 
+
+2015. “Skill Ontogeny among Tsimane Forager -Horticulturalists.” American Journal of 930 
+
+Physical Anthropology 158 (1): 3 –18. https://doi.org/10.1002/ajpa.22757. 931 
+
+Schniter, Eric, Nathaniel T. Wilcox, Bret A. Beheim, Hillard S. Kaplan, and Michael Gurven. 932 
+
+2018. “Information Transmission and the Oral Tradition: Evidence of a Late -Life Service 933 
+
+Niche for Tsimane Amerindians.” Evolution and Human Behavior 39 (1): 94 –105. 934 
+
+https://doi.org/10.1016/j.evolhumbehav.2017.10.006. 935 
+
+Seno, H. 2006. “Group Size Determined by Fusion and Fission A Mathematical Modelling with 936 
+
+Inclusive Fitness.” Journal of Mathematical Biology 52 (1): 70 –92. 937 
+
+https://doi.org/10.1007/s00285 -005 -0341 -7. 938 
+
+Shen, Sheng -Feng, Stephen T. Emlen, Walter D. Koenig, and Dustin R. Rubenstein. 2017. “The 939 
+
+Ecology of Cooperative Breeding Behaviour.” Ecology Letters 20 (6): 708 –20. 940 
+
+https://doi.org/10.1111/ele.12774. 941 
+
+Shen, Sheng -Feng, H. Kern Reeve, Stephen T. Emlen, Ming Liu, and Dustin Rubenstein. 2023. 942 
+
+“Group Size and the Resolution of Insider –Outsider Conflict in Animal Societies.” 943 
+
+Animal Behaviour 205 (November): 107 –16. 944 
+
+https://doi.org/10.1016/j.anbehav.2023.08.013. 945 
+
+Sibly, R. M. 1983. “Optimal Group Size Is Unstable.” Animal Behaviour 31 (3): 947 –48. 946 
+
+https://doi.org/10.1016/S0003 -3472(83)80250 -4. 947 
+
+Sih, Andrew, Alison Bell, and J. Chadwick Johnson. 2004. “Behavioral Syndromes: An 948 
+
+Ecological and Evolutionary Overview.” Trends in Ecology & Evolution 19 (7): 372 –78. 949 
+
+https://doi.org/10.1016/j.tree.2004.04.009. 950 29 
+
+Smith, Eric Alden. 1981. “The Application of Optimal Foraging Theory to the Analysis of 951 
+
+Hunter -Gatherer Group Size.” In B. Winterhalder & E.A. Smith (Eds.), Hunter -Gatherer 952 
+
+Foraging Strategies: Ethnographic and Archaeological Analyses. University of Chicago 953 
+
+Press. 954 
+
+Smith, Eric Alden. 1985. “Inuit Foraging Groups: Some Simple Models Incorporating Conflicts 955 
+
+of Interest, Relatedness, and Central -Place Sharing.” Ethology and Sociobiology 6 (1): 956 
+
+27 –47. https://doi.org/10.1016/0162 -3095(85)90039 -1. 957 
+
+Sturrock, Nicole J., Ben J. Hatchwell, Josh A. Firth, and Jonathan P. Green. 2022. “Who to 958 
+
+Help? Helping Decisions in a Cooperatively Breeding Bird with Redirected Care.” 959 
+
+Behavioral Ecology and Sociobiology 76 (6): 83. https://doi.org/10.1007/s00265 -022 -960 
+
+03190 -w. 961 
+
+Wakeford, Rory, and Marina Cords. 2025. “Social Ties Drive Post -Fission Group Choice in Blue 962 
+
+Monkeys.” Proceedings of the Royal Society B: Biological Sciences 292 (2055): 963 
+
+20250376. https://doi.org/10.1098/rspb.2025.0376. 964 
+
+Walker, Robert S. 2014. “Amazonian Horticulturalists Live in Larger, More Related Groups than 965 
+
+Hunter –Gatherers.” Evolution and Human Behavior 35 (5): 384 –88. 966 
+
+https://doi.org/10.1016/j.evolhumbehav.2014.05.003. 967 
+
+Walker, Robert S., and Kim R. Hill. 2014. “Causes, Consequences, and Kin Bias of Human 968 
+
+Group Fissions.” Human Nature 25 (4): 465 –75. https://doi.org/10.1007/s12110 -014 -969 
+
+9209 -0. 970 
+
+Waterman, Jane M. 2002. “Delayed Maturity, Group Fission and the Limits of Group Size in 971 
+
+Female Cape Ground Squirrels (Sciuridae: Xerus Inauris).” Journal of Zoology 256 (1): 972 
+
+113 –20. https://doi.org/10.1017/S0952836902000146. 973 
+
+Widdig, A., P. Nürnberg, F. B. Bercovitch, et al. 2006. “Consequences of Group Fission for the 974 
+
+Patterns of Relatedness among Rhesus Macaques.” Molecular Ecology 15 (12): 3825 –32. 975 
+
+https://doi.org/10.1111/j.1365 -294X.2006.03039.x. 976 
+
+Wilson, Michael L., Christophe Boesch, Barbara Fruth, et al. 2014. “Lethal Aggression in Pan Is 977 
+
+Better Explained by Adaptive Strategies than Human Impacts.” Nature 513 (7518): 414 –978 
+
+17. https://doi.org/10.1038/nature13727. 979 
+
+980 
+
+981 30 
+
+# Appendix A: Derivation of the Fission Threshold 982 
+
+The fission threshold is defined as the smallest intact -group size at which splitting into two equal 983 
+
+daughters yields a higher per -capita payoff than remaining intact. Starting from the piecewise 984 
+
+linear payoff function: 985 
+
+PI(n) = R1 + α(n − 1) for n ≤ N* (A.1) 986 
+
+PI(n) = Pmax − β(n − N*) for n > N* (A.2) 987 
+
+and noting that post -fission daughters begin below N* so PI(n/2) = R1 + α(n/2 − 1), the threshold 988 
+
+condition PI(n/2) > PI(n) on the declining branch becomes: 989 
+
+R1 + α(n/2 − 1) > Pmax − β(n − N*) 990 
+
+Substituting Pmax = R1 + α( N* − 1) and collecting terms in n:991 
+
+αn /2 − α > α(N* − 1) − β( n − N*) 992 
+
+n(α/2 + β) > αN * + βN * = N*( α + β)993 
+
+n > N* · 2( α + β) / ( α + 2 β)994 
+
+The fission threshold NF is the smallest integer satisfying this inequality: 995 
+
+NF = N* · 2( α + β) / ( α + 2β) (A.3) 996 
+
+In the symmetric case ( α = β) this simplifies to NF = ⁴⁄₃ N*. Post -fission daughter size is NF/2 =997 
+
+N*( α + β)/( α + 2 β), equal to ⅔ N* when α = β. When fission carries a per -capita cost F, the realized 998 
+
+threshold satisfies PI(n/2) − F > PI(n), shifting the threshold upward by 2 F/( α + 2 β), so it increases 999 
+
+monotonically with F and approaches the Nash equilibrium size as F → ∞. 1000 
+
+# Appendix B: Derivation of the Viable Exclusion Condition 1001 
+
+Exclusion is viable if it dominates admission at N*, the smallest size at which adding a member 1002 
+
+reduces per -capita payoff. The relevant payoffs evaluated at N* are: 1003 
+
+WA(N*) = PI(N* + 1) = Pmax − β (B.1) 1004 
+
+WE(N*) = PI(N*) − CE(N*) = Pmax − (c + γN *) (B.2) 1005 
+
+Exclude beats admit at N* if and only if WE(N*) > WA(N*), i.e.: 1006 
+
+Pmax − (c + γN *) > Pmax − β1007 
+
+β > c + γN * (B.3) 1008 31 
+
+This is the viable exclusion condition. For n < N*, admission always raises per -capita payoff so 1009 
+
+WA(n) > WE(n) always holds; the condition binds only at N* and above. For n > N*, CE(n) = c +1010 
+
+γn continues to rise relative to the fixed cost β per additional member, so if exclusion beats 1011 
+
+admission at N*, it does so for all n ∈ [N*, NF]. When β ≤ c + γN *, exclusion never beats admission 1012 
+
+anywhere in the relevant range, and the group grows past N* until fission is triggered. 1013 
+
+The exclude –fission crossing nEF quoted in the main text follows from equating the exclude and 1014 
+
+fission payoffs at a size above N*. Writing WE(n) = PI(n) − ( c + γn ) and WF(n) = PI(n/2) − F, with 1015 
+
+the declining -branch and rising -branch forms of PI used in Appendix A, the crossing WE = WF1016 
+
+gives, after substituting Pmax = R1 + α(N* − 1) and collecting terms in n:1017 
+
+n(α/2 + β + γ) = N*( α + β) + F − c (B.4) 1018 
+
+so that 1019 
+
+nEF = 2 · [ N*( α + β) + F − c] / ( α + 2 β + 2 γ). (B.5) 1020 
+
+The γ term, absent from the admit –fission crossing NAF , enters because the per -capita exclusion 1021 
+
+cost rises with size whereas the per -entry admission cost β does not; it is what places nEF below 1022 
+
+the size the same group would reach under admission alone. As emphasized in the main text, a 1023 
+
+viable -exclusion group growing sequentially from below N* locks at N* and never approaches nEF ,1024 
+
+which therefore characterizes a policy boundary relevant only to groups displaced above N* by 1025 
+
+exogenous factors. 1026 
+
+# Appendix C: Volunteer’s -Dilemma Micro -Foundation for CE(n)1027 
+
+The exclusion cost function CE(n) = c + γn is parameterized so that c captures the baseline per -1028 
+
+capita effort of attempting exclusion and γn captures the size -dependent rise in expected cost. The 1029 
+
+γn term is not a claim that the physical effort of a successful exclusion attempt grows with group 1030 
+
+size; conditional on success, per -capita effort is roughly constant. What changes with n is the 1031 
+
+probability that coordination succeeds. 1032 
+
+Following the volunteer’s -dilemma framework (Archetti 2009), the chance that the required 1033 
+
+contributors actually volunteer declines faster than the number of potential contributors rises as 1034 
+
+group size grows. The expected cost to an incumbent — per -attempt effort divided by the 1035 
+
+probability of successful coordination — therefore rises with n. Writing this expected cost as e /1036 
+
+p(n), where e is the per -attempt effort and p(n) is the size -dependent coordination success 1037 
+
+probability, the γn term approximates the contribution of declining p(n) to the expected cost over 1038 
+
+the relevant range. The linear approximation is tractable and preserves the qualitative monotonicity 1039 
+
+that drives the viable exclusion boundary; the results hold for any monotonically increasing CE(n)1040 
+
+satisfying CE(1) = c > 0. 1041 32 
+
+# Appendix D: Formal Model of Case 3 (Weak Joiner Discrimination) 1042 
+
+Case 3 covers populations in which prospective joiners can perceive payoff differences between 1043 
+
+available daughters but do so imperfectly. We formalize this with a logit choice rule indexed by 1044 
+
+an assessment -noise parameter σ. 1045 
+
+The choice rule 1046 
+
+Let the two post -fission daughters have current sizes mL (larger) and mS (smaller), with per -capita 1047 
+
+post -entry payoffs PI(mL + 1) and PI(mS + 1). A prospective joiner chooses the larger daughter with 1048 
+
+probability: 1049 
+
+pL = 1 / [1 + exp(−Δ / σ)], Δ = PI(mL + 1) − PI(mS + 1) (D.1) 1050 
+
+where Δ ≥ 0 is the post -entry payoff advantage of the larger daughter and σ > 0 is the assessment -1051 
+
+noise scale. As σ → 0, pL → 1 whenever Δ > 0 and the rule collapses to deterministic preference 1052 
+
+for the larger daughter. As σ → ∞, pL → ½ and joiners split evenly, running independent Case -1-1053 
+
+like cycles. Intermediate σ produces stochastic asymmetry: both daughters receive joiners, the 1054 
+
+larger with probability above ½. 1055 
+
+Gap dynamics 1056 
+
+The expected change in the size gap per arrival is: 1057 
+
+E[Δgap] = (2 pL − 1) (D.2) 1058 
+
+This is positive whenever Δ > 0 and increases with Δ/σ, so the gap widens in expectation at a rate 1059 
+
+that measures how strongly the population is pushed toward the asymmetric outcome. Slope 1060 
+
+asymmetry enters through Δ: daughters on the rising limb just after fission produce Δ ≈ α per unit 1061 
+
+size difference, so steep -decline systems (low NF, daughters far below N*) push Case 3 toward 1062 
+
+Case 2, while shallow -decline systems (high NF, daughters near N*) keep allocation near even. 1063 
+
+Empirical estimation 1064 
+
+The discrimination strength 1/σ is estimable from observed joining decisions. Given binary choices 1065 
+
+between groups with independently estimated payoff differences Δ, σ is recovered by fitting the 1066 
+
+logit above — a standard discrete -choice estimation. The slope of the empirical choice probability 1067 
+
+against Δ near Δ = 0 identifies 1/σ. A population’s position on the Case 1 –2 continuum is then a 1068 
+
+measured quantity, and the fit yields a test of whether joiners discriminate at all (σ finite) against 1069 
+
+the null of random affiliation (σ → ∞). 1070 
+
+1071

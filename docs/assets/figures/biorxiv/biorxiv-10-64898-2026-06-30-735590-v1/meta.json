@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-06-30-735590-v1/fig-001.webp",
+      "caption": "Figure 1: A breakdown of experimental stimuli and paradigm schematic. Top left: four example scenes, one of each background type (boardwalk, office, forest, train station). The same scenes were used across condition groups with AiTR highlights presence and presentation dependent on condition. Top right: All 50 task-irrelevant and taskrelevant items used as background objects for scene construction. Participants only ever saw 25 objects in the visual search task, with the remaining 25 objects used as lures in the memory task. Bottom: a schematic of the search task followed by the surprise memory task. Participants either search the scenes alone (No AiTR condition) or with AiTR highlights presented simultaneously with scene onset (AiTR condition) or delayed in onset by 250 ms (Delayed AiTR condition). Participants in all conditions then completed the memory task where they were asked about the 25 task-irrelevant objects they saw as well as 25 lures. Analysis",
+      "page": 11,
+      "index": 1,
+      "width": 976,
+      "height": 552
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-06-30-735590-v1/fig-002.webp",
+      "caption": "Figure 2: Percentage of fixations made on background information (e.g. not on the people in the scene) across conditions (left) and fixation positions overlaid as blue dots for an example scene across condition (right).",
+      "page": 14,
+      "index": 2,
+      "width": 798,
+      "height": 539
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-06-30-735590-v1/fig-003.webp",
+      "caption": "Figure 3: ROC curves plotted for each condition (left) and histograms of memory reports for old and new objects across conditions (right).",
+      "page": 16,
+      "index": 3,
+      "width": 976,
+      "height": 552
+    }
+  ]
+}

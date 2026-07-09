@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-001.webp",
+      "caption": "Figure 1: Overview of PAPERPILOT. Compared with single-turn scientific literature search, PAPERPILOT uses multi-turn feedback to clarify user intent and refine the search workflow before producing final results.",
+      "page": 1,
+      "index": 1,
+      "width": 406,
+      "height": 417
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-002.webp",
+      "caption": "Table 5: Toolset.",
+      "page": 11,
+      "index": 2,
+      "width": 577,
+      "height": 615
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-003.webp",
+      "caption": "Table 1: Comparison of literature search and agentic reasoning systems by key capabilities. ✓ = explicit first-class support; △ = partial, or indirect; × = clearly unsupported.",
+      "page": 2,
+      "index": 3,
+      "width": 879,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-004.webp",
+      "caption": "Table 3: Workflow-level evaluation on generation and editing tasks. CE denotes successful workflow-generation cases per dollar, and Rel. Eff. denotes the log-scale normalized CE score.",
+      "page": 7,
+      "index": 4,
+      "width": 900,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-005.webp",
+      "caption": "Figure 2: Overview of PAPERPILOT. Given an anchor paper and a user search intent, the agent induces a DAGstructured search workflow from a predefined toolset, executes the workflow over the literature corpus, and refines the workflow through multi-turn user interaction.",
+      "page": 4,
+      "index": 5,
+      "width": 906,
+      "height": 493
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-006.webp",
+      "caption": "Figure 12: An example PaperPilot search session",
+      "page": 17,
+      "index": 6,
+      "width": 902,
+      "height": 518
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-007.webp",
+      "caption": "Figure 11: Workflow refinement example",
+      "page": 17,
+      "index": 7,
+      "width": 902,
+      "height": 579
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-008.webp",
+      "caption": "Figure 9: Human Study interface",
+      "page": 16,
+      "index": 8,
+      "width": 902,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00597v1/fig-009.webp",
+      "caption": "Figure 10: Human Study interface",
+      "page": 16,
+      "index": 9,
+      "width": 902,
+      "height": 368
+    }
+  ]
+}

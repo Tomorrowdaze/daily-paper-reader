@@ -1,0 +1,69 @@
+{
+  "label": "2026-07-09",
+  "date": "2026-07-09",
+  "generated_at": "2026-07-09T21:44:10",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202607/09/biorxiv-10-64898-2026-06-26-734857-v1-conflict-mediated-group-size-regulation-a-theory-of-supraoptimal-and-suboptimal-group-size",
+      "section": "quick",
+      "title_en": "Conflict-Mediated Group Size Regulation: A Theory of Supraoptimal and Suboptimal Group Size",
+      "authors": "Schniter, E.",
+      "date": "2026-07-01",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.06.26.734857v1.full.pdf",
+      "score": "7.0",
+      "evidence": "分析群体冲突和社会紧张局势的机制",
+      "tldr": "本文提出一种由冲突驱动的群体规模调节理论，解释为何现实中的群体规模往往偏离成员收益最大的最优值。研究从“内部成员与外来者的接纳冲突”以及“群体规模扩大后的内部竞争与紧张”两类冲突出发，分析接纳、排斥和分裂三种策略。模型显示，仅靠分裂机制就可能产生过大与过小群体并存的双峰结构；进一步引入排斥决策后，一个简单的不等式即可划分稳定最优群体与周期性分裂两种制度，并为多种动物及人类社会提供可检验预测。",
+      "tags": "query:q6",
+      "abstract_en": "Observed group sizes rarely match the size that would maximize what each member gets from belonging. We propose a two-part theory in which group size is regulated by two related conflicts: insider-outsider conflict over admission, and within-group conflict as crowding, competition, and social tensions intensify with size. Three strategies are available: admission, exclusion, and fission. The first part shows that even when exclusion is unavailable, fission dynamics alone drive group size away from the optimum in both directions, with the pattern set by how prospective joiners encounter groups and by the geometry of fission. When joiners compare groups across a shared landscape and fission is asymmetric, the standing distribution is bimodal: supra-optimal large groups coexisting with a sub-optimal mode of small groups, the pattern characteristic of fission-fusion societies. The second part promotes exclusion and fission to active decisions: incumbents weigh the per-capita cost of accommodating entry ({beta}) against the costs of coordinated exclusion (c +{gamma} N*) and fissioning (F). A single inequality, {beta} > c +{gamma} N*, partitions populations into two regimes: where it holds, exclusion is viable and groups lock at the optimum size; where it fails, groups grow past the optimum and cycle through recurrent fission. Modal group size, fission frequency, and exclusion behavior together identify which regime governs a population -- a set of predictions applicable across fishes, social insects, birds, and mammals including primates and human foragers.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/09/2607.00597v1-multi-turn-agentic-scientific-literature-search-via-workflow-induction",
+      "section": "quick",
+      "title_en": "Multi-Turn Agentic Scientific Literature Search via Workflow Induction",
+      "authors": "Jisen Li, Bingxuan Li, Nanyi Jiang, Xuying Ning, Xiyao Wang, Yifan Shen, Heng Wang, Yuqing Jian, Xiaoxia Wu, Ben Athiwaratkun, Pan Lu, Jiaxuan You, Bingxin Zhao",
+      "date": "2026-07-01",
+      "pdf": "https://arxiv.org/pdf/2607.00597v1",
+      "score": "6.0",
+      "evidence": "针对复杂用户意图的智能科学文献搜索",
+      "tldr": "PaperPilot提出一种面向多轮科研文献搜索的工作流归纳框架，将用户查询与锚点论文转化为可执行的搜索DAG，通过关键词检索、引文扩展、过滤、重排和证据提取等模块完成复杂检索，并利用用户反馈持续优化查询与工作流。该方法结合监督模仿学习和偏好优化训练，在多轮交互场景下显著提升检索效果与执行稳定性，同时增强了搜索代理的可控性和可解释性。",
+      "tags": "query:profile-1",
+      "abstract_en": "Scientific literature search often requires more than retrieving papers from a single query: users' intents are underspecified, preference-dependent, and evolve through interaction. Existing search agents typically rely on fixed pipelines or implicit language-only reasoning, making their search strategies difficult to control, inspect, and refine. We introduce PaperPilot, a multi-turn literature search agent that frames scientific search as workflow induction. Given an anchor paper and a user query, PaperPilot constructs an executable DAG of paper-search operators, including keyword search, citation expansion, filtering, scoring, reranking, and evidence extraction. User feedback is then used to refine both the query and the workflow itself. We train PaperPilot with supervised workflow imitation and preference optimization over controlled workflow corruptions. Experiments show that PaperPilot-9B improves over the base Qwen3.5-9B toolset agent under multi-turn interaction, increasing Hit@5 from 58.0 to 77.0, MRR from 47.5 to 59.4, and nDCG@10 from 26.8 to 32.5, while reducing workflow execution errors from 9.5% to 0%. These results show that explicit, editable search workflows provide an effective and controllable interface for aligning literature search agents with complex scientific intent.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/09/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering",
+      "section": "quick",
+      "title_en": "Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering",
+      "authors": "Ritajit Dey, Iadh Ounis, Graham McDonald",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.07380v1",
+      "score": "6.0",
+      "evidence": "为人工智能推理提出可解释的不确定性信号",
+      "tldr": "论文提出一种面向问答系统的可解释不确定性感知框架，通过分析大语言模型隐藏状态，在单次前向传播中区分“知识不足”与“知识冲突/歧义”两类不确定性，并据此自适应决定是否调用检索增强生成或执行额外推理。该方法兼顾效率、透明性与实用性，为降低幻觉并提升用户可解释性提供了新的RAG决策机制。",
+      "tags": "query:q5",
+      "abstract_en": "Large language models (LLMs) achieve a strong performance in question answering (QA), but remain prone to hallucinations and suffer from limited transparency. Retrieval-augmented generation (RAG) can improve factuality, yet decisions about when and how to retrieve from external resources are typically based on opaque policies or computationally inefficient multi-step prompting procedures. We propose an uncertainty-aware framework for adaptive QA based on explicit signals derived from LLM internal representations. We distinguish between knowledge insufficiency and knowledge ambiguity or conflict, and efficiently estimate these from hidden states in a single forward pass. These signals guide system behaviour: RAG is triggered when knowledge is insufficient, while additional reasoning is applied when ambiguity or conflict is high. By grounding adaptive decisions in decomposed and efficiently estimable uncertainty signals, this approach provides a transparent and practical alternative to existing retrieval and reasoning strategies supporting the design of interpretable user-facing tools.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/09/biorxiv-10-64898-2026-06-30-735590-v1-delaying-the-onset-of-aided-target-recognition-highlights-allows-for-a-more-dispersed-allocation-of-overt-attention",
+      "section": "quick",
+      "title_en": "Delaying the onset of aided target recognition highlights allows for a more dispersed allocation of overt attention",
+      "authors": "Callahan-Flintoft, C., Larkin, G. B.",
+      "date": "2026-07-06",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.06.30.735590v1.full.pdf",
+      "score": "6.0",
+      "evidence": "讨论军事行动中的AI辅助识别",
+      "tldr": "该研究探讨辅助目标识别系统（AiTR）高亮出现时机对视觉搜索与情境感知的影响。研究让参与者在合成场景中识别持枪人员，并比较无高亮、即时高亮和延迟250毫秒高亮三种条件下的注视行为与背景记忆。结果发现，即时AiTR会使注意力集中于高亮目标并减少对背景区域的关注，而短暂延迟高亮可促进更均匀的注意分配，说明结合人类认知机制设计AiTR有助于提升人机协同效果。",
+      "tags": "query:q5",
+      "abstract_en": "Visual search is a critical component of many professions such as military operations, baggage screening, and radiology. Aided Target Recognition (AiTR) systems are designed to highlight potential threats across the operators visual field in real-time, directing attention and improving accuracy. However, these systems may impact search and, consequently, situational awareness by diverting attentional resources from non-highlighted, yet relevant, locations. Previous work suggests that scene gist is extracted within the first 250 ms of scene onset (Vo & Henderson, 2010). As such, this study examined whether a 250 ms AiTR onset delay could encourage a more even distribution of attention. Participants searched synthetically generated scenes and classified each person in the scene as armed or unarmed. Depending on their condition, participants either saw the scenes unaugmented (No AiTR condition), with AiTR highlights consisting of red bounding boxes around armed people and yellow boxes around unarmed (AiTR condition), or with AiTR highlights presented 250 ms post scene onset (Delayed AiTR condition). A surprise memory test of background objects presented in the search scenes was administered to all participants upon completion of the search task. As predicted and preregistered, results showed less overt attentional deployment to background information (anything other than the people themselves) in the AiTR condition compared to No AiTR, however, decreased overt attentional deployment was not seen in the Delayed AiTR group. A similar pattern was observed in the memory data (with the AiTR condition having a lower score than the No AiTR condition and the Delayed AiTR condition), this difference was not significant.\n\nSignificance statementAided target recognition (AiTR) systems are designed to augment a users field of view with salient highlights at locations containing task-relevant or threatening information in the environment. As computer vision models advance, such technologies will become an even more critical tool for people that perform visual search professionally (e.g. Soldiers, baggage screeners, radiologists). In a military context especially, having a system that potentially improves threat detection accuracy and reduces response times could be lifesaving. However, such benefits can only be realized if AiTR systems are designed to be integrated with the cognitive mechanisms of the human user. Without this, displays run the risk of being distracting, creating attentional blind spots, and generally producing a poorer user experience and performance. The current work, motivated by findings in the literature, tested the introduction of a short delay between scene onset and the onset of AiTR highlights. It was found that this very brief delay (250 ms) was sufficient to allow participants to direct overt attention to areas of the scene not highlighted by the AiTR system. This finding is critical because, while the purpose of AiTR highlights is to encourage the placement of attentional resources across the visual field, it is imperative that the human operator ultimately be able to attend to non-highlighted locations in the event of system failures (e.g. threats missed by the AiTR). Moreover, this work demonstrates how cognitive research can be used to systematically explore complex application spaces for improve human-machine integration.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-06-26-734857-v1/fig-001.webp",
+      "caption": "Figure 1. Per-capita payoff as a function of group size under the fission-only model, shown for three cases: 284 symmetric slopes (α = β, solid lines), steeper decline (β > α, dashed), and shallower decline (α > β, dotted). 285 In each case the payoff function consists of two line segments meeting at the nominal optimum N*. The 286 fission threshold NF (i.e., the group size at which splitting into two equal daughters first yields a higher per-287 capita return than remaining intact ) shifts leftward when the decline slope is steep and rightward when it is 288 shallow. Post-fission daughter size (= NF/2) and time-averaged group size over the fission-regrowth cycle 289 shift accordingly. The preferred-state envelope (thick line) follows whichever payoff (intact or post-fission) 290 is higher at each group size. 291",
+      "page": 9,
+      "index": 1,
+      "width": 1004,
+      "height": 624
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-06-26-734857-v1/fig-002.webp",
+      "caption": "Figure 2. Predicted standing distributions of group size under the fission-only model, for three combinations 466 of joiner-pool structure and fission geometry (optimum N* dashed; symmetric, costless baseline). In Case 1 467 (local pools, symmetric fission), independent fission–regrowth cycles give a unimodal distribution centered 468 on the cycle-averaged size ⟨n⟩ = (3/4)NF, which equals N* in this baseline. In Case 2 (global pool, asymmetric 469 fission), a small number of members leave larger, crowded groups while large groups continue to recruit 470 under deterministic best-response joining, yielding a bimodal distribution: supra-optimal large groups 471 together with a sub-optimal mode of small groups (orange). The small mode is continually refilled by 472 asymmetric fission, and its height is set by the dissociation rate and the residence time of groups; a 473 coordination cost that rises with the size of the departing group concentrates departures at the smallest sizes. 474 In Case 3 (global pool, weak discrimination), stochastic (logit) choice among all groups yields a broad, over-475 dispersed distribution spanning sub- and supra-optimal sizes. Distributions are simulations of the 476 corresponding dynamics; see Zenodo repository for the accompanying code (Figure2.py). 477",
+      "page": 14,
+      "index": 2,
+      "width": 1002,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-06-26-734857-v1/fig-003.webp",
+      "caption": "Figure 3. The three decision payoffs WA(n) (admit), WE(n) (exclude), and WF(n) (fission) are plotted as 546 functions of group size in two parameter regimes. The preferred-state envelope (the payoff-maximizing 547 option at each n) is traced by whichever of WA, WE, and WF is highest. Panel A: WE crosses above WA at N* 548 and the preferred-state envelope switches from admit to exclude. Under sequential growth, the group reaches 549 N* and locks there indefinitely; no further joiners are admitted and fission is suppressed. Panel B: WE lies 550 below WA throughout the relevant range and never enters the envelope. The group admits past N* until the 551 admit-fission crossing at NAF, where WF rises above WA and the envelope switches to fission; the fission-only 552 dynamics are recovered. The transition between the two regimes is sharp at the boundary β = c + γN*. 553",
+      "page": 17,
+      "index": 3,
+      "width": 1021,
+      "height": 531
+    }
+  ]
+}
