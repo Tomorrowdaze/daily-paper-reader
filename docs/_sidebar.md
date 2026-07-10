@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-10 <!--dpr-date:20260710-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/10/2607.06407v1-explainer-a-declarative-query-language-for-explaining-classification-models" data-sidebar-item="{&quot;title&quot;: &quot;ExplAIner: A Declarative Query Language for Explaining Classification Models&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.06407v1-explainer-a-declarative-query-language-for-explaining-classification-models&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;用于解释分类模型的声明式查询语言&quot;}">ExplAIner: A Declarative Query Language for Explaining Classification Models</a>
   * 2026-07-09 <!--dpr-date:20260709-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/09/biorxiv-10-64898-2026-06-26-734857-v1-conflict-mediated-group-size-regulation-a-theory-of-supraoptimal-and-suboptimal-group-size" data-sidebar-item="{&quot;title&quot;: &quot;Conflict-Mediated Group Size Regulation: A Theory of Supraoptimal and Suboptimal Group Size&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/biorxiv-10-64898-2026-06-26-734857-v1-conflict-mediated-group-size-regulation-a-theory-of-supraoptimal-and-suboptimal-group-size&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;分析群体冲突和社会紧张局势的机制&quot;}">Conflict-Mediated Group Size Regulation: A Theory of Supraoptimal and Suboptimal Group Size</a>
