@@ -1,0 +1,133 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-11T21:16:49.836353+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.07768v1",
+      "source": "arxiv",
+      "title": "Cascading Effects of the COVID-19 Pandemic on Barangays in the Philippines",
+      "abstract": "The COVID-19 pandemic disrupted socio-economic and healthcare systems in the Philippines, significantly affecting barangays. This study analyzes the cascading effects of the COVID-19 pandemic on key aspects of a barangay, namely mobility, accessibility of public services, economic and financial health, food security, educational engagement, and physical health. It focuses on data from 2,122 Filipino households collected during May to June 2021 as part of the World Bank COVID-19 Households Survey. A Bayesian network model was constructed to programmatically map the conditional dependencies among these variables, utilizing Python libraries. Survey responses were grouped into common variables based on shared characteristics and standardized through z-score normalization to serve as nodes in the Bayesian network. By extending the Bayesian network into an influence diagram, the results will help identify interventions to guide local government units (LGUs) and policymakers in crafting tailored recovery programs and strategies that address impacts on physical health, economic and financial health, food security, public service access, mobility, and educational engagement. These efforts ultimately aim to enhance barangay resilience and preparedness for future public health crises. The results indicate that interventions aimed at boosting food production, stabilizing market prices, and expanding income opportunities are the most effective in improving community outcomes. This highlights the vital role of targeted economic and food security measures in mitigating the socio-economic impacts of the pandemic and offers valuable insights for shaping future response and recovery efforts.",
+      "authors": [
+        "Naomi Ashley Amparo",
+        "John Frederick Muji",
+        "Paul James Montecillo",
+        "Jaymar Soriano",
+        "Vena Pearl Bongolan"
+      ],
+      "primary_category": "econ.GN",
+      "categories": [
+        "econ.GN",
+        "cs.SI"
+      ],
+      "published": "2026-07-08T16:11:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.07768v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Bayesian network model for mapping conditional dependencies in socio-economic disruptions",
+      "llm_evidence_cn": "用于映射社会经济动荡中条件依赖关系的贝叶斯网络模型",
+      "llm_evidence": "用于映射社会经济动荡中条件依赖关系的贝叶斯网络模型",
+      "canonical_evidence": "用于映射社会经济动荡中条件依赖关系的贝叶斯网络模型",
+      "llm_tldr_en": "Uses Bayesian networks to analyze cascading socio-economic effects, offering a methodological bridge for conflict modeling.",
+      "llm_tldr_cn": "使用贝叶斯网络分析连锁社会经济影响，为冲突建模提供了方法论桥梁。",
+      "llm_tldr": "使用贝叶斯网络分析连锁社会经济影响，为冲突建模提供了方法论桥梁。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.06407v1",
+      "source": "arxiv",
+      "title": "ExplAIner: A Declarative Query Language for Explaining Classification Models",
+      "abstract": "The XAI community has studied a wide range of queries and scores for explaining predictions of ML models. From a data management perspective, this proliferation of explanation notions calls for declarative query languages in which such notions can be specified, combined, and analyzed uniformly. In this paper, we develop such a framework for Boolean models. We first revisit FOIL, an interpretability query language for black-box models, and show that it has two fundamental limitations: it cannot express central optimality-based explanation queries, and its evaluation problem over decision trees is hard for every level of the polynomial hierarchy. We then introduce ExplAIner, a query language based on FOIL with an extended vocabulary and a layered structure. We show that ExplAIner can express a broad family of explanation notions, including abductive, contrastive, feature-based, and distance-based queries. We also prove that the evaluation problem for each query in ExplAIner belongs to the Boolean hierarchy over every class of Boolean models for which some basic predicates can be evaluated in polynomial time. In particular, that property holds for deterministic and decomposable Boolean circuits. Finally, we introduce Opt-FOIL, an optimization-oriented fragment of ExplAIner for computing explanations that are minimal with respect to strict partial orders, and prove that its evaluation problem is in $\\mathrm{FP}^{\\mathrm{NP}}$ under the same tractability assumptions. These complexity results have a direct algorithmic consequence: a fixed ExplAIner query can be evaluated with a fixed number of calls to a SAT solver, while a notion of explanation specified in Opt-FOIL can be computed with a polynomial number of such calls. This is particularly relevant in formal XAI, where SAT solvers have been successfully used to compute explanations for several classes of ML models.",
+      "authors": [
+        "Marcelo Arenas",
+        "Pablo Barceló",
+        "Diego Bustamante",
+        "Jose Caraball",
+        "María Alejandra Schild",
+        "Bernardo Subercaseaux"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-07T15:36:51+00:00",
+      "link": "https://arxiv.org/pdf/2607.06407v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "declarative query language for explaining classification models in XAI",
+      "llm_evidence_cn": "用于解释可解释人工智能中分类模型的声明式查询语言",
+      "llm_evidence": "用于解释可解释人工智能中分类模型的声明式查询语言",
+      "canonical_evidence": "用于解释可解释人工智能中分类模型的声明式查询语言",
+      "llm_tldr_en": "ExplAIner is a query language designed to specify and analyze various explanation notions for ML models.",
+      "llm_tldr_cn": "ExplAIner是一种旨在规范和分析机器学习模型各种解释概念的查询语言。",
+      "llm_tldr": "ExplAIner是一种旨在规范和分析机器学习模型各种解释概念的查询语言。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.07380v1",
+      "source": "arxiv",
+      "title": "Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering",
+      "abstract": "Large language models (LLMs) achieve a strong performance in question answering (QA), but remain prone to hallucinations and suffer from limited transparency. Retrieval-augmented generation (RAG) can improve factuality, yet decisions about when and how to retrieve from external resources are typically based on opaque policies or computationally inefficient multi-step prompting procedures. We propose an uncertainty-aware framework for adaptive QA based on explicit signals derived from LLM internal representations. We distinguish between knowledge insufficiency and knowledge ambiguity or conflict, and efficiently estimate these from hidden states in a single forward pass. These signals guide system behaviour: RAG is triggered when knowledge is insufficient, while additional reasoning is applied when ambiguity or conflict is high. By grounding adaptive decisions in decomposed and efficiently estimable uncertainty signals, this approach provides a transparent and practical alternative to existing retrieval and reasoning strategies supporting the design of interpretable user-facing tools.",
+      "authors": [
+        "Ritajit Dey",
+        "Iadh Ounis",
+        "Graham McDonald"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-07-08T13:12:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.07380v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interpretable uncertainty signals from internal representations for transparent reasoning",
+      "llm_evidence_cn": "来自内部表示的可解释不确定性信号，用于透明推理",
+      "llm_evidence": "来自内部表示的可解释不确定性信号，用于透明推理",
+      "canonical_evidence": "来自内部表示的可解释不确定性信号，用于透明推理",
+      "llm_tldr_en": "Proposes an interpretable uncertainty framework for LLMs that could enhance transparency in risk prediction models.",
+      "llm_tldr_cn": "提出了一种大模型可解释不确定性框架，可增强风险预测模型的透明度。",
+      "llm_tldr": "提出了一种大模型可解释不确定性框架，可增强风险预测模型的透明度。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
