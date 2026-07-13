@@ -6,32 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-12
-- 运行时间：2026-07-12 20:26:57 UTC
+- 最新运行日期：2026-07-13
+- 运行时间：2026-07-13 21:08:00 UTC
 - 运行状态：成功
 - 本次总论文数：3
 - 精读区：0
 - 速读区：3
 
 ### 今日简报（AI）
-今日速读 3 篇论文，重点聚焦 AI 可解释性、问答系统不确定性评估，以及疫情对菲律宾社区的连锁影响。  
-最值得关注的是 ExplAIner 提出的分类模型解释查询语言，以及“可解释不确定性”在自适应检索与推理问答中的应用方向。  
-如果只跟进一个方向，建议优先关注“AI 如何解释自己的决策与不确定性”，这类能力正逐渐成为智能系统落地的关键。
-- 详情：[/202607/12/README](/202607/12/README)
+- 今日共生成 3 篇推荐（精读 0 篇，速读 3 篇）
+- 速读：《ExplAIner: A Declarative Query Language for Explaining Classification Models》（7.0/10）, 《Integrating knowledge graphs and multilingual scholarly corpora for domain-adaptive LLMs in SSH》（6.5/10）, 《Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering》（6.5/10）
+- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
+- 详情：[/202607/13/README](/202607/13/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [ExplAIner: A Declarative Query Language for Explaining Classification Models](/202607/12/2607.06407v1-explainer-a-declarative-query-language-for-explaining-classification-models)  
+1. [ExplAIner: A Declarative Query Language for Explaining Classification Models](/202607/13/2607.06407v1-explainer-a-declarative-query-language-for-explaining-classification-models)  
    标签：评分：7.0/10、query:q5
-   evidence：用于解释分类模型的可解释人工智能（XAI）声明式查询语言
-2. [Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering](/202607/12/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering)  
+   evidence：用于解释分类模型预测的声明式查询语言
+2. [Integrating knowledge graphs and multilingual scholarly corpora for domain-adaptive LLMs in SSH](/202607/13/2607.05956v1-integrating-knowledge-graphs-and-multilingual-scholarly-corpora-for-domain-adaptive-llms-in-ssh)  
+   标签：评分：6.5/10、query:profile-1
+   evidence：使大语言模型适应社会科学和人文科学（SSH）的研究实践和文献综合。
+3. [Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering](/202607/13/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering)  
    标签：评分：6.5/10、query:q5
-   evidence：用于推理和透明度的可解释不确定性信号
-3. [Cascading Effects of the COVID-19 Pandemic on Barangays in the Philippines](/202607/12/2607.07768v1-cascading-effects-of-the-covid-19-pandemic-on-barangays-in-the-philippines)  
-   标签：评分：6.0/10、query:q6
-   evidence：使用贝叶斯网络模型映射社会经济变量间的条件依赖关系
+   evidence：提出了一种用于AI模型自适应检索和推理的可解释不确定性框架。
 
 
 <div class="dpr-home-promo-card">

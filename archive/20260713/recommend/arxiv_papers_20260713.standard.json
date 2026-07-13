@@ -1,0 +1,136 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-13T21:07:08.004429+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.06407v1",
+      "source": "arxiv",
+      "title": "ExplAIner: A Declarative Query Language for Explaining Classification Models",
+      "abstract": "The XAI community has studied a wide range of queries and scores for explaining predictions of ML models. From a data management perspective, this proliferation of explanation notions calls for declarative query languages in which such notions can be specified, combined, and analyzed uniformly. In this paper, we develop such a framework for Boolean models. We first revisit FOIL, an interpretability query language for black-box models, and show that it has two fundamental limitations: it cannot express central optimality-based explanation queries, and its evaluation problem over decision trees is hard for every level of the polynomial hierarchy. We then introduce ExplAIner, a query language based on FOIL with an extended vocabulary and a layered structure. We show that ExplAIner can express a broad family of explanation notions, including abductive, contrastive, feature-based, and distance-based queries. We also prove that the evaluation problem for each query in ExplAIner belongs to the Boolean hierarchy over every class of Boolean models for which some basic predicates can be evaluated in polynomial time. In particular, that property holds for deterministic and decomposable Boolean circuits. Finally, we introduce Opt-FOIL, an optimization-oriented fragment of ExplAIner for computing explanations that are minimal with respect to strict partial orders, and prove that its evaluation problem is in $\\mathrm{FP}^{\\mathrm{NP}}$ under the same tractability assumptions. These complexity results have a direct algorithmic consequence: a fixed ExplAIner query can be evaluated with a fixed number of calls to a SAT solver, while a notion of explanation specified in Opt-FOIL can be computed with a polynomial number of such calls. This is particularly relevant in formal XAI, where SAT solvers have been successfully used to compute explanations for several classes of ML models.",
+      "authors": [
+        "Marcelo Arenas",
+        "Pablo Barceló",
+        "Diego Bustamante",
+        "Jose Caraball",
+        "María Alejandra Schild",
+        "Bernardo Subercaseaux"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-07T15:36:51+00:00",
+      "link": "https://arxiv.org/pdf/2607.06407v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Declarative query language for explaining classification model predictions",
+      "llm_evidence_cn": "用于解释分类模型预测的声明式查询语言",
+      "llm_evidence": "用于解释分类模型预测的声明式查询语言",
+      "canonical_evidence": "用于解释分类模型预测的声明式查询语言",
+      "llm_tldr_en": "ExplAIner is a query language designed to specify and analyze explanations for machine learning models.",
+      "llm_tldr_cn": "ExplAIner是一种旨在规范和分析机器学习模型解释的查询语言。",
+      "llm_tldr": "ExplAIner是一种旨在规范和分析机器学习模型解释的查询语言。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.05956v1",
+      "source": "arxiv",
+      "title": "Integrating knowledge graphs and multilingual scholarly corpora for domain-adaptive LLMs in SSH",
+      "abstract": "The integration of Large Language Models (LLMs) into scientific research workflows, particularly for bibliographic discovery and literature synthesis, raises significant methodological, epistemic and regulatory challenges for the Social Sciences and Humanities (SSH), especially with regard to disciplinary diversity, multilingual access to sources and the evaluation of results. This paper presents an on-going use case developed within the European project LLMs4EU and the ALT-EDIC infrastructure, aimed at adapting foundation models to SSH research practices and supporting tasks such as question answering, comparative document analysis and literature review. The evaluation framework follows the LLMs4EU protocol and encompasses both independent quantitative benchmarking (retrieval, summarisation, traceability and hallucination detection) and a qualitative assessment involving a panel of Digital Humanities experts. By embedding model adaptation within research infrastructures and a structured legal and ethical compliance framework, the use case explores how domain-sensitive and regulation-aware generative AI can support SSH scholarship while preserving reliability and epistemic responsibility.",
+      "authors": [
+        "Adam Faci",
+        "Alessio Miaschi",
+        "Anne Combe",
+        "Pascal Cuxac",
+        "Francesca Frontini",
+        "Nicolas Larrousse",
+        "Stéphane Pouyllau"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-07T07:56:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.05956v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Adapting LLMs for Social Sciences and Humanities (SSH) research practices and literature synthesis.",
+      "llm_evidence_cn": "使大语言模型适应社会科学和人文科学（SSH）的研究实践和文献综合。",
+      "llm_evidence": "使大语言模型适应社会科学和人文科学（SSH）的研究实践和文献综合。",
+      "canonical_evidence": "使大语言模型适应社会科学和人文科学（SSH）的研究实践和文献综合。",
+      "llm_tldr_en": "Integrates knowledge graphs and corpora to adapt LLMs for social science research and literature review.",
+      "llm_tldr_cn": "整合知识图谱和语料库，使大语言模型适应社会科学研究和文献综述。",
+      "llm_tldr": "整合知识图谱和语料库，使大语言模型适应社会科学研究和文献综述。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.07380v1",
+      "source": "arxiv",
+      "title": "Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering",
+      "abstract": "Large language models (LLMs) achieve a strong performance in question answering (QA), but remain prone to hallucinations and suffer from limited transparency. Retrieval-augmented generation (RAG) can improve factuality, yet decisions about when and how to retrieve from external resources are typically based on opaque policies or computationally inefficient multi-step prompting procedures. We propose an uncertainty-aware framework for adaptive QA based on explicit signals derived from LLM internal representations. We distinguish between knowledge insufficiency and knowledge ambiguity or conflict, and efficiently estimate these from hidden states in a single forward pass. These signals guide system behaviour: RAG is triggered when knowledge is insufficient, while additional reasoning is applied when ambiguity or conflict is high. By grounding adaptive decisions in decomposed and efficiently estimable uncertainty signals, this approach provides a transparent and practical alternative to existing retrieval and reasoning strategies supporting the design of interpretable user-facing tools.",
+      "authors": [
+        "Ritajit Dey",
+        "Iadh Ounis",
+        "Graham McDonald"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-07-08T13:12:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.07380v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Proposes an interpretable uncertainty framework for adaptive retrieval and reasoning in AI models.",
+      "llm_evidence_cn": "提出了一种用于AI模型自适应检索和推理的可解释不确定性框架。",
+      "llm_evidence": "提出了一种用于AI模型自适应检索和推理的可解释不确定性框架。",
+      "canonical_evidence": "提出了一种用于AI模型自适应检索和推理的可解释不确定性框架。",
+      "llm_tldr_en": "Introduces an uncertainty-aware framework to improve transparency and factuality in LLM-based reasoning.",
+      "llm_tldr_cn": "引入不确定性感知框架，提高大语言模型推理的透明度和真实性。",
+      "llm_tldr": "引入不确定性感知框架，提高大语言模型推理的透明度和真实性。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
