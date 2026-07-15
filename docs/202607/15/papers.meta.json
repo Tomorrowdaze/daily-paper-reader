@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-15",
+  "date": "2026-07-15",
+  "generated_at": "2026-07-15T21:18:33",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/15/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering",
+      "section": "quick",
+      "title_en": "Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering",
+      "authors": "Ritajit Dey, Iadh Ounis, Graham McDonald",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.07380v1",
+      "score": "6.5",
+      "evidence": "来自内部表示的可解释不确定性信号用于推理",
+      "tldr": "提出一种利用内部信号提高AI推理透明度的不确定性感知框架。",
+      "tags": "query:q5",
+      "abstract_en": "Large language models (LLMs) achieve a strong performance in question answering (QA), but remain prone to hallucinations and suffer from limited transparency. Retrieval-augmented generation (RAG) can improve factuality, yet decisions about when and how to retrieve from external resources are typically based on opaque policies or computationally inefficient multi-step prompting procedures. We propose an uncertainty-aware framework for adaptive QA based on explicit signals derived from LLM internal representations. We distinguish between knowledge insufficiency and knowledge ambiguity or conflict, and efficiently estimate these from hidden states in a single forward pass. These signals guide system behaviour: RAG is triggered when knowledge is insufficient, while additional reasoning is applied when ambiguity or conflict is high. By grounding adaptive decisions in decomposed and efficiently estimable uncertainty signals, this approach provides a transparent and practical alternative to existing retrieval and reasoning strategies supporting the design of interpretable user-facing tools.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/15/biorxiv-10-64898-2026-07-08-737358-v1-ecoxai-autonomous-agentic-ecosystem-for-explainable-artificial-intelligence-and-biomedical-discovery",
+      "section": "quick",
+      "title_en": "EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery",
+      "authors": "Matsumoto, N., Choi, H., Freda, P. J., Hernandez, M. E., Wang, Z. P., Moore, J. H.",
+      "date": "2026-07-13",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.07.08.737358v1.full.pdf",
+      "score": "6.0",
+      "evidence": "可解释人工智能的智能体生态系统",
+      "tldr": "引入一个用于可解释人工智能的多智能体系统，从复杂数据中提取见解。",
+      "tags": "query:q5",
+      "abstract_en": "MotivationAs biomedical datasets and knowledge graphs continue to grow in size, complexity, and heterogeneity, navigating and extracting actionable insights from them presents a major bottleneck for researchers. There is a clear need for autonomous analytical solutions that can utilize recent advancements in agentic AI such as agent harnessing and loop engineering without introducing hallucination or workflow fragmentation. Researchers, regardless of technical expertise, need tools that streamline complex data analysis and deliver meaningful, actionable insights grounded in both data and established biomedical knowledge. EcoXAI addresses this by introducing a modular, customizable, containerized multi-agent system that structures analysis into explicit pipeline execution stages, lowering the computational barrier for clinical and translational researchers.\n\nResultEcoXAI replaces monolithic AI text interfaces with an autonomous execution-driven framework with specialized bioinformatics agents for delivering proactive, data-driven insights grounded in established biological knowledge. Unlike purely LLM-driven or less integrated AI solutions prone to hallucinations or biologically implausible outcomes, EcoXAIs multi-agent framework, which leverages modern agentic management and explicit knowledge graph integration, provides greater transparency and verifiability in its reasoning. In our use case in drug repurposing for Alzheimers Disease, EcoXAI evaluated 103 drug candidates and identified 79 novel candidates whose predictive models exceeded a randomized baseline, including the CCR5 antagonist Maraviroc, whose generated hypothesis was subsequently supported by the literature. These results demonstrate the potential of knowledge graph-grounded AI agents to accelerate hypothesis-driven biomedical research.\n\nAvailability and implementationEcoXAI is available on GitHub at: https://github.com/EpistasisLab/EcoXAI.\n\nContactjason.moore@csmc.edu",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

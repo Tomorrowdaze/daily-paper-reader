@@ -6,8 +6,8 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-14
-- 运行时间：2026-07-14 21:24:00 UTC
+- 最新运行日期：2026-07-15
+- 运行时间：2026-07-15 21:16:51 UTC
 - 运行状态：成功
 - 本次总论文数：2
 - 精读区：0
@@ -15,20 +15,20 @@
 
 ### 今日简报（AI）
 - 今日共生成 2 篇推荐（精读 0 篇，速读 2 篇）
-- 速读：《EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery》（6.5/10）, 《MC-RAG System: A Structure-Driven RAG System for Multi-Constraint Queries》（6.0/10）
+- 速读：《Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering》（6.5/10）, 《EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery》（6.0/10）
 - 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202607/14/README](/202607/14/README)
+- 详情：[/202607/15/README](/202607/15/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery](/202607/14/biorxiv-10-64898-2026-07-08-737358-v1-ecoxai-autonomous-agentic-ecosystem-for-explainable-artificial-intelligence-and-biomedical-discovery)  
+1. [Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering](/202607/15/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering)  
    标签：评分：6.5/10、query:q5
-   evidence：用于可解释人工智能（XAI）的自主代理生态系统
-2. [MC-RAG System: A Structure-Driven RAG System for Multi-Constraint Queries](/202607/14/2607.10151v1-mc-rag-system-a-structure-driven-rag-system-for-multi-constraint-queries)  
+   evidence：来自内部表示的可解释不确定性信号用于推理
+2. [EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery](/202607/15/biorxiv-10-64898-2026-07-08-737358-v1-ecoxai-autonomous-agentic-ecosystem-for-explainable-artificial-intelligence-and-biomedical-discovery)  
    标签：评分：6.0/10、query:q5
-   evidence：可解释、结构感知且约束一致的检索与生成
+   evidence：可解释人工智能的智能体生态系统
 
 
 <div class="dpr-home-promo-card">
