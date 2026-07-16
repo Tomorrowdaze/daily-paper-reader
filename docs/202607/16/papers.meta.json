@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-16",
+  "date": "2026-07-16",
+  "generated_at": "2026-07-16T21:14:30",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/16/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering",
+      "section": "quick",
+      "title_en": "Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering",
+      "authors": "Ritajit Dey, Iadh Ounis, Graham McDonald",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.07380v1",
+      "score": "6.5",
+      "evidence": "用于透明推理的可解释不确定性信号",
+      "tldr": "提出一种利用LLM内部状态的不确定性感知框架，以提高推理任务的透明度。",
+      "tags": "query:q5",
+      "abstract_en": "Large language models (LLMs) achieve a strong performance in question answering (QA), but remain prone to hallucinations and suffer from limited transparency. Retrieval-augmented generation (RAG) can improve factuality, yet decisions about when and how to retrieve from external resources are typically based on opaque policies or computationally inefficient multi-step prompting procedures. We propose an uncertainty-aware framework for adaptive QA based on explicit signals derived from LLM internal representations. We distinguish between knowledge insufficiency and knowledge ambiguity or conflict, and efficiently estimate these from hidden states in a single forward pass. These signals guide system behaviour: RAG is triggered when knowledge is insufficient, while additional reasoning is applied when ambiguity or conflict is high. By grounding adaptive decisions in decomposed and efficiently estimable uncertainty signals, this approach provides a transparent and practical alternative to existing retrieval and reasoning strategies supporting the design of interpretable user-facing tools.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

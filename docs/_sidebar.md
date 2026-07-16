@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-16 <!--dpr-date:20260716-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/16/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering" data-sidebar-item="{&quot;title&quot;: &quot;Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;用于透明推理的可解释不确定性信号&quot;}">Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering</a>
   * 2026-07-15 <!--dpr-date:20260715-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/15/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering" data-sidebar-item="{&quot;title&quot;: &quot;Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.07380v1-interpretable-uncertainty-for-adaptive-retrieval-and-reasoning-in-question-answering&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;来自内部表示的可解释不确定性信号用于推理&quot;}">Interpretable Uncertainty for Adaptive Retrieval and Reasoning in Question Answering</a>
