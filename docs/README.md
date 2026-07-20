@@ -6,26 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-19
-- 运行时间：2026-07-19 21:02:56 UTC
+- 最新运行日期：2026-07-20
+- 运行时间：2026-07-20 21:35:19 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：2
 - 精读区：0
-- 速读区：1
+- 速读区：2
 
 ### 今日简报（AI）
-- 今日共生成 1 篇推荐（精读 0 篇，速读 1 篇）
-- 速读：《EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery》（6.0/10）
+- 今日共生成 2 篇推荐（精读 0 篇，速读 2 篇）
+- 速读：《EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery》（6.0/10）, 《FloREN: Decoding Immune Regulatory Networks through Interpretable Graph Transformer Patient Representations.》（6.0/10）
 - 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202607/19/README](/202607/19/README)
+- 详情：[/202607/20/README](/202607/20/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery](/202607/19/biorxiv-10-64898-2026-07-08-737358-v1-ecoxai-autonomous-agentic-ecosystem-for-explainable-artificial-intelligence-and-biomedical-discovery)  
+1. [EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery](/202607/20/biorxiv-10-64898-2026-07-08-737358-v1-ecoxai-autonomous-agentic-ecosystem-for-explainable-artificial-intelligence-and-biomedical-discovery)  
    标签：评分：6.0/10、query:q5
-   evidence：该论文介绍了EcoXAI，一个用于可解释人工智能（XAI）和发现的多智能体系统。
+   evidence：用于可解释人工智能和科学发现的自主智能体生态系统
+2. [FloREN: Decoding Immune Regulatory Networks through Interpretable Graph Transformer Patient Representations.](/202607/20/biorxiv-10-64898-2026-07-12-738088-v1-floren-decoding-immune-regulatory-networks-through-interpretable-graph-transformer-patient-representations)  
+   标签：评分：6.0/10、query:q6
+   evidence：用于解码调控网络的监督式和可解释样本表示
 
 
 <div class="dpr-home-promo-card">
