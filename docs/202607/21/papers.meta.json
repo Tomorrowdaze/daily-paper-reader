@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-21",
+  "date": "2026-07-21",
+  "generated_at": "2026-07-21T21:29:06",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/21/biorxiv-10-64898-2026-07-08-737358-v1-ecoxai-autonomous-agentic-ecosystem-for-explainable-artificial-intelligence-and-biomedical-discovery",
+      "section": "quick",
+      "title_en": "EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery",
+      "authors": "Matsumoto, N., Choi, H., Freda, P. J., Hernandez, M. E., Wang, Z. P., Moore, J. H.",
+      "date": "2026-07-13",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.07.08.737358v1.full.pdf",
+      "score": "6.0",
+      "evidence": "用于可解释人工智能的自主代理生态系统",
+      "tldr": "EcoXAI提供了一个用于复杂领域可解释AI和数据分析的多代理系统。",
+      "tags": "query:q5",
+      "abstract_en": "MotivationAs biomedical datasets and knowledge graphs continue to grow in size, complexity, and heterogeneity, navigating and extracting actionable insights from them presents a major bottleneck for researchers. There is a clear need for autonomous analytical solutions that can utilize recent advancements in agentic AI such as agent harnessing and loop engineering without introducing hallucination or workflow fragmentation. Researchers, regardless of technical expertise, need tools that streamline complex data analysis and deliver meaningful, actionable insights grounded in both data and established biomedical knowledge. EcoXAI addresses this by introducing a modular, customizable, containerized multi-agent system that structures analysis into explicit pipeline execution stages, lowering the computational barrier for clinical and translational researchers.\n\nResultEcoXAI replaces monolithic AI text interfaces with an autonomous execution-driven framework with specialized bioinformatics agents for delivering proactive, data-driven insights grounded in established biological knowledge. Unlike purely LLM-driven or less integrated AI solutions prone to hallucinations or biologically implausible outcomes, EcoXAIs multi-agent framework, which leverages modern agentic management and explicit knowledge graph integration, provides greater transparency and verifiability in its reasoning. In our use case in drug repurposing for Alzheimers Disease, EcoXAI evaluated 103 drug candidates and identified 79 novel candidates whose predictive models exceeded a randomized baseline, including the CCR5 antagonist Maraviroc, whose generated hypothesis was subsequently supported by the literature. These results demonstrate the potential of knowledge graph-grounded AI agents to accelerate hypothesis-driven biomedical research.\n\nAvailability and implementationEcoXAI is available on GitHub at: https://github.com/EpistasisLab/EcoXAI.\n\nContactjason.moore@csmc.edu",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/21/biorxiv-10-64898-2026-07-12-738088-v1-floren-decoding-immune-regulatory-networks-through-interpretable-graph-transformer-patient-representations",
+      "section": "quick",
+      "title_en": "FloREN: Decoding Immune Regulatory Networks through Interpretable Graph Transformer Patient Representations.",
+      "authors": "Clemente-Larramendi, I., Hillion, S., Cornec, D., Jamin, C., Foulquier, N.",
+      "date": "2026-07-20",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.07.12.738088v1.full.pdf",
+      "score": "6.0",
+      "evidence": "可解释的样本表示和监督学习框架",
+      "tldr": "FloREN使用可解释的图变换器进行监督学习和生物变异分析。",
+      "tags": "query:q6",
+      "abstract_en": "Single-cell RNA sequencing (scRNA-seq) enables detailed characterization of cellular heterogeneity, yet understanding the full cellular and regulatory environment of complex tissues remains challenging. In the era of large single-cell atlases, this technology has become increasingly accessible, and datasets have grown in scale and statistical power. As a result, sample representation methods have emerged as a promising strategy to summarize patient-level biological variation. However, most existing approaches rely on unsupervised learning frameworks with ambiguous biological interpretability. Here we present a Framework for Learning Over REgulatory-Embedding Networks (FloREN), a supervised and interpretable sample representation method. FloREN models single-cell data as a heterogeneous network integrating cells and genes together with gene regulatory and cell-cell communication relationships. Through condition-aware embeddings and interpretable attention networks, FloREN enables improved sample stratification and biomarker discovery. In addition, the framework supports downstream analyses that found specific immune network mechanisms in immune-mediated inflammatory diseases (IMIDs).",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

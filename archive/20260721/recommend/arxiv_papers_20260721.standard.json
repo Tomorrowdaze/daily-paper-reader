@@ -1,0 +1,96 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-21T21:28:23.197355+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "biorxiv-10-64898-2026-07-08-737358-v1",
+      "source": "biorxiv",
+      "title": "EcoXAI: Autonomous Agentic Ecosystem for Explainable Artificial Intelligence and Biomedical Discovery",
+      "abstract": "MotivationAs biomedical datasets and knowledge graphs continue to grow in size, complexity, and heterogeneity, navigating and extracting actionable insights from them presents a major bottleneck for researchers. There is a clear need for autonomous analytical solutions that can utilize recent advancements in agentic AI such as agent harnessing and loop engineering without introducing hallucination or workflow fragmentation. Researchers, regardless of technical expertise, need tools that streamline complex data analysis and deliver meaningful, actionable insights grounded in both data and established biomedical knowledge. EcoXAI addresses this by introducing a modular, customizable, containerized multi-agent system that structures analysis into explicit pipeline execution stages, lowering the computational barrier for clinical and translational researchers.\n\nResultEcoXAI replaces monolithic AI text interfaces with an autonomous execution-driven framework with specialized bioinformatics agents for delivering proactive, data-driven insights grounded in established biological knowledge. Unlike purely LLM-driven or less integrated AI solutions prone to hallucinations or biologically implausible outcomes, EcoXAIs multi-agent framework, which leverages modern agentic management and explicit knowledge graph integration, provides greater transparency and verifiability in its reasoning. In our use case in drug repurposing for Alzheimers Disease, EcoXAI evaluated 103 drug candidates and identified 79 novel candidates whose predictive models exceeded a randomized baseline, including the CCR5 antagonist Maraviroc, whose generated hypothesis was subsequently supported by the literature. These results demonstrate the potential of knowledge graph-grounded AI agents to accelerate hypothesis-driven biomedical research.\n\nAvailability and implementationEcoXAI is available on GitHub at: https://github.com/EpistasisLab/EcoXAI.\n\nContactjason.moore@csmc.edu",
+      "authors": [
+        "Matsumoto, N.",
+        "Choi, H.",
+        "Freda, P. J.",
+        "Hernandez, M. E.",
+        "Wang, Z. P.",
+        "Moore, J. H."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-07-13T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.07.08.737358v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "autonomous agentic ecosystem for explainable artificial intelligence",
+      "llm_evidence_cn": "用于可解释人工智能的自主代理生态系统",
+      "llm_evidence": "用于可解释人工智能的自主代理生态系统",
+      "canonical_evidence": "用于可解释人工智能的自主代理生态系统",
+      "llm_tldr_en": "EcoXAI provides a multi-agent system for explainable AI and data analysis in complex domains.",
+      "llm_tldr_cn": "EcoXAI提供了一个用于复杂领域可解释AI和数据分析的多代理系统。",
+      "llm_tldr": "EcoXAI提供了一个用于复杂领域可解释AI和数据分析的多代理系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-07-12-738088-v1",
+      "source": "biorxiv",
+      "title": "FloREN: Decoding Immune Regulatory Networks through Interpretable Graph Transformer Patient Representations.",
+      "abstract": "Single-cell RNA sequencing (scRNA-seq) enables detailed characterization of cellular heterogeneity, yet understanding the full cellular and regulatory environment of complex tissues remains challenging. In the era of large single-cell atlases, this technology has become increasingly accessible, and datasets have grown in scale and statistical power. As a result, sample representation methods have emerged as a promising strategy to summarize patient-level biological variation. However, most existing approaches rely on unsupervised learning frameworks with ambiguous biological interpretability. Here we present a Framework for Learning Over REgulatory-Embedding Networks (FloREN), a supervised and interpretable sample representation method. FloREN models single-cell data as a heterogeneous network integrating cells and genes together with gene regulatory and cell-cell communication relationships. Through condition-aware embeddings and interpretable attention networks, FloREN enables improved sample stratification and biomarker discovery. In addition, the framework supports downstream analyses that found specific immune network mechanisms in immune-mediated inflammatory diseases (IMIDs).",
+      "authors": [
+        "Clemente-Larramendi, I.",
+        "Hillion, S.",
+        "Cornec, D.",
+        "Jamin, C.",
+        "Foulquier, N."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-07-20T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.07.12.738088v1.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable sample representation and supervised learning framework",
+      "llm_evidence_cn": "可解释的样本表示和监督学习框架",
+      "llm_evidence": "可解释的样本表示和监督学习框架",
+      "canonical_evidence": "可解释的样本表示和监督学习框架",
+      "llm_tldr_en": "FloREN uses interpretable graph transformers for supervised learning and biological variation analysis.",
+      "llm_tldr_cn": "FloREN使用可解释的图变换器进行监督学习和生物变异分析。",
+      "llm_tldr": "FloREN使用可解释的图变换器进行监督学习和生物变异分析。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
