@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-23",
+  "date": "2026-07-23",
+  "generated_at": "2026-07-23T20:41:27",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/23/2607.16443v1-causality-and-minimal-supports-in-recursive-datalog",
+      "section": "quick",
+      "title_en": "Causality and Minimal Supports in Recursive Datalog",
+      "authors": "Ratan Bahadur Thapa, Steffen Staab",
+      "date": "2026-07-17",
+      "pdf": "https://arxiv.org/pdf/2607.16443v1",
+      "score": "6.5",
+      "evidence": "递归逻辑中的基于删除的解释与因果关系",
+      "tldr": "研究了Datalog中递归规则评估解释的因果关系和最小支持集。",
+      "tags": "query:q6",
+      "abstract_en": "Recursive rule evaluation can make explanation harder than in nonrecursive query answering. For fixed unions of conjunctive queries, each explanation is bounded by the query body. For recursive rules, the same answer may depend on large supports, and the number of minimal supports may be exponential in the input. We study this gap through deletion-based explanation, using inclusion-minimal endogenous input facts that entail the atom together with fixed background facts. We organize these supports as a hypergraph and prove that it determines actual causes, counterfactual causes, responsibility, and deletion robustness. The resulting view separates nonrecursive queries from recursive Datalog at the level of minimal input explanations. For positive-length reachability, minimal supports are exactly simple directed paths, and deletion robustness is the minimum directed edge cut. We also prove invariance under fixed-goal equivalent positive Datalog programs and an NP-hardness calibration for the robustness threshold problem.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/23/2607.18864v1-evaluating-a-visual-query-tracer-and-builder-for-learning-declarative-logic-programming",
+      "section": "quick",
+      "title_en": "Evaluating a Visual Query Tracer and Builder for Learning Declarative Logic Programming",
+      "authors": "Julián Méndez, Lukas Gerlach, Tobias Wieland, Alex Ivliev, Markus Krötzsch, Raimund Dachselt",
+      "date": "2026-07-21",
+      "pdf": "https://arxiv.org/pdf/2607.18864v1",
+      "score": "6.0",
+      "evidence": "用于解释逻辑编程的可视化查询追踪器",
+      "tldr": "评估了一种用于解释Datalog查询的可视化工具，支持逻辑系统的可解释性。",
+      "tags": "query:q6",
+      "abstract_en": "Nemo Explain Visualizer (nev) is an interactive visual query tracer and builder for Nemo, a powerful Datalog reasoner with extended features. Our tools were developed with and for expert users. However, considering the lack of resources to learn Datalog and similar declarative logic programming languages, we conducted a qualitative user study to assess how our tools might help students. The study, interviewing 14 participants with varying levels of involvement with the content of a university course on knowledge graphs, revealed a very positive assessment of our tools, which strengthens the value of visual explanation tools beyond their intended use.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

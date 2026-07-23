@@ -1,0 +1,916 @@
+Title: Causality and Minimal Supports in Recursive Datalog
+
+URL Source: https://arxiv.org/pdf/2607.16443v1
+
+Published Time: Tue, 21 Jul 2026 00:10:15 GMT
+
+Number of Pages: 27
+
+Markdown Content:
+# Causality and Minimal Supports in Recursive Datalog 
+
+Ratan Bahadur Thapa 1⋆ and Steffen Staab 1,2 
+
+> 1
+
+Institute for Artificial Intelligence, University of Stuttgart, Germany  
+
+> 2
+
+University of Southampton, United Kingdom 
+
+Abstract. Recursive rule evaluation can make explanation harder than in nonrecursive query answering. For fixed unions of conjunctive queries, each explanation is bounded by the query body. For recursive rules, the same answer may depend on large supports, and the number of minimal supports may be exponential in the input. We study this gap through deletion-based explanation, using inclusion-minimal endogenous input facts that entail the atom together with fixed background facts. We organize these supports as a hypergraph and prove that it determines actual causes, counterfactual causes, responsibility, and deletion robust-ness. The resulting view separates nonrecursive queries from recursive Datalog at the level of minimal input explanations. For positive-length reachability, minimal supports are exactly simple directed paths, and deletion robustness is the minimum directed edge cut. We also prove in-variance under fixed-goal equivalent positive Datalog programs and an NP-hardness calibration for the robustness threshold problem. 
+
+# 1 Introduction 
+
+When a database query returns a surprising answer, the natural explanatory question is not only how the answer was derived, but also which input facts keep the answer true and which deletions would make it disappear. Lineage and prove-nance address the first part by describing how an answer can be derived [7,13]. Query-answer causality addresses the deletion part of the explanation [16,17]. It distinguishes between exogenous facts, which form the fixed background context, and endogenous facts, which are allowed to be deleted. An endogenous fact is an actual cause if deleting it, possibly after deleting other endogenous facts while preserving the answer, makes the answer false. We study the same deletion-based questions for positive Datalog entailments, where answers are derived by a least-fixpoint computation rather than by a single nonrecursive query [1]. The question is important because recursive rule languages are central in deductive databases, rule-based knowledge representation, and ontology-style reasoning, and answers derived using them often need to be explained in terms of the input facts on which they depend. Consider a directed graph encoded by  
+
+> ⋆
+
+Corresponding author arXiv:2607.16443v1 [cs.DB] 17 Jul 2026 2 R. B. Thapa and S. Staab 
+
+facts Edge (a, b ). Throughout the paper, let Πtc be the positive-length transitive-closure program with rules 
+
+Path (x, y ) ← Edge (x, y ), Path (x, y ) ← Edge (x, z ), Path (z, y )
+
+deriving Path (x, y ) from Edge (x, y ), and deriving Path (x, y ) from Edge (x, z ) and 
+
+Path (z, y ). If several independent chains of rule application support the entail-ment of Path (s, t ), then the answer survives exactly when at least one chain remains after deletion. Thus, the relevant explanation is not one derivation tree, but the family of minimal endogenous edge sets that still entail Path (s, t ), in the sense of database witnesses, why-provenance, and lineage [7,13]. We organize this family as a hypergraph whose vertices are deletable facts and whose hyperedges are minimal sufficient sets; we call it the support hypergraph. We follow database-causality terminology [16,17]: a counterfactual cause is a fact whose deletion alone falsifies the answer; the counterfactual refers to the deletion test, not to the fact itself. An endogenous support is a set of endoge-nous facts that entails the answer together with the fixed background facts; it is inclusion-minimal, or simply minimal, if no proper subset has the same property. A fact is an actual cause if it belongs to some such support, and it is counterfac-tual cause if it belongs to every support. The robustness radius is the minimum number of deletions needed to intersect all supports; responsibility is measured by the size of a smallest contingency deletion that makes a fact counterfactual cause. 
+
+Example 1. Consider a graph database in which all edge facts are endogenous, i.e., all of them may be deleted: 
+
+e1 = Edge (s, a ), e 2 = Edge (a, t ), e 3 = Edge (s, b ), e 4 = Edge (b, t ), e 5 = Edge (a, b ).
+
+For Πtc and the answer Path (s, t ), the minimal endogenous supports are 
+
+S1 = {e1, e 2}, S2 = {e3, e 4} and S3 = {e1, e 5, e 4}.
+
+Thus, the support hypergraph has vertices e1, . . . , e 5 and hyperedges S1, S 2, S 3.Every edge fact is an actual cause, because each occurs in some support. No edge fact is a counterfactual cause, because no edge occurs in all three supports. The deletion robustness radius is 2: one deletion cannot hit all three supports, while {e1, e 4} hits S1, S 2, S 3 and destroys all s-t paths, i.e., Path (s, t ). The same hypergraph also determines responsibility: under the standard causality conven-tion, a fact with smallest contingency size k has responsibility 1/(k + 1) . For instance, e1 has a one-fact contingency, such as {e3}, so its responsibility is 1/2.By contrast, e5 occurs only in S3; preserving S3 while hitting the supports avoid-ing e5 requires deleting both e2 and e3, so its responsibility is 1/3. The example shows why we analyze minimal input supports rather than derivation multiplic-ity: deletion behavior depends on which fact sets still entail the answer, not on how many proof trees derive it. The main difficulty is that recursion breaks the bounded-witness behavior familiar from conjunctive queries (CQs). For a fixed CQ, each valuation uses Causality and Supports in Datalog 3
+
+only the atoms in the query body; therefore, every minimal endogenous support has bounded cardinality. A fixed union of CQs (UCQs) consequently has only polynomially many minimal supports in the database size. Recursive Datalog behaves differently. Already for the fixed program Πtc , a minimal support for 
+
+Path (s, t ) can be a simple path whose length grows with the database, and a linear-size graph can contain exponentially many simple s-t paths. Enumerating proof trees is not an adequate substitute: recursive programs may generate many derivations, including cyclic proof-tree unfoldings, whereas deletion robustness depends only on which endogenous facts intersect all minimal supports. Prior work provides the causal and provenance foundations but does not iso-late this support-level phenomenon for recursive Datalog. Query-answer causal-ity defines actual causes, counterfactual causes, contingencies, and responsibility for database answers [16,17], building on structural-model causality and respon-sibility [14,9]. Provenance and lineage describe witnesses, annotations, circuits, and derivations [7,13,10]. Resilience, deletion propagation, and how-to queries study related tuple-deletion or update problems, particularly for CQs and related nonrecursive classes [20,21,4,12]. Our focus is different: for positive Datalog en-tailment, we study its inclusion-minimal deletable input supports. The resulting support hypergraph captures causality, responsibility, and deletion robustness, separates fixed UCQs from recursive Datalog by support structure, and distin-guishes input supports from derivation multiplicity. Our main contribution is the isolation of the minimal-support structure un-derlying deletion-based explanation for positive Datalog entailments. We: (i) for-malize the support hypergraph of a derived atom over a database whose facts are divided into fixed background facts and deletable facts; (ii) prove that this sup-port hypergraph determines actual causes, counterfactual causes, responsibility, and deletion robustness; (iii) then show that recursion fundamentally changes the support structure: fixed UCQs have bounded support cardinality and poly-nomially many minimal supports, while positive-length transitive closure can generate unbounded-size and exponentially many minimal supports; and (iv) fi-nally show that support hypergraphs depend on the goal semantics, not on the chosen positive Datalog formulation: fixed-goal equivalent programs induce the same minimal supports. For all-endogenous reachability with distinct endpoints, deletion robustness becomes exactly the minimum directed s-t edge cut. 
+
+# 2 Positive Datalog 
+
+A finite relational signature Σ is partitioned into extensional predicates ΣE and intensional predicates ΣI , each with fixed arity. We allow nullary intensional predicates for Boolean Datalog queries. Constants are drawn from a countably infinite set, and terms are variables or constants. A database instance D is a finite set of ground atoms over ΣE . A positive Datalog rule is an expression 
+
+H(¯ t) ← B1(¯ t1), . . . , B m(¯ tm),4 R. B. Thapa and S. Staab 
+
+where m ≥ 0, H is an intensional predicate symbol of arity k, each Bi is a predicate symbol of arity ki over ΣE ∪ ΣI , ¯t is a k-tuple of terms, each ¯ti is a 
+
+ki-tuple of terms, and every variable occurring in the rule occurs in the body. A positive Datalog program Π is a finite set of such function-free rules. We use active-domain grounding. Let adom (Π, D) be the set of constants occurring in Π or D. The intensional Herbrand base BΣI 
+
+> Π, D
+
+is the finite set of all ground atoms P (¯ a) such that P ∈ ΣI and every constant in ¯a belongs to adom (Π, D),i.e., 
+
+BΣI 
+
+> Π, D
+
+= { P (c1, . . . , c k) | P ∈ ΣI , arity( P ) = k, c 1, . . . , c k ∈ adom (Π, D) }.
+
+The immediate-consequence operator TΠ, D maps a set I ⊆ BΣI 
+
+> Π, D
+
+of derived intensional atoms to the intensional atoms obtained by one rule application over D ∪ I. Since Π is positive, TΠ, D is monotone. Starting with I0 = ∅, the Kleene sequence Ii+1 = Ii ∪ TΠ, D (Ii) is increasing and reaches a least fixpoint after finitely many steps, because BΣI 
+
+> Π, D
+
+is finite. We write Π ∪ D | = A if A
+
+is an extensional fact in D or an intensional fact in that least fixpoint [1]. Entailment is always evaluated over the active domain of the program and the retained extensional instance; atoms using constants outside that domain are not entailed. 
+
+2.1 Endogenous Tuples 
+
+Database causality partitions input tuples into endogenous tuples, which may be candidate causes, and exogenous tuples, which form the background context [16,17]. 
+
+Definition 1. Let Π be a positive Datalog program over ΣE ∪ ΣI . A partitioned instance for Π is a triple (Dx, Dn, A ), where Dx and Dn are disjoint finite sets of ground atoms over ΣE , and A is a ground atom over ΣE ∪ ΣI whose constants belong to adom (Π, Dx ∪ D n). We call Dx the exogenous database, Dn the endoge-nous database, and D = Dx ∪ D n the input database. Deletions range only over 
+
+Dn.
+
+For ∆ ⊆ D n, we write D \ ∆ as shorthand for Dx ∪ (Dn \ ∆). Thus, a deletion removes only endogenous facts and leaves the exogenous database unchanged. 
+
+2.2 Endogenous Supports 
+
+We now isolate the inclusion-minimal endogenous fact sets sufficient for entail-ment. The resulting support hypergraph is the abstraction used for causality and robustness. 
+
+Definition 2. Let Π be a positive Datalog program, let (Dx, Dn, A ) be a parti-tioned instance for Π, let D = Dx ∪ D n, and assume Π ∪ D | = A. A set S ⊆ D n
+
+is an endogenous support for A if 
+
+Π ∪ D x ∪ S |= A. Causality and Supports in Datalog 5
+
+It is a minimal endogenous support if no proper subset S′ ⊊ S satisfies Π ∪ D x ∪
+
+S′ |= A. When the partition D = Dx ∪ D n is clear from the partitioned instance, the family of all minimal endogenous supports is 
+
+SΠ, D,A = { S ⊆ D n | Π ∪ D x ∪ S |= A and ∀S′ ⊊ S, Π ∪ D x ∪ S′̸ |= A }.
+
+The hypergraph of minimal supports for A is the finite hypergraph 
+
+HΠ, D,A = ( Dn, SΠ, D,A ),
+
+where vertices are the endogenous facts Dn and hyperedges are the minimal en-dogenous supports for A.
+
+If Π ∪ D x |= A, then ∅ is an endogenous support and the unique minimal endogenous support, i.e., SΠ, D,A = {∅} . In this exogenous-entailment case, no deletion of endogenous facts can destroy A, no endogenous fact is an actual or counterfactual cause, and the deletion robustness radius is ∞.
+
+Proposition 1. Let Π be a positive Datalog program, let (Dx, Dn, A ) be a par-titioned instance for Π, let D = Dx ∪ D n, and assume Π ∪ D | = A. Then, SΠ, D,A 
+
+is a finite antichain under set inclusion, and for every E ⊆ D n,
+
+Π ∪ D x ∪ E |= A ⇐⇒ ∃S ∈ SΠ, D,A such that S ⊆ E. 
+
+Proof. The family SΠ, D,A is a subset of 2Dn
+
+. Since Dn is finite, SΠ, D,A is finite. If 
+
+S1, S 2 ∈ SΠ, D,A and S1 ⊊ S2, then S2 is not inclusion-minimal among supports, because S1 is a proper supporting subset. Thus, SΠ, D,A is an antichain. Let E ⊆ D n. Assume first that Π ∪ D x ∪ E |= A. The finite set FE = { F ⊆
+
+E : Π ∪ D x ∪ F |= A } contains E. Choose an inclusion-minimal member S of 
+
+FE . If some S′ ⊊ S satisfied Π ∪ D x ∪ S′ |= A, then S′ ∈ F E , contradicting the choice of S. Thus, S ∈ SΠ, D,A and S ⊆ E.Conversely, assume that S ∈ SΠ, D,A and S ⊆ E. If A is extensional, then 
+
+A ∈ D x ∪ S. Since S ⊆ E, we have A ∈ D x ∪ E, and thus Π ∪ D x ∪ E |= A. If A
+
+is intensional, let (Ii)i≥0 and (Ji)i≥0 be the Kleene sequences for Π over Dx ∪ S
+
+and Dx ∪ E, respectively. Since S ⊆ E, induction on i gives Ii ⊆ Ji: the base case is empty, and every ground rule instance whose body is true in (Dx ∪ S) ∪ Ii is also true in (Dx ∪ E) ∪ Ji. Therefore, the least fixpoint over Dx ∪ S is contained in the least fixpoint over Dx ∪ E, so Π ∪ D x ∪ E |= A.Proposition 1 is the semantic basis for the paper: grounded atom A survives over a retained set E ⊆ D n exactly when E contains a minimal support. 
+
+# 3 Recursive Datalog 
+
+We compare fixed UCQs with one fixed recursive Datalog program. A CQ has the form q(¯ x) = ∃¯y Vmi=1 Ri(¯ zi), where each ¯zi uses variables from ¯x ∪ ¯y [1]. For a database D and tuple ¯a, D | = q(¯ a) holds if there is a valuation h with h(¯ x) = ¯ a6 R. B. Thapa and S. Staab 
+
+and Ri(h(¯ zi)) ∈ D for every i. A UCQ is a finite disjunction of CQs with the same free variables. For a UCQ q over the extensional signature ΣE , a disjoint partition D =
+
+Dx ∪ D n of a finite ΣE -database, and an answer ¯a with D | = q(¯ a), a set S ⊆ D n
+
+is an endogenous support for q(¯ a) if Dx ∪ S |= q(¯ a). It is minimal if no proper subset has this property. For a fixed UCQ q, let m(q) be the maximum number of atoms in a disjunct of q, and let Sq, D,¯a denote the minimal endogenous supports for q(¯ a).
+
+Theorem 1. Following holds. 1. For every fixed UCQ q, every disjoint partition D = Dx ∪ D n, every answer 
+
+¯a, and every S ∈ Sq, D,¯a,
+
+|S| ≤ m(q) and |Sq, D,¯a| ≤ 
+
+> m(q)
+
+X
+
+> i=0
+
+|D n|
+
+i
+
+
+
+.
+
+2. For the fixed positive-length transitive-closure program Πtc , there is a family of instances (∅, Dr , A r )r≥1, with exogenous database empty and endogenous database Dr , such that 
+
+max 
+
+> S∈SΠtc ,Dr ,Ar
+
+|S| = Θ(|D r |) and |SΠtc ,Dr ,A r | = 2 Ω(|D r |).
+
+In Theorem 1, asymptotic notation is with respect to database size: Θ(|D r |)
+
+means linear in |D r |, and 2Ω(|D r |) means exponential in |D r |. The first part of the theorem gives polynomially many minimal supports in |D n| for fixed UCQ s. The second part shows that a fixed recursive program can have minimal supports of unbounded cardinality and exponentially many such supports. 
+
+Proof. Let S ∈ Sq, D,¯a. Since Dx ∪ S |= q(¯ a), there are a disjunct qj of q and a valuation h such that h maps the free variables of qj to ¯a and maps every body atom of qj to a fact of Dx ∪ S. Let 
+
+W = { R(h(¯ z)) ∈ S | R(¯ z) is a body atom of qj }.
+
+Every body atom of qj is mapped either to an exogenous fact in Dx or to a fact in W . Thus, the same valuation h witnesses Dx ∪ W |= q(¯ a). Since W ⊆ S and S
+
+is inclusion-minimal among endogenous supports, S = W . The chosen disjunct has at most m(q) body atoms, so |S| = |W | ≤ m(q). Therefore, every minimal support is a subset of Dn of size at most m(q), and the number of such subsets is bounded by Pm(q)
+
+> i=0
+
+ |D n|
+
+> i
+
+.For the recursive case, consider the fixed positive-length transitive-closure program 
+
+Path (x, y ) ← Edge (x, y ), Path (x, y ) ← Edge (x, z ), Path (z, y ). (Πtc )For r ≥ 1, let Gr be the layered directed graph whose vertex layers are L0 = {s},
+
+Li = {ai, b i} for 1 ≤ i ≤ r, and Lr+1 = {t}. The edge set E(Gr ) contains exactly Causality and Supports in Datalog 7
+
+all directed edges from one layer to the next, i.e., all pairs (u, v ) with u ∈ Li
+
+and v ∈ Li+1 for some 0 ≤ i ≤ r. Let Dr = {Edge (u, v ) | (u, v ) ∈ E(Gr )}, with all facts endogenous, and let Ar = Path (s, t ).For any S ⊆ D r , let GS be the subgraph of Gr whose edge set corresponds to the edge facts in S. We prove 
+
+Πtc ∪ S |= Path (u, v ) ⇐⇒ GS has a positive-length directed walk from u to v. 
+
+For the forward implication, use induction on the first Kleene stage at which 
+
+Path (u, v ) appears. If the base rule derives Path (u, v ), then Edge (u, v ) ∈ S, giving a one-edge walk. If the recursive rule derives Path (u, v ), then Edge (u, w ) ∈ S and 
+
+Path (w, v ) appeared at an earlier stage; by induction, GS has a positive-length walk from w to v, and prefixing the edge (u, w ) gives a positive-length walk from 
+
+u to v. For the reverse implication, use induction on the length ℓ ≥ 1 of a walk 
+
+u = v0, v 1, . . . , v ℓ = v. If ℓ = 1 , the base rule applies to Edge (u, v ). If ℓ > 1, the induction hypothesis derives Path (v1, v ) from the suffix, and the recursive rule together with Edge (u, v 1) derives Path (u, v ).Since Gr is acyclic and layered, every directed walk from s to t is a simple path that uses exactly one edge between each consecutive pair of layers. If P is such a path, then its edge-fact set F (P ) entails Path (s, t ). Removing any edge of 
+
+P leaves no edge sequence from s to t inside the graph with edge set E(P ) \ { e};hence no proper subset of F (P ) is a support. Conversely, if S is a minimal support for Ar , then GS contains an s-t path P . The set F (P ) ⊆ S is itself a support, so the minimality of S gives S = F (P ). Thus, the minimal supports are exactly the edge-fact sets of simple directed s-t paths in Gr .Each such path chooses one of the two vertices in every intermediate layer and has r + 1 edges, so there are 2r minimal supports and each has cardinality 
+
+r + 1 . The graph has two edges from L0 to L1, two edges from Lr to Lr+1 , and 
+
+4( r − 1) edges between intermediate consecutive layers. Thus, |D r | = 4 r, the maximum support cardinality max S∈SΠtc ,Dr ,Ar |S| is r + 1 = Θ(|D r |), and the number of minimal supports |SΠtc ,Dr ,A r | is 2r = 2 Ω(|D r |).Theorem 1 separates fixed UCQ s from recursive Datalog by the size and number of minimal supports. 
+
+# 4 Causality and Robustness 
+
+We now connect supports with the standard deletion-based notions of query-answer causality: actual cause, counterfactual cause, contingency, and responsi-bility [16,14,9]. We show that the support hypergraph is exact for these notions and for deletion robustness. 
+
+Definition 3. Let Π be a positive Datalog program, let (Dx, Dn, A ) be a parti-tioned instance for Π, let D = Dx ∪ D n, and assume Π ∪ D | = A. For τ ∈ D n,the fact τ is a counterfactual cause of A if Π ∪ (D \ { τ })̸ |= A. The fact τ8 R. B. Thapa and S. Staab 
+
+is an actual cause of A if there is Γ ⊆ D n \ { τ } such that Π ∪ (D \ Γ ) |= A
+
+and Π ∪ (D \ (Γ ∪ { τ })) ̸ |= A. Such a set Γ is a contingency set for τ . The responsibility of τ for A is 
+
+RΠ, D,A (τ ) = 
+
+
+
+11 + CΠ, D,A (τ ) if τ is an actual cause, 
+
+0 otherwise, where CΠ, D,A (τ ) is the minimum cardinality of a contingency set for τ .
+
+As in resilience and deletion propagation for CQs [12], we measure deletions by whether they destroy the answer . 
+
+Definition 4. Let (Dx, Dn, A ) be a partitioned instance for a positive Datalog program Π, D = Dx ∪ D n and Π ∪ D | = A be as in Definition 3. Then, the deletion robustness radius of A is 
+
+rΠ, D,A = min { | ∆| | ∆ ⊆ D n and Π ∪ (D \ ∆)̸ |= A }.
+
+If no such ∆ exists, then rΠ, D,A = ∞.
+
+We next relate the support hypergraph to deletion robustness. Let U be a finite set and let F ⊆ 2U . A transversal of F is a set T ⊆ U such that T ∩ F̸ = ∅
+
+for every F ∈ F [3]. The transversal number tr( F) is the minimum cardinality of such a set. If ∅ ∈ F , then no transversal exists, and we set tr( F) = ∞. This convention matches exogenous entailment: if the answer already follows without endogenous facts, then no deletion of endogenous facts can destroy it. 
+
+Theorem 2. Let (Dx, Dn, A ) be a partitioned instance for a positive Datalog program Π, D = Dx ∪ D n and Π ∪ D | = A. Let S = SΠ, D,A . Then, ∀τ ∈ D n:1. τ is an actual cause of A iff ∃S ∈ S. τ ∈ S,2. τ is a counterfactual cause of A iff ∀S ∈ S. τ ∈ S.Moreover, rΠ, D,A = tr( S).Proof. Suppose τ is an actual cause with contingency set Γ . Let E = Dn \ Γ .The first contingency condition gives Π ∪ D x ∪ E |= A. By Proposition 1, choose 
+
+S ∈ S with S ⊆ E. If τ /∈ S, then S ⊆ E \ { τ }. Monotonicity of positive Datalog entailment then gives Π ∪ D x ∪ (E \ { τ }) |= A, contradicting the second contingency condition. Hence, τ ∈ S.Conversely, let S ∈ S with τ ∈ S, and put Γ = Dn \ S. Then Γ ⊆ D n \ { τ },and D \ Γ = Dx ∪ S, so Π ∪ (D \ Γ ) |= A. Also, 
+
+D \ (Γ ∪ { τ }) = Dx ∪ (S \ { τ }).
+
+Since S\{ τ } ⊊ S and S is inclusion-minimal among supports, Π∪D x∪(S\{ τ })̸ |=
+
+A. Thus, Γ is a contingency set for τ .For counterfactual causes, Definition 3 gives the condition Π ∪ D x ∪ (Dn \{τ })̸ |= A. By Proposition 1, the corresponding entailment holds if and only if Causality and Supports in Datalog 9
+
+some S ∈ S satisfies S ⊆ D n \ { τ }. Such an S exists if and only if some minimal support avoids τ . Therefore, the non-entailment condition holds if and only if every minimal support contains τ .For robustness, let ∆ ⊆ D n and put E = Dn \ ∆. Proposition 1 gives 
+
+Π ∪ (D \ ∆) |= A ⇐⇒ ∃S ∈ S with S ⊆ E. 
+
+Since E = Dn \ ∆, the condition S ⊆ E is equivalent to S ∩ ∆ = ∅. Hence, 
+
+∆ destroys A if and only if ∆ intersects every member of S, i.e., if and only if ∆ is a transversal of S. Minimizing |∆| over all destroying deletions gives 
+
+rΠ, D,A = tr( S), with the case ∅ ∈ S covered by the convention tr( S) = ∞.The support hypergraph also determines responsibility. The next proposition gives the exact contingency-size formula. Let S = SΠ, D,A . For τ ∈ D n, let 
+
+S+ 
+
+> τ
+
+= { S ∈ S | τ ∈ S } and S− 
+
+> τ
+
+= { S ∈ S | τ / ∈ S }.
+
+Proposition 2. For every τ ∈ D n,
+
+RΠ, D,A (τ ) = 
+
+
+
+0, S+ 
+
+> τ
+
+= ∅,
+
+11 + CΠ, D,A (τ ) , S+
+
+> τ
+
+̸ = ∅,
+
+with CΠ, D,A (τ ) = min S+∈S+ 
+
+> τ
+
+min { | Γ | | Γ ⊆ D n \ S+, ∀S− ∈ S− 
+
+> τ
+
+: Γ ∩ S−̸ = ∅} .Remark 1. Theorem 2 and Proposition 2 show that actual causes, counterfactual causes, responsibility, and deletion robustness are all determined by the support hypergraph. 
+
+Example 2. Suppose that, for a fixed entailment A, the minimal supports are 
+
+S1 = {α, β }, S2 = {β, γ }, S3 = {δ, ϵ }.
+
+Every fact occurring in these supports is an actual cause, and no fact is a coun-terfactual cause, because no fact occurs in all three supports. The robustness value is 2: one deletion cannot hit all supports, while {β, δ } does. The same hy-pergraph determines responsibility. For instance, β has a one-fact contingency, such as {δ}, and hence responsibility 1/2. By contrast, α occurs only in S1; to preserve S1 and hit both supports avoiding α, one must delete γ and one of δ, ϵ .Thus, α has responsibility 1/3.
+
+# 5 Support Hypergraphs and Provenance 
+
+We separate support hypergraphs from derivation-based Datalog provenance. Proof trees, circuits, and semiring expressions record how an answer is derived [10,5,8]. Minimal endogenous supports keep only deletion-minimal input suffi-ciency, which is exactly the information needed for causality and robustness. 10 R. B. Thapa and S. Staab 
+
+Example 3. Consider the left- and right-recursive Datalog formulations of tran-sitive closure: 
+
+Path (x, y ) ← Edge (x, y ) Path (x, y ) ← Edge (x, y ),
+
+Path (x, y ) ← Edge (x, z ), Path (z, y ) Path (x, y ) ← Path (x, z ), Edge (z, y ).
+
+The two programs derive the same reachability atoms over every finite ΣE -database, but they decompose paths in different directions and therefore have different proof-tree shapes. For the fixed goal Path (s, t ), their minimal endoge-nous supports are nevertheless identical: they are the edge sets of simple directed paths from s to t. Thus, the support hypergraph follows the fixed-goal semantics rather than the chosen recursive presentation. We first formalize the semantic nature of supports. Let Π1 and Π2 be positive Datalog programs over the same extensional signature, and let A be a ground atom over a common intensional predicate. We say that Π1 and Π2 are equivalent for A over finite extensional databases if, for every finite extensional database 
+
+E,
+
+Π1 ∪ E |= A ⇐⇒ Π2 ∪ E |= A, 
+
+where each Πi is evaluated over adom (Πi, E ). The syntactic constants of A are fixed on both sides; if one of those constants is outside the active domain of the retained extensional database for a program, then A is not entailed by that program. This is fixed-goal equivalence for A, not full program equivalence [1]. 
+
+Theorem 3. Let Π1 and Π2 be positive Datalog programs over the same exten-sional signature ΣE , and let A be a ground atom over a predicate in the common intensional signature ΣI . If Π1 and Π2 are equivalent for A over finite ΣE -databases, then, for every finite ΣE -database D = Dx ∪ D n such that (Dx, Dn, A )
+
+is a partitioned instance for both programs and Π1 ∪ D | = A,
+
+SΠ1,D,A = SΠ2,D,A .
+
+Proof. For every S ⊆ D n, the instance Dx ∪ S is a finite extensional database. By equivalence for A, Π1 ∪ D x ∪ S |= A if and only if Π2 ∪ D x ∪ S |= A. Hence, the two programs have the same endogenous supports over (Dx, Dn, A ). Since inclusion-minimality is taken over the same set Dn, the minimal members of the two support families coincide. Theorem 3 separates minimal endogenous supports from derivation presen-tations. Positive Datalog programs that are equivalent for the fixed goal may have different rule decompositions and different proof trees, but they induce the same minimal endogenous supports for that goal. 
+
+Corollary 1. Let Π1 and Π2 be positive Datalog programs, let (Dx, Dn, A ) be a partitioned instance for both programs, let D = Dx ∪ D n, and assume 
+
+Π1 ∪ D | = A and Π2 ∪ D | = A. 
+
+If SΠ1,D,A = SΠ2,D,A , then Π1 and Π2 induce the same actual causes, counter-factual causes, responsibilities, and deletion robustness radius for A over D.Causality and Supports in Datalog 11 
+
+Theorem 2 gives the claim for actual causes, counterfactual causes, and deletion robustness. Proposition 2 gives the claim for responsibility. Both characteriza-tions use only the common support hypergraph. We next separate supports from proof-tree multiplicity. A finite proof tree for positive Datalog has the derived atom at the root, rule instances at internal intensional nodes, and database facts at extensional leaves. We use ordinary fi-nite proof-tree unfoldings; repeated intensional atoms and repeated rule-instance occurrences are not quotiented or represented cyclically. 
+
+Proposition 3. There exist a fixed positive recursive Datalog program Π, a finite database D whose facts are all endogenous, and a ground atom A such that 
+
+A has infinitely many finite proof trees over D, while SΠ, D,A contains exactly one minimal endogenous support. Proof. Let Π = Πtc , let D = {Edge (s, a ), Edge (a, a ), Edge (a, t )}, with all three facts endogenous, and let A = Path (s, t ). For each k ≥ 0, construct a finite proof tree as follows. The root Path (s, t ) is justified by the ground rule instance 
+
+Path (s, t ) ← Edge (s, a ), Path (a, t ).
+
+Below the child Path (a, t ), apply the recursive ground instance 
+
+Path (a, t ) ← Edge (a, a ), Path (a, t )
+
+exactly k times, and then close the final Path (a, t ) node with the base instance 
+
+Path (a, t ) ← Edge (a, t ). After the final base-rule closure, every leaf is an exten-sional fact in D, and every internal node is justified by a ground rule instance of Πtc . The tree constructed for k has a different number of recursive Path (a, t )
+
+nodes from the tree constructed for k′̸ = k. Thus, A has infinitely many finite proof trees over D.We now compute the minimal supports. In the directed graph with edge set corresponding to D, every positive-length directed walk from s to t has the form 
+
+s, a, a, . . . , a 
+
+| {z } 
+
+> krepetitions
+
+, t 
+
+for some k ≥ 0; equivalently, it uses Edge (s, a ), then Edge (a, a ) zero or more times, and finally Edge (a, t ). Hence, every support for Path (s, t ) contains both 
+
+Edge (s, a ) and Edge (a, t ). The set S0 = {Edge (s, a ), Edge (a, t )} entails Path (s, t )
+
+by deriving Path (a, t ) from Edge (a, t ) by the base rule, and then Path (s, t ) from 
+
+Edge (s, a ) and Path (a, t ) by the recursive rule. No proper subset of S0 contains both required edge facts, so no proper subset entails Path (s, t ). Thus, S0 is the unique minimal endogenous support. The loop fact Edge (a, a ) occurs in the proof trees with k > 0, but it belongs to no minimal support. Proposition 3 shows that derivation multiplicity and minimal support in-formation can diverge sharply: infinitely many proof trees may collapse to one minimal endogenous support. Thus, support hypergraphs are coarser than proof-tree provenance, but they retain exactly the deletion-relevant information used by causality, responsibility, and robustness. 12 R. B. Thapa and S. Staab 
+
+# 6 Reachability 
+
+We now specialize the support-hypergraph analysis to positive-length reachabil-ity. For the recursive reachability program, minimal endogenous supports are exactly simple directed paths, and deletion robustness is exactly the minimum directed edge-cut size. Let G = ( V, E ) be a finite directed graph, and let DG = {Edge (u, v ) | (u, v ) ∈
+
+E} be the corresponding ΣE -database. Throughout this section, every fact in DG
+
+is endogenous. A directed s-t path is simple if it has the form P = ( v0, v 1, . . . , v k),where v0 = s, vk = t, (vi−1, v i) ∈ E for every 1 ≤ i ≤ k, and the vertices 
+
+v0, . . . , v k are pairwise distinct. For such a path P , let 
+
+F (P ) = {Edge (vi−1, v i) | 1 ≤ i ≤ k}
+
+be the corresponding set of edge facts. A directed s-t edge cut is a set C ⊆ E
+
+such that (V, E \ C) has no directed path from s to t. We write λG(s, t ) for the minimum cardinality of such a cut. 
+
+Theorem 4. Let G = ( V, E ) be a finite directed graph, let s, t ∈ V be distinct vertices, and assume Πtc ∪ D G |= Path (s, t ), where Πtc is the positive-length transitive-closure program. Then, 
+
+SΠtc ,DG,Path (s,t ) = { F (P ) | P is a simple directed s-t path in G },
+
+and rΠtc ,DG,Path (s,t ) = λG(s, t ).Proof. Let S ⊆ D G, and let GS be the directed graph with edge set {(u, v ) |
+
+Edge (u, v ) ∈ S}. The exact meaning of Πtc over S is: 
+
+Πtc ∪ S |= Path (a, b ) ⇐⇒ GS has a positive-length directed walk from a to b. 
+
+For soundness, argue by induction on the fixpoint stage at which Path (a, b ) first appears. If it is derived by the base rule, then Edge (a, b ) ∈ S, so the one-edge walk exists. If it is derived by the recursive rule, then Edge (a, c ) ∈ S and Path (c, b )
+
+was derived earlier; by induction there is a positive-length walk from c to b, and prefixing (a, c ) gives a walk from a to b. For completeness, use induction on the length ℓ ≥ 1 of a directed walk a = v0, v 1, . . . , v ℓ = b. The case ℓ = 1 uses the base rule. For ℓ > 1, the suffix v1, . . . , v ℓ derives Path (v1, b ) by induction, and the recursive rule with Edge (a, v 1) derives Path (a, b ).Since s̸ = t, every positive-length directed walk from s to t contains a simple directed s-t path obtained by removing closed repeated-vertex segments. If P is a simple directed s-t path, then F (P ) entails Path (s, t ) by the equivalence above. No proper subset of F (P ) entails Path (s, t ): after removing any edge of the path, the graph containing only the remaining path edges has no directed s-t walk. Thus, F (P ) is a minimal support. Conversely, let S ∈ SΠtc ,DG,Path (s,t ). By the equivalence above, GS has a positive-length directed walk from s to t, and therefore a simple directed s-tCausality and Supports in Datalog 13 
+
+path P . Then, F (P ) ⊆ S and F (P ) itself is a support. By inclusion-minimality of S, we must have S = F (P ). This proves the stated characterization of minimal supports. For robustness, let ∆ ⊆ D G and let C = {(u, v ) | Edge (u, v ) ∈ ∆}. By The-orem 2, ∆ destroys Path (s, t ) if and only if it intersects every minimal support. By the support characterization, this is equivalent to the condition that C in-tersects every simple directed s-t path. This holds if and only if (V, E \ C) has no directed path from s to t, i.e., if and only if C is a directed s-t edge cut. Minimizing |∆| = |C| gives rΠtc ,DG,Path (s,t ) = λG(s, t ).
+
+Remark 2. Theorem 2 applied to the path-support characterization gives the corresponding causal statements. An edge fact Edge (u, v ) is an actual cause of 
+
+Path (s, t ) if and only if (u, v ) lies on some simple directed s-t path, and it is a counterfactual cause if and only if (u, v ) lies on every simple directed s-t path. Theorem 4 complements Theorem 1: although reachability can have expo-nentially many minimal supports, its deletion robustness is computable as a minimum directed edge cut, without enumerating those supports. 
+
+Corollary 2. There are partitioned instances (∅, Dr , A r ) for the fixed program 
+
+Πtc such that 
+
+|SΠtc ,Dr ,A r | = 2 Ω(|D r |),
+
+while the robustness radius rΠtc ,Dr ,A r is computable in polynomial time without enumerating the support family. Proof. We use the layered instances (∅, Dr , A r ) constructed in the proof of The-orem 1. That proof shows that |SΠtc ,Dr ,A r | = 2 r and |D r | = 4 r, so |SΠtc ,Dr ,A r | =2Ω(|D r |). By Theorem 4, rΠtc ,Dr ,A r = λGr (s, t ). A minimum directed s-t edge cut with unit capacities is computable in polynomial time by a maximum-flow/minimum-cut algorithm. This computation uses Gr and does not enumerate the 2r paths or supports. Corollary 2 follows from Theorem 4 by assigning unit capacity to every edge and applying a standard maximum-flow/minimum-cut algorithm [11,2]. 
+
+# 7 Hardness 
+
+We include one compact hardness calibration. The reachability result gives a tractable structured case; the next proposition shows that the threshold problem for deletion robustness is already NP-hard for positive nonrecursive Datalog, because it can express the problem of hitting conjunctive-query witnesses [6,15]. 
+
+Definition 5. Let Π be a positive Datalog program and let A0 be a fixed Boolean intensional atom of Π. The problem Destroy (Π, A 0) takes as input disjoint finite 
+
+ΣE -databases Dx, Dn and an integer k, with Π∪(Dx∪D n) |= A0, and asks whether there is ∆ ⊆ D n such that |∆| ≤ k and 
+
+Π ∪  Dx ∪ (Dn \ ∆)̸ |= A0.14 R. B. Thapa and S. Staab 
+
+Proposition 4. There exists a fixed positive nonrecursive Datalog program Π
+
+and a fixed Boolean intensional atom A0 such that Destroy (Π, A 0) is NP-hard in data complexity. Proof. We reduce from Vertex Cover restricted to graphs with at least one edge. This restriction remains NP-hard [15]: map an arbitrary instance (G, k )
+
+to the disjoint union of G with one fresh edge and increase the bound to k + 1 .Given an undirected graph G = ( V, E ) with E̸ = ∅ and an integer k, use a binary 
+
+ΣE predicate R, whose facts will be exogenous, and a unary ΣE predicate P ,whose facts will be endogenous. For every vertex u ∈ V , include P (u) in Dn.For every undirected edge {u, v } ∈ E, choose one orientation (u, v ) and include 
+
+R(u, v ) in Dx. Let Π consist of the single positive nonrecursive rule 
+
+Goal ← R(x, y ), P (x), P (y),
+
+with Goal nullary, and set A0 = Goal . Since E̸ = ∅, some fact R(u, v ) ∈ D x
+
+is present and both P (u), P (v) ∈ D n are initially present. Thus, the promise 
+
+Π ∪ (Dx ∪ D n) |= Goal holds. If C ⊆ V is a vertex cover of size at most k, delete ∆C = {P (u) : u ∈ C}.Suppose Goal were still derivable. Then for some oriented edge fact R(a, b ) ∈ D x,both P (a) and P (b) would remain. Hence, neither endpoint of the corresponding undirected edge belongs to C, contradicting that C is a vertex cover. Thus, ∆C
+
+destroys Goal , and |∆C | ≤ k.Conversely, let ∆ ⊆ D n with |∆| ≤ k destroy Goal , and put C∆ = {u ∈
+
+V : P (u) ∈ ∆}. If some edge {u, v } ∈ E had no endpoint in C∆, then for its chosen orientation (a, b ), the facts R(a, b ), P (a), and P (b) would all remain after deleting ∆. The rule would then derive Goal , contradicting that ∆ destroys it. Therefore, C∆ is a vertex cover of size at most k. The reduction is polynomial and uses a fixed program and fixed goal atom, so Destroy (Π, A 0) is NP-hard in data complexity. 
+
+# 8 Related Work and Discussion 
+
+Database causality studies answers and non-answers through actual causes, coun-terfactual causes, contingencies, and responsibility [16,17]. Meliou et al. study causes and responsibility for CQs in data complexity and identify tractable and intractable cases for responsibility [17]. Meliou, Roy, and Suciu relate causality to provenance, deletion propagation, why-not queries, and database explanations [18]. We use the same tuple-deletion notions, but we study the support struc-ture induced by positive Datalog entailments. Our results show that recursion changes this structure: fixed UCQ s have bounded minimal supports, whereas one fixed recursive program can have supports of unbounded size and exponential multiplicity. Structural-model accounts of causality and responsibility originate in the work of Halpern and Pearl on actual causality and Chockler and Halpern on responsibility and blame [14,9]. Database causality specializes these notions to Causality and Supports in Datalog 15 
+
+endogenous tuple interventions [16,17]. We keep this intervention model, but we restrict interventions to deletions of endogenous extensional facts under a fixed positive Datalog program. Under this monotone deletion semantics, our support hypergraph exactly determines actual causes, counterfactual causes, responsibil-ity, and deletion robustness. Datalog already appears in the causality literature through abduction, view updates, and integrity constraints. Salimi and Bertossi relate answer causality to Datalog abduction and view-update problems, including settings with integrity constraints [20,21,4]. We do not claim Datalog causality itself as new. Instead, we contribute a support-level analysis: we separate nonrecursive and recursive programs by the size and number of minimal supports, prove invariance under fixed-goal equivalent programs, and show that all-endogenous positive-length reachability reduces robustness to a directed edge-cut problem. Provenance, lineage, and semiring annotations describe how query results depend on input data [7,13]. Datalog provenance has been studied through proof trees, circuits, semiring semantics, and the complexity of why-provenance [10,5,8]. Our support hypergraphs are coarser than these provenance objects: they discard rule decompositions, proof-tree multiplicities, and annotations. We make this loss deliberately. For deletion-based explanation, it suffices to retain exactly the inclusion-minimal endogenous fact sets that entail the answer. Deletion propagation and resilience ask how input tuples must be removed to eliminate query answers or view tuples [6,12]. Tiresias and related how-to sys-tems compute database updates that achieve desired query-output changes under constraints [19]. Our robustness question is narrower: we delete only endogenous facts and ask when one already-derived positive Datalog entailment disappears. The support hypergraph reduces this question a transversal problem. 
+
+# 9 Conclusion 
+
+We have introduced deletion-based explanation for positive Datalog entailments through inclusion-minimal endogenous supports. We isolated the support hy-pergraph as a semantic abstraction that captures the information needed for causality, responsibility, and deletion robustness, while abstracting from deriva-tion multiplicity. Our results separate nonrecursive and recursive rule evaluation at the level of minimal supports. While UCQs yield bounded and polynomially many minimal supports, positive-length transitive closure can yield supports of unbounded size and exponential multiplicity. In all-endogenous reachability, deletion robustness nevertheless coincides with the minimum directed s-t edge cut. For future work, several directions remain. One is to identify recursive Data-log fragments that admit compact representations of minimal supports. Another is to extend the analysis to stratified negation and weighted deletion costs. A third is to study when provenance circuits can be reduced to support hypergraphs while preserving deletion-relevant quantities. Answering these questions would 16 R. B. Thapa and S. Staab 
+
+clarify the representational and algorithmic scope of support-based explanation in richer rule languages. 
+
+Acknowledgments. This work is funded by the German Research Foundation (DFG) – SFB 1574 Circular Factory– 471687386. 
+
+# References 
+
+1. Abiteboul, S., Hull, R., Vianu, V.: Foundations of databases, vol. 8. Addison-Wesley Reading (1995) 2. Ahuja, R.K., Orlin, J.B.: Combinatorial algorithms for inverse network flow prob-lems. Networks: An International Journal 40 (4), 181–187 (2002) 3. Berge, C.: Hypergraphs: combinatorics of finite sets, vol. 45. Elsevier (1984) 4. Bertossi, L., Salimi, B.: Causes for query answers from databases: Datalog abduc-tion, view-updates, and integrity constraints. International Journal of Approximate Reasoning 90 , 226–252 (2017) 5. Bourgaux, C., Bourhis, P., Peterfreund, L., Thomazo, M.: Revisiting semiring provenance for datalog. In: KR 2022-19th International Conference on Principles of Knowledge Representation and Reasoning. pp. Pages–91 (2022) 6. Buneman, P., Khanna, S., Tan, W.C.: On propagation of deletions and annota-tions through views. In: Proceedings of the twenty-first ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems. pp. 150–158 (2002) 7. Buneman, P., Khanna, S., Wang-Chiew, T.: Why and where: A characterization of data provenance. In: International conference on database theory. pp. 316–330. Springer (2001) 8. Calautti, M., Livshits, E., Pieris, A., Schneider, M.: The complexity of why-provenance for datalog queries. Proceedings of the ACM on Management of Data 
+
+2(2), 1–16 (2024) 9. Chockler, H., Halpern, J.Y.: Responsibility and blame: A structural-model ap-proach. Journal of Artificial Intelligence Research 22 , 93–115 (2004) 10. Deutch, D., Milo, T., Roy, S., Tannen, V.: Circuits for datalog provenance. In: ICDT. vol. 3, p. 2014 (2014) 11. Ford Jr, L.R., Fulkerson, D.R.: Maximal flow through a network. Canadian journal of Mathematics 8, 399–404 (1956) 12. Freire, C., Gatterbauer, W., Immerman, N., Meliou, A.: The complexity of re-silience and responsibility for self-join-free conjunctive queries. Proceedings of the VLDB Endowment 9(3) (2015) 13. Green, T.J., Karvounarakis, G., Tannen, V.: Provenance semirings. In: Proceedings of the twenty-sixth ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems. pp. 31–40 (2007) 14. Halpern, J.Y., Pearl, J.: Causes and explanations: A structural-model approach. part i: Causes. The British journal for the philosophy of science (2005) 15. Karp, R.M.: Reducibility among combinatorial problems. In: 50 Years of Integer Programming 1958-2008: from the Early Years to the State-of-the-Art, pp. 219– 241. Springer (2009) 16. Meliou, A., Gatterbauer, W., Halpern, J.Y., Koch, C., Moore, K.F., Suciu, D.: Causality in databases. IEEE Data Engineering Bulletin 33 (3), 59–67 (2010) Causality and Supports in Datalog 17 17. Meliou, A., Gatterbauer, W., Moore, K.F., Suciu, D.: The complexity of causality and responsibility for query answers and non-answers. Proceedings of the VLDB Endowment 4(1) (2010) 18. Meliou, A., Roy, S., Suciu, D.: Causality and explanations in databases. Proceed-ings of the VLDB Endowment 7(13), 1715–1716 (2014) 19. Meliou, A., Suciu, D.: Tiresias: the database oracle for how-to queries. In: Pro-ceedings of the 2012 ACM SIGMOD International Conference on Management of Data. pp. 337–348 (2012) 20. Salimi, B., Bertossi, L.: Query-answer causality in databases: abductive diagnosis and view-updates. In: Proceedings of the UAI 2015 Conference on Advances in Causal Inference-Volume 1504. pp. 76–85 (2015) 21. Salimi, B., Bertossi, L.E.: Causes for query answers from databases, datalog ab-duction and view-updates: The presence of integrity constraints. In: FLAIRS. pp. 674–679 (2016) 
+
+# A Extended Proofs 
+
+We use the notation of the main text: Π is a positive Datalog program, Dx
+
+and Dn are disjoint finite sets of extensional facts, D = Dx ∪ D n, and A is a ground atom with Π ∪ D | = A. Entailment is evaluated over the active-domain grounding determined by the constants occurring in the program and in the retained extensional instance. Whenever we consider a retained set E ⊆ D n,the associated database is Dx ∪ E; hence all support, causality, and robustness arguments are over the same endogenous universe Dn.
+
+Proof of Proposition 1 
+
+We first prove that SΠ, D,A is a finite antichain. By definition, every member of 
+
+SΠ, D,A is a subset of Dn. Since Dn is finite, the powerset 2Dn
+
+is finite. Hence, 
+
+SΠ, D,A ⊆ 2Dn
+
+is finite. If S1, S 2 ∈ SΠ, D,A and S1 ⊊ S2, then S2 is not inclusion-minimal among endogenous supports, because S1 is a proper subset of S2 and 
+
+Π ∪ D x ∪ S1 |= A. This contradicts the definition of minimal support. Therefore, no two distinct supports in SΠ, D,A are comparable by proper inclusion. We now prove the decomposition equivalence. Let E ⊆ D n.Assume first that Π ∪ D x ∪ E |= A. Consider the family 
+
+FE = { F ⊆ E : Π ∪ D x ∪ F |= A }.
+
+This family is nonempty because E ∈ F E . It is finite because E is finite. Hence, it contains an inclusion-minimal member; call it S. Then S ⊆ E and Π ∪ D x ∪
+
+S |= A. We must show that S is minimal among all subsets of Dn, not merely among subsets of E. Suppose, for a contradiction, that some S′ ⊊ S satisfies 
+
+Π ∪ D x ∪ S′ |= A. Since S′ ⊊ S ⊆ E, we have S′ ∈ F E , contradicting the choice of S as an inclusion-minimal member of FE . Thus, S ∈ SΠ, D,A and S ⊆ E.18 R. B. Thapa and S. Staab 
+
+Conversely, assume that there exists S ∈ SΠ, D,A such that S ⊆ E. By defini-tion of support, Π ∪ D x ∪ S |= A. We distinguish the extensional and intensional cases for A.If A is an extensional atom, then the semantics of Π ∪ D x ∪ S |= A gives 
+
+A ∈ D x ∪ S. Since S ⊆ E, every fact in S is also in E. Hence, A ∈ D x ∪ E, and therefore Π ∪ D x ∪ E |= A.Suppose now that A is intensional. Let IS 
+
+> 0
+
+= ∅ and 
+
+ISi+1 = ISi ∪ TΠ, Dx∪S (ISi )
+
+be the Kleene sequence for Π over Dx ∪ S. Similarly, let IE 
+
+> 0
+
+= ∅ and 
+
+IEi+1 = IEi ∪ TΠ, Dx∪E (IEi )
+
+be the Kleene sequence over Dx ∪ E. Since S ⊆ E, the active domain of Π with 
+
+Dx ∪ S is contained in the active domain of Π with Dx ∪ E. Therefore, every ground rule instance available over Dx ∪S is also a ground rule instance available over Dx ∪ E.We prove by induction on i ≥ 0 that ISi ⊆ IEi . For i = 0 , both sets are empty. For the induction step, assume ISi ⊆ IEi , and let B ∈ ISi+1 . By definition of ISi+1 ,either B ∈ ISi or B ∈ TΠ, Dx∪S (ISi ). In the first case, the induction hypothesis gives B ∈ IEi ⊆ IEi+1 . In the second case, there is a ground instance of a rule of 
+
+Π with head B such that every extensional body atom is in Dx ∪ S and every intensional body atom is in ISi . Because S ⊆ E and ISi ⊆ IEi , the same ground rule instance has all extensional body atoms in Dx ∪ E and all intensional body atoms in IEi . Hence, B ∈ TΠ, Dx∪E (IEi ) ⊆ IEi+1 . This proves ISi+1 ⊆ IEi+1 .The least fixpoint over a finite active domain is the union of the finite Kleene sequence at its stabilization point. Since Π ∪ D x ∪ S |= A and A is intensional, 
+
+A ∈ ISj for some stage j. The inclusion ISj ⊆ IEj gives A ∈ IEj , and therefore 
+
+Π ∪ D x ∪ E |= A. The two directions prove the claimed equivalence. 
+
+Proof of Theorem 1 
+
+We first prove the claim for fixed UCQs. Let q be a fixed UCQ , and let m(q) be the maximum number of atoms in a disjunct of q. Let D = Dx ∪ D n be a finite database, and let ¯a be an answer to q. Let S ⊆ D n be a minimal endogenous support for q(¯ a).Since S is a support, Dx ∪ S |= q(¯ a). Hence, some disjunct qj of q has a satisfying valuation h over Dx ∪ S that maps the free variables of qj to ¯a. For each body atom R(¯ z) of qj , the ground atom R(h(¯ z)) belongs to Dx ∪ S. Let 
+
+W = { R(h(¯ z)) ∈ S : R(¯ z) is a body atom of qj }.
+
+The set W contains exactly the endogenous facts among the facts used by this valuation. The valuation has at most one ground fact for each body atom of qj .Since qj has at most m(q) atoms, |W | ≤ m(q). Every extensional fact required by the valuation is either exogenous, hence in Dx, or endogenous and included Causality and Supports in Datalog 19 
+
+in W . Therefore, the same valuation witnesses Dx ∪ W |= q(¯ a). Thus, W is a support and W ⊆ S. Since S is inclusion-minimal among supports, S = W .Hence, |S| ≤ m(q).Every minimal support for q(¯ a) is therefore a subset of Dn of cardinality at most m(q). The number of such subsets is bounded by 
+
+> m(q)
+
+X
+
+> i=0
+
+|D n|
+
+i
+
+
+
+.
+
+Because q is fixed, m(q) is constant in data complexity, and this expression is polynomial in |D n|.We now prove the recursive separation. Let r ≥ 1. The graph Gr = ( Vr , F r )
+
+has layers 
+
+L0 = {s}, Li = {ai, b i} for 1 ≤ i ≤ r, Lr+1 = {t},
+
+and contains every directed edge from Li to Li+1 for 0 ≤ i ≤ r. There are two edges from L0 to L1, two edges from Lr to Lr+1 , and four edges from Li to Li+1 
+
+for each 1 ≤ i < r . Thus, |Fr | = 2 + 4( r − 1) + 2 = 4 r. Let 
+
+Dr = { Edge (u, v ) : ( u, v ) ∈ Fr }
+
+be the all-endogenous database, and let Ar = Path (s, t ).We need the following reachability characterization for Πtc . For any S ⊆Dr , let HS be the directed graph whose edges are the pairs (u, v ) such that 
+
+Edge (u, v ) ∈ S. We claim that 
+
+Πtc ∪ S |= Path (x, y ) ⇐⇒ HS contains a positive-length directed walk from x to y. 
+
+For the left-to-right direction, define the Kleene sequence I0 = ∅ and Ii+1 =
+
+Ii ∪ TΠtc ,S (Ii). We prove by induction on i that every atom Path (x, y ) ∈ Ii
+
+corresponds to a positive-length directed walk from x to y in HS of length at most i. The case i = 0 is vacuous. For the step, let Path (x, y ) ∈ Ii+1 . If it already belongs to Ii, the induction hypothesis applies. Otherwise, it is produced by a ground rule instance. If the base rule is used, then Edge (x, y ) ∈ S, so the single edge (x, y ) is a walk of length 1. If the recursive rule is used, then for some z,
+
+Edge (x, z ) ∈ S and Path (z, y ) ∈ Ii. By the induction hypothesis, there is a walk from z to y of length at most i; prefixing the edge (x, z ) gives a walk from x to 
+
+y of length at most i + 1 .For the right-to-left direction, we prove by induction on the length ℓ ≥ 1 of a directed walk. If ℓ = 1 , the walk is one edge (x, y ), so Edge (x, y ) ∈ S and the base rule derives Path (x, y ) at stage 1. If ℓ > 1, we write the walk as 
+
+x = v0, v 1, . . . , v ℓ = y. 
+
+The suffix v1, . . . , v ℓ has length ℓ − 1. By the induction hypothesis, Path (v1, y ) is derived by stage ℓ−1. Since Edge (x, v 1) ∈ S, the recursive rule derives Path (x, y )
+
+by stage ℓ.20 R. B. Thapa and S. Staab 
+
+For distinct endpoints, a positive-length directed walk contains a simple di-rected path between the same endpoints: whenever a vertex repeats, delete the closed segment between two consecutive occurrences of that vertex; this strictly decreases the walk length and preserves the endpoints. Repeating this operation terminates and yields a walk with no repeated vertices, i.e., a simple directed path. We now identify the minimal supports for Ar . If P is a simple directed s-t
+
+path in Gr , then its edge-fact set F (P ) entails Path (s, t ) by the characterization above. No proper subset of F (P ) entails Path (s, t ): removing any edge of the path breaks the only directed route available in the graph whose edge set is contained in F (P ). Hence, F (P ) is a minimal support. Conversely, if S is a minimal support for Ar , then HS contains a positive-length directed walk from 
+
+s to t, and therefore a simple directed s-t path P . The set F (P ) is contained in 
+
+S and is itself a support. By minimality, S = F (P ).Every simple directed s-t path in Gr chooses exactly one vertex from each intermediate layer Li, 1 ≤ i ≤ r, and then uses one edge between each pair of consecutive layers. Hence, the number of such paths is 2r , and every such path has r + 1 edges. Therefore, 
+
+|SΠtc ,Dr ,A r | = 2 r , max { | S| : S ∈ SΠtc ,Dr ,A r } = r + 1 .
+
+Since |D r | = |Fr | = 4 r, we obtain r + 1 = Θ(|D r |) and 2r = 2 Ω(|D r |).
+
+Proof of Theorem 2 
+
+Let S = SΠ, D,A . We prove the three assertions separately. For actual causes, assume first that τ ∈ D n is an actual cause. Then there is a contingency set Γ ⊆ D n \ { τ } such that 
+
+Π ∪ (D \ Γ ) |= A and Π ∪ (D \ (Γ ∪ { τ })) ̸ |= A. 
+
+Let E = Dn \ Γ . Since D \ Γ = Dx ∪ E, Proposition 1 gives a support S ∈ S with 
+
+S ⊆ E. If τ / ∈ S, then S ⊆ E \ { τ }. Applying Proposition 1 again with E \ { τ }
+
+gives 
+
+Π ∪ D x ∪ (E \ { τ }) |= A. 
+
+But Dx ∪ (E \ { τ }) = D \ (Γ ∪ { τ }), contradicting the non-entailment condition above. Therefore, τ ∈ S.Conversely, suppose that τ ∈ S for some S ∈ S . Let Γ = Dn \ S. Since τ ∈ S,we have Γ ⊆ D n \ { τ }. Also, D \ Γ = Dx ∪ S, so Π ∪ (D \ Γ ) |= A. After also deleting τ , the retained endogenous set is S \ { τ }. This is a proper subset of S,and S is a minimal support. Hence, 
+
+Π ∪ D x ∪ (S \ { τ })̸ |= A. 
+
+Since Dx ∪ (S \ { τ }) = D \ (Γ ∪ { τ }), the set Γ is a contingency for τ . Therefore, 
+
+τ is an actual cause. Causality and Supports in Datalog 21 
+
+For counterfactual causes, by definition τ is counterfactual exactly when 
+
+Π ∪ D x ∪ (Dn \ { τ })̸ |= A. 
+
+By Proposition 1, the corresponding entailment holds exactly when there is a support S ∈ S with S ⊆ D n \ { τ }. This containment is equivalent to τ /∈ S.Hence, non-entailment holds exactly when no minimal support avoids τ , i.e., exactly when every S ∈ S contains τ .For robustness, let ∆ ⊆ D n and put E = Dn \ ∆. By Proposition 1, 
+
+Π ∪ (D \ ∆) = Π ∪ D x ∪ E |= A
+
+holds exactly when some S ∈ S satisfies S ⊆ E. Since E = Dn \ ∆, the inclusion 
+
+S ⊆ E is equivalent to S∩∆ = ∅. Therefore, ∆ destroys A exactly when ∆∩S̸ = ∅
+
+for every S ∈ S . Such sets ∆ are precisely the transversals of S. Minimizing their cardinality gives 
+
+rΠ, D,A = tr( S).
+
+If ∅ ∈ S , then no ∆ ⊆ D n intersects every support, because no set intersects ∅.In that case both the deletion robustness radius and the transversal number are 
+
+∞ (by the conventions as in the main text). 
+
+Proof of Proposition 2 
+
+Let 
+
+S+ 
+
+> τ
+
+= { S ∈ SΠ, D,A : τ ∈ S }, S− 
+
+> τ
+
+= { S ∈ SΠ, D,A : τ / ∈ S }.
+
+If S+ 
+
+> τ
+
+= ∅, then Theorem 2 implies that τ is not an actual cause. By Definition 3, its responsibility is then 0.Assume S+
+
+> τ
+
+̸ = ∅. We characterize exactly the contingency sets for τ . Let 
+
+Γ ⊆ D n \ { τ }. The set Γ is a contingency for τ iff both conditions below hold: 
+
+Π ∪ (D \ Γ ) |= A, Π ∪ (D \ (Γ ∪ { τ })) ̸ |= A. 
+
+By Proposition 1, the first condition holds iff there exists a support S ∈ SΠ, D,A 
+
+such that S ∩ Γ = ∅. The second condition holds iff no support is contained in 
+
+Dn \ (Γ ∪ { τ }). A support containing τ is never contained in Dn \ { τ }, so only supports not containing τ can violate the second condition. Thus, the second condition is equivalent to 
+
+Γ ∩ S−̸ = ∅ for every S− ∈ S − 
+
+> τ
+
+.
+
+If this hitting condition holds, then no support in S− 
+
+> τ
+
+can be disjoint from Γ .Therefore, the support preserved by the first condition must be some S+ ∈ S + 
+
+> τ
+
+.Preserving this support means S+ ∩ Γ = ∅, equivalently Γ ⊆ D n \ S+.Consequently, the contingency sets for τ are exactly the sets Γ for which there exists S+ ∈ S + 
+
+> τ
+
+such that 
+
+Γ ⊆ D n \ S+, Γ ∩ S−̸ = ∅ for every S− ∈ S − 
+
+> τ
+
+.
+
+The smallest contingency size is therefore the minimum displayed in the state-ment of the proposition. Substituting this value into the database-causality def-inition of responsibility gives the stated formula. 22 R. B. Thapa and S. Staab 
+
+Proof of Theorem 3 and Corollary 1 
+
+We first prove Theorem 3. Let S ⊆ D n be arbitrary. Since Dx and Dn are finite 
+
+ΣE -databases, the retained instance Dx ∪ S is a finite ΣE -database. By the fixed-goal equivalence assumption, each program is evaluated over its own active-domain grounding, and the following equivalence holds for this retained database: 
+
+Π1 ∪ D x ∪ S |= A ⇐⇒ Π2 ∪ D x ∪ S |= A. 
+
+By Definition 2, the left-hand side says exactly that S is an endogenous support for A with respect to Π1 over the partition (Dx, Dn). The right-hand side says exactly that the same set S is an endogenous support for A with respect to Π2
+
+over the same partition. Hence, for every S ⊆ D n, S belongs to the full support family of Π1 iff it belongs to the full support family of Π2.Let 
+
+Ti = { S ⊆ D n : Πi ∪ D x ∪ S |= A } (i ∈ { 1, 2})
+
+be the full family of endogenous supports before taking inclusion-minimal mem-bers. The previous paragraph proves T1 = T2. Minimal endogenous supports are precisely the inclusion-minimal members of these finite families, and inclu-sion is taken over the same universe Dn in both cases. Therefore, the sets of inclusion-minimal members are equal: 
+
+SΠ1,D,A = SΠ2,D,A .
+
+This proves Theorem 3. We now prove Corollary 1. Assume SΠ1,D,A = SΠ2,D,A = S. Both programs are evaluated over the same endogenous universe Dn. For any τ ∈ D n, Theorem 2 characterizes actual causality by the condition 
+
+∃S ∈ S such that τ ∈ S, 
+
+and counterfactual causality by the condition ∀S ∈ S , τ ∈ S. Since these two conditions mention only τ and the common family S, the two programs have the same actual causes and the same counterfactual causes. The same theorem gives the deletion robustness radius as the transversal number of the common support family: 
+
+rΠi,D,A = tr( S) (i ∈ { 1, 2}).
+
+Thus, the robustness radii coincide. It remains only to check responsibility. For any fixed τ ∈ D n, Proposition 2 uses: 
+
+S+ 
+
+> τ
+
+= {S ∈ S : τ ∈ S}, S− 
+
+> τ
+
+= {S ∈ S : τ / ∈ S},
+
+and the same ambient set Dn to compute the minimum contingency size. Since 
+
+S and Dn are common to both programs, the feasible contingency sets and their minimum cardinality are the same for Π1 and Π2. Therefore, the responsibility value of every τ ∈ D n is the same for both programs. This proves Corollary 1. Causality and Supports in Datalog 23 
+
+Proof of Proposition 3 
+
+Let Π = Πtc and 
+
+D = {Edge (s, a ), Edge (a, a ), Edge (a, t )},
+
+with all facts endogenous. Let A = Path (s, t ). We use ordinary finite proof trees: each internal node is justified by one ground rule instance, leaves are extensional facts, and repeated occurrences of the same intensional atom are not identified. For every integer k ≥ 0, we construct a finite proof tree for Path (s, t ). The root is labeled Path (s, t ) and is justified by the ground recursive rule instance 
+
+Path (s, t ) ← Edge (s, a ), Path (a, t ).
+
+Thus, the root has one extensional child labeled Edge (s, a ) and one intensional child labeled Path (a, t ). If k = 0 , close this intensional child by the base rule instance 
+
+Path (a, t ) ← Edge (a, t ).
+
+If k > 0, expand the node labeled Path (a, t ) by the recursive rule instance 
+
+Path (a, t ) ← Edge (a, a ), Path (a, t )
+
+exactly k consecutive times. After these k recursive expansions, close the re-maining node labeled Path (a, t ) by the base rule instance Path (a, t ) ← Edge (a, t ).After the final base-rule closure, every leaf of the finite tree is one of the exten-sional facts in D: one occurrence of Edge (s, a ), k occurrences of Edge (a, a ), and one occurrence of Edge (a, t ). Hence, each tree is a valid finite proof tree. The tree for k + 1 has one more recursive expansion below Path (a, t ) than the tree for 
+
+k, so the trees have distinct depths. Therefore, there are infinitely many finite proof trees. We now compute the minimal endogenous supports. The set 
+
+S0 = {Edge (s, a ), Edge (a, t )}
+
+entails Path (s, t ): first the base rule derives Path (a, t ) from Edge (a, t ), and then the recursive rule derives Path (s, t ) from Edge (s, a ) and Path (a, t ). No proper subset of S0 entails Path (s, t ). If Edge (s, a ) is absent, no positive-length walk can leave s. If Edge (a, t ) is absent, no positive-length walk can reach t. The remaining fact Edge (a, a ) is only a self-loop at a and cannot connect s to t
+
+without both Edge (s, a ) and Edge (a, t ).Conversely, any support for Path (s, t ) must contain both facts Edge (s, a ) and 
+
+Edge (a, t ). Indeed, every positive-length directed walk from s to t in the directed graph with edge set corresponding to D has the form 
+
+s, a, a, . . . , a 
+
+| {z }
+
+> zero or more repetitions
+
+, t, 24 R. B. Thapa and S. Staab 
+
+and therefore uses Edge (s, a ) and Edge (a, t ). Hence, the unique minimal endoge-nous support is 
+
+SΠtc ,D,Path (s,t ) = { S0 }.
+
+The loop fact Edge (a, a ) occurs in the proof trees constructed above when k > 0,but it is not contained in the unique minimal support. 
+
+Proof of Theorem 4 
+
+Let G = ( V, E ) be a finite directed graph, let DG = {Edge (u, v ) : ( u, v ) ∈ E}, and let S ⊆ D G. Let GS = ( V, E S ) be the directed graph whose edge set corresponds to S, where 
+
+ES = { (u, v ) : Edge (u, v ) ∈ S }.
+
+Let I0 = ∅ and Ii+1 = Ii ∪ TΠtc ,S (Ii) be the Kleene sequence for Πtc over the extensional database S.We first prove soundness of the fixpoint computation with respect to directed walks. For every i ≥ 0, if Path (a, b ) ∈ Ii, then GS contains a positive-length directed walk from a to b of length at most i. The proof is by induction on i.For i = 0 , I0 = ∅, so there is nothing to prove. Assume the claim holds at stage 
+
+i, and let Path (a, b ) ∈ Ii+1 . If Path (a, b ) ∈ Ii, the induction hypothesis gives the required walk. Otherwise, Path (a, b ) is newly produced by TΠtc ,S (Ii). If the base rule produced it, then Edge (a, b ) ∈ S, so (a, b ) ∈ ES is a walk of length 1 ≤ i + 1 .If the recursive rule produced it, then for some constant c, Edge (a, c ) ∈ S and 
+
+Path (c, b ) ∈ Ii. The induction hypothesis gives a walk from c to b of length at most i. Prefixing the edge (a, c ) gives a walk from a to b of length at most i + 1 .We next prove completeness. For every positive-length directed walk from a
+
+to b in GS of length ℓ ≥ 1, the atom Path (a, b ) belongs to Iℓ. The proof is by induction on ℓ. If ℓ = 1 , the walk is the edge (a, b ), so Edge (a, b ) ∈ S, and the base rule gives Path (a, b ) ∈ I1. If ℓ > 1, let the walk as 
+
+a = v0, v 1, . . . , v ℓ = b. 
+
+The suffix v1, . . . , v ℓ is a positive-length directed walk from v1 to b of length 
+
+ℓ − 1. By the induction hypothesis, Path (v1, b ) ∈ Iℓ−1. Since Edge (a, v 1) ∈ S, the recursive rule derives Path (a, b ) at stage ℓ, so Path (a, b ) ∈ Iℓ.The two inductions prove 
+
+Πtc ∪ S |= Path (a, b ) ⇐⇒ GS contains a positive-length directed walk from a to b. 
+
+When a̸ = b, every positive-length directed walk from a to b contains a simple directed a-b path. To see this, if a walk repeats a vertex, remove the segment between two equal occurrences of that vertex. The remaining sequence is still a directed walk with the same endpoints and strictly smaller length. Repeating this finite shortening process yields a walk with no repeated vertices, i.e., a simple directed path. Causality and Supports in Datalog 25 
+
+We now specialize to distinct vertices s, t ∈ V . Let P be a simple directed path from s to t in G, and let F (P ) = {Edge (u, v ) | (u, v ) is an edge of P }. By completeness, F (P ) entails Path (s, t ). We prove that F (P ) is inclusion-minimal. Assume the path as 
+
+s = v0, v 1, . . . , v m = t, 
+
+where the vertices are pairwise distinct and the path edges are (vj−1, v j ) for 
+
+1 ≤ j ≤ m. If one edge (vj−1, v j ) is removed from this path-edge set, then no edge remains that goes from any vertex among v0, . . . , v j−1 to any vertex among vj , . . . , v m inside the subgraph whose edges are the remaining path edges. Therefore, there is no directed walk from s to t using only the remaining path edges. By the equivalence above, the remaining facts do not entail Path (s, t ).Hence, every proper subset obtained by deleting at least one path edge is not a support, and F (P ) is a minimal support. Conversely, let S ∈ SΠtc ,DG,Path (s,t ). Since S is a support, Πtc ∪S |= Path (s, t ).By the equivalence above, GS contains a positive-length directed walk from s to 
+
+t. Since s̸ = t, this walk contains a simple directed s-t path P . All edge facts of 
+
+P belong to S, so F (P ) ⊆ S. By completeness, F (P ) is a support. Since S is inclusion-minimal among supports, S = F (P ). This proves 
+
+SΠtc ,DG,Path (s,t ) = { F (P ) : P is a simple directed s-t path in G }.
+
+It remains to prove the cut identity. Let ∆ ⊆ D G, and let 
+
+C = { (u, v ) : Edge (u, v ) ∈ ∆ } ⊆ E. 
+
+By Theorem 2, ∆ destroys Path (s, t ) iff it intersects every minimal support. By the support characterization just proved, this holds iff C intersects the edge set of every simple directed s-t path. This is equivalent to saying that E \C contains no directed s-t path: if a simple path avoids C, then it remains after deleting C;conversely, if a directed s-t path remains after deleting C, it contains a simple directed s-t subpath that also avoids C. Therefore, C is a directed s-t edge cut exactly when ∆ destroys Path (s, t ). Since the correspondence ∆ 7 → C preserves cardinality, minimizing |∆| over destroying deletion sets gives 
+
+rΠtc ,DG,Path (s,t ) = λG(s, t ).
+
+This proves the support characterization and the cut identity in Theorem 4. 
+
+Proof of Corollary 2 
+
+We use the layered instances (∅, Dr , A r ) constructed in the proof of Theorem 1. In that construction, Ar = Path (s, t ), all edge facts are endogenous, and Dr is the set of edge facts of the layered graph Gr . The graph has two edges from the source layer to the first intermediate layer, two edges from the last intermediate layer to the target, and four edges between each consecutive pair of intermediate layers. Hence, the number of endogenous facts is 
+
+|D r | = 4 r. 26 R. B. Thapa and S. Staab 
+
+Thus, polynomial time in the size of Gr is polynomial time in the database size, because Dr contains exactly one fact for each edge of Gr .Each simple directed s-t path in Gr chooses exactly one of the two vertices in each of the r intermediate layers. These choices are independent, so Gr has 
+
+2r simple directed s-t paths. By Theorem 4, the minimal endogenous supports of Ar are exactly the edge-fact sets of these simple paths. Therefore, 
+
+|SΠtc ,Dr ,A r | = 2 r = 2 Ω(|D r |).
+
+The same theorem gives rΠtc ,Dr ,A r = λGr (s, t ), where λGr (s, t ) is the mini-mum cardinality of a directed s-t edge cut. Assign unit capacity to every edge of Gr . By the maximum-flow/minimum-cut theorem, the value of a maximum 
+
+s-t flow equals the minimum cardinality of a directed s-t edge cut [11,2]. Stan-dard maximum-flow algorithms compute this value in time polynomial in the number of vertices and edges of Gr , and hence in time polynomial in |D r |. This computation uses Gr as a graph instance and never enumerates its 2r simple paths. Consequently, the robustness value is computable in polynomial time even though the support family is exponential. 
+
+Proof of Proposition 4 
+
+We give a many-one reduction from Vertex Cover . The source problem asks, given an undirected graph G = ( V, E ) and an integer k, whether there is a set 
+
+C ⊆ V with |C| ≤ k such that every edge in E has at least one endpoint in C.We use the restriction to graphs with at least one edge. This restriction remains NP-hard. Indeed, map an arbitrary instance (G, k ) to the disjoint union of G
+
+with one fresh edge {p, q } and replace the bound by k + 1 ; Vertex Cover is NP-complete [15]. If G has a vertex cover of size at most k, then adding one of p, q 
+
+gives a cover of the new graph of size at most k + 1 .Conversely, any cover of the new graph of size at most k + 1 must contain at least one of p, q to cover the fresh edge. Removing one selected endpoint of that fresh edge from the cover leaves a vertex cover of the original graph G of size at most k.Let (G, k ) be an instance of this restricted problem, with G = ( V, E ) and E̸ =
+
+∅. We construct an instance of Destroy (Π, A 0). The fixed positive nonrecursive Datalog program Π uses a binary extensional predicate R, a unary extensional predicate P , and a nullary intensional predicate Goal . It consists of the single rule 
+
+Goal ← R(x, y ), P (x), P (y).
+
+The fixed goal atom is A0 = Goal .The extensional database is built as follows. For every vertex u ∈ V , put the fact P (u) into the endogenous database Dn. For every undirected edge 
+
+{u, v } ∈ E, choose one orientation, denoted (a, b ), and put the fact R(a, b ) into the exogenous database Dx. No other facts are added. The construction is polynomial in |V | + |E|, and the program Π and goal A0
+
+do not depend on the input graph. Causality and Supports in Datalog 27 
+
+The constructed instance satisfies the promise in Definition 5. Since E̸ = ∅,choose an edge {u, v } ∈ E and let (a, b ) be its chosen orientation. Then R(a, b ) ∈Dx, and both P (a) and P (b) belong to Dn. Therefore, the ground rule instance 
+
+Goal ← R(a, b ), P (a), P (b)
+
+has all body atoms true in Dx ∪ D n, so Π ∪ (Dx ∪ D n) |= Goal .We prove correctness of the reduction in both directions. Suppose first that 
+
+G has a vertex cover C ⊆ V with |C| ≤ k. Let 
+
+∆C = { P (u) : u ∈ C } ⊆ D n.
+
+Then, |∆C | = |C| ≤ k. We show that deleting ∆C destroys Goal . Assume, toward a contradiction, that 
+
+Π ∪ (Dx ∪ (Dn \ ∆C )) |= Goal .
+
+The only rule with head Goal is the rule displayed above. Hence, some ground instance of that rule must have all body atoms true in the retained database. Thus, there are constants a, b such that R(a, b ) ∈ D x, P (a) ∈ D n \ ∆C , and 
+
+P (b) ∈ D n \ ∆C . The fact R(a, b ) was introduced from the undirected edge 
+
+{a, b } ∈ E. Since P (a) and P (b) were not deleted, neither a nor b belongs to C.This contradicts that C covers every edge of G. Therefore, 
+
+Π ∪ (Dx ∪ (Dn \ ∆C )) ̸ |= Goal ,
+
+and the constructed Destroy (Π, A 0) instance is a yes-instance. Conversely, suppose there is a deletion set ∆ ⊆ D n with |∆| ≤ k such that 
+
+Π ∪ (Dx ∪ (Dn \ ∆)) ̸ |= Goal .
+
+Let C∆ = { u ∈ V : P (u) ∈ ∆ }. Since the facts P (u) are in one-to-one corre-spondence with vertices u ∈ V , we have |C∆| = |∆| ≤ k. We show that C∆ is a vertex cover. Assume not. Then some edge {u, v } ∈ E has neither endpoint in C∆. Let (a, b ) be the orientation of this edge used in the construction. Since neither endpoint belongs to C∆, both P (a) and P (b) remain in Dn \ ∆. Also, 
+
+R(a, b ) ∈ D x by construction. Hence, the ground instance 
+
+Goal ← R(a, b ), P (a), P (b)
+
+has all body atoms true in Dx ∪(Dn \∆). It follows that Π ∪(Dx ∪(Dn \∆)) |= Goal ,contradicting the choice of ∆. Therefore, every edge of G has an endpoint in C∆,and C∆ is a vertex cover of size at most k.The two directions establish that (G, k ) is a yes-instance of Vertex Cover 
+
+iff the constructed instance is a yes-instance of Destroy (Π, A 0). The reduction is polynomial, while Π and A0 are fixed. Hence, Destroy (Π, A 0) is NP-hard in data complexity.
