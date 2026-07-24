@@ -6,29 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-23
-- 运行时间：2026-07-23 20:41:12 UTC
+- 最新运行日期：2026-07-24
+- 运行时间：2026-07-24 21:07:19 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：0
 - 精读区：0
-- 速读区：2
+- 速读区：0
 
 ### 今日简报（AI）
-- 今日共生成 2 篇推荐（精读 0 篇，速读 2 篇）
-- 速读：《Causality and Minimal Supports in Recursive Datalog》（6.5/10）, 《Evaluating a Visual Query Tracer and Builder for Learning Declarative Logic Programming》（6.0/10）
-- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202607/23/README](/202607/23/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202607/24/README](/202607/24/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Causality and Minimal Supports in Recursive Datalog](/202607/23/2607.16443v1-causality-and-minimal-supports-in-recursive-datalog)  
-   标签：评分：6.5/10、query:q6
-   evidence：递归逻辑中的基于删除的解释与因果关系
-2. [Evaluating a Visual Query Tracer and Builder for Learning Declarative Logic Programming](/202607/23/2607.18864v1-evaluating-a-visual-query-tracer-and-builder-for-learning-declarative-logic-programming)  
-   标签：评分：6.0/10、query:q6
-   evidence：用于解释逻辑编程的可视化查询追踪器
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
