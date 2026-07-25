@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-25 <!--dpr-date:20260725-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/25/2607.16443v1-causality-and-minimal-supports-in-recursive-datalog" data-sidebar-item="{&quot;title&quot;: &quot;Causality and Minimal Supports in Recursive Datalog&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.16443v1-causality-and-minimal-supports-in-recursive-datalog&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;递归规则中的因果关系与解释&quot;}">Causality and Minimal Supports in Recursive Datalog</a>
   * 2026-07-23 <!--dpr-date:20260723-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/23/2607.16443v1-causality-and-minimal-supports-in-recursive-datalog" data-sidebar-item="{&quot;title&quot;: &quot;Causality and Minimal Supports in Recursive Datalog&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.16443v1-causality-and-minimal-supports-in-recursive-datalog&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;递归逻辑中的基于删除的解释与因果关系&quot;}">Causality and Minimal Supports in Recursive Datalog</a>
