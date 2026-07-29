@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-29T20:06:07.057841+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.21785v1",
+      "source": "arxiv",
+      "title": "From Seasonality to Semantics: Benchmarking a Hybrid Probabilistic Forecasting System for Roadblocks in Bolivia",
+      "abstract": "Roadblocks in Bolivia are a social conflict phenomenon with devastating economic impacts, estimated at losses equivalent to 4% of the national Gross Domestic Product. Despite their recurrence and impact, there is a lack of local predictive systems to anticipate these events for logistical decision-making. This paper presents a hybrid probabilistic forecasting system that integrates time series decomposition (Prophet) with natural language processing (NLP) techniques applied to a six-year corpus of Bolivian news coverage. The methodology employs vector semantic embeddings and zero-shot classification models to capture signals of discursive escalation prior to the materialization of the roadblocks. Using an expanding walk-forward validation scheme applied over 1,762 days and seven forecasting horizons (H+1 to H+7), seven internal configurations and four external benchmarks were compared, including SARIMA and LightGBM. The results demonstrate that the hybrid configuration (Prophet + NLP, C6) consistently outperforms purely statistical models, achieving an AUC-ROC of 0.677 at H+1 and reducing the Brier Score by 10.9% relative to the baseline temporal model (0.220 vs. 0.247), maintaining a statistically significant error reduction across all evaluated horizons ($p < 0.02$). This research validates that the integration of semantic news signals allows for the detection of social tension peaks not captured by historical inertia, providing a technical tool for risk management in critical transport corridors.",
+      "authors": [
+        "Rodrigo Vargas Sainz",
+        "Christian Berón Curti"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-07-23T20:05:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.21785v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 8.5,
+      "llm_evidence_en": "Predictive system for social conflict (roadblocks) using NLP and zero-shot classification on news corpus.",
+      "llm_evidence_cn": "使用自然语言处理和零样本分类对新闻语料库进行社会冲突（路障）预测系统研究。",
+      "llm_evidence": "使用自然语言处理和零样本分类对新闻语料库进行社会冲突（路障）预测系统研究。",
+      "canonical_evidence": "使用自然语言处理和零样本分类对新闻语料库进行社会冲突（路障）预测系统研究。",
+      "llm_tldr_en": "A hybrid system forecasting social conflict events in Bolivia using time series and semantic NLP techniques.",
+      "llm_tldr_cn": "该研究结合时间序列和语义NLP技术，构建了玻利维亚社会冲突事件的混合预测系统。",
+      "llm_tldr": "该研究结合时间序列和语义NLP技术，构建了玻利维亚社会冲突事件的混合预测系统。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}
