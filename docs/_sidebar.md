@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-31 <!--dpr-date:20260731-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/31/2607.22766v1-beyond-shapley-an-influence-based-data-auditing-pipeline-for-llm-alignment-and-evaluation" data-sidebar-item="{&quot;title&quot;: &quot;Beyond Shapley: An Influence-Based Data Auditing Pipeline for LLM Alignment and Evaluation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.22766v1-beyond-shapley-an-influence-based-data-auditing-pipeline-for-llm-alignment-and-evaluation&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;基于影响力的模型评估数据估值和Shapley值近似方法&quot;}">Beyond Shapley: An Influence-Based Data Auditing Pipeline for LLM Alignment and Evaluation</a>
   * 2026-07-29 <!--dpr-date:20260729-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/29/2607.21785v1-from-seasonality-to-semantics-benchmarking-a-hybrid-probabilistic-forecasting-system-for-roadblocks-in-bolivia" data-sidebar-item="{&quot;title&quot;: &quot;From Seasonality to Semantics: Benchmarking a Hybrid Probabilistic Forecasting System for Roadblocks in Bolivia&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.21785v1-from-seasonality-to-semantics-benchmarking-a-hybrid-probabilistic-forecasting-system-for-roadblocks-in-bolivia&quot;, &quot;score&quot;: &quot;8.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用自然语言处理和零样本分类对新闻语料库进行社会冲突（路障）预测系统研究。&quot;}">From Seasonality to Semantics: Benchmarking a Hybrid Probabilistic Forecasting System for Roadblocks in Bolivia</a>

@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.22766v1/fig-001.webp",
+      "caption": "Table 1: Taxonomy of contradiction pairs identified in the HelpSteer2 dataset. The pipeline isolates inter-annotator inconsistencies where human raters awarded a perfect score (Record A, Score: 4) to a structurally sound but factually flawed response, while correctly penalizing functionally identical errors in related contexts (Record B, Score: ≤ 1).",
+      "page": 7,
+      "index": 1,
+      "width": 827,
+      "height": 222
+    },
+    {
+      "url": "assets/figures/arxiv/2607.22766v1/fig-002.webp",
+      "caption": "Figure 1: Workflow of the proposed influence-based data valuation pipeline. Phase 1 constructs a directed graph of semantic neighborhoods and measures the predictive influence between records using inference-only conditional log-likelihood shifts. Phase 2 converts these raw predictive shifts into actionable metrics to isolate structural contradictions, which are then arbitrated by an expert evaluator to sanitize datasets and benchmarks.",
+      "page": 3,
+      "index": 2,
+      "width": 772,
+      "height": 227
+    },
+    {
+      "url": "assets/figures/arxiv/2607.22766v1/fig-003.webp",
+      "caption": "Figure 2: Template for the zero-shot and one-shot prompt given a base prompt and one of its neighbors.",
+      "page": 13,
+      "index": 3,
+      "width": 831,
+      "height": 456
+    },
+    {
+      "url": "assets/figures/arxiv/2607.22766v1/fig-004.webp",
+      "caption": "Table 3: Model Disagreement Rates on HH-RLHF Evaluation Subsets. The full pipeline isolates records where the human ground-truth is highly flawed, resulting in massive spikes in apparent model \"failure\" rates.",
+      "page": 9,
+      "index": 4,
+      "width": 827,
+      "height": 230
+    }
+  ]
+}
