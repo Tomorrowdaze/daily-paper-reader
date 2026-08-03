@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-03",
+  "date": "2026-08-03",
+  "generated_at": "2026-08-03T20:52:24",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/03/2607.23753v1-on-the-post-hoc-evaluation-of-pde-discovery-a-multifaceted-challenge-of-scientific-advancement",
+      "section": "quick",
+      "title_en": "On the post-hoc Evaluation of PDE Discovery: A Multifaceted Challenge of Scientific Advancement",
+      "authors": "Baptiste Mathevon, Farah Cherfaoui, Amaury Habrard, Marc Sebban",
+      "date": "2026-07-26",
+      "pdf": "https://arxiv.org/pdf/2607.23753v1",
+      "score": "6.0",
+      "evidence": "关注科学发现模型中的可解释性和预测准确性",
+      "tldr": "基于准确性、物理一致性和可解释性评估偏微分方程发现模型。",
+      "tags": "query:profile-1",
+      "abstract_en": "Partial differential equation (PDE) discovery aims to identify from data the governing law of a physical system. Constituting a cornerstone of scientific advancement, it has become during the past decade a major line of research in the rapidly evolving field of Physics-informed Machine Learning (PiML). Among the remaining open problems to address in this domain, the post-hoc evaluation of discovered PDEs raises the particular difficulty of being multifaceted. Indeed, it requires jointly considering predictive accuracy, physical consistency, interpretability, and out-of-distribution generalization capacity. Given that some of these properties are conflicting, it is worth noting that the wide range of existing evaluation metrics only partially address the overall problem, potentially leading to overly interpreted conclusions about the validity of a presumed new physical theory. From an abundant literature spanning machine learning, numerical analysis, information theory or symbolic regression, we propose, to our knowledge, the first taxonomy of PDE evaluation metrics, and discuss their advantages and limitations in depth. Based on the observation that evaluation is often achieved on a case-by-case basis and that a universally accepted methodology remains elusive, we further provide recommendations with the aim of promoting standardized and reliable practices, before sketching promising future lines of research in this field. We argue that this paper is intended both for ML experts who design new PDE discovery algorithms and for users of these methods aiming, in real applications, to discover and validate well-founded scientific laws.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/03/2607.25605v1-computational-extraction-of-legal-causes-via-al-sabr-wa-al-taqsim-a-set-theoretic-formalization-for-closed-fiqh-chapters",
+      "section": "quick",
+      "title_en": "Computational Extraction of Legal Causes via al-Sabr wa al-Taqsim: A Set-Theoretic Formalization for Closed Fiqh Chapters",
+      "authors": "Elnaser Abdelwahab",
+      "date": "2026-07-28",
+      "pdf": "https://arxiv.org/pdf/2607.25605v1",
+      "score": "6.0",
+      "evidence": "使用集合论形式化方法提取法律原因并消除冗余属性",
+      "tldr": "介绍了一种利用形式逻辑从法学数据中提取最小法律原因的算法。",
+      "tags": "query:q6",
+      "abstract_en": "This paper presents a set-theoretic formalization of the classical usuli method of al-Sabr wa al-Taqsim (Examination and Division) for extracting legal causes ('ilal) within closed chapters of jurisprudence. A computational algorithm is introduced that extracts minimal operational rules from a truth table of juristic verdicts. The principal result is that, given a complete truth table for a closed chapter, the algorithm computes the minimal structural generators of the ruling and eliminates all logically redundant attributes. The resulting structures constitute admissible candidate causes for subsequent juristic evaluation. The framework is conditional upon the availability of a finite school-relative concept vocabulary and a complete ruling table for the chapter under investigation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
