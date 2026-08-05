@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-05 <!--dpr-date:20260805-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/05/2607.26380v1-continuous-online-evaluation-of-recommendation-strategies-in-social-science-academic-search" data-sidebar-item="{&quot;title&quot;: &quot;Continuous Online Evaluation of Recommendation Strategies in Social Science Academic Search&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.26380v1-continuous-online-evaluation-of-recommendation-strategies-in-social-science-academic-search&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;profile-1&quot;}], &quot;evidence&quot;: &quot;社会科学学术搜索中的推荐策略&quot;}">Continuous Online Evaluation of Recommendation Strategies in Social Science Academic Search</a>
   * 2026-08-03 <!--dpr-date:20260803-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/03/2607.23753v1-on-the-post-hoc-evaluation-of-pde-discovery-a-multifaceted-challenge-of-scientific-advancement" data-sidebar-item="{&quot;title&quot;: &quot;On the post-hoc Evaluation of PDE Discovery: A Multifaceted Challenge of Scientific Advancement&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.23753v1-on-the-post-hoc-evaluation-of-pde-discovery-a-multifaceted-challenge-of-scientific-advancement&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;profile-1&quot;}], &quot;evidence&quot;: &quot;关注科学发现模型中的可解释性和预测准确性&quot;}">On the post-hoc Evaluation of PDE Discovery: A Multifaceted Challenge of Scientific Advancement</a>

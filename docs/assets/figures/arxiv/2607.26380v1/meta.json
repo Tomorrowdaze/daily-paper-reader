@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.26380v1/fig-001.webp",
+      "caption": "Fig. 1: Recommendations in the section Similar Research Data for a given research dataset about social media usage.",
+      "page": 10,
+      "index": 1,
+      "width": 725,
+      "height": 500
+    },
+    {
+      "url": "assets/figures/arxiv/2607.26380v1/fig-002.webp",
+      "caption": "Table 2: Pairwise comparison of recommender systems. Statistically significant p-values are highlighted in bold.",
+      "page": 11,
+      "index": 2,
+      "width": 714,
+      "height": 318
+    },
+    {
+      "url": "assets/figures/arxiv/2607.26380v1/fig-003.webp",
+      "caption": "Table 3: Category-specific pairwise comparison of recommender systems. For each pair and category, two cells contain the number of wins and the win rate for systems in the corresponding pair. Cell colors indicate percentage change from the overall results (i.e., Table 2): decreases (red), increases (green), and near-zero changes (yellow).",
+      "page": 12,
+      "index": 3,
+      "width": 698,
+      "height": 398
+    }
+  ]
+}

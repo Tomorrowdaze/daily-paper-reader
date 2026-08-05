@@ -6,22 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-04
-- 运行时间：2026-08-04 20:36:05 UTC
+- 最新运行日期：2026-08-05
+- 运行时间：2026-08-05 21:50:52 UTC
 - 运行状态：成功
-- 本次总论文数：0
+- 本次总论文数：1
 - 精读区：0
-- 速读区：0
+- 速读区：1
 
 ### 今日简报（AI）
-> 今日无新推荐，系统未产出可展示论文。
-- 详情：[/202608/04/README](/202608/04/README)
+- 今日共生成 1 篇推荐（精读 0 篇，速读 1 篇）
+- 速读：《Continuous Online Evaluation of Recommendation Strategies in Social Science Academic Search》（6.0/10）
+- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
+- 详情：[/202608/05/README](/202608/05/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [Continuous Online Evaluation of Recommendation Strategies in Social Science Academic Search](/202608/05/2607.26380v1-continuous-online-evaluation-of-recommendation-strategies-in-social-science-academic-search)  
+   标签：评分：6.0/10、query:profile-1
+   evidence：社会科学学术搜索中的推荐策略
 
 
 <div class="dpr-home-promo-card">
