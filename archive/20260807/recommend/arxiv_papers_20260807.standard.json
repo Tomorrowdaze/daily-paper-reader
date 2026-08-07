@@ -1,15 +1,15 @@
 {
   "mode": "standard",
-  "generated_at": "2026-08-07T01:57:31.631173+00:00",
+  "generated_at": "2026-08-07T21:09:07.530617+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
     "deep_divecandidates": 1,
     "deep_cap": 6,
     "deep_selected": 1,
-    "quick_candidates": 0,
+    "quick_candidates": 1,
     "quick_skim_target": 11,
-    "quick_selected": 0
+    "quick_selected": 1
   },
   "deep_dive": [
     {
@@ -30,14 +30,14 @@
       "tags": [
         "query:内战预测"
       ],
-      "llm_score": 9.5,
-      "llm_evidence_en": "Extracts structured causal evidence from humanitarian crisis reports using LLMs with snippet grounding for auditability.",
-      "llm_evidence_cn": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
-      "llm_evidence": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
-      "canonical_evidence": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
-      "llm_tldr_en": "A pipeline for extracting auditable causal evidence from crisis reports, supporting conflict mechanism analysis.",
-      "llm_tldr_cn": "一种从危机报告中提取可审计因果证据的流水线，支持冲突机制分析。",
-      "llm_tldr": "一种从危机报告中提取可审计因果证据的流水线，支持冲突机制分析。",
+      "llm_score": 8.5,
+      "llm_evidence_en": "Extracts causal evidence from humanitarian crisis reports using LLMs with grounding for auditability.",
+      "llm_evidence_cn": "使用大语言模型从人道主义危机报告中提取因果证据，并提供可审计的依据。",
+      "llm_evidence": "使用大语言模型从人道主义危机报告中提取因果证据，并提供可审计的依据。",
+      "canonical_evidence": "使用大语言模型从人道主义危机报告中提取因果证据，并提供可审计的依据。",
+      "llm_tldr_en": "A pipeline for extracting auditable causal relations from crisis reports to support humanitarian decision-making.",
+      "llm_tldr_cn": "一种从危机报告中提取可审计因果关系的流水线，旨在支持人道主义决策。",
+      "llm_tldr": "一种从危机报告中提取可审计因果关系的流水线，旨在支持人道主义决策。",
       "llm_tags": [
         "query:q6"
       ],
@@ -47,5 +47,43 @@
       "selection_source": "fresh_fetch"
     }
   ],
-  "quick_skim": []
+  "quick_skim": [
+    {
+      "id": "2608.06292v1",
+      "source": "arxiv",
+      "title": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "abstract": "Retrieval-augmented generation (RAG) improves question answering by grounding large language models (LLMs) in external knowledge such as text corpora. However, its reasoning process remains largely opaque: intermediate reasoning steps are difficult to verify and cannot be reliably attributed to specific evidence. Moreover, missing user-specific context is rarely detected systematically, often leading to incomplete or incorrect output.   We propose NeSy-RAG, a modular neuro-symbolic RAG framework that synthesizes attributable Prolog modules from retrieved text chunks. For each chunk, the system generates semantically meaningful predicates that encode Boolean claims, which may depend on user facts. Using joint natural language-code embeddings, predicates are retrieved and composed into Prolog queries. To address incomplete user context, we introduce a symbolic knowledge-gap detection mechanism that identifies missing user facts whose truth values affect the query outcome and automatically triggers follow-up interactions.   Executing the resulting Prolog queries yields deterministic answers together with transparent execution traces that link each reasoning step to its originating source. On the ShARC benchmark, without domain-specific training, NeSy-RAG achieves 61.1% accuracy, outperforming a same-model RAG baseline that achieves 42.8% accuracy.",
+      "authors": [
+        "Jonas Gann",
+        "Michael Gertz"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.SC"
+      ],
+      "published": "2026-08-06T17:16:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.06292v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explainable reasoning process and attributable evidence using neuro-symbolic logic",
+      "llm_evidence_cn": "使用神经符号逻辑的可解释推理过程和可追溯证据",
+      "llm_evidence": "使用神经符号逻辑的可解释推理过程和可追溯证据",
+      "canonical_evidence": "使用神经符号逻辑的可解释推理过程和可追溯证据",
+      "llm_tldr_en": "Proposes a neuro-symbolic RAG framework for explainable and attributable question answering.",
+      "llm_tldr_cn": "提出了一种神经符号RAG框架，用于可解释和可归因的问答。",
+      "llm_tldr": "提出了一种神经符号RAG框架，用于可解释和可归因的问答。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
 }
