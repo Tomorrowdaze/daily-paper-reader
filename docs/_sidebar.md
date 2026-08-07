@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-07 <!--dpr-date:20260807-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/07/2608.04576v1-causal-evidence-extraction-and-triangulation-in-crisis-reports-using-large-language-models-a-reliefweb-based-study" data-sidebar-item="{&quot;title&quot;: &quot;Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.04576v1-causal-evidence-extraction-and-triangulation-in-crisis-reports-using-large-language-models-a-reliefweb-based-study&quot;, &quot;score&quot;: &quot;9.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。&quot;}">Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study</a>
   * 2026-08-05 <!--dpr-date:20260805-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/05/2607.26380v1-continuous-online-evaluation-of-recommendation-strategies-in-social-science-academic-search" data-sidebar-item="{&quot;title&quot;: &quot;Continuous Online Evaluation of Recommendation Strategies in Social Science Academic Search&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.26380v1-continuous-online-evaluation-of-recommendation-strategies-in-social-science-academic-search&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;profile-1&quot;}], &quot;evidence&quot;: &quot;社会科学学术搜索中的推荐策略&quot;}">Continuous Online Evaluation of Recommendation Strategies in Social Science Academic Search</a>

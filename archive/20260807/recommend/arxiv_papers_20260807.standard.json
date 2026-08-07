@@ -1,0 +1,51 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-07T01:57:31.631173+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2608.04576v1",
+      "source": "arxiv",
+      "title": "Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study",
+      "abstract": "Humanitarian reports are long, noisy, and multi-topic, making it difficult to consolidate decision-relevant causal evidence. We present a ReliefWeb study (2000-2024) and a two-stage Large Language Model (LLM) pipeline that extracts structured intervention-outcome records with direction and strength attributes. Query-conditioned extraction restricts output to a specified intervention class, reducing retrieval-induced over-extraction, while snippet grounding links each relation to supporting text for auditability and classification. In an expert-annotated dataset of 100 reports, the best closed-source LLM achieved a weighted F1 score of 90.73% with strong cost-efficiency, while Llama-3.1-8B with supervised fine-tuning reached 94.15% weighted F1 score. We further propose context-preserving triangulation that aggregates strength-weighted evidence within disaster$\\times$source cells, applies Laplace smoothing and equally weights cells to quantify cross-context convergence via a Level-of-Evidence score. Applied to cash assistance, food-related outcomes show strong positive convergence (LoE=0.865) and stable long-horizon trajectories.",
+      "authors": [
+        "Yuanjun Zhang",
+        "Mourad Oussalah"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-05T08:07:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.04576v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 9.5,
+      "llm_evidence_en": "Extracts structured causal evidence from humanitarian crisis reports using LLMs with snippet grounding for auditability.",
+      "llm_evidence_cn": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
+      "llm_evidence": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
+      "canonical_evidence": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
+      "llm_tldr_en": "A pipeline for extracting auditable causal evidence from crisis reports, supporting conflict mechanism analysis.",
+      "llm_tldr_cn": "一种从危机报告中提取可审计因果证据的流水线，支持冲突机制分析。",
+      "llm_tldr": "一种从危机报告中提取可审计因果证据的流水线，支持冲突机制分析。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-07",
+  "date": "2026-08-07",
+  "generated_at": "2026-08-07T01:58:52",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/07/2608.04576v1-causal-evidence-extraction-and-triangulation-in-crisis-reports-using-large-language-models-a-reliefweb-based-study",
+      "section": "deep",
+      "title_en": "Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study",
+      "authors": "Yuanjun Zhang, Mourad Oussalah",
+      "date": "2026-08-05",
+      "pdf": "https://arxiv.org/pdf/2608.04576v1",
+      "score": "9.5",
+      "evidence": "使用大模型从人道主义危机报告中提取结构化因果证据，并通过片段溯源实现可审计性。",
+      "tldr": "一种从危机报告中提取可审计因果证据的流水线，支持冲突机制分析。",
+      "tags": "query:q6",
+      "abstract_en": "Humanitarian reports are long, noisy, and multi-topic, making it difficult to consolidate decision-relevant causal evidence. We present a ReliefWeb study (2000-2024) and a two-stage Large Language Model (LLM) pipeline that extracts structured intervention-outcome records with direction and strength attributes. Query-conditioned extraction restricts output to a specified intervention class, reducing retrieval-induced over-extraction, while snippet grounding links each relation to supporting text for auditability and classification. In an expert-annotated dataset of 100 reports, the best closed-source LLM achieved a weighted F1 score of 90.73% with strong cost-efficiency, while Llama-3.1-8B with supervised fine-tuning reached 94.15% weighted F1 score. We further propose context-preserving triangulation that aggregates strength-weighted evidence within disaster$\\times$source cells, applies Laplace smoothing and equally weights cells to quantify cross-context convergence via a Level-of-Evidence score. Applied to cash assistance, food-related outcomes show strong positive convergence (LoE=0.865) and stable long-horizon trajectories.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
