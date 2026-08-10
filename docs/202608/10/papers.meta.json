@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-10",
+  "date": "2026-08-10",
+  "generated_at": "2026-08-10T21:02:37",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/10/2608.04576v1-causal-evidence-extraction-and-triangulation-in-crisis-reports-using-large-language-models-a-reliefweb-based-study",
+      "section": "deep",
+      "title_en": "Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study",
+      "authors": "Yuanjun Zhang, Mourad Oussalah",
+      "date": "2026-08-05",
+      "pdf": "https://arxiv.org/pdf/2608.04576v1",
+      "score": "9.0",
+      "evidence": "使用LLM和片段接地在危机报告中提取因果证据",
+      "tldr": "使用接地的LLM流水线从人道主义危机报告中提取结构化的因果证据。",
+      "tags": "query:q6",
+      "abstract_en": "Humanitarian reports are long, noisy, and multi-topic, making it difficult to consolidate decision-relevant causal evidence. We present a ReliefWeb study (2000-2024) and a two-stage Large Language Model (LLM) pipeline that extracts structured intervention-outcome records with direction and strength attributes. Query-conditioned extraction restricts output to a specified intervention class, reducing retrieval-induced over-extraction, while snippet grounding links each relation to supporting text for auditability and classification. In an expert-annotated dataset of 100 reports, the best closed-source LLM achieved a weighted F1 score of 90.73% with strong cost-efficiency, while Llama-3.1-8B with supervised fine-tuning reached 94.15% weighted F1 score. We further propose context-preserving triangulation that aggregates strength-weighted evidence within disaster$\\times$source cells, applies Laplace smoothing and equally weights cells to quantify cross-context convergence via a Level-of-Evidence score. Applied to cash assistance, food-related outcomes show strong positive convergence (LoE=0.865) and stable long-horizon trajectories.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/10/2608.06292v1-nesy-rag-neuro-symbolic-rag-for-explainable-question-answering",
+      "section": "quick",
+      "title_en": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "authors": "Jonas Gann, Michael Gertz",
+      "date": "2026-08-06",
+      "pdf": "https://arxiv.org/pdf/2608.06292v1",
+      "score": "6.0",
+      "evidence": "用于可解释和可归因问答的神经符号RAG",
+      "tldr": "将LLM与Prolog结合，实现透明、可归因且可解释的推理过程。",
+      "tags": "query:profile-1",
+      "abstract_en": "Retrieval-augmented generation (RAG) improves question answering by grounding large language models (LLMs) in external knowledge such as text corpora. However, its reasoning process remains largely opaque: intermediate reasoning steps are difficult to verify and cannot be reliably attributed to specific evidence. Moreover, missing user-specific context is rarely detected systematically, often leading to incomplete or incorrect output.   We propose NeSy-RAG, a modular neuro-symbolic RAG framework that synthesizes attributable Prolog modules from retrieved text chunks. For each chunk, the system generates semantically meaningful predicates that encode Boolean claims, which may depend on user facts. Using joint natural language-code embeddings, predicates are retrieved and composed into Prolog queries. To address incomplete user context, we introduce a symbolic knowledge-gap detection mechanism that identifies missing user facts whose truth values affect the query outcome and automatically triggers follow-up interactions.   Executing the resulting Prolog queries yields deterministic answers together with transparent execution traces that link each reasoning step to its originating source. On the ShARC benchmark, without domain-specific training, NeSy-RAG achieves 61.1% accuracy, outperforming a same-model RAG baseline that achieves 42.8% accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/10/2608.06305v1-beyond-top-k-replacing-black-box-retrieval-with-interpretable-agentic-operations",
+      "section": "quick",
+      "title_en": "Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations",
+      "authors": "Sagar Tamang, Ayush Vyas, Tabarakul Hazarika",
+      "date": "2026-08-06",
+      "pdf": "https://arxiv.org/pdf/2608.06305v1",
+      "score": "6.0",
+      "evidence": "针对复杂文档的可解释智能体操作",
+      "tldr": "在结构化文档分析中，用可解释的智能体操作取代黑盒检索。",
+      "tags": "query:q5",
+      "abstract_en": "Retrieval-augmented generation over long documents is dominated by one design: chunk the text, embed the chunks, and surface the top-k nearest neighbours of the query. We argue that for an important class of documents -- financial statements, audit reports, regulatory returns -- this design is structurally unsound, and we make the argument measurable. On a 780-page government financial report, 86.8% of content lines are table rows, thousands of near-identical figures compete in one embedding space, and a figure inherits its unit from a header a median of 13 lines above it -- so a chunk boundary routinely separates a number from whether it is in lakh or crore, an error of two orders of magnitude. A table-aware chunker built as a steelman fixes the unit problem but leaves 27-30% of numeric chunks with no fiscal-year header at every chunk size we tried. We propose READ (Reliable Embedding-free Agentic Document-search), in which an agent reads the raw document through three deterministic operations -- normalized lexical search, structural navigation, and bounded span reads -- exposed over the Model Context Protocol, so a trajectory is a replayable audit trail, not an opaque similarity score. On 51 verified questions READ answers 58.8% against dense retrieval's 15.7% (p_Holm = 2 x 10^-5) -- or 35.3% tuned, which READ still leads by 23.5 points (p_Holm = 0.017). An agent given the same loop but a top-k tool reaches only 27.5%, locating the gain in the interface rather than in iteration. We also report what the evidence does not support: BM25 is statistically indistinguishable from READ, so our result separates embedding-based from embedding-free retrieval, not agentic from lexical search.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

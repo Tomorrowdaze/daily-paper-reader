@@ -1,0 +1,128 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-10T21:00:29.538535+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2608.04576v1",
+      "source": "arxiv",
+      "title": "Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study",
+      "abstract": "Humanitarian reports are long, noisy, and multi-topic, making it difficult to consolidate decision-relevant causal evidence. We present a ReliefWeb study (2000-2024) and a two-stage Large Language Model (LLM) pipeline that extracts structured intervention-outcome records with direction and strength attributes. Query-conditioned extraction restricts output to a specified intervention class, reducing retrieval-induced over-extraction, while snippet grounding links each relation to supporting text for auditability and classification. In an expert-annotated dataset of 100 reports, the best closed-source LLM achieved a weighted F1 score of 90.73% with strong cost-efficiency, while Llama-3.1-8B with supervised fine-tuning reached 94.15% weighted F1 score. We further propose context-preserving triangulation that aggregates strength-weighted evidence within disaster$\\times$source cells, applies Laplace smoothing and equally weights cells to quantify cross-context convergence via a Level-of-Evidence score. Applied to cash assistance, food-related outcomes show strong positive convergence (LoE=0.865) and stable long-horizon trajectories.",
+      "authors": [
+        "Yuanjun Zhang",
+        "Mourad Oussalah"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-05T08:07:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.04576v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "causal evidence extraction in crisis reports using LLMs with snippet grounding",
+      "llm_evidence_cn": "使用LLM和片段接地在危机报告中提取因果证据",
+      "llm_evidence": "使用LLM和片段接地在危机报告中提取因果证据",
+      "canonical_evidence": "使用LLM和片段接地在危机报告中提取因果证据",
+      "llm_tldr_en": "Extracts structured causal evidence from humanitarian crisis reports using grounded LLM pipelines.",
+      "llm_tldr_cn": "使用接地的LLM流水线从人道主义危机报告中提取结构化的因果证据。",
+      "llm_tldr": "使用接地的LLM流水线从人道主义危机报告中提取结构化的因果证据。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.06292v1",
+      "source": "arxiv",
+      "title": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "abstract": "Retrieval-augmented generation (RAG) improves question answering by grounding large language models (LLMs) in external knowledge such as text corpora. However, its reasoning process remains largely opaque: intermediate reasoning steps are difficult to verify and cannot be reliably attributed to specific evidence. Moreover, missing user-specific context is rarely detected systematically, often leading to incomplete or incorrect output.   We propose NeSy-RAG, a modular neuro-symbolic RAG framework that synthesizes attributable Prolog modules from retrieved text chunks. For each chunk, the system generates semantically meaningful predicates that encode Boolean claims, which may depend on user facts. Using joint natural language-code embeddings, predicates are retrieved and composed into Prolog queries. To address incomplete user context, we introduce a symbolic knowledge-gap detection mechanism that identifies missing user facts whose truth values affect the query outcome and automatically triggers follow-up interactions.   Executing the resulting Prolog queries yields deterministic answers together with transparent execution traces that link each reasoning step to its originating source. On the ShARC benchmark, without domain-specific training, NeSy-RAG achieves 61.1% accuracy, outperforming a same-model RAG baseline that achieves 42.8% accuracy.",
+      "authors": [
+        "Jonas Gann",
+        "Michael Gertz"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.SC"
+      ],
+      "published": "2026-08-06T17:16:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.06292v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "neuro-symbolic RAG for explainable and attributable question answering",
+      "llm_evidence_cn": "用于可解释和可归因问答的神经符号RAG",
+      "llm_evidence": "用于可解释和可归因问答的神经符号RAG",
+      "canonical_evidence": "用于可解释和可归因问答的神经符号RAG",
+      "llm_tldr_en": "Combines LLMs with Prolog for transparent, attributable, and explainable reasoning processes.",
+      "llm_tldr_cn": "将LLM与Prolog结合，实现透明、可归因且可解释的推理过程。",
+      "llm_tldr": "将LLM与Prolog结合，实现透明、可归因且可解释的推理过程。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.06305v1",
+      "source": "arxiv",
+      "title": "Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations",
+      "abstract": "Retrieval-augmented generation over long documents is dominated by one design: chunk the text, embed the chunks, and surface the top-k nearest neighbours of the query. We argue that for an important class of documents -- financial statements, audit reports, regulatory returns -- this design is structurally unsound, and we make the argument measurable. On a 780-page government financial report, 86.8% of content lines are table rows, thousands of near-identical figures compete in one embedding space, and a figure inherits its unit from a header a median of 13 lines above it -- so a chunk boundary routinely separates a number from whether it is in lakh or crore, an error of two orders of magnitude. A table-aware chunker built as a steelman fixes the unit problem but leaves 27-30% of numeric chunks with no fiscal-year header at every chunk size we tried. We propose READ (Reliable Embedding-free Agentic Document-search), in which an agent reads the raw document through three deterministic operations -- normalized lexical search, structural navigation, and bounded span reads -- exposed over the Model Context Protocol, so a trajectory is a replayable audit trail, not an opaque similarity score. On 51 verified questions READ answers 58.8% against dense retrieval's 15.7% (p_Holm = 2 x 10^-5) -- or 35.3% tuned, which READ still leads by 23.5 points (p_Holm = 0.017). An agent given the same loop but a top-k tool reaches only 27.5%, locating the gain in the interface rather than in iteration. We also report what the evidence does not support: BM25 is statistically indistinguishable from READ, so our result separates embedding-based from embedding-free retrieval, not agentic from lexical search.",
+      "authors": [
+        "Sagar Tamang",
+        "Ayush Vyas",
+        "Tabarakul Hazarika"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-08-06T17:23:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.06305v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable agentic operations for complex documents",
+      "llm_evidence_cn": "针对复杂文档的可解释智能体操作",
+      "llm_evidence": "针对复杂文档的可解释智能体操作",
+      "canonical_evidence": "针对复杂文档的可解释智能体操作",
+      "llm_tldr_en": "Replaces black-box retrieval with interpretable agentic operations for structured document analysis.",
+      "llm_tldr_cn": "在结构化文档分析中，用可解释的智能体操作取代黑盒检索。",
+      "llm_tldr": "在结构化文档分析中，用可解释的智能体操作取代黑盒检索。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
