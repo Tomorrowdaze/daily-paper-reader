@@ -1,0 +1,166 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-001.webp",
+      "caption": "Figure 6: Edge-centric referral tensor operations (1 head).",
+      "page": 6,
+      "index": 1,
+      "width": 798,
+      "height": 786
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-002.webp",
+      "caption": "Figure 8: GM-0 constructs edges representing constraint regions in early layers.",
+      "page": 11,
+      "index": 2,
+      "width": 798,
+      "height": 422
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-003.webp",
+      "caption": "Figure 7: Seed 0, test batch 0, sample 0: puzzle, solution, and predictions (GM-0 and T-0).",
+      "page": 11,
+      "index": 3,
+      "width": 798,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-004.webp",
+      "caption": "Figure 17: GM-0’s edges are input-adaptive (early-layer).",
+      "page": 25,
+      "index": 4,
+      "width": 798,
+      "height": 1048
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-005.webp",
+      "caption": "Figure 18: GM-0’s edges are input-adaptive (late-layer).",
+      "page": 26,
+      "index": 5,
+      "width": 798,
+      "height": 1048
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-006.webp",
+      "caption": "Table 12: Transformer - positional encodings.",
+      "page": 21,
+      "index": 6,
+      "width": 756,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-007.webp",
+      "caption": "Figure 21: GM-0 and T-0 differ in late-layer attention weights: GM-0’s attention appears more global and more interpretable.",
+      "page": 29,
+      "index": 7,
+      "width": 798,
+      "height": 721
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-008.webp",
+      "caption": "Table 14: GM - address sparsity.",
+      "page": 22,
+      "index": 8,
+      "width": 544,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-009.webp",
+      "caption": "Figure 12: T-0 struggles to combine relational and content-based roles in early-to-middle layers (excerpt).",
+      "page": 14,
+      "index": 9,
+      "width": 798,
+      "height": 389
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-010.webp",
+      "caption": "Figure 1: GM representations. Figure 2: GM layers.",
+      "page": 3,
+      "index": 10,
+      "width": 829,
+      "height": 279
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-011.webp",
+      "caption": "Figure 13: Simplified code for edge-augmented attention.",
+      "page": 18,
+      "index": 11,
+      "width": 827,
+      "height": 590
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-012.webp",
+      "caption": "Figure 15: GM-0 uses different mechanisms to target r2c5 and r5c2, consistently across source cells.",
+      "page": 23,
+      "index": 12,
+      "width": 798,
+      "height": 1227
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-013.webp",
+      "caption": "Figure 20: T-0 struggles to combine relational and content-based roles in early-to-middle layers.",
+      "page": 28,
+      "index": 13,
+      "width": 798,
+      "height": 1048
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-014.webp",
+      "caption": "Figure 11: GM-0’s edge and node factors specialize in relational and content-based roles, respectively (excerpt).",
+      "page": 13,
+      "index": 14,
+      "width": 798,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-015.webp",
+      "caption": "Figure 10: GM-0’s edges are input-adaptive (excerpt).",
+      "page": 13,
+      "index": 15,
+      "width": 798,
+      "height": 720
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-016.webp",
+      "caption": "Figure 5: Edge-augmented attention tensor operations (1 head).",
+      "page": 4,
+      "index": 16,
+      "width": 798,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-017.webp",
+      "caption": "Figure 14: Simplified code for edge-centric referral.",
+      "page": 19,
+      "index": 17,
+      "width": 827,
+      "height": 837
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-018.webp",
+      "caption": "Figure 9: GM-0 composes existing regions through self-referral to produce more complex regions.",
+      "page": 12,
+      "index": 18,
+      "width": 798,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-019.webp",
+      "caption": "Figure 19: GM-0’s edge and node factors specialize in relational and content-based roles, respectively.",
+      "page": 27,
+      "index": 19,
+      "width": 798,
+      "height": 1060
+    },
+    {
+      "url": "assets/figures/arxiv/2608.06834v1/fig-020.webp",
+      "caption": "Figure 16: GM-0 applies the 1-2-4 construction broadly, including in cells that are not middle-ofrow/column.",
+      "page": 24,
+      "index": 20,
+      "width": 798,
+      "height": 631
+    }
+  ]
+}

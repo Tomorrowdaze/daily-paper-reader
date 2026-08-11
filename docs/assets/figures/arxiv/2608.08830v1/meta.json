@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-001.webp",
+      "caption": "Table 4: Performance comparison of different models (e.g., DeepSeek, Llama-3.1-70B, Claude, and GPT-4) across sections of the Indian Penal Code. This evaluation presents the F1-scores of various statutes using both LM-based and LLM-based approaches. Among the LM-based models, InLegalBERT consistently outperforms others. Additionally, a key finding is that LLMs achieve the highest performance in statute prediction with explanation when using the Chain-of-Thought (CoT) setup within In-Context Learning (ICL) techniques.",
+      "page": 6,
+      "index": 1,
+      "width": 990,
+      "height": 712
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-002.webp",
+      "caption": "Figure 1: An example of annotation by legal experts in the proposed PROSLEX dataset. Here, statutes IPC 147 and IPC 302 are applicable, and the explanation (reason) for the applicability of these statutes is shown as annotations.",
+      "page": 2,
+      "index": 2,
+      "width": 1056,
+      "height": 416
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-003.webp",
+      "caption": "Table 1: A Comparative Overview of Prominent Legal Statute Prediction Datasets.",
+      "page": 3,
+      "index": 3,
+      "width": 1002,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-004.webp",
+      "caption": "Figure 2: This workflow illustrates a legal prediction framework to identify applicable Indian Penal Code (IPC) statutes for legal cases with the reasoning. The diagram shows a workflow where a legal corpus is annotated by legal experts to create a training set of case facts paired with relevant statutes and explanations. The left side displays an example case involving Bheemanna’s assault and death, with highlighted text mapped to IPC sections 302 (murder) and 147 (rioting). The system uses a retrieval model to find similar cases, then employs in-context learning techniques like few-shot examples and chain-of-thought reasoning to make predictions on unlabeled cases. The bottom portion demonstrates the model analyzing a test document about dowry harassment and correctly predicting applicable statutes (IPC 302 for a kerosene burning death and IPC 498A for dowry harassment).",
+      "page": 3,
+      "index": 4,
+      "width": 829,
+      "height": 579
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-005.webp",
+      "caption": "Table 6: Shows that LLM-generated explanations and their associated IPC sections are verified by a senior legal expert (discussed in Section 5.2).",
+      "page": 9,
+      "index": 5,
+      "width": 886,
+      "height": 433
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-006.webp",
+      "caption": "Figure 3: The red-colored text span represents the portion labeled by the GPT-4 model in the Chain-of-Thought setup, where the predicted statute is Indian Penal Code 147. The blue-colored span corresponds to the annotation provided by legal experts, with the same predicted statute, Indian Penal Code 147. Thus, although GPT-4 correctly identified the statute, its reasoning was incorrect.",
+      "page": 9,
+      "index": 6,
+      "width": 1056,
+      "height": 239
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-007.webp",
+      "caption": "Table 3: The structure of the prompt used in our ICL experiments. [X] represents a variable that is to be substituted for its value.",
+      "page": 5,
+      "index": 7,
+      "width": 506,
+      "height": 698
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08830v1/fig-008.webp",
+      "caption": "Table 2: Statistics of the PROSLEX Dataset",
+      "page": 5,
+      "index": 8,
+      "width": 1050,
+      "height": 234
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.08288v1/fig-001.webp",
+      "caption": "Figure 1: CSSPD architecture. Three streams (At, Yt, Xt/S) are embedded and passed through L independent Mamba SSM layers (O(T )) to produce ãt, ỹt, x̃t. A SCM-gated CausalGatedMixer (9) fuses them into the balancing representation BRt. Domain confusion (dashed red) suppresses I(BRt;At) via gradient reversal but inadvertently suppresses I(BRt;Ht+k) and I(BRt;Xt). CPC (solid green) restores temporal MI I(BRt;Ht+k); LIM (solid orange) restores covariate MI I(BRt;Xt). The parallel decoder (10) receives two distinct inputs: a stop-gradient copy BR⊥ t (dashed blue, left-entering) encoding patient state, and TrtEnc(āt+1:t+τ ) (solid black, bottom-entering) encoding the counterfactual intervention; together they produce all τmax predictions simultaneously. CSSD omits the CPC and LIM heads.",
+      "page": 3,
+      "index": 1,
+      "width": 1045,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2608.08288v1/fig-002.webp",
+      "caption": "Table 1: Cancer Simulation: Mean normalised RMSE averaged over τ = 1–6 steps and 5 random seeds (lower is better; bold = best per column). ¶Baseline results are reproduced. ‡CHSD and CHSPD exhibit high variance at γ≥2.",
+      "page": 7,
+      "index": 2,
+      "width": 890,
+      "height": 234
+    }
+  ]
+}

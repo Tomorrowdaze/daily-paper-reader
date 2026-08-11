@@ -1,0 +1,203 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-11T20:11:47.870639+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2608.04576v1",
+      "source": "arxiv",
+      "title": "Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study",
+      "abstract": "Humanitarian reports are long, noisy, and multi-topic, making it difficult to consolidate decision-relevant causal evidence. We present a ReliefWeb study (2000-2024) and a two-stage Large Language Model (LLM) pipeline that extracts structured intervention-outcome records with direction and strength attributes. Query-conditioned extraction restricts output to a specified intervention class, reducing retrieval-induced over-extraction, while snippet grounding links each relation to supporting text for auditability and classification. In an expert-annotated dataset of 100 reports, the best closed-source LLM achieved a weighted F1 score of 90.73% with strong cost-efficiency, while Llama-3.1-8B with supervised fine-tuning reached 94.15% weighted F1 score. We further propose context-preserving triangulation that aggregates strength-weighted evidence within disaster$\\times$source cells, applies Laplace smoothing and equally weights cells to quantify cross-context convergence via a Level-of-Evidence score. Applied to cash assistance, food-related outcomes show strong positive convergence (LoE=0.865) and stable long-horizon trajectories.",
+      "authors": [
+        "Yuanjun Zhang",
+        "Mourad Oussalah"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-05T08:07:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.04576v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 8.5,
+      "llm_evidence_en": "Causal evidence extraction in crisis reports using LLMs with snippet grounding for auditability.",
+      "llm_evidence_cn": "使用大语言模型在危机报告中提取因果证据，并通过片段溯源实现可审计性。",
+      "llm_evidence": "使用大语言模型在危机报告中提取因果证据，并通过片段溯源实现可审计性。",
+      "canonical_evidence": "使用大语言模型在危机报告中提取因果证据，并通过片段溯源实现可审计性。",
+      "llm_tldr_en": "Extracts structured causal evidence from humanitarian crisis reports using LLMs with auditable grounding.",
+      "llm_tldr_cn": "利用大语言模型从人道主义危机报告中提取结构化因果证据，并提供可审计的溯源。",
+      "llm_tldr": "利用大语言模型从人道主义危机报告中提取结构化因果证据，并提供可审计的溯源。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.06292v1",
+      "source": "arxiv",
+      "title": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "abstract": "Retrieval-augmented generation (RAG) improves question answering by grounding large language models (LLMs) in external knowledge such as text corpora. However, its reasoning process remains largely opaque: intermediate reasoning steps are difficult to verify and cannot be reliably attributed to specific evidence. Moreover, missing user-specific context is rarely detected systematically, often leading to incomplete or incorrect output.   We propose NeSy-RAG, a modular neuro-symbolic RAG framework that synthesizes attributable Prolog modules from retrieved text chunks. For each chunk, the system generates semantically meaningful predicates that encode Boolean claims, which may depend on user facts. Using joint natural language-code embeddings, predicates are retrieved and composed into Prolog queries. To address incomplete user context, we introduce a symbolic knowledge-gap detection mechanism that identifies missing user facts whose truth values affect the query outcome and automatically triggers follow-up interactions.   Executing the resulting Prolog queries yields deterministic answers together with transparent execution traces that link each reasoning step to its originating source. On the ShARC benchmark, without domain-specific training, NeSy-RAG achieves 61.1% accuracy, outperforming a same-model RAG baseline that achieves 42.8% accuracy.",
+      "authors": [
+        "Jonas Gann",
+        "Michael Gertz"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.SC"
+      ],
+      "published": "2026-08-06T17:16:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.06292v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "neuro-symbolic RAG for explainable question answering and attributable evidence",
+      "llm_evidence_cn": "用于可解释问答和证据归因的神经符号RAG",
+      "llm_evidence": "用于可解释问答和证据归因的神经符号RAG",
+      "canonical_evidence": "用于可解释问答和证据归因的神经符号RAG",
+      "llm_tldr_en": "Introduces a neuro-symbolic RAG framework that provides explainable reasoning steps and evidence attribution.",
+      "llm_tldr_cn": "引入了一种神经符号RAG框架，提供可解释的推理步骤和证据归因。",
+      "llm_tldr": "引入了一种神经符号RAG框架，提供可解释的推理步骤和证据归因。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.06834v1",
+      "source": "arxiv",
+      "title": "Graph Machine: Exploring Edge Mechanisms as an Inductive Bias",
+      "abstract": "Transformers provide a powerful architecture for global content-based matching, but reasoning problems may benefit from a stronger inductive bias toward iterative traversal of latent relations. We introduce Graph Machine, an architecture with two explicit edge-based mechanisms: Edge-augmented attention, in which edges modulate attention between nodes, and edge-centric referral, in which nodes exchange addresses to update their edges. Conceptually, this enables the model to dynamically and differentiably construct and revise relational graphs across layers. We study this inductive bias using Sudoku under controlled settings and find that Graph Machine outperforms Transformer baselines, with ablation studies and mechanistic analysis attributing the gains to the edge mechanisms. Surprisingly, we found that the model discovers a compact edge-based construction for Sudoku geometry. Our results support explicit edge mechanisms as a promising architectural design, motivating broader evaluation.",
+      "authors": [
+        "Lintai Hou"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-07T05:48:04+00:00",
+      "link": "https://arxiv.org/pdf/2608.06834v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "mechanistic analysis and relational graphs for reasoning",
+      "llm_evidence_cn": "用于推理的机制分析和关系图",
+      "llm_evidence": "用于推理的机制分析和关系图",
+      "canonical_evidence": "用于推理的机制分析和关系图",
+      "llm_tldr_en": "Introduces Graph Machine with edge-based mechanisms to improve relational reasoning and interpretability.",
+      "llm_tldr_cn": "引入具有边机制的图机器，以增强关系推理能力和模型的可解释性。",
+      "llm_tldr": "引入具有边机制的图机器，以增强关系推理能力和模型的可解释性。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.08288v1",
+      "source": "arxiv",
+      "title": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "abstract": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "authors": [
+        "Abisoye Abidakun",
+        "Mingjun Zhong",
+        "Georgios Leontidis"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-08-08T18:41:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.08288v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Causal State-Space Model for longitudinal causal inference and counterfactual prediction",
+      "llm_evidence_cn": "用于纵向因果推断和反事实预测的因果状态空间模型",
+      "llm_evidence": "用于纵向因果推断和反事实预测的因果状态空间模型",
+      "canonical_evidence": "用于纵向因果推断和反事实预测的因果状态空间模型",
+      "llm_tldr_en": "This paper develops a causal state-space model for estimating counterfactual outcomes in longitudinal data.",
+      "llm_tldr_cn": "本文开发了一种因果状态空间模型，用于估计纵向数据中的反事实结果。",
+      "llm_tldr": "本文开发了一种因果状态空间模型，用于估计纵向数据中的反事实结果。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.08830v1",
+      "source": "arxiv",
+      "title": "PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary",
+      "abstract": "Legal Statute Prediction (LSP) involves automatically identifying relevant legal statutes given factual descriptions in legal documents, typically framed as a multi-label classification task within natural language processing and information retrieval research. While recent advances have begun incorporating Large Language Models (LLMs) for statute prediction, current approaches primarily focus on accuracy metrics without addressing the critical need for legal reasoning, a fundamental requirement in judicial contexts where decisions must be explainable and justifiable. To address this research gap, we present PROSLEX (PRediction Of Statutes and LEgal eXplanation), a comprehensive dataset comprising 1,623 expert-annotated legal documents from the Indian context. Each document is paired with statute predictions and detailed explanations, totaling 7,450 explanations, capturing the underlying legal reasoning. Using this dataset, we systematically evaluate various prompting strategies, including zero-shot, few-shot, chain-of-thought, and tree-of-thoughts approaches, to generate both statute predictions and their corresponding legal rationales. Our evaluation framework measures not only predictive performance but also the coherence and legal validity of generated explanations, positioning PROSLEX as a benchmark for developing explainable AI systems that can support legal practitioners while advancing research in interpretable legal NLP. To ensure reproducibility, we have made our PROSLEX dataset and model code available on GitHub: https://github.com/subinay494/Legal_Statute_Prediction_Explanation.",
+      "authors": [
+        "Subinay Adhikary",
+        "Upal Bhattacharya",
+        "Vivek Kumar Singh",
+        "Anurag Sharma",
+        "Shubham Kumar Nigam",
+        "Suvasis Das",
+        "Shouvik Kumar Guha",
+        "Koustav Rudra",
+        "Kripabandhu Ghosh"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-09T17:24:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.08830v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explainable and justifiable legal reasoning models",
+      "llm_evidence_cn": "可解释且正当的法律推理模型",
+      "llm_evidence": "可解释且正当的法律推理模型",
+      "canonical_evidence": "可解释且正当的法律推理模型",
+      "llm_tldr_en": "Presents PROSLEX, a dataset for legal statute prediction emphasizing the need for explainable reasoning.",
+      "llm_tldr_cn": "提供PROSLEX数据集，用于法律条文预测，强调可解释推理在司法中的重要性。",
+      "llm_tldr": "提供PROSLEX数据集，用于法律条文预测，强调可解释推理在司法中的重要性。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
