@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.09532v1/fig-001.webp",
+      "caption": "Figure 1: An overview of the Carnot system. Users create datasets from uploaded raw data files (Step 1) and provide API keys which may be used by Carnot to perform LLM-based data processing (Step 2). (Local storage and models are also supported for private deployments.) Users execute queries against their dataset(s) in natural language via a chat interface or via an equivalent representation of the physical plan in a notebook (Step 3). Any feedback provided in the chat and / or edits made to the notebook will be sent to Carnot’s query planner which will re-optimize the query plan in response (Steps 4 and 5).",
+      "page": 2,
+      "index": 1,
+      "width": 948,
+      "height": 387
+    },
+    {
+      "url": "assets/figures/arxiv/2608.09532v1/fig-002.webp",
+      "caption": "Figure 2: A Carnot workspace answering the query “Which of these papers is about AI?” Center: the chat interface with the linearized plan and visual DAG. Right: the notebook’s code cells, exposing the Carnot library calls that implement each operator. Left: the finished query execution showing per-operator results, cost annotations, and the final output.",
+      "page": 4,
+      "index": 2,
+      "width": 1056,
+      "height": 294
+    }
+  ]
+}

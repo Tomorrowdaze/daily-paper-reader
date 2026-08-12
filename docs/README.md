@@ -6,38 +6,41 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-11
-- 运行时间：2026-08-11 20:14:58 UTC
+- 最新运行日期：2026-08-12
+- 运行时间：2026-08-12 19:54:15 UTC
 - 运行状态：成功
-- 本次总论文数：5
+- 本次总论文数：6
 - 精读区：1
-- 速读区：4
+- 速读区：5
 
 ### 今日简报（AI）
-- 今日共生成 5 篇推荐（精读 1 篇，速读 4 篇）
-- 精读：《Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study》（8.5/10）
-- 速读：《NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering》（6.0/10）, 《Graph Machine: Exploring Edge Mechanisms as an Inductive Bias》（6.0/10）, 《Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects》（6.0/10）
+- 今日共生成 6 篇推荐（精读 1 篇，速读 5 篇）
+- 精读：《Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study》（9.0/10）
+- 速读：《Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects》（7.0/10）, 《Interpretable Adaptive Sampling for LLM Test-Time Scaling》（6.5/10）, 《NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering》（6.5/10）
 - 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202608/11/README](/202608/11/README)
+- 详情：[/202608/12/README](/202608/12/README)
 
 ### 精读区论文标签
-1. [Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study](/202608/11/2608.04576v1-causal-evidence-extraction-and-triangulation-in-crisis-reports-using-large-language-models-a-reliefweb-based-study)  
-   标签：评分：8.5/10、query:q6
-   evidence：使用大语言模型在危机报告中提取因果证据，并通过片段溯源实现可审计性。
+1. [Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study](/202608/12/2608.04576v1-causal-evidence-extraction-and-triangulation-in-crisis-reports-using-large-language-models-a-reliefweb-based-study)  
+   标签：评分：9.0/10、query:q6
+   evidence：使用大模型在危机报告中提取因果证据
 
 ### 速读区论文标签
-1. [NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering](/202608/11/2608.06292v1-nesy-rag-neuro-symbolic-rag-for-explainable-question-answering)  
+1. [Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects](/202608/12/2608.08288v1-causal-state-space-model-for-causal-inference-estimating-longitudinal-individual-treatment-effects)  
+   标签：评分：7.0/10、query:q6
+   evidence：用于纵向个体治疗效果和反事实结果估计的因果推断方法
+2. [Interpretable Adaptive Sampling for LLM Test-Time Scaling](/202608/12/2608.03961v1-interpretable-adaptive-sampling-for-llm-test-time-scaling)  
+   标签：评分：6.5/10、query:q5
+   evidence：用于可检查推理的可解释信号和模糊控制器
+3. [NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering](/202608/12/2608.06292v1-nesy-rag-neuro-symbolic-rag-for-explainable-question-answering)  
+   标签：评分：6.5/10、query:q5
+   evidence：用于可解释推理和归因的神经符号RAG框架
+4. [Carnot: Interpretable, Interactive, and Optimized Execution of Deep Research Queries](/202608/12/2608.09532v1-carnot-interpretable-interactive-and-optimized-execution-of-deep-research-queries)  
+   标签：评分：6.5/10、query:q5
+   evidence：深度研究查询的可解释执行和中间推理
+5. [Cleo: A Transparent and Controllable Chatbot for Conversational Commerce](/202608/12/2608.06068v1-cleo-a-transparent-and-controllable-chatbot-for-conversational-commerce)  
    标签：评分：6.0/10、query:q5
-   evidence：用于可解释问答和证据归因的神经符号RAG
-2. [Graph Machine: Exploring Edge Mechanisms as an Inductive Bias](/202608/11/2608.06834v1-graph-machine-exploring-edge-mechanisms-as-an-inductive-bias)  
-   标签：评分：6.0/10、query:q6
-   evidence：用于推理的机制分析和关系图
-3. [Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects](/202608/11/2608.08288v1-causal-state-space-model-for-causal-inference-estimating-longitudinal-individual-treatment-effects)  
-   标签：评分：6.0/10、query:q6
-   evidence：用于纵向因果推断和反事实预测的因果状态空间模型
-4. [PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary](/202608/11/2608.08830v1-proslex-a-novel-dataset-for-expert-annotated-legal-statute-prediction-for-indian-judiciary)  
-   标签：评分：6.0/10、query:q4
-   evidence：可解释且正当的法律推理模型
+   evidence：具有可审计排序功能的透明且可控的架构
 
 
 <div class="dpr-home-promo-card">
