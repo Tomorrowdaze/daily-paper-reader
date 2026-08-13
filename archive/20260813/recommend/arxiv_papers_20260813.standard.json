@@ -1,0 +1,328 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-13T21:10:05.260003+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 8,
+    "quick_skim_target": 11,
+    "quick_selected": 8
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.04576v1",
+      "source": "arxiv",
+      "title": "Causal Evidence Extraction and Triangulation in Crisis Reports using Large Language Models: A ReliefWeb-based Study",
+      "abstract": "Humanitarian reports are long, noisy, and multi-topic, making it difficult to consolidate decision-relevant causal evidence. We present a ReliefWeb study (2000-2024) and a two-stage Large Language Model (LLM) pipeline that extracts structured intervention-outcome records with direction and strength attributes. Query-conditioned extraction restricts output to a specified intervention class, reducing retrieval-induced over-extraction, while snippet grounding links each relation to supporting text for auditability and classification. In an expert-annotated dataset of 100 reports, the best closed-source LLM achieved a weighted F1 score of 90.73% with strong cost-efficiency, while Llama-3.1-8B with supervised fine-tuning reached 94.15% weighted F1 score. We further propose context-preserving triangulation that aggregates strength-weighted evidence within disaster$\\times$source cells, applies Laplace smoothing and equally weights cells to quantify cross-context convergence via a Level-of-Evidence score. Applied to cash assistance, food-related outcomes show strong positive convergence (LoE=0.865) and stable long-horizon trajectories.",
+      "authors": [
+        "Yuanjun Zhang",
+        "Mourad Oussalah"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-05T08:07:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.04576v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "Extracts causal evidence from crisis reports using LLMs with grounding for auditability.",
+      "llm_evidence_cn": "利用大语言模型从危机报告中提取因果证据，并通过片段关联实现可审计性。",
+      "llm_evidence": "利用大语言模型从危机报告中提取因果证据，并通过片段关联实现可审计性。",
+      "canonical_evidence": "利用大语言模型从危机报告中提取因果证据，并通过片段关联实现可审计性。",
+      "llm_tldr_en": "This paper develops an LLM pipeline to extract auditable causal relations from humanitarian crisis reports.",
+      "llm_tldr_cn": "该研究开发了一个大模型流水线，从人道主义危机报告中提取可审计的因果关系，助力冲突分析。",
+      "llm_tldr": "该研究开发了一个大模型流水线，从人道主义危机报告中提取可审计的因果关系，助力冲突分析。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.06305v2",
+      "source": "arxiv",
+      "title": "Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations",
+      "abstract": "Retrieval-augmented generation over long documents is dominated by one design: chunk the text, embed the chunks, and surface the top-k nearest neighbours of the query. We argue that for an important class of documents -- financial statements, audit reports, regulatory returns -- this design is structurally unsound, and we make the argument measurable. On a 780-page government financial report, 86.8% of content lines are table rows, thousands of near-identical figures compete in one embedding space, and a figure inherits its unit from a header a median of 13 lines above it -- so a chunk boundary routinely separates a number from whether it is in lakh or crore, an error of two orders of magnitude. A table-aware chunker built as a steelman fixes the unit problem but leaves 27-30% of numeric chunks with no fiscal-year header at every chunk size we tried. We propose READ (Reliable Embedding-free Agentic Document-search), in which an agent reads the raw document through three deterministic operations -- normalized lexical search, structural navigation, and bounded span reads -- exposed over the Model Context Protocol, so a trajectory is a replayable audit trail, not an opaque similarity score. On 51 verified questions READ answers 58.8% against dense retrieval's 15.7% (p_Holm = 2 x 10^-5) -- or 35.3% tuned, which READ still leads by 23.5 points (p_Holm = 0.017). An agent given the same loop but a top-k tool reaches only 27.5%, locating the gain in the interface rather than in iteration. We also report what the evidence does not support: BM25 is statistically indistinguishable from READ, so our result separates embedding-based from embedding-free retrieval, not agentic from lexical search.",
+      "authors": [
+        "Sagar Tamang",
+        "Ayush Vyas",
+        "Tabarakul Hazarika"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-08-06T17:23:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.06305v2",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable agentic operations for analyzing complex government reports",
+      "llm_evidence_cn": "用于分析复杂政府报告的可解释代理操作",
+      "llm_evidence": "用于分析复杂政府报告的可解释代理操作",
+      "canonical_evidence": "用于分析复杂政府报告的可解释代理操作",
+      "llm_tldr_en": "Replaces black-box retrieval with interpretable agentic operations for complex document analysis.",
+      "llm_tldr_cn": "在复杂文档分析中，用可解释的代理操作取代了黑盒检索。",
+      "llm_tldr": "在复杂文档分析中，用可解释的代理操作取代了黑盒检索。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.08288v1",
+      "source": "arxiv",
+      "title": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "abstract": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "authors": [
+        "Abisoye Abidakun",
+        "Mingjun Zhong",
+        "Georgios Leontidis"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-08-08T18:41:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.08288v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "Causal inference for longitudinal outcomes and counterfactual estimation",
+      "llm_evidence_cn": "用于纵向结果和反事实估计的因果推断",
+      "llm_evidence": "用于纵向结果和反事实估计的因果推断",
+      "canonical_evidence": "用于纵向结果和反事实估计的因果推断",
+      "llm_tldr_en": "Develops a causal state-space model for estimating longitudinal individual treatment effects and counterfactuals.",
+      "llm_tldr_cn": "开发了一种因果状态空间模型，用于估计纵向个体治疗效果和反事实结果。",
+      "llm_tldr": "开发了一种因果状态空间模型，用于估计纵向个体治疗效果和反事实结果。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09532v1",
+      "source": "arxiv",
+      "title": "Carnot: Interpretable, Interactive, and Optimized Execution of Deep Research Queries",
+      "abstract": "Enterprises increasingly seek to query data lakes using natural language via AI-driven tools like semantic operators or deep research agents. However, the latter operates as an opaque black box, hiding its intermediate reasoning and data retrieval steps, and failing to expose controls for managing API costs and execution latency. Meanwhile, the former can be prohibitively expensive for enterprise-scale data lakes. Consequently, analysts using these systems lack the agency to intercept hallucinated premises, verify intermediate results, or correct the system's trajectory. We present Carnot, an interactive execution engine for AI-driven analytics. Carnot compiles natural language requests into physical execution graphs and surfaces them through an interactive notebook interface. Rather than waiting blindly for a final output, users can critique the plan, incrementally execute operators, inspect intermediate data, or directly edit the underlying code or semantic operator instructions. Carnot's query optimizer will optimize the query with respect to cost or latency constraints provided by the user. Our demo will showcase how Carnot helps users achieve efficient and verifiable insights on workloads motivated by real enterprise use cases.",
+      "authors": [
+        "Matthew Russo",
+        "Yash Agarwal",
+        "Tianyu Li",
+        "Zhuohan Gu",
+        "Michael Cafarella",
+        "Omar Khattab",
+        "Tim Kraska",
+        "Samuel Madden"
+      ],
+      "primary_category": "cs.DB",
+      "categories": [
+        "cs.DB",
+        "cs.AI"
+      ],
+      "published": "2026-08-10T12:32:39+00:00",
+      "link": "https://arxiv.org/pdf/2608.09532v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable execution of deep research queries",
+      "llm_evidence_cn": "深度研究查询的可解释执行",
+      "llm_evidence": "深度研究查询的可解释执行",
+      "canonical_evidence": "深度研究查询的可解释执行",
+      "llm_tldr_en": "Presents Carnot, an engine that makes AI-driven research queries interpretable by surfacing execution graphs.",
+      "llm_tldr_cn": "提出Carnot引擎，通过展示执行图使AI驱动的研究查询过程具有可解释性。",
+      "llm_tldr": "提出Carnot引擎，通过展示执行图使AI驱动的研究查询过程具有可解释性。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.08288v2",
+      "source": "arxiv",
+      "title": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "abstract": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "authors": [
+        "Abisoye Abidakun",
+        "Mingjun Zhong",
+        "Georgios Leontidis"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-08-08T18:41:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.08288v2",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "Causal inference for longitudinal individual treatment effects and outcome prediction",
+      "llm_evidence_cn": "用于纵向个体治疗效果和结果预测的因果推断",
+      "llm_evidence": "用于纵向个体治疗效果和结果预测的因果推断",
+      "canonical_evidence": "用于纵向个体治疗效果和结果预测的因果推断",
+      "llm_tldr_en": "Proposes a causal state-space model for estimating counterfactual outcomes in longitudinal data.",
+      "llm_tldr_cn": "提出了一种因果状态空间模型，用于估计纵向数据中的反事实结果。",
+      "llm_tldr": "提出了一种因果状态空间模型，用于估计纵向数据中的反事实结果。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08830v1",
+      "source": "arxiv",
+      "title": "PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary",
+      "abstract": "Legal Statute Prediction (LSP) involves automatically identifying relevant legal statutes given factual descriptions in legal documents, typically framed as a multi-label classification task within natural language processing and information retrieval research. While recent advances have begun incorporating Large Language Models (LLMs) for statute prediction, current approaches primarily focus on accuracy metrics without addressing the critical need for legal reasoning, a fundamental requirement in judicial contexts where decisions must be explainable and justifiable. To address this research gap, we present PROSLEX (PRediction Of Statutes and LEgal eXplanation), a comprehensive dataset comprising 1,623 expert-annotated legal documents from the Indian context. Each document is paired with statute predictions and detailed explanations, totaling 7,450 explanations, capturing the underlying legal reasoning. Using this dataset, we systematically evaluate various prompting strategies, including zero-shot, few-shot, chain-of-thought, and tree-of-thoughts approaches, to generate both statute predictions and their corresponding legal rationales. Our evaluation framework measures not only predictive performance but also the coherence and legal validity of generated explanations, positioning PROSLEX as a benchmark for developing explainable AI systems that can support legal practitioners while advancing research in interpretable legal NLP. To ensure reproducibility, we have made our PROSLEX dataset and model code available on GitHub: https://github.com/subinay494/Legal_Statute_Prediction_Explanation.",
+      "authors": [
+        "Subinay Adhikary",
+        "Upal Bhattacharya",
+        "Vivek Kumar Singh",
+        "Anurag Sharma",
+        "Shubham Kumar Nigam",
+        "Suvasis Das",
+        "Shouvik Kumar Guha",
+        "Koustav Rudra",
+        "Kripabandhu Ghosh"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-09T17:24:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.08830v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explainable prediction and legal reasoning in judicial contexts",
+      "llm_evidence_cn": "司法背景下的可解释预测和法律推理",
+      "llm_evidence": "司法背景下的可解释预测和法律推理",
+      "canonical_evidence": "司法背景下的可解释预测和法律推理",
+      "llm_tldr_en": "A dataset for legal statute prediction that emphasizes the need for explainable and justifiable decisions.",
+      "llm_tldr_cn": "一个强调决策可解释性和正当性的法律条文预测数据集。",
+      "llm_tldr": "一个强调决策可解释性和正当性的法律条文预测数据集。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.06292v1",
+      "source": "arxiv",
+      "title": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "abstract": "Retrieval-augmented generation (RAG) improves question answering by grounding large language models (LLMs) in external knowledge such as text corpora. However, its reasoning process remains largely opaque: intermediate reasoning steps are difficult to verify and cannot be reliably attributed to specific evidence. Moreover, missing user-specific context is rarely detected systematically, often leading to incomplete or incorrect output.   We propose NeSy-RAG, a modular neuro-symbolic RAG framework that synthesizes attributable Prolog modules from retrieved text chunks. For each chunk, the system generates semantically meaningful predicates that encode Boolean claims, which may depend on user facts. Using joint natural language-code embeddings, predicates are retrieved and composed into Prolog queries. To address incomplete user context, we introduce a symbolic knowledge-gap detection mechanism that identifies missing user facts whose truth values affect the query outcome and automatically triggers follow-up interactions.   Executing the resulting Prolog queries yields deterministic answers together with transparent execution traces that link each reasoning step to its originating source. On the ShARC benchmark, without domain-specific training, NeSy-RAG achieves 61.1% accuracy, outperforming a same-model RAG baseline that achieves 42.8% accuracy.",
+      "authors": [
+        "Jonas Gann",
+        "Michael Gertz"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.SC"
+      ],
+      "published": "2026-08-06T17:16:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.06292v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "neuro-symbolic RAG for explainable reasoning and attributable evidence",
+      "llm_evidence_cn": "用于可解释推理和可归因证据的神经符号RAG",
+      "llm_evidence": "用于可解释推理和可归因证据的神经符号RAG",
+      "canonical_evidence": "用于可解释推理和可归因证据的神经符号RAG",
+      "llm_tldr_en": "A neuro-symbolic framework that generates attributable Prolog modules for explainable question answering.",
+      "llm_tldr_cn": "一种生成可归因Prolog模块以实现可解释问答的神经符号框架。",
+      "llm_tldr": "一种生成可归因Prolog模块以实现可解释问答的神经符号框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08994v1",
+      "source": "arxiv",
+      "title": "Guardian Crawler: Retrieval-First Knowledge Discovery with Bounded LLM Augmentation for Noisy Web Intelligence",
+      "abstract": "Retrieving relevant evidence from noisy web data is challenging, particularly in sensitive domains containing incomplete reports, heterogeneous language, and irrelevant content. We present Guardian Crawler, a reproducible retrieval-first testbed for controlled experiments on knowledge discovery and evidence-grounded summarization over synthetic web-like corpora. The architecture combines BM25 retrieval with risk-aware, embedding-augmented, and hybrid reranking, followed by constrained retrieval-augmented generation with explicit document citations. Experiments on a synthetic 900-document corpus and 10 queries produced the highest descriptive retrieval scores under risk-based reranking, with P@10 = 1.00 and NDCG@10 = 0.94, compared with 0.94 and 0.81 for BM25. The best hybrid and BM25+Semantic configurations reached NDCG@10 values of 0.94 and 0.88, respectively. All 41 evaluable generated bullets passed the lexical coverage threshold; an automated LLM judge classified 36 as supported, one as partially supported, and four as unsupported. These results demonstrate the feasibility of Guardian Crawler as a controlled testbed but do not establish statistical superiority, human-validated faithfulness, or transfer to live-web investigative environments.",
+      "authors": [
+        "Joshua Castillo",
+        "Santosh Nukavarapu",
+        "Ravi Mukkamala"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-10T01:28:11+00:00",
+      "link": "https://arxiv.org/pdf/2608.08994v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "risk-aware retrieval and evidence-grounded discovery for sensitive domains",
+      "llm_evidence_cn": "针对敏感领域的风险感知检索和基于证据的知识发现",
+      "llm_evidence": "针对敏感领域的风险感知检索和基于证据的知识发现",
+      "canonical_evidence": "针对敏感领域的风险感知检索和基于证据的知识发现",
+      "llm_tldr_en": "A retrieval-first testbed for knowledge discovery in noisy, sensitive web intelligence domains.",
+      "llm_tldr_cn": "一个用于在嘈杂、敏感的网络情报领域进行知识发现的检索优先测试平台。",
+      "llm_tldr": "一个用于在嘈杂、敏感的网络情报领域进行知识发现的检索优先测试平台。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
