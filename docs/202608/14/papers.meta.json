@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-14",
+  "date": "2026-08-14",
+  "generated_at": "2026-08-14T21:01:19",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/14/2608.06292v1-nesy-rag-neuro-symbolic-rag-for-explainable-question-answering",
+      "section": "quick",
+      "title_en": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "authors": "Jonas Gann, Michael Gertz",
+      "date": "2026-08-06",
+      "pdf": "https://arxiv.org/pdf/2608.06292v1",
+      "score": "6.0",
+      "evidence": "用于可解释推理和归因的神经符号RAG",
+      "tldr": "NeSy-RAG提出一种神经-符号RAG，将检索文本转化为可归因的Prolog模块，利用语义谓词与自然语言-代码联合嵌入构造查询，并通过符号化知识缺口检测触发补问，实现可追踪、可验证推理，在ShARC上无特定训练达61.1%准确率，显著优于基线。",
+      "tags": "query:q5",
+      "abstract_en": "Retrieval-augmented generation (RAG) improves question answering by grounding large language models (LLMs) in external knowledge such as text corpora. However, its reasoning process remains largely opaque: intermediate reasoning steps are difficult to verify and cannot be reliably attributed to specific evidence. Moreover, missing user-specific context is rarely detected systematically, often leading to incomplete or incorrect output.   We propose NeSy-RAG, a modular neuro-symbolic RAG framework that synthesizes attributable Prolog modules from retrieved text chunks. For each chunk, the system generates semantically meaningful predicates that encode Boolean claims, which may depend on user facts. Using joint natural language-code embeddings, predicates are retrieved and composed into Prolog queries. To address incomplete user context, we introduce a symbolic knowledge-gap detection mechanism that identifies missing user facts whose truth values affect the query outcome and automatically triggers follow-up interactions.   Executing the resulting Prolog queries yields deterministic answers together with transparent execution traces that link each reasoning step to its originating source. On the ShARC benchmark, without domain-specific training, NeSy-RAG achieves 61.1% accuracy, outperforming a same-model RAG baseline that achieves 42.8% accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/14/2608.09532v1-carnot-interpretable-interactive-and-optimized-execution-of-deep-research-queries",
+      "section": "quick",
+      "title_en": "Carnot: Interpretable, Interactive, and Optimized Execution of Deep Research Queries",
+      "authors": "Matthew Russo, Yash Agarwal, Tianyu Li, Zhuohan Gu, Michael Cafarella, Omar Khattab, Tim Kraska, Samuel Madden",
+      "date": "2026-08-10",
+      "pdf": "https://arxiv.org/pdf/2608.09532v1",
+      "score": "6.0",
+      "evidence": "深度研究查询的可解释执行和中间推理透明度",
+      "tldr": "Carnot提出一种面向企业数据湖的可解释、可交互、可优化的AI分析执行引擎，将自然语言请求编译为物理执行图，通过笔记本界面暴露中间过程，允许用户审阅与干预，并在成本或延迟约束下进行查询优化，实现高效可验证洞察。",
+      "tags": "query:q5",
+      "abstract_en": "Enterprises increasingly seek to query data lakes using natural language via AI-driven tools like semantic operators or deep research agents. However, the latter operates as an opaque black box, hiding its intermediate reasoning and data retrieval steps, and failing to expose controls for managing API costs and execution latency. Meanwhile, the former can be prohibitively expensive for enterprise-scale data lakes. Consequently, analysts using these systems lack the agency to intercept hallucinated premises, verify intermediate results, or correct the system's trajectory. We present Carnot, an interactive execution engine for AI-driven analytics. Carnot compiles natural language requests into physical execution graphs and surfaces them through an interactive notebook interface. Rather than waiting blindly for a final output, users can critique the plan, incrementally execute operators, inspect intermediate data, or directly edit the underlying code or semantic operator instructions. Carnot's query optimizer will optimize the query with respect to cost or latency constraints provided by the user. Our demo will showcase how Carnot helps users achieve efficient and verifiable insights on workloads motivated by real enterprise use cases.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
