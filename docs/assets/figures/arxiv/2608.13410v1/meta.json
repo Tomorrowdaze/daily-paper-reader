@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.13410v1/fig-001.webp",
+      "caption": "Fig. 2. Knowledge graph schema stored in a single Neo4j instance.",
+      "page": 6,
+      "index": 1,
+      "width": 728,
+      "height": 724
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13410v1/fig-002.webp",
+      "caption": "Table 2. Human evaluation comparing ParliamentRAG (PRAG) and NotebookLM (NbLM). The left section reports mean Likert ratings (1–5) for each evaluation dimension, while the right section reports the percentage of pairwise preferences in favor of PRAG, ties, and preferences in favor of NbLM.",
+      "page": 14,
+      "index": 2,
+      "width": 719,
+      "height": 276
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13410v1/fig-003.webp",
+      "caption": "Fig. 1. An example of ParliamentRAG’s authority-aware, multi-view summary of the positions of the Italian parliamentary groups on the subject reform of justice. Exact citations are delimited by « and ». The image presents the first part of a longer answer in Italian, automatically translated into English for this publication.",
+      "page": 3,
+      "index": 3,
+      "width": 508,
+      "height": 717
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13410v1/fig-004.webp",
+      "caption": "Fig. 3. Processing Pipeline. Steps 2a and 2b are executed in parallel.",
+      "page": 8,
+      "index": 4,
+      "width": 433,
+      "height": 298
+    }
+  ]
+}

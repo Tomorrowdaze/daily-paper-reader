@@ -1,0 +1,258 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-15T19:46:29.450322+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 6,
+    "quick_skim_target": 11,
+    "quick_selected": 6
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.08288v2",
+      "source": "arxiv",
+      "title": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "abstract": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "authors": [
+        "Abisoye Abidakun",
+        "Mingjun Zhong",
+        "Georgios Leontidis"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-08-08T18:41:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.08288v2",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "causal inference and state-space models for longitudinal outcome prediction",
+      "llm_evidence_cn": "用于纵向结果预测的因果推断和状态空间模型",
+      "llm_evidence": "用于纵向结果预测的因果推断和状态空间模型",
+      "canonical_evidence": "用于纵向结果预测的因果推断和状态空间模型",
+      "llm_tldr_en": "Develops a causal state-space model for estimating longitudinal treatment effects, improving counterfactual prediction.",
+      "llm_tldr_cn": "开发了一种因果状态空间模型，用于估计纵向治疗效果，改进了反事实预测。",
+      "llm_tldr": "开发了一种因果状态空间模型，用于估计纵向治疗效果，改进了反事实预测。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08830v1",
+      "source": "arxiv",
+      "title": "PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary",
+      "abstract": "Legal Statute Prediction (LSP) involves automatically identifying relevant legal statutes given factual descriptions in legal documents, typically framed as a multi-label classification task within natural language processing and information retrieval research. While recent advances have begun incorporating Large Language Models (LLMs) for statute prediction, current approaches primarily focus on accuracy metrics without addressing the critical need for legal reasoning, a fundamental requirement in judicial contexts where decisions must be explainable and justifiable. To address this research gap, we present PROSLEX (PRediction Of Statutes and LEgal eXplanation), a comprehensive dataset comprising 1,623 expert-annotated legal documents from the Indian context. Each document is paired with statute predictions and detailed explanations, totaling 7,450 explanations, capturing the underlying legal reasoning. Using this dataset, we systematically evaluate various prompting strategies, including zero-shot, few-shot, chain-of-thought, and tree-of-thoughts approaches, to generate both statute predictions and their corresponding legal rationales. Our evaluation framework measures not only predictive performance but also the coherence and legal validity of generated explanations, positioning PROSLEX as a benchmark for developing explainable AI systems that can support legal practitioners while advancing research in interpretable legal NLP. To ensure reproducibility, we have made our PROSLEX dataset and model code available on GitHub: https://github.com/subinay494/Legal_Statute_Prediction_Explanation.",
+      "authors": [
+        "Subinay Adhikary",
+        "Upal Bhattacharya",
+        "Vivek Kumar Singh",
+        "Anurag Sharma",
+        "Shubham Kumar Nigam",
+        "Suvasis Das",
+        "Shouvik Kumar Guha",
+        "Koustav Rudra",
+        "Kripabandhu Ghosh"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-09T17:24:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.08830v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "explainable prediction and reasoning in high-stakes legal/judicial contexts",
+      "llm_evidence_cn": "高风险法律/司法背景下的可解释预测与推理",
+      "llm_evidence": "高风险法律/司法背景下的可解释预测与推理",
+      "canonical_evidence": "高风险法律/司法背景下的可解释预测与推理",
+      "llm_tldr_en": "Introduces PROSLEX, a dataset for explainable legal statute prediction to support justifiable judicial decisions.",
+      "llm_tldr_cn": "推出PROSLEX数据集，旨在实现可解释的法律条文预测，支持司法决策的合理性。",
+      "llm_tldr": "推出PROSLEX数据集，旨在实现可解释的法律条文预测，支持司法决策的合理性。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.08288v1",
+      "source": "arxiv",
+      "title": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "abstract": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "authors": [
+        "Abisoye Abidakun",
+        "Mingjun Zhong",
+        "Georgios Leontidis"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-08-08T18:41:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.08288v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Causal inference for longitudinal treatment effects and counterfactual outcomes",
+      "llm_evidence_cn": "用于纵向治疗效果和反事实结果的因果推断",
+      "llm_evidence": "用于纵向治疗效果和反事实结果的因果推断",
+      "canonical_evidence": "用于纵向治疗效果和反事实结果的因果推断",
+      "llm_tldr_en": "Proposes a causal state-space model for estimating counterfactual outcomes over time.",
+      "llm_tldr_cn": "提出了一种用于估计随时间变化的反事实结果的因果状态空间模型。",
+      "llm_tldr": "提出了一种用于估计随时间变化的反事实结果的因果状态空间模型。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09532v1",
+      "source": "arxiv",
+      "title": "Carnot: Interpretable, Interactive, and Optimized Execution of Deep Research Queries",
+      "abstract": "Enterprises increasingly seek to query data lakes using natural language via AI-driven tools like semantic operators or deep research agents. However, the latter operates as an opaque black box, hiding its intermediate reasoning and data retrieval steps, and failing to expose controls for managing API costs and execution latency. Meanwhile, the former can be prohibitively expensive for enterprise-scale data lakes. Consequently, analysts using these systems lack the agency to intercept hallucinated premises, verify intermediate results, or correct the system's trajectory. We present Carnot, an interactive execution engine for AI-driven analytics. Carnot compiles natural language requests into physical execution graphs and surfaces them through an interactive notebook interface. Rather than waiting blindly for a final output, users can critique the plan, incrementally execute operators, inspect intermediate data, or directly edit the underlying code or semantic operator instructions. Carnot's query optimizer will optimize the query with respect to cost or latency constraints provided by the user. Our demo will showcase how Carnot helps users achieve efficient and verifiable insights on workloads motivated by real enterprise use cases.",
+      "authors": [
+        "Matthew Russo",
+        "Yash Agarwal",
+        "Tianyu Li",
+        "Zhuohan Gu",
+        "Michael Cafarella",
+        "Omar Khattab",
+        "Tim Kraska",
+        "Samuel Madden"
+      ],
+      "primary_category": "cs.DB",
+      "categories": [
+        "cs.DB",
+        "cs.AI"
+      ],
+      "published": "2026-08-10T12:32:39+00:00",
+      "link": "https://arxiv.org/pdf/2608.09532v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable execution of deep research queries and intermediate reasoning",
+      "llm_evidence_cn": "深度研究查询的可解释执行与中间推理",
+      "llm_evidence": "深度研究查询的可解释执行与中间推理",
+      "canonical_evidence": "深度研究查询的可解释执行与中间推理",
+      "llm_tldr_en": "An engine that makes AI-driven research queries interpretable by surfacing execution graphs.",
+      "llm_tldr_cn": "一种通过展示执行图使AI驱动的研究查询具有可解释性的引擎。",
+      "llm_tldr": "一种通过展示执行图使AI驱动的研究查询具有可解释性的引擎。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.13410v1",
+      "source": "arxiv",
+      "title": "Who Speaks Matters: Authority-Aware Multi-View RAG over Italian Parliamentary Proceedings",
+      "abstract": "Parliamentary proceedings are a primary record of democratic deliberation, yet their volume and fragmentation make multi-perspective access difficult for citizens, journalists, and researchers. Applying Retrieval-Augmented Generation (RAG) to parliamentary transcripts introduces three specific risks: dominance of the most frequent speakers, inability to weight speakers according to topical expertise, and citation misattribution in politically sensitive text. We present ParliamentRAG, a RAG system for the Italian Chamber of Deputies that addresses these risks jointly. Its core contribution is a topic-dependent authority model that estimates each speaker's authority as a function of the current query, combining interpretable components such as profession, education, and previous interventions. Given a user query, the system retrieves relevant speech chunks, identifies topic-relevant experts across parliamentary groups, and generates a summary synthesizing their perspectives, accompanied by supporting quotations. ParliamentRAG is evaluated against Google NotebookLM on 15 policy topics via a two-level protocol combining automated metrics and blind A/B human evaluation by six domain experts. The system achieves higher coverage across political groups (0.97 vs. 0.95), perfect quotation faithfulness (1.00 vs. 0.95), and stronger expert preferences on source-related dimensions, while NotebookLM remains stronger on prose-oriented dimensions.",
+      "authors": [
+        "Mirko Tritella",
+        "Riccardo Pozzi",
+        "Matteo Palmonari"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-13T16:07:23+00:00",
+      "link": "https://arxiv.org/pdf/2608.13410v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable components for analyzing politically sensitive parliamentary proceedings",
+      "llm_evidence_cn": "用于分析政治敏感议会程序的解释性组件",
+      "llm_evidence": "用于分析政治敏感议会程序的解释性组件",
+      "canonical_evidence": "用于分析政治敏感议会程序的解释性组件",
+      "llm_tldr_en": "Presents ParliamentRAG, an authority-aware system for interpretable retrieval over Italian parliamentary records.",
+      "llm_tldr_cn": "展示了ParliamentRAG，一个针对意大利议会记录进行可解释检索的权威感知系统。",
+      "llm_tldr": "展示了ParliamentRAG，一个针对意大利议会记录进行可解释检索的权威感知系统。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.09779v1",
+      "source": "arxiv",
+      "title": "KGCaRe: Explainable Complex Conditional Question Answering using Automatic Knowledge Graph Construction and Context Retrieval with LLMs",
+      "abstract": "Answering complex conditional questions using Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) remains a challenge, particularly in domain-specific contexts where general-purpose LLMs and RAG tend to underperform. We hypothesize that augmenting RAG with unstructured and structured knowledge, extracted from both documents and knowledge graphs (KGs), can improve reasoning and answer accuracy for such tasks.   To test this, we propose KGCaRe, a hybrid approach that combines neural retrieval with symbolic reasoning over LLM-generated KGs. KGCaRe constructs a KG from documents using a multi-prompt extraction strategy and stores it in a graph database. Simultaneously, the documents are embedded into a vector store to enable neural retrieval. KGCaRe performs innovative iterative graph traversal guided by the LLM to extract relevant triples, prune irrelevant information, and uses additional clue entities to traverse the graph again if the initial traversal does not provide satisfactory context to generate the answer. The relevant triples extracted from the KG in path form, along with semantically retrieved text passages, are then fed into custom KGCaRe prompts to generate answers to the complex conditional questions with explanations.   We evaluate KGCaRe on two complex conditional QA datasets. Our results on these datasets show that KGCaRe consistently outperforms existing baselines, including Vanilla LLM, Code Prompt, Text Prompt, Think-on-Graph, Vanilla RAG, and HybridContextQA, across multiple LLMs such as Mistral, Mixtral, GPT-3.5, and GPT-4o. We publicly release the software pipeline that we developed to implement the proposed KGCaRe approach.",
+      "authors": [
+        "Ghanshyam Verma",
+        "Simanta Sarkar",
+        "Devishree Pillai",
+        "Hotaka Shiokawa",
+        "Yourong Xu",
+        "Fiona Veazey",
+        "Peter Hubbert",
+        "Hui Su",
+        "Paul Buitelaar"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-08-10T16:05:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.09779v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explainable reasoning using knowledge graphs and symbolic reasoning",
+      "llm_evidence_cn": "使用知识图谱和符号推理的可解释推理",
+      "llm_evidence": "使用知识图谱和符号推理的可解释推理",
+      "canonical_evidence": "使用知识图谱和符号推理的可解释推理",
+      "llm_tldr_en": "Proposes KGCaRe, a hybrid RAG approach using knowledge graphs for explainable complex conditional question answering.",
+      "llm_tldr_cn": "提出KGCaRe，一种结合知识图谱的混合RAG方法，用于可解释的复杂条件问答。",
+      "llm_tldr": "提出KGCaRe，一种结合知识图谱的混合RAG方法，用于可解释的复杂条件问答。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

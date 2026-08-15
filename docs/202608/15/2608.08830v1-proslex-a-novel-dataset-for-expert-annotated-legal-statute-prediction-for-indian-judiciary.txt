@@ -1,0 +1,1356 @@
+PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute
+Prediction for Indian Judiciary
+Subinay Adhikary
+sa21rs094@iiserkol.ac.in
+IISER Kolkata
+India
+Upal Bhattacharya
+upal.bhattacharya@gmail.com
+Utrecht University
+Netherlands
+Vivek Kumar Singh
+Vksingh306@gmail.com
+IISER Kolkata
+India
+Anurag Sharma
+anuragsharma3211@gmail.com
+IIT Kharagpur
+India
+Shubham Kumar Nigam
+shubhamkumarnigam@gmail.com
+University of Birmingham Dubai
+United Arab Emirates
+Suvasis Das
+suvasisdas7@gmail.com
+IISER Kolkata
+India
+Shouvik Kumar Guha
+shouvikkumarguha@nujs.edu
+WBNUJS
+India
+Koustav Rudra
+krudra@cai.iitkgp.ac.in
+IIT Kharagpur
+India
+Kripabandhu Ghosh
+kripa.ghosh@gmail.com
+IISER Kolkata
+India
+Abstract
+Legal Statute Prediction (LSP) involves automatically identifying rel-
+evant legal statutes given factual descriptions in legal documents,
+typically framed as a multi-label classification task within natu-
+ral language processing and information retrieval research. While
+recent advances have begun incorporating Large Language Mod-
+els (LLMs) for statute prediction, current approaches primarily
+focus on accuracy metrics without addressing the critical need for
+legal reasoning—a fundamental requirement in judicial contexts
+where decisions must be explainable and justifiable. To address
+this research gap, we present PROSLEX (PRediction Of Statutes and
+LEgal eXplanation), a comprehensive dataset comprising 1,623
+expert-annotated legal documents from the Indian context. Each
+document is paired with statute predictions and detailed expla-
+nations, totaling 7,450 explanations, capturing the underlying
+legal reasoning. Using this dataset, we systematically evaluate vari-
+ous prompting strategies, including zero-shot, few-shot, chain-of-
+thought, and tree-of-thoughts approaches, to generate both statute
+predictions and their corresponding legal rationales. Our evaluation
+framework measures not only predictive performance but also the
+coherence and legal validity of generated explanations, positioning
+PROSLEX as a benchmark for developing explainable AI systems
+that can support legal practitioners while advancing research in
+interpretable legal NLP. To ensure reproducibility, we have made
+our PROSLEX dataset and model code available on GitHub1.
+1https://github.com/subinay494/Legal_Statute_Prediction_Explanation
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed
+for profit or commercial advantage and that copies bear this notice and the full citation
+on the first page. Copyrights for components of this work owned by others than the
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific permission
+and/or a fee. Request permissions from permissions@acm.org.
+ICAIL 2026, Singapore
+© 2026 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+ACM ISBN 978-x-xxxx-xxxx-x/YYYY/MM
+https://doi.org/10.1145/nnnnnnn.nnnnnnn
+Keywords
+Statute Prediction, Large Language Model, Explanation
+ACM Reference Format:
+Subinay Adhikary, Upal Bhattacharya, Vivek Kumar Singh, Anurag Sharma,
+Shubham Kumar Nigam, Suvasis Das, Shouvik Kumar Guha, Koustav Rudra,
+and Kripabandhu Ghosh. 2026. PROSLEX: A Novel Dataset for Expert-Annotated
+Legal Statute Prediction for Indian Judiciary. In Proceedings of International
+Conference on Artificial Intelligence and Law (ICAIL 2026). ACM, New York,
+NY, USA, 10 pages. https://doi.org/10.1145/nnnnnnn.nnnnnnn
+1
+Introduction
+In Civil Law jurisdictions, written statutory provisions explicitly
+define charges under specific statutes (e.g., theft, murder, riot),
+which must be consulted before determining the applicable charge
+in a given case2. ‘Statute’ refers to a set of codified legal rules fol-
+lowed by the legal system in the concerned judiciary. In countries
+such as India, which adhere to the Civil Law system (in conjunction
+with elements of Common Law) and face the looming pendency of
+millions of cases3, automating statute identification emerges as a sig-
+nificant research challenge – not only to support legal professionals
+but also to aid individuals without legal expertise, for whom seek-
+ing professional advice can be costly and time-consuming. Statute
+prediction makes it easy to find the laws that apply to a case, giving
+both lawyers and everyday people quick, affordable access to legal
+guidance.
+Statute prediction involves identifying the relevant legal statutes
+for a given case based on its factual description, making it a practical
+and impactful application of Natural Language Processing [2, 9, 26].
+Since a legal case document can be associated with multiple statutes,
+statute prediction is inherently a multi-label classification task.
+Explainability in AI-systems, especially in high-risk domains
+like law, is of paramount importance [19]. The EU AI Act Article 13:
+Transparency and Provision of Information to Deployers 4 states
+“High-risk AI systems shall be designed and developed in such a
+2https://en.wikipedia.org/wiki/Civil_law_(legal_system)
+3https://njdg.ecourts.gov.in/njdg_v3/
+4https://artificialintelligenceact.eu/article/13/
+arXiv:2608.08830v1  [cs.AI]  9 Aug 2026
+
+
+ICAIL 2026, June 2026, Singapore
+Adhikary et al.
+An example document annotated by legal experts.
+BHIMANNA v. STATE OF KARNATAKA [2012] INSC 495 (4 September 2012) On 17.11.1999 at about 4.00 p.m., Yenkappa(A-1), along
+with Bhimanna (A-2) and Suganna (A-3), was returning home with agricultural implements, that is axes and a plough. They at-
+tempted to use the land of the deceased as a pathway. The deceased Bheemanna, who was present on his land along with
+his wife Paddamma (PW.1) and mother, namely, Bheemava, obstructed the accused persons, asking them not to pass through his
+land. Yenkappa(A-1) then started hurling abuses in filthy language and instigated Bhimanna (A-2) and Suganna (A-3) to assault the deceased.
+|                                                                                                                                    {z                                                                                                                                    }
+𝑆𝑡𝑎𝑡𝑢𝑡𝑒:IPC 147
+Thus, Bhimanna (A-2) and Suganna (A-3) began assaulting the deceased with axes over his head and right hand.
+|                                                                                                                                                      {z                                                                                                                                                      }
+𝑆𝑡𝑎𝑡𝑢𝑡𝑒:IPC 302, IPC 147
+Yenkappa (A-1) assaulted the de-
+ceased with the wooden part of a plough. Paddamma (PW.1) and Bheemava, mother of the deceased went to save the deceased, but they too, were
+threatened with assault. Similar threats were hurled when Rangayya (PW.6), nephew of the deceased and his father Hanumappa approached the
+place of occurrence. The accused persons left the place after assaulting the deceased, throwing away the axes and wooden part of the plough.
+Rangayya (PW.6) brought a bullock cart as asked by Paddamma (PW.1) from the village and the deceased was then taken to Ramdurga Police Station.
+Upon the advice of the police, the deceased was taken in a mini lorry, driven by Mahadevappa (PW.10) to Deodurga Hospital, and when they reached
+there at 8.00 p.m., based on the complaint submitted by Paddamma (PW.1), an FIR was lodged at 8.15 p.m.
+|                                                                                                                   {z                                                                                                                   }
+𝑆𝑡𝑎𝑡𝑢𝑡𝑒:IPC 302
+Figure 1: An example of annotation by legal experts in the proposed PROSLEX dataset. Here, statutes IPC 147 and IPC 302 are
+applicable, and the explanation (reason) for the applicability of these statutes is shown as annotations.
+way as to ensure that their operation is sufficiently transparent
+to enable deployers to interpret a system’s output and use it
+appropriately. An appropriate type and degree of transparency shall
+be ensured with a view to achieving compliance with the relevant
+obligations of the provider and deployer set out in Section 3” highlight-
+ing the non-negotiable necessity of transparency in AI systems. To
+build explainable automatic statute prediction systems, test beds
+are necessary, and in Indian law, apart from initial attempts like
+[33], there has been no large-scale court facts (of cases) dataset
+containing legal expert annotated explanations for the applicabil-
+ity of statute(s). In this paper, we present PROSLEX (PRediction Of
+Statutes and LEgal eXplanation), a dataset comprising 1,623 legal
+expert–annotated case facts paired with their relevant statutes for
+explainable statute prediction. Figure 1 illustrates an example anno-
+tation, where legal experts highlighted a text span and associated
+it with the applicable statute. Afterward, a total of 7,450 spans
+were annotated to represent the legal reasoning for the statutes.
+The creation of PROSLEX involved two main stages and was
+carried out by legal experts from a reputed Indian legal institute.
+In the first stage, experts identified statutes based on their legal
+and social importance. In the second stage, they selected documents
+corresponding to these statutes and annotated the relevant text
+spans. Subsequently, a senior legal expert resolved annotations with
+low inter-annotator agreement (IAA) scores. Section 3 provides a
+detailed description of the PROSLEX creation process. The resulting
+dataset was then used for our empirical study, which is elaborately
+described in Section 4. Furthermore, Figure 2 depicts the complete
+pipeline, from dataset creation to its application in downstream
+tasks using various in-context learning techniques, including few-
+shot, chain-of-thought, and tree-of-thoughts.
+Our research delivers a comprehensive AI-based system for legal
+statute prediction and explanation tailored to the Indian judiciary.
+2
+Related Work
+Legal charge identification or statute prediction has significantly
+evolved, leveraging advances in machine learning and deep learn-
+ing methodologies. Early research primarily relied on traditional
+machine learning methods. For instance, Liu et al. [22] utilized
+support vector machines (SVMs) with textual features from legal
+documents to predict associated statutes.
+Motivated by the success of deep learning in NLP tasks [1, 3],
+researchers introduced neural network architectures into charge
+prediction tasks [10, 16, 31, 32, 35, 39]. Luo et al. [23] proposed a
+hierarchical attention network that predicted charges by selecting
+the most relevant law articles. Similarly, Wei and Lin [34] developed
+a knowledge-aware multi-label charge prediction method using
+external knowledge from legal texts to improve prediction accuracy.
+On the other side, to address the challenges of distinguishing
+confusing charges, Li et al. [17] developed an element-driven atten-
+tive neural network model leveraging legal constitutive elements as
+discriminative features. Similarly, Yang et al. [38] integrated word
+collocation features using attention mechanisms, and Hu et al. [13]
+constructed discriminative attributes to enhance differentiation be-
+tween confusing charges. More recently, Xu et al. [37] developed an
+attention mechanism focusing on subtle differences between con-
+fusing legal articles, aiming to improve charge prediction accuracy
+further.
+Knowledge-enhanced models have shown effectiveness, particu-
+larly for confusing charges. Bi et al. [7] presented a dual-graph in-
+teraction framework that integrates external legal knowledge bases,
+significantly improving performance in distinguishing among con-
+fusing charges. Moreover, Chen et al. [11] introduced a defendant-
+aware label representation method tailored for multi-defendant
+scenarios, addressing complexities in real-world legal cases. Sev-
+eral works emphasized understanding semantic relations between
+
+
+PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary
+ICAIL 2026, June 2026, Singapore
+Legal Corpus
+Annotated by Legal Experts
+The deceased Bheemanna, who was present on his 
+land alongwith his wife Paddamma (PW.1) and 
+mother, namely, Bheemava, obstructed the accused 
+persons asking them not to pass through his 
+land. Yenkappa(A-1) then started hurling abuses in 
+filthy language and instigated Bhimanna (A-2) and 
+Suganna (A-3) to assault the deceased. Thus, 
+Bhimanna (A-2) and Suganna (A-3) began assaulting 
+the deceased with axes over his head and right 
+hand. Yenkappa (A-1) assaulted the deceased 
+with Wooden part of a plough.
+…….
+Upon the advice of the police, the deceased was 
+taken in a mini lorry, driven by Mahadevappa
+(PW.10) to Deodurga Hospital and when they 
+reached there at 8.00 p.m., the doctor declared 
+Bheemanna dead. On the basis of the complaint 
+submitted by Paddamma (PW.1), an FIR was lodged 
+at 8.15 p.m.
+Fact of the Case
+Yenkappa (A-1) assaulted the 
+deceased with Wooden part of a 
+plough.
+IPC 302, 
+IPC 147
+Upon the advice of the police, the 
+deceased was taken in a mini lorry, 
+driven by Mahadevappa (PW.10) to 
+Deodurga Hospital and when they 
+reached there at 8.00 p.m., the 
+doctor declared Bheemanna dead.
+IPC 302
+Labeled Statutes with Explanation
+Annotated 
+Corpus
+Retrieval Model
+Top-k Examples
+Few-shot
+Chain of 
+Thought
+LLM
+In-context Learning
+Training Set
+…..  Jaggu Ram, his son Jeevan Ram and 
+wife Nathi started harassing Shanti in 
+connection with dowry;     ……..
+Test Doc
+they killed his daughter by burning with kerosene.
+IPC 302
+…. connection with dowry; that after three 
+days of marriage they left Radio, Press etc.
+IPC 498A
+Statute Prediction with Explanation
+Figure 2: This workflow illustrates a legal prediction framework to identify applicable Indian Penal Code (IPC) statutes for
+legal cases with the reasoning. The diagram shows a workflow where a legal corpus is annotated by legal experts to create
+a training set of case facts paired with relevant statutes and explanations. The left side displays an example case involving
+Bheemanna’s assault and death, with highlighted text mapped to IPC sections 302 (murder) and 147 (rioting). The system uses a
+retrieval model to find similar cases, then employs in-context learning techniques like few-shot examples and chain-of-thought
+reasoning to make predictions on unlabeled cases. The bottom portion demonstrates the model analyzing a test document
+about dowry harassment and correctly predicting applicable statutes (IPC 302 for a kerosene burning death and IPC 498A for
+dowry harassment).
+Table 1: A Comparative Overview of Prominent Legal Statute Prediction Datasets.
+Corpus
+Language
+Jurisdiction
+# of Cases
+# Labels
+Explanation
+ECtHR-B [9]
+English
+Europe
+10,000
+10
+ILSI [26]
+English
+India
+66,090
+Law Article (100)
+LeSICiN [27]
+English
+India
+100,000
+IPC Statutes (multiple)
+FIRE AILA 2019 [6]
+English
+India
+100
+197
+[33]
+English
+India
+45
+80
+✔
+PROSLEX (Ours)
+English
+India
+1623
+7
+✔
+charges and textual descriptions to enhance prediction accuracy [15,
+18, 37, 42].
+Within the Indian legal context, the Artificial Intelligence for
+Legal Assistance (AILA) track at FIRE 2019 was instrumental in em-
+phasizing legal information retrieval and statute identification [5].
+Subsequently, Vats et al. [33] investigated the strengths and lim-
+itations of large language models (e.g., GPT, Llama, Gemini) for
+statute prediction, demonstrating both substantial promise and crit-
+ical shortcomings. Further, comprehensive state-of-the-art surveys
+by Pawar et al. [29] and Paul et al. [26] on publicly available datasets
+underscored notable progress while also identifying persistent chal-
+lenges in Indian legal statute prediction.
+Despite these advances, a notable gap persists in generating
+clear explanations alongside charge predictions, especially within
+
+
+ICAIL 2026, June 2026, Singapore
+Adhikary et al.
+the in-context learning framework. In response to this limitation,
+we introduce PROSLEX, a novel dataset created to enable in-depth
+analysis of charge identification with accompanying explanatory
+context, focusing on Indian legal cases.
+3
+Dataset Creation
+In this section, we provide a detailed account of the creation pro-
+cess of our dataset, PROSLEX (PRediction Of Statutes and LEgal
+eXplanation), which comprises a subset of 33,546 Supreme Court of
+India5 judgements from 1950 to 2016, covering 444 Acts and 3,428
+Sections.
+Annotation Process
+3.1
+Involvement of Legal Experts
+The dataset creation was supported by a Government-funded ini-
+tiative, involving two postgraduate legal experts per statute,
+and a senior faculty member from a reputed National Law
+University. Legal experts initiate the annotation process by first
+selecting relevant statutes and then choosing the corresponding doc-
+uments for each statute.
+.
+3.2
+Statute selection
+We concentrate on crime-related documents, which account for 30%
+of the Supreme Court collection. In the Indian judiciary, 512 sections
+related to criminal law, collectively known as the Indian Penal Code
+(IPC). The selection of statutes for annotation was guided by the
+following three criteria:
+(1) Legal and social significance: Those statutes have high
+importance from a legal perspective and the socio-legal per-
+spective. For example, Indian Penal Code 302 represents the
+sentence for murder and is thus of high relevance.
+(2) Sufficient documents: Those statutes have a substantial
+representative number of documents for the empirical study.
+(3) Distinctiveness of legal provisions: The nature of statutes
+needs to be distinct. For instance, IPC 302 indicates a sen-
+tence (punishment) for culpable homicide amounting to mur-
+der, IPC 300 defines culpable homicide, and IPC 304 addresses
+culpable homicide but not amounting to murder. Hence, to
+select the distinctive statute, legal experts only select those
+documents that are associated with IPC 302 as it concerns
+the sentence for the most serious crime within homicide.6
+Statute overview. Based on the aforementioned criteria, the
+legal experts identified seven statutes that meet our requirements,
+which are described below:
+(1) Indian Penal Code, 1860_147: Whoever is guilty of rioting,
+shall be punished with imprisonment of either description
+for a term which may extend to two years, or with fine, or
+with both.
+(2) Indian Penal Code, 1894_201: Whoever, knowing or having
+reason to believe that an offence has been committed, causes
+any evidence of the commission of that offence to disappear.
+5https://www.sci.gov.in/
+6https://devgan.in/ipc/chapter_16.php
+(3) Indian Penal Code, 1860_302: Whoever commits murder
+shall be punished with death, or imprisonment for life, and
+shall also be liable to fine.
+(4) Indian Penal Code, 1860_376: Deals with the punishment
+for rape.
+(5) Indian Penal Code, 1860_420: Whoever cheats and thereby
+dishonestly induces the person deceived to deliver any prop-
+erty to any person.
+(6) Indian Penal Code, 1860_498𝐴: An act of cruelty for the
+purposes of Section 498A corresponded to willful conduct
+of such a nature that it could cause danger to the life, limb,
+or health of the woman.
+(7) Indian Penal Code, 1860_506: Whoever commits the offence
+of criminal intimidation shall be punished with imprisonment
+of either description for a term which may extend to two
+years, or with fine, or with both.
+3.3
+Document Selection and Explanation
+Extraction
+Manually annotating all 33,546 documents is both time-consuming
+and labor-intensive, and expensive. As a solution, we opted to select
+a representative subset of collection for annotation. In this phase,
+legal experts focus on selecting a substantial amount of relevant
+documents of the aforementioned statutes. Considering the budget
+constraints of the Government-funded project, the selection was
+restricted to at most 250 cases per section. To optimally utilize
+the available resources, we prioritized including a greater number
+of cases per statute, ensuring sufficient data points for each class,
+over covering a larger number of statutes with fewer cases. Now,
+legal experts focus on two key tasks: i) document selection and
+ii) extracting text span (i.e., explanation) relates with corresponding
+statute, which is carried out by a team of two legal experts per
+section, and is described below.
+Let the section is 𝑆𝑘and the two legal experts are 𝐿1 and 𝐿2.
+(1) 𝐿1 and 𝐿2 individually selected cases (same cases annotated
+by both the annotators) in which section 𝑆𝑘was upheld by the
+ruling court. Thus, the cases in which section 𝑆𝑘was initially
+applied but ultimately repealed are struck off from the list
+of cases to be annotated.
+(2) The legal experts 𝐿1 and 𝐿2, extract facts of the case from the
+original case document.
+(3) The legal experts 𝐿1 and 𝐿2, perform annotation over facts
+of the cases. Figure 1 displays legal experts labeling a span
+of text along with applicable statutes, as the explanation.
+(4) Later, to create the ground-truth version, we follow an adju-
+dication process with the help of a senior legal expert.
+3.4
+Adjudication Process
+To establish the gold standard annotations, we measured inter-
+annotator agreement between explanation-statute pairs provided
+by two independent legal experts. We computed text overlap using
+ROUGE-L [20], which relies on the longest common subsequence
+to capture sentence-level structural similarity and word order. The
+scores range from 0 (no overlap) to 1 (perfect overlap). Higher
+scores indicate stronger consistency between annotators. Analysis
+of ROUGE-L scores across all annotation pairs revealed:
+
+
+PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary
+ICAIL 2026, June 2026, Singapore
+Table 2: Statistics of the PROSLEX Dataset
+Dataset
+Indian Penal Code (IPC) Statutes
+Type
+Statistics
+IPC 147
+IPC 201
+IPC 302
+IPC 376
+IPC 420
+IPC 498A
+IPC 506
+Train
+#Documents
+214
+214
+193
+105
+172
+118
+116
+Train
+# Avg. tokens
+1052
+1584
+617
+745
+496
+270
+488
+Validation
+#Documents
+30
+30
+27
+15
+24
+17
+16
+Validation
+# Avg. tokens
+1100
+1540
+583
+750
+487
+274
+498
+Test
+#Documents
+62
+63
+57
+30
+51
+35
+34
+Test
+# Avg. tokens
+1043
+1534
+600
+723
+415
+323
+502
+Table 3: The structure of the prompt used in our ICL experi-
+ments. [X] represents a variable that is to be substituted for
+its value.
+Prompt Template for Predicting Statute with Explanation
+Given a fact of a legal case document as enclosed within angular
+brackets, enlist the likely statutes that apply to this segment.
+Following are the tags along with their descriptions.
+1. “[Statute]”: “[Description]”
+2. “[Statute]”: “[Description]”
+...
+Following is a list of example text for each :
+# Example 1:
+Case_proceeding: “[Text]”
+Prediction: “[Statute],[Statute]”
+Explanation: “[Reasoning],[Reasoning]”
+# Example 2:
+Case_proceeding: “[Text]”
+Prediction: “[Statute]”
+Explanation: “[Reasoning]”
+Instruction: Learn from the examples provided. Avoid generating
+fabricated or invalid tags.
+Input segment: <[INPUT]>
+• Mean ROUGE-L: 0.79 (SD = 0.12)
+• Median: 0.80
+• Quartiles: Q1 = 0.72, Q3 = 0.87
+To determine an appropriate threshold for requiring adjudication,
+we conducted a calibration study with 50 randomly sampled anno-
+tation pairs. A senior legal expert with over 15 years of experience
+in legal domain blind-reviewed each pair and indicated whether
+adjudication was necessary. This analysis showed that cases with
+ROUGE-L < 0.75 required adjudication in 90% of instances.
+Based on these findings, we adhere to the following adjudication
+steps:
+• ROUGE-L < 0.75: The senior legal expert independently
+reviewed both annotations and either selected the more ac-
+curate one or created a refined version combining insights
+from both annotators.
+• ROUGE-L ≥0.75: In this case, we retained the annotation
+with more detailed legal reasoning.
+This approach ensured high-quality gold standard annotations
+while maintaining annotation efficiency, with approximately 37%
+of cases requiring senior expert adjudication.
+The process of fact extraction, labeling span of text, solving inter-
+annotator disagreement, and providing additional cases if required,
+are repeated until for section 𝑆𝑘we have 250 relevant and annotated
+cases. Although it was not feasible to obtain 250 cases for every
+statute, our dataset PROSLEX nevertheless offers 1623 annotated
+documents with 7450 explanations, based on Indian Supreme Court
+judgments (as shown in Table 1). We allocated 94 INR per document,
+resulting in a total expenditure of approximately 152,562 INR for the
+complete annotation process. This amount represented the entire
+budget for the project, which also limited our ability to annotate a
+larger number of cases. In Table 2, we showcase overall statistics
+of our dataset PROSLEX. Later, we employ PROSLEX for various
+empirical studies.
+4
+Experimental Setup
+In the previous section, we described the entire data set creation
+process. For the empirical study, we divide our dataset into three
+parts: training, validation, and testing. We divided our dataset into
+training (70%), validation (10%), and testing (20%) sets using strat-
+ified random sampling. This configuration provides: a) Sufficient
+training samples (70%) for model learning across all statute cat-
+egories, b) a validation set (10%) for hyperparameter tuning and
+early stopping, c) an adequately sized test set (20%) for robust per-
+formance evaluation. In addition, this 70:30 split follows standard
+practice in legal NLP tasks [14, 24] and provides sufficient data
+for model training while reserving adequate samples for robust
+evaluation. The stratification ensured balanced representation of
+statute categories across all splits. We used a fixed random seed
+(seed=42) for reproducibility.
+Language Model Based. In this approach, we utilized sev-
+eral language models, including LegalBERT [8], InLegalBERT [28],
+
+
+ICAIL 2026, June 2026, Singapore
+Adhikary et al.
+Table 4: Performance comparison of different models (e.g., DeepSeek, Llama-3.1-70B, Claude, and GPT-4) across sections
+of the Indian Penal Code. This evaluation presents the F1-scores of various statutes using both LM-based and LLM-based
+approaches. Among the LM-based models, InLegalBERT consistently outperforms others. Additionally, a key finding is that
+LLMs achieve the highest performance in statute prediction with explanation when using the Chain-of-Thought (CoT) setup
+within In-Context Learning (ICL) techniques.
+Models
+Indian Penal Code (Statutes)
+Macro F1 score
+IPC 147
+IPC 201
+IPC 302
+IPC 376
+IPC 420
+IPC 498A
+IPC 506
+Statute Prediction Only
+LM Based
+InLegalBERT
+0.76
+0.80
+0.83
+0.87
+0.94
+0.91
+0.45
+0.82
+LegalBERT
+0.68
+0.72
+0.84
+0.90
+0.93
+0.91
+0.37
+0.80
+BERT-base
+0.60
+0.55
+0.68
+0.81
+0.80
+0.86
+0.06
+0.67
+Longformer
+0.57
+0.59
+0.73
+0.68
+0.83
+0.86
+0.02
+0.67
+RoBERTa
+0.64
+0.41
+0.64
+0.75
+0.86
+0.85
+0.10
+0.64
+Zero-shot
+DeepSeek
+0.68
+0.65
+0.75
+0.83
+0.75
+0.73
+0.26
+0.64
+Llama-3.1-70B
+0.47
+0.27
+0.66
+0.47
+0.58
+0.55
+0.25
+0.47
+Claude
+0.60
+0.45
+0.71
+0.66
+0.73
+0.71
+0.39
+0.61
+GPT-4
+0.55
+0.37
+0.68
+0.59
+0.69
+0.66
+0.35
+0.56
+Few-shot
+DeepSeek
+0.87
+0.72
+0.75
+0.85
+0.82
+0.80
+0.43
+0.71
+Llama-3.1-70B
+0.66
+0.43
+0.72
+0.83
+0.83
+0.78
+0.37
+0.64
+Claude
+0.62
+0.52
+0.74
+0.74
+0.71
+0.74
+0.41
+0.64
+GPT-4
+0.61
+0.51
+0.73
+0.73
+0.78
+0.77
+0.46
+0.66
+TOT
+DeepSeek
+0.21
+0.08
+0.12
+0.34
+0.05
+0.21
+0.24
+0.17
+Llama-3.1-70B
+0.25
+0.01
+0.09
+0.30
+0.01
+0.24
+0.06
+0.13
+Claude
+0.32
+0.02
+0.08
+0.74
+0.11
+0.02
+0.03
+0.18
+GPT-4
+0.05
+0.26
+0.13
+0.36
+0.41
+0.01
+0.27
+0.21
+Statute Prediction with Explanation
+COT
+DeepSeek
+0.65
+0.66
+0.74
+0.91
+0.78
+0.88
+0.40
+0.73
+Llama-3.1-70B
+0.50
+0.44
+0.71
+0.71
+0.56
+0.74
+0.33
+0.57
+Claude
+0.49
+0.58
+0.66
+0.86
+0.82
+0.82
+0.40
+0.66
+GPT-4
+0.50
+0.61
+0.73
+0.93
+0.93
+0.86
+0.54
+0.75
+Table 5: Comparison of explanation performance across various model combinations for statute prediction using multiple
+evaluation metrics, including legal expert evaluation scores. The highest value for each metric is highlighted in bold.
+Models
+Lexical Based Evaluation
+Semantic Evaluation
+Expert Evaluation
+Rouge-1
+Rouge-2
+Rouge-L
+BLEU
+BLEURT
+BERTScore
+Rating Score
+Prediction with explanation on PROSLEX
+Llama-3.1-70B
+0.17
+0.18
+0.21
+0.25
+0.58
+0.65
+3.16
+Deepseek
+0.10
+0.13
+0.15
+0.21
+0.42
+0.46
+3.83
+Claude
+0.10
+0.11
+0.14
+0.19
+0.40
+0.43
+3.51
+GPT-4
+0.20
+0.23
+0.31
+0. 28
+0.63
+0.67
+3.91
+Longformer[4], RoBERTa [21], and BERT-based (Large) [12] as base-
+lines for multilabel classification. For training the model, we used a
+batch size of 32, the Adam optimizer, and a learning rate of 5e-6. The
+training was conducted over 20 epochs on the PROSLEX dataset.
+The remaining hyperparameters were set to their default values as
+provided by the HuggingFace library.
+Large Language Model Based. By employing LLMs in predic-
+tion, we considered two approaches: one involving identifying
+legal statutes only, and the other focusing on statute identifica-
+tion with explanation. For this prediction task, we employ several
+
+
+PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary
+ICAIL 2026, June 2026, Singapore
+models, including Llama-3.1-70B7, deepseek-r1-distill-llama-70b8,
+claude-sonnet-4-202505149, GPT-410. The temperature parameter
+was set to 0 for Claude and GPT, and 0.01 for Llama and DeepSeek.
+Additionally, we standardized the top-p value to 0.95 across all
+experiments.
+4.1
+Zero-shot
+In this approach, we rely exclusively on the label descriptions (as
+detailed in Section 3.2) for all labels, without providing any example
+context, as shown in Table 3.
+4.2
+Exemplar selection for few-shot
+In this approach, we adopt the K-nearest neighbor selection method
+to choose an exemplar for few-shot learning. We compute semantic
+similarity between the statute description with annotated span of the
+corresponding statutes for each document from the training set, and
+then select examples for each statute based on the highest score.
+Let 𝐷train = {𝑑1,𝑑2, . . . ,𝑑𝑛} denote the set of training documents,
+and 𝑆= {𝑠1,𝑠2, . . . ,𝑠𝑚} represent the set of statutes. For each doc-
+ument 𝑑𝑖, let 𝑎𝑖𝑗be the annotated span corresponding to statute
+𝑠𝑗, and let 𝑡𝑗denote the textual description of 𝑠𝑗, as illustrated in
+Figure 2. We compute the semantic similarity score between the
+statute description 𝑡𝑗and the annotated span 𝑎𝑖𝑗using a similarity
+function 𝜎(·, ·), such as cosine similarity in an embedding space,
+comparing their [CLS] embeddings obtained from InLegalBERT11,
+which is trained on Indian legal documents. The pair (𝑠𝑗∗,𝑎𝑖∗𝑗) is
+selected as the representative example for statute 𝑠𝑗. For the empir-
+ical study, we conduct experiments using 𝐾∈{2,4,6} examples per
+statute as few-shot exemplars.
+4.3
+Chain-of-thought
+To elicit a series of intermediate reasoning steps while predicting
+the statutes, we employ the chain-of-thought approach [36]. Yu
+et al. [41] employed zero-shot Chain-of-Thought (CoT) prompting
+for statute prediction, generating explanations prior to prediction;
+however, this approach underperformed compared to methods that
+did not utilize explanations. In contrast, Vats et al. [33] applied
+few-shot CoT prompting [36] on a dataset of 45 documents. In our
+work, we conducted experiments on a significantly larger dataset
+(1623 documents). Table 5 and Table 4 present the comparative
+performance of the models in terms of both prediction and expla-
+nation.
+4.4
+Tree-of-thoughts
+The Tree-of-Thoughts (ToT) framework has been proposed to im-
+prove prompting for complex tasks that demand exploration and
+look-ahead reasoning [40]. Unlike Chain-of-Thought (CoT) prompt-
+ing, ToT organizes intermediate reasoning steps—referred to as
+thoughts—into a tree structure. Each thought constitutes a coherent
+language sequence that incrementally progresses toward the final
+solution. This tree-based organization enables language models to
+7https://ai.meta.com/blog/meta-llama-3-1/
+8https://www.deepseek.com/en
+9https://www.anthropic.com/claude/sonnet
+10https://openai.com/
+11https://huggingface.co/law-ai/InLegalBERT
+reason deliberately by evaluating how well different thoughts con-
+tribute to solving the task. Furthermore, ToT combines the model’s
+capability to generate and assess thoughts with search strategies
+such as breadth-first and depth-first search.
+In this study, we employ a breadth-first search (BFS) strategy
+to ensure systematic exploration of the solution space at each rea-
+soning level before proceeding deeper. Our hyperparameters were
+determined through preliminary experiments on a validation subset:
+we set a maximum search depth of 𝑑max = 7 to balance exploration
+breadth with computational feasibility, allow at most 𝑐max = 3 child
+nodes per state to maintain diversity while avoiding combinatorial
+explosion, impose a limit of 𝑛max = 10 nodes per level to constrain
+memory usage, and apply a confidence threshold of 0.4 (represent-
+ing the minimum normalized probability score for path expansion)
+to prune low-quality reasoning branches early. We chose BFS over
+depth-first search because it proved more robust in our pilot studies
+for tasks requiring comparison of multiple reasoning strategies at
+similar depths. These parameters result in a maximum of 37 = 2,187
+possible paths in the worst case, though early pruning typically
+reduces the explored space to 15–30% of this theoretical maximum.
+5
+Results and Analysis
+In this section, we discuss the insights derived from our empirical
+observations. Table 4 shows the F1-score for each statute, followed
+by the macro-F1 score, while Table 5 compares LLM-generated
+explanations with expert annotations.
+5.1
+Insights from Statute Prediction
+Specifically, Table 4 provides a comparative analysis of the perfor-
+mance of different models across the aforementioned sections of
+the Indian Penal Code (IPC), using both traditional language-based
+models and Large Language Models (LLMs). For the LLM-based
+systems, we further explore in-context learning (ICL), Chain-of-
+Thought (CoT), and Tree-of-Thoughts (ToT) strategies. InLegalBERT
+emerges as the best-performing model under the “Statute Predic-
+tion Only” setting, achieving the highest overall accuracy of 0.82,
+notably outperforming other language models like LegalBERT and
+Longformer. Among zero-shot setups, DeepSeek performs best with
+0.64 macro F1-score, though still significantly behind the fine-tuned
+LM-based models. In the few-shot setting, DeepSeek again leads
+with 0.71 macro F1-score, demonstrating better generalization with
+limited examples, while GPT-4 and Claude show more moderate
+performance.
+Another observation is that LLMs under the ToT mechanism
+struggle with accurate statute prediction. When generating multi-
+ple reasoning branches, the model may interpret the same statutory
+language differently across branches, resulting in inconsistent or
+incorrect predictions. In contrast, CoT follows a single reasoning
+chain. This focused strategy allows LLMs to concentrate compu-
+tational resources on one line of reasoning rather than dispers-
+ing attention across multiple branches, leading to more accurate
+statute identification. Consequently, GPT-4 achieves the highest
+macro F1-score of 0.75, demonstrating strong reasoning capabilities,
+particularly when explanations are required.
+
+
+ICAIL 2026, June 2026, Singapore
+Adhikary et al.
+Overall, while domain-specific models like InLegalBERT dom-
+inate in direct statute prediction, large foundational models like
+GPT-4 excel when interpretability and reasoning are involved.
+5.2
+Insights of LLM Reasoning
+To evaluate the LLMs generated rationale along with predicted
+statutes, we employ a comprehensive evaluation strategy that inte-
+grates both quantitative and qualitative analyses. This multifaceted
+approach ensures a robust assessment of our model’s performance
+for the explanation tasks.
+(1) Lexical Based Evaluation: We employed lexical similar-
+ity metrics, including ROUGE [20] (ROUGE-1, ROUGE-2,
+ROUGE-L), and BLEU [25] to evaluate the generated expla-
+nations. These metrics measure the overlap and sequence
+of words between the model outputs and reference texts,
+offering insight into the lexical accuracy of the explanations.
+(2) Semantic Similarity Based Evaluation: To capture the
+semantic quality of the generated explanations, we used
+BERTScore [43], BLEURT [30], which evaluate the semantic
+similarity between the generated outputs and the reference
+explanations. Therefore, these metrics provide deeper in-
+sight into the model’s ability to produce meaningful and
+contextually appropriate explanations.
+(3) Expert Evaluation: Evaluating generative models in the
+statute identification task with explanation requires domain-
+specific expertise. We shared LLM generated predicted statutes
+along with their explanations to legal experts and asked them
+to rate the alignment between explanations and predicted
+statutes on a scale from 0 to 4:
+• 4: Fully aligned - explanation directly and completely sup-
+ports the predicted statute.
+• 3: Mostly aligned - explanation supports the statute with
+minor gaps or tangential points.
+• 2: Partially aligned - explanation has some relevant points
+but also contains misaligned or irrelevant content.
+• 1: Minimally aligned - explanation barely relates to the
+predicted statute.
+• 0: Not aligned - explanation is irrelevant or contradicts
+the statute.
+Table 5 presents a comparative analysis of explanation quality
+across various models such as LLaMA- 3.1-70B, DeepSeek, Claude,
+and GPT-4, employing both lexical-based (ROUGE-1, ROUGE-2,
+ROUGE-L, BLEU) and semantic-based (METEOR, BERTScore) eval-
+uation metrics. Overall, GPT-4 consistently outperforms the other
+models across all metrics, achieving the highest scores in ROUGE-
+1 (0.20), ROUGE-2 (0.23), ROUGE-L (0.31), BLEU (0.28), BLEURT
+(0.63), and BERTScore (0.67), indicating that its explanations are
+both textually aligned and semantically richer compared to other
+models. LLaMA 3.1 ranks second, showing relatively strong lexical
+overlap (e.g., ROUGE-2: 0.18) and decent semantic quality (BLEURT:
+0.58, BERTScore: 0.65), suggesting it generates explanations that
+are closer to reference texts than DeepSeek or Claude. DeepSeek
+and Claude lag behind significantly on all metrics, with Claude
+performing the lowest semantically (BERTScore: 0.43), indicating
+less coherent or relevant explanations. This analysis confirms that
+GPT-4 is the most capable model for generating legally meaningful
+and well-aligned statute explanations, with LLaMA-3.1-70B being a
+strong secondary contender. Among the evaluated models, GPT-4
+achieves the highest expert rating with an average score of 3.91,
+indicating the most consistently high-quality explanations as as-
+sessed by domain experts. Deepseek follows with a strong expert
+score of 3.83, suggesting that its explanations are generally well-
+aligned with legal expectations. Claude attains an average rating
+of 3.51, reflecting competent but comparatively less consistent per-
+formance.
+In contrast, Llama-3.1-70B receives the lowest expert rating (3.16),
+indicating greater variability in explanation quality and more fre-
+quent deviations from expert standards. Overall, the expert evalua-
+tion results highlight clear performance differences across models,
+with GPT-4 and Deepseek demonstrating superior alignment with
+expert legal reasoning criteria.
+Table 7 reports the distribution of expert-assigned rating scores
+for explanations generated by different generative models under
+the PROSLEX setting. Scores range from 0 to 4, with higher values
+indicating better explanation quality.
+Across all models, the majority of explanations receive the high-
+est rating (score 4), indicating consistently strong performance.
+GPT-4 achieves the highest concentration of top-rated explanations,
+with 47 instances rated 4 and no explanations receiving scores 0 or
+1. Deepseek and Claude show similarly strong performance, with
+46 and 43 explanations, respectively, receiving the maximum score,
+although Deepseek exhibits a small number of lower-rated cases.
+In comparison, Llama-3.1-70B demonstrates greater variability,
+with 38 explanations rated 4 and 10 explanations receiving a score
+of 0 (including cases where the model failed to generate any ex-
+planation), indicating low-quality outputs. Ratings of 1 and 2 are
+rare across all models, suggesting that explanations are generally
+evaluated as either high quality or clearly inadequate rather than
+marginal.
+Overall, the distribution indicates that all evaluated models are
+capable of producing high-quality explanations, with GPT-4 show-
+ing the most consistent performance in terms of expert ratings.
+Below, we provide an error analysis to illustrate common failure
+modes, followed by examples of expert-evaluated explanations.
+5.3
+Error Analysis
+Figure 3 illustrates this challenge. The model (GPT-4) correctly
+predicts the applicable statute (IPC 147) but provides misaligned
+reasoning. The model-selected span (red) highlights a fight, which
+does not sufficiently establish the statutory elements of rioting,
+whereas the expert-annotated span (blue) explicitly describes the
+appellant leading a group that assaulted and threatened hospital
+staff, satisfying the legal requirements of IPC 147. The model relies
+on surface-level indicators of physical altercation rather than legally
+salient facts, demonstrating that correct statute prediction does not
+necessarily imply correct legal reasoning.
+Table 6 further reveals this variability: while LLMs can generate
+persuasive and contextually rich legal explanations for some IPC
+sections, their outputs are not uniformly reliable across all cases.
+This reinforces the need for human-in-the-loop validation in legal
+AI systems.
+
+
+PROSLEX: A Novel Dataset for Expert-Annotated Legal Statute Prediction for Indian Judiciary
+ICAIL 2026, June 2026, Singapore
+Table 6: Shows that LLM-generated explanations and their associated IPC sections are verified by a senior legal expert (discussed
+in Section 5.2).
+Inferred Section
+Generated Explanation
+Human Score
+IPC 302
+Appellant no. 2 gave a blow with an axe on the neck of the deceased as a result of
+which he fell down and soon thereafter died.
+4
+IPC 302
+The deceased had come to the house of PW 1, heard sound of falling of a cycle. He
+therefore looked into that direction and saw that the appellant was giving blows to
+his friend with a sword.
+4
+IPC 420
+Kanhayalal Sharma and his son Prakash Kanhayalal Sharma are being investigated
+for having issued bogus and false Degree certificates to a large number of students.
+4
+IPC 420
+The appellant allotted premises to various persons under his signature, issued rent
+receipts so that the said persons could claim possession of the tenements, though in
+fact the tenements were vacant.
+4
+IPC 147
+Companions of Kallu came to the factory and murdered Ashok Kumar.
+0
+IPC 147
+Allegations against them were that on September 17, 1982, they committed rioting.
+2
+IPC 506
+The appellant took out a revolver and threatened the complainant with death unless
+he withdrew the complaint.
+2
+IPC 376
+The doctor opined that Asha was possibly raped.
+4
+IPC 201
+The claimants also claimed 12% additional compensation under Section 23(1A) of the
+L.A. Act, which the Court below had not granted.
+4
+IPC 201
+It was alleged that the chopped portion of the head was handed over to the accused
+Abdullah.
+0
+An example of Misaligned Reasoning Despite Correct Statute Prediction
+... The appellant was bewildered and motionless for some time. The appellant apprehended that Dr. Bhattacharya would create a situation which may adversely affect
+appellant’s health. There was heated exchange of words which resulted in commotion. There was scuffle on the arrival of outsiders and two sons of Parul Jana
+out of hospital premises. The appellant immediately contacted the General Manager (Projects) and requested him to help to control the situation. When the General
+Manager reached the hospital, the appellant explained the situation to him. The General Manager also met Dr. Bhattacharya to get true and correct facts as to how the
+incident had happened. The General Manager then advised the appellant to go back. Immediately, the appellant left the hospital. In the entire incident, asserted the
+appellant, save and except accompanying sons of Parul Jana, he did nothing. He was not involved in the incident in any manner whatsoever. It was the Chief Medical
+Officer, who alone was responsible for the entire unfortunate situation. He also inflicted injuries on two sons of Parul Jana. Dr. Bhattacharya, however, cooked up a false
+case against the appellant alleging that the appellant had assaulted and injured him. On 6th May, 1999, i.e. on the next day, the Chief Medical Officer, Dr. Bhattacharya
+reported to the management that at the late night hours of 5th May, 1999, the appellant led by a bunch of hooligans had visited the hospital, assaulted
+him, i.e. Dr. Bhattacharya and abused and threatened other officers....
+Figure 3: The red-colored text span represents the portion labeled by the GPT-4 model in the Chain-of-Thought setup, where
+the predicted statute is Indian Penal Code 147. The blue-colored span corresponds to the annotation provided by legal experts,
+with the same predicted statute, Indian Penal Code 147. Thus, although GPT-4 correctly identified the statute, its reasoning was
+incorrect.
+Table 7: Distribution of rating scores for different generative
+models is assigned by the legal experts for each explanation.
+Generative Models
+Rating Score
+0
+1
+2
+3
+4
+PROSLEX
+Llama-3.1-70B
+10
+0
+0
+1
+38
+Deepseek
+1
+0
+2
+0
+46
+Claude
+6
+0
+0
+0
+43
+GPT-4
+0
+0
+2
+0
+47
+Overall, this error analysis underscores the importance of fine-
+grained, expert-aligned supervision of reasoning spans and evalu-
+ation frameworks that assess both predictive correctness and the
+legal validity of supporting explanations.
+6
+Conclusion and Future Work
+This work introduces PROSLEX, the largest and most comprehensive
+dataset constructed to date for the challenging task of legal statute
+prediction and explanation. By providing an unprecedented scale of
+annotated legal cases paired with relevant statutory provisions and
+human-generated explanations, PROSLEX represents a significant
+milestone in advancing computational approaches to legal reason-
+ing. The dataset addresses a critical gap in the legal AI landscape,
+where previous resources have been limited in scope, coverage, or
+the depth of explanatory annotations required to train and evaluate
+sophisticated models.
+Acknowledgments
+We acknowledge the Start-Up grant provided by IISER Kolkata to Dr.
+Kripabandhu Ghosh for covering the annotation cost. Generative
+
+
+ICAIL 2026, June 2026, Singapore
+Adhikary et al.
+AI tools were not used for core idea generation or experimental
+design. Its use was limited to minor writing and formatting.
+References
+[1] Subinay Adhikary, Junsume Das, and Dwaipayan Roy. 2025. Thinkir at eRisk
+2025: early detection and risk assessment of depression using transformer models.
+Working Notes of CLEF (2025), 9–12.
+[2] Subinay Adhikary, Procheta Sen, Dwaipayan Roy, and Kripabandhu Ghosh. 2024.
+A case study for automated attribute extraction from legal documents using large
+language models. Artificial Intelligence and Law (2024), 1–22.
+[3] Purbid Bambroo, Subinay Adhikary, Paheli Bhattacharya, Abhijnan Chakraborty,
+Saptarshi Ghosh, and Kripabandhu Ghosh. 2025. MARRO: multi-headed attention
+for rhetorical role labeling in legal documents. arXiv preprint arXiv:2503.10659
+(2025).
+[4] Iz Beltagy, Matthew E Peters, and Arman Cohan. 2020. Longformer: The long-
+document transformer. arXiv preprint arXiv:2004.05150 (2020).
+[5] Paheli Bhattacharya, Kripabandhu Ghosh, Saptarshi Ghosh, Arindam Pal, Parth
+Mehta, Arnab Bhattacharya, and Prasenjit Majumder. 2019. FIRE 2019 AILA
+track: artificial intelligence for legal assistance. In Proceedings of the 11th annual
+meeting of the forum for information retrieval evaluation. 4–6.
+[6] Paheli Bhattacharya, Kripabandhu Ghosh, Saptarshi Ghosh, Arindam Pal, Parth
+Mehta, Arnab Bhattacharya, and Prasenjit Majumder. 2019. Overview of the FIRE
+2019 AILA Track: Artificial Intelligence for Legal Assistance.. In FIRE (working
+notes). 1–12.
+[7] Sheng Bi, Zafar Ali, Tianxing Wu, and Guilin Qi. 2024. Knowledge-enhanced
+model with dual-graph interaction for confusing legal charge prediction. Expert
+Systems with Applications 249 (2024), 123626.
+[8] Ilias Chalkidis, Manos Fergadiotis, Prodromos Malakasiotis, Nikolaos Aletras,
+and Ion Androutsopoulos. 2020. LEGAL-BERT: The muppets straight out of law
+school. arXiv preprint arXiv:2010.02559 (2020).
+[9] Ilias Chalkidis, Abhik Jana, Dirk Hartung, Michael Bommarito, Ion Androut-
+sopoulos, Daniel Martin Katz, and Nikolaos Aletras. 2021. LexGLUE: A bench-
+mark dataset for legal language understanding in English.
+arXiv preprint
+arXiv:2110.00976 (2021).
+[10] Huajie Chen, Deng Cai, Wei Dai, Zehui Dai, and Yadong Ding. 2019. Charge-based
+prison term prediction with deep gating network. arXiv preprint arXiv:1908.11521
+(2019).
+[11] Yu Chen, You Zhang, Jin Wang, Dan Xu, and Xuejie Zhang. 2024. Learning
+Defendant-aware Label Representation for Multi-Defendant Charge Prediction.
+In 2024 International Joint Conference on Neural Networks (IJCNN). IEEE, 1–8.
+[12] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. Bert:
+Pre-training of deep bidirectional transformers for language understanding. In
+Proceedings of the 2019 conference of the North American chapter of the association
+for computational linguistics: human language technologies, volume 1 (long and
+short papers). 4171–4186.
+[13] Zikun Hu, Xiang Li, Cunchao Tu, Zhiyuan Liu, and Maosong Sun. 2018. Few-shot
+charge prediction with discriminative legal attributes. In Proceedings of the 27th
+international conference on computational linguistics. 487–498.
+[14] Abhinav Joshi, Shounak Paul, Akshat Sharma, Pawan Goyal, Saptarshi Ghosh,
+and Ashutosh Modi. 2024. IL-TUR: Benchmark for Indian legal text understanding
+and reasoning. arXiv preprint arXiv:2407.05399 (2024).
+[15] Liangyi Kang, Jie Liu, Lingqiao Liu, and Dan Ye. 2021. Label definitions augmented
+interaction model for legal charge prediction. In Advances in Information Retrieval:
+43rd European Conference on IR Research, ECIR 2021, Virtual Event, March 28–April
+1, 2021, Proceedings, Part I 43. Springer, 270–283.
+[16] Penghua Li, Fen Zhao, Yuanyuan Li, and Ziqin Zhu. 2018. Law text classification
+using semi-supervised convolutional neural networks. In 2018 Chinese control
+and decision conference (CCDC). IEEE, 309–313.
+[17] Shang Li, Boyang Liu, Lin Ye, Hongli Zhang, and Binxing Fang. 2019. Element-
+aware legal judgment prediction for criminal cases with confusing charges. In
+2019 IEEE 31st International Conference on Tools with Artificial Intelligence (ICTAI).
+IEEE, 660–667.
+[18] Wei Li, Shiyu Zhu, and Li Li. 2023. Leveraging knowledge-aware method for
+charge prediction. In 2023 26th International Conference on Computer Supported
+Cooperative Work in Design (CSCWD). IEEE, 1496–1501.
+[19] Q. Vera Liao and Jennifer Wortman Vaughan. 2024. AI Transparency in the Age
+of LLMs: A Human-Centered Research Roadmap. Harvard Data Science Review
+Special Issue 5 (may 31 2024). https://hdsr.mitpress.mit.edu/pub/aelql9qy.
+[20] Chin-Yew Lin. 2004. Rouge: A package for automatic evaluation of summaries.
+In Text summarization branches out. 74–81.
+[21] Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer
+Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. 2019. RoBERTa: A
+Robustly Optimized BERT Pretraining Approach. arXiv preprint arXiv:1907.11692
+(2019).
+[22] Yi-Hung Liu, Yen-Liang Chen, and Wu-Liang Ho. 2015. Predicting associated
+statutes for legal problems. Information Processing & Management 51, 1 (2015),
+194–211. doi:10.1016/j.ipm.2014.07.003
+[23] Bingfeng Luo, Yansong Feng, Jianbo Xu, Xiang Zhang, and Dongyan Zhao. 2017.
+Learning to predict charges for criminal cases with legal basis. arXiv preprint
+arXiv:1707.09168 (2017).
+[24] Anish Pahilajani, Samyak Jain, and Devasha Trivedi. 2024. NLP at UC Santa Cruz
+at SemEval-2024 task 5: Legal answer validation using few-shot multi-choice
+QA. In Proceedings of the 18th International Workshop on Semantic Evaluation
+(SemEval-2024). 1309–1314.
+[25] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a
+method for automatic evaluation of machine translation. In Proceedings of the
+40th annual meeting of the Association for Computational Linguistics. 311–318.
+[26] Shounak Paul, Rajas Bhatt, Pawan Goyal, and Saptarshi Ghosh. 2024. Legal
+statute identification: A case study using state-of-the-art datasets and methods.
+In Proceedings of the 47th International ACM SIGIR Conference on Research and
+Development in Information Retrieval. 2231–2240.
+[27] Shounak Paul, Pawan Goyal, and Saptarshi Ghosh. 2022. Lesicin: A heterogeneous
+graph-based approach for automatic legal statute identification from indian legal
+documents. In Proceedings of the AAAI conference on artificial intelligence, Vol. 36.
+11139–11146.
+[28] Shounak Paul, Arpan Mandal, Pawan Goyal, and Saptarshi Ghosh. 2023. Pre-
+trained language models for the legal domain: a case study on Indian law. In
+Proceedings of the nineteenth international conference on artificial intelligence and
+law. 187–196.
+[29] Sachin Pawar, Basit Ali, Girish K Palshikar, Ramandeep Singh, and Dhirendra
+Singh. 2023. Extraction and classification of statute facets using few-shot learning.
+In Proceedings of the Nineteenth International Conference on Artificial Intelligence
+and Law. 197–206.
+[30] Thibault Sellam, Dipanjan Das, and Ankur P Parikh. 2020. BLEURT: Learning
+robust metrics for text generation. arXiv preprint arXiv:2004.04696 (2020).
+[31] Yatian Shen, Jun Sun, Xiaopeng Li, Lei Zhang, Yan Li, and Xiajiong Shen. 2018.
+Legal article-aware end-to-end memory network for charge prediction. In Pro-
+ceedings of the 2nd International Conference on Computer Science and Application
+Engineering. 1–5.
+[32] Samir Undavia, Adam Meyers, and John E Ortega. 2018. A comparative study of
+classifying legal documents with neural networks. In 2018 Federated conference
+on computer science and information systems (FedCSIS). IEEE, 515–522.
+[33] Shaurya Vats, Atharva Zope, Somsubhra De, Anurag Sharma, Upal Bhattacharya,
+Shubham Kumar Nigam, Shouvik Guha, Koustav Rudra, and Kripabandhu Ghosh.
+2023. LLMs – the Good, the Bad or the Indispensable?: A Use Case on Legal Statute
+Prediction and Legal Judgment Prediction on Indian Court Cases. In Findings
+of the Association for Computational Linguistics: EMNLP 2023, Houda Bouamor,
+Juan Pino, and Kalika Bali (Eds.). Association for Computational Linguistics,
+Singapore, 12451–12474. doi:10.18653/v1/2023.findings-emnlp.831
+[34] Duan Wei and Li Lin. 2019. An external knowledge enhanced multi-label charge
+prediction approach with label number learning. arXiv preprint arXiv:1907.02205
+(2019).
+[35] Fusheng Wei, Han Qin, Shi Ye, and Haozhen Zhao. 2018. Empirical study of deep
+learning for text classification in legal document review. In 2018 IEEE International
+Conference on Big Data (Big Data). IEEE, 3317–3320.
+[36] Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi,
+Quoc V Le, Denny Zhou, et al. 2022. Chain-of-thought prompting elicits reasoning
+in large language models. Advances in neural information processing systems 35
+(2022), 24824–24837.
+[37] Nuo Xu, Pinghui Wang, Long Chen, Li Pan, Xiaoyan Wang, and Junzhou Zhao.
+2020. Distinguish confusing law articles for legal judgment prediction. arXiv
+preprint arXiv:2004.02557 (2020).
+[38] Wenmian Yang, Weijia Jia, Xiaojie Zhou, and Yutao Luo. 2019. Legal judg-
+ment prediction via multi-perspective bi-feedback network.
+arXiv preprint
+arXiv:1905.03969 (2019).
+[39] Ze Yang, Pengfei Wang, Lei Zhang, Linjun Shou, and Wenwen Xu. 2019. A
+recurrent attention network for judgment prediction. In Artificial Neural Networks
+and Machine Learning–ICANN 2019: Text and Time Series: 28th International
+Conference on Artificial Neural Networks, Munich, Germany, September 17–19,
+2019, Proceedings, Part IV 28. Springer, 253–266.
+[40] Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Tom Griffiths, Yuan Cao, and
+Karthik Narasimhan. 2023. Tree of thoughts: Deliberate problem solving with
+large language models. Advances in neural information processing systems 36
+(2023), 11809–11822.
+[41] Fangyi Yu, Lee Quartey, and Frank Schilder. 2022. Legal prompting: Teaching a
+language model to think like a lawyer. arXiv preprint arXiv:2212.01326 (2022).
+[42] Linan Yue, Qi Liu, Binbin Jin, Han Wu, Kai Zhang, Yanqing An, Mingyue Cheng,
+Biao Yin, and Dayong Wu. 2021. Neurjudge: A circumstance-aware neural
+framework for legal judgment prediction. In Proceedings of the 44th international
+ACM SIGIR conference on research and development in information retrieval. 973–
+982.
+[43] Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q Weinberger, and Yoav
+Artzi. 2019. Bertscore: Evaluating text generation with bert. arXiv preprint
+arXiv:1904.09675 (2019).
