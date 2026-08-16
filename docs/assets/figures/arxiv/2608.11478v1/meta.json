@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.11478v1/fig-001.webp",
+      "caption": "Figure 1- Number of SDG-16 related papers by discipline",
+      "page": 3,
+      "index": 1,
+      "width": 704,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2608.11478v1/fig-002.webp",
+      "caption": "Figure 2 - Top keywords in peace-related papers by discipline",
+      "page": 4,
+      "index": 2,
+      "width": 1027,
+      "height": 408
+    },
+    {
+      "url": "assets/figures/arxiv/2608.11478v1/fig-003.webp",
+      "caption": "Figure 4 - Top keywords in peace-related papers from the least peaceful countries. GPI# indicates the country's GPI rank.",
+      "page": 5,
+      "index": 3,
+      "width": 950,
+      "height": 1144
+    }
+  ]
+}

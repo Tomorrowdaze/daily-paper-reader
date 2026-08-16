@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-16",
+  "date": "2026-08-16",
+  "generated_at": "2026-08-16T19:52:35",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/16/2608.11478v1-characterizing-peace-through-scientific-keywords",
+      "section": "deep",
+      "title_en": "Characterizing Peace Through Scientific Keywords",
+      "authors": "Gita Ghiasi, Rabeeh Parhizkari, Tanja Tajmel",
+      "date": "2026-08-11",
+      "pdf": "https://arxiv.org/pdf/2608.11478v1",
+      "score": "8.0",
+      "evidence": "跨学科和背景通过科学关键词分析和平与暴力研究",
+      "tldr": "研究以SDG16相关论文为样本，比较不同学科与国家语境下和平关键词的差异，发现和平研究以“暴力”为核心但被不同学科与高低和平国家以技术、法政、社会等视角各异建构，并据此指向科研与政策优先方向。",
+      "tags": "query:profile-1",
+      "abstract_en": "This study aims to show that peace, as reflected in scientific research, is not a neutral or uniform concept but is constructed differently across disciplines and geopolitical contexts. To do this, this study analyzes differences in the use of keywords among scholarly publications aligned with SDG 16 across various disciplinary, societal, and national contexts, and identifies which keywords are most strongly associated with countries exhibiting higher versus lower levels of societal peace. Results show that while peace-related research is strongly centered on violence, it is interpreted through distinct lenses: technological and forensic approaches in biomedical and NSE fields, and institutional, legal, and societal perspectives in the social sciences. At the country level, violence remains a central anchor, but its framing varies with levels of peace, with higher-peace countries embedding it within welfare, health, and social systems, and lower-peace countries emphasizing conflict, security, and geopolitics. These results could contribute to shaping both research priorities and science policy initiatives.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/16/2608.08288v2-causal-state-space-model-for-causal-inference-estimating-longitudinal-individual-treatment-effects",
+      "section": "quick",
+      "title_en": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "authors": "Abisoye Abidakun, Mingjun Zhong, Georgios Leontidis",
+      "date": "2026-08-08",
+      "pdf": "https://arxiv.org/pdf/2608.08288v2",
+      "score": "7.0",
+      "evidence": "用于因果推断和估计纵向个体治疗效应的因果状态空间模型",
+      "tldr": "本研究面向临床纵向反事实预测，揭示域混淆导致的平衡-预测互信息冲突，提出CSSD/CSSPD：选择性状态空间编码+并行多步直接解码，并以对比预测与局部信息最大化恢复被抑制信号；在MIMIC-III与癌症模拟显著优于Causal Transformer，编码成本线性。",
+      "tags": "query:q6",
+      "abstract_en": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/16/2608.08288v1-causal-state-space-model-for-causal-inference-estimating-longitudinal-individual-treatment-effects",
+      "section": "quick",
+      "title_en": "Causal State-Space Model for Causal Inference: Estimating Longitudinal Individual Treatment Effects",
+      "authors": "Abisoye Abidakun, Mingjun Zhong, Georgios Leontidis",
+      "date": "2026-08-08",
+      "pdf": "https://arxiv.org/pdf/2608.08288v1",
+      "score": "6.5",
+      "evidence": "用于纵向处理效应和反事实结果估计的因果推断模型",
+      "tldr": "面向纵向观测数据的反事实预测，本文指出域混淆引发平衡与预测的互信息冲突，并以Jensen–Shannon散度界进行形式化；提出CSSD/CSSPD，基于选择性状态空间与并行多步直接解码器，辅以对比预测与局部信息最大化；在MIMIC‑III与癌症仿真中整体优于Causal Transformer。",
+      "tags": "query:q6",
+      "abstract_en": "Estimating counterfactual outcomes over time from longitudinal observational data is central to clinical decision support. Existing methods rely on domain confusion -- adversarial training that renders representations invariant to treatment assignment -- yet this invariance creates a mutual information conflict: it suppresses treatment-correlated covariate signals necessary for accurate outcome prediction. We formalise this tension via a Jensen-Shannon divergence bound on counterfactual prediction error and develop two complementary models. CSSD (Causal State-Space model with Direct decoder) adapts selective State Space Models with a parallel multi-step decoder that eliminates accumulated rollout error by producing all prediction horizons simultaneously in a single forward pass. CSSPD (Causal State-Space model with Predictive regularisation and Direct decoder) augments CSSD with Contrastive Predictive Coding and Local Information Maximisation to reinforce temporal predictability in the balancing representation and recover local covariate information destroyed by domain confusion. On MIMIC-III, CSSPD achieves lower counterfactual RMSE than the Causal Transformer at every horizon tau >= 2 at O(T) encoder cost, with gains from 0.02 (2-step) to 0.07 (6-step). On Cancer Simulation across confounding strengths gamma in {0,1,2,3,4}, CSSPD outperforms CT at gamma <= 3 (margins 25.9%--37.0%), and CSSD achieves the lowest overall average RMSE (12.7% reduction over CT), confirming the MI conflict analysis. To our knowledge, this is the first work to formalise the balancing-prediction MI conflict and propose a structured resolution through complementary predictive and information-theoretic training objectives.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
