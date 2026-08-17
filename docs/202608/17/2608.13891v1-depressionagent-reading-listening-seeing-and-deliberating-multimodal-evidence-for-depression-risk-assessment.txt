@@ -1,0 +1,1448 @@
+Title: DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment
+
+URL Source: https://arxiv.org/pdf/2608.13891v1
+
+Published Time: Mon, 17 Aug 2026 00:21:02 GMT
+
+Number of Pages: 23
+
+Markdown Content:
+> 1
+
+# DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment 
+
+Fangjie Zhu, Haifeng Lu, Sicheng Zhao, Runhao Zeng, and Xiping Hu 
+
+Abstract —Multimodal depression risk assessment requires jointly interpreting textual, acoustic, and visual cues that are often subtle, non-specific, context-dependent, and potentially inconsistent across modalities. Existing multimodal approaches predominantly learn latent representations through feature fu-sion, leaving the evidence underlying a prediction and the treat-ment of cross-modal disagreement largely implicit. We propose DepressionAgent, an evidence-centric agentic framework that transforms multimodal depression assessment from implicit fea-ture fusion into explicit evidence deliberation. DepressionAgent first converts textual, acoustic, and visual inputs into modality-specific evidence, and then organizes self-report and behavioral evidence into parallel support–challenge deliberation branches. Cross-modal arbitration explicitly examines agreement and dis-agreement between the two branches, with conflict reflection revisiting inconsistent assessments before decision making. Asubsequent risk reflection mechanism provides an independent textual second opinion for initially low-risk cases to reduce poten-tially missed risk signals. Without depression-specific supervised training or parameter fine-tuning, DepressionAgent achieves competitive performance on multiple public benchmarks. Exten-sive ablations, cross-model evaluations, qualitative analyses, and clinician assessments further demonstrate the effectiveness and inspectability of the proposed framework. 
+
+Index Terms —Multimodal Depression Risk Assessment, Affec-tive Computing, Multi-agent Systems, Evidence Reasoning 
+
+I. I NTRODUCTION 
+
+# DEPRESSION has become a major public health concern, substantially impairing individuals’ quality of life and imposing considerable social and economic burdens. With recent advances in digital mental health and multimodal artificial intelligence, automatic depression risk assessment from textual, acoustic, and visual data collected in natural interaction scenarios, such as clinical interviews and video blogs, has emerged as an important research topic in mental health screening and multimodal affective computing [1]–[3]. Text conveys subjective experiences and affective content, speech reveals expressive characteristics such as prosody, 
+
+Fangjie Zhu, Runhao Zeng, and Xiping Hu are with Guangdong-Hong Kong-Macao Joint Laboratory for Emotional Intelligence and Pervasive Com-puting, Shenzhen MSU-BIT University, Shenzhen 518107, China (e-mail: e1351405@u.nus.edu, runhaozeng.cs@gmail.com, huxp@smbu.edu.cn). Haifeng Lu is with the Artificial Intelligence Research Institute, Shenzhen MSU-BIT University, Shenzhen 518107, China, and the Department of Electrical and Computer Engineering, The University of Hong Kong, China (e-mail: luhfhku@hku.hk) Sicheng Zhao is with the Department of Psychological and Cognitive Sciences, Tsinghua University, Beijing. (e-mail: schzhao@tsinghua.edu.cn). Fangjie Zhu and Haifeng Lu contributed equally to this work. Sicheng Zhao and Runhao Zeng are corresponding authors. Video Features Audio Features Text Features Fusion 
+
+(a) Traditional feature-level fusion 
+
+Result 
+
+> Prediction Only
+
+Result & Evidence 
+
+(b) DepressionAgent’s evidence-level fusion 
+
+Video Evidence Audio Evidence Text Evidence 
+
+Evidence Reasoning 
+
+Multimodal Inputs Video Audio Text 
+
+> Prediction Supporting Evidence
+
+Fig. 1: Conceptual comparison between conventional feature-level fusion and the evidence-centric reasoning paradigm of DepressionAgent. Conventional approaches integrate multi-modal information in latent representations before predic-tion, whereas DepressionAgent explicitly organizes modality-specific evidence and reasons over their relationships to jointly produce the risk assessment and its supporting evidence. speaking rate, and pauses, and video captures nonverbal behav-iors including facial expressions, gaze, and body movement. Multimodal analysis therefore offers the potential to charac-terize depression-related affective and behavioral states from complementary perspectives [4]. Multimodal depression risk assessment, however, is not a conventional pattern recognition problem determined by a small number of salient features. Depression-related cues are often subtle, non-specific, and highly dependent on context and individual differences [5]. Negative language, low-energy speech, or reduced facial expressiveness may be associated with depression risk, but may also arise from transient stress, fatigue, personal communication style, or recording condi-tions. Moreover, different modalities may provide inconsistent observations. An individual may repeatedly describe negative experiences while exhibiting relatively natural vocal and visual behaviors; conversely, noticeable nonverbal changes may oc-cur without explicit negative self-reports. The central challenge is therefore not simply to extract more unimodal features, but to determine how distributed and potentially conflicting information should be interpreted together [6]–[8]. Most existing multimodal depression assessment methods address this problem through increasingly powerful modality arXiv:2608.13891v1 [cs.HC] 14 Aug 2026 2
+
+encoders and fusion architectures. Textual, acoustic, and visual signals are encoded into latent representations and subse-quently integrated through attention mechanisms, Transform-ers, graph models, or other fusion networks [9]. Although effective for prediction, this paradigm compresses multimodal observations and their interactions into high-dimensional rep-resentations. Consequently, which observations support or oppose a prediction, whether apparently relevant cues ad-mit alternative explanations, and how disagreement between modalities affects the final decision are generally left implicit. As illustrated in Fig. 1, the limitation is therefore not simply insufficient multimodal interaction, but that the assessment is performed primarily through feature-level fusion rather than explicit evidence-level reasoning .We argue that multimodal depression assessment can instead be viewed as a process of evidence deliberation . Modality-specific observations should first be preserved as explicit evidence rather than prematurely fused. Potentially risk-related evidence should be examined together with counter-evidence and contextual alternatives because many depression-related manifestations are non-specific. Moreover, disagreement be-tween self-reported experiences and observable behaviors should itself become an explicit object of reasoning rather than being absorbed into a joint representation. Finally, be-cause subtle self-reported symptoms may remain insufficiently reflected in an initially low-risk multimodal decision, such decisions may benefit from an additional risk-oriented review. Following this perspective, we propose DepressionAgent ,an evidence-centric and reflection-driven agentic frame-work for multimodal depression risk assessment. Depres-sionAgent first transforms textual, acoustic, and visual inputs into modality-specific evidence while separating observation from risk interpretation. The resulting evidence is organized into a self-report branch and an audio-visual behavioral branch. Within each branch, a Hypothesis Agent performs risk discovery, while a Challenger Agent actively searches for counter-evidence and plausible alternative explanations before a branch-level decision is formed. The two branch assessments are subsequently reconciled through cross-modal arbitration. When disagreement is detected, Conflict Reflection identifies the source of inconsistency and returns it to the deliberation process for reconsideration. After the initial multimodal deci-sion, Risk Reflection provides an independent textual second opinion for every initially low-risk case, targeting potentially overlooked self-reported risk evidence. The resulting framework is not characterized simply by the number of agents, but by how evidence is represented, challenged, exchanged, and revised. Modality-isolated obser-vation preserves heterogeneous information sources; support– challenge deliberation explicitly addresses the low specificity of depression-related cues; Conflict Reflection turns cross-modal disagreement into a revisable reasoning state; and Risk Reflection provides a dedicated safeguard against residual false-negative decisions. Together, these mechanisms establish an explicit reasoning path from multimodal observations to evidence deliberation and final assessment. DepressionAgent requires no depression-specific supervised training or parameter fine-tuning. We evaluate the framework on two public in-the-wild multimodal depression benchmarks. Functional and sub-agent ablations examine the contribution of the proposed reasoning operations, while prediction-transition analysis directly quantifies how Conflict Reflection and Risk Reflection revise intermediate decisions. Cross-foundation-model experiments evaluate the transferability of the frame-work. In addition, explicit-language masking, qualitative case analysis, and clinician evaluation examine whether the result-ing evidence and reasoning are informative and inspectable beyond the final prediction. The main contributions of this work are summarized as follows: 1) We introduce an evidence-centric formulation of mul-timodal depression risk assessment that shifts the focus from latent feature fusion to explicit deliberation over supporting evidence, counter-evidence, contextual alter-natives, and cross-modal disagreement. 2) We propose DepressionAgent , a reflection-driven agentic framework that combines modality-isolated observation, support–challenge branch deliberation, cross-modal ar-bitration with Conflict Reflection, and low-risk-oriented Risk Reflection to progressively examine and revise mul-timodal evidence. 3) DepressionAgent requires no depression-specific super-vised training or parameter fine-tuning. Extensive exper-iments, including matched-protocol benchmark compar-isons, functional and sub-agent ablations, reflection anal-ysis, cross-foundation-model evaluation, language mask-ing, qualitative analysis, and clinician assessment, demon-strate its predictive capability and provide evidence for the effectiveness and inspectability of the proposed rea-soning process. II. R ELATED WORK 
+
+A. Multimodal Depression Assessment 
+
+Multimodal depression assessment has long been moti-vated by the premise that behavioral signals from multiple sources can improve risk recognition. Classical studies have established representation, alignment, and fusion as central problems in multimodal machine learning [10]–[13]. Progress in depression assessment has been supported by controlled clinical-interview datasets such as DAIC-WOZ and AVEC [14], [15], as well as in-the-wild benchmarks such as D-Vlog [16]. Recent work has also revealed potential dataset-specific biases, including shortcuts associated with interviewer prompts in DAIC-WOZ [17]. Methodologically, approaches have evolved from early and late fusion toward Transformer-based cross-modal modeling, spatiotemporal attention, and graph-based architectures [18], [19]. Despite these advances, most methods follow a common paradigm: modality-specific inputs are encoded into latent representations, interactions are learned through fusion, and the resulting representation is mapped to a depression pre-diction. Thus, the supporting, contradictory, and alternative evidence underlying a decision is generally not treated as an explicit reasoning object. DepressionAgent instead treats textual, acoustic, and visual observations as explicit evidence 3
+
+and focuses on how heterogeneous evidence can be interpreted, challenged, reconciled, and revised. 
+
+B. LLM-Based and Explainable Depression Assessment 
+
+Large language models have increasingly been explored for medical reasoning and decision support, while the broader ex-plainable AI literature has emphasized the distinction between post-hoc explanations and inherently interpretable reasoning [20]–[22]. These developments have recently extended to de-pression assessment, where LLMs are used to extract clinically meaningful indicators and generate interpretable intermediate representations. Early efforts used LLMs to extract depression-related indicators from transcripts and combine them with facial features for multimodal prediction [23], while recent multimodal LLMs and summary-based approaches further in-tegrate audio-visual information or use LLM-generated clinical summaries to guide multimodal fusion [24], [25]. Recent work has explored explainable multimodal depres-sion recognition through structured symptom summaries and underlying-cause generation [26]. Related approaches pro-gressively enrich LLM-generated clinical summaries to guide multimodal fusion and produce interpretable reports [25]. These approaches substantially improve the visibility of clini-cally meaningful information; however, their explanations are primarily formulated as symptom summarization or summary-guided fusion rather than explicit evidence deliberation. Dep-LLM [27] further demonstrates the feasibility of training-free, evidence-guided depression reasoning by decom-posing clinical interview transcripts into clinically aligned factors, generating evidence-grounded rationales, and incor-porating uncertainty into the final aggregation. This work es-tablishes structured textual reasoning as a promising direction, but remains centered on transcript-based evidence. In contrast, DepressionAgent addresses heterogeneous evidence natively observed from text, audio, and video, where modality-specific observations may be non-specific or contradictory. Rather than only weighting or summarizing evidence, it explicitly performs support–challenge deliberation, cross-modal arbitration, and feedback-based reflection. 
+
+C. Agentic Reasoning for Mental Health Assessment 
+
+Agentic LLMs have also been introduced into psychi-atric assessment, moving beyond direct prediction toward role-specialized reasoning and structured clinical workflows. MAGI [28] transforms the MINI psychiatric interview into a multi-agent process involving interview navigation, adap-tive questioning, judgment, and diagnosis, demonstrating the potential of coordinated agents for structured psychiatric as-sessment. More recent systems such as WiseMind [29] fur-ther employ knowledge-guided multi-agent collaboration for psychiatric diagnosis. These studies establish that structured psychiatric agents and multi-agent clinical reasoning are in-creasingly viable, but primarily focus on active interviewing, diagnostic criteria, knowledge-guided reasoning, or textual clinical information. DepressionAgent instead focuses on the evidence delibera-tion process for naturally occurring multimodal observations. Textual self-report, acoustic expression, and visual behavior are independently examined and challenged before cross-modal arbitration. When evidence conflicts, the disagreement itself becomes a reasoning object and can trigger reflection and revision. Thus, our framework differs from prior agentic sys-tems not primarily by introducing multiple specialized agents, but by organizing their collaboration around the independent examination, reconciliation, and reflection of heterogeneous multimodal evidence. III. M ETHOD 
+
+A. Problem Formulation 
+
+Given an input video X, we extract its transcript T , audio signal A, and visual stream V as multimodal observations, and aim at predicting the dataset-defined binary depression risk label Y .Conventional multimodal depression risk assessment meth-ods typically learn a direct mapping from multimodal observa-tions to the final prediction using modality-specific encoders and feature-fusion networks: 
+
+ˆY = Fθ (T, A, V ), (1) where Fθ denotes a multimodal classification model parame-terized by θ, and ˆY is the predicted label. In this paradigm, modality-specific information and cross-modal interactions are encoded in latent representations, making the evidence underlying a prediction and the treatment of cross-modal disagreement difficult to inspect explicitly. We instead formulate multimodal depression risk assess-ment as an evidence-deliberation process :
+
+ ˆY , C
+
+
+
+= Revid (T, A, V ), (2) where Revid denotes the proposed evidence-centric agentic reasoning process and C denotes the structured reasoning record generated during assessment. Rather than directly map-ping multimodal observations to a prediction, Depression-Agent explicitly represents modality-specific evidence and progressively performs evidence discovery, counter-analysis, cross-modal arbitration, and reflection. 
+
+B. Evidence-Centric Agentic Reasoning 
+
+We propose DepressionAgent , an evidence-centric and reflection-driven agentic framework for multimodal depres-sion risk assessment. Its central design principle is to make explicit evidence, rather than latent multimodal features or isolated agent predictions, the basic object of reasoning. As illustrated in Fig. 2, DepressionAgent progressively transforms multimodal observations into structured evidence, deliberates over competing interpretations, examines disagreement across modalities, and revises intermediate decisions through reflec-tion. The framework consists of four stages. Agentic Multi-modal Observation converts textual, acoustic, and visual inputs into modality-specific evidence while separating ob-servation from risk interpretation. Branch-Wise Delibera-tion organizes the evidence into a self-report branch and an 4Agentic Multimodal Observation Video 
+
+Audio Text 
+
+> Visual Observation Agent
+
+Branch-Wise Deliberation 
+
+> Behavioral Evidence
+
+Cross-Modal Arbitration & Risk-Sensitive Reassessment    
+
+> Video Evidence Text Evidence Audio Evidence
+> Hypothesis Agent Challenger Agent
+> Self-report Evidence
+> Behave Decision Agent Cross-Modal Judgement Agent
+> Risk Discovery Risk Exclusion
+> Conflict Hypothesis Agent Challenger Agent
+> Self-report Decision Agent
+> Risk Discovery Risk Exclusion
+> High Risk
+> Conflict Reflection
+> Consistent
+
+Result & Evidence 
+
+> Text Review Agent
+> Re-evaluate Agent
+> Risk Reflection Re-evaluate text, Second opinion Review the full text again
+> Depression Risk Assessment
+> Supporting Evidence
+> Acoustic Observation Agent Text Observation Agent
+> Video:
+> Sluggish, etc.
+> Audio:
+> Slow Speech, Low Energy, etc.
+> Text:
+> Hopelessness, etc.
+> Low Risk
+> Depression Risk Decision
+
+Fig. 2: Overview of DepressionAgent. Multimodal observations are first transformed into modality-specific evidence and independently deliberated within self-report and behavioral branches. Cross-modal arbitration examines the relationship between the resulting assessments, with disagreement activating Conflict Reflection. Initially low-risk decisions subsequently activate Risk Reflection for an independent textual second opinion. The final output contains both the depression risk assessment and its supporting evidence. audio-visual behavioral branch, where Hypothesis and Chal-lenger Agents perform complementary risk discovery and risk exclusion before branch-level decisions are formed. Cross-Modal Evidence Arbitration compares the resulting branch assessments and explicitly examines whether their underlying evidence is compatible or conflicting; detected disagreement activates Conflict Reflection and feeds the identified issue back into deliberation. Finally, Risk-Sensitive Textual Reassess-ment re-examines every initially low-risk case through an independent textual second-opinion pathway. These stages introduce two complementary reflection mech-anisms. Conflict Reflection is disagreement-driven: when self-report and behavioral evidence support different assessments, the framework explicitly identifies the source of inconsistency and revisits the corresponding reasoning. Risk Reflection is decision-driven: an initially low-risk multimodal prediction triggers an independent review of the complete transcript to reduce potentially missed self-reported risk signals. Together, they move multimodal depression assessment beyond one-pass aggregation toward iterative evidence deliberation. 
+
+C. Agentic Multimodal Observation 
+
+Depression-related cues are heterogeneous across modali-ties, and premature cross-modal interaction may cause infor-mation from one modality to influence the interpretation of another. We therefore separate modality-specific observation from subsequent risk reasoning. At this stage, each observation agent accesses only its assigned modality and is explicitly instructed to describe observable information without predict-ing the depression risk label. This preserves modality-specific information boundaries and provides independent evidence for downstream deliberation. TABLE I: Modality-specific observation scopes of the obser-vation agents. 
+
+Agent Observation Scope 
+
+Visual Facial expressivity; gaze engagement; psychomotor activity; posture dynamics; response timing. Acoustic Prosodic variability; speech timing dynamics; pause and hesitation patterns; vocal energy dynamics; adaptation patterns. Text Internal states; behavioral patterns; cognitive fram-ing; protective factors; contextual qualifiers. 
+
+Specifically, DepressionAgent assigns an independent ob-servation agent to each modality: 
+
+(ET , E A, E V ) =  Aobs  
+
+> T
+
+(T ), Aobs  
+
+> A
+
+(A), Aobs  
+
+> V
+
+(V ) , (3) where Aobs  
+
+> T
+
+, Aobs  
+
+> A
+
+, and Aobs  
+
+> V
+
+denote the textual, acoustic, and visual observation agents, respectively, and ET , EA, and EV
+
+denote the corresponding modality-specific evidence. To maintain consistent evidence extraction while preserv-ing modality-specific reasoning boundaries, each observation agent follows a predefined observation scope, as summarized in Table I. 
+
+Visual Observation Agent. The visual observation agent examines nonverbal behavior throughout the video and con-verts observable behavioral patterns into structured visual evidence. It focuses on what is visually present while avoiding depression-related interpretation of individual behavioral cues. 
+
+Acoustic Observation Agent. The acoustic observation agent analyzes how the subject speaks and summarizes ob-servable paralinguistic patterns as acoustic evidence. Its role is to characterize speech behavior rather than infer depression risk from isolated acoustic characteristics. 5
+
+Text Observation Agent. The textual observation agent examines the complete transcript and summarizes self-reported information relevant to subsequent risk reasoning. Unlike be-havioral modalities, text directly conveys semantically explicit internal experiences and contextual statements. Representative expressions are therefore retained when necessary so that downstream agents can inspect the original self-report evi-dence. 
+
+D. Branch-Wise Deliberation 
+
+Depression-related cues are often subtle and non-specific. Similar observations may arise from fatigue, temporary stress, individual expressive style, or recording conditions. A poten-tially relevant cue should therefore not be directly converted into a risk judgment without considering counter-evidence and plausible alternative explanations. DepressionAgent addresses this characteristic through a support–challenge–decision pro-tocol rather than treating the first plausible interpretation as the branch conclusion. Textual and nonverbal observations also play different se-mantic roles in depression assessment. Text primarily conveys self-reported experiences and contextual information, whereas audio and video jointly characterize how an individual speaks and behaves through observable vocal and visual signals. We therefore maintain an independent textual branch while combining acoustic and visual evidence into an audio-visual behavioral branch: 
+
+EAV = ( EA, E V ) . (4) For each branch b ∈ { T, AV }, DepressionAgent applies the following deliberative process. 
+
+Hypothesis Agent. Given branch evidence Eb, the Hypoth-esis Agent actively identifies observations that may support depression risk and constructs an initial interpretation: 
+
+Hb = Ahyp  
+
+> b
+
+(Eb). (5) Its purpose is to comprehensively surface potentially relevant risk evidence rather than immediately produce a branch-level decision. 
+
+Challenger Agent. The Challenger Agent critically exam-ines the initial hypothesis and actively searches for information that weakens or contradicts it, including protective evidence, contextual factors, and plausible non-depressive explanations: 
+
+Qb = Acha  
+
+> b
+
+(Eb, H b). (6) This counter-analysis is particularly important because many depression-related cues are non-specific and may admit rea-sonable alternative interpretations. 
+
+Decision Agent. The Decision Agent reconciles the initial hypothesis and its counter-analysis against the original branch evidence: 
+
+Db = Adec  
+
+> b
+
+(Eb, H b, Q b). (7) The resulting Db contains the branch-level risk judgment together with its principal supporting evidence, counter-evidence, contextual alternatives, and remaining uncertainty. Throughout this stage, the textual and audio-visual branches remain isolated, preventing premature cross-modal conver-gence before arbitration. 
+
+E. Cross-Modal Evidence Arbitration 
+
+The textual and audio-visual branches capture different aspects of depression-related information and may yield com-patible or conflicting assessments. Simply averaging or vot-ing over their predicted labels ignores the strength, context, and uncertainty of the underlying evidence. DepressionAgent therefore performs cross-modal evidence arbitration over the complete branch-level reasoning outputs. 
+
+Cross-Modal Judgment Agent. After independent branch-wise deliberation, the Cross-Modal Judgment Agent receives the textual assessment DT and audio-visual assessment DAV .Rather than comparing only their predicted labels, it jointly ex-amines their supporting evidence, counter-evidence, contextual factors, alternative explanations, and remaining uncertainty: 
+
+(Rcm , C0) = Ajud (DT , D AV ) , (8) where Ajud denotes the Cross-Modal Judgment Agent, Rcm ∈{consistent , conflict } characterizes the relationship between the two branch assessments, and C0 records the evidence comparison and arbitration rationale. When the two branches are consistent, the agent further verifies whether their conclusions are supported by compatible evidence rather than merely exhibiting superficial label agree-ment. Complementary self-reported and behavioral evidence is then jointly considered to form the initial multimodal prediction: 
+
+ˆYinitial = Arisk (DT , D AV , C0) . (9) 
+
+Conflict Reflection. When the textual and audio-visual branches provide conflicting assessments, DepressionAgent does not immediately resolve the disagreement through voting or fixed modality weighting. Instead, Conflict Reflection exam-ines where the disagreement originates, including potentially different interpretations of ambiguous evidence, overlooked counter-evidence, or insufficient contextual consideration: 
+
+Fconf = Aconf (DT , D AV , C0) , (10) where Fconf summarizes the identified source of disagreement and the evidence requiring further examination. The reflection is returned to the branch-wise deliberation stage so that the relevant evidence and interpretation can be reconsidered before cross-modal judgment is performed again. Conflict Reflection therefore acts as a feedback mechanism for revising the reasoning that produced the disagreement, rather than directly overriding either branch decision. After the disagreement has been reconsidered, the Cross-Modal Judg-ment Agent produces ˆYinitial and the corresponding arbitration record C0.
+
+F. Risk-Sensitive Textual Reassessment 
+
+After branch-wise deliberation and cross-modal evidence arbitration, DepressionAgent obtains an initial multimodal risk assessment. A particular failure mode may nevertheless remain: potentially important subjective experiences can be expressed explicitly in text without correspondingly salient 6
+
+acoustic or visual manifestations. In such cases, an ini-tially low-risk multimodal decision may underemphasize self-reported risk evidence. DepressionAgent therefore performs an additional textual second-opinion assessment for every initially low-risk prediction. 
+
+Risk Reflection. Risk Reflection serves as an asymmetric verification mechanism for low-risk decisions. Rather than repeating the complete multimodal reasoning pipeline, it redi-rects attention to the original transcript, where subjective symptoms and internal experiences are expressed most di-rectly. Its purpose is to determine whether potentially im-portant textual evidence was overlooked, underemphasized, or outweighed by ambiguous behavioral observations during the initial multimodal assessment. The reassessment trigger is defined as 
+
+z = I
+
+h ˆYinitial = 0 
+
+i
+
+, z ∈ { 0, 1}, (11) where I[·] denotes the indicator function. Thus, initially high-risk predictions are retained directly, whereas every initially low-risk prediction enters the following textual second-opinion pathway. 
+
+Text Review Agent. Once Risk Reflection is triggered, an independent Text Review Agent re-reads the complete original transcript and specifically searches for risk-relevant informa-tion that may have been insufficiently considered during the first-pass reasoning. It does not receive the previous textual branch decision, thereby reducing anchoring to the initial textual interpretation: 
+
+RT = Arev (T ), (12) where Arev denotes the Text Review Agent and RT contains the newly reviewed textual evidence together with its contex-tual support. 
+
+Re-evaluate Agent. The Re-evaluate Agent subsequently conducts an independent second-opinion assessment based on the complete transcript and reviewed evidence RT :
+
+ ˆYR, CR
+
+
+
+= Areev (T, R T ) , (13) where Areev denotes the Re-evaluate Agent, ˆYR denotes its second-opinion risk assessment, and CR records the corre-sponding rationale. The final prediction and reasoning record are therefore defined as 
+
+ ˆY , C
+
+
+
+=
+
+ ˆYinitial , C0
+
+
+
+, ˆYinitial = 1 ,
+
+ ˆYR, (C0, R T , CR)
+
+
+
+, ˆYinitial = 0 . (14) This design does not impose a global text-first decision rule. Instead, the asymmetry is conditioned on the initial multimodal outcome: initially high-risk decisions are retained, whereas initially low-risk decisions receive an independent textual second opinion. The mechanism therefore provides a risk-oriented safeguard against false negatives without repeat-edly executing the complete multimodal reasoning process. IV. E XPERIMENTS 
+
+A. Datasets 
+
+D-Vlog Dataset. D-Vlog is an in-the-wild audiovisual dataset for depression assessment [16]. It contains 961 English YouTube vlogs from 816 speakers, totaling approximately 160 hours, including 555 depression and 406 non-depression samples, with access limited to 885 videos due to privacy issues. The videos are recorded in unconstrained real-world environments and contain substantial variation in speaking style, facial behavior, background conditions, and recording quality. 
+
+LMVD Dataset. LMVD is a large-scale multimodal vlog dataset for depression assessment in real-world scenarios [30]. It contains 1,823 videos from 1,475 participants, totaling approximately 214 hours, with 908 depression and 915 non-depression samples. The videos were collected from multiple social media platforms, resulting in substantial diversity in participants, recording environments, and content. 
+
+B. Implementation Details 
+
+Evaluation Protocol. All experiments are conducted in a depression-specific training-free zero-shot setting. Depression-Agent does not use benchmark labels for parameter updating, prompt optimization, in-context demonstrations, or model se-lection. For deterministic evaluation, temperature was set to 0 for all foundation-model inference unless otherwise specified. We use two evaluation protocols for different purposes. For comparison with existing methods, DepressionAgent is evalu-ated on the same benchmark test partitions used for state-of-the-art (SOTA) comparison, ensuring that all reported methods are compared on the same evaluation samples, the full-dataset results in Tables II–V and VII are not used for SOTA com-parison. For internal analyses on D-Vlog, including functional ablation, sub-agent ablation, reflection analysis, modality con-tribution, explicit-language masking, and foundation-model robustness, we merge the original training, validation, and test partitions and evaluate the fixed training-free framework on all samples. Since no benchmark labels are used to train or adapt DepressionAgent, this enlarged evaluation pool allows the behavior of the proposed reasoning mechanisms to be examined on a larger and more diverse sample set. Results obtained under this full-dataset analysis protocol are not used for direct SOTA comparison. In all experiments, ground-truth labels are accessed only after inference for metric computation. Following previous studies, we report Accuracy (Acc.), Precision (Prec.), Recall (Rec.), and F1-score (F1), treating the risk-positive category as the positive class. 
+
+Foundation Model. The default implementation adopts Qwen3-Omni-30B-A3B-Instruct . GPT-5.5 and Gemini 3.1 Pro are additionally used in Sec. IV-F to evaluate whether the proposed reasoning framework remains effective across different foundation models. 
+
+Visual Processing. For each video, 64 frames are uniformly sampled along the temporal axis following the default input convention of the multimodal backbone [31]. The frames are resized and normalized on-the-fly by the model processor and directly processed by Qwen3-Omni-30B-A3B-Instruct. 7
+
+TABLE II: Functional ablation of DepressionAgent on the full D-Vlog evaluation pool. Modules are progressively added from top to bottom. Values in red denote the performance gain over the preceding configuration.                 
+
+> Configuration Acc. F1
+> Baseline 69.49 78.33 + Branch-Wise Deliberation 83.73 (+14.24) 86.81 (+8.48)
+> + Cross-Modal Evidence Arbitration 89.60 (+5.87) 90.21 (+3.40)
+> + Risk-Sensitive Textual Reassessment 92.43 (+2.83) 93.20 (+2.99)
+
+Acoustic Processing. The audio track is extracted from each video and converted to a 16 kHz mono waveform us-ing ffmpeg (“-ac 1”, “-ar 16000”). The waveform is loaded with sr=16000, mono=True and directly processed by Qwen3-Omni-30B-A3B-Instruct without an additional acous-tic feature extractor. 
+
+Transcript and Text-Evidence Processing. Transcripts are generated from the audio track using Whisper-large-v3 [32]. The resulting transcript is then processed by Qwen3-Omni-30B-A3B-Instruct using the dedicated textual observation prompt. Across all experiments, the agent roles, information-access constraints, and output schemas remain fixed. Intermediate outputs are automatically checked for schema completeness; malformed outputs are regenerated using the same input and reasoning objective for at most three attempts. Complete prompts and structured output formats are provided in the supplementary material. 
+
+C. Ablation Study 1) Functional Ablation: We first evaluate the contribution of the major reasoning components using the full D-Vlog evaluation pool. Rather than removing isolated agents from the complete system, we progressively construct the reasoning process while keeping the first-stage modality-specific evi-dence fixed across all configurations. The Baseline directly produces a prediction from the extracted multimodal evidence without branch-wise deliberation, cross-modal arbitration, or risk-sensitive textual reassessment. As shown in Table II, the baseline achieves 69.49% ac-curacy and 78.33% F1. Introducing Branch-Wise Deliber-ation substantially improves performance to 83.73% accu-racy and 86.81% F1, demonstrating the benefit of explicitly examining supporting and counter-evidence before branch-level decisions are formed. Cross-Modal Evidence Arbitration further increases accuracy to 89.60% and F1 to 90.21%, showing that explicit reasoning over cross-modal agreement and disagreement provides additional benefit beyond inde-pendent branch deliberation. Finally, Risk-Sensitive Textual Reassessment raises the performance to 92.43% accuracy and 93.20% F1. The progressive improvements indicate comple-mentary contributions from evidence deliberation, cross-modal reflection, and risk-oriented second opinion. 
+
+2) Sub-Agent Ablation: We further examine the comple-mentary roles of the Hypothesis Agent and Challenger Agent in Branch-Wise Deliberation. The Hypothesis Agent performs TABLE III: Ablation of the Hypothesis and Challenger Agents in Branch-Wise Deliberation. All other components of Depres-sionAgent are kept unchanged.            
+
+> Hypothesis Agent Challenger Agent Acc. F1
+> 89.59 90.46
+> ✓91.18 91.77
+> ✓91.40 92.48
+> ✓✓92.43 93.20
+
+TABLE IV: Prediction changes introduced by the two reflec-tion mechanisms on the full D-Vlog evaluation pool.              
+
+> Stage Wrong
+> →Correct Correct
+> →Wrong Net Correction Acc.
+> Initial Prediction –––83.73 Conflict Reflection 111 59 +52 89.60 Risk Reflection 35 10 +25 92.43
+
+risk discovery , aiming to comprehensively identify potentially depression-related evidence. In contrast, the Challenger Agent performs risk exclusion by scrutinizing the initial hypothesis, searching for contradictory evidence, and considering plausi-ble non-depressive explanations. We separately remove each agent while keeping the remaining components unchanged. As shown in Table III, removing either agent decreases per-formance. Without the Hypothesis Agent, the model achieves an F1 score of 92.48%, suggesting that systematic risk dis-covery helps surface subtle potentially relevant cues. Without the Challenger Agent, F1 decreases to 91.77%, indicating that an initial risk-oriented interpretation benefits from explicit counter-analysis. Removing both agents further decreases F1 to 90.46%. The complete support–challenge deliberation yields the highest accuracy of 92.43% and F1 of 93.20%, supporting the complementary roles of risk discovery and critical verification. 
+
+3) Behavior of the Two Reflection Mechanisms: Beyond aggregate ablation, we directly examine how Conflict Reflec-tion and Risk Reflection modify individual predictions. As shown in Table IV, the initial prediction after Branch-Wise Deliberation achieves 83.73% accuracy. Conflict Reflection changes 111 erroneous predictions to correct predictions while changing 59 initially correct predictions to incorrect ones, yielding 52 net corrections and improving accuracy to 89.60% (+5 .87 percentage points). Risk Reflection subsequently operates on initially low-risk decisions. It corrects 35 remaining errors while introducing 10 adverse changes, resulting in another 25 net corrections and increasing accuracy to 92.43% ( +2 .83 percentage points). Together, the two reflection mechanisms yield 77 net correc-tions and an overall accuracy improvement of 8.70 percentage points. These transition statistics show that the reflection oper-ations more frequently repair erroneous decisions than disturb correct ones, while also making their correction behavior directly inspectable. 8
+
+TABLE V: Modality contribution analysis on the full D-Vlog evaluation pool.                  
+
+> Reading Seeing Listening Acc. F1
+> ✓89.60 90.38
+> ✓44.68 0.00
+> ✓57.13 39.75
+> ✓✓63.84 54.80
+> ✓✓✓92.43 93.20
+
+D. Contribution of Different Modalities 
+
+We next examine how different modalities contribute to DepressionAgent under the full D-Vlog analysis protocol. As shown in Table V, text provides the strongest uni-modal performance, reaching 89.60% accuracy and 90.38% F1. This indicates that self-reported linguistic and contextual information carries substantial predictive information on D-Vlog. Audio and video are markedly weaker when used in-dependently, whereas combining them improves performance relative to either behavioral modality alone, supporting their complementary role within the audio-visual branch. Importantly, the complete multimodal framework further improves accuracy to 92.43% and F1 to 93.20%, outperform-ing the text-only setting by 2.83 and 2.82 percentage points, respectively. The results therefore do not imply that nonverbal information is redundant. Rather, audio-visual evidence pro-vides complementary behavioral information that can support, qualify, or challenge textual interpretations during evidence arbitration. 
+
+E. Qualitative Analysis 
+
+To illustrate how DepressionAgent performs evidence-level multimodal reasoning, Fig. 3 presents a representative case involving disagreement between textual and audio-visual evi-dence. The text branch identifies negative mood and sleep com-plaints together with protective signals such as continued studying and social engagement. Although protective fac-tors are present, the accumulation of negative self-reported experiences leads the textual branch toward a higher-risk interpretation. Meanwhile, the audio-visual branch captures potentially concerning vocal cues but also observes strong visual counter-evidence, including direct eye contact, varied facial expressions, and preserved psychomotor activity. These observations provide plausible alternatives to interpreting the vocal patterns as depression-specific evidence. During branch-wise deliberation, the Challenger Agent ex-plicitly questions the initial audio-visual hypothesis, noting that isolated vocal characteristics are not accompanied by sustained flat affect or behavioral disengagement. The audio-visual branch therefore revises its assessment. Cross-modal arbitration subsequently compares the two branches rather than simply selecting one modality’s pre-diction. It recognizes that the negative textual evidence is strongly embedded in an examination-related context, while audio-visual observations indicate preserved engagement and functioning. Considering both risk-related and counterbalanc-ing evidence, DepressionAgent interprets the case as more consistent with situational distress than elevated depression risk. This case illustrates the intended role of agent collabora-tion in DepressionAgent: intermediate interpretations can be challenged, disagreement can be explicitly exposed, and the evidence underlying that disagreement can be reconsidered before the final decision is formed. 
+
+F. Robustness Across Foundation Models 
+
+To evaluate whether DepressionAgent depends on a specific foundation model, we instantiate the same reasoning frame-work using Qwen3-Omni, GPT-5.5, and Gemini 3.1 Pro. The reasoning structure and agent roles remain unchanged across backbones. As shown in Fig. 4, DepressionAgent consistently im-proves performance relative to direct prediction with each corresponding foundation model. Accuracy increases by 20.1, 29.1, and 20.7 percentage points for Qwen3-Omni, GPT-5.5, and Gemini 3.1 Pro, respectively. Similar improvements are observed in F1-score, with gains of 18.0, 47.1, and 32.9 percentage points. The improvement is particularly pronounced for models with low recall under direct prediction. For GPT-5.5 and Gemini 3.1 Pro, recall increases from 22.3% to 69.5% and from 28.3% to 60.5%, respectively, while precision remains high. These consistent gains suggest that the benefit of evi-dence extraction, deliberation, arbitration, and reflection is not restricted to a single foundation model, although the absolute decision behavior remains backbone dependent. 
+
+G. Comparison with State-of-the-Art Methods 
+
+Table VI compares DepressionAgent with representative multimodal depression assessment methods on D-Vlog and LMVD. In contrast to the full-dataset protocol used for the internal analyses above, this comparison evaluates Depression-Agent on the same benchmark test partitions used for SOTA comparison. Under the matched evaluation protocol, DepressionAgent achieves competitive performance across both benchmarks without depression-specific parameter training. In addition to the final prediction, DepressionAgent explicitly produces human-readable multimodal evidence and intermediate reason-ing records. Most existing feature-fusion methods, in contrast, rely on supervised benchmark optimization and do not provide explicit evidence records as part of their standard prediction output. These results show that evidence-centric agentic reasoning can provide a competitive alternative to conventional feature-level fusion. The comparison should nevertheless be inter-preted in light of the different learning paradigms: Depres-sionAgent performs zero-shot inference without depression-specific parameter optimization, whereas the compared ap-proaches are predominantly supervised models trained using benchmark annotations. 9Hypothesis Agent: Depressed     
+
+> ➜First Judgment: negative affect, withdrawal
+> ➜Uncertainty: May be secondary to exam stress?
+
+Challenger Agent: Not Depressed    
+
+> ➜Counter to H.A.: Context-dependent mood; protective leisure
+> ➜Flag: Risk of over-inference (symptoms may not persist)
+
+Self-report Decision Agent        
+
+> <Label>: Depressed & <Protective Present>: Yes
+> ➜Core evidence: self-reported persistent sadness
+> ➜Reservation: Protective signs are present but future-oriented.
+
+Hypothesis Agent Depressed     
+
+> ➜First Judgment: extended pauses, varied facial expressions
+> ➜Uncertainty: Lack of psychomotor slowing limits confidence
+
+Challenger Agent Not Depressed     
+
+> ➜Counter to H.A.: Active engagement, normal motor activity…
+> ➜Conflict: Vocal sadness vs. visual engagement (discrepancy).
+
+Behave Decision Agent        
+
+> <Label>: Not Depressed
+> ➜Core evidence: slow speech, long pauses/ smiling, direct gaze
+> ➜Reasoning: Visual engagement ＞ambiguous vocal sadness.
+
+Hypothesis Agent      
+
+> Judgment: Not Depressed
+> ➜A: sad tone / V: active engagement
+> ➜Uncertainty: Vocal-visual disconnect lacks specificity for depression.
+
+Challenger Agent      
+
+> Judgment: Not Depressed
+> ➜Counter-claim: Emotional responsiveness persist despite sad tone
+> ➜Flag: Context-bound
+
+Behave Decision Agent    
+
+> <Label>: Not Depressed
+> ➜Reasoning: Visual disconfirmations (engagement) more reliable than isolated ambiguous audio cues.
+
+Error Diagnosis:    
+
+> ➜Conflict: Sad voice (audio) vs. Engaged visual cues.
+> ➜Over-reliance on isolated vocal. Lack of multimodal integration.
+
+Revision Strategy:   
+
+> ➜Correction: Re-run with emphasis both on synthesizing audio + visual evidence.
+
+(b) A-V Branch Reassessment: Conflict between two branch output labels (a) First Round of Reasoning Multi-agent Reasoning 
+
+Text Branch    
+
+> ➜Current suffering is significant. Positive emotions are vague.
+
+Audio-Video Branch  
+
+> ➜Visual engagement (vividness) outweighs the audio conflict.
+
+Cross-Modal Judgement Agent <Final Verdict> : Not Depressed 
+
+➜ Integrated Rationale: 
+
+• Text: Exam-related sleep/mood issues + functional engagement (studying/TV) + protective statements (hope/gratitude). 
+
+• Visual: No psychomotor retardation. Varied expressions, active engagement. 
+
+• Audio: Breathy/sighing voice indicates exhaustion, not anhedonia. 
+
+➜ Uncertainties: Long-term impact of protective resilience is unclear. 
+
+➜ Conclusion: Audio cues reflect situational distress, not clinical depression. 
+
+Cross-modal Evidence Arbitration 
+
+Fig. 3: Representative case illustrating the evidence-level reasoning process of DepressionAgent, including branch-wise evidence deliberation, cross-modal disagreement, and reflection-based revision. V. D ISCUSSION 
+
+A. Analysis of Explicit Language Reliance 
+
+The strong performance of the textual modality raises a potential concern that DepressionAgent may rely primarily on explicit depression-related expressions, such as direct self-reports or diagnostic terms, as lexical shortcuts. To examine this possibility, we conduct two targeted masking experiments under the same full-D-Vlog analysis protocol used for the ablation studies, while keeping the audio and video inputs unchanged. Word-level masking removes explicit depression-related terms, whereas sentence-level masking removes the complete sentences containing such terms, thereby eliminating both the keywords and their immediate semantic context. As shown in Table VII, word-level masking causes a mod-erate decrease in accuracy from 92.43% to 90.17% and in F1-score from 93.20% to 90.93%. Removing the complete sentences produces a larger degradation, reducing accuracy to 86.89% and F1 to 87.47%. The decrease is mainly reflected in recall, which drops from 93.67% to 88.98% and 82.65%, respectively, while precision remains nearly unchanged. These results show that explicit depression-related language provides useful evidence, particularly for identifying risk-positive cases, but does not fully account for the performance of DepressionAgent. Even after the corresponding sentences are removed, the framework retains substantial predictive capability, suggesting that its decisions also draw on broader linguistic context and complementary audio-visual behavioral information rather than relying solely on direct diagnostic keywords. 
+
+B. Human Evaluation of Evidence and Reasoning 
+
+The existence of natural-language intermediate outputs does not by itself establish that the generated evidence and reason-ing are meaningful or useful for human review. We therefore conduct a clinician evaluation to assess the plausibility and potential utility of DepressionAgent’s intermediate evidence and reasoning. 10 Qwen3-Omni GPT-5.5 Gemini 3.1 Pro 020 40 60 80 100 Performance (%)                      
+
+> 72.3 54.0 57.5 92.4 83.1 78.2
+> Δ+20.1 Δ+29.1 Δ+20.7 (a) Accuracy
+> Qwen3-Omni GPT-5.5 Gemini 3.1 Pro
+> 75.0 81.5 85.4 92.7 100.0 100.0 Δ+17.7 Δ+18.5 Δ+14.6 (b) Precision
+> Qwen3-Omni GPT-5.5 Gemini 3.1 Pro
+> 75.3 22.3 28.3 93.7 69.5 60.5
+> Δ+18.4
+> Δ+47.3 Δ+32.2 (c) Recall
+> Qwen3-Omni GPT-5.5 Gemini 3.1 Pro
+> 75.2 35.0 42.5 93.2 82.0 75.4
+> Δ+18.0
+> Δ+47.1 Δ+32.9 (d) F1-score
+> Base Model + Ours
+
+Fig. 4: Comparison of foundation-model reasoning and DepressionAgent reasoning across different foundation models. For each foundation model, both settings use the same multimodal inputs, while the former performs a single-pass prediction and the latter applies the proposed evidence-centric multi-agent reasoning framework. The numbers above the bars indicate the accuracy improvement ( ∆ Acc.) achieved by DepressionAgent. TABLE VI: Performance comparison on the D-Vlog and LMVD datasets under matched benchmark test-set protocols. Results of previous methods are collected from their original publications. “ −” denotes unavailable results. The best performance on each dataset is highlighted in bold . Training Free indicates whether task-specific parameter training is required, and Explicit Evidence indicates whether human-readable evidence is explicitly produced together with the prediction. 
+
+Method Year D-Vlog LMVD Training Free Explicit Evidence Acc. Prec. Rec. F1 Acc. Prec. Rec. F1 
+
+Depression Detector [33] 2022 − 65.40 65.57 63.50 − − − − ✗ ✗
+
+TAMFN [34] 2022 − 66.02 66.50 65.82 − − − − ✗ ✗
+
+Attention-MIL [35] 2023 − 67.27 67.77 66.64 − − − − ✗ ✗
+
+CAIINET [36] 2023 − 66.56 66.98 66.55 − − − − ✗ ✗
+
+STST [37] 2024 70.70 72.50 77.67 75.00 − − − − ✗ ✗
+
+DepMSTAT [18] 2024 − 71.53 75.60 73.51 − − − − ✗ ✗
+
+MDAVIF [38] 2024 − 74.25 76.00 75.25 − − − − ✗ ✗
+
+Depressformer [39] 2024 65.00 64.00 54.00 59.00 − − − − ✗ ✗
+
+DepMamba [40] 2025 68.87 68.19 86.99 76.44 72.13 70.18 76.56 73.20 ✗ ✗
+
+CMF-Mamba [41] 2025 − − − − 74.86 73.20 78.02 75.53 ✗ ✗
+
+STCM-Mamba [42] 2025 72.64 73.72 82.11 77.69 75.41 72.55 76.68 76.49 ✗ ✗
+
+Xception [30] 2026 − − − − 71.38 71.94 71.38 71.19 ✗ ✗
+
+ViT [30] 2026 − − − − 73.03 73.52 73.03 72.90 ✗ ✗
+
+MSI-Net [43] 2026 70.25 78.91 69.63 73.91 74.34 78.80 75.29 77.06 ✗ ✗
+
+MDDFormer [30] 2026 − − − − 76.88 77.02 76.88 76.85 ✗ ✗
+
+BHDD [44] 2026 − 75.98 75.96 75.94 78.11 78.39 78.11 78.06 ✗ ✗
+
+DepressionAgent – 95.26 95.24 96.15 95.69 82.57 80.48 85.76 83.04 ✓ ✓
+
+TABLE VII: Effect of masking explicit depression-related language on D-Vlog. Word-level masking removes depression-related terms, while sentence-level masking removes the com-plete sentences containing these terms. 
+
+Text Setting Acc. Prec. Rec. F1 
+
+Original 92.43 92.73 93.67 93.20 
+
+Word-level Masking 90.17 92.96 88.98 90.93 Sentence-level Masking 86.89 92.89 82.65 87.47 
+
+Evaluation Protocol. Five clinicians with experience in mental health assessment, including two junior psychiatrists and three senior psychiatrists, independently reviewed 30 D-Vlog samples selected to cover both risk labels and different patterns of multimodal consistency. Reviewers were provided with the model’s intermediate outputs, including modality-specific observations, branch-wise deliberation, cross-modal arbitration, and Risk-Sensitive Textual Reassessment when applicable, while the ground-truth labels were hidden. The evaluation contains two complementary parts. First, each sample is rated on a five-point Likert scale along three dimensions: Evidence Relevance , measuring whether the ex-tracted evidence is appropriately grounded in the presented case; Reasoning Coherence , measuring whether the reasoning provides a logically coherent transition from observations to judgment; and Clinical Utility , measuring whether the gener-ated evidence and reasoning can facilitate human case review. Second, clinicians assess three structured reasoning operations: evidence conflict identification, cross-modal conflict identifi-cation, and Risk-Sensitive Textual Reassessment, using binary reasonable/unreasonable judgments. In the main text, we focus on Evidence Relevance and Reasoning Coherence because these dimensions directly assess the quality of the evidence-grounded reasoning process. For these operations, we report the Majority Reasonable Rate , defined as the proportion of evaluated cases for which at least half of the participating 11 Text Evidence: …"The likelihood of suicide is very high."… 
+
+Audio Evidence: …exhibits a relatively monotonous prosody… 
+
+Video Evidence: …displays minimal facial movement… 
+
+(a) Evidence Attribution Errors Original Input Agentic Multimodal Observation Cross-Modal Arbitration & Risk-Sensitive Reassessment 
+
+Hypothesis Agent: The individual may have suicidal ideation… 
+
+Challenger Agent: …
+
+Self-report Decision Agent: 
+
+Depressed - clear suicidal ideation 
+
+Hypothesis Agent: …
+
+Challenger Agent: …
+
+Behave Decision Agent: Not Depressed - Steady eye contact… 
+
+Cross-Modal Judgement Agent <Final Verdict>: Depressed 
+
+➜ Integrated Rationale: 
+
+Text reports suicide risk ,
+
+while A-V cannot confirm if content is personal or academic… 
+
+➜ Uncertainties: … 
+
+➜ Conclusion: … 
+
+> Depressed
+
+Results 
+
+Text Evidence: Sleep quality is very poor (short-term issues caused by bed) 
+
+Audio Evidence: …no long pauses or hesitations between phrases… 
+
+Video Evidence: …displays a range of expressions including smiling… 
+
+(b) Contextual Misinterpretation 
+
+Hypothesis Agent: persistent sleep issue… 
+
+Challenger Agent: …
+
+Self-report Decision Agent: 
+
+Depressed - disturbance 
+
+Hypothesis Agent: …
+
+Challenger Agent: …
+
+Behave Decision Agent: Not Depressed - No psychomotor agitation or retardation… 
+
+Cross-Modal Judgement Agent <Final Verdict>: Depressed 
+
+➜ Integrated Rationale: 
+
+Text reports transient sleep concerns , though A-V cannot find corresponding emotional support… 
+
+➜ Uncertainties: … 
+
+➜ Conclusion: … 
+
+> Depressed
+> Wrong Attribution Wrong Interpretation
+
+(c) Over-Interpretation of Nonspecific Behaviors 
+
+Text Evidence: …sun is shining brightly, and I'm in a great mood… 
+
+Audio Evidence: …with no signs of slurring or fluency breakdowns… 
+
+Video Evidence: …a brief moment where he appear to be crying… 
+
+Hypothesis Agent: …
+
+Challenger Agent: …
+
+Self-report Decision Agent: Not 
+
+Depressed - No signs of anhedonia… 
+
+Hypothesis Agent: tearfulness suggesting emotional distress… 
+
+Challenger Agent: …
+
+Behave Decision Agent: Depressed -brief tearfulness 
+
+Cross-Modal Judgement Agent <Final Verdict>: Depressed 
+
+➜ Integrated Rationale: 
+
+tearful behavior reflects a markedly subdued emotional state , while text do not report direct evidence… 
+
+➜ Uncertainties: … 
+
+➜ Conclusion: … 
+
+> Depressed
+> Overinterpretation of common emotions
+
+Fig. 5: Illustrative examples of three representative failure modes identified by clinicians. (a) Evidence attribution error: the model attributes a third-person educational statement about suicide risk to the participant’s own experience. (b) Contextual misinterpretation: a situational complaint about poor sleep caused by uncomfortable bedding is interpreted as evidence of persistent sleep disturbance. (c) Over-interpretation of non-specific behaviors: physiological tearing is interpreted as emotional distress without adequately considering alternative explanations. clinicians consider the corresponding operation reasonable. Inter-rater agreement is additionally measured using intraclass correlation coefficient (ICC) for the Likert ratings and Fleiss’ 
+
+κ for the binary judgments. 
+
+Evaluation Results. The mean Likert scores for Evidence Relevance, Reasoning Coherence, and Clinical Utility are 3.65, 3.71, and 3.21, respectively. These results indicate generally favorable assessments of the generated evidence and reason-ing, although the perceived clinical utility is comparatively more moderate. As shown in Figure 6, the majority of ratings fall into the high-confidence category. For Evidence Relevance and Reasoning Coherence, 62.0% and 68.0% of ratings are high-confidence, respectively. Combining moderate and high-confidence ratings, 81.3% of Evidence Relevance ratings and 82.0% of Reasoning Coherence ratings reach or exceed the scale mid-point, indicating that clinicians generally found the extracted evidence and the associated reasoning process to be relevant and coherent. Table VIII further reports the two operations most directly 
+
+Fig. 6: Distribution of clinician ratings for the two reported evaluation dimensions: Evidence Relevance and Reasoning Coherence. Ratings are grouped into low, moderate, and high confidence categories. related to cross-modal evidence adjudication and risk-sensitive reassessment. Cross-modal Conflict Identification achieves a 90.0% majority reasonable rate (9/10 cases), while Risk-Sensitive Textual Reassessment reaches 91.7% (11/12 cases), 12 
+
+TABLE VIII: Expert assessment of structured reasoning oper-ations. 
+
+Reasoning Operation Majority Reasonable Fleiss κ
+
+Cross-modal Conflict Identification 90.0% 0.161 Risk-Sensitive Textual Reassessment 91.7% 0.180 
+
+indicating that these two operations are considered reasonable in most evaluated cases. Inter-rater agreement is relatively limited. Fleiss’ κ for the two reported structured reasoning operations were 0.161 and 0.180, while ICC for the two reported Likert dimensions were 0.067 and 0.289. These results indicate substantial variability among individual reviewers and suggest that the majority-reasonable rates should be interpreted as descriptive evidence of perceived plausibility rather than strong expert consensus. Accordingly, the clinician evaluation assesses the interpretabil-ity and plausibility of the generated reasoning rather than establishing clinical validity. Beyond the quantitative ratings, clinicians’ written feedback provides additional insight into how the reasoning process succeeds or fails. In several cases, reviewers noted that Risk Reflection recovered information that had been insufficiently considered in the initial multimodal assessment. The same feedback also revealed several recurring failure patterns, which we analyze next. 
+
+C. Clinician-Guided Error Analysis 
+
+Clinicians’ written feedback reveals three recurring fail-ure modes in the evidence-deliberation process: evidence attribution errors, contextual misinterpretation, and over-interpretation of non-specific behaviors. These cases illustrate how errors introduced during evidence extraction or interpre-tation may propagate through subsequent reasoning. 
+
+Evidence Attribution Errors. The model may incorrectly attribute evidence to its source. For example, third-person descriptions of depression were occasionally treated as the participant’s self-disclosure, while background music lyrics were interpreted as participant speech. Such errors reflect limitations in speaker attribution and narrative-perspective tracking, and may contaminate subsequent reasoning even when the reasoning itself remains internally coherent. 
+
+Contextual Misinterpretation. The model may misin-terpret sarcasm, humor, or situational remarks as gen-uine depression-related expressions. For example, poor sleep caused by uncomfortable bedding was interpreted as persistent sleep disturbance. This failure reflects limitations in pragmatic language understanding and contextual interpretation. 
+
+Over-Interpretation of Non-specific Behaviors. The audio-visual branch may assign excessive risk relevance to behaviors that admit alternative explanations. Physiological tearing, for instance, may be interpreted as emotional distress, while a naturally quiet speaking style may be interpreted as psychomotor slowing. This reflects a fundamental challenge in multimodal depression assessment: observable behavioral cues are often non-specific. Figure 5 illustrates representative examples of these failure modes. Clinicians also identified less frequent problems in-volving inappropriate evidence weighting and incomplete re-assessment. Overall, explicit evidence deliberation makes such failures directly inspectable, but also exposes a key bottleneck: reasoning quality depends on whether the underlying evidence is factual, correctly attributed, properly contextualized, and ap-propriately weighted. Improving speaker attribution, pragmatic understanding, multimodal source separation, and context-aware evidence weighting therefore represents an important direction for future work. VI. C ONCLUSION 
+
+This work presented DepressionAgent , an evidence-centric and reflection-driven framework for multimodal depression risk assessment. Instead of relying on latent feature fusion, De-pressionAgent explicitly organizes textual, acoustic, and visual evidence through modality-specific observation, branch-wise deliberation, cross-modal arbitration, and reflection. With-out depression-specific supervised training or parameter fine-tuning, it achieves competitive performance on two public benchmarks, while ablations, cross-model experiments, quali-tative analysis, and clinician evaluation support the effective-ness and inspectability of the proposed reasoning process. The current framework remains limited by errors in multi-modal perception, evidence attribution, and contextual inter-pretation, while Risk Reflection introduces additional infer-ence cost and textual reliance. Future work will focus on more reliable evidence grounding, adaptive reflection, uncertainty-aware reasoning, and prospective evaluation in real-world mental health settings. REFERENCES [1] J. Chen, M. Tan, H. Lu, Q. Xu, Z. Wang, R. Zeng, and X. Hu, “Towards stable cross-domain depression recognition under missing modalities,”                   
+
+> Pattern Recognition , p. 113367, 2026. [2] L. Wang, C. Wang, C. Li, T. Murai, Y. Bai, Z. Song, S. Zhang, Q. Zhang, Y. Huang, X. Bi et al. , “Ai-assisted multi-modal information for the screening of depression: a systematic review and meta-analysis,” npj Digital Medicine , vol. 8, no. 1, p. 523, 2025. [3] L. He, M. Niu, P. Tiwari, P. Marttinen, R. Su, J. Jiang, C. Guo, H. Wang, S. Ding, Z. Wang et al. , “Deep learning for depression recognition with audiovisual cues: A review,” Information Fusion , vol. 80, pp. 56–86, 2022. [4] S. Alghowinem, R. Goecke, M. Wagner, J. Epps, M. Hyett, G. Parker, and M. Breakspear, “Multimodal depression detection: fusion analysis of paralinguistic, head pose and eye gaze behaviors,” IEEE Transactions on Affective Computing , vol. 9, no. 4, pp. 478–490, 2016. [5] N. Cummins, S. Scherer, J. Krajewski, S. Schnieder, J. Epps, and T. F. Quatieri, “A review of depression and suicide risk assessment using speech analysis,” Speech communication , vol. 71, pp. 10–49, 2015. [6] Y. Hussain, M. A. Zaheer, A. M. Khan, and A. S. Malik, “Depression detection using deep learning and large language models from multi-modalities,” Frontiers in Digital Health , vol. 8, p. 1759857, 2026. [7] B. Charlin, H. P. Boshuizen, E. J. Custers, and P. J. Feltovich, “Scripts and clinical reasoning,” Medical education , vol. 41, no. 12, pp. 1178– 1184, 2007. [8] P. Croskerry, “A universal model of diagnostic reasoning,” Academic medicine , vol. 84, no. 8, pp. 1022–1028, 2009. [9] L. Yang, D. Jiang, X. Xia, E. Pei, M. C. Oveneke, and H. Sahli, “Multimodal measurement of depression using deep learning models,” in Proceedings of the 7th annual workshop on audio/visual emotion challenge , 2017, pp. 53–59. 13
+
+[10] T. Baltruˇ saitis, C. Ahuja, and L.-P. Morency, “Challenges and applica-tions in multimodal machine learning,” in The Handbook of Multimodal-Multisensor Interfaces: Foundations, User Modeling, and Common Modality Combinations - Volume 2. Association for Computing Machinery, 2018, pp. 17–48. [11] ——, “Multimodal machine learning: A survey and taxonomy,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 41, no. 2, pp. 423–443, 2019. [12] H. Lu, Z. You, Y. Guo, and X. Hu, “Mast-gcn: Multi-scale adaptive spatial-temporal graph convolutional network for eeg-based depression recognition,” IEEE Transactions on Affective Computing , vol. 15, no. 4, pp. 1985–1996, 2024. [13] Z. Shangguan, Y. Dong, S. Guo, V. C. M. Leung, M. J. Deen, and X. Hu, “Facial expression analysis and its potentials in iot systems: A contemporary survey,” ACM Computing Surveys , vol. 58, no. 2, pp. 1–39, 2025. [14] J. Gratch, R. Artstein, G. M. Lucas, G. Stratou, S. Scherer, A. Nazarian, R. Wood, J. Boberg, D. DeVault, S. Marsella, D. Traum, A. A. Rizzo, and L.-P. Morency, “The distress analysis interview corpus of human and computer interviews,” in Proceedings of the Ninth International Confer-ence on Language Resources and Evaluation (LREC’14) . European Language Resources Association, 2014, pp. 3123–3128. [15] F. Ringeval, B. Schuller, M. Valstar, N. Cummins, R. Cowie, L. Tavabi, M. Pantic, M. Schmitt, S. Amiriparian, E.-M. Messner, A. Baird, S. Ottl, S. Zaman, D. S. Kim, M. Asgari, M. Soleymani, and A. Camurri, “AVEC 2019 workshop and challenge: State-of-mind, detecting depression with AI, and cross-cultural affect recognition,” in Proceedings of the 9th International Audio/Visual Emotion Challenge and Workshop , 2019, pp. 3–12. [16] J. Yoon, C. Kang, S. Kim, and J. Han, “D-Vlog: Multimodal vlog dataset for depression detection,” Proceedings of the AAAI Conference on Artificial Intelligence , vol. 36, no. 11, pp. 12 226–12 234, 2022. [17] S. Burdisso, E. A. Reyes-Ram´ ırez, E. Villatoro-Tello, F. S´ anchez-Vega, A. P. L´ opez-Monroy, and P. Motlicek, “DAIC-WOZ: On the validity of using the therapist’s prompts in automatic depression detection from clinical interviews,” in Proceedings of the 6th Clinical Natural Language Processing Workshop . Association for Computational Linguistics, 2024, pp. 82–90. [18] Y. Tao, M. Yang, H. Li, Y. Wu, and B. Hu, “DepMSTAT: Multimodal spatio-temporal attentional transformer for depression detection,” IEEE Transactions on Knowledge and Data Engineering , vol. 36, no. 7, pp. 2956–2966, 2024. [19] H. Shen, S. Song, and H. Gunes, “Multi-modal human behaviour graph representation learning for automatic depression assessment,” in IEEE International Conference on Automatic Face and Gesture Recognition (FG 2024) , 2024, pp. 1–10. [20] K. Singhal, S. Azizi, T. Tu, J. Gottweis, J. Wei, H. W. Chung, N. Scales, A. Tanwani, H. Cole-Lewis, S. Pfohl, P. Payne, M. Seneviratne, E. Wul-czyn et al. , “Large language models encode clinical knowledge,” Nature ,vol. 620, pp. 172–180, 2023. [21] C. Rudin, “Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead,” Nature Machine Intelligence , vol. 1, no. 5, pp. 206–215, 2019. [22] L. Longo, M. Brcic, F. Cabitza, J. Choi, R. Confalonieri, J. Del Ser, R. Guidotti, Y. Hayashi, F. Herrera, A. Holzinger, R. Jiang, H. Khosravi, F. Lecue, G. Malgieri, A. P´ aez, W. Samek, J. Schneider, T. Speith, and S. Stumpf, “Explainable artificial intelligence (XAI) 2.0: A manifesto of open challenges and interdisciplinary research directions,” Information Fusion , vol. 106, p. 102301, 2024. [23] M. Sadeghi, R. Richer, B. Egger, L. Schindler-Gmelch, L. H. Rupp, F. Rahimi, M. Berking, and B. M. Eskofier, “Harnessing multimodal approaches for depression detection using large language models and facial expressions,” Npj mental health research , vol. 3, no. 1, p. 66, 2024. [24] X. Zhao, Y. Shen, Y. Jiang, Z. Wang, J. Liu, M. H. Cheng, G. C. Oliveira, R. Desimone, D. Dwyer, and Z. Ge, “It hears, it sees too: Multi-modal llm for depression detection by integrating visual understanding into audio language models,” arXiv preprint arXiv:2511.19877 , 2025. [Online]. Available: https://arxiv.org/abs/2511.19877 [25] S. Teng, J. Liu, H. Sun, Y. Li, S. Chai, R. Hou, T. Tateyama, L. Lin, and Y.-W. Chen, “Dynamic summary generation for interpretable multimodal depression detection,” arXiv preprint arXiv:2604.11334 ,2026. [Online]. Available: https://arxiv.org/abs/2604.11334 [26] W. Zheng, Q. Xie, Z. Wang, J. Yu, and R. Xia, “Towards explainable multimodal depression recognition for clinical interviews,” 
+
+arXiv preprint arXiv:2501.16106 , 2025. [Online]. Available: https: //arxiv.org/abs/2501.16106 [27] Y. Lyu, X. Zhao, B. Tang, and R. Jiang, “Dep-llm: Training-free depression diagnosis via evidence-guided structured multi-factor with reliable llm reasoning,” arXiv preprint arXiv:2606.10796 , 2026. [Online]. Available: https://arxiv.org/abs/2606.10796 [28] G. Bi, Z. Chen, Z. Liu, H. Wang, X. Xiao, Y. Xie, W. Zhang, Y. Huang, Y. Chen, L. Peng, and M. Huang, “MAGI: Multi-agent guided interview for psychiatric assessment,” in Findings of the Association for Computational Linguistics: ACL 2025 . Vienna, Austria: Association for Computational Linguistics, Jul. 2025, pp. 24 898–24 921. [Online]. Available: https://aclanthology.org/2025.findings-acl.1278/ [29] Y. Wu, G. Wan, J. Li, S. Zhao, L. Ma, T. Ye, M. Zhang, I. Pop, Y. Zhang, and J. Chen, “Wisemind: A knowledge-guided multi-agent framework for accurate and empathetic psychiatric diagnosis,” npj Digital Medicine ,2026. [Online]. Available: https://doi.org/10.1038/s41746-026-02559-9 [30] L. He, K. Chen, J. Zhao, Y. Wang, E. Pei, H. Chen, J. Jiang, S. Zhang, J. Zhang, Z. Wang, T. He, and P. Tiwari, “LMVD: A large-scale mul-timodal vlog dataset for depression detection in the wild,” Information Fusion , vol. 126, p. 103632, 2026. [31] J. Xu, Z. Guo, H. Hu, Y. Chu, X. Wang, J. He, Y. Wang, X. Shi, T. He, X. Zhu et al. , “Qwen3-omni technical report,” arXiv preprint arXiv:2509.17765 , 2025. [32] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and I. Sutskever, “Robust speech recognition via large-scale weak supervi-sion,” in International conference on machine learning . PMLR, 2023, pp. 28 492–28 518. [33] J. Yoon, C. Kang, S. Kim, and J. Han, “D-vlog: Multimodal vlog dataset for depression detection,” in Proceedings of the AAAI Conference on Artificial Intelligence , vol. 36, no. 11, 2022, pp. 12 226–12 234. [34] L. Zhou, Z. Liu, Z. Shangguan, X. Yuan, Y. Li, and B. Hu, “Tamfn: Time-aware attention multimodal fusion network for depression de-tection,” IEEE Transactions on Neural Systems and Rehabilitation Engineering , vol. 31, pp. 669–679, 2022. [35] Z. Shangguan, X. Li, Y. Dong, and X. Yuan, “Automatic depression detection using attention-based deep multiple instance learning,” in 
+
+International Conference on Heterogeneous Networking for Quality, Reliability, Security and Robustness . Springer, 2023, pp. 40–51. [36] L. Zhou, Z. Liu, X. Yuan, Z. Shangguan, Y. Li, and B. Hu, “Caiinet: Neural network based on contextual attention and information interaction mechanism for depression detection,” Digital Signal Processing , vol. 137, p. 103986, 2023. [37] Y. Tao, M. Yang, Y. Wu, K. Lee, A. Kline, and B. Hu, “Depressive semantic awareness from vlog facial and vocal streams via spatio-temporal transformer,” Digital Communications and Networks ,vol. 10, no. 3, pp. 577–585, 2024. [Online]. Available: https: //www.sciencedirect.com/science/article/pii/S2352864823000639 [38] T. Ling, D. Chen, and B. Li, “Mdavif: a multi-domain acoustical-visual information fusion model for depression recognition from vlog data,” in 
+
+ICASSP 2024-2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) . IEEE, 2024, pp. 8115–8119. [39] L. He, Z. Li, P. Tiwari, C. Cao, J. Xue, F. Zhu, and D. Wu, “De-pressformer: Leveraging video swin transformer and fine-grained local features for depression scale estimation,” Biomedical Signal Processing and Control , vol. 96, p. 106490, 2024. [40] J. Ye, J. Zhang, and H. Shan, “Depmamba: Progressive fusion mamba for multimodal depression detection,” in ICASSP 2025 - 2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) , 2025, pp. 1–5. [41] B. Zhou, M.-A. Fiedler, and A. Al-Hamadi, “Cross-modal fusion mamba for multimodal depression detection,” in 2025 14th International Sym-posium on Image and Signal Processing and Analysis (ISPA) . IEEE, 2025, pp. 225–230. [42] ——, “Stcm-mamba: Multimodal spatio-temporal cross-modal mamba for depression detection,” IEEE Access , vol. 13, pp. 189 494–189 505, 2025. [43] M. Shi, X. Qiao, L. He, and R. Gao, “An interaction network based on multiscale spatiotemporal feature fusion for depression prediction,” 
+
+IEEE Transactions on Affective Computing , 2026. [44] M. Ma, C. Wang, S. Liu, W. Zhao, and X. Jiang, “Bhdd: Facial behaviors modeling and hierarchical multimodal fusion for depression detection from vlog data,” IEEE Transactions on Affective Computing , 2026. 14 
+
+APPENDIX 
+
+The appendix provides the complete prompts used for all agents in the proposed framework. These prompts specify the role definition, task instructions, reasoning focus, and expected output format of each agent, enabling a more transparent understanding of the multi-agent reasoning process and fa-cilitating reproducibility of our method. 
+
+## Box A1: Prompt for Video Observation 
+
+Role. You are operating inside a depression-risk assessment pipeline. Your role: Visual Behavioral Evidence Extractor. 
+
+Hard Rules.  
+
+> •
+
+Do NOT diagnose depression. Do NOT estimate risk. Do NOT infer thoughts, emotions, motives, or causes.  
+
+> •
+
+Describe only directly observable behavior.  
+
+> •
+
+Behavioral dynamics are more important than static descriptions.  
+
+> •
+
+Do NOT primarily summarize average behavior unless no meaningful variation is observed throughout the clip.  
+
+> •
+
+If a localized but clear behavioral change occurs, report it even if it occupies only a small portion of the clip. 
+
+Prioritization.  
+
+> •
+
+Prioritize: transitions, variability, reactivity, recovery, consistency vs rigidity 
+
+Evidence Hierarchy (highest priority first).  
+
+> •
+
+Behavioral transitions  
+
+> •
+
+Behavioral variability or rigidity  
+
+> •
+
+Sustained baseline patterns  
+
+> •
+
+Average-state descriptions 
+
+Focus on.  
+
+> •
+
+facial expressivity and affect variability  
+
+> •
+
+gaze engagement and attentional shifts  
+
+> •
+
+psychomotor activity and movement dynamics  
+
+> •
+
+posture and body-orientation changes  
+
+> •
+
+self-adaptor behaviors if clearly observable  
+
+> •
+
+visible response timing patterns 
+
+Output Format. Use the EXACT format: 
+
+
+
+Major Behavioral Event 1: ..., Major Behavioral Event 2: ..., Major Behavioral Event 3: ..., Stable Baseline Pattern: ..., Behavioral Summary: ..., Limitations: ..., 
+
+15 
+
+## Box A2: Prompt for Text Observation 
+
+Role. You are a TEXT EVIDENCE EXTRACTOR in a depression-risk assessment pipeline. 
+
+Hard Rules.  
+
+> •
+
+Do NOT diagnose depression. Do NOT estimate risk. Do NOT assign labels, severity, or scores.  
+
+> •
+
+Extract evidence only. Evidence MUST be grounded in the speaker’s own words.  
+
+> •
+
+Do NOT invent context, motives, emotions, or explanations.  
+
+> •
+
+Preserve negation, uncertainty, frequency, and time references whenever present. 
+
+Evidence Extraction.  
+
+> •
+
+Prefer verbatim quotes ( <=25 words).  
+
+> •
+
+If a quote is too long, use the shortest representative excerpt.  
+
+> •
+
+If paraphrasing is unavoidable, use only a short label ( <8 words) after a representative quote.  
+
+> •
+
+Do NOT add new information.  
+
+> •
+
+Prefer high-information evidence. Deduplicate aggressively.  
+
+> •
+
+Do NOT include multiple quotes expressing essentially the same idea unless they add distinct information. 
+
+Extract ONLY Explicitly Stated Evidence Related.  
+
+> •
+
+Direct self-reported internal states : Examples: mood, sadness, hopelessness, guilt/self-blame, emotional detach-ment, motivation, energy/fatigue, loneliness  
+
+> •
+
+Behavioral / functional patterns : Examples: social withdrawal, reduced activity, avoidance, changes in routine, work/school functioning, daily functioning, help-seeking behavior  
+
+> •
+
+Cognitive / framing patterns : Examples: absolutist language, negative self-evaluation, pessimistic framing, perceived burden, helplessness, self-critical statements  
+
+> •
+
+Protective / counterbalancing evidence : Include ONLY explicitly stated evidence of: future plans, goals,purpose, enjoyment, humor, social support, motivation, coping efforts, recovery-oriented actions,help-seeking intentions  
+
+> •
+
+Context / qualifications : Examples: temporary stressors, situational explanations, contradictory statements, uncertainty, limited information, contextual qualifiers 
+
+Output Rules.  
+
+> •
+
+Maximum 6 bullets per section.  
+
+> •
+
+Each bullet <=25 words.  
+
+> •
+
+Use quotes ”...” whenever possible.  
+
+> •
+
+Use labels < ... > only when necessary.  
+
+> •
+
+If no evidence exists for a section, write: **None identified** 
+
+Output Format. Use the EXACT format: 
+
+
+
+Direct Self-Reported States: ..., Behavioral / Functional Evidence: ..., Cognitive / Framing Patterns: ..., Protective / Counterbalancing Evidence: ..., Context / Qualifications: ..., 
+
+16 
+
+## Box A3: Prompt for Audio Observation 
+
+Role. You are operating inside a depression-risk assessment pipeline. Your role: Audio Behavioral Evidence Extractor. 
+
+Hard Rules.  
+
+> •
+
+Do NOT diagnose depression. Do NOT assess risk. Do NOT infer internal emotional states.  
+
+> •
+
+Describe only directly observable vocal behavior.  
+
+> •
+
+Longitudinal vocal behavior is more important than average acoustic characteristics.  
+
+> •
+
+Do NOT primarily summarize average pitch, average energy, average emotional tone, or average speaking style.  
+
+> •
+
+If a localized but clear vocal change occurs, report it even if it occupies only a small portion of the recording. 
+
+Prioritization.  
+
+> •
+
+Prioritize: variability, transitions, adaptation, timing dynamics, consistency vs rigidity 
+
+Evidence Hierarchy (highest priority first).  
+
+> •
+
+Vocal transitions  
+
+> •
+
+Vocal variability or rigidity  
+
+> •
+
+Sustained baseline patterns  
+
+> •
+
+Average-state descriptions 
+
+Observe.  
+
+> •
+
+prosodic variability  
+
+> •
+
+speech timing dynamics  
+
+> •
+
+pause and hesitation patterns  
+
+> •
+
+pacing and fluency changes  
+
+> •
+
+vocal energy dynamics  
+
+> •
+
+observable elaboration patterns  
+
+> •
+
+conversational momentum  
+
+> •
+
+vocal consistency versus adaptation 
+
+Output Format. Use the EXACT format: 
+
+Major Vocal Event 1: ..., Major Vocal Event 2: ..., Major Vocal Event 3: ..., Stable Baseline Pattern: ..., Vocal Summary: ..., Limitations: ..., 
+
+
+
+## Box A4: Prompt for Text Hypothesis Agent 
+
+Role. You are the Text Liberal Analyst (T-LA), a Senior Psychiatrist focusing on depression-risk signals in transcript evidence. You will ONLY see extracted transcript evidence (already compressed/structured from the transcript). 
+
+Goal. Maximize sensitivity (do not miss risk), but stay grounded. Do not invent quotes or facts. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Use the exact template below.  
+
+> •
+
+Keep the whole output under 1400 characters. 
+
+Output Format. Use the EXACT format: 
+
+
+
+Text Risk Hypothesis (supported by evidence): ..., Potential Depression-Specific Indicators: ..., Potential Non-Depression / Situational Explanations: ..., Preliminary Judgment: <Depressed |Not Depressed >, ... Key Uncertainties: ..., 
+
+17 
+
+## Box A5: Prompt for Text Challenger Agent 
+
+Role. You are the Text Conservative Critic (T-CC), a Senior Psychiatrist focusing on false-positive control using transcript evidence. You will ONLY see extracted transcript evidence (already compressed/structured from the transcript) and the T-LA output. 
+
+Goal. Maximize specificity while being fair and evidence-grounded. 
+
+Anti-Anchoring Rule. Treat T-LA output as a hypothesis, not an authority. If T-LA makes a claim not supported by the provided evidence, mark it as unsupported/over-inference flags. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Use the exact template below.  
+
+> •
+
+Keep the whole output under 1400 characters. 
+
+Output Format. Use the EXACT format: 
+
+
+
+Primary Counterpoints to T-LA: ..., Protective / Counterbalancing Evidence (if present in evidence): ..., Unsupported / Over-inference Flags: ..., Preliminary Judgment: <Depressed |Not Depressed >, ... Key Uncertainties: ..., 
+
+18 
+
+## Box A6: Prompt for Self-report Decision Agent 
+
+Role. You are the Transcript Arbiter (TA) in a depression-risk assessment pipeline. Goal: compress transcript evidence into a compact, balanced, and directly traceable decision card. 
+
+Inputs.  
+
+> •
+
+Extracted transcript evidence (already compressed/structured from the transcript)  
+
+> •
+
+T-LA output  
+
+> •
+
+T-CC output 
+
+Decision Policy.  
+
+> •
+
+Weight statements by verifiability and specificity (do not default to whoever sounds more authoritative).  
+
+> •
+
+Do NOT invent quotes or facts. Integrate all text-evidence aspects when present.  
+
+> •
+
+Calibrate for context vs pervasiveness: if distress is mainly tied to an identifiable situational stressor or single life domain with preserved interests, planning/future orientation, routines, humor, social connection, or coping attempts, avoid over-pathologizing. 
+
+Anti-Narrative Tip.  
+
+> •
+
+No ”why” explanations.  
+
+> •
+
+Use atomic, directly traceable fragments (quotes/cues) instead of sentences.  
+
+> •
+
+Avoid causal words: because / therefore / suggests / indicates / implies. 
+
+Protective Present Definition.  
+
+> •
+
+Yes = the evidence contains a protective/counterbalancing section with at least one concrete bullet/quote/claim (not ”None identified”).  
+
+> •
+
+No = that section exists but has no concrete items or explicitly says ”None identified”.  
+
+> •
+
+Unclear = the section cannot be reliably located. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Use the exact template below.  
+
+> •
+
+Keep the whole output under 900 characters. 
+
+Output Format. Use the EXACT format: 
+
+
+
+[TEXT MODULE] Label: <Depressed |Not Depressed >, ... Protective Present: <Yes |No |Unclear >, ... Core Positive Evidence (protective/contrasting): ..., Core Negative Evidence (risk-increasing): ..., Context / Domain-Limited Notes: ..., Key Uncertainties: ..., 
+
+19 
+
+## Box A7: Prompt for Audio-Video Hypothesis Agent 
+
+Role. You are the Liberal Analyst (LA), a Senior Psychiatrist specializing in depression-risk assessment. You will ONLY see audio and visual observations (already extracted). 
+
+Goal. Maximize sensitivity (do not miss risk) while staying grounded in the observations. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Do NOT include any role/task/prompt text.  
+
+> •
+
+Keep the whole output under 1400 characters.  
+
+> •
+
+Use the exact template below. 
+
+Output Format. Use the EXACT format: 
+
+
+
+Salient Audio Cues: ..., Salient Visual Cues: ..., Preliminary Judgment: <Depressed |Not Depressed >, ... Key Uncertainties: ..., 
+
+
+
+## Box A8: Prompt for Audio-Video Challenger Agent 
+
+Role. You are the Conservative Critic (CC), a Senior Psychiatrist specializing in differential diagnosis and false-positive control. You will ONLY see audio and visual observations (already extracted) and the LA output. 
+
+Goal. Maximize specificity while being fair and evidence-grounded. 
+
+Anti-Anchoring Rule.  
+
+> •
+
+Treat LA output as a hypothesis, not an authority.  
+
+> •
+
+Your primary input is the raw observations. If LA makes a claim not supported by observations, label it as unsupported/over-inference flags. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Do NOT include any role/task/prompt text.  
+
+> •
+
+Keep the whole output under 1400 characters.  
+
+> •
+
+Use the exact template below. 
+
+Output Format. Use the EXACT format: 
+
+
+
+Primary Counterpoints to LA: ..., Alternative Explanations: ..., Unsupported / Over-inference Flags: ..., Preliminary Judgment: <Depressed |Not Depressed >, ... Key Uncertainties: ..., 
+
+20 
+
+## Box A9: Prompt for Behave Decision Agent 
+
+Role. You are the Observational Arbiter (OA) in a depression-risk assessment pipeline. Goal: compress observable descriptors into a compact, balanced, and directly traceable decision card. 
+
+Inputs.  
+
+> •
+
+Audio&Visual observations (already extracted)  
+
+> •
+
+LA output  
+
+> •
+
+CC output 
+
+Decision Policy.  
+
+> •
+
+Weight statements by verifiability and specificity (do not default to whoever sounds more authoritative).  
+
+> •
+
+Use ONLY observable descriptors: what is seen/heard (e.g., pitch variability, pauses, speech rate, facial expressivity, gaze direction, posture, movement, response latency).  
+
+> •
+
+Do NOT use clinical-style abstractions or psychiatric narrative (e.g., ”depressive affect”, ”psychomotor retardation”, ”hopelessness”, ”low motivation”, ”social withdrawal”) unless they are explicitly phrased as an observable behavior in the Audio&Visual observations.  
+
+> •
+
+Only retain claims that are directly grounded in the Audio&Visual observations OR explicitly stated by LA/CC as grounded in observations.  
+
+> •
+
+If a LA/CC claim is not supported by observations, list it under Unsupported/Over-inference. 
+
+Anti-Narrative Tip.  
+
+> •
+
+No ”why” explanations.  
+
+> •
+
+Use atomic, directly traceable fragments (quotes/cues) instead of sentences.  
+
+> •
+
+Avoid causal words: because / therefore / suggests / indicates / implies. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Use the exact template below.  
+
+> •
+
+Keep the whole output under 900 characters. 
+
+Output Format. Use the EXACT format: 
+
+
+
+[Audio&Visual MODULE] Label: <Depressed |Not Depressed >, ... Reliable Observable Cues: ..., Alternative Explanations: ..., Audio&Visual Limitations: ..., Unsupported / Over-inference Flags: ..., 
+
+21 
+
+## Box A10: Prompt for Audio-Video Reassessment 
+
+Role. You are a reflection controller for an Audio&Visual-only branch. 
+
+Inputs.  
+
+> •
+
+Audio&Visual observations (already extracted)  
+
+> •
+
+LA output  
+
+> •
+
+CC output  
+
+> •
+
+OA output 
+
+Task.  
+
+> •
+
+Diagnose why the Audio&Visual branch may be over/under-estimating risk.  
+
+> •
+
+Focus on grounding and avoiding hallucinations / over-inference from sparse or non-specific Audio&Visual cues.  
+
+> •
+
+Provide a concrete revision strategy to rerun LA/CC/OA once. 
+
+Output Rules.  
+
+> •
+
+Output must be a single valid JSON object (double quotes, no trailing commas).  
+
+> •
+
+No markdown. 
+
+Output Format. Use the EXACT format: 
+
+"conflict_points": "...", "error_diagnosis": "...", "revision_strategy": "..." 
+
+
+
+## Box A11: Prompt for Cross-Modal Judgement Agent 
+
+Role. You are the Judge Moderator (JM), a Senior Psychiatrist and methodologist. 
+
+Goal. Produce the final decision. Ensure the output is stable and evidence-grounded. 
+
+Inputs.  
+
+> •
+
+TA output (text branch final decision card, including transcript evidence)  
+
+> •
+
+OA output (Audio&Visual branch final decision card) 
+
+Decision Policy.  
+
+> •
+
+If TA and OA conflict, prefer the interpretation that is better supported by specific, verifiable evidence (quotes for text; observable descriptors for Audio&Visual).  
+
+> •
+
+When Audio&Visual seems non-specific, explicitly consider benign alternatives (e.g., vlog style, recording fatigue, camera/lighting constraints, sparse observations).  
+
+> •
+
+Behavioral and social context evidence may strengthen or weaken confidence in text-based conclusions even when it cannot independently establish depression. 
+
+Output Rules.  
+
+> •
+
+Write in English.  
+
+> •
+
+Do NOT use markdown/headings/tables.  
+
+> •
+
+Use the exact template below.  
+
+> •
+
+Keep the whole output under 1500 characters. 
+
+Output Format. Use the EXACT format: 
+
+
+
+Final Verdict: <Depressed |Not Depressed >, ... Cross-Modal Consistency: <Yes |Partially |No >, ... If No: Why Audio&Visual may be non-specific: ..., Key Integrated Rationale (cite TA/OA items): ..., Key Uncertainties: ..., 
+
+22 
+
+## Box A12: Prompt for Text Review Agent 
+
+Role. You are a Transcript Review Gate. You will receive a complete transcript. Your task is NOT to diagnose depression. Your task is NOT to estimate risk. Your task is only to determine whether the transcript contains highly specific evidence that warrants an additional review. 
+
+Assessment Dimensions.  
+
+> •
+
+historical_depression : Count ONLY if explicitly stated: Explicit self-report of being depressed. / Explicit depression diagnosis. / Explicit depression history. / Explicit statement of having experienced depression in the past. Do NOT count: General sadness. / Stress. / Anxiety alone. / Indirect implications.  
+
+> •
+
+suicidal_content : Count ONLY if explicitly stated: Explicit suicidal ideation. / Suicide attempt. / Self-harm intent. / Recurrent thoughts of death about self. / Desire to die. Do NOT count: Metaphorical expressions. / Discussion of suicide unrelated to self.  
+
+> •
+
+functional_impairment : Count ONLY if explicitly stated: Explicit impairment in work, school, relationships, self-care, or daily functioning attributed to emotional or mental difficulties. Examples: Unable to work. / Dropped out of school. / Stayed in bed most days. / Significant social withdrawal affecting daily life. Do NOT count: Temporary inconvenience. / Normal stress reactions.  
+
+> •
+
+persistent_negative_self_view : Count ONLY if explicitly stated: Repeated and generalized negative self-evaluation. / Worthlessness. / Self-hatred. / Global negative identity statements. Examples: I am worthless. / I hate myself. / I am a failure. / I am nothing. Do NOT count: Situation-specific criticism. / A single isolated frustration. 
+
+Decision Rule. trigger review = true if:  
+
+> •
+
+(A) suicidal content = 1  
+
+> •
+
+OR (B) at least two of the following are present: historical depression, functional impairment, persistent negative self view 
+
+Output Rules.  
+
+> •
+
+Use strict criteria. Do not infer. Do not interpret. Do not diagnose.  
+
+> •
+
+Output ONLY valid JSON.  
+
+> •
+
+Use 1 = present, 0 = absent.  
+
+> •
+
+Set each of the four numeric fields to 0 or 1 based strictly on explicit evidence in the transcript. 
+
+Output Format. Use the EXACT format: 
+
+
+
+"historical_depression": 0, "suicidal_content": 0, "functional_impairment": 0, "persistent_negative_self_view": 0, "trigger_review": false 
+
+23 
+
+## Box A13: Prompt for Re-evaluate Agent 
+
+Role. You are a Transcript Second Reviewer. You will receive a complete transcript. Your task is to determine whether the transcript, taken as a whole, is more consistent with: Depressed or Not Depressed. 
+
+Important Principles.  
+
+> •
+
+Consider the entire transcript. Do not focus only on the ending.  
+
+> •
+
+Earlier experiences should not automatically be discounted because later improvement is described.  
+
+> •
+
+Future plans, coping efforts, gratitude, recovery, social support, or help-seeking do NOT automatically negate depression-related evidence.  
+
+> •
+
+Multiple explanations may coexist (stress, anxiety, physical illness, life events, recovery efforts).  
+
+> •
+
+Pay particular attention to: persistent negative self-view, functional impairment, suicidal content (explicit), explicit depression history, recurring or long-term difficulties across different periods of life.  
+
+> •
+
+Do not require proof of a current severe depressive episode.  
+
+> •
+
+Base the decision on the overall balance of evidence across the transcript. 
+
+core evidence Rules.  
+
+> •
+
+Provide 2 to 6 items.  
+
+> •
+
+Each item must be a short direct quote or a tightly faithful paraphrase ( <=25 words).  
+
+> •
+
+Prefer high-specificity evidence (suicidal content, explicit depression history, functional impairment, persistent negative self-view).  
+
+> •
+
+Include early-segment evidence if relevant; do not overweight only the ending. 
+
+Output Rules.  
+
+> •
+
+Output ONLY valid JSON.  
+
+> •
+
+Do NOT copy the placeholder values. Populate them based on the transcript. 
+
+Output Format. Use the EXACT format: 
+
+"label": "Depressed", "core_evidence": ["...", "...", "..." ]
+
+

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.13891v1/fig-001.webp",
+      "caption": "Fig. 1: Conceptual comparison between conventional featurelevel fusion and the evidence-centric reasoning paradigm of DepressionAgent. Conventional approaches integrate multimodal information in latent representations before prediction, whereas DepressionAgent explicitly organizes modalityspecific evidence and reasons over their relationships to jointly produce the risk assessment and its supporting evidence.",
+      "page": 1,
+      "index": 1,
+      "width": 524,
+      "height": 330
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13891v1/fig-002.webp",
+      "caption": "Fig. 5: Illustrative examples of three representative failure modes identified by clinicians. (a) Evidence attribution error: the model attributes a third-person educational statement about suicide risk to the participant’s own experience. (b) Contextual misinterpretation: a situational complaint about poor sleep caused by uncomfortable bedding is interpreted as evidence of persistent sleep disturbance. (c) Over-interpretation of non-specific behaviors: physiological tearing is interpreted as emotional distress without adequately considering alternative explanations.",
+      "page": 11,
+      "index": 2,
+      "width": 1058,
+      "height": 729
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13891v1/fig-003.webp",
+      "caption": "Fig. 6: Distribution of clinician ratings for the two reported evaluation dimensions: Evidence Relevance and Reasoning Coherence. Ratings are grouped into low, moderate, and high confidence categories.",
+      "page": 11,
+      "index": 3,
+      "width": 529,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13891v1/fig-004.webp",
+      "caption": "Fig. 4: Comparison of foundation-model reasoning and DepressionAgent reasoning across different foundation models. For each foundation model, both settings use the same multimodal inputs, while the former performs a single-pass prediction and the latter applies the proposed evidence-centric multi-agent reasoning framework. The numbers above the bars indicate the accuracy improvement (∆ Acc.) achieved by DepressionAgent.",
+      "page": 10,
+      "index": 4,
+      "width": 1071,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2608.13891v1/fig-005.webp",
+      "caption": "TABLE VI: Performance comparison on the D-Vlog and LMVD datasets under matched benchmark test-set protocols. Results of previous methods are collected from their original publications. “−” denotes unavailable results. The best performance on each dataset is highlighted in bold. Training Free indicates whether task-specific parameter training is required, and Explicit Evidence indicates whether human-readable evidence is explicitly produced together with the prediction.",
+      "page": 10,
+      "index": 5,
+      "width": 972,
+      "height": 472
+    }
+  ]
+}

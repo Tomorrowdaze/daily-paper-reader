@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-001.webp",
+      "caption": "Figure 1: Mental-model representation of the possibilities associated with AND, OR, and NEITHER/NOR.",
+      "page": 1,
+      "index": 1,
+      "width": 458,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-002.webp",
+      "caption": "Table 5: Accuracy on the non-validated (NV) and human-validated (HV) subsets of LOGICAL-COMMONSENSEQA.",
+      "page": 14,
+      "index": 2,
+      "width": 946,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-003.webp",
+      "caption": "Figure 2: Overview of the proposed framework. Each compound answer option is decomposed into two atomic answers and its explicit operator. The LLM scores local evidence for each atom, and an operator-constrained ILP combines these scores to select exactly one answer option under the corresponding operator semantics.",
+      "page": 3,
+      "index": 3,
+      "width": 858,
+      "height": 517
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-004.webp",
+      "caption": "Figure 4: Construction of LOGICAL-SATA from SATA-Bench. Each source instance provides a paragraph, a reading-comprehension question, and independently annotated correct and incorrect atomic answers. Pairs of atomic answers are combined according to the semantics of AND, OR, and NEITHER/NOR. Each source question produces one item for each operator-specific setting and one MIXED item.",
+      "page": 18,
+      "index": 4,
+      "width": 900,
+      "height": 371
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-005.webp",
+      "caption": "Figure 5: Representative LOGICAL-COMMONSENSEQA instances covering the AND, OR, NEITHER/NOR, and MIXED settings. Values in parentheses denote ground-truth binary labels for the atomic answers. The highlighted option is the unique gold option.",
+      "page": 19,
+      "index": 5,
+      "width": 950,
+      "height": 711
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-006.webp",
+      "caption": "Table 10: Different effects of atomic scoring errors across logical constructions based on the same LOGICAL-COMMONSENSEQA question.",
+      "page": 17,
+      "index": 6,
+      "width": 990,
+      "height": 426
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-007.webp",
+      "caption": "Figure 6: Representative LOGICAL-SATA instances from four source domains, covering the AND, OR, NEITHER/NOR, and MIXED settings. Values in parentheses denote ground-truth binary labels for the atomic answers. The highlighted option is the unique gold option. Passage and document excerpts are shortened for readability.",
+      "page": 20,
+      "index": 7,
+      "width": 950,
+      "height": 802
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-008.webp",
+      "caption": "Table 9: Representative semantic atomic errors in LOGICAL-COMMONSENSEQA (LCQA) and LOGICAL-SATA (LSATA). The examples include direct atomic scoring errors, broad interpretations of open-ended questions, insufficient attention to modifiers, and failures to identify applicable document labels.",
+      "page": 16,
+      "index": 8,
+      "width": 973,
+      "height": 405
+    },
+    {
+      "url": "assets/figures/arxiv/2608.12836v1/fig-009.webp",
+      "caption": "Figure 3: Structure of LOGICAL-COMMONSENSEQA instances. Operator-specific instances use the same operator across all four options, whereas MIXED instances may contain different operators.",
+      "page": 16,
+      "index": 9,
+      "width": 950,
+      "height": 382
+    }
+  ]
+}
