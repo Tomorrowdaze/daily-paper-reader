@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-19 <!--dpr-date:20260819-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/19/2608.14177v1-structure-guided-spatiotemporal-attention-graph-neural-network-for-traffic-flow-prediction" data-sidebar-item="{&quot;title&quot;: &quot;Structure-Guided Spatiotemporal Attention Graph Neural Network for Traffic Flow Prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.14177v1-structure-guided-spatiotemporal-attention-graph-neural-network-for-traffic-flow-prediction&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;针对安全关键系统的可解释时空预测&quot;}">Structure-Guided Spatiotemporal Attention Graph Neural Network for Traffic Flow Prediction</a>
   * 2026-08-17 <!--dpr-date:20260817-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/17/2608.09532v1-carnot-interpretable-interactive-and-optimized-execution-of-deep-research-queries" data-sidebar-item="{&quot;title&quot;: &quot;Carnot: Interpretable, Interactive, and Optimized Execution of Deep Research Queries&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.09532v1-carnot-interpretable-interactive-and-optimized-execution-of-deep-research-queries&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;深度研究查询的可解释与交互式执行&quot;}">Carnot: Interpretable, Interactive, and Optimized Execution of Deep Research Queries</a>
