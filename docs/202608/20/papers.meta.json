@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-20",
+  "date": "2026-08-20",
+  "generated_at": "2026-08-20T20:10:51",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/20/2608.11478v1-characterizing-peace-through-scientific-keywords",
+      "section": "quick",
+      "title_en": "Characterizing Peace Through Scientific Keywords",
+      "authors": "Gita Ghiasi, Rabeeh Parhizkari, Tanja Tajmel",
+      "date": "2026-08-11",
+      "pdf": "https://arxiv.org/pdf/2608.11478v1",
+      "score": "7.0",
+      "evidence": "跨学科分析和平与暴力研究的关键词",
+      "tldr": "本文以SDG16相关论文为对象，跨学科与国家比较关键词，发现和平研究多以暴力为核心，但生医与理工偏技术取径，社科强调制度社会；高和平国家将暴力置于福利与健康体系，低和平国家侧重冲突与安全，为研究与政策提供依据。",
+      "tags": "query:profile-1",
+      "abstract_en": "This study aims to show that peace, as reflected in scientific research, is not a neutral or uniform concept but is constructed differently across disciplines and geopolitical contexts. To do this, this study analyzes differences in the use of keywords among scholarly publications aligned with SDG 16 across various disciplinary, societal, and national contexts, and identifies which keywords are most strongly associated with countries exhibiting higher versus lower levels of societal peace. Results show that while peace-related research is strongly centered on violence, it is interpreted through distinct lenses: technological and forensic approaches in biomedical and NSE fields, and institutional, legal, and societal perspectives in the social sciences. At the country level, violence remains a central anchor, but its framing varies with levels of peace, with higher-peace countries embedding it within welfare, health, and social systems, and lower-peace countries emphasizing conflict, security, and geopolitics. These results could contribute to shaping both research priorities and science policy initiatives.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/20/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction",
+      "section": "quick",
+      "title_en": "ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction",
+      "authors": "Samirasadat Jamalidinan, Yue Xu, Kazem Cheshmi",
+      "date": "2026-08-18",
+      "pdf": "https://arxiv.org/pdf/2608.17856v1",
+      "score": "6.0",
+      "evidence": "针对表格预测任务的自适应检索和样本选择",
+      "tldr": "本文面向表格预测，提出ARASH：基于训练集局部邻域的自适应检索与样本选择，为TabPFN等TFM提供最相关few-shot提示，替代频繁重训并提升资源效率。ARASH将提示长度减少1261.5倍、内存减少2.56倍，同时保持可比准确率。",
+      "tags": "query:q4",
+      "abstract_en": "Tabular prediction is a critical task across numerous applications. The recent success of large language models has sparked various approaches for adapting them to the tabular domain. A prevalent strategy involves training or fine-tuning specialized Tabular Foundation Models (TFMs) such as TabPFN. However, TFMs require substantial computational resources, and frequent model retraining is often impractical. In-context learning (ICL), specifically, few-shot prompting, offers a resource-efficient alternative to enhance performance. Yet, identifying the most relevant rows to serve as shots remains a challenge for tabular data. This paper introduces ARASH (Adaptive, query-specific Retrieval And Shot selection), a method that improves TFM efficiency by selecting optimal shots based on local neighborhood analysis within the training set. Our results demonstrate that ARASH reduces the prompt length and memory usage of TabPFN by 1261.5$\\times$ and 2.56$\\times$, respectively, while providing comparable accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

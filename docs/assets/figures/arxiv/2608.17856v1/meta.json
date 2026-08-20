@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.17856v1/fig-001.webp",
+      "caption": "Fig. 3: Accuracy-efficiency comparison between ARASH and ICL demonstration-selection baselines across (a)TabPFN and (b)TabDPT models. Lower number of demonstrations and higher accuracy are better.",
+      "page": 6,
+      "index": 1,
+      "width": 508,
+      "height": 537
+    },
+    {
+      "url": "assets/figures/arxiv/2608.17856v1/fig-002.webp",
+      "caption": "Fig. 1: Motivation example for ARASH. Four synthetic regions are shown. Each point represents one demonstration with two features, shown on the horizontal and vertical axes. The colors in the top row denote routed local regions. The bottom row shows the same points, where colors denote class labels.",
+      "page": 2,
+      "index": 2,
+      "width": 521,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2608.17856v1/fig-003.webp",
+      "caption": "Fig. 6: Representative analysis cases for ARASH. Top: Jungle. Bottom: WDBC. In each row, the left panel shows routed clusters in a two-dimensional PCA projection, the middle panel shows class labels in the same projection, and the right panel reports per-cluster diagnostics, including Hopkins locality, anisotropy, label entropy, and cluster size.",
+      "page": 7,
+      "index": 3,
+      "width": 509,
+      "height": 315
+    }
+  ]
+}

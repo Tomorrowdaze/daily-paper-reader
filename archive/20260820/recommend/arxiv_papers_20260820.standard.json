@@ -1,0 +1,90 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-20T20:09:10.836416+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.11478v1",
+      "source": "arxiv",
+      "title": "Characterizing Peace Through Scientific Keywords",
+      "abstract": "This study aims to show that peace, as reflected in scientific research, is not a neutral or uniform concept but is constructed differently across disciplines and geopolitical contexts. To do this, this study analyzes differences in the use of keywords among scholarly publications aligned with SDG 16 across various disciplinary, societal, and national contexts, and identifies which keywords are most strongly associated with countries exhibiting higher versus lower levels of societal peace. Results show that while peace-related research is strongly centered on violence, it is interpreted through distinct lenses: technological and forensic approaches in biomedical and NSE fields, and institutional, legal, and societal perspectives in the social sciences. At the country level, violence remains a central anchor, but its framing varies with levels of peace, with higher-peace countries embedding it within welfare, health, and social systems, and lower-peace countries emphasizing conflict, security, and geopolitics. These results could contribute to shaping both research priorities and science policy initiatives.",
+      "authors": [
+        "Gita Ghiasi",
+        "Rabeeh Parhizkari",
+        "Tanja Tajmel"
+      ],
+      "primary_category": "cs.DL",
+      "categories": [
+        "cs.DL"
+      ],
+      "published": "2026-08-11T22:40:40+00:00",
+      "link": "https://arxiv.org/pdf/2608.11478v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "analyzes peace and violence research keywords across disciplines",
+      "llm_evidence_cn": "跨学科分析和平与暴力研究的关键词",
+      "llm_evidence": "跨学科分析和平与暴力研究的关键词",
+      "canonical_evidence": "跨学科分析和平与暴力研究的关键词",
+      "llm_tldr_en": "Analyzes how peace and violence are characterized in scientific literature across different geopolitical contexts.",
+      "llm_tldr_cn": "分析了不同地缘政治背景下科学文献中和平与暴力的特征描述。",
+      "llm_tldr": "分析了不同地缘政治背景下科学文献中和平与暴力的特征描述。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.17856v1",
+      "source": "arxiv",
+      "title": "ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction",
+      "abstract": "Tabular prediction is a critical task across numerous applications. The recent success of large language models has sparked various approaches for adapting them to the tabular domain. A prevalent strategy involves training or fine-tuning specialized Tabular Foundation Models (TFMs) such as TabPFN. However, TFMs require substantial computational resources, and frequent model retraining is often impractical. In-context learning (ICL), specifically, few-shot prompting, offers a resource-efficient alternative to enhance performance. Yet, identifying the most relevant rows to serve as shots remains a challenge for tabular data. This paper introduces ARASH (Adaptive, query-specific Retrieval And Shot selection), a method that improves TFM efficiency by selecting optimal shots based on local neighborhood analysis within the training set. Our results demonstrate that ARASH reduces the prompt length and memory usage of TabPFN by 1261.5$\\times$ and 2.56$\\times$, respectively, while providing comparable accuracy.",
+      "authors": [
+        "Samirasadat Jamalidinan",
+        "Yue Xu",
+        "Kazem Cheshmi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-18T14:48:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.17856v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Adaptive retrieval and shot selection for tabular prediction tasks",
+      "llm_evidence_cn": "针对表格预测任务的自适应检索和样本选择",
+      "llm_evidence": "针对表格预测任务的自适应检索和样本选择",
+      "canonical_evidence": "针对表格预测任务的自适应检索和样本选择",
+      "llm_tldr_en": "ARASH improves tabular foundation model efficiency through adaptive, query-specific shot selection.",
+      "llm_tldr_cn": "ARASH通过自适应、针对查询的样本选择，提高了表格基础模型的效率。",
+      "llm_tldr": "ARASH通过自适应、针对查询的样本选择，提高了表格基础模型的效率。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
