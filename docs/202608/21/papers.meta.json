@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-21",
+  "date": "2026-08-21",
+  "generated_at": "2026-08-21T20:42:18",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/21/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction",
+      "section": "quick",
+      "title_en": "ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction",
+      "authors": "Samirasadat Jamalidinan, Yue Xu, Kazem Cheshmi",
+      "date": "2026-08-18",
+      "pdf": "https://arxiv.org/pdf/2608.17856v1",
+      "score": "6.5",
+      "evidence": "提供了一种适用于表格预测的方法，这是内战和冲突数据集的标准格式。",
+      "tldr": "面向表格预测中TFMs（如TabPFN）训练耗资、难以频繁重训的痛点，本文提出ARASH：基于查询自适应的检索与样本选择，在训练集局部邻域挑选最相关行作few-shot示例，缩短提示并节省内存；在保持可比准确率下，将TabPFN提示长度降1261.5倍、内存降2.56倍。",
+      "tags": "query:q4",
+      "abstract_en": "Tabular prediction is a critical task across numerous applications. The recent success of large language models has sparked various approaches for adapting them to the tabular domain. A prevalent strategy involves training or fine-tuning specialized Tabular Foundation Models (TFMs) such as TabPFN. However, TFMs require substantial computational resources, and frequent model retraining is often impractical. In-context learning (ICL), specifically, few-shot prompting, offers a resource-efficient alternative to enhance performance. Yet, identifying the most relevant rows to serve as shots remains a challenge for tabular data. This paper introduces ARASH (Adaptive, query-specific Retrieval And Shot selection), a method that improves TFM efficiency by selecting optimal shots based on local neighborhood analysis within the training set. Our results demonstrate that ARASH reduces the prompt length and memory usage of TabPFN by 1261.5$\\times$ and 2.56$\\times$, respectively, while providing comparable accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/21/2608.20065v1-orthogonal-jepa-factorized-predictive-states-for-latent-world-models",
+      "section": "quick",
+      "title_en": "Orthogonal JEPA: Factorized Predictive States for Latent World Models",
+      "authors": "Taoyong Cui, Pheng Ann Heng, Wanli Ouyang",
+      "date": "2026-08-20",
+      "pdf": "https://arxiv.org/pdf/2608.20065v1",
+      "score": "6.0",
+      "evidence": "潜界模型的分解预测状态以改进推理",
+      "tldr": "本文提出Orthogonal JEPA，通过将目标状态分解为多个正交预测分量并分别预测，再合成完整潜在状态，缓解单一路径对主导信号的偏置；结合幅度保持、正交与方差正则等机制，在多领域验证表示、预测与规划的稳定性与效果。",
+      "tags": "query:q5",
+      "abstract_en": "World models construct latent states that support prediction, planning, and reasoning about an underlying system. Joint-embedding predictive architectures (JEPAs) offer a direct way to learn such states by predicting targets in representation space instead of reconstructing every detail of the observation. Standard JEPAs, however, organize all predictable content through one target embedding and one prediction pathway. In complex systems, this monolithic state can allocate redundant capacity to dominant signals while providing weak or conflicting gradients to less dominant predictive structure. We introduce \\method, a latent world-modeling framework based on orthogonal predictive factorization. Learned basis matrices analyze each target state into multiple components, and a dedicated prediction branch estimates each component from a shared context representation. Predictive regression preserves the factor magnitudes required for state synthesis, an orthogonality objective discourages repeated directions, factor-activity regularization maintains variation in projected targets, and online variance regularization discourages coordinate-wise encoder collapse. Predicted components are synthesized into a complete latent state that can be used by a readout, decoder, planner, or autoregressive rollout. The same predictive-state mechanism applies when the target is temporally future, spatially hidden, or another partial observation of the same system. Experiments on controlled vision, single-cell transcriptomics, longitudinal health records, continuous control, and molecular dynamics evaluate representation quality, forecasting, planning, and long-horizon stability.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/21/biorxiv-10-1101-2025-06-04-657781-v4-mantpy-a-framework-for-extracellular-matrix-analysis-in-spatial-proteomics",
+      "section": "quick",
+      "title_en": "Mantpy: a framework for extracellular matrix analysis in spatial proteomics",
+      "authors": "Ghafoor, M., Parkinson, J. E., Pham, T., Georgaka, S., Hayley, M. J., Jokl, E., Hanley, K. P., Allen, J. E., Sutherland, T. E., Rattray, M.",
+      "date": "2026-08-19",
+      "pdf": "https://www.biorxiv.org/content/10.1101/2025.06.04.657781v4.full.pdf",
+      "score": "6.0",
+      "evidence": "支持用于空间分析的可解释图深度学习",
+      "tldr": "空间蛋白组学已能原位同时观测细胞与细胞外基质，但现有分析偏向细胞；Mantpy将ECM及其与细胞的界面建模为空间图，从标记直接构建ECM图并与细胞图联通，支持图统计、可解释图学习与可视化；在肠、肝、肺数据中重建分层结构、解析感染相关基质变化并刻画细胞-基质关联，且与scverse互操作并发布配套数据。",
+      "tags": "query:q5",
+      "abstract_en": "Spatial proteomics technologies now profile cells and the extracellular matrix (ECM) together in situ. Yet analysis tools remain cell-centric, despite the ECM playing an essential role in health and disease. Here we present Mantpy, a framework that represents the ECM, and its interface with cells, as spatial graphs. Mantpy builds ECM graphs directly from matrix markers and links them with cell graphs for joint cell-ECM analysis, supporting graph statistics, explainable graph deep learning and visualisation. From a single ECM marker to multiplexed panels of ECM and cellular markers, Mantpy recovers layered tissue architecture in human intestine, resolves disease-associated matrix composition and organisation in infected mouse liver, and characterises cell-matrix associations in mouse lung. Released with ECM-inclusive datasets and interoperating with the scverse ecosystem, Mantpy extends the unit of spatial analysis beyond the cell, to the matrix that surrounds it.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

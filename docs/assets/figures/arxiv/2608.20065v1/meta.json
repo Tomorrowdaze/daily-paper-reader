@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.20065v1/fig-001.webp",
+      "caption": "Table 2: Controlled visual binding. Standard JEPA and Orthogonal JEPA use the same learnedgrid readout.",
+      "page": 6,
+      "index": 1,
+      "width": 794,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2608.20065v1/fig-002.webp",
+      "caption": "Table 4: Prediction across more than 1,000 future clinical events.",
+      "page": 7,
+      "index": 2,
+      "width": 980,
+      "height": 288
+    }
+  ]
+}

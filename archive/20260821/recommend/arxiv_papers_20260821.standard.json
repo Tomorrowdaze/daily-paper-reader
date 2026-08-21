@@ -1,0 +1,134 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-21T20:40:58.369452+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.17856v1",
+      "source": "arxiv",
+      "title": "ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction",
+      "abstract": "Tabular prediction is a critical task across numerous applications. The recent success of large language models has sparked various approaches for adapting them to the tabular domain. A prevalent strategy involves training or fine-tuning specialized Tabular Foundation Models (TFMs) such as TabPFN. However, TFMs require substantial computational resources, and frequent model retraining is often impractical. In-context learning (ICL), specifically, few-shot prompting, offers a resource-efficient alternative to enhance performance. Yet, identifying the most relevant rows to serve as shots remains a challenge for tabular data. This paper introduces ARASH (Adaptive, query-specific Retrieval And Shot selection), a method that improves TFM efficiency by selecting optimal shots based on local neighborhood analysis within the training set. Our results demonstrate that ARASH reduces the prompt length and memory usage of TabPFN by 1261.5$\\times$ and 2.56$\\times$, respectively, while providing comparable accuracy.",
+      "authors": [
+        "Samirasadat Jamalidinan",
+        "Yue Xu",
+        "Kazem Cheshmi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-18T14:48:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.17856v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Provides a method for tabular prediction which is the standard format for conflict and civil war datasets.",
+      "llm_evidence_cn": "提供了一种适用于表格预测的方法，这是内战和冲突数据集的标准格式。",
+      "llm_evidence": "提供了一种适用于表格预测的方法，这是内战和冲突数据集的标准格式。",
+      "canonical_evidence": "提供了一种适用于表格预测的方法，这是内战和冲突数据集的标准格式。",
+      "llm_tldr_en": "Introduces ARASH for efficient tabular prediction using adaptive retrieval and few-shot prompting.",
+      "llm_tldr_cn": "引入ARASH，通过自适应检索和少样本提示提高表格预测效率。",
+      "llm_tldr": "引入ARASH，通过自适应检索和少样本提示提高表格预测效率。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.20065v1",
+      "source": "arxiv",
+      "title": "Orthogonal JEPA: Factorized Predictive States for Latent World Models",
+      "abstract": "World models construct latent states that support prediction, planning, and reasoning about an underlying system. Joint-embedding predictive architectures (JEPAs) offer a direct way to learn such states by predicting targets in representation space instead of reconstructing every detail of the observation. Standard JEPAs, however, organize all predictable content through one target embedding and one prediction pathway. In complex systems, this monolithic state can allocate redundant capacity to dominant signals while providing weak or conflicting gradients to less dominant predictive structure. We introduce \\method, a latent world-modeling framework based on orthogonal predictive factorization. Learned basis matrices analyze each target state into multiple components, and a dedicated prediction branch estimates each component from a shared context representation. Predictive regression preserves the factor magnitudes required for state synthesis, an orthogonality objective discourages repeated directions, factor-activity regularization maintains variation in projected targets, and online variance regularization discourages coordinate-wise encoder collapse. Predicted components are synthesized into a complete latent state that can be used by a readout, decoder, planner, or autoregressive rollout. The same predictive-state mechanism applies when the target is temporally future, spatially hidden, or another partial observation of the same system. Experiments on controlled vision, single-cell transcriptomics, longitudinal health records, continuous control, and molecular dynamics evaluate representation quality, forecasting, planning, and long-horizon stability.",
+      "authors": [
+        "Taoyong Cui",
+        "Pheng Ann Heng",
+        "Wanli Ouyang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-20T13:59:57+00:00",
+      "link": "https://arxiv.org/pdf/2608.20065v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Factorized predictive states for latent world models to improve reasoning",
+      "llm_evidence_cn": "潜界模型的分解预测状态以改进推理",
+      "llm_evidence": "潜界模型的分解预测状态以改进推理",
+      "canonical_evidence": "潜界模型的分解预测状态以改进推理",
+      "llm_tldr_en": "A framework for learning factorized latent states to improve prediction and reasoning in complex systems.",
+      "llm_tldr_cn": "一种学习分解潜状态的框架，旨在改进复杂系统中的预测和推理。",
+      "llm_tldr": "一种学习分解潜状态的框架，旨在改进复杂系统中的预测和推理。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-1101-2025-06-04-657781-v4",
+      "source": "biorxiv",
+      "title": "Mantpy: a framework for extracellular matrix analysis in spatial proteomics",
+      "abstract": "Spatial proteomics technologies now profile cells and the extracellular matrix (ECM) together in situ. Yet analysis tools remain cell-centric, despite the ECM playing an essential role in health and disease. Here we present Mantpy, a framework that represents the ECM, and its interface with cells, as spatial graphs. Mantpy builds ECM graphs directly from matrix markers and links them with cell graphs for joint cell-ECM analysis, supporting graph statistics, explainable graph deep learning and visualisation. From a single ECM marker to multiplexed panels of ECM and cellular markers, Mantpy recovers layered tissue architecture in human intestine, resolves disease-associated matrix composition and organisation in infected mouse liver, and characterises cell-matrix associations in mouse lung. Released with ECM-inclusive datasets and interoperating with the scverse ecosystem, Mantpy extends the unit of spatial analysis beyond the cell, to the matrix that surrounds it.",
+      "authors": [
+        "Ghafoor, M.",
+        "Parkinson, J. E.",
+        "Pham, T.",
+        "Georgaka, S.",
+        "Hayley, M. J.",
+        "Jokl, E.",
+        "Hanley, K. P.",
+        "Allen, J. E.",
+        "Sutherland, T. E.",
+        "Rattray, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-08-19T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.06.04.657781v4.full.pdf",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Supports explainable graph deep learning for spatial analysis",
+      "llm_evidence_cn": "支持用于空间分析的可解释图深度学习",
+      "llm_evidence": "支持用于空间分析的可解释图深度学习",
+      "canonical_evidence": "支持用于空间分析的可解释图深度学习",
+      "llm_tldr_en": "A framework for spatial proteomics using explainable graph deep learning to analyze tissue architecture.",
+      "llm_tldr_cn": "一个利用可解释图深度学习分析组织结构的空间蛋白质组学框架。",
+      "llm_tldr": "一个利用可解释图深度学习分析组织结构的空间蛋白质组学框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
