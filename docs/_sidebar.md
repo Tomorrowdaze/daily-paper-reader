@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-24 <!--dpr-date:20260824-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/24/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction" data-sidebar-item="{&quot;title&quot;: &quot;ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用上下文学习和自适应检索进行表格预测的方法&quot;}">ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction</a>
   * 2026-08-21 <!--dpr-date:20260821-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/21/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction" data-sidebar-item="{&quot;title&quot;: &quot;ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;提供了一种适用于表格预测的方法，这是内战和冲突数据集的标准格式。&quot;}">ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction</a>

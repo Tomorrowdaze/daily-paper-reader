@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-24",
+  "date": "2026-08-24",
+  "generated_at": "2026-08-24T20:38:17",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/24/2608.17856v1-arash-adaptive-retrieval-and-shot-selection-for-tabular-prediction",
+      "section": "quick",
+      "title_en": "ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction",
+      "authors": "Samirasadat Jamalidinan, Yue Xu, Kazem Cheshmi",
+      "date": "2026-08-18",
+      "pdf": "https://arxiv.org/pdf/2608.17856v1",
+      "score": "6.0",
+      "evidence": "使用上下文学习和自适应检索进行表格预测的方法",
+      "tldr": "面向表格预测，作者提出ARASH，通过对训练集局部邻域的自适应检索与示例选择，为TabPFN等TFM构建更短且更相关的小样本提示，在无需频繁重训的前提下显著降低提示长度与内存，同时保持与基线相当的准确率。",
+      "tags": "query:q4",
+      "abstract_en": "Tabular prediction is a critical task across numerous applications. The recent success of large language models has sparked various approaches for adapting them to the tabular domain. A prevalent strategy involves training or fine-tuning specialized Tabular Foundation Models (TFMs) such as TabPFN. However, TFMs require substantial computational resources, and frequent model retraining is often impractical. In-context learning (ICL), specifically, few-shot prompting, offers a resource-efficient alternative to enhance performance. Yet, identifying the most relevant rows to serve as shots remains a challenge for tabular data. This paper introduces ARASH (Adaptive, query-specific Retrieval And Shot selection), a method that improves TFM efficiency by selecting optimal shots based on local neighborhood analysis within the training set. Our results demonstrate that ARASH reduces the prompt length and memory usage of TabPFN by 1261.5$\\times$ and 2.56$\\times$, respectively, while providing comparable accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
