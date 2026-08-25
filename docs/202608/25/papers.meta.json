@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-25",
+  "date": "2026-08-25",
+  "generated_at": "2026-08-25T20:54:43",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/25/2608.21656v1-mitigating-database-leakage-in-rag-systems-with-keyword-grounded-fact-substitution",
+      "section": "quick",
+      "title_en": "Mitigating Database Leakage in RAG Systems with Keyword-Grounded Fact Substitution",
+      "authors": "Ziliang Zhang, Yubo Zhu, Wei Tong, Jingyu Hua, Zijian Wang, Yuan Zhang, Sheng Zhong",
+      "date": "2026-08-21",
+      "pdf": "https://arxiv.org/pdf/2608.21656v1",
+      "score": "6.5",
+      "evidence": "使用因果扰动机制进行关键词识别和解释",
+      "tldr": "本文针对RAG易受提示注入导致数据库泄露的问题，提出KFS-RAG：先用注意力回溯与因果扰动提取关键影响词，再借助辅助LLM生成以关键词为锚的精炼事实，并以此替换原始检索文本。实验表明，该法显著降低泄露风险，同时基本保持回答准确性与相关性。",
+      "tags": "query:q6",
+      "abstract_en": "Retrieval-Augmented Generation (RAG) has emerged as a powerful paradigm for combining large language models (LLMs) with external knowledge sources. However, RAG systems remain vulnerable to prompt injection attacks, which may mislead the retriever or generator to expose sensitive database contents. To address this issue, we propose KFS-RAG, a defense that mitigates information leakage by reformulating the retrieved context. Specifically, our method first identifies a small set of influential keywords from the retrieved context via an attention rollout plus a causal perturbation mechanism. These keywords are then used to guide an auxiliary LLM to generate a compact set of keyword-grounded facts from the retrieved passages. Finally, the original context is substituted with these curated facts, ensuring that the generator operates on sanitized evidence rather than the raw retrieved text. Experimental evaluations demonstrate that KFS-RAG significantly reduces the risk of database leakage under injection attacks while maintaining response accuracy and relevance. This work highlights a practical pathway toward building secure and trustworthy RAG systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/25/2608.22034v1-align-unify-suppress-route-a-coherentist-view-of-transformer-computation",
+      "section": "quick",
+      "title_en": "Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation",
+      "authors": "Nura Aljaafari, Andre Freitas",
+      "date": "2026-08-22",
+      "pdf": "https://arxiv.org/pdf/2608.22034v1",
+      "score": "6.0",
+      "evidence": "Transformer计算的机械可解释性框架",
+      "tldr": "本文提出基于一致性解释的CPC框架，将Transformer计算分解为对齐、统一、抑制、路由四算子，并在15个模型上以权重签名与激活指标验证：抑制更稳健；对齐头消融影响下游抑制但非矛盾特异；矛盾改变层级一致性；指令微调保留归纳头结构。",
+      "tags": "query:q5",
+      "abstract_en": "Mechanistic interpretability has identified transformer circuits, but lacks a shared vocabulary for describing how their functions compose across tasks and architectures. We introduce Coherentist Probabilistic Compositionalism (CPC), an interpretive framework that grounds transformer computation in coherentist theories of interpretation and describes it through four operator roles. Alignment identifies candidate relations, unification integrates supporting information, suppression reduces incompatible alternatives, and routing carries selected information to the output. Across 15 models from five architecture families, the suppression, unification, and routing weight-space signatures correlate with held-out activation-level role measures above random baselines. Suppression is more stable across tasks than unification. Ablating alignment heads reduces downstream suppressive activity beyond a random-head control in 10 models, but similar effects on no-conflict prompts indicate a general upstream dependency, not contradiction-specific coupling. Explicit contradictions significantly shift a layerwise coherence proxy in 14 models; after removing shared residual covariance, the gap has the predicted direction in every model. Base and instruction-tuned variants preserve induction-head score structure ($r{\\geq}0.98$) without a consistent shift of operator signatures towards later layers. These results support CPC as a shared vocabulary for comparing transformer mechanisms while showing that their depth and geometric expression remain architecture-specific.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

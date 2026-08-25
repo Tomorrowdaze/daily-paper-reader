@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-001.webp",
+      "caption": "Table 1: Utility performance comparison across benchmarks.",
+      "page": 6,
+      "index": 1,
+      "width": 946,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-002.webp",
+      "caption": "Table 2: Security performance on the ODQA dataset.",
+      "page": 6,
+      "index": 2,
+      "width": 945,
+      "height": 234
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-003.webp",
+      "caption": "Table 9: Review-driven stress tests. Higher utility is better, while lower leakage metrics are better. The results show that simple summarization and advanced RAG leak substantially more raw database content, whereas prompt hardening lowers leakage mainly by sacrificing utility.",
+      "page": 15,
+      "index": 3,
+      "width": 943,
+      "height": 255
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-004.webp",
+      "caption": "Table 4: Security performance on the HealthcareMagic dataset.",
+      "page": 7,
+      "index": 4,
+      "width": 945,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-005.webp",
+      "caption": "Table 3: Security performance on the 2WikiMultiHopQA dataset.",
+      "page": 7,
+      "index": 5,
+      "width": 945,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-006.webp",
+      "caption": "Table 8: Leakage sensitivity to AP backbone and fact-extraction model.",
+      "page": 14,
+      "index": 6,
+      "width": 943,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-007.webp",
+      "caption": "Table 7: Utility sensitivity to AP backbone and fact-extraction model.",
+      "page": 13,
+      "index": 7,
+      "width": 943,
+      "height": 295
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-008.webp",
+      "caption": "Table 6: Leakage under context-side adversarial instructions embedded in the retrieved documents.",
+      "page": 13,
+      "index": 8,
+      "width": 943,
+      "height": 354
+    },
+    {
+      "url": "assets/figures/arxiv/2608.21656v1/fig-009.webp",
+      "caption": "Figure 2: Pipeline of KFS-RAG",
+      "page": 4,
+      "index": 9,
+      "width": 898,
+      "height": 244
+    }
+  ]
+}

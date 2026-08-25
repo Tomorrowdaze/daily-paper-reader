@@ -1,0 +1,93 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-25T20:53:33.877246+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.21656v1",
+      "source": "arxiv",
+      "title": "Mitigating Database Leakage in RAG Systems with Keyword-Grounded Fact Substitution",
+      "abstract": "Retrieval-Augmented Generation (RAG) has emerged as a powerful paradigm for combining large language models (LLMs) with external knowledge sources. However, RAG systems remain vulnerable to prompt injection attacks, which may mislead the retriever or generator to expose sensitive database contents. To address this issue, we propose KFS-RAG, a defense that mitigates information leakage by reformulating the retrieved context. Specifically, our method first identifies a small set of influential keywords from the retrieved context via an attention rollout plus a causal perturbation mechanism. These keywords are then used to guide an auxiliary LLM to generate a compact set of keyword-grounded facts from the retrieved passages. Finally, the original context is substituted with these curated facts, ensuring that the generator operates on sanitized evidence rather than the raw retrieved text. Experimental evaluations demonstrate that KFS-RAG significantly reduces the risk of database leakage under injection attacks while maintaining response accuracy and relevance. This work highlights a practical pathway toward building secure and trustworthy RAG systems.",
+      "authors": [
+        "Ziliang Zhang",
+        "Yubo Zhu",
+        "Wei Tong",
+        "Jingyu Hua",
+        "Zijian Wang",
+        "Yuan Zhang",
+        "Sheng Zhong"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-21T21:57:40+00:00",
+      "link": "https://arxiv.org/pdf/2608.21656v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "uses causal perturbation mechanism for keyword identification and explanation",
+      "llm_evidence_cn": "使用因果扰动机制进行关键词识别和解释",
+      "llm_evidence": "使用因果扰动机制进行关键词识别和解释",
+      "canonical_evidence": "使用因果扰动机制进行关键词识别和解释",
+      "llm_tldr_en": "Proposes a defense for RAG systems using causal perturbation to identify influential keywords for fact substitution.",
+      "llm_tldr_cn": "提出一种RAG防御方法，利用因果扰动识别关键特征并进行事实替换以防止泄露。",
+      "llm_tldr": "提出一种RAG防御方法，利用因果扰动识别关键特征并进行事实替换以防止泄露。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.22034v1",
+      "source": "arxiv",
+      "title": "Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation",
+      "abstract": "Mechanistic interpretability has identified transformer circuits, but lacks a shared vocabulary for describing how their functions compose across tasks and architectures. We introduce Coherentist Probabilistic Compositionalism (CPC), an interpretive framework that grounds transformer computation in coherentist theories of interpretation and describes it through four operator roles. Alignment identifies candidate relations, unification integrates supporting information, suppression reduces incompatible alternatives, and routing carries selected information to the output. Across 15 models from five architecture families, the suppression, unification, and routing weight-space signatures correlate with held-out activation-level role measures above random baselines. Suppression is more stable across tasks than unification. Ablating alignment heads reduces downstream suppressive activity beyond a random-head control in 10 models, but similar effects on no-conflict prompts indicate a general upstream dependency, not contradiction-specific coupling. Explicit contradictions significantly shift a layerwise coherence proxy in 14 models; after removing shared residual covariance, the gap has the predicted direction in every model. Base and instruction-tuned variants preserve induction-head score structure ($r{\\geq}0.98$) without a consistent shift of operator signatures towards later layers. These results support CPC as a shared vocabulary for comparing transformer mechanisms while showing that their depth and geometric expression remain architecture-specific.",
+      "authors": [
+        "Nura Aljaafari",
+        "Andre Freitas"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-22T16:29:20+00:00",
+      "link": "https://arxiv.org/pdf/2608.22034v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Mechanistic interpretability framework for transformer computation",
+      "llm_evidence_cn": "Transformer计算的机械可解释性框架",
+      "llm_evidence": "Transformer计算的机械可解释性框架",
+      "canonical_evidence": "Transformer计算的机械可解释性框架",
+      "llm_tldr_en": "Introduces a framework to interpret transformer functions through four operator roles.",
+      "llm_tldr_cn": "引入了一个通过四种算子角色来解释Transformer功能的框架。",
+      "llm_tldr": "引入了一个通过四种算子角色来解释Transformer功能的框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

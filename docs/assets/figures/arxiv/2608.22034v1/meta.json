@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.22034v1/fig-001.webp",
+      "caption": "Figure 2 A coherence state and its groundings. Fragments m1-m4 capture partial hypotheses about spans of the input, grey lines mark the positions Um they cover, and dashed teal groundings map fragment positions into the relational graph G.",
+      "page": 6,
+      "index": 1,
+      "width": 800,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2608.22034v1/fig-002.webp",
+      "caption": "Figure 3 Coherence as a representational configuration. Circles are grounded fragments, fill level shows support, teal links mark mutual support, and red dashed links mark unresolved incompatibility, not disagreement. Refinement increases coverage and compatibility and decreases conflict, raising C(A) (Section 2; BonJour 1985; Thagard and Verbeurgt 1998). All fragments can be retained provided their relations are admissible, and support stays graded.",
+      "page": 6,
+      "index": 2,
+      "width": 738,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2608.22034v1/fig-003.webp",
+      "caption": "Figure 1 The CPC vocabulary on the give-frame running example. Partial cues enter, alignment proposes candidate role links, unification integrates the compatible assignments, suppression prunes the incompatible recipient, and routing conveys the consistent interpretation to the readout, with coherence increasing across depth. The legend names a characteristic mechanism for each operator, and the same operators also cover factual recall, contradiction handling, and instruction tuning. Individual mechanisms may instantiate one or more operator roles.",
+      "page": 2,
+      "index": 3,
+      "width": 695,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2608.22034v1/fig-004.webp",
+      "caption": "Table 2 Operator-signature structure and functional validation (means over 5 seeds), computed on the four independent signature coordinates (alignment, suppression, unification, routing-copy). Sil.: silhouette at k=4; Best k: silhouette-optimal cluster count; pshuf : maximum column-shuffle null p-value across seeds; W→Act r: held-out Spearman correlation between weight scores and activation-level role measures, against the weight-magnitude baseline (Magn.); Bl.: baselines beaten (random-projection, shuffled-relation, weight-magnitude); Abl.: positive rank correlation with held-out single-head ablation effects. The pre-specified P1 verdict is SUPPORT with 3/3 baselines and a positive ablation correlation (three models), PARTIAL otherwise (twelve).",
+      "page": 14,
+      "index": 4,
+      "width": 604,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2608.22034v1/fig-005.webp",
+      "caption": "Figure 6 Layerwise coherence gap (consistent minus contradictory) for all 15 models. Lines give the mean over 5 seeds, bands the range across seeds, and colour the sign of the mean gap (navy positive, orange negative). GPT-2 and Pythia show the predicted positive gap, Gemma, Qwen, and three of the four LLaMA variants show negative gaps, and LLaMA-1B-Instruct follows the positive families.",
+      "page": 18,
+      "index": 5,
+      "width": 774,
+      "height": 399
+    },
+    {
+      "url": "assets/figures/arxiv/2608.22034v1/fig-006.webp",
+      "caption": "Figure 5 Causal ablation of operator-ranked heads on held-out IOI (mean over 5 seeds). Filled dots: change in the correct-token logit when zero-ablating the top five heads per operator ranking (routing ranked by the embedding-space copy score, Equation 6); open diamonds: layer-matched random-head control. Dots left of zero indicate removed support for the correct answer.",
+      "page": 16,
+      "index": 6,
+      "width": 774,
+      "height": 334
+    }
+  ]
+}

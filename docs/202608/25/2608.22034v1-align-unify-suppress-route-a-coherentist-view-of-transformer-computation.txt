@@ -1,0 +1,705 @@
+Title: Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation
+
+URL Source: https://arxiv.org/pdf/2608.22034v1
+
+Published Time: Tue, 25 Aug 2026 00:43:15 GMT
+
+Number of Pages: 30
+
+Markdown Content:
+# Preprint 
+
+# Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation 
+
+## Nura Aljaafari ∗1, André Freitas 1,2 
+
+> 1
+
+University of Manchester, United Kingdom 
+
+nura.aljaafari@manchester.ac.uk  
+
+> 2
+
+Idiap Research Institute, Switzerland 
+
+andre.freitas@idiap.ch 
+
+Mechanistic interpretability has identified transformer circuits, but lacks a shared vocabulary for describing how their functions compose across tasks and architectures. We introduce Coher-entist Probabilistic Compositionalism (CPC), an interpretive framework that grounds trans-former computation in coherentist theories of interpretation and describes it through four opera-tor roles. Alignment identifies candidate relations, unification integrates supporting informa-tion, suppression reduces incompatible alternatives, and routing carries selected information to the output. Across 15 models from five architecture families, the suppression, unification, and routing weight-space signatures correlate with held-out activation-level role measures above random baselines. Suppression is more stable across tasks than unification. Ablating alignment heads reduces downstream suppressive activity beyond a random-head control in 10 models, but similar effects on no-conflict prompts indicate a general upstream dependency, not contradiction-specific coupling. Explicit contradictions significantly shift a layerwise coherence proxy in 14 models; after removing shared residual covariance, the gap has the predicted direction in every model. Base and instruction-tuned variants preserve induction-head score structure ( r≥0.98 )without a consistent shift of operator signatures towards later layers. These results support CPC as a shared vocabulary for comparing transformer mechanisms while showing that their depth and geometric expression remain architecture-specific. 1
+
+1. Introduction 
+
+As transformer language models scale, their capabilities extend beyond surface pat-tern matching to in-context learning and other emergent behaviours (Olsson et al. 2022; Nanda et al. 2023; Wei et al. 2022). Post-training further refines model behaviour (Ouyang et al. 2022; Bai et al. 2022). Mechanistic interpretability seeks to explain these behaviours through the analysis of internal components and computations, often identi-fying circuits: sets of interacting components that contribute to a particular computation or behaviour (Wang et al. 2023a). Such analyses have identified induction heads, the indirect-object identification (IOI) circuit, copy-suppression heads, feedforward mem-  
+
+> ∗Corresponding author
+> 1Code and data will be made publicly available upon acceptance.
+
+1arXiv:2608.22034v1 [cs.CL] 22 Aug 2026 Preprint When Mary and John went to the store, John gave a drink to         
+
+> 1 Input
+> partial cues
+> 2 Early layers
+> alignment
+> 3 Middle layers
+> unify + suppress
+> 4 Late layers
+> routing + readout
+> Mary John gave the store a drink Subject Object Indirect object Mary? John?
+> competing candidates
+> Subject John
+> Object a drink
+> Indirect object
+> Mary? John?
+> mutually consistent assignments suppress already the subject
+> next-token prediction
+> Mary
+> John the . . .
+> route coherence increasing coherence across depth
+> Alignment
+> QK compatibility
+> Unification
+> OV / FFN writes
+> Suppression
+> negative OV modes
+> Routing
+> name-mover transport example shown: role resolution same operators also cover: factual recall contradiction handling instruction tuning
+
+Figure 1 
+
+The CPC vocabulary on the give-frame running example. Partial cues enter, alignment proposes candidate role links, unification integrates the compatible assignments, suppression prunes the incompatible recipient, and routing conveys the consistent interpretation to the readout, with coherence increasing across depth. The legend names a characteristic mechanism for each operator, and the same operators also cover factual recall, contradiction handling, and instruction tuning. Individual mechanisms may instantiate one or more operator roles. 
+
+ories, and instruction-conditioned conflict resolution (Elhage et al. 2021; Geva et al. 2021; Olsson et al. 2022; Wang et al. 2023a; McDougall et al. 2024; Wang et al. 2023b; Templeton et al. 2024; Aljaafari, Carvalho, and Freitas 2026a). These mechanisms are well characterised individually, but how their functional roles fit within a broader framework of transformer computation is not. Existing frameworks approach this question at different levels of abstraction. Bayesian and algorithmic analyses treat prompts as evidence for latent task inference or as inputs to implicit estimators (Xie et al. 2022; Akyürek et al. 2023; Von Oswald et al. 2023; Garg et al. 2022), abstracting away the components that implement the computation. Feature-level analyses decompose activations into interpretable directions (Elhage et al. 2022; Huben et al. 2024; Bricken et al. 2023), primarily characterising rep-resentational content and its local causal roles, with less emphasis on how this content is combined and revised across depth. Circuit analyses identify causal components and reusable computational structure (Zheng et al. 2025; He et al. 2025; Aljaafari, Carvalho, and Freitas 2026b), but do not resolve how recurring functions can be described through graded roles that generalise across tasks and architectures. We address this gap by organising these functions into a shared vocabulary grounded in coherence refinement :the view that a model interprets its context by linking representational fragments and progressively resolving inconsistencies among them. We test how the organisation of these functions varies across tasks, architectures, and post-training methods. Since language is a structured field of inferential and referential relations, plausi-ble continuations are constrained by discourse entities, semantic roles, and coherence relations established earlier in the context, not by surface adjacency alone (Halliday and Hasan 1976; Grosz, Joshi, and Weinstein 1995; Fillmore 1982). For a token-based language model, these relations must be realised through representations distributed across token positions. The representations link mentions, roles, and events, and the model must keep them compatible as the context extends (see Figure 2). Self-supervised 2Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+language models encode aspects of this structure, including syntactic dependencies, semantic roles, and coreference (Tenney, Das, and Pavlick 2019; Manning et al. 2020; Hu et al. 2020). Models can draw on this structure by relating context fragments, integrating compatible information, reducing support for contradictions, and carrying the interpretation to the prediction position (Olsson et al. 2022; Wang et al. 2023a; Geva et al. 2021; McDougall et al. 2024). We propose coherence refinement as the organising principle for a vocabulary of these operations and formalise it as Coherentist Probabilistic Compositionalism (CPC). In CPC (Figure 1), transformer computation is modelled as the iterative refinement of represen-tational fragments under a global coherence functional C, and components across layers may instantiate four operator roles that realise these operations: alignment , unification ,
+
+suppression , and routing . Each describes what a component (e.g., an attention head or a feedforward layer) contributes to the developing interpretation: a single component may serve several roles, and one role may be spread across many components. The empirical question is how far weights and activations carry measurable signatures of these roles. We treat this as a modelling hypothesis, organising known mechanisms and generating testable predictions without assuming that transformers optimise C directly. The empirical evaluation examines four dimensions: (i) the reproducibility and functional validity of operator signatures (P1); (ii) the dependence of suppression on upstream alignment (P2); (iii) the effect of contradiction on the coherence proxy near layers with high alignment and suppression activity (P3); and (iv) the extent to which post-training reweights operator structure or introduces new structure (P4). The paper makes three contributions: 
+
+## r An interpretive framework that describes transformer computation as coherence refinement carried out by four operator roles, giving mechanistic findings a shared representational language (Section 3). 
+
+## r Operational definitions of attention-head operator signatures, with activation-level measures and causal tests of their proposed functional roles (Sections 3.4 and 5.3). 
+
+## r Empirical evaluation across 15 models from five architecture families, identifying which properties of the vocabulary generalise between architectures (Section 5). 
+
+2. Coherence in Language and Cognition 
+
+Coherence has been investigated in both philosophy and linguistics. In philosophy, theories take an epistemological view, where a belief is justified partly by the degree to which it aligns with the broader system of beliefs held by a reasoner (BonJour 1985). In linguistics, coherence is used to characterise the relations between text units that make a discourse interpretable as a structured whole, different from an arbitrary sequence of sentences (Hobbs 1979; Jurafsky and Martin 2026). Despite these different objects of study, both perspectives treat coherence as a relational property: an element is evaluated by how it fits with other elements, not in isolation. 
+
+2.1 Coherence in Language and Discourse 
+
+In linguistic settings, coherence is commonly studied through coherence relations : rela-tions that connect linguistic units such as clauses, sentences, or larger discourse spans (Hobbs 1979). They explain how one part of a discourse is interpreted with respect to another. For example, two spans may stand in a causal, elaborative, temporal, or 3Preprint 
+
+contrastive relation (Jurafsky and Martin 2026). One of the most widely used theories is the Rhetorical Structure Theory, which formalises this view by representing a text through relations between discourse spans, including relations such as E LABORATION ,CAUSE , and C ONTRAST (Mann and Thompson 1988). Jurafsky and Martin (2026) distinguish between local and global coherence. Local coherence refers to how nearby parts of a text are connected. It has three main sources: (i) coherence relations between neighbouring text spans, (ii) continuity of discourse entities, where successive spans remain centred on the same people, objects, or events, and (iii) lexical or semantic continuity, where neighbouring spans remain within a compatible topic or semantic field. Global coherence concerns the organisation of the discourse over longer stretches of text, including how individual sentences and local relations contribute to the overall discourse structure. Several computational approaches formalise these sources separately. Cohesion models describe surface links created through repetition, reference, and lexical relations (Halliday and Hasan 1976). Entity-based models describe how discourse entities are introduced and maintained. For instance, Centring Theory tracks the changing focus of attention across utterances and predicts greater coherence when transitions preserve salient discourse entities (Grosz, Joshi, and Weinstein 1995). On the other hand, Se-mantic approaches measure compatibility between neighbouring textual representa-tions. More recent computational models learn such compatibility from coherent and reordered text, producing a score that distinguishes well-formed discourse from less coherent alternatives (Li and Hovy 2014). These approaches differ in what constitutes a discourse unit and how compatibility is measured, but all describe coherence in terms of relations among parts of the text. An important consequence is that semantic opposition does not itself imply in-coherence. A discourse may contain disagreement, contrast, correction, or concession while remaining coherent if the relation between the opposing contents is represented explicitly. For example, C ONTRAST is itself a coherence relation in Rhetorical Structure Theory (Mann and Thompson 1988). In what follows, incompatibility refers instead to two assignments that cannot be jointly maintained within a single interpretation. 
+
+2.2 Coherence as Constraint Satisfaction 
+
+A more general formalisation treats coherence as a constraint-satisfaction problem. Tha-gard and Verbeurgt (1998) define a finite set of elements E = {e1, . . . , e n} with weighted positive and negative constraints between pairs of elements. Positive constraints con-nect elements that support or fit with one another, while negative constraints connect elements that conflict. A solution partitions the elements into an accepted set A and a rejected set R. A positive constraint between ei and ej is satisfied when both elements receive the same status, while a negative constraint is satisfied when one is accepted and the other rejected. The coherence of a partition can then be written as 
+
+W (A, R) = X 
+
+> (ei,e j) satisfied
+
+wij , (1) where wij is the weight associated with the constraint between ei and ej . The coherence problem is to find the partition that maximises W .Exact maximisation of this objective is computationally difficult. A connectionist approximation represents elements as units in a network, positive constraints as ex-4Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+citatory connections, and negative constraints as inhibitory connections (Thagard and Verbeurgt 1998). Mutually supporting elements reinforce one another, while conflicting elements compete. The network progressively settles into a configuration in which compatible elements tend to be active together and incompatible alternatives are sepa-rated. Thagard (2000) applies this general formulation to different cognitive problems, including explanation, perception, analogy, and decision making. The elements and constraints differ between domains, but the underlying problem remains the same: finding a configuration that satisfies as many mutually weighted constraints as possible. This formulation provides a useful bridge between epistemological and linguis-tic perspectives. In discourse, the elements may correspond to propositions, entities, events, or discourse spans. Positive constraints can represent relations that support a joint interpretation, such as coreference, causal relations, or compatible semantic roles. Negative constraints can represent mutually incompatible assignments. Coherence then depends on the configuration of these relations across the interpretation. 
+
+3. Coherentist Probabilistic Compositionalism 
+
+CPC describes transformer computation through the layerwise construction of an in-terpretation in the residual stream. The operator roles specify functional contributions to this process, while analyses of transformer components and circuits provide the empirical basis for identifying them. 
+
+3.1 Coherence State and Functional 
+
+A coherence state A={(m, g )} is a set of representational fragments m paired with groundings g. A fragment captures a partial hypothesis about the input, such as a token span, entity mention, syntactic role, or latent feature. A grounding maps a fragment into a relational structure G representing the current interpretation. Figure 2 illustrates a coherence state and its groundings. We define the global coherence functional as 
+
+C(A)= μ cov( A)
+
+| {z }
+
+> coverage reward (unification)
+
++ X
+
+> (m,g )∈A
+
+log Scoh (g | m, G )
+
+| {z }
+
+> local fit (alignment, unification)
+
+− λ
+
+2
+
+X
+
+> (m,g ),(m′,g ′)∈A
+> (m,g )̸=( m′,g ′)
+
+κ(m, g ; m′, g ′)
+
+| {z }
+
+> contradiction penalty (suppression)
+
+,
+
+(2) 
+
+where coverage is defined over grounded positions, cov( A)= S 
+
+> (m,g )∈A
+
+dom( g) , Scoh (g |
+
+m, G )∈(0 , 1] measures how well a grounding fits the relational structure G, and κ≥0 is a symmetric contradiction kernel that vanishes on compatible pairs. Formal definitions of fragments, groundings, admissible pairings, and the contradiction kernel are given in Appendix B. The functional rewards coverage ( μ> 0) and local compatibility while penalising incompatible assignments ( λ> 0). The coverage term favours interpretations that incorporate more of the available input, the local-fit term favours groundings com-patible with the developing relational structure, and the contradiction term penalises grounded fragments that cannot be jointly maintained. Figure 3 illustrates the resulting 5Preprint 
+
+view of coherence as a configuration of grounded fragments connected by relations of support and incompatibility. Appendix A develops the relation to the formalisation of coherence in Section 2.                           
+
+> Mary and John went to the store, John gave adrink to ___
+> m1: entity Mary
+> m2: entity John
+> m3: location store
+> m4: event give (agent, recipient, theme)
+> relational graph G
+> MARY JOHN STORE GIVE DRINK
+> recipient agent at theme solid grey lines mark fragment positions Umdashed teal arrows are groundings g:Um⇀ V
+
+Figure 2 
+
+A coherence state and its groundings. Fragments m1-m4 capture partial hypotheses about spans of the input, grey lines mark the positions Um they cover, and dashed teal groundings map fragment positions into the relational graph G.              
+
+> m1
+> m2
+> m3m4
+> m5
+> m6m7
+> fragmented / competing state
+> refinement
+> m1
+> m2
+> m3m4
+> m5
+> m6m7
+> conflict exposed / compatible structure strengthens
+> refinement
+> m1
+> m2
+> m3m4
+> m5
+> m6m7
+> coherent configuration
+> support (compatibility) conflict (incompatibility) fragment support level (low →high) coverage ↑compatibility ↑conflict ↓ ⇒ C (A)↑
+
+Figure 3 
+
+Coherence as a representational configuration. Circles are grounded fragments, fill level shows support, teal links mark mutual support, and red dashed links mark unresolved incompatibility, not disagreement. Refinement increases coverage and compatibility and decreases conflict, raising C(A) (Section 2; BonJour 1985; Thagard and Verbeurgt 1998). All fragments can be retained provided their relations are admissible, and support stays graded. 
+
+3.2 The Four Operators 
+
+The four operators describe recurring functional contributions to the refinement of a coherence state. To connect these roles to transformer computation, we use the residual-stream and attention decomposition of Elhage et al. (2021). Transformer blocks update an additive residual stream, while attention heads separate into query-key (QK) inter-actions, which determine which positions attend to one another, and value-output (OV) 6Aljaafari, Freitas A Coherentist View of Transformer Computation     
+
+> x1
+> x2
+> x3
+> x4
+> xT
+> layer ℓℓ+1 ℓ+2
+> align (QK scores relations) unify (OV/MLP write, +)suppress ( −)route (mover head) readout
+
+Figure 4 
+
+The CPC operators on the transformer architecture, with tokens on the left and depth running left to right. Query-key structure aligns positions, OV and feedforward writes unify content, subtractive writes suppress incompatible content, and a mover head routes the result to the readout. 
+
+maps, which determine what information is written from attended positions back to the residual stream. Figure 4 locates the four roles on this architecture. 
+
+Alignment. It identifies candidate relations between positions or representational frag-ments. In transformers, QK interactions provide input-dependent compatibility scores that determine which positions exchange information. 
+
+Unification. It incorporates compatible content into the developing interpretation. Once a fragment is aligned with a candidate role or relation, additive component writes can increase support for the corresponding interpretation in the residual stream without removing competing alternatives. 
+
+Suppression. It reduces support for continuations, features, or fragments that are in-compatible with the developing interpretation. In transformers, this role can be imple-mented through subtractive component writes along particular readout directions. 
+
+Routing. It carries selected content to positions where it can affect the readout. It changes where information is available without necessarily introducing new representational content. These roles correspond to different changes in the coherence state and func-tional. Alignment proposes candidate groundings. Unification incorporates compatible grounded fragments, increasing coverage and local fit. Suppression reduces support for alternatives that contribute to the contradiction penalty. Routing does not directly change C and instead controls where the resulting content is available to affect the model’s prediction. 
+
+3.3 Layerwise Coherence Refinement 
+
+CPC interprets transformer depth as a sequence of approximate coherence-refinement steps in which the operators act on the current representational state. Figure 1 illustrates this process on the running example. A stronger conjecture is that the latent coherence 7Preprint             
+
+> Operator Mechanistic signature Representative circuits
+> Alignment QK compatibility structure Previous-token, duplicate-token heads Unification Positive OV or feedforward writes Induction-head OV; key-value memories Suppression Negative OV modes; subtractive writes S-inhibition, copy-suppression heads Routing Content-preserving OV structure; positional transport (activations) Name-mover heads
+
+Table 1 
+
+CPC operators, their candidate mechanistic signatures, and representative circuits associated with each role; sources are cited in the text. 
+
+functional tends to improve across depth on typical inputs: 
+
+C
+
+
+
+A(ℓ+1) 
+
+≳ C
+
+
+
+A(ℓ)
+
+. (3) We treat Equation 3 as a falsifiable conjecture, not as an assumption of monotonic im-provement at every layer. Operators may overlap, repeat, or interact across layers, and CPC does not impose a fixed sequence in which alignment must precede unification, suppression, or routing. 
+
+3.4 Transformer Mechanisms as CPC Operators 
+
+Known circuits and transformer mechanisms can be described through the four opera-tor roles, although the correspondence is not one-to-one. Circuit findings are measured through attention patterns, activations, ablations, and logit contributions, while the operator labels describe functional contributions at a higher level of abstraction. A single mechanism may combine several roles, and one role may be implemented by several components. Table 1 summarises the proposed correspondence. Induction combines alignment and unification: a previous-token head supplies shifted positional context, and the induction head copies a compatible continuation through its OV map (Olsson et al. 2022). The IOI circuit combines all four roles: duplicate-token heads align repeated names, S-inhibition heads suppress the duplicated-subject pathway, and name-mover heads route the correct name to the prediction position while their OV writes increase support for that name (Wang et al. 2023a). Copy-suppression heads provide a direct example of subtractive writes (McDougall et al. 2024), while feedforward key-value memories provide an example of content integration (Geva et al. 2021). Instruction-conditioned suppression connects the vocabulary to post-training (Wang et al. 2023b). Sparse autoencoder features offer a candidate measurement basis for CPC fragments (Huben et al. 2024; Templeton et al. 2024), although the correspondence remains partial. 
+
+Per-head operator scores. For each head h, we derive weight-space quantities correspond-ing to the proposed mechanistic roles. Let WOV = WO WV denote the effective OV map, with singular value decomposition WOV = P 
+
+> i
+
+σiuiv⊤ 
+
+> i
+
+. For residual state r and token readout direction et, its contribution to the token logit is 
+
+e⊤ 
+
+> t
+
+WOV r = X
+
+> i
+
+σi⟨et, u i⟩⟨ vi, r ⟩. (4) 8Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+A mode contributes subtractively to token t when the corresponding term in Equation 4 is negative. This motivates separating additive and subtractive OV structure at the weight level, while task-specific effects still depend on the residual state r and readout direction et. We compute 
+
+salign (h) =  σQK h, 1
+
+2P 
+
+> i
+
+ σQK h,i 
+
+2,ssup (h) = P
+
+> i
+
+σOV h,i max  0, −⟨ uOV h,i , v OV h,i ⟩ ,sunify (h) = P
+
+> i
+
+σOV h,i max  0, ⟨uOV h,i , v OV h,i ⟩ ,strace (h) = 1 
+
+> d
+
+tr( WOV,h ),
+
+(5) where d=dmodel , σQK h,i are the singular values of the QK map, and σOV h,i , uOV h,i , and vOV h,i 
+
+are the singular values and vectors of the OV map. The alignment score measures QK spectral concentration, while the suppression and unification scores quantify subtrac-tive and additive OV modes. Since 
+
+tr( WOV,h ) = X
+
+> i
+
+σOV h,i ⟨uOV h,i , v OV h,i ⟩,
+
+the trace descriptor satisfies strace = ( sunify − ssup )/d exactly and is not treated as an independent signature coordinate. Routing is instead represented by the embedding-space copy score of Elhage et al. (2021). For a seeded token sample with effective embeddings collected in E (token embedding plus the first-layer MLP output; McDougall et al. 2024) and unembedding directions in U , the map Mh = E W OV,h U measures how strongly head h maps token representations towards their corresponding readout directions. We define 
+
+scopy (h) = 
+
+P 
+
+> i
+
+max {0, λ i(Mh)}
+
+P 
+
+> i
+
+|λi(Mh)| ∈ [0 , 1] , (6) where λi are the eigenvalues of Mh. A head that preserves token identity towards the readout scores near one, while a head dominated by inverted mappings scores near zero. The copy score depends on the embedding geometry and is not an algebraic function of the other scores. The resulting signature is (salign , s sup , s unify , s copy ).These signatures are defined for attention heads. Feedforward contributions to unification (Table 1) enter CPC through the functional mapping and are not assigned separate weight-space scores in the present evaluation. Position-dependent routing is also measured separately at the activation level. The signatures nominate candidate operator roles whose functional validity is tested in Section 5 using held-out activation measures and causal ablations. CPC does not assume that every component belongs to one operator class, that every task requires all four roles, or that transformers explicitly optimise Equation 2. 9Preprint 
+
+3.5 Activation-Level Coherence Proxy 
+
+The functional C is latent, so the empirical analysis uses an activation-level proxy for one possible geometric consequence of coherence: 
+
+ˆC(ℓ)link = 1
+
+|P |
+
+X
+
+> (i,j )∈P
+
+sim 
+
+
+
+r(ℓ) 
+
+> i
+
+, r (ℓ)
+
+> j
+
+
+
+, (7) where r(ℓ) 
+
+> i
+
+is the residual-stream vector at position i and layer ℓ, P is a set of posi-tion pairs, and sim is a bounded similarity function. Higher similarity is treated as a candidate signature of representational coherence across the prompt, and an explicit contradiction is predicted to reduce it. The proxy captures only one geometric consequence that may accompany changes in C and does not uniquely isolate relational coherence. We compare it against matched non-contradictory and shuffled position-pair controls, and evaluate a whitened variant that reduces the contribution of global residual-stream covariance. The contradiction experiment compares matched consistent and contradictory prompts across depth (P3, Section 5.5), while the ascent analysis tests the relation between the proxy and layer depth on mixed prompts (Section 3.3). The experimental choices of P and sim are specified in Section 4. 
+
+3.6 Post-Training as Operator Reweighting 
+
+Post-training methods, including supervised instruction tuning and reinforcement learning from human feedback (RLHF), modify model behaviour after pretraining. The mechanistic question is how much these changes alter the organisation of computations already present in the base model. RLHF provides one formal instance: it is commonly expressed as reward optimisation under a KL constraint to a reference policy (Ouyang et al. 2022; Bai et al. 2022). In CPC terms, the preference objective changes the relative importance of behaviours expressed through the operator roles, while the KL constraint limits divergence from the pretrained computation. This motivates testing if post-training primarily reweights existing operator structure. 
+
+4. Methodology 
+
+The experiments test four predictions: operator signatures in weight space (P1), suppression-alignment coupling (P2), coherence under contradiction (P3), and operator reweighting under post-training (P4). Layerwise composition and cross-task stability serve as secondary analyses. 
+
+Models. We evaluate 15 models from five families: GPT-2 (Small, Medium, Large; Rad-ford et al. 2019), Pythia (410M, 1.4B, 2.8B; Biderman et al. 2023), Qwen 2.5 (1.5B, 3B; Qwen et al. 2025), Gemma 2 (2B; Team et al. 2024), and LLaMA 3.2 (1B, 3B; Dubey et al. 2024), plus the available instruction-tuned variants (Gemma, LLaMA-1B, LLaMA-3B, Qwen-1.5B). The P1 weight-space analyses operate on model weights without inference. Experiments using prompts cover all models, except P4, which compares the four base/instruction-tuned pairs. 10 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+Tasks and data. We use indirect object identification (IOI; Wang et al. 2023a), greater-than comparison (Hanna, Liu, and Variengien 2023), and factual recall (Meng et al. 2022), formally defined in Appendix C. For each task, examples are filtered to those the model predicts correctly, with a target of 500 examples per model-task pair. Greater-than requires the two-digit year continuation to be a single token, which the LLaMA, Qwen, and Gemma tokenisers do not provide; the affected models are excluded from this task only. Each task set is split 50/50 into discovery and held-out subsets using a seeded hash fixed at generation time. Head selection and ranking are performed on the discovery split before held-out evaluation. Contradiction experiments use 500 matched consistent/contradictory prompt pairs per run, sampled with a fixed seed from a frozen pool of 3,854 unique pairs (generation templates and pool composition in Appendix E). 
+
+Operational measures. CPC is evaluated through weight-space and activation-level mea-sures. In weight space, each attention head is represented by the four signature coordi-nates defined in Section 3.4, (salign , s sup , s unify , s copy ). At the activation level, unification and suppression are measured through positive and negative direct logit attribution (DLA; nostalgebraist 2020) over the model’s top-10 predicted tokens. Routing is mea-sured through an attention-weighted copy score, and alignment through the maximum previous-token or duplicate-token attention on repeated random sequences (Olsson et al. 2022; Wang et al. 2023a). Layerwise coherence is measured using ˆC(ℓ)link (Equation 7), instantiated as the mean cosine similarity over all position pairs in the residual stream, excluding the beginning-of-sequence token. Task-based activation measures are aver-aged over correctly predicted examples. For comparison across architectures of different depths, layerwise measures are aggregated into early, middle, and late thirds of the layer stack (Appendix D). 
+
+P1: operator signatures. We first characterise the geometry of the four-dimensional weight-space signature. Within each model, heads from all layers are pooled and each coordinate is standardised. To identify recurring signature profiles, we apply k-means clustering (MacQueen 1967) with 50 restarts for k ∈ { 2, . . . , 7}. To characterise continu-ous axes of variation, we apply principal component analysis (PCA; Pearson 1901) to the same head-by-coordinate matrix. The algebraically derived trace descriptor is excluded from both analyses. Pooling is used because P1 concerns model-wide operator structure, and the influence of depth is quantified separately through the depth-separation ratio and depth residualisation. Clustering quality is measured by the silhouette coefficient (Kaufman and Rousseeuw 1990) and calibrated against two nulls in the same four-coordinate space: a column-shuffle null, which preserves each coordinate’s marginal distribution while removing cross-score dependence, and an isotropic standard Gaus-sian null with the same number of heads and dimensions. We test functional validity by correlating the suppression, unification, and rout-ing weight-space scores (Spearman) with their corresponding held-out activation-level measures. The correlations are compared against the 95% quantile of 100 random weight projections, weight-magnitude ranking, and, for suppression and unification, scores computed after shuffling task relations. Alignment is evaluated separately through its activation-level detector. We also correlate the weight-space scores with held-out single-head ablation effects, defined as the absolute change in the correct-token logit after zero-ablating a head. This analysis uses the union of the top-10 heads under each operator ranking, so a positive correlation indicates that higher-scoring heads have larger causal effects irrespective of direction. 11 Preprint 
+
+For direct causal validation, we ablate the top five heads per signature dimension on IOI, using the same selection rule across models, and measure changes in the correct-token (IO) logit, wrong-token (subject) logit, and logit margin. We compare these effects against layer-matched random-head ablations (20 control samples per intervention) and a magnitude-matched control. As a task-conditioned check, suppression and unification heads are additionally ranked by the targeted DLA margin on the discovery split and ablated on the held-out split. 
+
+P2: suppression-alignment coupling. Ablating upstream alignment heads should reduce the summed suppressive contribution sact sup (h, x, t ) = max  0, −e⊤ 
+
+> t
+
+o(h) 
+
+> i∗
+
+(x) of downstream suppressor heads h, where o(h) 
+
+> i∗
+
+(x) is the head output at the readout position and et
+
+the unembedding direction of the incompatible candidate t. The candidate is the top-1 continuation of the matched consistent prompt, rendered incompatible by the inserted contradiction. On contradiction prompts, suppression is compared before and after alignment-head ablation against two controls: layer-matched random-head ablation and the same intervention on matched no-conflict prompts. Significance is assessed by paired permutation tests (10,000 permutations), Holm-corrected (Holm 1979) across the 30 model-by-contrast comparisons, with percentile bootstrap confidence intervals (Efron 1979) based on 10,000 resamples. GPT-2 Small uses the validated IOI circuit, with duplicate- and previous-token heads as alignment heads, and S-inhibition and negative name-mover heads as suppressors. Elsewhere, alignment heads are the five heads scoring highest on the activation-level alignment measure, which uses repeated random sequences and no task data, and suppressor heads are the six heads with the most-negative mean DLA on t, estimated on the discovery split of the contradiction prompts. 
+
+P3: coherence under contradiction. The coherence gap is the consistent-minus-contradictory difference in ˆC(ℓ)link on matched prompt pairs. It is tested per layer third using paired t-tests with Holm correction, and checked for co-location with the layer third in which the model’s alignment or suppression activity peaks. Three controls qualify the raw gap. Lexically matched non-contradictory pairs isolate the contradic-tion substitution, while a shuffled position-pair control, which pairs positions across prompts, separates within-prompt relational structure from a global state shift. A per-layer whitened proxy applies shrinkage-regularised ZCA whitening (Kessy, Lewin, and Strimmer 2018) to residual vectors before cosine similarity, with covariance shrunk towards the average-variance identity ( α=0 .1), and is used to test the directional pre-diction. The layerwise logit-lens rank trajectory (nostalgebraist 2020) of the coherent continuation provides a scale-free convergent measure, and a naturalistic Wikipedia prompt set probes out-of-template replication. 
+
+P4: post-training reweighting. The base/instruction-tuned pairs are compared through per-head operator signatures in the early and late halves of the network. We addi-tionally measure the Pearson correlation of induction scores for corresponding heads between variants. Preservation is assessed using Fisher’s z-transformation (Fisher 1915) with the one-sided hypotheses H0: ρ≤0.9 and H1: ρ> 0.9.
+
+Secondary analyses. Layerwise composition averages the per-head activation-level mea-sures by layer third on correctly predicted prompts. A targeted variant contrasts com-patible and incompatible tokens through the per-head DLA margin (indirect object vs. 12 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+subject in IOI, answer vs. distractor in factual recall). Cross-task stability correlates per-head DLA-based unification and suppression scores between task pairs, subject to the task exclusions above. 
+
+Decision rules and statistical testing. The following decision rules were fixed before the runs. Outcomes satisfying none of the stated SUPPORT , PARTIAL , or MIXED criteria are labelled AGAINST . P1 (signatures): SUPPORT requires the mean of the correspond-ing functional correlations to exceed all applicable baselines and the ablation-effect correlation to be positive; PARTIAL requires at least one applicable baseline to be ex-ceeded. The optimal k is the silhouette peak over k ∈ { 2, . . . , 7}. P2 (coupling): SUP - 
+
+> PORT
+
+requires alignment-head ablation to reduce summed suppressive contribution more than random-head ablation (Holm-corrected α=0 .05 ) and the reduction to be weaker on matched no-conflict prompts; PARTIAL requires only the first condition. P3 (contradiction sensitivity): SUPPORT requires a significant raw coherence gap in at least one layer third (Holm-corrected), with the largest absolute gap co-locating with the model’s peak alignment or suppression third (Section 5.2); MIXED denotes a significant but non-co-located gap. The directional prediction is scored separately on the whitened proxy, where SUPPORT requires a significant positive consistent-minus-contradictory gap. P4 (base vs. tuned): SUPPORT requires the late suppression-and-routing shift to exceed the early alignment shift and induction preservation to pass the one-sided test with threshold r=0 .9; PARTIAL requires one condition. Layerwise composition: SUPPORT 
+
+requires unification to peak in the middle or late third, routing in the late third, and suppression to increase from early to middle; PARTIAL requires two of three conditions. 
+
+Cross-task stability: SUPPORT requires mean cross-task r> 0.5 for both suppression and unification; PARTIAL requires the threshold for one operator. 
+
+Software and implementation. Experiments were run on NVIDIA RTX A6000 GPUs with Python 3.11.15. Core dependencies are NumPy 2.4.6 (Harris et al. 2020), Py-Torch 2.7.1 with CUDA 12.6 (Paszke et al. 2019), TransformerLens 3.5.1 (Nanda and Bloom 2022), Transformers 5.14.1 (Wolf et al. 2020), scikit-learn 1.9.0 (Pedregosa et al. 2011), SciPy 1.17.1 (Virtanen et al. 2020), and h5py 3.16.0. 
+
+5. Results and Discussion 5.1 Operator Signatures (P1) 
+
+CPC predicts reproducible functional information in the operator scores 
+
+(salign , s sup , s unify , s copy ) (Section 3.4), without assuming that heads form four disjoint operator classes. 
+
+Signature scores correlate with held-out functional roles. On held-out inputs, the suppres-sion, unification, and routing scores correlate with the matching activation-level role measures at mean Spearman r between 0.21 and 0.58 per model, positive throughout (Table 2). The copy score is the strongest single predictor ( r=0 .59 against the activation-level copy measure, versus 0.40 for the derived trace score). The correlation exceeds the random-projection and shuffled-relation baselines in all models, but the weight-magnitude baseline in only 10: in the Qwen family and two LLaMA variants, generic OV magnitude tracks activation-level roles as well as the structured scores do, suggesting that these families concentrate functional roles in their largest-norm heads . However, the align-ment weight score does not track the attention-based alignment measure ( r≈− 0.04 ); 13 Preprint                                                                                                                    
+
+> Model Sil. Best kpshuf W→Act rMagn. rBl. Abl.
+> GPT-2 Small 0.42 30.15 0.54 0.22 3/3 –GPT-2 Medium 0.46 3<0.01 0.54 0.11 3/3 ✓
+> GPT-2 Large 0.42 3<0.01 0.58 0.15 3/3 ✓
+> Pythia-410M 0.36 50.82 0.30 0.07 3/3 ✓
+> Pythia-1.4B 0.42 3<0.01 0.34 0.05 3/3 –Pythia-2.8B 0.36 6<0.01 0.33 0.10 3/3 –Qwen-1.5B 0.48 20.12 0.21 0.25 2/3 –Qwen-3B 0.50 2<0.01 0.23 0.37 2/3 –Gemma-2B 0.49 5<0.01 0.42 0.07 3/3 –LLaMA-1B 0.50 3<0.01 0.32 0.23 3/3 –LLaMA-3B 0.49 4<0.01 0.29 0.35 2/3 –Qwen-1.5B-It 0.48 20.12 0.21 0.24 2/3 –Gemma-2B-It 0.49 5<0.01 0.45 0.07 3/3 –LLaMA-1B-It 0.50 4<0.01 0.26 0.27 2/3 –LLaMA-3B-It 0.50 4<0.01 0.32 0.14 3/3 –
+
+Table 2 
+
+Operator-signature structure and functional validation (means over 5 seeds), computed on the four independent signature coordinates (alignment, suppression, unification, routing-copy). Sil.: silhouette at k=4 ; Best k: silhouette-optimal cluster count; pshuf : maximum column-shuffle null 
+
+p-value across seeds; W →Act r: held-out Spearman correlation between weight scores and activation-level role measures, against the weight-magnitude baseline (Magn.); Bl.: baselines beaten (random-projection, shuffled-relation, weight-magnitude); Abl.: positive rank correlation with held-out single-head ablation effects. The pre-specified P1 verdict is SUPPORT with 3/3 baselines and a positive ablation correlation (three models), PARTIAL otherwise (twelve). 
+
+evidence for the alignment role accordingly depends on the activation-level detection score. Predicting held-out single-head ablation effects is harder, with a positive rank correlation in 3 models. The pre-specified rule gives 3 SUPPORT and 12 PARTIAL verdicts, with no model AGAINST : the signatures carry functional role information beyond chance in every model and beyond naive magnitude in two-thirds , while reliable prediction of causal effect sizes remains the open gap. 
+
+Structured signatures appear across all families, but the optimal cluster count varies. Silhou-ette coefficients at k=4 range from 0.36 to 0.50 (Table 2). A two-cluster separation between QK- and OV-specialised heads provides a natural baseline, with higher k indi-cating finer role-dominant profiles. The preferred cluster count remains architecture-dependent: k=2 across the Qwen family, k=3 in the GPT-2 family, Pythia-1.4B, and LLaMA-1B, k=4 in the remaining LLaMAs, and k=5 or k=6 in Gemma, Pythia-410M, and Pythia-2.8B. No single cluster count describes all families, and no family cleanly reproduces a four-profile organisation. This supports the framework’s position that operator roles are graded properties of heads, not disjoint classes (Section 3.4): most heads mix addi-tive and subtractive OV modes, and the preferred count tracks how sharply a family separates its few specialised heads from this mixed background. 
+
+Cross-score structure exceeds marginal-preserving nulls in most models. Two nulls calibrate the silhouettes (Table 2; Section 4). Every model exceeds the Gaussian null ( p< 0.01 
+
+against 200 draws; mean ∆= + 0 .28 ), and 11 exceed the column-shuffle null at p< 0.01 
+
+in every seed (mean ∆= + 0 .09 , exceptions GPT-2 Small, Pythia-410M, and Qwen-1.5B variants). The joint structure is carried largely by the copy score’s coupling to the OV mode balance ( r(ssup , s copy )= −0.61 , r(sunify , s copy )=+0 .44 ): heads dominated by subtractive OV modes anti-copy token identity. Clusters track depth only partially: the 14 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+depth-separation ratio (between-band share of signature variance) is 0.02 –0.24 (mean 
+
+0.08 ), and regressing out layer position leaves substantial clusterability (best-k silhou-ette 0.35 –0.56 ), changing the preferred count in 5 models. Base and instruction-tuned variants produce nearly identical silhouettes (difference ≤0.001 ; best k unchanged ex-cept LLaMA-1B, 3→4), suggesting limited weight-space reorganisation. 
+
+The signatures separate QK specialisation from OV mode balance. PCA on the four standard-ised coordinates gives components of 49% , 27% , 18% , and 7% : no single axis domi-nates. Alignment is nearly uncorrelated with every other score ( |r| ≤ 0.07 ) and suppres-sion and unification are moderately anti-correlated ( r=−0.30 ). QK specialisation hence varies independently of an OV subspace in which mode balance and copying are cou-pled. Functionally, the suppression, unification, and copy scores predict their matching activation-level measures at r=+0 .21 , +0 .28 , and +0 .59 . The geometry separates the signature space into two nearly independent families, a QK axis and an OV subspace, and explains why the alignment role needs its own activation-level measure: the additive or subtractive character of an OV map is fixed by the weights, while QK structure acts only in combination with the input; the present weight-space alignment score does not recover the activation-level attention pattern .
+
+5.2 Layerwise Operator Composition 
+
+Following Section 3.3, which interprets depth as coherence refinement, CPC expects a depth-stratified distribution of operator roles: alignment early, unification and sup-pression mid-network, routing late. The discriminative prediction is that suppression should not follow the generic late-peaking pattern. Suppression peaks in the middle third for Pythia-1.4B and Pythia-2.8B, and in the early third for Pythia-410M, GPT-2 Large, and both Gemma variants; the decomposi-tion distinguishes operator timing beyond the generic late-layer bias. The full decision rule (unification peaking mid-or-late, routing late, suppression increasing early-to-mid) holds in 8 models; the remaining 7 satisfy two of three conditions. Gemma remains the most divergent family: suppression and alignment peak in the early third while routing peaks late, suggesting early suppressive processing followed by conventional late read-out. Operators distribute non-uniformly across depth and suppression is separable from the late-concentration baseline, but the three-stage partition (align/suppress/route) does not hold cleanly: unification and routing co-occur in the later part, in line with content becoming readout-aligned only late in the model, and suppression timing is architecture-dependent. The three-stage organisation of depth holds as a tendency, not a strict sequence. The targeted DLA variant (Section 4) concentrates the correct-token margin in the late third of both tasks (GPT-2 Small IOI: early 0.00 , late +0 .08 per head), with factual margins an order of magnitude smaller and no support for an early factual margin. 
+
+5.3 Causal Ablation of Operator-Ranked Heads 
+
+The analyses above measure association, not causation. We test if operator-ranked heads cause the predicted behaviour with the ablation design of Section 4 (Figure 5). Ablating the top unification heads reduces the correct-token logit in 10 models, exceeding the layer-matched control in 9 and the magnitude-matched control in 11. For routing, the copy-score ranking selects a head set largely distinct from unification (mean top-5 overlap 0.19 ), and ablating it reduces the correct-token logit in 14 models, exceeding both controls in 10. Magnitude and direction vary by family: Gemma-2B-15 Preprint −2.5 0.0 
+
+Δ IO logit  
+
+> GPT-2 S GPT-2 M GPT-2 L Pyth 410M Pyth 1.4B Pyth 2.8B Qwen 1.5B Qwen 3B Gemma 2B LLaMA 1B LLaMA 3B Qwen 1.5B-It Gemma 2B-It LLaMA 1B-It LLaMA 3B-It
+> Unification
+> −2.5 0.0
+
+Δ IO logit   
+
+> Routing
+> −1 01
+
+Δ IO logit   
+
+> Suppression
+> −2 02
+
+Δ IO logit  
+
+> Alignment
+> layer-matched control top-5 ablation
+
+Figure 5 
+
+Causal ablation of operator-ranked heads on held-out IOI (mean over 5 seeds). Filled dots: change in the correct-token logit when zero-ablating the top five heads per operator ranking (routing ranked by the embedding-space copy score, Equation 6); open diamonds: layer-matched random-head control. Dots left of zero indicate removed support for the correct answer. 
+
+It shows an IO-logit change of −3.45 for routing ablation (control: +0 .83 ), while GPT-2 Small’s unification ablation raises the logit ( +1 .27 ; control: −0.80 ), the clearest counter-example to the prediction, matching the backup behaviour documented for this circuit, where removing supportive heads recruits compensatory ones (Wang et al. 2023a). Its routing ablation behaves as predicted ( −0.89 ). For suppression, the result is weaker: the ablation exceeds the layer-matched control in only 5 models, and the predicted release of the wrong token appears in 7, with the margin moving oppositely or negligibly in the remaining 8. The weight score thus does not reliably isolate task-specific suppression (see Limitations): it measures a head’s total subtractive capacity, while which content that capacity acts on depends on the residual state. Task-agnostic structure does not guarantee task-relevant suppression. Re-ranking suppression and unification heads by the targeted DLA margin on the discovery split restores causal reliability on the held-out split: the margin moves in the predicted direction in all models for both rankings (mean +2 .07 suppression, −1.86 unification), and DLA-ranked unification ablation reduces the correct-token logit in every model (mean −1.08 ), at the cost of requiring task labels. Weight-based rankings suffice for routing and unification, while identifying task-specific suppression requires activation evidence. 
+
+5.4 Suppression–Alignment Coupling (P2) 
+
+CPC treats suppression as a response to conflicts exposed through alignment: ablating upstream alignment heads should reduce the summed suppressive contribution of downstream suppressor heads (design in Section 4). Table 3 reports the per-model results. Ablating alignment heads reduces the summed suppressive contribution on contradiction prompts in 12 models, and the reduction exceeds the layer-matched random-head control with Holm-corrected significance in 10 
+
+(95% bootstrap CIs exclude zero). The conflict-specificity control is rarely passed: only LLaMA-3.2-3B shows a reduction that is significantly weaker on matched no-conflict 16 Aljaafari, Freitas A Coherentist View of Transformer Computation                                                                    
+
+> Model ∆contra ∆rand. ∆no-conf. P2
+> GPT-2 Small -1.39 ∗-0.43 -1.74 PART .GPT-2 Medium +0.02 -0.01 -0.02 AGAI .GPT-2 Large -0.01 ∗-0.00 -0.02 PART .Pythia-410M -0.21 ∗-0.01 -0.33 PART .Pythia-1.4B -0.10 ∗-0.05 -0.14 PART .Pythia-2.8B -0.34 ∗+0.01 -0.44 PART .Qwen-1.5B -0.06 -0.08 -0.07 AGAI .Qwen-3B +0.02 -0.12 +0.46 AGAI .Gemma-2B -0.11 ∗-0.01 -0.11 PART .LLaMA-1B +0.06 -0.11 +0.02 AGAI .LLaMA-3B -0.29 ∗+0.09 -0.28 SUPP .Qwen-1.5B-It -0.09 -0.13 -0.13 AGAI .Gemma-2B-It -0.02 ∗-0.01 -0.02 PART .LLaMA-1B-It -0.15 ∗-0.08 -0.23 PART .LLaMA-3B-It -0.22 ∗-0.00 -0.23 PART .
+
+Table 3 
+
+Suppression-alignment coupling (mean over 5 seeds): change in summed suppressive contribution when ablating alignment heads on contradiction prompts ( ∗: exceeds the layer-matched random-head control, Holm-corrected p< 0.05 ), the random-head control, and the same intervention on matched no-conflict prompts. P2: pre-specified verdict (SUPP ./ PART ./ AGAI .). 
+
+prompts, and in the remaining significant models the same intervention reduces sup-pressive activity comparably with and without conflict. Under the pre-specified rule, the outcome is 1 SUPPORT , 9 PARTIAL , and 5 AGAINST . Alignment ablation thus propagates to downstream suppressor heads in most architectures, aligned with compositional coupling through the residual stream, but the propagation reflects generic upstream dependence, not conflict-specific signalling. The CPC prediction survives only in its weaker, non-selective form, with suppressor heads appearing to rely on a broad set of upstream writes instead of a dedicated conflict channel. Conflict-specific signalling, if present, is not separable by zero-ablation at this granularity. 
+
+5.5 Coherence Under Contradiction (P3) 
+
+The framework predicts that an explicit contradiction depresses the layerwise coherence proxy ˆC(ℓ)link (Equation 7), with the largest disruption near the layers where the model’s alignment and suppression activity concentrates (Section 5.2). Figure 6 shows the layerwise coherence gap for all 15 models. The gap is significant (paired t-test, Holm-corrected) in 14 models, but its sign is architecture-dependent : GPT-2 and Pythia show the predicted positive gap (magnitudes ∼10 −3 to 10 −2), whereas Gemma, Qwen, and three of the four LLaMA variants show a comparable negative gap: contra-dictory prompts raise pairwise similarity. The exception is LLaMA-3.2-3B, whose gaps are small and do not survive correction. LLaMA-1B-Instruct, the fourth variant, shows a positive gap and follows the GPT-2 and Pythia pattern. The pre-specified co-location rule gives 10 SUPPORT , 4 MIXED (both Gemma variants, GPT-2 Small, and Qwen-1.5B-Instruct), and 1 AGAINST . The directional prediction is assessed separately below. Co-location is exact and seed-stable in all Pythia models: the gap and the suppression profile peak in the same third at every size and seed. 
+
+Controls and robustness. Three analyses qualify the interpretation (designs in Section 4). First, lexically matched non-contradictory pairs produce gaps one to two orders of magnitude smaller in every model: the effect is driven by the contradiction substitution. 17 Preprint 0 5 10 −25 025                                  
+
+> Gap ( ×10 −3 )
+> GPT-2 S
+> 010 20
+> GPT-2 M
+> 010 20 30
+> GPT-2 L
+> 010 20
+> Pythia 410M
+> 010 20
+> Pythia 1.4B
+> 010 20 30 −25 025
+> Gap ( ×10 −3 )
+> Pythia 2.8B
+> 010 20
+> Qwen 1.5B
+> 010 20 30
+> Qwen 3B
+> 010 20
+> Gemma 2B
+> 0510 15
+> LLaMA 1B
+> 010 20
+> Layer
+> −25 025
+> Gap ( ×10 −3 )
+> LLaMA 3B
+> 010 20
+> Layer
+> Qwen 1.5B-It
+> 010 20
+> Layer
+> Gemma 2B-It
+> 0510 15
+> Layer
+> LLaMA 1B-It
+> 010 20
+> Layer
+> LLaMA 3B-It
+
+Figure 6 
+
+Layerwise coherence gap (consistent minus contradictory) for all 15 models. Lines give the mean over 5 seeds, bands the range across seeds, and colour the sign of the mean gap (navy positive, orange negative). GPT-2 and Pythia show the predicted positive gap, Gemma, Qwen, and three of the four LLaMA variants show negative gaps, and LLaMA-1B-Instruct follows the positive families. 
+
+Second, the shuffled position-pair control reproduces the raw gap almost exactly in 14 models: the raw proxy is a global state marker of contradiction, not a measure of within-prompt relational structure. Third, on the whitened proxy the directional prediction holds: the gap is positive in all models and significant in 14 (Holm-corrected, exception LLaMA-1B-Instruct). This attributes the raw sign flip to residual-stream covariance. One possible explanation is that contradiction engages a shared response component in these families, raising all pairwise similarities at once and masking the relational effect; removing the shared covariance recovers the predicted decrease in every family. As with the signature scores, a global measure mainly reflects the family’s overall geometry, and the predicted relational effect appears only once that shared structure is removed. The logit-lens measure agrees: contradiction worsens the rank of the coherent continuation in all models, with the largest changes concentrated in the late third. On the naturalistic Wikipedia set the gap is positive in 10, a weak out-of-template replication. The ascent conjecture (Equation 3) behaves consistently: on mixed prompts the proxy’s correlation with depth is non-negative in 14 models (Spearman ρ up to 0.93 in Qwen and LLaMA), although it is close to zero for GPT-2 Large and Pythia-410M and negative for GPT-2 Medium. 
+
+5.6 Base vs. Instruction-Tuned Models (P4) 
+
+CPC treats post-training as a possible reweighting of operator structure already present in the base model (Section 3.6). Table 4 summarises the four pairs. Induction-head matching passes the pre-specified preservation test in all four pairs ( r=0 .98 –1.00 ; one-sided test against r=0 .9, p< 0.05 ): induction-head score structure is strongly preserved after post-training, while a generic late concentration of the signature shift is not observed . Under the 18 Aljaafari, Freitas A Coherentist View of Transformer Computation                                 
+
+> Pair Late s+r Early a Ratio Ind. rPres. Verdict
+> Gemma-2B 0.006 0.017 0.33 0.982 yes PARTIAL
+> LLaMA-1B 0.060 0.051 1.18 0.992 yes SUPPORT
+> LLaMA-3B 0.055 0.040 1.36 0.991 yes SUPPORT
+> Qwen-1.5B 0.002 0.003 0.61 0.998 yes PARTIAL
+> Table 4
+> Base vs. instruction-tuned reweighting (mean over 5 seeds): late-half suppression-and-routing signature shift, early-half alignment shift, their ratio, the induction-head correlation between variants, and the outcome of the one-sided preservation test (threshold r=0 .9). Verdicts follow the pre-specified P4 rule.
+
+pre-specified operator-specific rule (Section 4), the late suppression-and-routing shift exceeds the early alignment shift in both LLaMA pairs but not in Gemma or Qwen, giv-ing two SUPPORT and two PARTIAL verdicts. The operator-specific reweighting predic-tion thus varies by family, while induction-head score preservation is consistent across the four pairs. The preservation result matches Section 3.6, where the KL constraint keeps post-training close to the pretrained computation: post-training adjusts behaviour while leaving the base circuits supporting in-context prediction intact. Where the ad-justment concentrates appears to follow each family’s depth organisation, echoing the architecture dependence seen throughout. 
+
+5.7 Cross-Task Operator Stability 
+
+If CPC operators are functional kinds, the same heads should play similar roles on dif-ferent tasks (design in Section 4). Suppression is consistently more task-stable than unifi-cation: mean cross-task suppression r=0 .68 versus unification r=0 .45 , with suppression exceeding 0.5 in 12 models and Gemma-2B the most stable (mean r=0 .99 ). Among the models evaluated on IOI and factual recall, unification stability is higher (mean r=0 .58 ). The three-task average underestimates cross-task consistency where greater-than has low accuracy. The prediction holds fully in 6 models (both operators r> 0.5), partially in 6, and fails on both operators in 3. The pattern suggests suppression is a consistent, task-general operation, while unification is more task-dependent . CPC currently treats both roles as equally task-general; the evidence supports this only for suppression. 
+
+Overall pattern. Across architectures, the most stable findings concern the functional operator axes, causal effects of routing and unification, cross-task suppression, and induction-score preservation. Architecture dependence is stronger in signature profile count, operator timing, raw contradiction geometry, and the location of post-training changes. Role-level regularities are consequently more stable across families than their depth and geometric expression. Role-level claims can be stated architecture-independently, while depth-level claims should be validated per family. 
+
+6. Related Work 
+
+Mechanistic interpretability. Circuit analysis provides CPC’s empirical basis, including QK/OV decomposition (Elhage et al. 2021), induction heads (Olsson et al. 2022; Chen et al. 2024), the IOI circuit (Wang et al. 2023a), copy suppression (McDougall et al. 2024), feedforward memories (Geva et al. 2021), and analyses of greater-than, factual recall, and component reuse (Hanna, Liu, and Variengien 2023; Geva et al. 2023; Meng et al. 19 Preprint 
+
+2022; Merullo, Eickhoff, and Pavlick 2024). Sparse autoencoders, feature circuits, and attribution graphs link interpretable features to causal subgraphs (Huben et al. 2024; Templeton et al. 2024; Marks et al. 2025; Lindsey et al. 2025). Path patching, automated circuit discovery, and edge-attribution methods locate the causally relevant components on which such findings rest (Goldowsky-Dill et al. 2023; Conmy et al. 2023; Hanna, Pezzelle, and Belinkov 2024), and the component types they identify are consistent with the operator roles CPC defines. Closest to CPC’s aim, modular-circuit approaches seek a global vocabulary of reusable task-agnostic subgraphs (He et al. 2025); CPC instead defines its vocabulary through graded functional roles tied to a coherence objective, under which heads may mix roles instead of partitioning into discrete modules. Cir-cuit analyses of logical reasoning find dedicated structure for propositional inference and syllogisms, including a middle-term suppression circuit (Hong et al. 2025; Kim, Valentino, and Freitas 2025); CPC treats such contradiction handling as one instance of its suppression role. The operators could be formalised as causal-abstraction vari-ables, with interchange interventions or causal scrubbing verifying proposed head-to-operator assignments (Geiger et al. 2025; Chan et al. 2022), or induced from circuit evidence through inductive-logic theory construction (Aljaafari, Carvalho, and Freitas 2026b). 
+
+Theoretical frameworks for in-context learning and post-training. Bayesian and algorithmic frameworks treat transformers as implicit inference machines or estimators (Xie et al. 2022; Akyürek et al. 2023; Von Oswald et al. 2023; Garg et al. 2022); CPC differs by naming the component-level functions that these frameworks abstract away: alignment, unification, suppression, and routing. Preference-training objectives change model be-haviour (Ouyang et al. 2022; Bai et al. 2022; Rafailov et al. 2023), and mechanistic studies suggest that fine-tuning can enhance or reweight existing circuits (Prakash et al. 2024; Jain et al. 2024; Ruscio, Khedouri, and Thompson 2026), with instruction-conditioned suppression (Wang et al. 2023b) providing a circuit-level example for CPC’s reweight-ing interpretation. Boleda (2025) combines symbolic-like and continuous computation, compatible with parts of CPC but without a central role for contradiction suppression. 
+
+7. Conclusion 
+
+We proposed Coherentist Probabilistic Compositionalism (CPC), an interpretive frame-work that describes transformer computation through four operator roles involved in coherence construction and readout, and evaluated its predictions on 15 models from five architecture families. The vocabulary identifies axes of head variation that hold across architectures, while the number of separable signature profiles, the depth at which suppression peaks, and the way contradictions register all depend on the fam-ily. CPC provides a shared vocabulary for transformer mechanisms and post-training effects, with predictions that should be stated conditionally on architecture. Verifying the operator assignments through causal abstraction and encoding the task-generality asymmetry between suppression and unification are natural next steps. 
+
+Limitations 
+
+CPC is an interpretive framework, not a mechanistic proof: the four operators are not claimed to be exhaustive, the treatment covers decoder-only English models, and the predicted failure regimes (ambiguity overload, depth overload, preference distortion) remain untested. The main measurement caveat concerns the coherence proxy, which 20 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+conflates semantic coherence with residual-stream geometry: the raw gap’s sign re-verses between families and is reproduced by cross-prompt position pairs, so it is a global state marker of contradiction, not a measure of within-prompt relational struc-ture (Section 5.5). Whitening and the logit-lens trajectory provide convergent directional support, but a proxy that isolates relational coherence pair-specifically remains future work, and the ascent conjecture (Equation 3) is weak or absent in the GPT-2 family and Pythia-410M. The suppression evidence is the weakest. The weight score measures total subtrac-tive OV mode weight, a property of the matrix, and does not reliably isolate task-specific suppression (layer-matched control exceeded in 5/15 models); task-targeted DLA rank-ings restore causal reliability (Section 5.3) but require task labels. The evaluation rests on synthetic tasks with a single naturalistic negation set (gap positive in 10/15 models), greater-than covers only the six GPT-2 and Pythia models for tokeniser reasons, and the base-vs-tuned comparison covers four pairs. The coupling test (P2) uses the validated IOI circuit only for GPT-2 Small, with automatically detected heads elsewhere, and its conflict-specificity control passed only in LLaMA-3.2-3B, so the P2 verdicts rest on the random-head control; other operationalisations of “the suppressed alternative” remain untested. 
+
+Ethics Statement 
+
+CPC is a mechanistic interpretive framework. Its predictions concern internal represen-tations, not system deployment. We do not anticipate direct misuse risks from this an-alytical vocabulary; however, improved understanding of suppression and instruction-following circuits may inform both the design and circumvention of safety mechanisms. 
+
+Appendix A: The CPC Functional and Coherentism 
+
+The CPC functional in Equation 2 adapts the constraint-based view of Section 2.2 to transformer computation. Grounded fragments (m, g ) play the role of elements in the constraint formulation, while the relational structure G specifies how these fragments can be connected. The local score Scoh (g | m, G ) rewards a grounding that fits the developing interpretation, corresponding to positive compatibility between elements. The kernel κ penalises incompatible grounded fragments, corresponding to negative constraints. The additional coverage term rewards interpretations that incorporate more of the available input, preventing coherence from being increased simply by retaining a small set of mutually compatible fragments. Three differences separate CPC from the discrete constraint-satisfaction formula-tion. First, support is graded: fragments receive continuous compatibility scores instead of belonging only to accepted or rejected sets. Second, the problem is incremental. New linguistic material is introduced token by token, so the interpretation must be updated as the context grows. Third, the optimisation is implicit. CPC does not claim that a transformer explicitly represents Equation 2 or solves a constraint-satisfaction problem. The stronger claim is instead formulated as the coherence-ascent conjecture of Section 3.3: computation across depth can be interpreted as repeated refinement of the current representational state towards configurations with greater coherence (see Figure 3). The four CPC operators describe functional contributions to this refinement. 
+
+Alignment identifies candidate relations between fragments. Unification incorporates mutually compatible information into the developing representation. Suppression re-21 Preprint 
+
+duces support for incompatible alternatives, paralleling inhibitory competition in the constraint-satisfaction formulation. Routing then carries the resulting information to positions where it can affect the readout. The correspondence is functional, not an identification of linguistic coherence theories with transformer mechanisms. This connection also clarifies the status of the empirical coherence proxy in Equation 7. Similarity between internal representations measures one possible conse-quence of compatible information becoming more closely represented, and is related to semantic-similarity approaches to discourse coherence. It does not measure the complete functional in Equation 2. In particular, it does not directly identify discourse relations, entity continuity, or incompatibility between specific groundings. For this reason, CPC treats the proxy as an empirical diagnostic of representational coherence, while the coherence state and functional provide the broader theoretical construct. The distinction between measurement and construct in this account parallels the levels of description in physical theory. Circuit-level measurements are analogous to instrument readings, which sit close to the observable. The operator labels and the functional are analogous to constructs such as energy and entropy, which organise many observations at a higher level of description and are not read from any single measurement. 
+
+Appendix B: Formal Definitions 
+
+A fragment m=( U, F, C ) specifies a position set U ⊆ { 1, . . . , T }, a content label F from a finite vocabulary of semantic and syntactic types, and compositional constraints C. A grounding is a partial function g : U ⇀ V into the relational graph G=( V, E ), admissible when it satisfies C. Two grounded fragments are compatible when their assignments agree on all shared positions and jointly satisfy both constraint sets. The contradiction kernel κ ≥ 0 is symmetric with κ=0 on compatible pairs. The local score Scoh (g | m, G ) ∈
+
+(0 , 1] is a content-compatibility factor times the geometric mean of pairwise relational compatibilities ψ g(u), g (u′); for nodes with activation vectors, ψ = ϵψ + (1 − ϵψ ) 1 + cos( rv , r v′ )/2, bounded in (0 , 1] .
+
+Appendix C: Task Definitions 
+
+The three tasks of Section 4 share a next-token format: the context is a token sequence 
+
+c = {tok 1, tok 2, . . . , tok n}, the model predicts its continuation, and an example enters the experiments only when the prediction is correct under the task’s criterion. Multi-token targets are scored on their first token. 
+
+Indirect Object Identification (IOI). This task requires the model to predict the indirect object of a transfer clause, given a context that introduces two names and repeats one of them as the subject, as in When Mary and John went to the store, John gave a drink to . Formally, the context c introduces names A and B and repeats B
+
+as the subject of the final clause, and the model seeks to produce the non-repeated name 
+
+A such that 
+
+A = arg max  
+
+> t∈V
+
+P (t | c), (C.1) where V denotes the model’s vocabulary. Predictions are deemed correct only if the predicted token matches the first token of A. The repeated name B provides the wrong-22 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+token contrast for the logit margin used in the ablation experiments (Section 4). Prompts instantiate 15 template frames over a pool of roughly 100 names, with places and objects varied. 
+
+Greater-Than Comparison. This task requires the model to complete a year interval con-sistently, given a context that states a start year and the century prefix of the end year, as in The war lasted from the year 1732 to the year 17 . With YY the two-digit suffix of the start year, the model seeks a two-digit continuation ˆy such that 
+
+ˆy = arg max  
+
+> t∈V
+
+P (t | c), YY < val(ˆ y) ≤ 99 , (C.2) where val( ·) reads a two-digit token as a number. Predictions are deemed correct only if the predicted token is a single-token two-digit year satisfying the inequality; this requirement excludes nine models from the task (Section 4). Examples are drawn from an exhaustive noun-by-year grid over the years 1102–1898, excluding suffixes 00 and 99. 
+
+Factual Recall. This task requires the model to predict the object of a subject-relation pair, given a natural-language prompt that expresses the subject and the relation, as in 
+
+The Eiffel Tower is located in the city of . Formally, the model seeks to produce the gold object o such that 
+
+o = arg max  
+
+> t∈V
+
+P (t | c). (C.3) Prompts and gold objects come from the CounterFact set (Meng et al. 2022), and predic-tions are deemed correct only if the predicted token matches the first token of o.
+
+Appendix D: Parameter and Threshold Choices 
+
+The constants below were fixed in the experiment plan before the confirmatory runs, and none was tuned against held-out outcomes. Choices fall into three classes: values preregistered with an explicit rationale, values matched to validated reference circuits, and conventional defaults. Every stochastic component (clustering, null draws, boot-straps, control-head samples) runs at seeds {0, . . . , 4}, with means and ranges reported across seeds. 
+
+Prompt counts and splits. The target of 500 model-correct examples per task balances stable per-head averages and paired tests against the cost of running 15 models with 5 seeds under interventions; candidate prompts are oversampled fourfold before correct-ness filtering. The 50/50 discovery/held-out split gives selection and verdict computa-tion equal power, and hashing at generation time fixes the assignment so no example migrates between splits. The contradiction pool of 3,854 pairs exhausts the unique fills of the generation templates; 500 pairs per run matches the per-task target. 
+
+Weight-space analysis. The cluster range k ∈ { 2, . . . , 7} brackets the hypothesised four-role organisation from both sides, with k=2 the minimal nontrivial split, letting the silhouette peak fall below, at, or above four instead of being forced towards it. Fifty 
+
+k-means restarts guard against local minima, and assignments are stable across the five seeds. The two silhouette nulls use 200 draws each, giving a p-value resolution of 1/201 ,23 Preprint 
+
+finer than the reporting level of p< 0.01 ; the 100 random weight projections give the 95% baseline quantile a resolution of one draw. 
+
+Activation measures. DLA is computed on the model’s top-10 predicted tokens so that attribution is restricted to the model’s own candidate set, where logit contributions bear on the prediction; widening the set dilutes the measure over tokens the model never considers. All layerwise quantities are computed at every layer; the layer third is the unit of summary and testing, not of measurement (per-layer profiles appear in Figure 6). Testing at thirds serves three purposes. The CPC predictions are phase-level claims (early alignment, mid-network unification and suppression, late routing); the test resolution matches the claim. Thirds are comparable across architectures whose depths range from 12 to 36 layers, where individual layer indices do not align. Three tests per model also keep the Holm family small, whereas per-layer testing would inflate it by an order of magnitude and reduce power. The whitening shrinkage of α=0 .1 addresses the rank-deficient per-batch covariance (positions are far fewer than dimensions); the value is a fixed conventional intensity, and the eigenvalue floor guards numerical stability. 
+
+Head-set sizes. The detection sizes for P2 mirror the validated GPT-2 Small IOI sets: five alignment heads (three duplicate-token plus two previous-token) and six suppressors (four S-inhibition plus two negative name-movers), so that automatic detection selects sets of the same size as the reference circuit. The causal ablations remove the top five heads per operator, applied uniformly: the set is comparable to identified circuit sizes and remains a small fraction of the head budget of even the smallest model (five of GPT-2 Small’s 144 heads). The ablation-effect correlation uses the union of the top-10 heads per operator because a correlation over all heads would be dominated by the large bulk of heads with near-zero scores and near-zero effects. 
+
+Statistical thresholds. Holm correction at α=0 .05 within each experiment family follows convention. Permutation tests and bootstrap intervals use 10,000 draws, placing the Monte Carlo standard error near 0.002 at p ≈ 0.05 . The preservation margin r=0 .9 was preregistered and uses a pre-specified preservation threshold of r = 0 .9: shared variance must exceed 0.81 , so preservation is never inferred from a non-significant difference. The cross-task stability threshold r> 0.5 is a conventional boundary for a moderate-to-strong correlation, fixed before analysis. 
+
+Appendix E: Contradiction Prompt Templates 
+
+Contradiction prompts are drawn from a pool of 3,854 globally unique consis-tent/contradictory pairs, generated once (seed 42). Each pair shares identical surface structure up to a key substitution that introduces or removes a contradiction. Pool 1 (3,333 pairs) instantiates four named-agent IOI-style frame pairs over a 100-name pool with place and object slots. Pool 2 (221 pairs) covers seven contradiction types (factual, temporal, causal, logical, narrative, spatial, quantitative) via parameterised generators. Pool 3 (300 pairs) crosses 20 agent-competence frames with 15 role pairs, without name placeholders. A representative pool-1 pair contrasts “When A and B went to the store, 
+
+A stayed in the store, and A gave a drink to” with the same frame containing “ A imme-diately left the store”; the other pools follow the same substitution pattern. A separate naturalistic set pairs Wikipedia lead sentences with pronoun-coreferent continuations, negating the first sentence’s copula in the contradictory variant; it provides the out-of-template replication of Section 5.5. 24 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+Acknowledgments 
+
+This is an example of acknowlwdgment. This is a sample paper presented jost for the coding of different elements of a document in L ATEX using this package file. We thank all readers. 
+
+References 
+
+Akyürek, Ekin, Dale Schuurmans, Jacob Andreas, Tengyu Ma, and Denny Zhou. 2023. What learning algorithm is in-context learning? investigations with linear models. In The Eleventh International Conference on Learning Representations .Aljaafari, Nura, Danilo Carvalho, and Andre Freitas. 2026a. Emergence and localisation of semantic role circuits in LLMs. In Findings of the Association for Computational Linguistics: ACL 2026 , pages 39402–39433, Association for Computational Linguistics, San Diego, California, United States. Aljaafari, Nura, Danilo S. Carvalho, and André Freitas. 2026b. From circuit evidence to mechanistic theory: An inductive logic approach. arXiv preprint arXiv:2605.21303 .Bai, Yuntao, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, Azalia Mirhoseini, Cameron McKinnon, Carol Chen, Catherine Olsson, Christopher Olah, Danny Hernandez, Dawn Drain, Deep Ganguli, Dustin Li, Eli Tran-Johnson, Ethan Perez, Jamie Kerr, Jared Mueller, Jeffrey Ladish, Joshua Landau, Kamal Ndousse, Kamile Lukosuite, Liane Lovitt, Michael Sellitto, Nelson Elhage, Nicholas Schiefer, Noemi Mercado, Nova DasSarma, Robert Lasenby, Robin Larson, Sam Ringer, Scott Johnston, Shauna Kravec, Sheer El Showk, Stanislav Fort, Tamera Lanham, Timothy Telleen-Lawton, Tom Conerly, Tom Henighan, Tristan Hume, Samuel R. Bowman, Zac Hatfield-Dodds, Ben Mann, Dario Amodei, Nicholas Joseph, Sam McCandlish, Tom Brown, and Jared Kaplan. 2022. Constitutional ai: Harmlessness from ai feedback. arXiv preprint arXiv:2212.08073 .Biderman, Stella, Hailey Schoelkopf, Quentin Anthony, Herbie Bradley, Kyle O’Brien, Eric Hallahan, Mohammad Aflah Khan, Shivanshu Purohit, USVSN Sai Prashanth, Edward Raff, Aviya Skowron, Lintang Sutawika, and Oskar Van Der Wal. 2023. Pythia: a suite for analyzing large language models across training and scaling. In Proceedings of the 40th International Conference on Machine Learning , ICML’23, JMLR.org. Boleda, Gemma. 2025. LLMs as a synthesis between symbolic and distributed approaches to language. In Findings of the Association for Computational Linguistics: EMNLP 2025 , pages 9365–9379, Association for Computational Linguistics, Suzhou, China. BonJour, Laurence. 1985. The Structure of Empirical Knowledge . Harvard University Press, Cambridge, MA. Bricken, Trenton, Adly Templeton, Joshua Batson, Brian Chen, Adam Jermyn, Tom Conerly, Nicholas L. Turner, Cem Anil, Carson Denison, Amanda Askell, et al. 2023. Towards monosemanticity: Decomposing language models with dictionary learning. Transformer Circuits Thread . https: //transformer-circuits.pub/2023/monosemantic-features/index.html .Chan, Lawrence, Adrià Garriga-Alonso, Nicholas Goldowsky-Dill, Ryan Greenblatt, Jenny Nitishinskaya, Ansh Radhakrishnan, Buck Shlegeris, and Nate Thomas. 2022. Causal scrubbing: A method for rigorously testing interpretability hypotheses. AI Alignment Forum. 
+
+https://www.alignmentforum.org/posts/JvZhhzycHu2Yd57RN/ causal-scrubbing-a-method-for-rigorously-testing .Chen, Siyu, Heejune Sheen, Tianhao Wang, and Zhuoran Yang. 2024. Unveiling induction heads: Provable training dynamics and feature learning in transformers. In Advances in Neural Information Processing Systems , volume 37, pages 66479–66567, Curran Associates, Inc. 
+
+https://proceedings.neurips.cc/paper_files/paper/2024/file/ 7aae9e3ec211249e05bd07271a6b1441-Paper-Conference.pdf .Conmy, Arthur, Augustine N. Mavor-Parker, Aengus Lynch, Stefan Heimersheim, and Adrià Garriga-Alonso. 2023. Towards automated circuit discovery for mechanistic interpretability. In Proceedings of the 37th International Conference on Neural Information Processing Systems , NIPS ’23, Curran Associates Inc., Red Hook, NY, USA. Dubey, Abhimanyu, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan, and et al. 2024. The llama 3 herd of models. Efron, B. 1979. Bootstrap methods: Another look at the jackknife. The Annals of Statistics ,7(1):1–26. 
+
+25 Preprint Elhage, Nelson, Tristan Hume, Catherine Olsson, Nicholas Schiefer, Tom Henighan, Shauna Kravec, Zac Hatfield-Dodds, Robert Lasenby, Dawn Drain, Carol Chen, Roger Grosse, Sam McCandlish, Jared Kaplan, Dario Amodei, Martin Wattenberg, and Christopher Olah. 2022. Toy models of superposition. Transformer Circuits Thread .
+
+https://transformer-circuits.pub/2022/toy_model/index.html .Elhage, Nelson, Neel Nanda, Catherine Olsson, Tom Henighan, Nicholas Joseph, Ben Mann, Amanda Askell, Yuntao Bai, Anna Chen, Tom Conerly, Nova DasSarma, Dawn Drain, Deep Ganguli, Zac Hatfield-Dodds, Danny Hernandez, Andy Jones, Jackson Kernion, Liane Lovitt, Kamal Ndousse, Dario Amodei, Tom Brown, Jack Clark, Jared Kaplan, Sam McCandlish, and Chris Olah. 2021. A mathematical framework for transformer circuits. Transformer Circuits Thread . https://transformer-circuits.pub/2021/framework/index.html .Fillmore, Charles J. 1982. Frame semantics. In The Linguistic Society of Korea, editor, Linguistics in the Morning Calm . Hanshin Publishing Company, Seoul, pages 111–137. Fisher, R. A. 1915. Frequency distribution of the values of the correlation coefficient in samples from an indefinitely large population. Biometrika , 10(4):507–521. Garg, Shivam, Dimitris Tsipras, Percy S Liang, and Gregory Valiant. 2022. What can transformers learn in-context? a case study of simple function classes. Advances in neural information processing systems , 35:30583–30598. Geiger, Atticus, Duligur Ibeling, Amir Zur, Maheep Chaudhary, Sonakshi Chauhan, Jing Huang, Aryaman Arora, Zhengxuan Wu, Noah Goodman, Christopher Potts, and Thomas Icard. 2025. Causal abstraction: A theoretical foundation for mechanistic interpretability. Journal of Machine Learning Research , 26(83):1–54. Geva, Mor, Jasmijn Bastings, Katja Filippova, and Amir Globerson. 2023. Dissecting recall of factual associations in auto-regressive language models. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , pages 12216–12235, Association for Computational Linguistics, Singapore. Geva, Mor, Roei Schuster, Jonathan Berant, and Omer Levy. 2021. Transformer feed-forward layers are key-value memories. In Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing , pages 5484–5495, Association for Computational Linguistics, Online and Punta Cana, Dominican Republic. Goldowsky-Dill, Nicholas, Chris MacLeod, Lucas Sato, and Aryaman Arora. 2023. Localizing model behavior with path patching. arXiv preprint arXiv:2304.05969 .Grosz, Barbara J., Aravind K. Joshi, and Scott Weinstein. 1995. Centering: A framework for modeling the local coherence of discourse. Computational Linguistics , 21(2):203–225. Halliday, M. A. K. and Ruqaiya Hasan. 1976. Cohesion in English . Number 9 in English Language Series. Longman, London. Hanna, Michael, Ollie Liu, and Alexandre Variengien. 2023. How does gpt-2 compute greater-than? interpreting mathematical abilities in a pre-trained language model. In 
+
+Proceedings of the 37th International Conference on Neural Information Processing Systems , NIPS ’23, Curran Associates Inc., Red Hook, NY, USA. Hanna, Michael, Sandro Pezzelle, and Yonatan Belinkov. 2024. Have faith in faithfulness: Going beyond circuit overlap when finding model mechanisms. In First Conference on Language Modeling . https://openreview.net/forum?id=TZ0CCGDcuT .Harris, Charles R., K. Jarrod Millman, Stéfan J. van der Walt, Ralf Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, Julian Taylor, Sebastian Berg, Nathaniel J. Smith, Robert Kern, Matti Picus, Stephan Hoyer, Marten H. van Kerkwijk, Matthew Brett, Allan Haldane, Jaime Fernández del Río, Mark Wiebe, Pearu Peterson, Pierre Gérard-Marchant, Kevin Sheppard, Tyler Reddy, Warren Weckesser, Hameer Abbasi, Christoph Gohlke, and Travis E. Oliphant. 2020. Array programming with numpy. Nature , 585:357–362. He, Yinhan, Wendy Zheng, Yushun Dong, Yaochen Zhu, Chen Chen, and Jundong Li. 2025. Towards global-level mechanistic interpretability: A perspective of modular circuits of large language models. In Proceedings of the 42nd International Conference on Machine Learning ,volume 267 of Proceedings of Machine Learning Research , pages 22865–22880, PMLR. Hobbs, Jerry R. 1979. Coherence and coreference. Cognitive Science , 3(1):67–90. Holm, Sture. 1979. A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics , 6(2):65–70. Hong, Guan Zhe, Nishanth Dikkala, Enming Luo, Cyrus Rashtchian, Xin Wang, and Rina Panigrahy. 2025. A implies b: Circuit analysis in LLMs for propositional logical reasoning. In 
+
+The Thirty-ninth Annual Conference on Neural Information Processing Systems .
+
+26 Aljaafari, Freitas A Coherentist View of Transformer Computation 
+
+https://openreview.net/forum?id=M0U8wUow8c .Hu, Jennifer, Jon Gauthier, Peng Qian, Ethan Wilcox, and Roger P. Levy. 2020. A systematic assessment of syntactic generalization in neural language models. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 1725–1744, Association for Computational Linguistics, Online. Huben, Robert, Hoagy Cunningham, Logan Smith, Aidan Ewart, and Lee Sharkey. 2024. Sparse autoencoders find highly interpretable features in language models. In International Conference on Learning Representations , volume 2024, pages 7827–7845. Jain, Samyak, Robert Kirk, Ekdeep Singh Lubana, Robert P. Dick, Hidenori Tanaka, Edward Grefenstette, Tim Rocktäschel, and David Krueger. 2024. Mechanistically analyzing the effects of fine-tuning on procedurally defined tasks. In ICLR 2024 Workshop on Secure and Trustworthy Large Language Models .Jurafsky, Daniel and James H. Martin. 2026. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition with Language Models , 3rd edition. Online manuscript released August 19, 2026. Kaufman, Leonard and Peter Rousseeuw. 1990. Finding Groups in Data: An Introduction To Cluster Analysis .Kessy, Agnan, Alex Lewin, and Korbinian Strimmer. 2018. Optimal whitening and decorrelation. 
+
+The American Statistician , 72(4):309 –314. Kim, Geonhee, Marco Valentino, and Andre Freitas. 2025. Reasoning circuits in language models: A mechanistic interpretation of syllogistic inference. In Findings of the Association for Computational Linguistics: ACL 2025 , pages 10074–10095, Association for Computational Linguistics, Vienna, Austria. Li, Jiwei and Eduard Hovy. 2014. A model of coherence based on distributed sentence representation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 2039–2048, Association for Computational Linguistics, Doha, Qatar. Lindsey, Jack, Wes Gurnee, Emmanuel Ameisen, Brian Chen, Adam Pearce, Nicholas L. Turner, Craig Citro, David Abrahams, Shan Carter, Basil Hosmer, Jonathan Marcus, Michael Sklar, Adly Templeton, Trenton Bricken, Callum McDougall, Hoagy Cunningham, Thomas Henighan, Adam Jermyn, Andy Jones, Andrew Persic, Zhenyi Qi, T. Ben Thompson, Sam Zimmerman, Kelley Rivoire, Thomas Conerly, Chris Olah, and Joshua Batson. 2025. On the biology of a large language model. Transformer Circuits Thread . https: //transformer-circuits.pub/2025/attribution-graphs/biology.html .MacQueen, J. B. 1967. Some methods for classification and analysis of multivariate observations. In Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability ,volume 1, pages 281–297, University of California Press. Mann, William C. and Sandra A. Thompson. 1988. Rhetorical structure theory: Toward a functional theory of text organization. Text - Interdisciplinary Journal for the Study of Discourse ,8(3):243–281. Manning, Christopher D., Kevin Clark, John Hewitt, Urvashi Khandelwal, and Omer Levy. 2020. Emergent linguistic structure in artificial neural networks trained by self-supervision. 
+
+Proceedings of the National Academy of Sciences , 117(48):30046–30054. Marks, Samuel, Can Rager, Eric J Michaud, Yonatan Belinkov, David Bau, and Aaron Mueller. 2025. Sparse feature circuits: Discovering and editing interpretable causal graphs in language models. In The Thirteenth International Conference on Learning Representations .McDougall, Callum Stuart, Arthur Conmy, Cody Rushing, Thomas McGrath, and Neel Nanda. 2024. Copy suppression: Comprehensively understanding a motif in language model attention heads. In Proceedings of the 7th BlackboxNLP Workshop: Analyzing and Interpreting Neural Networks for NLP , pages 337–363, Association for Computational Linguistics, Miami, Florida, US. Meng, Kevin, David Bau, Alex Andonian, and Yonatan Belinkov. 2022. Locating and editing factual associations in gpt. In Proceedings of the 36th International Conference on Neural Information Processing Systems , NIPS ’22, Curran Associates Inc., Red Hook, NY, USA. Merullo, Jack, Carsten Eickhoff, and Ellie Pavlick. 2024. Circuit component reuse across tasks in transformer language models. In The Twelfth International Conference on Learning Representations (ICLR) .Nanda, Neel and Joseph Bloom. 2022. TransformerLens. 
+
+https://github.com/TransformerLensOrg/TransformerLens .
+
+27 Preprint Nanda, Neel, Lawrence Chan, Tom Lieberum, Jess Smith, and Jacob Steinhardt. 2023. Progress measures for grokking via mechanistic interpretability. In The Eleventh International Conference on Learning Representations . https://openreview.net/forum?id=9XFSbDPmdW .nostalgebraist. 2020. Interpreting GPT: the logit lens. https://www.lesswrong.com/ posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens . LessWrong. Olsson, Catherine, Nelson Elhage, Neel Nanda, Nicholas Joseph, Nova DasSarma, Tom Henighan, Ben Mann, Amanda Askell, Yuntao Bai, Anna Chen, Tom Conerly, Dawn Drain, Deep Ganguli, Zac Hatfield-Dodds, Danny Hernandez, Scott Johnston, Andy Jones, Jackson Kernion, Liane Lovitt, Kamal Ndousse, Dario Amodei, Tom Brown, Jack Clark, Jared Kaplan, Sam McCandlish, and Chris Olah. 2022. In-context learning and induction heads. Transformer Circuits Thread . https://transformer-circuits.pub/2022/ in-context-learning-and-induction-heads/index.html .Ouyang, Long, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell, Peter Welinder, Paul Christiano, Jan Leike, and Ryan Lowe. 2022. Training language models to follow instructions with human feedback. In Proceedings of the 36th International Conference on Neural Information Processing Systems , NIPS ’22, Curran Associates Inc., Red Hook, NY, USA. Paszke, Adam, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban Desmaison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu Fang, Junjie Bai, and Soumith Chintala. 2019. Pytorch: An imperative style, high-performance deep learning library. In Advances in Neural Information Processing Systems ,volume 32, Curran Associates, Inc. Pearson, Karl. 1901. On lines and planes of closest fit to systems of points in space. The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science , 2(11):559–572. Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer, Ron Weiss, Vincent Dubourg, Jake Vanderplas, Alexandre Passos, David Cournapeau, Matthieu Brucher, Matthieu Perrot, and Édouard Duchesnay. 2011. Scikit-learn: Machine learning in Python. Journal of Machine Learning Research , 12:2825–2830. Prakash, Nikhil, Tamar Shaham, Tal Haklay, Yonatan Belinkov, and David Bau. 2024. Fine-tuning enhances existing mechanisms: A case study on entity tracking. In International Conference on Learning Representations (ICRL) , volume 2024, pages 8057–8082. Qwen, :, An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tianyi Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, and Zihan Qiu. 2025. Qwen2.5 technical report. Radford, Alec, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. OpenAI Blog .Rafailov, Rafael, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, and Chelsea Finn. 2023. Direct preference optimization: your language model is secretly a reward model. In Proceedings of the 37th International Conference on Neural Information Processing Systems , NIPS ’23, Curran Associates Inc., Red Hook, NY, USA. Ruscio, Valeria, Eli-Shaoul Khedouri, and Keiran Thompson. 2026. Where pretraining writes and alignment reads: The asymmetry of transformer weight space. arXiv preprint arXiv:2605.16600 .Team, Gemma, Morgane Riviere, Shreya Pathak, Pier Giuseppe Sessa, Cassidy Hardin, Surya Bhupatiraju, Léonard Hussenot, Thomas Mesnard, Bobak Shahriari, Alexandre Ramé, Johan Ferret, Peter Liu, Pouya Tafti, Abe Friesen, Michelle Casbon, Sabela Ramos, Ravin Kumar, Charline Le Lan, Sammy Jerome, Anton Tsitsulin, Nino Vieillard, Piotr Stanczyk, Sertan Girgin, Nikola Momchev, Matt Hoffman, Shantanu Thakoor, Jean-Bastien Grill, Behnam Neyshabur, Olivier Bachem, Alanna Walton, Aliaksei Severyn, Alicia Parrish, Aliya Ahmad, Allen Hutchison, Alvin Abdagic, Amanda Carl, Amy Shen, Andy Brock, Andy Coenen, Anthony Laforge, Antonia Paterson, Ben Bastian, Bilal Piot, Bo Wu, Brandon Royal, Charlie Chen, Chintu Kumar, Chris Perry, Chris Welty, Christopher A. Choquette-Choo, Danila Sinopalnikov, David Weinberger, Dimple Vijaykumar, Dominika Rogozi ´ nska, Dustin 
+
+28 Aljaafari, Freitas A Coherentist View of Transformer Computation Herbison, Elisa Bandy, Emma Wang, Eric Noland, Erica Moreira, Evan Senter, Evgenii Eltyshev, Francesco Visin, Gabriel Rasskin, Gary Wei, Glenn Cameron, Gus Martins, Hadi Hashemi, Hanna Klimczak-Pluci ´ nska, Harleen Batra, Harsh Dhand, Ivan Nardini, Jacinda Mein, Jack Zhou, James Svensson, Jeff Stanway, Jetha Chan, Jin Peng Zhou, Joana Carrasqueira, Joana Iljazi, Jocelyn Becker, Joe Fernandez, Joost van Amersfoort, Josh Gordon, Josh Lipschultz, Josh Newlan, Ju yeong Ji, Kareem Mohamed, Kartikeya Badola, Kat Black, Katie Millican, Keelin McDonell, Kelvin Nguyen, Kiranbir Sodhia, Kish Greene, Lars Lowe Sjoesund, Lauren Usui, Laurent Sifre, Lena Heuermann, Leticia Lago, Lilly McNealus, Livio Baldini Soares, Logan Kilpatrick, Lucas Dixon, Luciano Martins, Machel Reid, Manvinder Singh, Mark Iverson, Martin Görner, Mat Velloso, Mateo Wirth, Matt Davidow, Matt Miller, Matthew Rahtz, Matthew Watson, Meg Risdal, Mehran Kazemi, Michael Moynihan, Ming Zhang, Minsuk Kahng, Minwoo Park, Mofi Rahman, Mohit Khatwani, Natalie Dao, Nenshad Bardoliwalla, Nesh Devanathan, Neta Dumai, Nilay Chauhan, Oscar Wahltinez, Pankil Botarda, Parker Barnes, Paul Barham, Paul Michel, Pengchong Jin, Petko Georgiev, Phil Culliton, Pradeep Kuppala, Ramona Comanescu, Ramona Merhej, Reena Jana, Reza Ardeshir Rokni, Rishabh Agarwal, Ryan Mullins, Samaneh Saadat, Sara Mc Carthy, Sarah Cogan, Sarah Perrin, Sébastien M. R. Arnold, Sebastian Krause, Shengyang Dai, Shruti Garg, Shruti Sheth, Sue Ronstrom, Susan Chan, Timothy Jordan, Ting Yu, Tom Eccles, Tom Hennigan, Tomas Kocisky, Tulsee Doshi, Vihan Jain, Vikas Yadav, Vilobh Meshram, Vishal Dharmadhikari, Warren Barkley, Wei Wei, Wenming Ye, Woohyun Han, Woosuk Kwon, Xiang Xu, Zhe Shen, Zhitao Gong, Zichuan Wei, Victor Cotruta, Phoebe Kirk, Anand Rao, Minh Giang, Ludovic Peran, Tris Warkentin, Eli Collins, Joelle Barral, Zoubin Ghahramani, Raia Hadsell, D. Sculley, Jeanine Banks, Anca Dragan, Slav Petrov, Oriol Vinyals, Jeff Dean, Demis Hassabis, Koray Kavukcuoglu, Clement Farabet, Elena Buchatskaya, Sebastian Borgeaud, Noah Fiedel, Armand Joulin, Kathleen Kenealy, Robert Dadashi, and Alek Andreev. 2024. Gemma 2: Improving open language models at a practical size. Templeton, Adly, Tom Conerly, Jonathan Marcus, Jack Lindsey, Trenton Bricken, Brian Chen, Adam Pearce, Craig Citro, Emmanuel Ameisen, Andy Jones, Hoagy Cunningham, Nicholas L. Turner, Callum McDougall, Monte MacDiarmid, Alex Tamkin, Esin Durmus, Tristan Hume, Francesco Mosconi, C. Daniel Freeman, Theodore R. Sumers, Edward Rees, Joshua Batson, Adam Jermyn, Shan Carter, Chris Olah, and Tom Henighan. 2024. Scaling monosemanticity: Extracting interpretable features from Claude 3 Sonnet. Transformer Circuits Thread . https: //transformer-circuits.pub/2024/scaling-monosemanticity/index.html .Tenney, Ian, Dipanjan Das, and Ellie Pavlick. 2019. BERT rediscovers the classical NLP pipeline. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 4593–4601, Association for Computational Linguistics, Florence, Italy. Thagard, Paul. 2000. Coherence in Thought and Action . The MIT Press. Thagard, Paul and Karsten Verbeurgt. 1998. Coherence as constraint satisfaction. Cognitive Science , 22(1):1–24. Virtanen, Pauli, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C. J. Carey, ˙ Ilhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. 2020. SciPy 1.0: Fundamental algorithms for scientific computing in python. Nature Methods , 17:261–272. Von Oswald, Johannes, Eyvind Niklasson, Ettore Randazzo, João Sacramento, Alexander Mordvintsev, Andrey Zhmoginov, and Max Vladymyrov. 2023. Transformers learn in-context by gradient descent. In International Conference on Machine Learning , pages 35151–35174, PMLR. Wang, Kevin Ro, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob Steinhardt. 2023a. Interpretability in the wild: a circuit for indirect object identification in GPT-2 small. In 
+
+The Eleventh International Conference on Learning Representations .Wang, Tony, Miles Kai, Kaivalya Hariharan, and Nir Shavit. 2023b. Forbidden facts: An investigation of competing objectives in llama 2. In Socially Responsible Language Modelling Research .Wei, Jason, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, Ed H. Chi, Tatsunori Hashimoto, 
+
+29 Preprint Oriol Vinyals, Percy Liang, Jeff Dean, and William Fedus. 2022. Emergent abilities of large language models. Transactions on Machine Learning Research .
+
+https://openreview.net/forum?id=yzkSU5zdwD .Wolf, Thomas, Lysandre Debut, Victor Sanh, Julien Chaumond, Clement Delangue, Anthony Moi, Pierric Cistac, Tim Rault, Remi Louf, Morgan Funtowicz, Joe Davison, Sam Shleifer, Patrick von Platen, Clara Ma, Yacine Jernite, Julien Plu, Canwen Xu, Teven Le Scao, Sylvain Gugger, Mariama Drame, Quentin Lhoest, and Alexander Rush. 2020. Transformers: State-of-the-art natural language processing. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations , pages 38–45, Association for Computational Linguistics, Online. Xie, Sang Michael, Aditi Raghunathan, Percy Liang, and Tengyu Ma. 2022. An explanation of in-context learning as implicit bayesian inference. In International Conference on Learning Representations .Zheng, Zifan, Yezhaohui Wang, Yuxin Huang, Shichao Song, Mingchuan Yang, Bo Tang, Feiyu Xiong, and Zhiyu Li. 2025. Attention heads of large language models. Patterns , 6(2):101176. 
+
+30
