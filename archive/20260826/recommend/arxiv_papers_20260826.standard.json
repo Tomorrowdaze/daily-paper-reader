@@ -1,0 +1,91 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-26T20:50:39.940404+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.22034v1",
+      "source": "arxiv",
+      "title": "Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation",
+      "abstract": "Mechanistic interpretability has identified transformer circuits, but lacks a shared vocabulary for describing how their functions compose across tasks and architectures. We introduce Coherentist Probabilistic Compositionalism (CPC), an interpretive framework that grounds transformer computation in coherentist theories of interpretation and describes it through four operator roles. Alignment identifies candidate relations, unification integrates supporting information, suppression reduces incompatible alternatives, and routing carries selected information to the output. Across 15 models from five architecture families, the suppression, unification, and routing weight-space signatures correlate with held-out activation-level role measures above random baselines. Suppression is more stable across tasks than unification. Ablating alignment heads reduces downstream suppressive activity beyond a random-head control in 10 models, but similar effects on no-conflict prompts indicate a general upstream dependency, not contradiction-specific coupling. Explicit contradictions significantly shift a layerwise coherence proxy in 14 models; after removing shared residual covariance, the gap has the predicted direction in every model. Base and instruction-tuned variants preserve induction-head score structure ($r{\\geq}0.98$) without a consistent shift of operator signatures towards later layers. These results support CPC as a shared vocabulary for comparing transformer mechanisms while showing that their depth and geometric expression remain architecture-specific.",
+      "authors": [
+        "Nura Aljaafari",
+        "Andre Freitas"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-22T16:29:20+00:00",
+      "link": "https://arxiv.org/pdf/2608.22034v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "mechanistic interpretability framework for transformer computation",
+      "llm_evidence_cn": "Transformer计算的机械可解释性框架",
+      "llm_evidence": "Transformer计算的机械可解释性框架",
+      "canonical_evidence": "Transformer计算的机械可解释性框架",
+      "llm_tldr_en": "Introduces a framework for interpreting transformer circuits, potentially applicable to conflict prediction models.",
+      "llm_tldr_cn": "引入了解释Transformer电路的框架，可能适用于冲突预测模型。",
+      "llm_tldr": "引入了解释Transformer电路的框架，可能适用于冲突预测模型。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.17795v1",
+      "source": "arxiv",
+      "title": "TraceSQL: Traceable Answerability Estimation for Reference-Free Text-to-SQL Verification",
+      "abstract": "Text-to-SQL systems are commonly evaluated using ground-truth SQL queries or reference execution results, but such supervision is unavailable at inference time in real-world deployments. This creates a critical verification problem: given only a user question, database context, and generated SQL, can a system estimate whether the generated query is likely to correctly answer the question? Recent approaches use LLMs as judge or specialized agents to inspect generated SQL, but their decisions can be difficult to trace. Outcome Reward Models (ORMs) address this by learning from execution-labeled candidate SQLs and assigning correctness scores to unseen queries, yet they still provide limited visibility into the signals behind each verification. To address this limitation, we propose TraceSQL, a lightweight and traceable verification model built on explicit diagnostic features. TraceSQL combines 67 features capturing question ambiguity, question requirements, question-schema-SQL consistency, SQL structure, and intent alignment. These signals remain available for examining which factors influence each prediction and for tracing decisions back to diagnostic evidence. On BIRD development databases, TraceSQL achieves 66.47% F1 and 64.48% ROC-AUC, compared with 61.87% F1 and 58.26% ROC-AUC for the GradeSQL-7B ORM baseline on the same generated-SQL evaluation. Feature attribution further shows that the model relies on both semantic grounding and deterministic SQL-structure signals. These results show that SQL verification can be performed with a lightweight learned model while retaining feature-level evidence for inspecting and diagnosing its predictions.",
+      "authors": [
+        "Neelesh Kumar Shukla",
+        "Debasmita Panda",
+        "Srutanik Bhaduri",
+        "Aditya Banerjee",
+        "Viji Krishnamurthy"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-18T13:56:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.17795v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "traceable answerability estimation for verification",
+      "llm_evidence_cn": "用于验证的可追溯答案估计",
+      "llm_evidence": "用于验证的可追溯答案估计",
+      "canonical_evidence": "用于验证的可追溯答案估计",
+      "llm_tldr_en": "Proposes TraceSQL for traceable verification of model outputs, a method relevant to explainable AI systems.",
+      "llm_tldr_cn": "提出了用于模型输出可追溯验证的TraceSQL，是与可解释人工智能相关的方法。",
+      "llm_tldr": "提出了用于模型输出可追溯验证的TraceSQL，是与可解释人工智能相关的方法。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
