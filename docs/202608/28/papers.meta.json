@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-28",
+  "date": "2026-08-28",
+  "generated_at": "2026-08-28T03:45:46",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/28/2608.22034v1-align-unify-suppress-route-a-coherentist-view-of-transformer-computation",
+      "section": "quick",
+      "title_en": "Align, Unify, Suppress, Route: A Coherentist View of Transformer Computation",
+      "authors": "Nura Aljaafari, Andre Freitas",
+      "date": "2026-08-22",
+      "pdf": "https://arxiv.org/pdf/2608.22034v1",
+      "score": "6.5",
+      "evidence": "引入了针对Transformer计算角色的机械可解释性框架",
+      "tldr": "本文提出基于一致性解释的CPC框架，将Transformer计算分解为对齐、统一、抑制与路由四类算子，并在5类架构15个模型上以权重特征与激活指标验证；结果显示抑制更稳健，矛盾会显著改变层级一致性，且该框架为跨模型比较提供共享词汇。",
+      "tags": "query:q5",
+      "abstract_en": "Mechanistic interpretability has identified transformer circuits, but lacks a shared vocabulary for describing how their functions compose across tasks and architectures. We introduce Coherentist Probabilistic Compositionalism (CPC), an interpretive framework that grounds transformer computation in coherentist theories of interpretation and describes it through four operator roles. Alignment identifies candidate relations, unification integrates supporting information, suppression reduces incompatible alternatives, and routing carries selected information to the output. Across 15 models from five architecture families, the suppression, unification, and routing weight-space signatures correlate with held-out activation-level role measures above random baselines. Suppression is more stable across tasks than unification. Ablating alignment heads reduces downstream suppressive activity beyond a random-head control in 10 models, but similar effects on no-conflict prompts indicate a general upstream dependency, not contradiction-specific coupling. Explicit contradictions significantly shift a layerwise coherence proxy in 14 models; after removing shared residual covariance, the gap has the predicted direction in every model. Base and instruction-tuned variants preserve induction-head score structure ($r{\\geq}0.98$) without a consistent shift of operator signatures towards later layers. These results support CPC as a shared vocabulary for comparing transformer mechanisms while showing that their depth and geometric expression remain architecture-specific.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/28/biorxiv-10-64898-2026-08-15-744687-v1-biomarker-fidelity-score---a-quantitative-framework-for-individual-level-validation-of-explainability-methods-in-3d-alzheimers-disease-mri-classification",
+      "section": "quick",
+      "title_en": "Biomarker Fidelity Score - A Quantitative Framework for Individual-Level Validation of Explainability Methods in 3D Alzheimer's Disease MRI Classification",
+      "authors": "Lepcha, D. C., Ali, A., Martin, S. A., Syed-Abdul, S.",
+      "date": "2026-08-20",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.08.15.744687v1.full.pdf",
+      "score": "6.5",
+      "evidence": "个体层面可解释性方法验证的定量框架",
+      "tldr": "针对AD 3D MRI可解释性在个体层面缺乏量化评估的问题，提出生物标志物忠实度评分（BFS），以注意力图与十三个AD相关ROI的重叠度衡量，并在三种架构、五种方法与两大数据集验证；结果显示Integrated Gradients最优、GradCAM++最差，形成可外部复现的临床可用标准。",
+      "tags": "query:q5",
+      "abstract_en": "Explainability methods applied to deep learning models for Alzheimer's disease neuroimaging produce attribution maps that vary substantially across methods and architectures, yet no validated quantitative framework exists for determining which method most faithfully localises attribution signal within established AD biomarker anatomy at the individual subject level. Existing validation approaches rely on group-level comparisons or qualitative visual inspection, leaving individual-level biomarker alignment uncharacterised. We introduce the Biomarker Fidelity Score (BFS), a quantitative tool measuring spatial overlap between individual-level 3D explainability attention maps and atlas-registered AD-relevant neuroimaging ROIs across thirteen anatomically defined structures including hippocampus, entorhinal cortex, amygdala, and parahippocampal gyrus. Five explainability methods (GradCAM++, Integrated Gradients, DeepSHAP, LRP, ScoreCAM) were benchmarked across three volumetric architectures (3D ResNet-18, DenseNet-121, Swin-UNETR) on 327 balanced ADNI-3 subjects. Integrated Gradients achieved the highest BFS across all architectures while GradCAM++ consistently showed the lowest biomarker alignment (all p<0.001, Friedman test). The complete BFS pipeline replicated these rankings without retraining on 207 independent OASIS-3 subjects, with maximum absolute difference of 0.0005 across all fifteen method-architecture combinations and Spearman rank correlation of 0.964 between cohort rankings. By offering an externally validated, individual-level, biomarker-grounded quantitative standard, BFS equips clinicians and AI developers with practical guidance for selecting trustworthy explainability methods in AD neuroimaging.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/28/biorxiv-10-64898-2026-08-15-745056-v1-boyuegrn-zero-shot-causal-discovery-of-directed-gene-regulatory-networks-from-single-cell-transcriptomes-via-amortized-inference-over-synthetic-structural-causal-models",
+      "section": "quick",
+      "title_en": "BoYueGRN: Zero-shot causal discovery of directed gene regulatory networks from single-cell transcriptomes via amortized inference over synthetic structural causal models",
+      "authors": "Wu, J., Shen, Y.-Q.",
+      "date": "2026-08-20",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.08.15.745056v1.full.pdf",
+      "score": "6.5",
+      "evidence": "该论文提出了一个使用结构因果模型进行机制分析的零样本因果发现框架。",
+      "tldr": "BoYueGRN用合成因果模型的摊销推断，零样本从单细胞转录组推断定向GRN；一次前向输出边与方向，TF滑窗融合覆盖全转录组；在BEELINE与Perturb‑seq表现优异，支撑跨疾病图谱级调控动态重建。",
+      "tags": "query:q6",
+      "abstract_en": "Gene regulatory network (GRN) inference from single-cell RNA-seq conventionally relies on per-dataset optimization. Existing tools must be refit for every new dataset, and the majority fail to infer causal regulatory directions. Here we present BoYueGRN, an amortized causal discovery framework trained exclusively on 10,000 synthetic structural causal models. For any unseen dataset, a single forward pass returns edge probabilities and regulatory directions, while TF-centric sliding windows with asymmetric fusion extend this fixed-size model to full-transcriptome coverage. BoYueGRN demonstrates strong zero-shot performance across BEELINE benchmarks. On two independent genome-wide CRISPRi Perturb-seq screens, directional accuracy on retained edges reaches 0.86 and 0.95. Reconstructed cell-type- and stage-specific GRN dynamics across five diseases spanning more than 270,000 cells yield experimentally testable biological hypotheses. BoYueGRN reframes directed GRN inference as a train-once, reuse-across-datasets paradigm. By decoupling network reconstruction from per-dataset optimization, this paradigm opens the door to systematic, atlas-scale mapping of regulatory dynamics across human diseases.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

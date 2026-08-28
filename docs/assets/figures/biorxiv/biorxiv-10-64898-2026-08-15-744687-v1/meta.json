@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-001.webp",
+      "caption": "Table 3 BFS summary, mean plus/minus standard deviation for all model-method combinations",
+      "page": 11,
+      "index": 1,
+      "width": 873,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-002.webp",
+      "caption": "Fig. 6. Radar charts summarising multi-dimensional performance profiles for each XAI method across three model architectures. (A) ResNet-18, (B) DenseNet-121, (C) Swin-UNETR. Each radar chart has three axes representing biomarker alignment (mean BFS, normalised), consistency (inverse of BFS standard deviation, normalised), and diagnostic specificity (Kruskal-Wallis eta-squared, normalised). The area enclosed by each polygon reflects overall method quality across all three dimensions. Integrated Gradients shows the most balanced high-performance profile for CNN architectures. GradCAM++ occupies a distinct low-alignment, high-consistency region reflecting reliable but clinically uninformative attention maps. LRP achieves high biomarker alignment but reduced consistency, indicating subject-level variability masked by competitive mean performance.",
+      "page": 15,
+      "index": 2,
+      "width": 946,
+      "height": 334
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-003.webp",
+      "caption": "Figure 7 presents representative saliency map overlays for matched CN, MCI, and AD subjects from the ResNet 18 model, comparing the best performing method, Integrated Gradients, against the worst performing method, GradCAM++, on the same subjects and model predictions.",
+      "page": 15,
+      "index": 3,
+      "width": 662,
+      "height": 750
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-004.webp",
+      "caption": "Table 2 Model classification performance summary",
+      "page": 10,
+      "index": 4,
+      "width": 946,
+      "height": 636
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-005.webp",
+      "caption": "Fig. 5. Mean normalised attribution mass within each of the thirteen AD biomarker ROIs for all five XAI methods across three model architectures on the ADNI 3 cohort. (A) ResNet-18, (B) DenseNet-121, (C) Swin-UNETR. ROIs are ordered along the x-axis by decreasing BFS weight from hippocampus (weight 1.00) to banks of the superior temporal sulcus (weight 0.40). Grey shading highlights the two highest-weight AD biomarker regions: hippocampus and entorhinal cortex. Error bars represent standard error of the mean across 327 subjects. Integrated Gradients and DeepSHAP show consistently higher attribution mass in medial temporal ROIs compared to GradCAM++, consistent with the overall BFS rankings. LRP shows a broader attribution distribution across posterior cortical regions including precuneus and posterior cingulate cortex.",
+      "page": 14,
+      "index": 5,
+      "width": 946,
+      "height": 819
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-006.webp",
+      "caption": "Fig. 8. Side-by-side comparison of mean Biomarker Fidelity Score heatmaps for the ADNI-3 primary cohort (left panel, n=327) and the OASIS-3 external validation cohort (right panel, n=207), across all fifteen model-method combinations. Rows represent XAI methods (GradCAM++, ScoreCAM, Integrated Gradients, DeepSHAP, LRP) and columns represent model architectures (ResNet-18, DenseNet-121, Swin-UNETR). Colour intensity reflects mean BFS, using an identical colour scale for both panels to facilitate direct visual comparison. The near-identical pattern of colour intensity and numerical values across both panels illustrates the high fidelity of BFS ranking replication across independent cohorts, scanner protocols, and populations, with a maximum absolute difference of 0.0005 and a Spearman rank correlation of 0.964 between cohorts.",
+      "page": 17,
+      "index": 6,
+      "width": 943,
+      "height": 490
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-007.webp",
+      "caption": "Table 4 Kruskal-Wallis test results for BFS diagnostic class specificity",
+      "page": 12,
+      "index": 7,
+      "width": 869,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-008.webp",
+      "caption": "Fig. 3. Heatmap of mean Biomarker Fidelity Score (BFS) for all fifteen model-method combinations. Rows represent XAI methods and columns represent model architectures. Colour intensity reflects mean BFS across 327 subjects, ranging from low alignment (light yellow) to high alignment (dark red-orange). Bold cell borders indicate the highest-performing method per architecture. Integrated Gradients achieves the highest BFS across all three architectures. GradCAM++ consistently occupies the lowest BFS range regardless of architecture.",
+      "page": 12,
+      "index": 8,
+      "width": 944,
+      "height": 660
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-009.webp",
+      "caption": "Fig. 1. Overview of the Biomarker Fidelity Score pipeline. (A) ADNI-3 dataset comprising 327 balanced subjects (109 CN, 109 MCI, 109 AD) acquired at 3T field strength. (B) Preprocessing pipeline comprising brain extraction, MNI152 registration, z-score normalisation, and resampling to 96x96x96 voxels at 1.5mm isotropic resolution, applied identically to both cohorts. (C) Three model architectures trained on ADNI-3 under five-fold stratified crossvalidation. (D) Five post-hoc XAI methods applied to each architecture, producing 4,905 volumetric attribution maps. (E) BFS computation as weighted F1 overlap between binarised attribution maps and thirteen atlas-registered AD biomarker ROIs. (F) Statistical analysis framework including Friedman and Kruskal-Wallis tests across all modelmethod combinations. (G) External validation arm applying the identical trained model checkpoints, preprocessing, XAI generation, and BFS scoring pipeline to an independent cohort of 207 OASIS-3 subjects (69 CN, 69 MCI, 69 AD), without retraining or fine-tuning, confirming replication of the method rankings established in Panels A through F. Brain illustration in panel A is schematic only and does not represent actual study data.",
+      "page": 9,
+      "index": 9,
+      "width": 946,
+      "height": 391
+    },
+    {
+      "url": "assets/figures/biorxiv/biorxiv-10-64898-2026-08-15-744687-v1/fig-010.webp",
+      "caption": "Table 5 Comparison of mean Biomarker Fidelity Score between ADNI-3 and OASIS-3 cohorts",
+      "page": 16,
+      "index": 10,
+      "width": 873,
+      "height": 636
+    }
+  ]
+}
