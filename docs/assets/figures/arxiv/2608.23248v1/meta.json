@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.23248v1/fig-001.webp",
+      "caption": "Fig. 3: Baseline performance of off-the-shelf LLMs on the Synthetic Medical Reports and MIMIC ICU Notes benchmarks. The top legend row shows models with reasoning capabilities, evaluated using OpenRouter’s default settings. For gemini-2.5-flash and claude-sonnet-5, these defaults did not enable reasoning. Due to computational costs, three models were evaluated on a 4% subset of the MIMIC ICU Notes test set and are shown with reduced opacity.",
+      "page": 7,
+      "index": 1,
+      "width": 588,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2608.23248v1/fig-002.webp",
+      "caption": "Fig. 4: Effect of fine-tuning on future querying accuracy with respect to the accuracy of proprietary models.",
+      "page": 8,
+      "index": 2,
+      "width": 648,
+      "height": 259
+    }
+  ]
+}
