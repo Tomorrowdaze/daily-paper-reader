@@ -1,60 +1,18 @@
 {
   "mode": "standard",
-  "generated_at": "2026-08-29T02:35:14.309991+00:00",
+  "generated_at": "2026-08-29T21:22:22.184999+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
     "deep_divecandidates": 0,
     "deep_cap": 6,
     "deep_selected": 0,
-    "quick_candidates": 4,
+    "quick_candidates": 1,
     "quick_skim_target": 11,
-    "quick_selected": 4
+    "quick_selected": 1
   },
   "deep_dive": [],
   "quick_skim": [
-    {
-      "id": "2608.23248v1",
-      "source": "arxiv",
-      "title": "Future Querying: Can LLMs Serve as Implicit Medical World Models?",
-      "abstract": "Traditional clinical prediction models rely on task-specific pipelines and curated, structured data, which scale poorly and underutilize unstructured text. To address this, we introduce future querying, a paradigm that probes whether large language models (LLMs) can function as implicit medical world models by evaluating their ability to answer time-indexed clinical queries about a patient's future. Our framework operates on unstructured clinical documentation using endpoint-agnostic training, enabling a single model to answer diverse clinical queries over patient trajectories without manual feature engineering or task-specific retraining. We show that small, locally fine-tuned open-weight models can match or approach larger proprietary systems, making the framework suitable for privacy-preserving, on-premise deployment. Evaluated on a new synthetic medical reports dataset and real ICU notes from the MIMIC-IV dataset, our results provide encouraging evidence that LLMs can capture aspects of clinical dynamics.",
-      "authors": [
-        "Siri Willems",
-        "James Butterworth",
-        "Lore Goetschalckx",
-        "Peter Vrancx",
-        "Philippe Modard",
-        "Elke Giets",
-        "Ludovic Denoyer"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "published": "2026-08-24T13:41:12+00:00",
-      "link": "https://arxiv.org/pdf/2608.23248v1",
-      "tags": [
-        "keyword:内战预测",
-        "query:内战预测"
-      ],
-      "llm_score": 7.0,
-      "llm_evidence_en": "future querying paradigm for clinical prediction using unstructured text and implicit world models",
-      "llm_evidence_cn": "使用非结构化文本和隐式世界模型进行临床预测的未来查询范式",
-      "llm_evidence": "使用非结构化文本和隐式世界模型进行临床预测的未来查询范式",
-      "canonical_evidence": "使用非结构化文本和隐式世界模型进行临床预测的未来查询范式",
-      "llm_tldr_en": "Introduces future querying to evaluate LLMs as implicit medical world models for clinical prediction.",
-      "llm_tldr_cn": "引入未来查询范式，评估大语言模型作为隐式医疗世界模型进行临床预测的能力。",
-      "llm_tldr": "引入未来查询范式，评估大语言模型作为隐式医疗世界模型进行临床预测的能力。",
-      "llm_tags": [
-        "query:q5"
-      ],
-      "matched_query_tag": "query:q5",
-      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
-      "matched_requirement_id": "req-5",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "7"
-    },
     {
       "id": "biorxiv-10-64898-2026-08-20-745848-v1",
       "source": "biorxiv",
@@ -80,106 +38,20 @@
         "keyword:内战预测",
         "query:内战预测"
       ],
-      "llm_score": 6.5,
-      "llm_evidence_en": "Weakly supervised framework linking prediction to interpretable morphological sub-populations",
-      "llm_evidence_cn": "将预测与可解释的形态学子群体联系起来的弱监督框架",
-      "llm_evidence": "将预测与可解释的形态学子群体联系起来的弱监督框架",
-      "canonical_evidence": "将预测与可解释的形态学子群体联系起来的弱监督框架",
-      "llm_tldr_en": "Develops an interpretable prediction framework for medical risk, offering a transferable XAI methodology.",
-      "llm_tldr_cn": "开发了一个可解释的医疗风险预测框架，提供了一种可迁移的可解释人工智能方法。",
-      "llm_tldr": "开发了一个可解释的医疗风险预测框架，提供了一种可迁移的可解释人工智能方法。",
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable prediction framework for risk assessment",
+      "llm_evidence_cn": "用于风险评估的可解释预测框架",
+      "llm_evidence": "用于风险评估的可解释预测框架",
+      "canonical_evidence": "用于风险评估的可解释预测框架",
+      "llm_tldr_en": "Develops Pheno-MYCN, a framework for interpretable risk prediction in neuroblastoma using morphological data.",
+      "llm_tldr_cn": "开发了Pheno-MYCN框架，利用形态学数据对神经母细胞瘤进行可解释的风险预测。",
+      "llm_tldr": "开发了Pheno-MYCN框架，利用形态学数据对神经母细胞瘤进行可解释的风险预测。",
       "llm_tags": [
         "query:q5"
       ],
       "matched_query_tag": "query:q5",
       "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
       "matched_requirement_id": "req-5",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2608.22062v1",
-      "source": "arxiv",
-      "title": "Search Broadly, Seek Evidence on Both Sides, Decide Narrowly: Evidence-Admissible GraphRAG for Longitudinal Clinical Event Verification",
-      "abstract": "Longitudinal clinical event-relation verification determines whether a patient record supports a specified relation among two or more clinical events. This task is challenging because evidence is distributed across structured records, notes, laboratory trajectories, encounters, and time, while negation, temporal mismatch, repeated documentation, and conflicting findings can make retrieved information appear relevant without establishing the relation.   We present MedEventGraph-RAG, an evidence-admissible framework that represents event occurrences in a patient-specific graph and links each occurrence to source evidence, including structured rows, note spans, timestamps, and numerical trajectories. Given a verification query specifying events, relation, and clinical scope, the graph guides discovery of candidate event chains and retrieves evidence from both supporting and contradicting sides. A query-specific evidence contract filters information by patient identity, scope, occurrence binding, and source traceability before a separate assessor determines supported, conflicting, refuted, or insufficient outcomes.   Across ten protocols on i2b2, n2c2, MIMIC-IV, and LUNGUAGE, MedEventGraph-RAG achieves balanced accuracies of 78.6, 67.3, and 96.8 on temporal, medication-adverse-event, and recorded-order verification, improving over the strongest matched baselines by 26.9, 4.9, and 30.4 points. Under evidence masking, it reaches 92.2 balanced accuracy with no false-support predictions. When intermediate events are hidden, it recovers complete source-traceable event chains in 57.9% of i2b2 and 70.0% of LUNGUAGE cases. These results show that separating broad evidence discovery from narrow evidence-admissible assessment improves longitudinal clinical verification and reduces unsupported conclusions.",
-      "authors": [
-        "Xingtao Lin",
-        "Yubo Feng",
-        "Weixin Liu",
-        "Hangqi Ren",
-        "Junchao Zhou",
-        "Caiwan Sun",
-        "You Chen"
-      ],
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI"
-      ],
-      "published": "2026-08-22T18:06:10+00:00",
-      "link": "https://arxiv.org/pdf/2608.22062v1",
-      "tags": [
-        "keyword:内战预测",
-        "query:内战预测"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "evidence-admissible framework for event verification and linking to source evidence",
-      "llm_evidence_cn": "用于事件验证和链接到源证据的可采信证据框架",
-      "llm_evidence": "用于事件验证和链接到源证据的可采信证据框架",
-      "canonical_evidence": "用于事件验证和链接到源证据的可采信证据框架",
-      "llm_tldr_en": "Presents MedEventGraph-RAG for clinical event verification using an evidence-admissible graph framework.",
-      "llm_tldr_cn": "提出MedEventGraph-RAG框架，通过可采信证据图进行临床事件验证。",
-      "llm_tldr": "提出MedEventGraph-RAG框架，通过可采信证据图进行临床事件验证。",
-      "llm_tags": [
-        "query:q5"
-      ],
-      "matched_query_tag": "query:q5",
-      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
-      "matched_requirement_id": "req-5",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2608.26386v1",
-      "source": "arxiv",
-      "title": "Co-Evolving Structured Knowledge and Reasoning in Language Models",
-      "abstract": "Retrieval-augmented methods improve factual accuracy by grounding language models in external knowledge, but retrieving over unstructured text often introduces irrelevant context and offers limited control over the retrieved information. Structured knowledge bases offer a more controllable alternative, yet they are expensive to construct and often brittle to reason over. To address these limitations, we propose KBevo: a co-evolving framework that jointly learns to construct a structured knowledge base and reason over it for knowledge-intensive question answering. By optimizing both components end-to-end with QA outcome rewards, our method enables reasoning success to directly improve the quality of the constructed knowledge base. This leads to larger, better-connected knowledge structures with higher answer reachability, while also improving compositional factual reasoning and controllability compared to standard retrieval baselines.",
-      "authors": [
-        "Ryan Thomas Noonan",
-        "Linxi Zhao",
-        "Menghan Xu",
-        "Akanksha Sarkar",
-        "Mihir Mishra",
-        "Dongyoung Go",
-        "Kilian Q. Weinberger",
-        "Yoav Artzi",
-        "Jennifer J. Sun"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "published": "2026-08-26T20:18:35+00:00",
-      "link": "https://arxiv.org/pdf/2608.26386v1",
-      "tags": [
-        "keyword:内战预测",
-        "query:内战预测"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "co-evolving structured knowledge and reasoning for improved factual accuracy and control",
-      "llm_evidence_cn": "协同演化结构化知识和推理，以提高事实准确性和可控性",
-      "llm_evidence": "协同演化结构化知识和推理，以提高事实准确性和可控性",
-      "canonical_evidence": "协同演化结构化知识和推理，以提高事实准确性和可控性",
-      "llm_tldr_en": "Proposes KBevo to jointly learn structured knowledge base construction and reasoning for question answering.",
-      "llm_tldr_cn": "提出KBevo框架，共同学习结构化知识库构建和问答推理。",
-      "llm_tldr": "提出KBevo框架，共同学习结构化知识库构建和问答推理。",
-      "llm_tags": [
-        "query:q6"
-      ],
-      "matched_query_tag": "query:q6",
-      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
-      "matched_requirement_id": "req-6",
       "selection_source": "fresh_fetch",
       "quick_tier": "6"
     }

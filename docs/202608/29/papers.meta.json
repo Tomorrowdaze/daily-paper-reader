@@ -1,24 +1,9 @@
 {
   "label": "2026-08-29",
   "date": "2026-08-29",
-  "generated_at": "2026-08-29T02:37:05",
-  "count": 4,
+  "generated_at": "2026-08-29T21:23:49",
+  "count": 1,
   "papers": [
-    {
-      "paper_id": "202608/29/2608.23248v1-future-querying-can-llms-serve-as-implicit-medical-world-models",
-      "section": "quick",
-      "title_en": "Future Querying: Can LLMs Serve as Implicit Medical World Models?",
-      "authors": "Siri Willems, James Butterworth, Lore Goetschalckx, Peter Vrancx, Philippe Modard, Elke Giets, Ludovic Denoyer",
-      "date": "2026-08-24",
-      "pdf": "https://arxiv.org/pdf/2608.23248v1",
-      "score": "7.0",
-      "evidence": "使用非结构化文本和隐式世界模型进行临床预测的未来查询范式",
-      "tldr": "为破解传统临床预测依赖结构化数据、扩展性差且低估文本的问题，本文提出“未来查询”，在非结构化病历上以端点无关训练LLM，统一回答带时间索引的未来临床问题、无需特征工程；在合成与MIMIC-IV ICU笔记上验证，小型本地微调开源模型可接近或匹敌专有系统，利于隐私部署。",
-      "tags": "query:q5",
-      "abstract_en": "Traditional clinical prediction models rely on task-specific pipelines and curated, structured data, which scale poorly and underutilize unstructured text. To address this, we introduce future querying, a paradigm that probes whether large language models (LLMs) can function as implicit medical world models by evaluating their ability to answer time-indexed clinical queries about a patient's future. Our framework operates on unstructured clinical documentation using endpoint-agnostic training, enabling a single model to answer diverse clinical queries over patient trajectories without manual feature engineering or task-specific retraining. We show that small, locally fine-tuned open-weight models can match or approach larger proprietary systems, making the framework suitable for privacy-preserving, on-premise deployment. Evaluated on a new synthetic medical reports dataset and real ICU notes from the MIMIC-IV dataset, our results provide encouraging evidence that LLMs can capture aspects of clinical dynamics.",
-      "source": "arxiv",
-      "selection_source": "fresh_fetch"
-    },
     {
       "paper_id": "202608/29/biorxiv-10-64898-2026-08-20-745848-v1-pheno-mycn-maps-the-morphological-footprint-of-mycn-amplification-in-paediatric-neuroblastoma",
       "section": "quick",
@@ -32,36 +17,6 @@
       "tags": "query:q5",
       "abstract_en": "MYCN amplification has long been a prognostic marker in paediatric neuroblastoma, yet is typically assayed in bulk, alongside rather than within the heterogeneous tissue architecture pathologists assess. This leaves a gap: MYCN status alone cannot localise MYCN-associated biology, while morphology alone cannot assign molecular risk. Motivated by our finding that the two together identify high-risk cases missed by either, we developed Pheno-MYCN, a weakly supervised framework linking slide-level MYCN prediction to interpretable morphological sub-populations on routine H&E whole-slide images. The aim is not a stronger classifier: prediction probes what MYCN amplification does to the tissue, its evidence open to pathological scrutiny. Across 189 slides, Pheno-MYCN resolved each into phenotypic clusters that expert review mapped to neuroblastoma morphologies. Cell-level profiling revealed MYCN amplification \"marked\" every sub-population, through a different feature in each: densely cellular yet disorganised tumour with sparser, less diverse networks; chiefly abundance in necrotic and haemorrhagic regions. MYCN-amplified-like tissue was identifiable per slide from these features alone (AUC 0.93-1.00, leave-one-slide-out) and traced as a continuous gradient within tumours. Thus MYCN amplification leaves a concrete, interpretable footprint that can be read and localised on routine H&E, offering a low-cost means to flag and map it where molecular testing is limited.",
       "source": "biorxiv",
-      "selection_source": "fresh_fetch"
-    },
-    {
-      "paper_id": "202608/29/2608.22062v1-search-broadly-seek-evidence-on-both-sides-decide-narrowly-evidence-admissible-graphrag-for-longitudinal-clinical-event-verification",
-      "section": "quick",
-      "title_en": "Search Broadly, Seek Evidence on Both Sides, Decide Narrowly: Evidence-Admissible GraphRAG for Longitudinal Clinical Event Verification",
-      "authors": "Xingtao Lin, Yubo Feng, Weixin Liu, Hangqi Ren, Junchao Zhou, Caiwan Sun, You Chen",
-      "date": "2026-08-22",
-      "pdf": "https://arxiv.org/pdf/2608.22062v1",
-      "score": "6.0",
-      "evidence": "用于事件验证和链接到源证据的可采信证据框架",
-      "tldr": "为解决纵向临床事件验证中证据分散、否定与时间错配等难题，提出证据可采纳的MedEventGraph-RAG：以患者图表示事件并溯源到结构化与文本等来源，广搜正反证据，经“证据契约”过滤后独立评估；在多数据集显著超越基线并降低无依据结论。",
-      "tags": "query:q5",
-      "abstract_en": "Longitudinal clinical event-relation verification determines whether a patient record supports a specified relation among two or more clinical events. This task is challenging because evidence is distributed across structured records, notes, laboratory trajectories, encounters, and time, while negation, temporal mismatch, repeated documentation, and conflicting findings can make retrieved information appear relevant without establishing the relation.   We present MedEventGraph-RAG, an evidence-admissible framework that represents event occurrences in a patient-specific graph and links each occurrence to source evidence, including structured rows, note spans, timestamps, and numerical trajectories. Given a verification query specifying events, relation, and clinical scope, the graph guides discovery of candidate event chains and retrieves evidence from both supporting and contradicting sides. A query-specific evidence contract filters information by patient identity, scope, occurrence binding, and source traceability before a separate assessor determines supported, conflicting, refuted, or insufficient outcomes.   Across ten protocols on i2b2, n2c2, MIMIC-IV, and LUNGUAGE, MedEventGraph-RAG achieves balanced accuracies of 78.6, 67.3, and 96.8 on temporal, medication-adverse-event, and recorded-order verification, improving over the strongest matched baselines by 26.9, 4.9, and 30.4 points. Under evidence masking, it reaches 92.2 balanced accuracy with no false-support predictions. When intermediate events are hidden, it recovers complete source-traceable event chains in 57.9% of i2b2 and 70.0% of LUNGUAGE cases. These results show that separating broad evidence discovery from narrow evidence-admissible assessment improves longitudinal clinical verification and reduces unsupported conclusions.",
-      "source": "arxiv",
-      "selection_source": "fresh_fetch"
-    },
-    {
-      "paper_id": "202608/29/2608.26386v1-co-evolving-structured-knowledge-and-reasoning-in-language-models",
-      "section": "quick",
-      "title_en": "Co-Evolving Structured Knowledge and Reasoning in Language Models",
-      "authors": "Ryan Thomas Noonan, Linxi Zhao, Menghan Xu, Akanksha Sarkar, Mihir Mishra, Dongyoung Go, Kilian Q. Weinberger, Yoav Artzi, Jennifer J. Sun",
-      "date": "2026-08-26",
-      "pdf": "https://arxiv.org/pdf/2608.26386v1",
-      "score": "6.0",
-      "evidence": "协同演化结构化知识和推理，以提高事实准确性和可控性",
-      "tldr": "本文提出KBevo，针对检索增强方法在非结构文本中引入噪声、结构化知识库难构建且推理脆弱的问题，端到端联合学习知识库构建与推理，以问答奖励优化两者，使推理成功反哺知识结构，提升规模、连通性与答案可达性，并优于标准检索基线的组合事实推理与可控性。",
-      "tags": "query:q6",
-      "abstract_en": "Retrieval-augmented methods improve factual accuracy by grounding language models in external knowledge, but retrieving over unstructured text often introduces irrelevant context and offers limited control over the retrieved information. Structured knowledge bases offer a more controllable alternative, yet they are expensive to construct and often brittle to reason over. To address these limitations, we propose KBevo: a co-evolving framework that jointly learns to construct a structured knowledge base and reason over it for knowledge-intensive question answering. By optimizing both components end-to-end with QA outcome rewards, our method enables reasoning success to directly improve the quality of the constructed knowledge base. This leads to larger, better-connected knowledge structures with higher answer reachability, while also improving compositional factual reasoning and controllability compared to standard retrieval baselines.",
-      "source": "arxiv",
       "selection_source": "fresh_fetch"
     }
   ],
