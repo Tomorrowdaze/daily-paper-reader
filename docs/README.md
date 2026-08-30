@@ -6,26 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-29
-- 运行时间：2026-08-29 21:23:30 UTC
+- 最新运行日期：2026-08-30
+- 运行时间：2026-08-30 22:42:24 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：0
 - 精读区：0
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-- 今日共生成 1 篇推荐（精读 0 篇，速读 1 篇）
-- 速读：《Pheno-MYCN maps the morphological footprint of MYCN amplification in paediatric neuroblastoma》（6.0/10）
-- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202608/29/README](/202608/29/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202608/30/README](/202608/30/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Pheno-MYCN maps the morphological footprint of MYCN amplification in paediatric neuroblastoma](/202608/29/biorxiv-10-64898-2026-08-20-745848-v1-pheno-mycn-maps-the-morphological-footprint-of-mycn-amplification-in-paediatric-neuroblastoma)  
-   标签：评分：6.0/10、query:q5
-   evidence：用于风险评估的可解释预测框架
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
