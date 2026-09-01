@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-01 <!--dpr-date:20260901-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/01/2608.31128v1-diasentinel-an-auditable-multi-agent-system-for-guideline-grounded-diabetes-risk-screening" data-sidebar-item="{&quot;title&quot;: &quot;DIASENTINEL: An Auditable Multi-Agent System for Guideline-Grounded Diabetes Risk Screening&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.31128v1-diasentinel-an-auditable-multi-agent-system-for-guideline-grounded-diabetes-risk-screening&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;用于风险筛查和基于指南的报告生成的审计多智能体系统&quot;}">DIASENTINEL: An Auditable Multi-Agent System for Guideline-Grounded Diabetes Risk Screening</a>
   * 2026-08-29 <!--dpr-date:20260829-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/29/biorxiv-10-64898-2026-08-20-745848-v1-pheno-mycn-maps-the-morphological-footprint-of-mycn-amplification-in-paediatric-neuroblastoma" data-sidebar-item="{&quot;title&quot;: &quot;Pheno-MYCN maps the morphological footprint of MYCN amplification in paediatric neuroblastoma&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/biorxiv-10-64898-2026-08-20-745848-v1-pheno-mycn-maps-the-morphological-footprint-of-mycn-amplification-in-paediatric-neuroblastoma&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;用于风险评估的可解释预测框架&quot;}">Pheno-MYCN maps the morphological footprint of MYCN amplification in paediatric neuroblastoma</a>
