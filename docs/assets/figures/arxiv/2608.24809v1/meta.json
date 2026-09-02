@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-001.webp",
+      "caption": "Table 1: Main results. Recall@K and MAP@K across the three datasets and retrieval setups. Best results bold-colored; second-best underlined. We observe that Crase-Llama-PPR consistently performs best on ACL and ICLR and remains competitive or best across most settings on arXiv.",
+      "page": 6,
+      "index": 1,
+      "width": 844,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-002.webp",
+      "caption": "Table 2: Ablations. Alternative claim extraction models (Qwen/Llama) and ranking strategies (SALSA/PPR) and the Recency baseline. Best per column is bold-colored; second-best is underlined. We observe that Crase-Llama-SALSA gives the strongest overall performance, while Crase-Qwen-PPR is competitive in Recall@K.",
+      "page": 6,
+      "index": 2,
+      "width": 844,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-003.webp",
+      "caption": "Table 11: Outputs of the claim-extraction stage. Each paper is represented by a small set of atomic, typed claims together with the source phrase from which the claim was extracted. These source anchors make the intermediate representation directly inspectable before claim-level entailment is computed.",
+      "page": 15,
+      "index": 3,
+      "width": 1048,
+      "height": 729
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-004.webp",
+      "caption": "Table 4: Retrieval utility and interaction cost on ICLR. We report median per-query resource consumption together with recall@50. Crase achieves substantially higher retrieval recall while requiring fewer external interactions and lower inference cost. ↓ indicates lower is better and ↑ indicates higher is better. corresponding median per-query cost decreases from $1.76 and $2.06 to $0.37. Importantly, these efficiency gains do not result from sacrificing retrieval quality. Crase achieves a recall@50 of 0.3659 on ICLR dataset, compared to 0.1220 for both proprietary-agent baselines. Thus, Crase achieves approximately 3× higher recall@50 while operating with a substantially smaller and predetermined external interaction budget. This result demonstrates that structurally constraining agentic exploration can improve retrieval utility while simultaneously making resource consumption and external actions more predictable.",
+      "page": 7,
+      "index": 4,
+      "width": 502,
+      "height": 291
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-005.webp",
+      "caption": "Table 3: Seed selection ablation. Query-year vs. current-year seeds (shaded; used in main experiments); bold marks the best result and ∆ the absolute change. Current-year seeds improve nearly all Recall@K and MAP@K scores, with the only drop at Recall@5 for ICLR.",
+      "page": 7,
+      "index": 5,
+      "width": 944,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-006.webp",
+      "caption": "Table 8: Fine-tuning configuration for the Crase entailment model.",
+      "page": 14,
+      "index": 6,
+      "width": 444,
+      "height": 464
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-007.webp",
+      "caption": "Table 12: Where does model autonomy remain in Crase? Model judgments are restricted to local, inspectable operations, while exploration, pruning, ranking, and termination remain structurally constrained after seed construction.",
+      "page": 18,
+      "index": 7,
+      "width": 1036,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-008.webp",
+      "caption": "Figure 1: Unlike deep research agents that repeatedly search until the model decides to stop, Crase performs a seeded search, constructs a 1.5-hop citation graph, prunes unsupported edges, and ranks papers with a recency-aware walk.",
+      "page": 4,
+      "index": 8,
+      "width": 892,
+      "height": 465
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-009.webp",
+      "caption": "Table 13: The seed set is noisy by design,and it does not matter. The complete seed set S (|S| = 29) for the query of Trace 1, grouped by contributing sub-query ρℓ. ✓ = seed survives Stage 2 claim-level pruning and enters the ranking walk; ✗ = every incident edge receives coverage affinity ∆ = 0 and the seed is removed from the evidence graph. Keyword search over a 500Kpaper corpus inevitably retrieves lexical-match artifacts (quantum measurement, galaxy catalogs, retail image classification); in a search-and-synthesis loop these would enter the context of every subsequent step, whereas in Crase the evidence graph , not the search engine , enforces relevance.",
+      "page": 19,
+      "index": 9,
+      "width": 1048,
+      "height": 990
+    },
+    {
+      "url": "assets/figures/arxiv/2608.24809v1/fig-010.webp",
+      "caption": "Figure 2: Recall@K (left) and MAP@K (right) under seed corruption. Lexically similar distractors degrade retrieval gracefully—Crase retains ∼ 56% of clean Recall@50 and ∼ 81% of clean MAP@50, because claim-level pruning suppresses the unsupported edges the distractor introduces. Random irrelevant seeds collapse to zero: an off-manifold seed induces a neighborhood disconnected from the ground truth, which Crase does not attempt to recover through further search.",
+      "page": 16,
+      "index": 10,
+      "width": 1054,
+      "height": 856
+    }
+  ]
+}

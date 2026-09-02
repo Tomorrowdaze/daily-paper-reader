@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-001.webp",
+      "caption": "Figure 4: Reliability diagrams on the validation set (mean ± std over seeds 0-2). The gap between each bar and the diagonal equals the per-bin calibration error; ECE is the weighted mean gap. All methods concentrate mass in two bins: a midconfidence cluster (≈ 0.55) from harder frames where the detector confidence is lower, and a high-confidence cluster (≈ 0.95 − 1.0) from the dominant presence frames. At the mid-confidence bin, IR is overconfident (bar below diagonal), while fusion operators are underconfident (bar above diagonal); RGB is best calibrated there. Naive exhibits an additional bin near 0.75 from missing-detection frames encoded with 𝑢 ≈ 0.5 (Table 4). DBF and ABF are identical.",
+      "page": 6,
+      "index": 1,
+      "width": 506,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-002.webp",
+      "caption": "Figure 3: Sparsification curves on the test set (signal: −?̂?2, mean ± std over seeds 0-2). Each curve shows the gap between an IoU-ordered oracle and the model when frames are removed in order of decreasing spatial uncertainty. Area under this gap is AUSE𝜎 (lower is better). IR’s Gaussian head is a substantially weaker localization failure predictor across the retention range (AUSE 0.0615), reflecting its weaker spatial uncertainty signal (Table 5). All four fusion operators are indistinguishable (AUSE = 0.0497), confirming the near-zero inter-modal conflict reported in Table 2. DMS is marginally worse (0.0517).",
+      "page": 6,
+      "index": 2,
+      "width": 506,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-003.webp",
+      "caption": "Figure 8: RGB-only configuration. Histograms of the three candidate switching signals across DETECT (top row) and TRACK (bottom row) modes on the validation set. Each subcaption reports the AUROC of the signal as a failure predictor.",
+      "page": 15,
+      "index": 3,
+      "width": 1056,
+      "height": 515
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-004.webp",
+      "caption": "Figure 7: IR-only configuration. Histograms of the three candidate switching signals across DETECT (top row) and TRACK (bottom row) modes on the validation set. Each subcaption reports the AUROC of the signal as a failure predictor.",
+      "page": 15,
+      "index": 4,
+      "width": 1056,
+      "height": 515
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-005.webp",
+      "caption": "Table 1: Localization performance and benchmark comparability (mean ± std over seeds 0–2). AP@0.5 and mAP@[0.5:0.95] are the primary detection metrics; mIoU is mean IoU over present frames; Acc is the EDTC accuracy metric included for comparability with the original thermal-only baselines (det+track); AUSE𝜎 is the sparsification error using −?̂?2 𝑏𝑒𝑠𝑡 (lower is better). Bold = best within each group per split.",
+      "page": 7,
+      "index": 5,
+      "width": 1047,
+      "height": 475
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-006.webp",
+      "caption": "Figure 6: Multimodal uncertainty-aware detection-tracking framework. Both the global detection branch (YOLOv5s) and local tracking branch (SiamCAR) process RGB and infrared streams independently, each producing per-modality semantic uncertainty via an evidential head and spatial uncertainty via a Gaussian head. Semantic predictions are aggregated across modalities via Discounted Belief Fusion (DBF). Spatial predictions are resolved by selecting the bounding box from the loweruncertainty modality (Dynamic Modality Selection). State-dependent switching between detection and tracking requires both semantic (𝑢fused) and spatial (?̂?2 best) confidence to satisfy their respective thresholds simultaneously.",
+      "page": 14,
+      "index": 6,
+      "width": 532,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-007.webp",
+      "caption": "Figure 5: Distribution of log ?̂?2 best conditioned on localization outcome (success: 𝐼𝑜𝑈 ≥ 0.5, failure: 0 < 𝐼𝑜𝑈 < 0.5) for IR-only (left) and RGB-only (right) configurations, pooled across seeds 0–2 on the validation set. IR shows heavily overlapping distributions (overlap coefficient 0.800, AUROC 0.598), while RGB shows clearly separated distributions (overlap 0.552, AUROC 0.760). The contrast confirms that IR’s Gaussian head produces outcome-insensitive variance, explaining the reversal of the spatial vs. semantic uncertainty ordering observed in Table 5.",
+      "page": 13,
+      "index": 7,
+      "width": 740,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-008.webp",
+      "caption": "Table 9: Target-size-stratified discriminability of the spatial uncertainty ?̂?2 best for the IR-only andRGB-only detectors, on detected present frames (IoU> 0; success: IoU≥ 0.5, failure: 0 < IoU< 0.5), validation set, seeds 0–2 pooled. Frames are divided into three equal-sized groups by normalized predicted target size (𝑤 ·ℎ)/𝐴frame, with group boundaries computed per modality. OVL is the histogram overlap coefficient of log ?̂?2 best between the success and failure distributions (1 = indistinguishable, 0 = disjoint); AUROC scores ?̂?2 best as a failure predictor. The IR−RGB gap is constant across sizes, isolating the thermal modality rather than target size as the cause.",
+      "page": 13,
+      "index": 8,
+      "width": 606,
+      "height": 199
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-009.webp",
+      "caption": "Table 3: Fused-belief quality, evaluated independently of the box output. Presence-discriminationmetrics use the fused semantic belief only (IoU-free) under heavy class imbalance (val ≈44:1, test ≈73:1 present:absent). ECE measures calibration of the belief values; AUROC measures failure (misclassification) discrimination. DMS produces no fused belief and is not assessed here. Results are mean± std over seeds 0-2. Bold = best per column within each split.",
+      "page": 8,
+      "index": 9,
+      "width": 926,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-010.webp",
+      "caption": "Figure 2: Multimodal uncertainty-aware detection framework. The detection branch (YOLOv5s) processes RGB and infrared streams independently, each producing per-modality semantic uncertainty via an evidential head and spatial uncertainty via a Gaussian head. Semantic opinions are aggregated across modalities via Discounted Belief Fusion (DBF), and the bounding box is resolved by selecting the lowerspatial-uncertainty modality (Dynamic Modality Selection). The fused opinion is passed through an uncertainty-gated output decision: a box is emitted only when the fused belief favors the UAV class (𝑏fused (UAV) > 𝑏fused (bg)) and the fused uncertainty falls below the gate threshold (𝑢fused < 𝜃cls); otherwise the target is reported absent.",
+      "page": 4,
+      "index": 10,
+      "width": 506,
+      "height": 450
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-011.webp",
+      "caption": "Table 8: List of abbreviations used throughout this paper.",
+      "page": 12,
+      "index": 11,
+      "width": 502,
+      "height": 820
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-012.webp",
+      "caption": "Table 6: Attribute-based robustness on the Anti-UAV test set. Means over seeds 0-2. 𝜌 is Spearman correlation between per-frame 𝑢fused and IoU (more negative = uncertainty better tracks localization failure). 𝑢 is mean 𝑢fused over all frames (including non-detections), reported as a diagnostic of each method’s uncertainty scale (not a quality metric; not scored). Best per row within each scored metric group in bold.",
+      "page": 9,
+      "index": 12,
+      "width": 1012,
+      "height": 383
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29235v1/fig-013.webp",
+      "caption": "Figure 9: DBF configuration. Histograms of the three candidate switching signals across DETECT (top row) and TRACK (bottom row) modes on the validation set. Each subcaption reports the AUROC of the signal as a failure predictor.",
+      "page": 16,
+      "index": 13,
+      "width": 1056,
+      "height": 515
+    }
+  ]
+}

@@ -1,0 +1,950 @@
+Title: Structurally-bounded Agentic Graph Exploration for Evidence-Grounded Scholarly DeepSearch
+
+URL Source: https://arxiv.org/pdf/2608.24809v1
+
+Published Time: Wed, 26 Aug 2026 01:26:52 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+# Structurally-bounded Agentic Graph Exploration for Evidence-Grounded Scholarly DeepSearch 
+
+## Rima Hazra ♠♡ ∗, Sayan Layek ♢∗, Somnath Banerjee ♣,Soumen Chakrabarti †, Animesh Mukherjee ♢
+
+> ♠
+
+National University of Singapore, ♡TCG CREST, 
+
+> ♢
+
+Indian Institute of Technology Kharagpur, ♣Singapore Institute of Technology, 
+
+> †
+
+Indian Institute of Technology Bombay 
+
+Abstract 
+
+We present Crase, a bounded and inspectable alternative to deep research agents for scholarly search. Instead of an open-ended search loop, Crase queries a search engine once for seed papers, expands them along their 1.5-hop citation neigh-borhood, prunes citation edges whose claims lack entailment support, and ranks the remaining papers with a recency-aware random walk. This makes the candidate set, the reason each paper is kept, and the stopping condition explicit and fixed before inference. On LitSearch and one further benchmarks over a 500K-paper arXiv corpus, Crase outperforms deep research agents built on proprietary models by up to 3 × re-call@50 at roughly a third of the cost. 
+
+Code: https://github.com/RadiantCrystal/CRASE 
+
+## Introduction 
+
+Deep research agents turn a single-turn language model into an autonomous search-and-synthesis process: given a com-plex information need, the agent decomposes it into sub-questions , calls external tools , reads what they return , judges whether evidences suffice , and searches again before com-posing a cited report (Nakano et al. 2021; OpenAI 2025; Li et al. 2025). Built on the reasoning-and-acting paradigm for tool-augmented models (Yao et al. 2023; Schick et al. 2023), it is effective wherever evidence must be gathered from many sources, from literature review to multi-document compar-ison. This same autonomy, however, is hard to oversee. A user sees the final report but little of what produced it, why the agent kept searching or stopped, which sources shaped its decisions, whether an early mistake quietly redirected ev-erything after it. Three properties of the loop compound the problem. Exploration is open-ended, so a query halts on an external budget rather than any condition the user can in-spect. Errors persist, because a weak source pulled in early sits in the context of every later query with no way to take it back. Also, evidence is hard to audit, since the final citations seldom say why a paper was kept. There is a cost too – often dozens of tool calls, the prompt growing at each step but the harder problem is that open-ended exploration, opaque stopping, and compounding errors leave these agents diffi-cult to monitor and control. In scholarly discovery this bites 
+
+> ∗
+
+These authors contributed equally to this work. 
+
+hardest: a report is only as reliable as the evidence behind it. We therefore ask: 
+
+Can scholarly discovery be performed through a struc-turally bounded and evidence-inspectable process with-out sacrificing retrieval effectiveness? 
+
+Our starting point is simple: a generic agent spends its whole trajectory rebuilding, one search at a time, a map of relevance the scientific literature has already drawn, the ci-tation network (Garfield 1972; Small 1973). So rather than rebuild that map, we walk it. One seeded search replaces open-ended querying, the graph bounds which papers are in play without asking the model to decide, and its edges leave a visible trail of how they connect. This mirrors the AI control view of safe autonomy like place a trusted, auditable com-ponent around an untrusted but capable one, so guarantees come from structure rather than the model’s own judgment of when it has done enough. What enables the trade is a change of objective: we ask the system not to synthesize an answer but to return a ranked set of relevant papers, turning open-ended search into a process whose boundaries, steps, and stopping point are open to inspection. We instantiate this in Crase ( Citation-guided Research 
+
+Agent for Scholarly Exploration), which resolves a query in three stages. It derives a research plan and issues one search call per sub-plan to Semantic Scholar (Kinney et al. 2023), keeping the top results as seeds – the only stage that touches an external service . It expands the seeds to their 1.5-hop citation neighborhood, the seeds , their references 
+
+and citing papers , and every edge among them to form an 
+
+evidence graph . Raw citations are often perfunctory, tan-gential, or purely methodological (Moravcsik and Muruge-san 1975; Jurgens et al. 2018), and citation counts follow a rich-get-richer dynamic (Barabási and Albert 1999): a heav-ily cited paper draws edges through sheer popularity, so a naive walk pools relevance on such hubs and drifts toward older work regardless of how well either grounds the query. Crase counters both, scoring every edge by how strongly the cited paper’s atomic claims ground the citing paper’s, so a popular but tangential hub is down-weighted or pruned rather than rewarded for its degree, then ranking what re-mains with a recency-aware Personalized PageRank (Page arXiv:2608.24809v1 [cs.CL] 25 Aug 2026 et al. 1999; Haveliwala 2002) or SALSA (Lempel and Moran 2001) whose weights balance this coverage affinity against an age decay. This claim-level reweighting is the central nov-elty, and it splits Crase into a trusted part and a checkable one. The graph construction, pruning rule, and ranking walk are fixed and deterministic, with no free choice left to the model; the model supplies only local judgments, the plan ,
+
+the claims , and the per-edge entailment scores , each verifi-able on its own. So the boundary and stopping point are fixed rather than model-chosen, the edge weights record why each paper was kept or cut, and the model drives external search only at seed construction. Crase does not make its judg-ments correct, but it makes the search space, evidence, and stopping condition auditable and while we study scholarly discovery, the design is not specific to it. We evaluate Crase on a controlled corpus of roughly 500K 
+
+arXiv papers spanning AI, ML, NLP, and computer vision (January 2016 – July 2026), using LitSearch (Ajith et al. 2024) and one further test set restricted to this corpus. Our primary contributions are threefold .1. We identify critical challenges to scholarly deep research: 
+
+open-ended exploration , model-controlled termination ,
+
+compounding errors , and limited visibility into evidence selection . In the spirit of AI control, we recast deep re-search as bounded discovery, where a trusted citation-graph substrate tempers an untrusted model’s judgments. 2. We introduce coverage affinity , a claim-level entailment weighting of citation edges estimating how much a cited paper grounds the citing paper’s claims, turning a bibli-ographic graph into an inspectable evidence graph that offsets both the popularity and recency biases of raw ci-tation topology. 3. We rank papers by a recency-aware random walk over the pruned graph and show on LitSearch and one further benchmark that Crase matches or improves scholarly re-trieval while substantially cutting the tool-call and token cost of generic deep research agents. 
+
+## Related work 
+
+Agentic search and retrieval-augmented generation : Tool-augmented models interleave reasoning with search (Yao et al. 2023; Shinn et al. 2023), learn tool use (Schick et al. 2023), browse with human feedback (Nakano et al. 2021), or combine retrieval with long-form reasoning and RL-trained search policies (Li et al. 2025; Jin et al. 2025); commer-cial deep research systems further extend this loop to report generation (OpenAI 2025) and dedicated benchmarks (Du et al. 2026). RAG methods similarly retrieve within genera-tion (Lewis et al. 2020), triggered by uncertainty (Jiang et al. 2023), reasoning steps (Trivedi et al. 2023), or self-critique (Asai et al. 2023). These approaches rely on repeated search, model-driven stopping, and largely irreversible retrieval tra-jectories; Crase instead performs a single seeded search and subsequently explores relations among retrieved papers. 
+
+Scholarly retrieval and citation-graph ranking : Scientific search spans dedicated infrastructure (Kinney et al. 2023), benchmarks (Ajith et al. 2024), citation recommenders (Fär-ber and Jatowt 2020), and citation-aware embeddings (Co-han et al. 2020; Singh et al. 2023); related systems in-terleave search with citation expansion (He et al. 2025) or combine retrieval with synthesis (Asai et al. 2024). Citation-based relevance has long supported citation anal-ysis (Garfield 1972), co-citation (Small 1973), bibliographic coupling (Kessler 1963), and PageRank-based ranking (Page et al. 1999; Haveliwala 2002; Jeh and Widom 2003). How-ever, raw citation graphs favor older papers through prefer-ential attachment (Barabási and Albert 1999) and conflate substantive with perfunctory citations (Moravcsik and Mu-rugesan 1975), motivating age-aware weighting and citation-intent modeling (Teufel, Siddharthan, and Tidhar 2006; Ju-rgens et al. 2018; Cohan et al. 2019). Instead of learning a step-wise expansion policy, Crase fixes a 1.5-hop neighbor-hood and weights edges by claim-level entailment (Bowman et al. 2015; Thorne et al. 2018; Wadden et al. 2020), yielding an auditable evidence graph. 
+
+Oversight and control of autonomous agents: Scalable over-sight makes model reasoning more supervisable by reward-ing intermediate steps (Lightman et al. 2024) or testing whether weaker models can oversee stronger ones (Burns et al. 2024; Bowman et al. 2022). AI control instead assumes the capable model may be unreliable and uses a trusted, auditable protocol to constrain it (Greenblatt et al. 2024; Rasheed et al. 2026). A complementary line instead makes the model itself more reliable at inference time, through decoding-time or test-time alignment (Banerjee et al. 2024, 2025), rather than constraining it externally. Deep research agents extend this challenge to multi-step evidence gathering, where these methods offer limited structure. Crase addresses this gap by separating the agent into a trusted substrate, fixed graph construction, coverage-affinity pruning, and determin-istic ranking. 
+
+## Problem formulation 
+
+A conventional deep research system follows a model-driven search loop. Starting from a query q, the model repeatedly in-vokes a search tool, inspects the retrieved evidence, updates its context, and decides whether another search is needed. Let 
+
+T denote the number of tool calls before termination. Since 
+
+T depends on the model’s intermediate judgments, neither the extent of the explored literature nor the stopping point is known in advance. Moreover, the model itself determines which retrieved evidence influences later search decisions, making both evidence selection and termination difficult to audit. Consequently, it is difficult to understand why a par-ticular paper was retrieved, why another was discarded, or why the search terminated at a particular point. We formulate the problem with the goal of making these decisions more explicit and structured. Rather than allowing the agent to perform an open-ended sequence of searches, we first define a bounded candidate space and then rank papers within this space. Given the query q, the objective is to return a ranked set Pq containing at most k relevant papers. This formula-tion makes the set of candidate papers, the evidence used for ranking, and the stopping condition directly observable. We represent a scientific corpus C as a directed citation graph. For each paper p, let Rp denote its references and Cp denote the papers that cite it. We define its citation neighborhood as 
+
+N (p) = Rp ∪ Cp. Each paper is additionally represented by its textual content t(p), consisting of its title, abstract, and introduction. Thus, a candidate paper can be evaluated using both its textual relevance to the query and its position within the citation structure. Given q, we first retrieve a small set of seed papers S ⊆ C 
+
+(see the section on seed construction). We then expand each seed through its citation neighborhood to obtain V = S ∪S 
+
+> p∈S
+
+N (p). Within this node set, we retain all citation links between the retrieved papers E = ( u, v ) ∈ EC : u, v ∈ V .Although the nodes are obtained through a one-hop expan-sion, it also preserves citation relations among the retrieved papers themselves. We refer to this enriched structure as a 
+
+1.5-hop neighborhood . These additional relations provide evidence about how candidate papers are connected to the seed papers and to one another, which is subsequently used during ranking. An important consequence of this construc-tion is that the exploration space is fixed once S is selected. Hence, the agent does not repeatedly decide whether to ex-pand the search further. Similarly, evidence selection is per-formed over an explicit graph whose nodes, edges, and rank-ing signals can be inspected. The stopping condition is also fixed: the system ranks papers within this bounded graph and returns the top-k candidates. The two controlling parameters are: m (number of seed papers retained for each sub-query), and k (number of papers returned after ranking). 
+
+## The Crase system 
+
+Crase makes a single retrieval call to obtain a small seed set, then confines all further reasoning to the citation graph around those seeds, grounding discovery in the structure of the literature rather than in a sequence of model-issued searches. Three stages, shown in Figure 1, carry a query from seeds to a ranked result. 
+
+Stage 1 ( Plan and seed construction ): Given a query q,Crase decomposes it into a set of focused sub-queries Rq .For each sub-query, it retrieves the top m papers from an external index and forms their union as the seed set S. This is the only stage that uses an external search service. 
+
+Stage 2 ( Guided graph expansion ): Crase expands S to its 
+
+1.5-hop citation neighborhood to construct an evidence graph 
+
+G = ( V, E ). Each citation edge is weighted by claim-level support between the citing and cited papers using a fine-tuned entailment model. Low-support edges are pruned, yielding a graph that reflects evidence-informed relationships rather than citation structure alone. 
+
+Stage 3 ( Ranking and output ): Finally, Crase ranks the re-tained papers using a query-personalized, recency-aware ran-dom walk over G and returns the top k papers as Pq . The ranking module is general: we use standard personalized graph-ranking methods (Page et al. 1999; Lempel and Moran 2001), but others can be plugged in. 
+
+Plan and seed construction 
+
+The first stage of Crase converts a query into a small set of seed papers from which the evidence graph is expanded. It consists of two steps – constructing a research plan and retrieving seeds for each plan element. 
+
+Research plan construction. Given a query q, we use an LLM to construct a research plan Rq = {ρ1, . . . , ρ L}, where each 
+
+ρℓ is a concise keyword-style sub-query covering one facet of 
+
+q. This decomposition provides multiple lexical entry points to the same information need, which is useful when relevant papers use different terminology. The prompt constrains each sub-query to preserve the technical requirements of q with-out introducing new tasks, methods, datasets, or domains. We further require keyword-style queries to better match title- and abstract-based academic search. The full prompt is provided in supp. mat. 
+
+Seed construction. For each sub-query ρℓ, we issue a sin-gle Semantic Scholar search and obtain rankings by rel-evance and recency. We retain up to m papers appearing among the top results of both rankings, favoring papers that are simultaneously relevant and recent. The final seed set is S = SLℓ=1 Seeds( ρℓ), | Seeds( ρℓ)| ≤ m. Since different sub-queries may retrieve the same papers, |S| can be smaller than mL . For each seed p ∈ S , we then retrieve its references 
+
+Rp and citing papers Cp. These papers are not added directly to the seed set; instead, they define the local neighborhood used to construct the citation graph (worked example in sup-plementary material). 
+
+Guided graph expansion 
+
+The second stage expands the seed set into a weighted ev-idence graph whose edges reflect semantic support rather than mere presence of a citation. For each seed, we collect its references and citing papers (out- and in-links) and con-struct a directed graph G = ( V, E ) over the resulting 1.5-hop neighborhood, where (u, v ) ∈ E if u cites v. Since a cita-tion may be merely contextual or methodological, we assess whether the cited paper actually supports the main claims of the citing paper. To do so, we extract a small set of atomic claims from each paper, estimate claim-level support using a scientific entailment model, and aggregate these scores into a coverage affinity ∆( u, v ). We then use this affinity to prune unsupported edges and isolated nodes, and to weight the remaining graph for ranking. 
+
+Claim extraction : We represent each paper p ∈ V by a small set of atomic claims extracted from its title, abstract, and introduction using Qwen2.5-32B-Instruct (Qwen 2025) model: 
+
+C(p) = {cp
+
+> 1
+
+, . . . , c pnp }, np = |C (p)| ∈ { 4, 5}, (1) Each cpi is a self-contained statement of a principal method, finding, or quantitative result. Restricting the representation to a few contribution-level claims filters background and related-work content that may introduce noise into subse-quent grounding scores. The extraction prompt is provided in the supp mat. This step is one of the prime novelties intro-duced in Crase. 
+
+Entailment model : The core operation in this stage is de-termining whether one scientific claim provides evidential grounding for another. Generic textual entailment models are trained largely on everyday natural language and may transfer poorly to dense, terminology-heavy scientific claims. We therefore fine-tune a dedicated entailment model for this setting. We use MsciNLI (Sadat and Caragea 2024) and 
+
+SciNLI (Sadat and Caragea 2022), which provide premise– hypothesis pairs with entailment labels, and adapt them to our claim-grounding formulation. Specifically, we fine-tune What are the latest approaches to AI alignment beyond RLHF?      
+
+> 1. alternatives to RLHF
+> 2. non-RLHF alignment
+> 3. post-RLHF alignment
+> 4. emerging alignment approaches
+> LLM
+> LLM
+> Review, Feedback
+> Tool calling
+> Accumulate research papers
+> Iterative tool use
+> Subqueries by planner
+> Planner
+> Tool calling
+> Accumulate research
+> seed papers Citation network
+> Edge pruning
+> Ranking relevant papers
+> Deep Reinforcement Learning from Human Preferences
+> Training Language Models to Follow Instructions with Human Feedback
+> A Survey of Reinforcement Learning from Human Feedback
+> Direct Preference Optimization: Your Language Model Is Secretly a Reward Model
+> Research papers
+> Research papers
+> Iterative Label Refinement Matters More than Preference Optimization under Weak Supervision
+> Weak-to-Strong Preference Optimization: Stealing Reward from Weak Aligned Model
+> Process-based Self-Rewarding Language Models
+> Scaling Laws for Scalable Oversight
+
+Traditional Deep Research Agent 
+
+Citation-guided Research Agent for Scholarly 
+
+Exploration (ours )Figure 1: Unlike deep research agents that repeatedly search until the model decides to stop, Crase performs a seeded search, constructs a 1.5-hop citation graph, prunes unsupported edges, and ranks papers with a recency-aware walk. 
+
+Qwen2.5-3B-Instruct and evaluate it on the test sets of both datasets, where it achieves F1 scores of 0.8 and 0.83, respectively. We denote the resulting scoring function by 
+
+ent( · | · ) and use it below to score claim pairs along each ci-tation edge. Full training and evaluation details are provided in the experiments section. 
+
+Claim-level entailment: We apply the entailment model to each citation edge at the claim level. Consider a directed edge (u, v ) ∈ E, where u is the citing paper and v the cited 
+
+paper, with claim sets C(u) = {cu 
+
+> 1
+
+, . . . , c unu } and C(v) = 
+
+{cv 
+
+> 1
+
+, . . . , c vnv }. We compute an entailment matrix M (u,v ) ∈
+
+[0 , 1] nu×nv whose entry 
+
+M (u,v ) 
+
+> ij
+
+= ent  cui | cvj
+
+ (2) where M (u,v ) 
+
+> ij
+
+measures how strongly the reference claim cv j
+
+grounds the citing paper’s claim cui. Since nu, n v ≤ 5, the matrix contains at most 25 entries. We obtain all entries in a single model call per edge, returned as JSON, rather than making nunv separate calls, keeping the number of model calls linear in the number of edges. 
+
+Claim support and coverage affinity: We next determine how strongly a reference v grounds the claims of the citing paper u. Given a support threshold θ ∈ [0 , 1] , a claim cui is considered supported by v if at least one claim of v entails it above this threshold. We define 
+
+si(u, v ) = 1
+
+
+
+max 
+
+> 1≤j≤nv
+
+M (u,v ) 
+
+> ij
+
+≥ θ
+
+
+
+, (3) where the row-wise maximum allows any single claim of v
+
+to provide sufficient grounding for cui . We then measure the 
+
+coverage affinity of the citation edge (u, v ) as the fraction of claims in u supported by v:
+
+∆( u, v ) = 1
+
+nunuX
+
+> i=1
+
+si(u, v ) ∈ [0 , 1] . (4) Thus, ∆( u, v ) = 1 when v grounds every claim of u and 
+
+0 when it grounds none. Since ∆( u, v ) depends only on the entailment matrix M (u,v ), each edge weight is computed independently of other references and is invariant to process-ing order. Multiple references may therefore receive credit for grounding the same claim. 
+
+Edge and node pruning: We prune every edge with 
+
+∆( u, v ) ≤ τ , using τ = 0 as a conservative default, so that we discard an edge exactly when v grounds no claim of u. We then remove any node left without incident edges, since such a node can lie on no evidential path and cannot contribute to ranking. The retained affinity ∆( u, v ) is exactly the value used in the ranking weight 
+
+w(u → v) = ∆( u, v ) · age( v)−β , (5) which couples semantic coverage with recency (Hu et al. 2021) and carries the pruned, reweighted graph into the rank-ing stage. 
+
+Source ranking on the evidence graph 
+
+The final stage of Crase produces the ranked result set Pq
+
+from the weighted evidence graph. Guided graph expansion yields a directed graph G = ( V, E ) in which each edge 
+
+u → v carries the weight w(u → v) of Eq. 5, coupling the coverage affinity ∆( u, v ) with the recency term age( v)−β .The ranking stage is modular. Crase operates on the result-ing weighted graph and can therefore be paired with dif-ferent graph-based ranking algorithms. In our experiments, we consider Personalized PageRank (PPR) and SALSA, and use PPR as the primary ranking mechanism. PPR propagates relevance from the seed papers through the weighted edges of G. Normalizing the outgoing edge weights gives the tran-sition probability P (u → v) = w(u→v)P  
+
+> v′w(u→v′)
+
+which forms the row-stochastic matrix W. For any dangling node, we re-place its row with the personalization distribution to keep 
+
+W stochastic. We anchor the walk to the query through a 
+
+personalization vector p, a distribution over V concentrated on the seed set S. Given p and a teleportation probability 
+
+α ∈ (0 , 1) , the PPR score vector π satisfies the fixed-point equation. 
+
+π(v) = (1 − α) X
+
+> u→v
+
+π(u) P (u → v) + α p (v), (6) with closed-form solution 
+
+π = α I − (1 − α)W⊤−1p. (7) At each step, the surfer follows an outgoing edge with prob-ability 1 − α or restarts from the seed distribution p with probability α. Because the transition probabilities derive from w(u → v), the walk favors targets that are both well grounded in the seeds and recent. The stationary score π(v)
+
+thus measures the relevance of v to the seeds, and hence to 
+
+q. We sort V by π in descending order and return the top k
+
+papers as Pq .
+
+## Datasets 
+
+Collected corpus: Our corpus C comprises roughly 500K 
+
+arXiv papers submitted between January 2016 and July 
+
+2026, spanning eight subject categories across Artificial In-telligence, Machine Learning, NLP, and Computer Vision – 
+
+cs.AI , cs.LG , cs.CL , cs.NE , cs.CV , cs.IR , cs.MA ,and stat.ML – where a paper is included if annotated with at least one; full statistics are in the supplementary material. For each paper we collect its title, publication year, abstract, and authors, and parse the introduction from the PDF with GROBID (gro 2008–2026). The title, abstract, and intro-duction form the textual representation t(p) used throughout Crase, and the publication year supplies the age in Eq. 5. 
+
+Test datasets : We evaluate Crase on three test sets that differ mainly in how their queries and ground-truth papers are obtained. Each query carries a set of relevant papers as ground-truth. We restrict both queries and ground truth to C
+
+thus evaluating all methods against the same candidate pool. 
+
+LitSearch: LitSearch (Ajith et al. 2024) pairs literature-search queries with their relevant ground-truth papers; we use its manual ACL and ICLR splits (155 and 91 queries). Restricting each query’s ground truth to C and dropping queries left with none yields 114 ACL and 60 ICLR queries. 
+
+arXiv set: Our second set is built from 98 papers submitted to the eight categories of C between November 2025 and February 2026. For each, we form a query from its title and abstract (prompt in the supplement) and take its in-corpus reference list as ground-truth; we strip the related-work sec-tion and references before generating the query, since these would reveal the ground-truth. This set of papers sit at the end of the corpus span measuring retrieval on very recent work. 
+
+## Evaluation metrics 
+
+We measure retrieval quality with two standard metrics, Recall@ k and MAP@ k, aggregated over the queries Q of a dataset. For a query q, let Rel( q) denote its set of ground-truth relevant papers and let Pq = ( p1, . . . , p k) denote the top-k papers returned by the method, ordered by decreasing score. 
+
+Recall@ k. Recall@ k is the proportion of relevant pa-pers retrieved within the top k, pooled over all queries, 
+
+Recall@ k =  
+
+> P
+> q∈Q |Pq∩Rel( q)|
+> P
+> q∈Q |Rel( q)|
+
+. Since scholarly search of-ten extends beyond the top five results, we report multiple cutoffs: Recall@5 measures early-ranking quality, while Re-call@20–Recall@50 capture broader evidence coverage. 
+
+MAP@ k. We also report mean average precision (MAP) at k, which rewards ranking relevant papers higher. Let yi =
+
+1[ pi ∈ Rel( q) ] denote whether the paper at rank i is relevant, and let Prec@ i(q) denote the precision over the first i papers. For a query q, the average precision at k is AP@ k(q) = 
+
+> 1
+> |Rel( q)|
+
+Pki=1 Prec@ i(q) yi and MAP@ k is the mean over all queries, MAP@ k = 1
+
+> |Q|
+
+P 
+
+> q∈Q
+
+AP@ k(q).
+
+## Experimental setup 
+
+We configure Crase according to the three stages discussed in the earlier section. In Stage 1, 
+
+Qwen2.5-32B-Instruct decomposes each query into focused sub-queries, and a single Semantic Scholar call per sub-query retrieves up to 10 seed papers. In Stage 2, claims are extracted using Qwen2.5-32B-Instruct 
+
+and Meta-Llama-3-70B-Instruct . For claim en-tailment, we fine-tune Qwen2.5-3B-Instruct on MSciNLI and SciNLI to classify claim pairs into entailment, reasoning, contrasting, or neutral relations; we select the 3B model over its 1.5B counterpart based on its higher test accuracy. In Stage 3, the resulting weighted evidence graph is ranked using PPR, with teleportation probability 
+
+α = 0.15 , age-decay exponent β = 0.5, and pruning threshold τ = 0.75 . Full model, training, and ranking configurations are provided in the supplementary material. 
+
+Baselines 
+
+DeepResearch-GPT - A GPT-based Deep Research baseline over the candidates from guided graph expansion. Each paper node is represented by its title, abstract, and introduction, em-bedded with BAAI/bge-base-en-v1.5 , and an OpenAI model (o4-mini ) searches exclusively over these nodes through a custom search graph papers tool, ranking them by relevance to the query; we keep the top-50. 
+
+DeepResearch-Claude - The same setup, agentic frame-work, paper pool, tools, and embedding model with the An-thropic model claude-sonnet-5 in place of o4-mini .
+
+Spector2-Deepwalk - A scientific document embedder built on SPECTER (Cohan et al. 2020) and SciRepEval (Singh et al. 2023). We encode each candidate’s title, abstract, and introduction with its pretrained retrieval model, apply Deep-Walk (Perozzi, Al-Rfou, and Skiena 2014) to the expansion graph for structural embeddings, and concatenate the two. Candidates are ranked by cosine similarity to seed papers. 
+
+Other variants 
+
+Crase variants : To test sensitivity to model and algorithmic choices, we vary two components while holding all else like graph construction, pruning, and the candidate pool fixed: the claim-extraction model ( Qwen-32B or Llama-70B )Dataset Method Recall@K MAP@K                                                                                                                                                            
+
+> @5 @10 @20 @30 @40 @50 @5 @10 @20 @30 @40 @50
+> ACL
+> DeepResearch-GPT 0.0335 0.0696 0.1289 0.1572 0.1881 0.2294 0.0107 0.0170 0.0234 0.0253 0.0267 0.0279 DeepResearch-Claude 0.0309 0.0696 0.1160 0.1366 0.1804 0.2294 0.0085 0.0150 0.0196 0.0203 0.0223 0.0242
+> Crase-Llama-PPR 0.0730 0.1236 0.1882 0.2584 0.3258 0.3848 0.0453 0.0530 0.0602 0.0656 0.0697 0.0730
+> Spector2-Deepwalk 0.0284 0.0747 0.1263 0.1830 0.2242 0.2629 0.0170 0.0248 0.0303 0.0341 0.0366 0.0380
+> ICLR
+> DeepResearch-GPT 0.0183 0.0427 0.0610 0.0732 0.1098 0.1220 0.0082 0.0106 0.0119 0.0123 0.0150 0.0155 DeepResearch-Claude 0.0183 0.0427 0.0549 0.0671 0.1037 0.1220 0.0040 0.0074 0.0083 0.0094 0.0121 0.0126
+> Crase-Llama-PPR 0.1037 0.1402 0.2256 0.2866 0.3293 0.3720 0.0857 0.0903 0.0995 0.1044 0.1061 0.1076
+> Spector2-Deepwalk 0.0305 0.0427 0.0854 0.1463 0.1829 0.2012 0.0245 0.0269 0.0295 0.0329 0.0352 0.0361
+> arXiv
+> DeepResearch-GPT 0.0491 0.0954 0.1811 0.2351 0.2793 0.3165 0.0270 0.0451 0.0738 0.0868 0.0935 0.0991 DeepResearch-Claude 0.0477 0.0940 0.1733 0.2246 0.2730 0.3165 0.0267 0.0454 0.0726 0.0845 0.0923 0.0987
+> Crase-Llama-PPR 0.0533 0.1168 0.1988 0.2585 0.3102 0.3572 0.0541 0.0635 0.0899 0.1193 0.1303 0.1168 Spector2-Deepwalk 0.0674 0.1151 0.1916 0.2533 0.3018 0.3446 0.0494 0.0762 0.1040 0.1183 0.1269 0.1331
+
+Table 1: Main results. Recall@K and MAP@K across the three datasets and retrieval setups. Best results bold-colored; second-best underlined. We observe that Crase-Llama-PPR consistently performs best on ACL and ICLR and remains competitive or best across most settings on arXiv .                                                                                                                                                              
+
+> Dataset Variant Recall@K MAP@K
+> @5 @10 @20 @30 @40 @50 @5 @10 @20 @30 @40 @50
+> ACL
+> Crase-Qwen-SALSA 0.0335 0.0747 0.1263 0.1675 0.2113 0.2552 0.0200 0.0258 0.0289 0.0317 0.0336 0.0359 Recency 0.0335 0.0619 0.1521 0.2165 0.2655 0.3015 0.0160 0.0209 0.0281 0.0333 0.0360 0.0376 Crase-Qwen-PPR 0.0309 0.0722 0.1572 0.2191 0.2706 0.3144 0.0148 0.0212 0.0284 0.0336 0.0362 0.0382 Crase-Llama-SALSA 0.0393 0.0787 0.1433 0.1938 0.2584 0.3146 0.0177 0.0269 0.0332 0.0359 0.0398 0.0428 ICLR
+> Crase-Qwen-SALSA 0.0549 0.0793 0.1280 0.1768 0.2073 0.2195 0.0197 0.0234 0.0280 0.0314 0.0325 0.0329 Recency 0.0427 0.1159 0.2073 0.2561 0.3171 0.3537 0.0235 0.0356 0.0469 0.0514 0.0545 0.0559 Crase-Qwen-PPR 0.0488 0.1220 0.2195 0.2561 0.3171 0.3659 0.0245 0.0372 0.0497 0.0531 0.0561 0.0580 Crase-Llama-SALSA 0.0671 0.0915 0.1341 0.1768 0.2073 0.2683 0.0425 0.0470 0.0539 0.0558 0.0567 0.0596 arXiv
+> Crase-Qwen-SALSA 0.0716 0.1312 0.2035 0.2625 0.3081 0.3523 0.0479 0.0723 0.0961 0.1081 0.1156 0.1210 Recency 0.0519 0.1046 0.1944 0.2554 0.2968 0.3361 0.0380 0.0584 0.0832 0.0962 0.1032 0.1083 Crase-Qwen-PPR 0.0519 0.1032 0.1902 0.2533 0.2947 0.3404 0.0384 0.0583 0.0821 0.0957 0.1028 0.1086 Crase-Llama-SALSA 0.0646 0.1263 0.2175 0.2842 0.3368 0.3804 0.0527 0.0737 0.1037 0.1170 0.1258 0.1321
+
+Table 2: Ablations. Alternative claim extraction models (Qwen/Llama) and ranking strategies (SALSA/PPR) and the Recency baseline. 
+
+Best per column is bold-colored; second-best is underlined. We observe that Crase-Llama-SALSA gives the strongest overall performance, while Crase-Qwen-PPR is competitive in Recall@K. 
+
+and the ranking algorithm over the evidence graph (Per-sonalized PageRank (Page et al. 1999) or SALSA (Lempel and Moran 2001)). This yields four configurations, Crase-{Qwen, Llama}-{PPR, SALSA}, each retaining the top-50 ranked papers. 
+
+Recency : This variant keeps Qwen-32B extraction and PPR ranking, changing only the age reference: paper age is mea-sured relative to the query’s publication year and not the current year. 
+
+## Results 
+
+Table 1 reports the retrieval performance on ACL ,
+
+ICLR , and arXiv . We compare Crase-Llama-PPR with DeepResearch-GPT, DeepResearch-Claude, and Spector2-Deepwalk. We report Recall @K and MAP @K for ( K ∈{5, 10 , 20 , 30 , 40 , 50 }). Overall, Crase-Llama-PPR gives the strongest results on ACL and ICLR datasets, while the results on arXiv dataset are more competitive. 
+
+Recall @K: On ACL , Crase-Llama-PPR achieves the best recall@K at all values of K. At recall @5, our method obtains 0.0730, compared to 0.0335 for the best baseline. The differ-ence remains as K increases. At recall @20, recall @30, and recall @50, our method obtains 0.1882, 0.2584, and 0.3848, respectively, while the corresponding best baseline results are 0.1289, 0.1830, and 0.2629, respectively. Thus, the gain is not limited to any particular value of K. Similar to ACL , Crase-Llama-PPR achieves the best recall @K across all values of K on the ICLR dataset. In particular, recall @5 increases from 0.0305 for the best baseline to 0.1037 with our method. At recall @10 and recall @20, our method reaches 0.1402 and 0.2256, compared to 0.0427 and 0.0854 for the best base-lines. The same trend continues at larger values of K, where Crase-Llama-PPR achieves a recall @50 of 0.3720, com-pared to 0.2012 for Spector2-Deepwalk. The arXiv dataset presents a different pattern. Spector2-Deepwalk performs best at recall @5 with 0.0674, while Crase-Llama-PPR ob-tains 0.0533. However, our method performs best for all re-maining recall @K values. It improves recall @10 from 0.1151 Recall@ K MAP@ K
+
+Dataset Seeds 5 10 20 30 40 50 5 10 20 30 40 50 
+
+Query yr. 0.0295 0.0516 0.1204 0.1622 0.2187 0.2654 0.0117 0.0158 0.0223 0.0253 0.0283 0.0311 
+
+ACL Current yr. 0.0309 0.0722 0.1572 0.2191 0.2706 0.3144 0.0148 0.0212 0.0284 0.0336 0.0362 0.0382             
+
+> ∆+.0014 +.0206 +.0368 +.0569 +.0519 +.0490 +.0031 +.0054 +.0061 +.0083 +.0079 +.0071
+
+Query yr. 0.0606 0.1138 0.2036 0.2216 0.2515 0.2994 0.0278 0.0338 0.0441 0.0454 0.0463 0.0483 
+
+ICLR Current yr. 0.0488 0.1220 0.2195 0.2561 0.3171 0.3659 0.0245 0.0372 0.0497 0.0531 0.0561 0.0580             
+
+> ∆−.0118 +.0082 +.0159 +.0345 +.0656 +.0665 −.0033 +.0034 +.0056 +.0077 +.0098 +.0097
+
+Table 3: Seed selection ablation. Query-year vs. current-year seeds (shaded; used in main experiments); bold marks the best result and ∆
+
+the absolute change. Current-year seeds improve nearly all Recall@K and MAP@K scores, with the only drop at Recall@5 for ICLR. 
+
+to 0.1168 and recall@20 from 0.1916 to 0.1988. The dif-ference becomes larger at higher (K): Crase-Llama-PPR obtains 0.3102 and 0.3572 at recall @40 and recall @50, compared to 0.3018 and 0.3446 for Spector2-Deepwalk. Hence, although Spector2-Deepwalk has an advantage for the recall @5 arXiv results, Crase-Llama-PPR recovers more relevant papers as the retrieval set grows. 
+
+MAP @K: The MAP results follow a similar trend on ACL 
+
+and ICLR datasets. On ACL dataset, Crase-Llama-PPR achieves the best MAP @K, increasing MAP @5 from 0.0170 for the best baseline to 0.0453 and MAP @50 from 0.0380 to 0.0730. The difference is larger on ICLR dataset, where our method obtains MAP @5 of 0.0857 and MAP @50 of 0.1076, compared to 0.0245 and 0.0361 for Spector2-Deepwalk. On 
+
+arXiv dataset, we observe Crase-Llama-PPR performs best at MAP @5, MAP @30, and MAP @40, with scores of 0.0541, 0.1193, and 0.1303, respectively. Spector2-Deepwalk per-forms better at MAP @10, MAP @20, and MAP @50. This suggests that the two graph-based methods are closer on 
+
+arXiv dataset, particularly in terms of the ranking of relevant papers. Across the three datasets, DeepResearch-GPT and DeepResearch-Claude generally remain behind the graph-based retrieval methods. The main difference is most clear on ACL and ICLR datasets, where Crase-Llama-PPR im-proves both recall and ranking quality over all baselines. On 
+
+arXiv , the gap with Spector2-Deepwalk is smaller, but our method still obtains the best recall@K for five of the six re-trieval depths. Overall, these results indicate that combining Llama-based representations with PPR provides stable re-trieval performance across different scientific paper retrieval. 
+
+Efficiency and interaction cost: Table 4 compares re-trieval utility with the interaction and computational cost of the agentic systems. The difference is particularly pro-nounced on the ICLR split. The DeepResearch-GPT and DeepResearch-Claude agents require a median of 18 and 17 external tool calls per query, respectively, whereas Crase performs only five pre-specified external search calls dur-ing seed construction and performs no subsequent external search. Crase also substantially reduces total inference cost. It consumes approximately 235K tokens per query, com-pared to 620K for the DeepResearch-GPT and 560K for the DeepResearch-Claude agent. Median end-to-end execution time decreases from 272 and 249 seconds, respectively, to 104 seconds with Crase. Under our cost accounting, the                            
+
+> Method Calls ↓Tokens ↓Time ↓Cost ↓R@50 ↑
+> (K) (s) ($)
+> DeepResearch-GPT 18 620 272 1.76 0.1220 DeepResearch-Claude 17 560 249 2.06 0.1220 Crase-Llama-PPR 5235 104 0.37 0.3659
+
+Table 4: Retrieval utility and interaction cost on ICLR. We re-port median per-query resource consumption together with recall@ 50 . Crase achieves substantially higher retrieval re-call while requiring fewer external interactions and lower inference cost. ↓ indicates lower is better and ↑ indicates higher is better. corresponding median per-query cost decreases from $1.76 and $2.06 to $0.37. Importantly, these efficiency gains do not result from sacrificing retrieval quality. Crase achieves a recall@ 50 of 0.3659 on ICLR dataset, compared to 0.1220 for both proprietary-agent baselines. Thus, Crase achieves approximately 3× higher recall@ 50 while operating with a substantially smaller and predetermined external interaction budget. This result demonstrates that structurally constrain-ing agentic exploration can improve retrieval utility while simultaneously making resource consumption and external actions more predictable. 
+
+Are Crase’s evidence decisions human-auditable? We evaluate whether the retain/prune decisions exposed by the evidence graph align with independent human judgments. On 50 citation edges (Table 5), Crase agrees with the ma-jority expert judgment in 84.0% of cases. Experts validate 
+
+88.0% of retained edges as meaningful evidence or topical grounding and 80.0% of pruned edges as appropriate to discard. Human judgments are also consistent, with 68.0% 
+
+unanimous agreement and Fleiss’ κ = 0.71 . Thus, Crase exposes intermediate evidence decisions that largely align with human judgment and can be independently inspected before the final ranking. 
+
+Effect of design choices : We further study the effect of the claim extraction models and ranking strategy in Table 2. Overall, Crase-Llama-SALSA provides the most consistent performance across datasets, particularly for MAP@K. On 
+
+ACL dataset, it achieves the best MAP for K=10 through 50, while Crase-Qwen-PPR gives the best recall@K for K=20, 30, and 40. A similar pattern is observed on ICLR . Crase-Measure Score      
+
+> Crase–human agreement 84.0%
+> Retained-edge precision 88.0%
+> Pruned-edge correctness 80.0%
+> Unanimous human agreement 68.0% Fleiss’ κ0.71
+
+Table 5: Human validation of evidence-graph decisions. Three domain experts independently assess 50 citation edges while being blinded to Crase’s decision. Crase’s retain/prune de-cisions are compared against the majority human judgment.       
+
+> Model MSciNLI SciNLI
+> Qwen2.5-1.5B-Instruct 0.75 0.77 Qwen2.5-3B-Instruct 0.80 0.83
+
+Table 6: F1 score on claim entailment. Best per dataset in     
+
+> bold .Qwen2.5-3B consistently outperforms Qwen2.5-1.5B on both datasets.
+
+Llama-SALSA achieves the best MAP at every K, whereas Crase-Qwen-PPR performs better for Recall at larger values of K. On arXiv dataset, Crase-Llama-SALSA achieves the best Recall for K=20 through 50 and the best MAP at every K. In contrast, Crase-Qwen-SALSA performs better at smaller recall cutoffs, obtaining the best recall @5 and recall @10. The Recency variant remains competitive on recall metric for ICLR dataset, but is generally weaker in MAP and on the other datasets. These results suggest that both the retrieval backbone and the ranking strategy affect performance, with the Llama-SALSA combination providing the most stable results across datasets and evaluation metrics. 
+
+Effect of seed selection strategy : Table 3 compares two ways of picking seeds: using the year of the query, and us-ing the current year. On ACL , seeding by the current year is better on every column, all six recall cutoffs and all six MAP cutoffs. For example, recall@50 rises from 0.2654 to 0.3144 and MAP@50 from 0.0311 to 0.0382. On ICLR ,seeding by the current year is better at all but the two small-est cutoffs. Seeding by the year of the query is slightly ahead at recall@5 (0.0606 against 0.0488) and MAP@5 (0.0278 against 0.0245), but from recall@10 and MAP@10 onward the current-year strategy leads. Recall@50 goes from 0.2994 to 0.3659 and MAP@50 from 0.0483 to 0.0580. On both datasets, the gap grows as K increases, so the benefit of current-year seeding is largest at the deeper cutoffs. We there-fore use current-year seed selection in Crase. 
+
+Claim entailment model result : Table 6 compares two Qwen2.5 models on MSciNLI and SciNLI under a two-class setting. Increasing the model size from 1.5B to 3B improves F1 score by ∼ 5 points on both MSciNLI ( 75% → 80% )and SciNLI ( 77% → 83% ). Both models achieve higher ac-curacy on SciNLI than on MSciNLI. Based on these results, we use Qwen2.5-3B-Instruct for claim entailment in Crase. 
+
+Complexity analysis : The cost of Crase is fixed by the size of the evidence graph, not by a model-chosen trajectory. With 
+
+|S| ≤ mL seeds and maximum seed degree dmax , the graph has |V | = O(mL d max ) nodes and |E| = O(|V | ¯d) edges, both determined by S before any inference. The complexity is dominated by the |E| entailment calls, and the total num-ber of model invocations is exactly 1 + |V | + |E|, known before inference and independent of intermediate outputs 
+
+(see supplementary material for full derivations). A generic search-and-synthesis agent, by contrast, appends each O(ℓ)
+
+observation to its context over Ttool model-terminated tool calls, giving cumulative cost O(T 2tool ℓ): quadratic in a trajec-tory length that is unbounded a priori. Crase is instead linear 
+
+in a structurally fixed graph, with constant-size prompts and a stopping condition set before inference. 
+
+## Conclusion 
+
+We introduced Crase, a structurally bounded approach to scholarly deep research that replaces open-ended search with citation-guided exploration and claim-level evidence filter-ing. Crase improves retrieval over agentic baselines while using fewer external calls, tokens, time, and cost, and its ev-idence decisions largely align with human judgments. These results suggest that constraining agentic search around ex-plicit, inspectable evidence can improve both retrieval effec-tiveness and auditability. 
+
+## References 
+
+2008–2026. GROBID. https://github.com/grobidOrg/ grobid. Ajith, A.; Xia, M.; Chevalier, A.; Goyal, T.; Chen, D.; and Gao, T. 2024. LitSearch: A Retrieval Benchmark for Scien-tific Literature Search. In Al-Onaizan, Y.; Bansal, M.; and Chen, Y.-N., eds., Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , 15068– 15083. Miami, Florida, USA: Association for Computational Linguistics. Asai, A.; He, J.; Shao, R.; Shi, W.; Singh, A.; Chang, J. C.; Lo, K.; Soldaini, L.; Feldman, S.; D’Arcy, M.; et al. 2024. Open-Scholar: Synthesizing Scientific Literature with Retrieval-Augmented LMs. arXiv preprint arXiv:2411.14199 .Asai, A.; Wu, Z.; Wang, Y.; Sil, A.; and Hajishirzi, H. 2023. Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection. arXiv preprint arXiv:2310.11511 .Banerjee, S.; Layek, S.; Adak, S.; Pechenizkiy, M.; Mukher-jee, A.; and Hazra, R. 2025. ProSocialAlign: Preference Conditioned Test Time Alignment in Language Models. arXiv:2512.06515. Banerjee, S.; Layek, S.; Tripathy, S.; Kumar, S.; Mukherjee, A.; and Hazra, R. 2024. SafeInfer: Context Adaptive De-coding Time Safety Alignment for Large Language Models. arXiv:2406.12274. Barabási, A.-L.; and Albert, R. 1999. Emergence of Scaling in Random Networks. Science , 286(5439): 509–512. Bowman, S. R.; Angeli, G.; Potts, C.; and Manning, C. D. 2015. A Large Annotated Corpus for Learning Natural Language Inference. In Proceedings of the 2015 Confer-ence on Empirical Methods in Natural Language Processing (EMNLP) .Bowman, S. R.; Hyun, J.; Perez, E.; Chen, E.; Pettit, C.; Heiner, S.; Lukoši¯ ut˙ e, K.; Askell, A.; Jones, A.; Chen, A.; et al. 2022. Measuring Progress on Scalable Oversight for Large Language Models. arXiv preprint arXiv:2211.03540 .Burns, C.; Izmailov, P.; Kirchner, J. H.; Baker, B.; Gao, L.; Aschenbrenner, L.; Chen, Y.; Ecoffet, A.; Joglekar, M.; Leike, J.; Sutskever, I.; and Wu, J. 2024. Weak-to-Strong Generalization: Eliciting Strong Capabilities with Weak Su-pervision. In Proceedings of the 41st International Confer-ence on Machine Learning (ICML) , volume 235 of Proceed-ings of Machine Learning Research , 4971–5012. PMLR. Cohan, A.; Ammar, W.; van Zuylen, M.; and Cady, F. 2019. Structural Scaffolds for Citation Intent Classification in Sci-entific Publications. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Com-putational Linguistics (NAACL) .Cohan, A.; Feldman, S.; Beltagy, I.; Downey, D.; and Weld, D. 2020. SPECTER: Document-level Representation Learn-ing using Citation-informed Transformers. In Jurafsky, D.; Chai, J.; Schluter, N.; and Tetreault, J., eds., Proceedings of the 58th Annual Meeting of the Association for Com-putational Linguistics , 2270–2282. Online: Association for Computational Linguistics. Du, M.; Xu, B.; Zhu, C.; Zhang, L.; Wang, X.; and Mao, Z. 2026. DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents. In The Fourteenth International Conference on Learning Representations .Färber, M.; and Jatowt, A. 2020. Citation Recommendation: Approaches and Datasets. International Journal on Digital Libraries , 21(4): 375–405. Garfield, E. 1972. Citation Analysis as a Tool in Journal Evaluation. Science , 178(4060): 471–479. Greenblatt, R.; Shlegeris, B.; Sachan, K.; and Roger, F. 2024. AI Control: Improving Safety Despite Intentional Subver-sion. In Proceedings of the 41st International Conference on Machine Learning (ICML) , volume 235 of Proceedings of Machine Learning Research , 16295–16336. PMLR. Haveliwala, T. H. 2002. Topic-Sensitive PageRank. In Pro-ceedings of the 11th International Conference on World Wide Web (WWW) , 517–526. He, Y.; Huang, G.; Feng, P.; Lin, Y.; Zhang, Y.; Li, H.; and E, W. 2025. PaSa: An LLM Agent for Comprehen-sive Academic Paper Search. In Proceedings of the 63rd Annual Meeting of the Association for Computational Lin-guistics (ACL) , 11663–11679. Vienna, Austria: Association for Computational Linguistics. Hu, F.; Ma, L.; Zhan, X.-X.; Zhou, Y.; Liu, C.; Zhao, H.; and Zhang, Z.-K. 2021. The aging effect in evolving scientific citation networks. Scientometrics , 126(5): 4297–4309. Jeh, G.; and Widom, J. 2003. Scaling Personalized Web Search. In Proceedings of the 12th International Conference on World Wide Web (WWW) , 271–279. Jiang, Z.; Xu, F. F.; Gao, L.; Sun, Z.; Liu, Q.; Dwivedi-Yu, J.; Yang, Y.; Callan, J.; and Neubig, G. 2023. Active Retrieval Augmented Generation. In Proceedings of the 2023 Confer-ence on Empirical Methods in Natural Language Processing (EMNLP) .Jin, B.; Zeng, H.; Yue, Z.; Yoon, J.; Arik, S.; Wang, D.; Zamani, H.; and Han, J. 2025. Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning. arXiv preprint arXiv:2503.09516 .Jurgens, D.; Kumar, S.; Hoover, R.; McFarland, D.; and Ju-rafsky, D. 2018. Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics , 6: 391–406. Kessler, M. M. 1963. Bibliographic Coupling Between Sci-entific Papers. American Documentation , 14(1): 10–25. Kinney, R.; Anastasiades, C.; Authur, R.; Beltagy, I.; Bragg, J.; Buraczynski, A.; Cachola, I.; Candra, S.; Chandrasekhar, Y.; Cohan, A.; et al. 2023. The Semantic Scholar Open Data Platform. arXiv preprint arXiv:2301.10140 .Lempel, R.; and Moran, S. 2001. SALSA: the stochastic approach for link-structure analysis. ACM Trans. Inf. Syst. ,19(2): 131–160. Lewis, P.; Perez, E.; Piktus, A.; Petroni, F.; Karpukhin, V.; Goyal, N.; Küttler, H.; Lewis, M.; Yih, W.-t.; Rocktäschel, T.; Riedel, S.; and Kiela, D. 2020. Retrieval-Augmented Gen-eration for Knowledge-Intensive NLP Tasks. In Advances in Neural Information Processing Systems (NeurIPS) .Li, X.; Dong, G.; Jin, J.; Zhang, Y.; Zhou, Y.; Zhu, Y.; Zhang, P.; and Dou, Z. 2025. Search-o1: Agentic Search-Enhanced Large Reasoning Models. arXiv preprint arXiv:2501.05366 .Lightman, H.; Kosaraju, V.; Burda, Y.; Edwards, H.; Baker, B.; Lee, T.; Leike, J.; Schulman, J.; Sutskever, I.; and Cobbe, K. 2024. Let’s Verify Step by Step. In Inter-national Conference on Learning Representations (ICLR) .ArXiv:2305.20050. Moravcsik, M. J.; and Murugesan, P. 1975. Some Results on the Function and Quality of Citations. Social Studies of Science , 5(1): 86–92. Nakano, R.; Hilton, J.; Balaji, S.; Wu, J.; Ouyang, L.; Kim, C.; Hesse, C.; Jain, S.; Kosaraju, V.; Saunders, W.; et al. 2021. WebGPT: Browser-Assisted Question-Answering with Human Feedback. arXiv preprint arXiv:2112.09332 .OpenAI. 2025. Introducing Deep Research. https://openai. com/index/introducing-deep-research/. Page, L.; Brin, S.; Motwani, R.; and Winograd, T. 1999. The PageRank Citation Ranking: Bringing Order to the Web. Technical report, Stanford InfoLab. Perozzi, B.; Al-Rfou, R.; and Skiena, S. 2014. DeepWalk: on-line learning of social representations. In Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining , KDD ’14, 701–710. New York, NY, USA: Association for Computing Machinery. ISBN 9781450329569. Qwen. 2025. Qwen2.5 Technical Report. arXiv:2412.15115. Rasheed, R. A.; Banerjee, S.; Mukherjee, A.; and Hazra, R. 2026. From Fluent to Verifiable: Claim-Level Auditability for Deep Research Agents. arXiv:2602.13855. Sadat, M.; and Caragea, C. 2022. SciNLI: A Corpus for Natural Language Inference on Scientific Text. In Muresan, S.; Nakov, P.; and Villavicencio, A., eds., Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , 7399–7409. Dublin, Ireland: Association for Computational Linguistics. Sadat, M.; and Caragea, C. 2024. MSciNLI: A Di-verse Benchmark for Scientific Natural Language Inference. arXiv:2404.08066. Schick, T.; Dwivedi-Yu, J.; Dessì, R.; Raileanu, R.; Lomeli, M.; Hambro, E.; Zettlemoyer, L.; Cancedda, N.; and Scialom, T. 2023. Toolformer: Language Models Can Teach Them-selves to Use Tools. In Advances in Neural Information Processing Systems (NeurIPS) .Shinn, N.; Cassano, F.; Gopinath, A.; Narasimhan, K.; and Yao, S. 2023. Reflexion: Language Agents with Verbal Re-inforcement Learning. In Advances in Neural Information Processing Systems (NeurIPS) .Singh, A.; D’Arcy, M.; Cohan, A.; Downey, D.; and Feld-man, S. 2023. SciRepEval: A Multi-Format Benchmark for Scientific Document Representations. In Bouamor, H.; Pino, J.; and Bali, K., eds., Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , 5548– 5566. Singapore: Association for Computational Linguistics. Small, H. 1973. Co-citation in the Scientific Literature: A New Measure of the Relationship Between Two Documents. 
+
+Journal of the American Society for Information Science ,24(4): 265–269. Teufel, S.; Siddharthan, A.; and Tidhar, D. 2006. Automatic Classification of Citation Function. In Proceedings of the 2006 Conference on Empirical Methods in Natural Language Processing (EMNLP) , 103–110. Thorne, J.; Vlachos, A.; Christodoulopoulos, C.; and Mittal, A. 2018. FEVER: A Large-scale Dataset for Fact Extraction and VERification. In Proceedings of the 2018 Conference of the North American Chapter of the Association for Compu-tational Linguistics (NAACL) .Trivedi, H.; Balasubramanian, N.; Khot, T.; and Sabharwal, A. 2023. Interleaving Retrieval with Chain-of-Thought Rea-soning for Knowledge-Intensive Multi-Step Questions. In 
+
+Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (ACL) .Wadden, D.; Lin, S.; Lo, K.; Wang, L. L.; van Zuylen, M.; Cohan, A.; and Hajishirzi, H. 2020. Fact or Fiction: Verify-ing Scientific Claims. In Proceedings of the 2020 Confer-ence on Empirical Methods in Natural Language Processing (EMNLP) .Yao, S.; Zhao, J.; Yu, D.; Du, N.; Shafran, I.; Narasimhan, K.; and Cao, Y. 2023. ReAct: Synergizing Reasoning and Acting in Language Models. In International Conference on Learning Representations (ICLR) .
+
+## Complexity Analysis 
+
+We bound the cost of Crase by the size of the evidence graph it induces and contrast it with the trajectory-dependent cost of a generic deep research agent. Let L = |Rq | be the number of sub-queries, m the seeds retained per sub-query, dmax the maximum seed degree (references plus citations in C), nmax 
+
+the cap on atomic claims per paper ( nmax = 5 ), and ℓ the maximum token length of t(p). We write cplan , cclaim , cent 
+
+for the per-call cost of the planning, claim-extraction, and entailment models, each a constant in ℓ and nmax .
+
+Graph size: With |S| ≤ mL , the node set is |V | ≤
+
+mL (dmax + 1) = O(mL d max ), and the induced edge set is 
+
+|E| = O(|V | ¯d) for sparse citation graphs of average degree 
+
+¯d ≪ | V |. Both bounds are fixed by S before any inference: the exploration frontier is a deterministic function of S and the corpus, not of model judgments. 
+
+Time: Stage 1 costs O(cplan + L + mL d max ) for one plan-ning call, L index queries, and the neighbor fetches. Stage 2 makes one claim-extraction call per node and one entailment call per edge; each edge scores a single nu × nv matrix (nu, n v ≤ nmax ) in O(n2max ) = O(1) and yields ∆( u, v )
+
+independently, so Stage 2 costs O(|V | cclaim + |E| cent ) plus an O(|V | + |E|) pruning pass. Stage 3 solves the PPR fixed point by power iteration on the sparse W rather than the 
+
+O(|V |3) closed form: each iteration is O(|V | + |E|) and contracts at rate (1 − α), so T = O(α−1 log(1 /ϵ )) iterations suffice, with O(|V | log k) for top-k extraction. End to end,                      
+
+> O
+> 
+> |V|cclaim +|E|cent
+> |{z }
+> graph weighting
+> +1
+> αlog 1
+> ϵ(|V|+|E|)
+> |{z }
+> ranking
+> +|V|log k
+> 
+> ,(8)
+
+dominated by the |E| entailment calls. The total number of model invocations is exactly 1 + |V | + |E|, known before any inference and independent of intermediate outputs. 
+
+Space: Crase stores the textual pool ( O(|V | ℓ)), claim sets (O(|V | nmax )), and weighted graph ( O(|V | + |E|)). Each entailment matrix is O(1) and discarded once ∆( u, v ) is computed, so edge scoring streams with O(1) memory per edge; power iteration adds O(|V | + |E|). Total space is 
+
+O(|V | ℓ + |E|). No component maintains a growing con-text: peak prompt length is O(ℓ) (extraction) or O(n2max )
+
+(entailment), regardless of how many papers are processed. 
+
+Comparison: A search-and-synthesis agent making Ttool 
+
+tool calls, appending each O(ℓ) observation to its context, incurs prompts of length O(t ℓ ) at step t and cumulative cost 
+
+O(P 
+
+> t
+
+t ℓ ) = O(T 2tool ℓ), quadratic in a trajectory length that is unbounded a priori, since the model decides termination. Crase is instead linear in a structurally fixed graph, with constant-size prompts and a termination condition (exhaus-tion of E, then PPR convergence) set before inference, con-sistent with the tool-call and token reductions in the results section. 
+
+## Research Plan and Seed Construction 
+
+A complete execution trace of this stage for a real query , the generated plan, the per-sub-query retrieval lists, and the resulting seed set , is reproduced in Appendix . For that query, Crase issues exactly L = 5 external search calls, after which no further search occurs; sub-queries whose keyword phrasing matches papers outside the topic (e.g., quantum-measurement papers retrieved for the phrase “faith-ful . . . measurement” ) contribute seeds that are subsequently removed by the claim-level pruning of Stage 2. 
+
+## Execution Trace of Stage 1 
+
+Trace 1 reproduces Crase’s Stage 1 log for one query from the expert-curated set, lightly reformatted for readability. Or-ange annotations ( ◁) connect each field to the formalism of Section 3. The trace illustrates two properties of the pipeline. First, the external-search budget is fixed and small: one plan-ning call and L = 5 index calls, after which every subse-quent operation is graph traversal. Second, seed construction is deliberately permissive: sub-query ρ1 retrieves quantum-information and applied-physics papers through pure key-word overlap, and these enter the seed set S. Such seeds survive Stage 1 by design , lexical search over a broad cor-pus cannot avoid them , and are removed in Stage 2, where every incident edge receives coverage affinity ∆ = 0 and is pruned. Relevance enforcement is thus the responsibility of the evidence graph, not the search engine. 
+
+Stage 1: Plan and seed construction query: "How to faithfully and explicitly measure the helpfulness of human explanations to language models during finetuning and inference?" ◁ input q
+
+plan: ["faithful explicit helpfulness measurement", "human explanations language models", "helpfulness metrics finetuning", "explicit human guidance LMs", "measuring explanation impact inference"] ◁ R q = {ρ1, . . . , ρ 5}, L = 5 ; one LLM call 
+
+external_calls: Semantic Scholar API × 5
+
+◁ one per ρℓ; the only search calls in the run 
+
+ρ2: "human explanations language models" 
+
+relevance: Fostering Appropriate Reliance on LLMs; Sparse Autoencoders Find Highly Interpretable Features in LMs; FaithLM; Evaluating the Reliability of Self-Explanations in LLMs; Can LLMs Explain Themselves?; ... 
+
+recency: Sparse Autoencoders Find Highly Interpretable Features in LMs; Can LLMs Explain Themselves?; Post Hoc Explanations of LMs Can Improve LMs; ... 
+
+intersection: Sparse Autoencoders Find Highly Interpretable Features in LMs; Can LLMs Explain Themselves?; Exploring LLMs for Human Mobility Prediction; Post Hoc Explanations of LMs Can Improve LMs; Are Human Explanations Always Helpful?; ... ◁ Seeds (ρ2), Eq. 3 , on-topic core of Sρ1: "faithful explicit helpfulness measurement" 
+
+relevance: Exact minimum measurement dependence for faithful local deterministic models...; A resource theory of quantum memories...; FlowSteer; Pretty good measurement for bosonic Gaussian ensembles; Topology-faithful nonparametric estimation... 
+
+recency: A resource theory of quantum memories...; Improvements on sampling of point spread function...; Pretty good measurement for bosonic Gaussian ensembles; Topology-faithful nonparametric estimation...; Estimation of non-constant variance in isothermal titration calorimetry... 
+
+intersection: A resource theory of quantum memories...; Pretty good measurement for bosonic Gaussian ensembles; Topology-faithful nonparametric estimation... ◁ lexical-match noise: enters S, pruned in Stage 2 ( ∆ = 0 )
+
+ρ3: "helpfulness metrics finetuning" 
+
+intersection: RAFT: Reward rAnked FineTuning; Mertech; What Happens During Finetuning of Vision Transformers; RAIN: Your LMs Can Align Themselves without Finetuning; Cross-Domain Image Captioning with Discriminative Finetuning; ... ◁ mixed: alignment papers on-topic; audio/vision finetuning tangential 
+
+ρ4: "explicit human guidance LMs" 
+
+intersection: Guiding Instruction-based Image Editing via Multimodal LLMs; Recent advances in leveraging human guidance for sequential decision-making; John praised Mary because _he_?; Explicit Syntactic Guidance for Neural Text Generation; Fine-Grained Human Feedback Gives Better Rewards for LM Training; ... ◁ recovers the human-feedback literature missed by ρ2
+
+ρ5: "measuring explanation impact inference" 
+
+intersection: Measuring the Impact of Explanation Bias; Field-level simulation-based inference with galaxy catalogs... ◁ |Seeds (ρ5)| = 2 : narrow phrasing, sparse overlap of the two rankings 
+
+seed_set: |S| = 29 papers ◁ union over ρ1–ρ5 after deduplication; |S| < mL , Eq. 3 
+
+Full seed set. Table 13 lists all 29 seed papers with their contributing sub-query. 
+
+Claim Entailment Prompt Instruction. Consider the following two sentences. Based only on the information available in these two sentences, which of the following options is true? 
+
+a. Sentence 1 generalizes, specifies, or has an equivalent mean-ing with Sentence 2. 
+
+b. Sentence 1 presents the reason, cause, or condition for the result or conclusion made in Sentence 2. 
+
+c. Sentence 2 mentions a comparison, criticism, juxtaposition, or a limitation of something said in Sentence 1. 
+
+d. Sentence 1 and Sentence 2 are independent. 
+
+Output: Answer with only the option letter: a, b, c, or d.Sentence 1: {premise} 
+
+Sentence 2: {hypothesis} 
+
+Sub-query Generation Prompt System Message 
+
+You are an expert scientific literature retrieval assistant. Your task is to decompose a research topic into highly relevant search queries for academic search engines such as Semantic Scholar, arXiv , Crossref, and OpenAlex. Your goal is to maximize retrieval of relevant papers while minimizing irrelevant ones. 
+
+Rules: 
+
+– Preserve the key technical concepts from the original query. – Never invent new concepts, tasks, datasets, methods, or ap-plication domains. – Never broaden the scope of the query. – Never remove constraints that make the query specific. – Each subquery should emphasize a different aspect of the original topic. – Prefer concise keyword-style search queries rather than nat-ural language. – Output ONLY a Python list of exactly 5 strings. 
+
+User Message 
+
+Generate exactly 5 complementary search queries for the fol-lowing research topic. 
+
+Requirements: 
+
+– Each query should contain 2–3 technical words. – Preserve all important constraints from the original query. – Focus on different aspects of the same topic. – Do NOT introduce unrelated terminology. – Do NOT generalize the query. – Do NOT specialize beyond what is stated. – Use terminology commonly appearing in paper titles and abstracts. – Return ONLY a Python list. 
+
+Examples Example 1 Query: Retrieval-augmented generation methods for medical question answering. 
+
+Good: 
+
+– RAG medical QA – retrieval augmented clinical answering – medical knowledge retrieval LLMs – RAG healthcare QA 
+
+Bad: 
+
+– medical question answering (drops the retrieval-augmented constraint) 
+
+– retrieval augmented generation (drops the medical ground-ing) 
+
+– clinical LLM fine-tuning (introduces fine-tuning, which was never mentioned) 
+
+Example 2 Query: Reducing hallucinations in multilingual neural ma-chine translation. 
+
+Good: 
+
+– hallucination multilingual translation – faithfulness multilingual MT – reducing translation hallucinations – multilingual MT hallucination mitigation 
+
+Bad: 
+
+– machine translation quality (too broad) 
+
+– LLM hallucination detection (drops translation) 
+
+– multilingual language models (drops both hallucination and translation) 
+
+Example 3 Query: Parameter-efficient fine-tuning of vision transformers for edge devices. 
+
+Good: 
+
+– PEFT vision transformers – ViT edge deployment – efficient ViT fine-tuning – adapter tuning ViT 
+
+Bad: 
+
+– vision transformer architectures (drops efficiency and edge) 
+
+– edge device inference (drops ViT) 
+
+– fine-tuning language models (wrong modality) 
+
+Example 4 Query: Research works on merging instruction-tuned and domain-specialized LLMs. 
+
+Good: 
+
+– merging instruction-tuned LLMs – merging domain-specialized LLMs – model merging LLM specialization – instruction domain LLM merging 
+
+Bad: 
+
+– domain-specialized LLMs integration (too vague) 
+
+– instruction-tuned domain-specialized models (describes one model instead of merging two) 
+
+– LLM combination methods (too generic) 
+
+Now generate exactly 5 search queries. Query: {agentic_query} 
+
+## Claim Extraction 
+
+Crase represents each paper by a small set of atomic, contribution-level claims extracted from its abstract and in-troduction. The prompt below constrains the extractor to re-turn 4–5 standalone claims, each tagged by type and anchored to a verbatim source phrase, so that the resulting claims can be compared across papers when building the entailment matrix of Stage 2. 
+
+Claim Extraction Prompt System Message 
+
+You are a scientific claim extractor specialized in analyzing academic papers. Your goal is to extract core claims that will later be used to build an entailment matrix — meaning each claim must be precise enough to be compared against claims from other papers for evidential grounding relationships. 
+
+User Message 
+
+Extract 4–5 core claims from the following paper excerpt (ab-stract + introduction). 
+
+Each claim must: – Be a standalone, self-contained assertion (readable with-out the paper’s context). – Be atomic (one idea per claim, no compound assertions). – Be tagged with one of these types: 
+
+∗ EMPIRICAL — a result, measurement, or observed phe-nomenon. 
+
+∗ THEORETICAL — a mechanistic explanation or formal relationship. 
+
+∗ METHODOLOGICAL — a design choice with its justifica-tion. 
+
+∗ CONTEXTUAL — a gap, limitation, or motivation the paper addresses. – Represent claims the paper makes as its own contribution ,not claims attributed to prior work. – Be phrased as a declarative sentence (not a question or fragment). Return your response as a JSON object in exactly this format: 
+
+{"claims": [{"id": "C1", "type": "EMPIRICAL | THEORETICAL |METHODOLOGICAL | CONTEXTUAL", "claim": <standalone declarative sentence>, "source_phrase": <short verbatim phrase from the text> }, ... ]}
+
+Do not include any explanation or text outside the JSON object. 
+
+Paper excerpt: {text} 
+
+## Test Data Preparation 
+
+For the arXiv held-out set, we convert each paper into a single search-style query using the prompt below. The prompt constrains the model to produce exactly one broad, self-contained research query that captures the paper’s pri-mary contribution, while varying phrasing across papers and avoiding any reference to the title, authors, or implementation details that would leak the ground truth. 
+
+Query Generation Prompt (Test Data) System Message 
+
+You are given the text of a research paper. Your task is to generate exactly one general research query that is directly answered by the paper. 
+
+Guidelines: 
+
+– Generate exactly ONE query. – The query must express a SINGLE information need. Do NOT combine multiple questions, requests, or comparisons into one query. – The query should capture the paper’s primary research prob-lem or main contribution rather than secondary details. – The query should be broad enough that someone could nat-urally use it to search for relevant research papers. – Keep the query concise, ideally between 8 and 18 words, and never exceed 25 words. – Avoid yes/no questions. Vary the phrasing across papers. Do NOT repeatedly start queries with “Can”, “Could”, “Is”, or “Are”. Instead, naturally vary the phrasing, for example: 
+
+∗ How does . . . 
+
+∗ What are . . . 
+
+∗ Which methods . . . 
+
+∗ Why do . . . 
+
+∗ When does . . . 
+
+∗ What approaches . . . – Do NOT mention the paper title, authors, or implementation details. – Mention datasets, benchmark names, model names, or algo-rithms only if they are central to the research question. – The query should sound like a realistic query that a re-searcher would type into Google Scholar, Semantic Scholar, or an academic search engine. – Return ONLY the query. Do not prepend “Query:”, use quo-tation marks, or provide any explanation. 
+
+Example Query: Could you recommend a dataset paper which presents relation extraction performance on translated data? 
+
+Research_paper: {reference_text} 
+
+The above research paper directly answers the example query. Now generate exactly one concise, diverse, search-oriented research query for the new research paper. 
+
+User Message 
+
+{text} 
+
+## Entailment Model Details 
+
+We fine-tune Qwen2.5-3B-Instruct on the union of MSciNLI and SciNLI, formulated as a four-way claim-relation classification task (entailment, reasoning, contrast-ing, neutral). Training uses full-parameter SFT with Deep-Speed ZeRO-3. Table 8 lists the full configuration. 
+
+## Corpus Statistics 
+
+Table 7 reports the number of papers per arXiv category in our corpus C. Papers may carry multiple category tags, so the per-category counts sum to more than the corpus size. 
+
+Category # Category #
+
+cs.LG 135,116 cs.NE 6,972 cs.CV 150,055 cs.MA 3,890 cs.AI 36,148 stat.ML 18,549 cs.CL 82,273 cs.IR 14,081 
+
+Table 7: Per-category paper counts in C. Papers with multiple tags are counted once per category. 
+
+## Effect of Exploration Hop 
+
+The 1.5-hop construction expands only to immediate neigh-bors of the seeds but additionally retains citation relations Setting Value                 
+
+> Base model Qwen2.5-3B-Instruct
+> Training stage Supervised fine-tuning (SFT) Fine-tuning type Full parameters Optimization backend DeepSpeed ZeRO-3 Prompt template qwen
+> Max sequence length 2048 Epochs 4Per-device batch size 16 Gradient accumulation 1Learning rate 1×10 −5
+> LR scheduler Cosine Warmup ratio 0.1 Precision bf16 Validation split 10% Eval strategy Every 500 steps Eval batch size 1
+
+Table 8: Fine-tuning configuration for the Crase entailment model.             
+
+> Graph R@50 |V|Entailment calls
+> 1-hop 0.331 642 1,286 1.5-hop 0.372 642 3,947 2-hop 0.386 4,781 28,614
+
+Table 9: Effect of exploration radius on ICLR. The 1-hop and 1.5-hop constructions contain the same nodes; 1.5-hop additionally retains relations among retrieved neighbors. among the retrieved nodes. We compare this design with a one-hop graph containing only seed–neighbor relations and a full two-hop expansion. The one-hop graph is cheaper but discards relations among neighboring papers, reducing Re-call@50. A full two-hop expansion provides only a small additional recall gain while increasing the candidate graph and entailment workload by an order of magnitude. The 1.5-hop construction therefore captures much of the benefit of additional graph connectivity without allowing the candidate space to grow recursively. 
+
+## Effect of the Seed Budget 
+
+The seed budget controls the trade-off between the size of the structurally bounded search space and candidate coverage. We vary the maximum number of seeds retained per sub-query while keeping L = 5 fixed. Increasing the seed budget improves coverage, but the gain diminishes beyond m =10 while graph construction and entailment cost continue to grow. We therefore use m = 10 as a practical trade-off between retrieval quality and the size of the bounded evidence graph. 
+
+## Qualitative Examples of Claim Extraction 
+
+Table 11 shows representative outputs of the claim-extraction stage for two papers with different contribution structures.                  
+
+> mR@50 Median |V|Relative cost
+> 50.326 371 0.61 ×
+> 10 0.372 655 1.00 ×
+> 15 0.381 911 1.42 ×
+> 20 0.386 1,174 1.83 ×
+
+Table 10: Effect of the seed budget on ICLR. For each paper, the extractor returns a small set of atomic claims together with a claim type and a source phrase from the input text. The examples illustrate that the representa-tion is not restricted to empirical results: survey papers may be represented primarily by contextual and methodological claims, whereas benchmark papers can contain empirical, methodological, and other contribution-level claims. The source phrases provide a direct textual anchor for inspect-ing each extracted claim. 
+
+## Error Analysis: Seed Corruption and Error Propagation 
+
+A central claim of Crase is that structural boundedness lo-calizes errors: because exploration is confined to the citation neighborhood induced by the seed set S, a faulty seed can only affect the graph region it induces, and claim-level prun-ing further suppresses the spurious edges it introduces. We test this directly with a controlled seed-corruption stress test that replaces the seeds of each query with corrupted seeds of varying relatedness, holding the rest of the pipeline fixed like 1.5-hop expansion, coverage-affinity pruning with threshold 
+
+τ , and PPR ranking are all unchanged. 
+
+Setup: For each query we substitute the seed papers with one of two corruption types and re-run Stages 2–3 without modification: 
+
+• Lexically similar distractor : a paper with high lexical/-surface overlap with the query but absent from the ground truth. Such seeds lie near the true region of the citation graph and mimic the lexical-match noise that keyword search returns in practice (cf. Trace 1, where phrasing such as “faithful . . . measurement” retrieves quantum-measurement papers). 
+
+• Random irrelevant paper : a paper drawn uniformly from the corpus, which with overwhelming probability lies in a citation region disconnected from the ground truth. We compare both against the uncorrupted clean seeds . Re-sults appear Figure 2. 
+
+Graceful degradation under near-manifold corruption: 
+
+Replacing the seeds with lexically similar distractors re-duces Recall@50 from 0.3636 to 0.2045 : Crase still recov-ers ∼ 56% of the relevant papers it retrieves under clean seeds, and preserves ∼ 81% of clean MAP@50 ( 0.0185 vs. 
+
+0.0228 ). Because the distractor is topically adjacent, its 1.5-hop neighborhood still intersects the relevant region, and any edge the distractor cannot ground receives coverage affinity 
+
+∆ = 0 and is pruned. The corruption therefore lowers how many relevant papers enter the candidate graph but does not ID Type Extracted claim Source phrase Paper 1: A Review of Cooperation in Multi-agent Learning 
+
+C1 CONTEXTUAL Cooperation in multi-agent learning intersects with game theory, economics, social sciences, and evolu-tionary biology. “Cooperation in multi-agent learning (MAL) is a topic at the intersection of numerous disciplines” C2 CONTEXTUAL Research in multi-agent learning aims to understand how agents can coordinate effectively when goals are aligned. “Research in this area aims to understand both how agents can coordinate effectively when goals are aligned” C3 CONTEXTUAL Research in multi-agent learning also aims to under-stand how agents may cooperate in settings with po-tential for conflict. “how they may cooperate in settings where gains from working together are possible but possibilities for con-flict abound” C4 METHODOLOGICAL The paper provides an overview of fundamental con-cepts, problem settings, and algorithms in multi-agent learning. “we provide an overview of the fundamental concepts, problem settings and algorithms of multi-agent learn-ing” C5 CONTEXTUAL The paper discusses open challenges in multi-agent learning to inspire new research avenues. “Finally we discuss open challenges in the field with the aim of inspiring new avenues for research” 
+
+Paper 2: Do MLLMs Capture How Interfaces Guide User Behavior? A Benchmark for Multimodal UI/UX Design Understanding 
+
+C1 CONTEXTUAL Recent studies on UI evaluation using MLLMs focus on surface-level features, neglecting the impact of de-sign choices on user behavior. “they largely focus on surface-level features, overlook-ing how design choices influence user behavior at scale” C2 EMPIRICAL WiserUI-Bench is a benchmark built on 300 real-world UI image pairs from industry A/B tests, with empiri-cally validated winners that induced more user actions. “built on 300 real-world UI image pairs from industry A/B tests, with empirically validated winners that in-duced more user actions” C3 METHODOLOGICAL WiserUI-Bench includes expert-curated key interpre-tations for each instance to support post-hoc under-standing of why certain UI designs succeed. “we support this via expert-curated key interpretations for each instance” C4 EMPIRICAL Experiments on WiserUI-Bench show that MLLMs exhibit limited understanding of the behavioral impact of UI/UX design. “models exhibit limited understanding of the behavioral impact of UI/UX design” C5 THEORETICAL WiserUI-Bench is designed to foster research on lever-aging MLLMs for visual design in user behavior con-texts. “We believe our work will foster research on leveraging MLLMs for visual design in user behavior contexts” 
+
+Table 11: Outputs of the claim-extraction stage. Each paper is represented by a small set of atomic, typed claims together with the source phrase from which the claim was extracted. These source anchors make the intermediate representation directly inspectable before claim-level entailment is computed. degrade the ranking of those that survive, and it does not propagate beyond the injected node’s local structure. The proportional loss is largest at deep cutoffs (Recall@50 re-tains 56% vs. 71% at Recall@20), indicating the distractor mainly costs the harder-to-reach tail of the evidence set. 
+
+Bounded failure under off-manifold corruption: Ran-dom irrelevant seeds collapse recall to 0 at every cutoff. This is the predicted cost of structural boundedness (see the cost-of-boundedness discussion and FAQ Q9): a seed whose citation neighborhood never reaches the ground truth can-not be recovered, because Crase deliberately forgoes open-ended re-search. Crucially, the failure is total but localizable 
+
+– it surfaces as an empty relevant-neighborhood that is di-rectly inspectable before ranking, not as silent trajectory drift that an open-ended agent would carry into every subsequent query. 
+
+Containment versus recovery: Together the two settings delineate Crase’s operating envelope. Crase contains errors that remain near the true evidence region, pruning stops them from propagating but it does not recover from errors that push the search off the citation manifold entirely. This is the design trade Crase makes: bounded cost and inspectable evidence in exchange for adaptive re-exploration. The realistic failure mode of keyword seeding is precisely the near-manifold case: search engines return lexical-match noise mixed with on-topic seeds, and Table 1 already shows Crase pruning 10 
+
+of 29 such artifacts at ∆ = 0 without recall loss. The all-random substitution is therefore best read as a worst-case sanity bound rather than a condition Crase is expected to encounter in deployment. 
+
+## Frequently Asked Questions about Crase 
+
+This section clarifies the main design choices of Crase and the trade-offs introduced by structurally bounded exploration. 20 30 40 50      
+
+> K
+> 0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 Recall@ K
+> retains ~56%
+> Recall under seed corruption
+> 20 30 40 50
+> K
+> −0.005 0.000 0.005 0.010 0.015 0.020 MAP@ K
+> MAP under seed corruption
+> Clean seeds (no corruption) Lexically similar distractor Random irrelevant paper
+
+Figure 2: Recall@ K (left) and MAP@ K (right) under seed corruption. Lexically similar distractors degrade retrieval gracefully—Crase retains ∼ 56% of clean Recall@50 and ∼ 81% of clean MAP@50, because claim-level pruning sup-presses the unsupported edges the distractor introduces. Random irrelevant seeds collapse to zero: an off-manifold seed induces a neighborhood disconnected from the ground truth, which Crase does not attempt to recover through further search. 
+
+Q1. What does “structurally bounded” actually guarantee? 
+
+Once the seed set S is constructed, the exploration space is fixed by the citation graph. Subsequent model outputs may change extracted claims and local edge scores, but they cannot issue new external searches or recursively enlarge the candidate set. Thus, Crase does not guarantee that every retrieved paper is correct; it guarantees that the search boundary, evidence-selection operations, and stopping rule remain explicit and inspectable. 
+
+Q2. Is auditability the same as correctness? 
+
+No. The claim extractor and entailment model remain learned components and can make mistakes. The key difference is that these mistakes appear as explicit intermediate objects: extracted claims, claim-support predictions, coverage affinities, and retain/prune decisions. In our human evaluation, Crase agrees with the majority expert judgment on 84 .0% of sampled citation edges. The goal is therefore not to eliminate model error, but to make evidence-selection decisions independently inspectable. 
+
+Q3. Why allow noisy papers into the seed set? 
+
+Stage 1 favors candidate coverage rather than final precision. Keyword-based academic search inevitably retrieves lexical matches that are unrelated to the intended research question. Our execution trace illustrates this with papers on quantum measurement and other unrelated domains. Instead of asking the search engine to make the final evidence decision, Crase allows such papers to enter S and delegates relevance filtering to the evidence graph. In the example trace, 10 of 29 seeds are subsequently removed because they lack surviving claim-level support. 
+
+Q4. Why use claim-level evidence instead of document sim-ilarity? 
+
+Document similarity captures whether two papers discuss re-lated topics, but not whether one paper supports the contri-bution of another. This distinction matters for citation graphs, where topical, methodological, historical, and substantive ci-tations all appear as the same binary relation. Crase therefore represents each paper using a small set of contribution-level claims and evaluates citation edges through claim-level sup-port. A retained edge can consequently be traced back to the specific claims responsible for its weight. 
+
+Q5. Why use coverage affinity instead of the strongest matching claim? 
+
+A single highly related claim should not make an entire ci-tation relation strong. Using only max ij M (u,v ) 
+
+> ij
+
+would allow one matching claim pair to dominate the edge even when the remaining contributions are unsupported. Coverage affinity in-stead measures the fraction of the citing paper’s claims that receive support: 
+
+∆( u, v ) = 1
+
+nunuX
+
+> i=1
+
+si(u, v ).
+
+This favors references that ground several principal claims while still allowing different cited-paper claims to support dif-ferent citing-paper claims. 
+
+Q6. Can an incorrect model judgment still propagate through the graph? 
+
+Yes, but its influence is structurally contained. A wrong claim extraction or entailment decision can alter an edge weight and therefore affect the final ranking. However, it cannot trigger another external search or change the exploration frontier after seed construction. In an open-ended research agent, an early re-trieval error may modify the context, alter subsequent queries, and redirect the remaining trajectory. In Crase, the error re-mains localizable to a claim, edge, or ranking path within a fixed graph. Q7. Why use a 1.5-hop neighborhood rather than one or two hops? 
+
+The 1.5-hop construction separates node expansion from edge completion . Crase retrieves only the immediate references and citing papers of each seed, as in a one-hop expansion, but also retains citation relations among all retrieved nodes. It therefore exposes richer local structure without recursively introducing another layer of papers. This provides more evidence paths than a strict one-hop graph while keeping the candidate boundary substantially smaller than a full two-hop expansion. 
+
+Q8. Why combine coverage affinity with recency? 
+
+The two terms play different roles. Coverage affinity measures semantic evidence, whereas the age term corrects a structural bias of citation networks: older papers have had more time to accumulate citations and may therefore receive disproportion-ately high random-walk mass. In 
+
+w(u → v) = ∆( u, v ) age( v)−β ,
+
+recency cannot rescue an unsupported edge because its weight remains controlled by ∆( u, v ). Conversely, an older paper with strong evidence is down-weighted rather than discarded. Re-cency therefore acts as a soft bias correction rather than a substitute for relevance. 
+
+Q9. What is the main cost of structural boundedness? 
+
+A relevant paper outside the citation neighborhood induced by the initial seeds cannot be recovered through later query refor-mulation. An open-ended agent may, in principle, discover such a paper by continuing to search. Crase deliberately exchanges this adaptive exploration for a process whose candidate bound-ary and termination rule are explicit. The candidate-space anal-ysis in section separates failures caused by missing candidates from those caused by evidence pruning or ranking. 
+
+Q10. Why is the advantage of Crase smaller on the recent arXiv set? 
+
+The main experiments show a different pattern on arXiv: the gap between Crase and the strongest graph baseline is smaller than on ACL and ICLR, and Spector2-Deepwalk is stronger at Recall@5 while Crase becomes stronger at deeper recall cutoffs. One plausible explanation is that very recent papers expose less mature citation structure, reducing the benefit of citation-guided propagation. We treat this as a hypothesis rather than a conclusion; the graph-statistics and candidate-coverage analyses provide a more direct test of this explanation. Stage Model contribution Structural control What can be inspected? 
+
+Planning Generates focused sub-queries Exactly L external search calls Research plan and retrieved seeds Graph construc-tion Extracts atomic claims Candidate graph fixed after seed con-struction Nodes, citation edges, extracted claims Evidence scor-ing Predicts local claim support Each citation edge scored independently Entailment matrix and ∆( u, v )
+
+Pruning Provides support scores Fixed threshold determines edge fate Why each edge is retained or re-moved Ranking No new evidence is generated Deterministic PPR/SALSA over the weighted graph Edge weights and final ranking scores Stopping None Graph scoring completes and ranking converges Explicit stopping condition 
+
+Table 12: Where does model autonomy remain in Crase? Model judgments are restricted to local, inspectable operations, while exploration, pruning, ranking, and termination remain structurally constrained after seed construction. Seed paper Fate 
+
+ρ1 “faithful explicit helpfulness measurement” 
+
+A resource theory of quantum memories and their faithful verification with minimal assumptions ✗
+
+Pretty good measurement for bosonic Gaussian ensembles ✗
+
+Topology-faithful nonparametric estimation and tracking of bulk interface networks ✗
+
+ρ2 “human explanations language models” 
+
+Sparse Autoencoders Find Highly Interpretable Features in Language Models ✓
+
+Can Large Language Models Explain Themselves? A Study of LLM-Generated Self-Explanations ✓
+
+Exploring Large Language Models for Human Mobility Prediction under Public Events ✗
+
+Post Hoc Explanations of Language Models Can Improve Language Models ✓
+
+Are Human Explanations Always Helpful? Towards Objective Evaluation of Human Natural Language Explanations ✓
+
+Interpreting Language Models with Contrastive Explanations ✓
+
+Using Large Language Models to Provide Explanatory Feedback to Human Tutors ✓
+
+Explanations from Large Language Models Make Small Reasoners Better ✓
+
+Extracting human interpretable structure-property relationships in chemistry using XAI and large language models ✓
+
+ρ3 “helpfulness metrics finetuning” 
+
+RAFT: Reward rAnked FineTuning for Generative Foundation Model Alignment ✓
+
+Mertech: Instrument Playing Technique Detection Using Self-Supervised Pretrained Model with Multi-Task Fine-tuning 
+
+✗
+
+What Happens During Finetuning of Vision Transformers: An Invariance Based Investigation ✗
+
+RAIN: Your Language Models Can Align Themselves without Finetuning ✓
+
+Cross-Domain Image Captioning with Discriminative Finetuning ✗
+
+GenAug: Data Augmentation for Finetuning Text Generators ✓
+
+Carve3D: Improving Multi-view Reconstruction Consistency for Diffusion Models with RL Finetuning ✗
+
+Finetuning Pretrained Transformers into Variational Autoencoders ✓
+
+RetailKLIP: Finetuning OpenCLIP backbone using metric learning on a single GPU ✗
+
+ρ4 “explicit human guidance LMs” 
+
+Guiding Instruction-based Image Editing via Multimodal Large Language Models ✗
+
+Recent advances in leveraging human guidance for sequential decision-making tasks ✓
+
+John praised Mary because _he_? Implicit Causality Bias and Its Interaction with Explicit Cues in LMs ✓
+
+Explicit Syntactic Guidance for Neural Text Generation ✓
+
+Fine-Grained Human Feedback Gives Better Rewards for Language Model Training ✓
+
+Learning adaptive planning representations with natural language guidance ✓
+
+ρ5 “measuring explanation impact inference” 
+
+Measuring the Impact of Explanation Bias: A Study of Natural Language Justifications for Recommender Systems ✓
+
+Field-level simulation-based inference with galaxy catalogs: the impact of systematic effects ✗
+
+Summary: 19 seeds retained (✓) 10 lexical-match artifacts pruned ( ✗) – all with zero surviving claim-level support Table 13: The seed set is noisy by design,and it does not matter. The complete seed set S (|S| = 29 ) for the query of Trace 1, grouped by contributing sub-query ρℓ. ✓ = seed survives Stage 2 claim-level pruning and enters the ranking walk; ✗ = every incident edge receives coverage affinity ∆ = 0 and the seed is removed from the evidence graph. Keyword search over a 500K-paper corpus inevitably retrieves lexical-match artifacts (quantum measurement, galaxy catalogs, retail image classification); in a search-and-synthesis loop these would enter the context of every subsequent step, whereas in Crase the evidence graph , not the search engine , enforces relevance.

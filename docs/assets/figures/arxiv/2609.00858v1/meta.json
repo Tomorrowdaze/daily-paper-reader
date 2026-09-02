@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.00858v1/fig-001.webp",
+      "caption": "Figure 1: End-to-end pipeline for source-grounded disaster storyline and KG generation. (a) Main pipeline integrating EM-DAT, EMM, and ReliefWeb through RAG-based retrieval. (b) One-Shot vs. Multi-Shot storyline generation strategies. (c) Per-element RAG enhancement of the causal knowledge graph with citation-grounded narratives.",
+      "page": 3,
+      "index": 1,
+      "width": 773,
+      "height": 843
+    },
+    {
+      "url": "assets/figures/arxiv/2609.00858v1/fig-002.webp",
+      "caption": "Table 1: Storyline extraction elements grouped by category.",
+      "page": 4,
+      "index": 2,
+      "width": 494,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2609.00858v1/fig-003.webp",
+      "caption": "Figure 2: Example output for the Haiti cholera case study. (a) Excerpt of the generated storyline with inline citations. (b) Causal knowledge graph derived from the storyline. (c) Source-grounded narrative associated with a selected edge. (d) Citation detail popup showing the retrieved source passage. (e) RAG-based Q&A answering a user query beyond the scope of the storyline and knowledge graph.",
+      "page": 6,
+      "index": 3,
+      "width": 918,
+      "height": 627
+    },
+    {
+      "url": "assets/figures/arxiv/2609.00858v1/fig-004.webp",
+      "caption": "Figure 3: Expert evaluation results from 9 domain experts. (a) Feature utility scores (1–5 scale) for the four main components of the dashboard: causal graphs, storyline fields, knowledge graph citations, and interactive KG queries. (b) Perceived operational impact (1–5 scale) across 3 dimensions: efficiency in crisis analysis workflows, enhancement of situational awareness, and usefulness for future disaster preparation. (c) Overall trust in the system, rated on a 0–10 scale.",
+      "page": 8,
+      "index": 4,
+      "width": 444,
+      "height": 463
+    }
+  ]
+}

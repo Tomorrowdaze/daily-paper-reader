@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.27998v1/fig-001.webp",
+      "caption": "Figure 2: Overview of spatial and thematic patterns in China’s climate-health research. (a) City-level actual risk growth rate across China. (Cai et al. 2025) (b) Research hotspots automatically identified by the Senior Analyst framework. (c) Circular heatmap of climate-health research topics, illustrating the relative attention to four categories: health outcomes, climate hazards, vulnerable groups, and socioeconomic determinants, as automatically summarized by the Senior Analyst.",
+      "page": 5,
+      "index": 1,
+      "width": 948,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2608.27998v1/fig-002.webp",
+      "caption": "Table 2: Baseline comparison on three core extraction tasks and overall performance",
+      "page": 6,
+      "index": 2,
+      "width": 1021,
+      "height": 245
+    },
+    {
+      "url": "assets/figures/arxiv/2608.27998v1/fig-003.webp",
+      "caption": "Figure 1: Proposed multi-agent LLM framework for automated climate-health literature analysis. It includes three core agents (Document Appraiser, Information Extractor, and Senior Analyst) supported by external databases and foundational models, enabling end-to-end processing from multi-source literature input to structured data and analysis reports.",
+      "page": 3,
+      "index": 3,
+      "width": 896,
+      "height": 635
+    }
+  ]
+}
