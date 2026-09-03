@@ -1,0 +1,627 @@
+Title: ClueWeaver: Reward-Guided Dual-Agent Evidence Reasoning for Compact LLMs on Literary Long Narratives
+
+URL Source: https://arxiv.org/pdf/2608.25531v1
+
+Published Time: Thu, 27 Aug 2026 00:42:19 GMT
+
+Number of Pages: 25
+
+Markdown Content:
+# ClueWeaver: Reward-Guided Dual-Agent Evidence Reasoning for Compact LLMs on Literary Long Narratives 
+
+Jihao Zhu 2⋆, Zhiwei Yang 1*, Wenxiao Zhang 3*, Junqian Zhao 1, Qi You 1, Fangqi Wang 1, Zheyuan Deng 4, Hanzhe Yang 3, Yu Liu 1(B), Jin B. Hong 3(B) 
+
+> 1
+
+Institute of Information Engineering, CAS, Beijing, China 
+
+liuyu@iie.ac.cn  
+
+> 2
+
+University of Aberdeen, Aberdeen, United Kingdom  
+
+> 3
+
+The University of Western Australia, Perth, Australia 
+
+jin.hong@uwa.edu.au  
+
+> 4
+
+Brown University, Providence, Rhode Island, United States 
+
+Abstract. Humanities and social science research requires close read-ing of long narrative materials such as novels, scripts, archives, and case reports, yet many users have limited access to costly proprietary long-context models. Compact, locally deployable language models are a practical alternative, but directly feeding them an entire long context remains costly, hard to inspect, and prone to missing sparse evidence. We present ClueWeaver , an evidence-aware dual-agent framework for long-narrative question answering with compact local models. A Finder iden-tifies passages containing answer-critical clues through retrieval-guided segmentation, while an Interpreter derives the answer from the selected evidence, produces rationales with paragraph-ID citations, and applies an internal self-calibration pass for high-risk questions. Both agents are optimized with reward-guided reinforcement learning: Finder rewards emphasize evidence retention and faithful paragraph-ID references, and Interpreter rewards emphasize correctness, grounding, and concise ex-planations. This decomposition makes evidence selection and reason-ing more inspectable than end-to-end prompting. Experiments across multiple long-context narrative question answering and claim verifica-tion settings show that ClueWeaver substantially improves local end-to-end language models while providing evidence coverage and paragraph-referenced reasoning traces. 
+
+Keywords: Long-context question answering · Long-narrative reason-ing · Evidence selection · Multi-agent reasoning 
+
+## 1 Introduction 
+
+Novels, screenplays, investigation records, and long case reports require coherent reading over extended narratives [10, 23, 27, 9]. Rather than collections of inde-pendent facts, their meaning emerges from characters, events, motives, temporal  
+
+> ⋆
+
+Equal contribution. arXiv:2608.25531v1 [cs.CL] 26 Aug 2026 2 J. Zhu et al. novel screenplay archive    
+
+> C1 C2 C3 Long narrative far apart
+> Question
+> Answer
+> LLM Combine clues C1 C2 C3
+> far apart Compact Local LLM Context windows C1 C2 C3 ... truncation can’t connect distant clues opaque evidence use
+> Uncertain or unsupported answer
+
+Fig. 1. Answer-critical clues in long narratives are often sparse and distant. While long-context models may connect them directly, compact local models operating over limited context windows can truncate evidence, separate related clues, and obscure evidence use. 
+
+order, and causal links distributed over hundreds of paragraphs. This setting is especially important for resource-constrained literary and humanities research, where scholars may need to analyze novels, scripts, archives, or case materials without costly proprietary long-context models or remote services [1, 26]. Long-narrative question answering therefore offers a practical testbed for strengthen-ing compact, locally deployable models for long-context reading [ ?,?,28]. Recent large language models, unlike earlier pretrained models with short context win-dows, can now accept much longer inputs in a single prompt [4, 30, 5]. Yet win-dow size alone does not ensure reliable narrative understanding [13, ?]: narrative questions often require sparse, indirect clues spread across distant text spans [17, 27]. Models must therefore identify salient story evidence. Figure 1 illustrates this difficulty. In long narratives, answer-critical clues are often sparse and far apart, requiring models to connect them in narrative order. Compact local models may instead rely on limited context windows, which can truncate evidence, separate related clues, and obscure evidence use. As a result, failures may arise from missing or misusing key clues, not merely from generation errors. This setting differs from standard retrieval-augmented generation (RAG) [11]. While typical RAG retrieves external documents from a large corpus, long-narrative question answering assumes that the source text is already given and requires the model to find, preserve, and use sparse evidence within it. Direct full-context prompting is a natural baseline, but it keeps evidence selection im-plicit [13, 5]: failures may result from missing relevant clues, discarding them among irrelevant details, or failing to reason over available evidence. This raises a central question: how can a compact local model answer long-narrative ques-tions while making its supporting clues explicit? Existing work has made this challenge visible, but does not fully answer the question above. Long-narrative and long-document benchmarks show that ques-tions over books, scripts, and passages require more than local phrase matching or shallow salience [10, 17]. Broader long-context evaluations further show that ClueWeaver 3
+
+simply increasing input length does not ensure robust use of relevant informa-tion, especially when evidence is buried inside the context [4, 13]. RAG improves knowledge-intensive generation by retrieving external passages [11]. IRCoT in-terleaves retrieval with chain-of-thought reasoning [22], Self-Ask decomposes questions into follow-up queries [18], Chain-of-Agents distributes long-context reading across collaborating agents [31], and RAG-DDR optimizes RAG mod-ules with data-driven rewards [12]. However, these methods mainly target open-domain retrieval, general multi-hop question answering, or broad long-context aggregation. They do not directly address the setting where the source narrative is already given, answer-critical clues are sparse and distributed, and evidence selection itself should be explicit and inspectable. Full-context prompting and single-stage readers, meanwhile, leave evidence selection implicit and couple ev-idence locating with answer generation. As a result, they provide limited control over whether the model is reasoning from the right evidence. A more suitable framework should expose evidence selection and evidence-grounded reasoning as separate, inspectable, and trainable steps. To this end, we propose ClueWeaver , a dual-agent pipeline for compact local models in literary and humanities-oriented long-narrative reading. Rather than compressing a long document into a single latent state, ClueWeaver builds retrieval-aware narrative segments and uses a Finder to select passages with answer-critical clues. These passages are packed with paragraph IDs and nar-rative order preserved, giving the Interpreter readable evidence for connecting clues, answering the question, and, when needed, applying Interpreter self -cal as a final consistency check. This separation makes failures easier to localize across candidate construction, clue selection, evidence packing, and final reasoning. We further optimize both agents with reward-guided training: the Finder is re-warded for retaining supporting clues and faithful paragraph references, while the Interpreter is rewarded for correct, grounded, and compact rationales. In this setting, reward-guided reinforcement learning provides a practical way to align intermediate evidence decisions with task-level outcomes, consistent with recent progress in feedback- and reward-based post-training for instruction following and reasoning [21]. Our contributions are three-fold: 1. We propose ClueWeaver , an evidence-aware agentic pipeline that decom-poses long-narrative question answering into explicit evidence selection, self-calibrated interpretation, and evidence-grounded explanation for compact local models. 2. We optimize both the Finder and the Interpreter with reward-guided rein-forcement learning, encouraging high-recall evidence retention, faithful para-graph referencing, and reliable answer generation. 3. Experiments across multiple long-context narrative understanding settings show that ClueWeaver substantially improves compact locally deployable language models while providing inspectable evidence traces. 4 J. Zhu et al. 
+
+## 2 Related Work 
+
+2.1 Agentic-Assisted Literary and Long-Context Reading 
+
+AI-assisted literary reading targets long narratives whose interpretation depends on plot, characters, temporal order, and implicit causality. NarrativeQA [10] and QuALITY [17] introduced QA over books, scripts, and long contexts; Nov-elQA [23], DetectiveQA [27], and NoCha [9] move further toward novel-scale QA and claim verification. Broader long-context benchmarks, including Long-Bench [4], ∞Bench [30], LooGLE [ ?], and LongBench v2 [5], show that larger context windows do not ensure robust long-range understanding, especially when relevant information is buried in the context [13]. However, these studies evaluate final answers and give less attention to clue discovery and evidence preservation. 
+
+2.2 Agentic RAG and LLM Reasoning Pipelines 
+
+Retrieval-Augmented Generation (RAG) [11] grounds generation in retrieved external passages. Agentic variants add adaptive control: ReAct [29] combines reasoning and actions, FLARE [8] retrieves during generation, and Self-RAG [3] adds retrieval and self-critique. Multi-step pipelines such as IRCoT [22], Self-Ask [18], Chain-of-Agents [31], and RAG-DDR [12] further organize retrieval and reasoning into staged procedures. These methods mainly target open-domain re-trieval, multi-hop QA, or general long-context aggregation: IRCoT and Self-Ask build query or sub-question chains, Chain-of-Agents compresses chunks through a running communication summary, and Self-RAG/RAG-DDR regulate general RAG behavior. ClueWeaver instead targets closed-document long narratives, where the source text is already given and the central issue is preserving sparse story clues. It trains a Finder for paragraph-level evidence decisions, keeps se-lected clues in narrative order with citations, and optimizes clue retention, cita-tion fidelity, and grounded final answers rather than introducing a new retrieval primitive. 
+
+2.3 Reward-Guided Reinforcement Learning for Reasoning 
+
+Post-training methods can improve model behavior. SFT [25] adapts models to instruction formats, PPO-based RLHF [20] optimizes preference rewards, and DPO [19] offers a simpler preference-optimization path. DeepSeekMath [21] shows that GRPO-based RL can strengthen reasoning. Meanwhile, answer attri-bution analysis [24] suggests that final answers may mix explicit reasoning with retrieval-like memorized knowledge. However, reward-guided training remains less focused on evidence selection, paragraph-level attribution, and grounded explanation in long-narrative reading. ClueWeaver 5Long literary narrative character dialogue event place time line            
+
+> ... Question / Claim
+> What happend? Why? Is the claim supported? ... Ranked candidate segments C1 C2 C3 ...
+> Finder Interpretor
+> Evidence Weave C1 C3 ...
+> 3. Dual-Agent Collaboration
+> selects answer-critical clues
+> Question Answer
+> connects clues and reasons
+> Final answer
+> Grounded rationale
+> Inspectable evidence trace
+> GRPO Training
+> •evidence retention
+> •citation faithfulness
+> •concise selection
+> •answer correctness
+> •evidence grounding
+> •concise rationale
+> Finder reward Interpretor reward
+> Dense Retrieval
+> 1. Input 2. Retrieval-guided segmentation 4. Output
+> self-calibration
+
+Fig. 2. Overview of ClueWeaver: Finder selects evidence-bearing narrative segments, and Interpreter produces a grounded answer with self-calibration. 
+
+## 3 Methodology 
+
+3.1 Problem Definition 
+
+We formulate agentic support for long-narrative reading as question answering with compact language models for resource-constrained humanities settings. Let 
+
+X = {p1, p 2, . . . , p m} be a narrative, where each pi is an indexed paragraph and 
+
+m is the number of paragraphs. Given a question or claim q, the model predicts answer y using only X; y may be a multiple-choice option or a binary verification label. Since only a small part of X supports y, the task is to select a compact evidence set E ⊂ X, preserve its narrative order, and generate both y and an explanation whose claims can be traced to paragraph-referenced evidence in E.
+
+3.2 Overview 
+
+Figure 2 illustrates the pipeline, and Algorithm 1 gives the inference proce-dure. ClueWeaver does not ask a compact model to read the whole narrative in one pass. It first builds retrieval-aware segments, uses the Finder to keep clue-bearing passages with paragraph IDs, packs the retained evidence in narrative order, and lets the Interpreter produce a paragraph-grounded answer. For bi-nary claims and high-risk question forms, the same Interpreter optionally runs 
+
+Iθi,self -cal , a self-calibration mode that re-checks the provisional answer against the identical evidence packet. In Algorithm 1, Y is the answer space, B is the evidence budget, θf and θi are the parameters of the two agents, S is the seg-ment set, E is the final evidence packet, and τ (q) triggers self-calibration. In the implementation, both agents use a compact XML interface: <reason> contains the paragraph-referenced explanation and <answer> contains either a YES/NO decision or the final answer. Complete prompts are in Appendix E. 6 J. Zhu et al. 
+
+Algorithm 1 ClueWeaver Inference 
+
+Require: Narrative X = {pi}mi=1 , question or claim q, answer space Y, evidence budget 
+
+B
+
+Ensure: XML-style output zI = ( r, y, C), with paragraph references extracted from r
+
+1: S = {sj }nj=1 ← Segment( X, q ) ▷ n is the number of retrieval-aware segments 2: Initialize candidate evidence pool C ← ∅ 
+
+3: for j = 1 to n do 
+
+4: Finder : zFj ← Fθf (sj , q )
+
+zFj = ⟨reason ⟩uj ⟨/reason ⟩⟨answer ⟩dj ⟨/answer ⟩
+
+5: Parse zFj into (uj , d j ) and extract referenced paragraph IDs ej
+
+6: if dj = YES then 
+
+7: C ← C ∪ { (sj , e j , u j )}
+
+8: end if 
+
+9: end for 
+
+10: Order C by the paragraph indices inherited from X
+
+11: Build E = Pack( C, B ) by keeping ordered clues within budget B
+
+12: Interpreter : ˆzI ← Iθi,ans (E, q, Y)ˆzI = ⟨reason ⟩r⟨/reason ⟩⟨answer ⟩y⟨/answer ⟩
+
+13: if τ (q) = 1 then 
+
+14: zI ← Iθi,self -cal (E, q, Y, ˆzI )
+
+15: else 
+
+16: zI ← ˆzI
+
+17: end if 
+
+18: Parse zI into (r, y ) and extract paragraph references C from r
+
+19: return zI = ( r, y, C)
+
+3.3 Training Principle 
+
+We train the two agents with Group Relative Policy Optimization (GRPO) [21]. Let a ∈ { F, I } denote the agent, where F is the Finder and I is the Interpreter .The Finder input is xF = ( sj , q ) with output oF = zFj , while the Interpreter input is xI = ( E, q, Y) with output oI = zI . For each input xa, the old policy 
+
+πa 
+
+> old
+
+samples K candidate outputs {oak}Kk=1 . Each output is scored by the agent-specific reward Ra(oak; xa), and its group-normalized advantage is 
+
+Aak = Ra(oak; xa) − mean lRa(oal ; xa)std lRa(oal ; xa) + ϵ , (1) where ϵ is a small numerical constant. Let ρak = πaθa (oak|xa)/π a
+
+> old
+
+(oak|xa) and 
+
+¯ρak = clip( ρak, 1 − δ, 1 + δ). The clipped objective for agent a is 
+
+Ja(θa) = Exa, oa∼πa
+
+> old
+
+"
+
+1
+
+K
+
+> K
+
+X
+
+> k=1
+
+
+
+min( ρakAak, ¯ρakAak) − βD ak
+
+#
+
+, (2) ClueWeaver 7
+
+where θa is the trainable policy parameter, δ is the clipping range, β controls KL regularization, and the sample-level KL estimator is 
+
+Dak = πa 
+
+> ref
+
+(oak|xa)
+
+πaθa (oak|xa) − log πa 
+
+> ref
+
+(oak|xa)
+
+πaθa (oak|xa) − 1. (3) This relative objective is useful for ClueWeaver because many valid rationales can exist for the same narrative question, while their usefulness can still be judged by task-level signals. We therefore use the same optimization form for both agents but instantiate agent-specific rewards. RF favors high-recall clue reten-tion, faithful paragraph-ID references, and calibrated YES/NO decisions, giving much higher reward to retaining answer-bearing evidence than to rejecting extra candidates. RI favors answer correctness, paragraph-grounded support, concise explanation, and resistance to unsupported inference. Thus, training directly aligns the pipeline stages: preserving answer-critical evidence before reasoning and converting the retained evidence into a grounded final answer. 
+
+3.4 Finder: Evidence Selection and Rationale Generation 
+
+The Finder is responsible for converting a long narrative into a small set of answer-relevant evidence with short rationales. Given the paragraph sequence 
+
+X and the question q, we first build retrieval-aware segments S = {sj }nj=1 . Each segment sj contains a contiguous paragraph span Ij ⊆ { 1, . . . , m }. The seg-mentation uses lexical and dense retrieval scores to place short anchor segments around paragraphs that are likely to be relevant to q, while the remaining text is covered by local windows. Retrieval is therefore used to guide segmentation boundaries, not to replace reading of the given narrative. This keeps the input to the Finder short enough for a compact model, while retaining paragraph indices needed for later evidence tracing. For each segment sj , the Finder predicts 
+
+(dj , e j , u j ) = Fθf (sj , q ), (4) where dj ∈ { YES , NO } is the clue decision, ej ⊆ Ij lists referenced paragraph IDs, and uj is the rationale. In the XML output, uj is written in <reason> , dj
+
+in <answer> , and ej is extracted from the paragraph-ID references inside uj .Segments with dj = YES are added to the candidate clue pool C. Since long-narrative questions often depend on indirect or distributed clues, the Finder is designed as a high-recall selector: it should avoid discarding answer-supporting evidence even when the segment does not directly state the final answer. 
+
+RL Training for Finder. We train the Finder with reward-guided reinforce-ment learning over structured outputs. For a training segment, let zj ∈ { 0, 1}
+
+be the gold evidence label and let Gj ⊆ Ij be the annotated supporting para-graphs within the segment. The Finder reward combines decision and evidence behavior: 
+
+RF = λfmt Rfmt + λdec Rdec + λcite Rcite + λcomp Rcomp + λneg Rneg . (5) 8 J. Zhu et al. 
+
+Here each λ is a non-negative weight controlling the importance of its corre-sponding reward term. Rfmt rewards valid structured output, Rdec rewards the correct YES/NO decision, and Rcite measures overlap between predicted para-graph IDs ej and gold paragraphs Gj . Rcomp rewards compact gold references, and Rneg rewards concise NO rationales without unsupported IDs. A missed positive segment receives only the format reward. This weighted reward design reflects the role of the Finder in the pipeline: preserving answer-critical clues is more important than aggressively filtering the narrative, because the Inter-preter can only reason from surviving evidence. See Appendix A for reward details. 
+
+3.5 Interpreter: Evidence-Grounded Interpretation Evidence-Grounded Interpretation. The Interpreter turns the selected evidence packet into the final answer. Let E = {(ℓt, ˜pt, ˜ut)}Tt=1 denote the or-dered packet after packing, where ℓt is the original paragraph index, ˜pt is the retained evidence text, ˜ut is the Finder rationale, and T is the number of packed evidence units. The Interpreter first predicts a provisional answer and then, when triggered, self-calibrates it using the same evidence: 
+
+ˆzI = Iθi,ans (E, q, Y),zI =
+
+(
+
+Iθi,self -cal (E, q, ˆzI ), τ (q) = 1 ,
+
+ˆzI , τ (q) = 0 ,
+
+(6) where zI is parsed into (r, y ) and referenced paragraphs C. Here r is a concise evidence-grounded rationale written in <reason> , y ∈ Y is the final answer written in <answer> , and C ⊆ { ℓt}Tt=1 is extracted from paragraph-ID references inside r. The trigger τ (q) is active for binary claim verification and for multiple-choice questions whose wording suggests higher risk of polarity or reasoning errors, such as negation, exception, causal, or inferential forms. The self-verifier is internal to the Interpreter ; it re-checks the provisional answer against the same evidence packet, uses the same compact model, and does not introduce a third agent. The model is therefore not asked to freely summarize the whole narrative. It must connect the selected clues, choose an answer from the allowed answer space, and make the rationale traceable to paragraph IDs. 
+
+RL Training for Interpreter. We train the Interpreter with the same GRPO principle but a different target. Given gold answer y⋆ and, when available, the supplied evidence paragraph set H, the Interpreter uses 
+
+RI = λfmt Rfmt + λans Rans + λcite Rcite + λground Rground − λhall Rhall . (7) Here Rfmt rewards valid structured output, Rans rewards matching the gold answer y⋆, Rcite rewards paragraph IDs that point to H and penalizes invalid IDs, and Rground rewards concise rationales with concrete grounding signals. The hallucination penalty Rhall discourages unsupported uncertainty or invalid paragraph references. This makes the Interpreter conservative with evidence: it is rewarded for correctness and traceability. ClueWeaver 9
+
+## 4 Experiments 
+
+4.1 Experimental Setup Datasets. We evaluate on four long-context narrative settings using the same test instances for all methods: DetectiveQA [27] for sparse detective-plot clues, 
+
+∞Bench [30] and LongBench v2 [5] for broader long-context reasoning, and NoCha [9] for novel-length claim verification. 
+
+Baselines. We compare with two groups. End-to-end readers use the available context directly with naive head truncation, including the 4B backbone and larger local models: Qwen3-8B [28], Ministral-3-14B [14], GPT-OSS-20B [15], Qwen3-30B-A3B [28], and Gemma-4-31B-it [7]. We also report higher-cost API readers, Claude Haiku 4.5 [2] and GPT-5 nano [16], as large-context refer-ences. Agentic baselines include ReAct [29], IRCoT [22], Self-Ask [18], Chain-of-Agents [31], and RAG-DDR [12], all using BGE-M3 [6]. 
+
+Metrics. We report final answer accuracy, normalizing multiple-choice outputs to option labels and verification outputs to binary labels. 
+
+Implementation Details. To control local-model comparisons, all local end-to-end readers use the same 32 K setting: maximum context length 32 ,768 , tokenizer-exact input budget 30 ,592 , and 128 output tokens. For higher-cost API LLMs, we report a separate large-context setting with a 128 K budget, using 126 ,976 input tokens and the same 128 -token output cap. ClueWeaver, the agentic baselines, and the 4B end-to-end reader use Qwen3-4B-Instruct [28]; larger local end-to-end readers use their own weights. Retrieval-based methods share BGE-M3 [6] and the same answer parser; baseline, training, and implementation details are deferred to Appendix C. 
+
+4.2 Main Results 
+
+Table 1 reports final answer accuracy on the four benchmarks. ClueWeaver achieves the best local overall accuracy ( 59 .0% ), leads all local methods on every dataset, and improves over the strongest local baseline (IRCoT, 52 .6% )by +6 .4 points overall. With the same Qwen3-4B backbone, the direct end-to-end reader reaches only 44 .5% because many narratives still require truncation; ClueWeaver improves it by +14 .5 points. The gain is not a scale effect: the best end-to-end reader up to 31 B (Qwen3-30B-A3B, 50 .3% ) remains 8.7 points behind ClueWeaver’s 4B backbone. These results show that retrieval-aware ev-idence selection, rather than context length or model size alone, is central to compact local long-narrative QA. Higher-cost API LLMs are reported as large-context references; ClueWeaver trails the best API overall result by 4.9 points and surpasses it on LongBench v2 by 11 .5 points. 
+
+4.3 Ablation Study 
+
+We ablate ClueWeaver on DetectiveQA, whose sparse, distributed clues make the contribution of each part most visible. 10 J. Zhu et al. 
+
+Table 1. Main results on four long-context narrative benchmarks (final answer ac-curacy, %). Among local methods, best per column is in bold and second best is underlined; best API result per column is marked with :::: 
+
+wavy ::::::::: 
+
+underlines. Method DetectiveQA ∞Bench LongBench v2 NoCha Overall 
+
+End-to-end reader (Local) 
+
+Qwen3-4B-Instruct [28] 36.5 50.7 38.5 49.5 44.5 Qwen3-8B [28] 45.2 56.5 26.9 55.0 49.7 Ministral-3-14B [14] 45.2 60.9 26.9 51.4 49.4 GPT-OSS-20B [15] 30.8 33.3 34.6 50.5 38.7 Qwen3-30B-A3B [28] 44.2 58.0 38.5 54.1 50.3 Gemma-4-31B-it [7] 35.6 58.0 46.2 59.5 50.0 
+
+End-to-end reader (API) 
+
+Claude Haiku 4.5 [2] :::: 
+
+62.5 73.9 ::: 
+
+38.5 ::: 
+
+64.9 ::: 
+
+63.9 GPT-5 nano [16] :::: 
+
+62.5 ::: 
+
+76.8 26.9 60.4 61.9 
+
+Agentic pipelines 
+
+ReAct [29] 50.0 50.7 38.5 58.6 52.3 IRCoT [22] 53.8 44.9 34.6 60.4 52.6 Self-Ask [18] 36.5 49.3 19.2 59.5 46.1 Chain-of-Agents [31] 27.9 46.4 38.5 55.9 42.9 RAG-DDR [12] 47.1 53.6 30.8 59.5 51.6 
+
+Our method 
+
+ClueWeaver (ours) 55.8 63.8 50.0 61.3 59.0 
+
+∆ vs. best local +2 .0 +2 .9 +3 .8 +0 .9 +6 .4
+
+∆ vs. best API −6.7 −13 .0 +11 .5 −3.6 −4.9
+
+Component ablation. Table 2(a) removes inference components from the full model. Disabling Interpreter self -cal lowers accuracy by 4.8 to 51 .0% , showing that the internal second pass helps correct fragile decisions over the same evi-dence. Removing the Finder—dumping all retrieved passages to the Interpreter instead of selecting answer-critical evidence—drops accuracy by 5.8 points to 
+
+50 .0% . Further removing both agents, leaving a bare end-to-end reader that must truncate the narrative to the backbone window, falls to 36 .5% . Thus, se-lected evidence and self-calibration both contribute to reliable long-narrative reading. 
+
+Training ablation. Table 2(b) removes reward-guided RL from the full model with the pipeline fixed. Removing Finder RL (untrained Finder, RL Interpreter) is the most damaging, dropping accuracy by 6.8 points to 49 .0% —below the 
+
+50 .0% obtained with no Finder at all (Table 2a): an untrained Finder discards useful evidence, so it is RL training that turns the Finder into a net gain. Remov-ing Interpreter RL costs 1.0, and removing both returns to the untrained pipeline at 50 .0% . Finder training contributes the larger share by retaining answer-critical clues, while Interpreter training converts the selected evidence into correct an-swers. ClueWeaver 11 
+
+Table 2. Ablation on DetectiveQA. (a) pipeline components and (b) RL training are removed from the full model ( ∆: accuracy change vs. the full model). (a) Component ablation Configuration Acc. ∆
+
+ClueWeaver (full) 55.8 –w/o Interpreter self -cal 51.0 −4.8
+
+w/o Finder 50.0 −5.8
+
+w/o Finder & Interpreter 36.5 −19 .3
+
+(b) Training ablation Configuration Acc. ∆
+
+ClueWeaver (full) 55.8 –w/o Finder RL 49.0 −6.8
+
+w/o Interpreter RL 54.8 −1.0
+
+w/o both RL 50.0 −5.80 2 4 6 8 10 12 14 
+
+> Latency per question (s)
+> 63.8 61.3 55.8 50.0 44.5
+> Accuracy (%)
+> ∞Bench (8.6s) NoCha (9.6s) DetectiveQA (9.4s) LongBench v2 (9.8s)
+> End-to-end (avg) 2.8s
+> Retrieval & Seg. Finder (filter) Interpreter End-to-end (single call)
+
+Fig. 3. Accuracy–latency trade-off using Table 1 accuracies and serial single-GPU stage timings. Most additional latency comes from the Finder stage. 
+
+4.4 Analysis Efficiency. When served on a single GPU with Qwen3-4B, ClueWeaver answers in 8.6–9.8 s per question, compared with 2.8 s for direct reading; most extra latency comes from Finder calls. The ClueWeaver end-to-end latency remains practical for local deployment, while bringing a +14 .5-point gain and evidence-level inspection. 
+
+Cost. Table 3 compares local GPU requirements with API token fees. Strong API readers can be competitive, but long-context calls are costly. ClueWeaver reaches API-level accuracy with a compact local model and can be deployed on commercial-grade GPUs, making the cost practical for sustained use. Its deployment footprint is also far below that of 30B-scale local readers. 
+
+Error analysis. Figure 4 compares direct-reader and ClueWeaver correctness. ClueWeaver recovers 84 of 172 direct-reader errors, yielding a consistently posi-tive net gain across the benchmarks. Some difficult cases remain, especially when the answer depends on distant multi-hop clues or passages with weak surface overlap, which points to stronger distant-clue retrieval as a future direction. 12 J. Zhu et al. 
+
+Table 3. Cost profile for local and API readers.                                                  
+
+> Setting Overall Acc. Access Example GPU
+> End-to-end reader (Local)
+> Qwen3-4B [28] 44.5 16GB RTX 5060 Ti 16GB Qwen3-8B [28] 49.7 24GB RTX 4090 / RTX 5090 Ministral-3-14B [14] 49.4 24GB RTX 4090 / RTX 5090 GPT-OSS-20B [15] 38.7 24GB RTX 4090 / RTX 5090 Qwen3-30B-A3B [28] 50.3 80GB A100/H100 Gemma-4-31B-it [7] 50.0 80GB A100/H100
+> Our method
+> ClueWeaver 59.0 24GB RTX 4090 / RTX 5090
+> End-to-end reader (API)
+> GPT-5 nano 61.9 API ≈$2/310 Claude Haiku 4.5 63.9 API ≈$40/310 020 40 60 80 100
+> Share of questions (%)
+> DetectiveQA
+> ∞Bench LongBench v2 NoCha 25 33 13 33 26 18 916 585843 25 12 31
+> Both correct Fixed Regression Unresolved
+
+Fig. 4. Error transitions between the direct reader and ClueWeaver across the four benchmarks. ClueWeaver yields a clear net correction gain. 
+
+4.5 Case Study 
+
+Table 4 contrasts direct reading with the full ClueWeaver pipeline. The end-to-end reader selects a surface-level distractor, whereas ClueWeaver first finds the relevant paragraph, then grounds the answer in that evidence. The self-calibration step appears as a final consistency check inside the Interpreter , not as a separate agent. Additional qualitative cases are shown in Appendix D. 
+
+## 5 Conclusion 
+
+This paper presented ClueWeaver, a reward-guided dual-agent framework for long narrative QA with compact local models. The framework separates evi-dence selection from interpretation: Finder retains sparse clue passages, while Interpreter connects them into grounded answers and applies self-calibration for high-risk questions. Reward-guided training aligns both stages with the end task, encouraging clue preservation, faithful paragraph references, and concise expla-nations. Experiments show that ClueWeaver improves local end-to-end readers, outperforms much larger local models, and approaches stronger API readers ClueWeaver 13 
+
+Table 4. Case study on DetectiveQA. ClueWeaver exposes the evidence-selection and interpretation process, with self-calibration used as a final consistency check. 
+
+Question. The reason why the robot doll was pushed downstairs is: (A) Break it for study (B) Eliminate clues (C) Hurt him (D) No particular purpose 
+
+[Gold: B] End-to-end reader selects the surface-level distractor: D ×
+
+ClueWeaver keeps the decisive evidence and then self-calibrates the Interpreter output. 
+
+Finder (retained evidence from the log): 
+
+> YES segments include [1203], where the killer is described as wiping physical traces, and [1326], where Dr. Phil links this to pushing the robot doll downstairs.
+
+Interpreter :
+
+> <reason>Option (B) is supported by [1203], where the killer erases footprints, fingerprints, and dust traces; [1326] links this reasoning to why the robot doll was pushed downstairs.</reason> <answer>B</answer>
+
+Interpreter self -cal : 
+
+> <reason>The two cited passages are consistent: [1203] establishes the motive of removing physical traces, and [1326] applies that motive to the pushed doll. Thus the answer is eliminating clues. </reason> <answer>B</answer>
+
+✓
+
+while remaining deployable on commercial GPUs. These results suggest that compact models can support literary and humanities analysis through explicit evidence paths. Future work will focus on harder distant clues and more robust multi-hop evidence integration. 
+
+Acknowledgements This research was supported by the National Key R&D Program of China (No. 2023YFC3303800). We also acknowledge WisPaper and QiewenPaper for providing Academic Agent support and GPU computational resources throughout the study; see https://wispaper.ai .
+
+## References 
+
+1. Akazawa, M., Gius, E.: Literaturwissenschaftlich arbeiten mit großen sprach-modellen? zwei experimentreihen zur textgenerierung mit künstlicher intelli-genz. Zeitschrift für Literaturwissenschaft und Linguistik 55 , 449–474 (2025). https://doi.org/10.1007/s41244-025-00383-4 2. Anthropic: Introducing Claude Haiku 4.5. Anthropic announcement (2025) 3. Asai, A., Wu, Z., Wang, Y., Sil, A., Hajishirzi, H.: Self-RAG: Learning to retrieve, generate, and critique through self-reflection. In: Proceedings of the International Conference on Learning Representations (2024) 4. Bai, Y., Lv, X., Zhang, J., Lyu, H., Tang, J., Huang, Z., Du, Z., Liu, X., Zeng, A., Hou, L., Dong, Y., Tang, J., Li, J.: LongBench: A bilingual, multitask bench-mark for long context understanding. In: Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). pp. 14 J. Zhu et al. 3119–3137. Association for Computational Linguistics, Bangkok, Thailand (2024). https://doi.org/10.18653/v1/2024.acl-long.172 5. Bai, Y., Tu, S., Zhang, J., Peng, H., Wang, X., Lv, X., Cao, S., Xu, J., Hou, L., Dong, Y., Tang, J., Li, J.: LongBench v2: Towards deeper understanding and reasoning on realistic long-context multitasks. In: Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). pp. 3639–3664. Association for Computational Linguistics, Vienna, Austria (2025). https://doi.org/10.18653/v1/2025.acl-long.183 6. Chen, J., Xiao, S., Zhang, P., Luo, K., Lian, D., Liu, Z.: M3-embedding: Multi-linguality, multi-functionality, multi-granularity text embeddings through self-knowledge distillation. In: Findings of the Association for Computational Lin-guistics: ACL 2024. pp. 2318–2335. Association for Computational Linguistics, Bangkok, Thailand (2024). https://doi.org/10.18653/v1/2024.findings-acl.137 7. Google DeepMind: Gemma 4 31B IT model card. Hugging Face model card (2026) 8. Jiang, Z., Xu, F., Gao, L., Sun, Z., Liu, Q., Dwivedi-Yu, J., Yang, Y., Callan, J., Neubig, G.: Active retrieval augmented generation. In: Proceedings of the 2023 Conference on Empirical Methods in Natural Language Process-ing. pp. 7969–7992. Association for Computational Linguistics, Singapore (2023). https://doi.org/10.18653/v1/2023.emnlp-main.495 9. Karpinska, M., Thai, K., Lo, K., Goyal, T., Iyyer, M.: One thousand and one pairs: A “novel” challenge for long-context language models. In: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing. pp. 17048– 17085. Association for Computational Linguistics, Miami, Florida, USA (2024). https://doi.org/10.18653/v1/2024.emnlp-main.948 10. Kočiský, T., Schwarz, J., Blunsom, P., Dyer, C., Hermann, K.M., Melis, G., Grefenstette, E.: The NarrativeQA reading comprehension challenge. Trans-actions of the Association for Computational Linguistics 6, 317–328 (2018). https://doi.org/10.1162/tacl_a_00023 11. Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W.t., Rocktäschel, T., Riedel, S., Kiela, D.: Retrieval-augmented generation for knowledge-intensive NLP tasks. In: Advances in Neural Information Processing Systems. vol. 33, pp. 9459–9474. Curran Associates, Inc. (2020) 12. Li, X., Mei, S., Liu, Z., Yan, Y., Wang, S., Yu, S., Zeng, Z., Chen, H., Yu, G., Liu, Z., Sun, M., Xiong, C.: RAG-DDR: Optimizing retrieval-augmented generation using differentiable data rewards. In: Proceedings of the International Conference on Learning Representations (2025) 13. Liu, N.F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P.: Lost in the middle: How language models use long contexts. Trans-actions of the Association for Computational Linguistics 12 , 157–173 (2024). https://doi.org/10.1162/tacl_a_00638 14. Mistral AI: Introducing Mistral 3. Mistral AI announcement and model cards (2025) 15. OpenAI: gpt-oss-120b and gpt-oss-20b model card. arXiv preprint arXiv:2508.10925 (2025) 16. OpenAI: Introducing GPT-5 for developers. OpenAI announcement (2025) 17. Pang, R.Y., Parrish, A., Joshi, N., Nangia, N., Phang, J., Chen, A., Padmaku-mar, V., Ma, J., Thompson, J., He, H., Bowman, S.R.: QuALITY: Question an-swering with long input texts, yes! In: Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. pp. 5336–5358. Association for Computational Linguistics, Seattle, United States (2022). https://doi.org/10.18653/v1/2022.naacl-main.391 ClueWeaver 15 18. Press, O., Zhang, M., Min, S., Schmidt, L., Smith, N., Lewis, M.: Measur-ing and narrowing the compositionality gap in language models. In: Find-ings of the Association for Computational Linguistics: EMNLP 2023 (2023). https://doi.org/10.18653/v1/2023.findings-emnlp.378 19. Rafailov, R., Sharma, A., Mitchell, E., Manning, C.D., Ermon, S., Finn, C.: Direct preference optimization: Your language model is secretly a reward model. In: Ad-vances in Neural Information Processing Systems. vol. 36. Curran Associates, Inc. (2023) 20. Schulman, J., Wolski, F., Dhariwal, P., Radford, A., Klimov, O.: Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347 (2017) 21. Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., Zhang, H., Zhang, M., Li, Y.K., Wu, Y., Guo, D.: DeepSeekMath: Pushing the limits of mathematical reasoning in open language models. arXiv preprint arXiv:2402.03300 (2024) 22. Trivedi, H., Balasubramanian, N., Khot, T., Sabharwal, A.: Interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions. In: Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). pp. 10014–10037. Association for Computa-tional Linguistics, Toronto, Canada (2023). https://doi.org/10.18653/v1/2023.acl-long.557 23. Wang, C., Ning, R., Pan, B., Wu, T., Guo, Q., Deng, C., Bao, G., Hu, X., Zhang, Z., Wang, Q., Zhang, Y.: NovelQA: Benchmarking question answering on documents exceeding 200k tokens. In: Proceedings of the International Conference on Learning Representations (2025) 24. Wang, Y., Li, C., Chen, G., Liang, J., Wang, T.: Reasoning or retrieval? a study of answer attribution on large reasoning models. In: Proceedings of the International Conference on Learning Representations (2026) 25. Wei, J., Bosma, M., Zhao, V.Y., Guu, K., Yu, A.W., Lester, B., Du, N., Dai, A.M., Le, Q.V.: Finetuned language models are zero-shot learners. In: Proceedings of the International Conference on Learning Representations (2022) 26. Widder, D.G., Whittaker, M., West, S.M.: Why ‘open’ AI systems are actually closed, and why this matters. Nature 635 , 827–833 (2024). https://doi.org/10.1038/s41586-024-08141-1 27. Xu, Z., Ye, J., Liu, X., Liu, X., Sun, T., Liu, Z., Guo, Q., Li, L., Liu, Q., Huang, X., Qiu, X.: DetectiveQA: Evaluating long-context reasoning on detective novels. In: ICLR 2025 Workshop on Reasoning and Planning for Large Language Models (2025) 28. Yang, A., Li, A., Yang, B., Zhang, B., Hui, B., Zheng, B., Yu, B., Gao, C., Huang, C., Lv, C., et al.: Qwen3 technical report. arXiv preprint arXiv:2505.09388 (2025) 29. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., Cao, Y.: ReAct: Synergizing reasoning and acting in language models. In: Proceedings of the Inter-national Conference on Learning Representations (2023) 30. Zhang, X., Chen, Y., Hu, S., Xu, Z., Chen, J., Hao, M.K., Han, X., Thai, Z.L., Wang, S., Liu, Z., Sun, M.: ∞Bench: Extending long context evaluation beyond 100k tokens. In: Proceedings of the 62nd Annual Meeting of the As-sociation for Computational Linguistics (Volume 1: Long Papers). pp. 15262– 15277. Association for Computational Linguistics, Bangkok, Thailand (2024). https://doi.org/10.18653/v1/2024.acl-long.814 31. Zhang, Y., Sun, R., Chen, Y., Pfister, T., Zhang, R., Arık, S.Ö.: Chain of agents: Large language models collaborating on long-context tasks. In: Advances in Neural Information Processing Systems. vol. 37. Curran Associates, Inc. (2024). https://doi.org/10.52202/079017-4202 16 J. Zhu et al. 
+
+## A Reward Design Details 
+
+A.1 Reward Components 
+
+We use rule-based rewards rather than a learned reward model, because the two agents have explicit structured roles and the training signals can be defined from labels, paragraph indices, and output format. The final trained agents use the balanced Finder reward and the test-aligned Interpreter reward described below. All rewards are computed after parsing the generated XML-style output. If the output cannot be parsed, the reward is set to zero. Otherwise, format validity provides a small base reward, while task-specific correctness and evidence behav-ior determine the remaining score. The constants below are the unnormalized rewards used before GRPO advantage normalization. 
+
+Finder reward. For a segment sj , let zj ∈ { 0, 1} indicate whether it contains sup-porting evidence, let Gj be the annotated gold paragraphs inside the segment, and let Pj be the paragraph IDs referenced in the Finder’s <reason> field. The final Finder reward is balanced: it makes positive evidence retention more valu-able than a short negative response, while still giving enough reward to correct 
+
+NO decisions to prevent an all-YES policy.                                                                    
+
+> Table 5. Finder reward components. Component Purpose Score Format validity Output must follow the required structured format and expose a decision and rationale.
+> +1 .0
+> Positive decision A gold-bearing segment should be kept by predicting YES .
+> +1 .5
+> Paragraph-ID F1 Reward overlap between predicted and gold paragraph IDs, using F1 over Pjand Gj.up to +1 .5
+> Compact ID bonus Extra credit when the Finder references gold paragraphs without adding many ir-relevant paragraph IDs.
+> +0 .25
+> Correct rejection A non-evidence segment should be rejected by predicting NO .
+> +1 .25
+> Negative rationale quality Reward non-trivial NO rationales with no paragraph ID and explicit irrelevance cues. up to +0 .75
+> Length calibration Encourage concise but informative ratio-nales rather than empty templates or long summaries. up to +0 .25
+> Spurious ID control Unsupported paragraph IDs on negative segments receive little or no additional credit. capped ClueWeaver 17
+> Table 6. Interpreter reward components. Component Purpose Score Format validity Output must contain a parseable rationale and normalized answer field.
+> +1 .0
+> Answer correctness Reward the normalized final answer. Multiple-choice questions receive a larger gain than binary verification because their random baseline is lower.
+> +2 .5MCQ;
+> +1 .5binary Hard-case bonus Additional reward for correctly solving ex-amples marked as hard residual errors dur-ing training.
+> +0 .5
+> Paragraph-ID use Reward rationales that reference paragraph IDs from the supplied evidence. Invalid paragraph IDs are penalized when the al-lowed paragraph set is known.
+> +0 .3/−0.3
+> Rationale length Encourage concise but non-trivial ratio-nales rather than bare answers or long sum-maries.
+> +0 .2
+> Specificity Reward concrete grounding signals such as quoted phrases, numbers, or named entities from the evidence.
+> +0 .3
+> Hedging penalty Penalize unsupported uncertainty tem-plates such as “cannot determine” or “in-sufficient evidence”.
+> −0.4
+
+This design intentionally favors recall without collapsing into a trivial all-
+
+YES policy. Positive segments can receive the highest score only when the deci-sion and paragraph IDs are both correct; negative segments still receive mean-ingful reward when they are rejected with a concise explanation. 
+
+Interpreter reward. The Interpreter receives the packed evidence and predicts the final answer. Its reward is correctness-dominant, with all rationale-quality bonuses gated by a correct answer. This prevents the model from receiving high reward for fluent but wrong explanations. The two rewards therefore optimize complementary abilities. The Finder is pushed to preserve sparse, answer-relevant clues with faithful paragraph-ID ref-erences, whereas the Interpreter is pushed to convert the retained evidence into a correct, grounded, and concise answer. 
+
+A.2 GRPO Objective Details 
+
+For each agent a ∈ { F, I } and training input xa, GRPO samples K complete structured outputs from the previous policy and compares them within the same 18 J. Zhu et al. 
+
+group. Let oak = ( wk, 1, . . . , w k,T k ) be the k-th sampled token sequence. Its se-quence log-probability under a policy π is 
+
+log π(oak|xa) = 
+
+> Tk
+
+X
+
+> t=1
+
+log π(wk,t |xa, w k,<t ). (8) The sequence-level policy ratio used in Eq. 2 is therefore 
+
+ρak = exp  log πaθa (oak|xa) − log πa
+
+> old
+
+(oak|xa) . (9) After parsing the full XML-style response, we compute the agent-specific reward 
+
+Ra(oak; xa) and normalize it within the sampled group: 
+
+μa = 1
+
+K
+
+> K
+
+X
+
+> l=1
+
+Ra(oal ; xa), σa =
+
+vuut 1
+
+K
+
+> K
+
+X
+
+> l=1
+
+(Ra(oal ; xa) − μa)2, (10) 
+
+Aak = Ra(oak; xa) − μa
+
+σa + ϵ . (11) The KL term is evaluated on the same sampled sequence against the reference model. With rak = πa 
+
+> ref
+
+(oak|xa)/π aθa (oak|xa), we use 
+
+Dak = rak − log rak − 1. (12) This value-free formulation is used for both agents, so no separate critic or value model is trained. 
+
+## B Training Details 
+
+B.1 Training Data 
+
+All training data are drawn from the benchmarks’ training splits, disjoint from the test set. As the source narratives are long, often exceeding 100 K tokens, we segment each document at the paragraph level and supervise both agents on segments rather than whole texts (Fig. 5). The Finder learns per-segment keep-/drop decisions, balanced 50 /50 with hard negatives, from a question-answering and a claim-verification split of detective novels. The Interpreter learns from 
+
+1,000 examples, each pairing a question with an evidence packet assembled from selected segments; the mixture follows the test distribution, scarce real NoCha cases are augmented with synthetic claim verification, and 27 .5% are items the base model fails, concentrating the reward on hard cases. A t-SNE projection of BGE-M3 question embeddings shows both pools are dominated by the de-tective domain; LongBench v2 is the most under-represented benchmark for the Interpreter, consistent with the smaller end-to-end gains seen there. ClueWeaver 19 (a) Finder training data 
+
+> DetectiveQA (800) DetectiveQA (claim) (800)
+> (b) Interpreter training data
+> DetectiveQA (330) NoCha (370) Bench (220)
+> LongBench v2 (80)
+
+Fig. 5. t-SNE of BGE-M3 embeddings of the training questions for the two agents, colored by source. Both pools are detective-domain dominated; the NoCha portion is mostly synthetic claim-verification, and LongBench v2 is the sparsest benchmark for the Interpreter. 
+
+B.2 Training Setup 
+
+All experiments use Qwen3-4B-Instruct as the base model for both agents. The Finder and Interpreter are trained separately with GRPO, using eight sampled responses per prompt to estimate group-relative advantages. We train full model weights in bfloat16 with cosine learning-rate decay, a warmup ratio of 0.1, tem-perature 1.0, top-p = 0 .9, top-k = 20 , and GRPO KL coefficient β = 0 .04 . We disable model-internal thinking during both training and inference so that the emitted traces follow the required structured format. Training is performed on a single node with 8 x NVIDIA A100 GPUs. During GRPO, vLLM is colocated with training workers to accelerate rollout genera-tion. At inference time, each active Qwen3-4B model instance uses about 10–12 GB of GPU memory with bfloat16 weights. The Finder and Interpreter can therefore be served sequentially on one GPU or concurrently on separate GPUs. Dense retrieval uses BGE-M3 on GPU, and all methods share the same answer normalization and output parser to avoid evaluation differences from formatting alone. Local end-to-end readers are evaluated with a 32K context budget (30,592 input tokens plus 128 output tokens), while API end-to-end readers use a 128K context budget (126,976 input tokens plus the same 128-token output cap). 
+
+## C Implementation Details 
+
+C.1 Baseline Implementations 
+
+All baselines use the same normalized question format and answer parser as ClueWeaver. Local agentic baselines use Qwen3-4B-Instruct as the backbone; larger end-to-end readers use their own model weights. The direct reader receives the narrative under the configured context budget and answers in one call. BM25, 20 J. Zhu et al.                                       
+
+> Table 7. GRPO training hyperparameters for each agent.
+> Agent Parameter Finder Interpreter
+> base model Qwen3-4B Qwen3-4B algorithm GRPO GRPO reward evidence selection answer grounding lr 5×10 −73×10 −7
+> bs 88
+> grad_accum 82
+> local_eff_bs 64 16
+> global_eff_bs 512 128
+> train_samples 12 K1.0Kmax_steps 150 100
+> group_sz ( G)88
+> max_input_len 9216 9216
+> max_output_len 256 256
+> GRPO beta ( β)0.04 0.04
+> temp / top-p/ top-k1.0/0.9/20 1.0/0.9/20
+
+dense, and hybrid RAG retrieve top paragraphs and answer from the packed ev-idence. Our ReAct baseline [29] is a ReAct-style iterative RAG adaptation: in this closed-document setting, the action is retrieval over the given narrative, the observation is the retrieved paragraph evidence, and the model alternates reasoning and retrieval before emitting the final answer. IRCoT [22] interleaves retrieval with one generated reasoning sentence per step. Self-Ask [18] first gen-erates follow-up sub-questions, retrieves evidence for them, and answers from the resulting trace. Chain-of-Agents [31] splits the narrative into chunks, lets worker agents update a communication summary, and uses a manager agent for the fi-nal answer. RAG-DDR [12] retrieves candidate passages, applies a prompt-only knowledge-refinement YES/NO filter, and answers from the retained passages without DDR training. 
+
+C.2 Retrieval, Segmentation, and Evidence Packing 
+
+ClueWeaver uses retrieval as a front-end for candidate construction, not as a replacement for narrative reading. Given a question q and a long narrative D =
+
+{pi}mi=1 , we first score paragraphs with dense retrieval and lexical matching. Dense retrieval is implemented with BGE-M3, while lexical matching is used only as a complementary signal for robust candidate coverage. The top paragraphs are used as anchors for local windows, producing candidate segments that preserve paragraph IDs and nearby context. Each candidate segment is then judged by the Finder. Unlike standard RAG, which passes top-ranked chunks directly to the answer model, ClueWeaver asks the Finder to decide whether a segment contains useful clues and to cite the ClueWeaver 21                            
+
+> Table 8. Evidence construction stages in ClueWeaver. Stage Operation Output Retrieval anchors Score paragraphs using dense re-trieval and lexical matching. Se-lect high-scoring paragraphs as anchors. Candidate anchor para-graphs Segment construc-tion Expand each anchor with nearby paragraphs and keep paragraph IDs. Add local windows to avoid missing surrounding context. Ordered candidate seg-ments sj
+> Finder selection Predict YES /NO , cite paragraph IDs, and emit a brief rationale for each segment. Clue-bearing segments and paragraph IDs Evidence packing Merge selected evidence, remove duplicates, retain nearby support-ing paragraphs, and sort by origi-nal narrative order. Compact evidence packet E
+> Interpreter input Combine q, answer options when available, and packed evidence with paragraph IDs. Grounded final-answer prompt
+
+supporting paragraph IDs. This step removes many retrieval-only false positives and keeps evidence traceable at paragraph level. The evidence packet is controlled by four implementation parameters. NE is the maximum number of selected evidence segments. Pr and Pw are the para-graph budgets for retrieval-anchored and local-window segments, respectively. 
+
+Bc is the total character budget for the packed evidence. For example, a focused configuration uses NE = 5 , Pr = 2 , Pw = 5 , and Bc = 13 ,000 , whereas a broader configuration uses NE = 10 , Pr = 4 , Pw = 6 , and Bc = 15 ,000 . The former illus-trates noise control, while the latter illustrates recall-oriented packing for sparse and distributed clues. Selected evidence is sorted by its original paragraph index before being passed to the Interpreter, so the final model receives clues in narra-tive order rather than retrieval-score order. For the main results, the task-level budgets are DetectiveQA (10 , 4, 6, 15000) , ∞Bench (7 , 3, 6, 14000) , LongBench v2 (8 , 4, 6, 15000) , and NoCha (10 , 6, 8, 16000) .
+
+C.3 Traceability and Format Audit 
+
+We further audit the final ClueWeaver traces used in Table 1. A citation is valid if the paragraph ID cited by the Interpreter appears in the Finder-provided evi-dence packet. Missing citations are not counted as invalid; the audit measures the faithfulness of explicit paragraph references. Across 310 questions, 275 outputs contain paragraph citations. Among citation-bearing outputs, 685 of 690 row-unique cited paragraph IDs are valid (99.3%), and 270 of 275 outputs contain 22 J. Zhu et al. 
+
+Table 9. Citation audit for final ClueWeaver traces. Citation validity is computed only for outputs with explicit paragraph citations. Dataset Citation-bearing outputs Valid cited IDs All citations valid DetectiveQA 98/104 235/237 (99.2%) 96/98 (98.0%) 
+
+∞Bench 65/69 155/155 (100.0%) 65/65 (100.0%) LongBench v2 24/26 76/76 (100.0%) 24/24 (100.0%) NoCha 88/111 219/222 (98.6%) 85/88 (96.6%) Overall 275/310 685/690 (99.3%) 270/275 (98.2%) 
+
+only valid citations (98.2%). The structured output is also stable: <reason> and 
+
+<answer> tags are present in 309 of 310 outputs (99.7%), and the final parser extracts a legal answer label in 308 of 310 outputs (99.4%). 
+
+## D Additional Case Studies 
+
+Table 10 gives representative qualitative examples from DetectiveQA. We in-clude one fixed case, one regression, and one unresolved case to show where the proposed pipeline helps and where it still fails. 
+
+## E Prompt Templates and Structured Outputs 
+
+We use three prompt families: Finder , Interpreter , and Interpreter self -cal .In implementation, each family has a multiple-choice instantiation and a binary claim-verification instantiation with TRUE /FALSE answers. Self-calibration is invoked only inside the Interpreter ; there is no self-calibration prompt for the Finder. 
+
+E.1 Prompt Templates 
+
+Finder Agent Prompt Template 
+
+> You are the evidence Finder agent in a long-narrative QA pipeline. You read ONE segment from a long story. Paragraphs are numbered like [N]. Decide whether the segment contains concrete evidence that should be shown to a downstream Interpreter. Say YES only when the segment contains a concrete fact that helps answer the question, choose or rule out one option, or confirm or refute a claim. Strong evidence includes a relevant action, dialogue line, motive, relationship, causal explanation, time/place clue, object, identity, or explicit contradiction. Say NO when: - The segment is scene-setting, scenery, weather, or transition narrative. - The segment mentions characters but says nothing about what the question is asking. - The overlap is only a common word, option word, or passing name with no relevant fact. - The segment merely raises suspicion but gives no fact that distinguishes options. - You cannot name a concrete clue from the segment.
+
+ClueWeaver 23 
+
+Table 10. Additional qualitative cases. 
+
+Type Question Prediction Observation 
+
+Fixed error Henry’s wife Sylvia on his drug use situation. 
+
+Direct: C; 
+
+ClueWeaver: 
+
+A; Gold: AThe Finder retrieves distant paragraphs in-dicating that Sylvia did not know about Henry’s drug use, al-lowing the Interpreter to reject plausible but unsupported alterna-tives. 
+
+Regression What was the cause of John Fairley’s death? 
+
+Direct: D; 
+
+ClueWeaver: 
+
+A; Gold: DThe selected evidence emphasizes a local suicide explana-tion and misses the option-specific detail needed to support the gold answer. 
+
+Unresolved Tina says: “The cup is empty.” What does this mean? 
+
+Direct: C; 
+
+ClueWeaver: 
+
+C; Gold: AThe literal evidence about the empty cup is found, but both systems fail to map the symbolic state-ment to the intended narrative implication. 
+
+> Bias: preserve answer-critical evidence. Prefer NO for pure background, but choose YES for any concrete fact that could help answer, rule out an option, confirm, or refute the claim. Judge this segment independently; partial evidence is still evidence. Question or claim: {question} Answer space: (A) {opt_a} (B) {opt_b} (C) {opt_c} (D) {opt_d} or TRUE/FALSE for claim verification Segment (paragraphs {start_para}-{end_para}): {segment_text} OUTPUT FORMAT -- exactly two XML fields and nothing else: <reason>one sentence naming the concrete clue, or saying no concrete clue is present; cite [N] when applicable</reason> <answer>YES</answer> or <answer>NO</answer>
+
+24 J. Zhu et al. 
+
+Interpreter Agent Prompt Template 
+
+You are the final Interpreter in a dual-agent long-narrative QA pipeline. Answer the question or verify the claim using ONLY the supplied evidence. Evidence paragraphs are numbered like [N]. Rules: - First identify the exact fact the question asks for; do not drift to a related event. - Match by meaning, not wording. - Check question polarity, including false, except, or not true. - Compare every option against direct evidence. - Missing evidence for an option does not prove it wrong; only explicit contradiction rules it out. - Prefer the option with the strongest positive support in the evidence. - For claim verification, check each essential element of the claim and answer TRUE or FALSE. - Cite paragraph numbers like [478] for every decisive fact. - Keep <reason> under 120 words. Question or claim: {question} Answer space: (A) {opt_a} (B) {opt_b} (C) {opt_c} (D) {opt_d} or TRUE/FALSE for claim verification Evidence (kept segments, in order): {evidence_block} OUTPUT -- only these two XML fields, nothing else: <reason>concise evidence-grounded rationale with [N] citations, under 120 words</reason> <answer>A</answer> or <answer>TRUE</answer> 
+
+Interpreter Self-Calibration Prompt Template 
+
+You are the same Interpreter performing a self-calibration step. The previous answer may be wrong. Re-check the question or claim, answer space, evidence, and previous answer using ONLY the supplied evidence. Rules: - If the previous rationale supports one option but the answer tag names another, correct the answer. - Match the exact question intent, including why, false, except, not true, deduce, and infer. - For claim verification, do not add requirements that are not stated in the claim. - Prefer concrete evidence links over broad or isolated word overlap. - If another option is better supported by the evidence, change the answer. - Keep <reason> under 100 words and cite decisive paragraph numbers. Question or claim: {question} Answer space: (A) {opt_a} (B) {opt_b} (C) {opt_c} (D) {opt_d} or TRUE/FALSE for claim verification Evidence: {evidence_block} ClueWeaver 25 
+
+Previous answer: {previous_answer} Previous rationale: {previous_reason} OUTPUT -- only these two XML fields, nothing else: <reason>self-calibrated rationale with [N] citations</reason> <answer>A</answer> or <answer>TRUE</answer>

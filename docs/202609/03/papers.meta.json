@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-03",
+  "date": "2026-09-03",
+  "generated_at": "2026-09-03T21:50:27",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/03/2609.00858v1-verifiable-disaster-storylines-and-causal-knowledge-graphs-a-citation-grounded-pipeline-from-heterogeneous-humanitarian-sources",
+      "section": "quick",
+      "title_en": "Verifiable Disaster Storylines and Causal Knowledge Graphs: A Citation-Grounded Pipeline from Heterogeneous Humanitarian Sources",
+      "authors": "Ivan Decostanzi, Michele Ronco, Sergio Consoli, Christina Corbane, Lorenzo Bertolini, Indaco Biazzo, Daria Mihaila, Manuel Garcia-Herranz, Felix Schwebel, Yelena Mejova, Kyriaki Kalimeri",
+      "date": "2026-09-01",
+      "pdf": "https://arxiv.org/pdf/2609.00858v1",
+      "score": "7.5",
+      "evidence": "用于人道主义危机和灾难故事情节的因果知识图谱",
+      "tldr": "为应对危机初期信息爆炸，本文提出将EM-DAT结构化记录与ReliefWeb、EMM文档融合的RAG管线，自动生成含17项字段的灾害情境故事线与可追溯因果知识图谱，并经三案例、专家/非专家评估验证高检索精度与因果事实性，优先选择带引文组件，计划扩展至全库公开。",
+      "tags": "query:q6",
+      "abstract_en": "Effective humanitarian response depends on the rapid synthesis of heterogeneous, high-volume information sources - a task that routinely exceeds human analytical capacity in the critical early hours of a crisis. We present a pipeline that combines structured disaster records from EM-DAT with unstructured documents from ReliefWeb and the European Media Monitor (EMM) to produce source-grounded disaster storylines and causal knowledge graphs supporting situational awareness for responders and analysts. Using Retrieval-Augmented Generation, the pipeline extracts structured storylines - tabular event profiles covering 17 fields, from severity and key drivers to child-sensitive impact indicators - and constructs causal knowledge graphs where each node and edge is enriched with citation-grounded explanatory narratives, enabling full traceability back to primary sources. We evaluate the system on three diverse crisis use cases through a human evaluation involving 9 domain expert and 9 non-expert evaluators. Results confirm high retrieval precision, strong faithfulness of extracted causal relations, and a clear expert preference for citation-grounded components over ungrounded alternatives. The pipeline is designed to scale to the full EM-DAT catalogue, with the goal of publicly releasing a narrative-enriched version of the database.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/03/2608.25531v1-clueweaver-reward-guided-dual-agent-evidence-reasoning-for-compact-llms-on-literary-long-narratives",
+      "section": "quick",
+      "title_en": "ClueWeaver: Reward-Guided Dual-Agent Evidence Reasoning for Compact LLMs on Literary Long Narratives",
+      "authors": "Jihao Zhu, Zhiwei Yang, Wenxiao Zhang, Junqian Zhao, Qi You, Fangqi Wang, Zheyuan Deng, Hanzhe Yang, Yu Liu, Jin B. Hong",
+      "date": "2026-08-26",
+      "pdf": "https://arxiv.org/pdf/2608.25531v1",
+      "score": "6.0",
+      "evidence": "使用双代理大语言模型对社会科学研究和档案进行证据推理",
+      "tldr": "ClueWeaver面向人文社科长篇叙事问答，提出由Finder与Interpreter组成的证据感知双代理框架，结合检索分段与段落ID引用，并以奖励引导优化，显著提升本地小模型的证据覆盖、可解释推理与答案准确性。",
+      "tags": "query:q6",
+      "abstract_en": "Humanities and social science research requires close reading of long narrative materials such as novels, scripts, archives, and case reports, yet many users have limited access to costly proprietary long-context models. Compact, locally deployable language models are a practical alternative, but directly feeding them an entire long context remains costly, hard to inspect, and prone to missing sparse evidence. We present ClueWeaver, an evidence-aware dual-agent framework for long-narrative question answering with compact local models. A Finder identifies passages containing answer-critical clues through retrieval-guided segmentation, while an Interpreter derives the answer from the selected evidence, produces rationales with paragraph-ID citations, and applies an internal self-calibration pass for high-risk questions. Both agents are optimized with reward-guided reinforcement learning: Finder rewards emphasize evidence retention and faithful paragraph-ID references, and Interpreter rewards emphasize correctness, grounding, and concise explanations. This decomposition makes evidence selection and reasoning more inspectable than end-to-end prompting. Experiments across multiple long-context narrative question answering and claim verification settings show that ClueWeaver substantially improves local end-to-end language models while providing evidence coverage and paragraph-referenced reasoning traces. Code is available at https://github.com/Ameame1/ClueWeaver.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/03/2608.31128v1-diasentinel-an-auditable-multi-agent-system-for-guideline-grounded-diabetes-risk-screening",
+      "section": "quick",
+      "title_en": "DIASENTINEL: An Auditable Multi-Agent System for Guideline-Grounded Diabetes Risk Screening",
+      "authors": "Yung Wei Shueh, Zhi-Jie Chen, Chia-Hsuan Hsu, Hsin-Ling Hsu, Donghua Zhang, Chenwei Wu, Jun-En Ding, Tongze Zhang, Shihao Yang, Pengfei Hu, Fang-Ming Hung, Feng Liu",
+      "date": "2026-08-31",
+      "pdf": "https://arxiv.org/pdf/2608.31128v1",
+      "score": "6.0",
+      "evidence": "用于风险筛查的可校准风险预测和可审计多智能体系统",
+      "tldr": "DIASENTINEL是一种本地可审计的多智能体系统，面向EHR开展一年期2型糖尿病风险筛查与依据ADA指南的报告生成，融合校准风险预测、确定性信号抽取、RRF检索与规则+LLM验证层，并提供批量筛查与交互式报告，实现可靠且隐私保护的临床决策支持。",
+      "tags": "query:q5",
+      "abstract_en": "Large language models (LLMs) offer promising clinical decision support but remain vulnerable to hallucinated facts, unsupported recommendations, and citation errors. We present DIASENTINEL, a fully on-premise multi-agent system for one-year type 2 diabetes mellitus (T2DM) risk screening and guideline-grounded report generation from electronic health records (EHRs). The system integrates calibrated risk prediction, deterministic clinical signal extraction, Reciprocal Rank Fusion over American Diabetes Association (ADA) guidelines, and a hybrid verification layer combining rule-based checks with LLM entailment. The demonstration provides a real-time batch-screening dashboard and an interactive patient report interface with cited recommendations, verification results, and raw EHR comparison. DIASENTINEL demonstrates a practical framework for reliable, auditable, and privacy-preserving LLM-based clinical decision support.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

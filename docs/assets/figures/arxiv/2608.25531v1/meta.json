@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-001.webp",
+      "caption": "Fig. 3. Accuracy–latency trade-off using Table 1 accuracies and serial single-GPU stage timings. Most additional latency comes from the Finder stage.",
+      "page": 11,
+      "index": 1,
+      "width": 645,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-002.webp",
+      "caption": "Table 8. Evidence construction stages in ClueWeaver.",
+      "page": 21,
+      "index": 2,
+      "width": 664,
+      "height": 476
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-003.webp",
+      "caption": "Fig. 1. Answer-critical clues in long narratives are often sparse and distant. While long-context models may connect them directly, compact local models operating over limited context windows can truncate evidence, separate related clues, and obscure evidence use.",
+      "page": 2,
+      "index": 3,
+      "width": 725,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-004.webp",
+      "caption": "Table 1. Main results on four long-context narrative benchmarks (final answer accuracy, %). Among local methods, best per column is in bold and second best is underlined; best API result per column is marked with ::::",
+      "page": 10,
+      "index": 4,
+      "width": 716,
+      "height": 538
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-005.webp",
+      "caption": "Table 10. Additional qualitative cases.",
+      "page": 23,
+      "index": 5,
+      "width": 725,
+      "height": 1065
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-006.webp",
+      "caption": "Table 4. Case study on DetectiveQA. ClueWeaver exposes the evidence-selection and interpretation process, with self-calibration used as a final consistency check.",
+      "page": 13,
+      "index": 6,
+      "width": 694,
+      "height": 436
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-007.webp",
+      "caption": "Fig. 5. t-SNE of BGE-M3 embeddings of the training questions for the two agents, colored by source. Both pools are detective-domain dominated; the NoCha portion is mostly synthetic claim-verification, and LongBench v2 is the sparsest benchmark for the Interpreter.",
+      "page": 19,
+      "index": 7,
+      "width": 673,
+      "height": 276
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-008.webp",
+      "caption": "Table 6. Interpreter reward components.",
+      "page": 17,
+      "index": 8,
+      "width": 664,
+      "height": 572
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-009.webp",
+      "caption": "Table 3. Cost profile for local and API readers.",
+      "page": 12,
+      "index": 9,
+      "width": 666,
+      "height": 263
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-010.webp",
+      "caption": "Fig. 4. Error transitions between the direct reader and ClueWeaver across the four benchmarks. ClueWeaver yields a clear net correction gain.",
+      "page": 12,
+      "index": 10,
+      "width": 667,
+      "height": 216
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-011.webp",
+      "caption": "Table 7. GRPO training hyperparameters for each agent.",
+      "page": 20,
+      "index": 11,
+      "width": 510,
+      "height": 434
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-012.webp",
+      "caption": "Fig. 2. Overview of ClueWeaver: Finder selects evidence-bearing narrative segments, and Interpreter produces a grounded answer with self-calibration.",
+      "page": 5,
+      "index": 12,
+      "width": 721,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2608.25531v1/fig-013.webp",
+      "caption": "Table 5. Finder reward components.",
+      "page": 16,
+      "index": 13,
+      "width": 664,
+      "height": 507
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-03T21:47:21.497209+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.00858v1",
+      "source": "arxiv",
+      "title": "Verifiable Disaster Storylines and Causal Knowledge Graphs: A Citation-Grounded Pipeline from Heterogeneous Humanitarian Sources",
+      "abstract": "Effective humanitarian response depends on the rapid synthesis of heterogeneous, high-volume information sources - a task that routinely exceeds human analytical capacity in the critical early hours of a crisis. We present a pipeline that combines structured disaster records from EM-DAT with unstructured documents from ReliefWeb and the European Media Monitor (EMM) to produce source-grounded disaster storylines and causal knowledge graphs supporting situational awareness for responders and analysts. Using Retrieval-Augmented Generation, the pipeline extracts structured storylines - tabular event profiles covering 17 fields, from severity and key drivers to child-sensitive impact indicators - and constructs causal knowledge graphs where each node and edge is enriched with citation-grounded explanatory narratives, enabling full traceability back to primary sources. We evaluate the system on three diverse crisis use cases through a human evaluation involving 9 domain expert and 9 non-expert evaluators. Results confirm high retrieval precision, strong faithfulness of extracted causal relations, and a clear expert preference for citation-grounded components over ungrounded alternatives. The pipeline is designed to scale to the full EM-DAT catalogue, with the goal of publicly releasing a narrative-enriched version of the database.",
+      "authors": [
+        "Ivan Decostanzi",
+        "Michele Ronco",
+        "Sergio Consoli",
+        "Christina Corbane",
+        "Lorenzo Bertolini",
+        "Indaco Biazzo",
+        "Daria Mihaila",
+        "Manuel Garcia-Herranz",
+        "Felix Schwebel",
+        "Yelena Mejova",
+        "Kyriaki Kalimeri"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-09-01T07:56:12+00:00",
+      "link": "https://arxiv.org/pdf/2609.00858v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "Causal knowledge graphs for humanitarian crisis and disaster storylines",
+      "llm_evidence_cn": "用于人道主义危机和灾难故事情节的因果知识图谱",
+      "llm_evidence": "用于人道主义危机和灾难故事情节的因果知识图谱",
+      "canonical_evidence": "用于人道主义危机和灾难故事情节的因果知识图谱",
+      "llm_tldr_en": "Extracts causal knowledge graphs from humanitarian sources to support situational awareness in crises.",
+      "llm_tldr_cn": "从人道主义资源中提取因果知识图谱，支持危机中的态势感知。",
+      "llm_tldr": "从人道主义资源中提取因果知识图谱，支持危机中的态势感知。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.25531v1",
+      "source": "arxiv",
+      "title": "ClueWeaver: Reward-Guided Dual-Agent Evidence Reasoning for Compact LLMs on Literary Long Narratives",
+      "abstract": "Humanities and social science research requires close reading of long narrative materials such as novels, scripts, archives, and case reports, yet many users have limited access to costly proprietary long-context models. Compact, locally deployable language models are a practical alternative, but directly feeding them an entire long context remains costly, hard to inspect, and prone to missing sparse evidence. We present ClueWeaver, an evidence-aware dual-agent framework for long-narrative question answering with compact local models. A Finder identifies passages containing answer-critical clues through retrieval-guided segmentation, while an Interpreter derives the answer from the selected evidence, produces rationales with paragraph-ID citations, and applies an internal self-calibration pass for high-risk questions. Both agents are optimized with reward-guided reinforcement learning: Finder rewards emphasize evidence retention and faithful paragraph-ID references, and Interpreter rewards emphasize correctness, grounding, and concise explanations. This decomposition makes evidence selection and reasoning more inspectable than end-to-end prompting. Experiments across multiple long-context narrative question answering and claim verification settings show that ClueWeaver substantially improves local end-to-end language models while providing evidence coverage and paragraph-referenced reasoning traces. Code is available at https://github.com/Ameame1/ClueWeaver.",
+      "authors": [
+        "Jihao Zhu",
+        "Zhiwei Yang",
+        "Wenxiao Zhang",
+        "Junqian Zhao",
+        "Qi You",
+        "Fangqi Wang",
+        "Zheyuan Deng",
+        "Hanzhe Yang",
+        "Yu Liu",
+        "Jin B. Hong"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-26T08:39:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.25531v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Evidence reasoning for social science research and archives using dual-agent LLMs",
+      "llm_evidence_cn": "使用双代理大语言模型对社会科学研究和档案进行证据推理",
+      "llm_evidence": "使用双代理大语言模型对社会科学研究和档案进行证据推理",
+      "canonical_evidence": "使用双代理大语言模型对社会科学研究和档案进行证据推理",
+      "llm_tldr_en": "A dual-agent framework for long-narrative reasoning in humanities and social sciences.",
+      "llm_tldr_cn": "一种用于人文社会科学长叙事推理的双代理框架。",
+      "llm_tldr": "一种用于人文社会科学长叙事推理的双代理框架。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.31128v1",
+      "source": "arxiv",
+      "title": "DIASENTINEL: An Auditable Multi-Agent System for Guideline-Grounded Diabetes Risk Screening",
+      "abstract": "Large language models (LLMs) offer promising clinical decision support but remain vulnerable to hallucinated facts, unsupported recommendations, and citation errors. We present DIASENTINEL, a fully on-premise multi-agent system for one-year type 2 diabetes mellitus (T2DM) risk screening and guideline-grounded report generation from electronic health records (EHRs). The system integrates calibrated risk prediction, deterministic clinical signal extraction, Reciprocal Rank Fusion over American Diabetes Association (ADA) guidelines, and a hybrid verification layer combining rule-based checks with LLM entailment. The demonstration provides a real-time batch-screening dashboard and an interactive patient report interface with cited recommendations, verification results, and raw EHR comparison. DIASENTINEL demonstrates a practical framework for reliable, auditable, and privacy-preserving LLM-based clinical decision support.",
+      "authors": [
+        "Yung Wei Shueh",
+        "Zhi-Jie Chen",
+        "Chia-Hsuan Hsu",
+        "Hsin-Ling Hsu",
+        "Donghua Zhang",
+        "Chenwei Wu",
+        "Jun-En Ding",
+        "Tongze Zhang",
+        "Shihao Yang",
+        "Pengfei Hu",
+        "Fang-Ming Hung",
+        "Feng Liu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-31T17:40:43+00:00",
+      "link": "https://arxiv.org/pdf/2608.31128v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "calibrated risk prediction and auditable multi-agent system for risk screening",
+      "llm_evidence_cn": "用于风险筛查的可校准风险预测和可审计多智能体系统",
+      "llm_evidence": "用于风险筛查的可校准风险预测和可审计多智能体系统",
+      "canonical_evidence": "用于风险筛查的可校准风险预测和可审计多智能体系统",
+      "llm_tldr_en": "Presents an auditable multi-agent system for risk screening with hybrid verification and calibrated prediction.",
+      "llm_tldr_cn": "提出一种具有混合验证和校准预测功能的可审计多智能体风险筛查系统。",
+      "llm_tldr": "提出一种具有混合验证和校准预测功能的可审计多智能体风险筛查系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
