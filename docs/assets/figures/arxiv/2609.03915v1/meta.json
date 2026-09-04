@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.03915v1/fig-001.webp",
+      "caption": "Table 1: Performance comparison on the LoCoMo benchmark (best in bold, second best underlined), across four question types: Single-hop (single evidence), Multi-hop (cross-snippet reasoning), Open-domain (dialogue with external knowledge), and Temporal (time-aware reasoning).",
+      "page": 5,
+      "index": 1,
+      "width": 1054,
+      "height": 570
+    },
+    {
+      "url": "assets/figures/arxiv/2609.03915v1/fig-002.webp",
+      "caption": "Figure 3: Analysis of recall failure, reasoning failure, and RPC hyperparameter sensitivity. (a) Recall rates obtained with Default Recall and Guided Recall across memory baselines; the orange line reports the relative improvement from guided retrieval. (b) Numbers of reasoning failures under default generation and Explicit Reasoning; the arrows report the relative reduction for each baseline. (c) Accuracy sensitivity to the RPC admission threshold τ (top) and the signal balancing coefficient α (bottom).",
+      "page": 5,
+      "index": 2,
+      "width": 1046,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2609.03915v1/fig-003.webp",
+      "caption": "Figure 2: The RuleMem framework. The system operates in three main stages: 1) Bottom-up rule memory construction: extracts temporal facts from dialogues to form a fact memory base (MF ), mines reasoning paths, and induces them into abstract natural-language rules stored in a rule memory base (MR). 2) Rule validation via RPC: filters and refines the induced rules by combining internal language priors with external factual consistency. 3) Top-down rule-guided QA: when facing a new question, the system activates relevant rule templates, guides the recall of supporting facts, and generates explicit reasoning answers using both the rule scaffold and factual evidence.",
+      "page": 4,
+      "index": 3,
+      "width": 894,
+      "height": 476
+    },
+    {
+      "url": "assets/figures/arxiv/2609.03915v1/fig-004.webp",
+      "caption": "Table 2: Case study of rule-guided recall and explicit reasoning. The conversation and retrieved memories are abbreviated excerpts. Bold text highlights key reasoning-relevant contents, while parentheses indicate why each memory was retrieved or how it relates to the query.",
+      "page": 7,
+      "index": 4,
+      "width": 1052,
+      "height": 602
+    },
+    {
+      "url": "assets/figures/arxiv/2609.03915v1/fig-005.webp",
+      "caption": "Figure 1: Comparison of three paradigms in agent memory. Fact memorization relies on surface similarity to retrieve isolated snippets. Fact organization builds instance-level structures (e.g., Zettelkasten and knowledge graphs) but introduces noise during complex reasoning. Our proposed rule induction extracts reusable rules from specific facts, bridging semantic gaps for implicit evidence retrieval and providing a logical skeleton for explicit reasoning.",
+      "page": 2,
+      "index": 5,
+      "width": 896,
+      "height": 371
+    }
+  ]
+}
