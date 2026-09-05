@@ -1,0 +1,188 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-05T22:09:20.468277+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.00858v1",
+      "source": "arxiv",
+      "title": "Verifiable Disaster Storylines and Causal Knowledge Graphs: A Citation-Grounded Pipeline from Heterogeneous Humanitarian Sources",
+      "abstract": "Effective humanitarian response depends on the rapid synthesis of heterogeneous, high-volume information sources - a task that routinely exceeds human analytical capacity in the critical early hours of a crisis. We present a pipeline that combines structured disaster records from EM-DAT with unstructured documents from ReliefWeb and the European Media Monitor (EMM) to produce source-grounded disaster storylines and causal knowledge graphs supporting situational awareness for responders and analysts. Using Retrieval-Augmented Generation, the pipeline extracts structured storylines - tabular event profiles covering 17 fields, from severity and key drivers to child-sensitive impact indicators - and constructs causal knowledge graphs where each node and edge is enriched with citation-grounded explanatory narratives, enabling full traceability back to primary sources. We evaluate the system on three diverse crisis use cases through a human evaluation involving 9 domain expert and 9 non-expert evaluators. Results confirm high retrieval precision, strong faithfulness of extracted causal relations, and a clear expert preference for citation-grounded components over ungrounded alternatives. The pipeline is designed to scale to the full EM-DAT catalogue, with the goal of publicly releasing a narrative-enriched version of the database.",
+      "authors": [
+        "Ivan Decostanzi",
+        "Michele Ronco",
+        "Sergio Consoli",
+        "Christina Corbane",
+        "Lorenzo Bertolini",
+        "Indaco Biazzo",
+        "Daria Mihaila",
+        "Manuel Garcia-Herranz",
+        "Felix Schwebel",
+        "Yelena Mejova",
+        "Kyriaki Kalimeri"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-09-01T07:56:12+00:00",
+      "link": "https://arxiv.org/pdf/2609.00858v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "Causal knowledge graphs for disaster storylines and humanitarian response",
+      "llm_evidence_cn": "用于灾难故事线和人道主义响应的因果知识图谱",
+      "llm_evidence": "用于灾难故事线和人道主义响应的因果知识图谱",
+      "canonical_evidence": "用于灾难故事线和人道主义响应的因果知识图谱",
+      "llm_tldr_en": "A pipeline creating causal knowledge graphs from humanitarian sources to support situational awareness in crises.",
+      "llm_tldr_cn": "该研究通过人道主义数据源构建因果知识图谱，支持危机中的态势感知。",
+      "llm_tldr": "该研究通过人道主义数据源构建因果知识图谱，支持危机中的态势感知。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.31128v1",
+      "source": "arxiv",
+      "title": "DIASENTINEL: An Auditable Multi-Agent System for Guideline-Grounded Diabetes Risk Screening",
+      "abstract": "Large language models (LLMs) offer promising clinical decision support but remain vulnerable to hallucinated facts, unsupported recommendations, and citation errors. We present DIASENTINEL, a fully on-premise multi-agent system for one-year type 2 diabetes mellitus (T2DM) risk screening and guideline-grounded report generation from electronic health records (EHRs). The system integrates calibrated risk prediction, deterministic clinical signal extraction, Reciprocal Rank Fusion over American Diabetes Association (ADA) guidelines, and a hybrid verification layer combining rule-based checks with LLM entailment. The demonstration provides a real-time batch-screening dashboard and an interactive patient report interface with cited recommendations, verification results, and raw EHR comparison. DIASENTINEL demonstrates a practical framework for reliable, auditable, and privacy-preserving LLM-based clinical decision support.",
+      "authors": [
+        "Yung Wei Shueh",
+        "Zhi-Jie Chen",
+        "Chia-Hsuan Hsu",
+        "Hsin-Ling Hsu",
+        "Donghua Zhang",
+        "Chenwei Wu",
+        "Jun-En Ding",
+        "Tongze Zhang",
+        "Shihao Yang",
+        "Pengfei Hu",
+        "Fang-Ming Hung",
+        "Feng Liu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-31T17:40:43+00:00",
+      "link": "https://arxiv.org/pdf/2608.31128v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Auditable multi-agent system for risk screening and prediction",
+      "llm_evidence_cn": "用于风险筛查和预测的可审计多智能体系统",
+      "llm_evidence": "用于风险筛查和预测的可审计多智能体系统",
+      "canonical_evidence": "用于风险筛查和预测的可审计多智能体系统",
+      "llm_tldr_en": "Presents DIASENTINEL, an auditable system for diabetes risk screening using guideline-grounded LLMs.",
+      "llm_tldr_cn": "介绍了DIASENTINEL，一个使用基于指南的LLM进行糖尿病风险筛查的可审计系统。",
+      "llm_tldr": "介绍了DIASENTINEL，一个使用基于指南的LLM进行糖尿病风险筛查的可审计系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.29948v2",
+      "source": "arxiv",
+      "title": "XQDT: eXplainable and Quantitative Data-Text Alignment Metric with Feedback Signals",
+      "abstract": "Evaluating data-text alignment remains challenging: existing metrics often provide limited explanations for the scores, while prompt-based LLM-as-Judge methods can be expensive and unreliable. We present an end-to-end explainable evaluation metric that fine-tunes a language model to identify omitted, extra, incorrect, and correct data units in a data-text pair. These local judgements are aggregated into precision, recall, and F1 scores, providing both fine-grained diagnostic feedback and an interpretable measure of alignment quality. Across benchmarks, our fine-tuned models outperform LLM-as-Judge methods in error prediction and achieve competitive precision, recall, and F1 scores, while maintaining strong correlation with human judgements. Beyond evaluation, our verifier outputs also provide useful feedback signals for downstream correction and refinement, supporting alignment-oriented improvement of data-to-text and text-to-data. Code and resources are available at https://github.com/guihuzhang/xqdt.",
+      "authors": [
+        "Kun Efimov-Zhang",
+        "Yifei Song",
+        "Claire Gardent"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-30T18:20:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.29948v2",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explainable evaluation metric providing fine-grained diagnostic feedback and interpretable alignment",
+      "llm_evidence_cn": "提供细粒度诊断反馈和可解释对齐的可解释评估指标",
+      "llm_evidence": "提供细粒度诊断反馈和可解释对齐的可解释评估指标",
+      "canonical_evidence": "提供细粒度诊断反馈和可解释对齐的可解释评估指标",
+      "llm_tldr_en": "XQDT provides explainable data-text alignment metrics, offering interpretable feedback for model outputs.",
+      "llm_tldr_cn": "XQDT提供可解释的数据-文本对齐指标，为模型输出提供可解释的反馈。",
+      "llm_tldr": "XQDT提供可解释的数据-文本对齐指标，为模型输出提供可解释的反馈。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.03915v1",
+      "source": "arxiv",
+      "title": "RuleMem: Active Rule Memory for Long-Term Conversational Agents",
+      "abstract": "Question answering agents in long-term conversations must reason over massive, temporally dispersed dialogue histories. However, existing memory mechanisms primarily treat past information as \\textit{passively} stored facts, leading to semantic gaps and unreliable reasoning. To address this limitation, we propose RuleMem, a rule-based memory framework that induces reusable logical rules from historical interactions to \\textit{actively} guide both evidence retrieval and reasoning. Specifically, RuleMem constructs natural-language Horn clauses from conversations and validates them via a Rule Perplexity Consistency (RPC) mechanism. These induced rules enable the retrieval of semantically distant evidence while providing an explicit logical structure for answer generation. We conducted a comprehensive evaluation of RuleMem on two long-term conversational benchmarks, LoCoMo and LongMemEval_s*. In a rigorous comparison against 14 baselines on LoCoMo, RuleMem achieved the highest accuracy, exceeding the baseline average by 27.47 points (a 54.3% relative improvement).",
+      "authors": [
+        "Xingyuan Zeng",
+        "Zuohan Wu",
+        "Quanming Yao",
+        "Yue Wang",
+        "Wei Liu",
+        "Libin Zheng",
+        "Jiuke Wang",
+        "Jian Yin"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-09-03T14:30:18+00:00",
+      "link": "https://arxiv.org/pdf/2609.03915v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "induces reusable logical rules for explicit logical structure in reasoning",
+      "llm_evidence_cn": "归纳可重用的逻辑规则，为推理提供显式的逻辑结构",
+      "llm_evidence": "归纳可重用的逻辑规则，为推理提供显式的逻辑结构",
+      "canonical_evidence": "归纳可重用的逻辑规则，为推理提供显式的逻辑结构",
+      "llm_tldr_en": "RuleMem induces logical rules from history to provide explicit structure for reasoning and retrieval.",
+      "llm_tldr_cn": "RuleMem从历史对话中归纳逻辑规则，为推理和检索提供显式的逻辑结构。",
+      "llm_tldr": "RuleMem从历史对话中归纳逻辑规则，为推理和检索提供显式的逻辑结构。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

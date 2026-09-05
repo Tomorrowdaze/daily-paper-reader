@@ -1,0 +1,278 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-001.webp",
+      "caption": "Table 4: Triple-level F1 (%) for prompt-based and fine-tuned XQDT models on the E2E synthetic data.",
+      "page": 6,
+      "index": 1,
+      "width": 461,
+      "height": 416
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-002.webp",
+      "caption": "Table 5: Spearman correlation between Pm, Rm, F1m metric scores and 4L-RP-Human Ph, Rh, F1h annotations. Pearson’s r and Kendall’s τ are reported in Appendix H.",
+      "page": 6,
+      "index": 2,
+      "width": 458,
+      "height": 458
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-003.webp",
+      "caption": "Table 3: Triple-level F1 (%) for prompt-based and fine-tuned XQDT verifier models on synthetic data constructed from WebNLG. Here and below, bold indicates the highest value per column; underline indicates the second- and third-highest. G3, L3, and Q3 refer to the Gemma3, Llama3, and Qwen3 implementation of our XQDT metric.",
+      "page": 6,
+      "index": 3,
+      "width": 461,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-004.webp",
+      "caption": "Table 32: Recall (%) on WebNLG error detection across Extra, Omission, and Incorrect errors.",
+      "page": 26,
+      "index": 4,
+      "width": 737,
+      "height": 405
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-005.webp",
+      "caption": "Table 31: Precision (%) on WebNLG error detection across Extra, Omission, and Incorrect errors.",
+      "page": 26,
+      "index": 5,
+      "width": 733,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-006.webp",
+      "caption": "Table 30: F1 scores for prompt-based and our fine-tuned verifier models on error detection data constructed with WebNLG. F1tri, F1ele, and F1sim denote triple-level, element-level, and similarity-based F1, respectively. The \"Macro\" column reports macro-averaged scores across the three error types.",
+      "page": 26,
+      "index": 6,
+      "width": 821,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-007.webp",
+      "caption": "Figure 2: Prompt for Error Detection",
+      "page": 15,
+      "index": 7,
+      "width": 727,
+      "height": 1161
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-008.webp",
+      "caption": "Figure 3: The annotation interface used for human verification on KELM. The left panel shows configuration and navigation controls. The upper area displays the reference data and model response, and the lower area contains Part 1 (verify model predictions) and Part 2 (supplement missed errors) annotation tasks.",
+      "page": 21,
+      "index": 8,
+      "width": 950,
+      "height": 1073
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-009.webp",
+      "caption": "Figure 6: Qualitative data-to-text improvement example (1).",
+      "page": 30,
+      "index": 9,
+      "width": 950,
+      "height": 587
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-010.webp",
+      "caption": "Figure 7: Qualitative data-to-text improvement example (2).",
+      "page": 30,
+      "index": 10,
+      "width": 950,
+      "height": 370
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-011.webp",
+      "caption": "Figure 1: Example of our fine-grained explainable evaluation for data-text alignment. The model assigns labels (Correct, Incorrect, Omitted, Extra) to each input data unit and identifies extra content units in the text. These fine-grained local judgments are then aggregated into precision, recall, and F1 scores as shown in Equations 1, 2.",
+      "page": 2,
+      "index": 11,
+      "width": 950,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-012.webp",
+      "caption": "Table 6: Spearman correlation at system level (ρsys) and text level (ρtxt) between Pm, Rm, F1m metric scores and Pa, Ra, F1a scores derived from WebNLG 2020 human-judgments.",
+      "page": 7,
+      "index": 12,
+      "width": 469,
+      "height": 269
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-013.webp",
+      "caption": "Figure 5: Prompt for improving data-to-text generation.",
+      "page": 29,
+      "index": 13,
+      "width": 869,
+      "height": 1367
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-014.webp",
+      "caption": "Table 37: Extraction repair results on WebNLG with ReGen as the base extractor across repair rounds.",
+      "page": 34,
+      "index": 14,
+      "width": 950,
+      "height": 989
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-015.webp",
+      "caption": "Table 36: Extraction repair results on WebNLG with BT5 as the base extractor across repair rounds. Best repair values within each metric block for each model column are boldfaced.",
+      "page": 33,
+      "index": 15,
+      "width": 950,
+      "height": 989
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-016.webp",
+      "caption": "Table 38: Extraction repair results on GenWiki with BT5 as the base extractor across repair rounds.",
+      "page": 35,
+      "index": 16,
+      "width": 950,
+      "height": 989
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-017.webp",
+      "caption": "Table 18: Categories of annotation quality issues in the E2E dataset, with the number of affected workers per type.",
+      "page": 18,
+      "index": 17,
+      "width": 919,
+      "height": 194
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-018.webp",
+      "caption": "Table 19: Correlations between model-predicted F1 and WebNLG 2017 annotation on semantic adequacy.",
+      "page": 18,
+      "index": 18,
+      "width": 448,
+      "height": 408
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-019.webp",
+      "caption": "Table 17: Text-level correlation with precision/recall/F1 targets derived from WebNLG 2020 human judgements.",
+      "page": 18,
+      "index": 19,
+      "width": 685,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-020.webp",
+      "caption": "Figure 4: Prompt for improving text-to-data extraction.",
+      "page": 28,
+      "index": 20,
+      "width": 869,
+      "height": 1202
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-021.webp",
+      "caption": "Table 39: Extraction repair results on GenWiki with ReGen as the base extractor across repair rounds.",
+      "page": 36,
+      "index": 21,
+      "width": 950,
+      "height": 989
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-022.webp",
+      "caption": "Table 20: Detailed correlations with E2E fine-grained human judgements on quality assessments.",
+      "page": 19,
+      "index": 22,
+      "width": 448,
+      "height": 915
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-023.webp",
+      "caption": "Table 16: System-level correlation with precision/recall/F1 targets derived from WebNLG 2020 human judgements. We approximate human precision as the product of Correctness and Relevance judgements (Pa = CR×RV ) and treat the Data Coverage score CV as human recall Ra, and F1a as the harmonic mean of Pa and Ra.",
+      "page": 17,
+      "index": 23,
+      "width": 685,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-024.webp",
+      "caption": "Table 15: Correlations (Pearson r, Spearman ρ, Kendall τ ) between Precision / Recall / F1 scores from verification models (Pm, Rm, F1m) and 4L-RP-Human Precision / Recall / F1 annotations (Ph, Rh, F1h).",
+      "page": 17,
+      "index": 24,
+      "width": 721,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-025.webp",
+      "caption": "Figure 9: Qualitative text-to-data improvement example (2).",
+      "page": 32,
+      "index": 25,
+      "width": 950,
+      "height": 647
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-026.webp",
+      "caption": "Table 33: F1 scores of verification models on error detection data constructed with E2E.",
+      "page": 27,
+      "index": 26,
+      "width": 821,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-027.webp",
+      "caption": "Table 34: Precision (%) on E2E error detection across Extra, Omission, and Incorrect errors.",
+      "page": 27,
+      "index": 27,
+      "width": 733,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-028.webp",
+      "caption": "Table 35: Recall (%) on E2E error detection across Extra, Omission, and Incorrect errors.",
+      "page": 27,
+      "index": 28,
+      "width": 737,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-029.webp",
+      "caption": "Table 11: Data-to-Text improvement scores on WebNLG using the Control Prefix baseline. BERTS-F1 denotes BERTScore-F1.",
+      "page": 9,
+      "index": 29,
+      "width": 458,
+      "height": 363
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-030.webp",
+      "caption": "Table 9: Improved Text-to-Data Scores on GenWiki. Exact F1 (%) on GenWiki with BT5 and ReGen as base text-to-data models. SR denotes Self-Refine; FS denotes FactSpotter; and R1/R3 denote 1 or 3 rounds of revision.",
+      "page": 9,
+      "index": 30,
+      "width": 461,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-031.webp",
+      "caption": "Table 10: Improved Text-to-Data Scores on WebNLG. Exact F1 (%) for improved text-to-data results on WebNLG with BT5 and ReGen as base extractors.",
+      "page": 9,
+      "index": 31,
+      "width": 461,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-032.webp",
+      "caption": "Table 40: WebNLG repair results on the Control Prefix baseline across repair rounds.",
+      "page": 37,
+      "index": 32,
+      "width": 879,
+      "height": 1393
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-033.webp",
+      "caption": "Figure 8: Qualitative text-to-data improvement example (1).",
+      "page": 31,
+      "index": 33,
+      "width": 950,
+      "height": 568
+    },
+    {
+      "url": "assets/figures/arxiv/2608.29948v2/fig-034.webp",
+      "caption": "Table 12: Data distribution across splits. Error Types (Omitted, Extra, Incorrect) indicate the number of negative samples containing each error type. Different types of errors could co-occur on the same negative sample.",
+      "page": 16,
+      "index": 34,
+      "width": 461,
+      "height": 332
+    }
+  ]
+}
