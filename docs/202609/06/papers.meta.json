@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-06",
+  "date": "2026-09-06",
+  "generated_at": "2026-09-06T20:54:20",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/06/2609.00858v1-verifiable-disaster-storylines-and-causal-knowledge-graphs-a-citation-grounded-pipeline-from-heterogeneous-humanitarian-sources",
+      "section": "quick",
+      "title_en": "Verifiable Disaster Storylines and Causal Knowledge Graphs: A Citation-Grounded Pipeline from Heterogeneous Humanitarian Sources",
+      "authors": "Ivan Decostanzi, Michele Ronco, Sergio Consoli, Christina Corbane, Lorenzo Bertolini, Indaco Biazzo, Daria Mihaila, Manuel Garcia-Herranz, Felix Schwebel, Yelena Mejova, Kyriaki Kalimeri",
+      "date": "2026-09-01",
+      "pdf": "https://arxiv.org/pdf/2609.00858v1",
+      "score": "7.0",
+      "evidence": "用于人道主义危机和灾害驱动因素的因果知识图谱",
+      "tldr": "为应对危机初期异构海量信息难以快速综合之痛点，本文提出基于引文溯源的RAG管线，融合EM-DAT与ReliefWeb、EMM，自动生成含17字段的灾害故事线与可验证因果知识图谱；人评证实高检索精度与因果忠实度，且可扩展至全库并计划公开叙事增强版数据库。",
+      "tags": "query:q6",
+      "abstract_en": "Effective humanitarian response depends on the rapid synthesis of heterogeneous, high-volume information sources - a task that routinely exceeds human analytical capacity in the critical early hours of a crisis. We present a pipeline that combines structured disaster records from EM-DAT with unstructured documents from ReliefWeb and the European Media Monitor (EMM) to produce source-grounded disaster storylines and causal knowledge graphs supporting situational awareness for responders and analysts. Using Retrieval-Augmented Generation, the pipeline extracts structured storylines - tabular event profiles covering 17 fields, from severity and key drivers to child-sensitive impact indicators - and constructs causal knowledge graphs where each node and edge is enriched with citation-grounded explanatory narratives, enabling full traceability back to primary sources. We evaluate the system on three diverse crisis use cases through a human evaluation involving 9 domain expert and 9 non-expert evaluators. Results confirm high retrieval precision, strong faithfulness of extracted causal relations, and a clear expert preference for citation-grounded components over ungrounded alternatives. The pipeline is designed to scale to the full EM-DAT catalogue, with the goal of publicly releasing a narrative-enriched version of the database.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/06/2609.03687v1-a-circuit-for-plural-reference-how-llms-represent-and-retrieve-singular-and-plural-entities",
+      "section": "quick",
+      "title_en": "A Circuit for Plural Reference: How LLMs Represent and Retrieve Singular and Plural Entities",
+      "authors": "Anh Danh, Rick Nouwen, Massimo Poesio",
+      "date": "2026-09-03",
+      "pdf": "https://arxiv.org/pdf/2609.03687v1",
+      "score": "6.0",
+      "evidence": "机械可解释性和因果干预技术",
+      "tldr": "本文研究LLM在复数指代中的共指解析机制，结合机制可解释与注意力模式分析，并用因果干预定位负责表示、识别与传递复数实体信息的注意力头，阐明模型如何选择先行项与预测代词，并发现对本体相似且由and连接的实体偏好复数代词，趋同于人类。",
+      "tags": "query:q6",
+      "abstract_en": "Coreference resolution is an important task in contextual reasoning. In this paper, we investigate the mechanism for representing and retrieving singular and plural entities for plural reference. We use a combination of mechanistic interpretability and attention pattern analysis to study the process in which LLMs predict a pronoun to refer back to previously mentioned entities. Using a range of causal intervention techniques, we find a set of attention heads that are responsible for (1) representing coreference information in the input, (2) identifying entities that form a plural reference, (3) transferring the information to the component that is responsible for selecting the antecedents and predicting the pronoun. We also find that LLMs align with humans in preference for plural pronoun. Specifically, entities in a plural construction are more likely to be referred to as a plural entity if they are ontologically similar and are linked by the conjunction \"and\".",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

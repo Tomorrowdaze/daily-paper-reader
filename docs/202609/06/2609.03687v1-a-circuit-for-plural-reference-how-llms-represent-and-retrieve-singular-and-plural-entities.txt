@@ -1,0 +1,647 @@
+Title: A Circuit for Plural Reference: How LLMs Represent and Retrieve Singular and Plural Entities
+
+URL Source: https://arxiv.org/pdf/2609.03687v1
+
+Published Time: Fri, 04 Sep 2026 00:54:20 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+## A Circuit for Plural Reference: How LLMs Represent and Retrieve Singular and Plural Entities 
+
+Anh Dang 1, Rick Nouwen 1, Massimo Poesio 1,2 
+
+> 1
+
+Utrecht University, 2Queen Mary University of London t.t.a.dang@uu.nl, r.w.f.nouwen@uu.nl, m.poesio@uu.nl 
+
+Abstract 
+
+Coreference resolution is an important task in contextual reasoning. In this paper, we inves-tigate the mechanism for representing and re-trieving singular and plural entities for plural reference. We use a combination of mechanis-tic interpretability and attention pattern analysis to study the process in which LLMs predict a pronoun to refer back to previously mentioned entities. Using a range of causal intervention techniques, we find a set of attention heads that are responsible for (1) representing coreference information in the input, (2) identifying entities that form a plural reference, (3) transferring the information to the component that is responsi-ble for selecting the antecedents and predicting the pronoun. We also find that LLMs align with humans in preference for plural pronoun. Specifically, entities in a plural construction are more likely to be referred to as a plural entity if they are ontologically similar and are linked by the conjunction and . 1
+
+1 Introduction 
+
+Discovering the underlying mechanism behind Large Language Models (LLMs) has been a topic of much research in the past few years due to high interest in improving their safety and their align-ment with human behaviors (Bereska and Gavves, 2024; Ferrando et al., 2024). While LLMs are be-coming larger and more capable, much of their inner working remains under the hood. Under-standing their working is extremely important in making these systems more controllable and thus increasing their safety and explainability. In this paper, we focus on studying how LLMs represent plural reference and how they resolve anaphoric reference involving plurals, as in John and Mary came to the shop. They bought some 
+
+> 1
+
+Our code and data will be made avail-able at https://github.com/dangthithaoanh/ plural-reference-circuit When     
+
+> John
+> saw
+> Mary
+> and
+> her
+> sister
+> ,
+> he
+> waved
+> at
+> When
+> John
+> saw
+> Mary
+> and
+> her
+> bike
+> ,
+> he
+> waved
+> at
+> Pronoun Interpretation
+> L13H6 L17H9 L23H12
+> Pronoun
+> Selection
+> Plurality Formation
+> token that attends token that receives attention
+> attention flow information flow between heads
+
+Figure 1: Summary of our Plural Reference Circuit .We identify Pronoun Interpretation Head , where entities attend to previous mentions ( he → John ; her → Mary ). 
+
+Plurality Formation Head finds the plural construction that forms a plural entity and attends to them. In con-texts where a plural entity is not preferred ( Mary and her bike ), attention to the plural construction is incom-plete. Such representation is then sent to the Pronoun Selection Head , where the LLMs decide which pronoun to predict and attend to the corresponding antecedents. 
+
+milk , where they is understood to corefer with John and Mary . In order to resolve plural reference, the LLMs have to identify the set of entities that create a plural entity. In psycholinguistic research, processing plural reference has been shown to be more complicated than singular reference because it requires tracking multiple entities simultaneously and grouping the entities that should be co-referred to by a plural pronoun (Patson, 2014). It has been found that entities which are similar in ontological properties (Koh and Clifton Jr, 2002) or play a similar role (Moxey et al., 2012) are more likely to be referred to with plurals than those which are not. arXiv:2609.03687v1 [cs.CL] 3 Sep 2026 On the other hand, entities of the same kind and linked by a conjunction are sometimes referred to using a singular pronoun when they create another object, as in Hook up the engine and the boxcar, and send it to Avon (Cokal et al., 2023). To study plural pronoun resolution, we use a combination of interpretability techniques, includ-ing activation patching, path patching (Vig et al., 2020; Geva et al., 2023; Wang et al., 2022), and at-tention pattern analysis (Wang et al., 2022; Tigges et al., 2023). We present the flow of information about plural reference across different model com-ponents (i.e., embeddings, attention heads) and throughout layers. We first use mechanistic in-terpretability techniques to find the attention heads that contribute to the LLMs’ choice of singular and plural pronouns. We then examine the attention pat-tern of these components to see what information is used to make the decision. We found a relatively small and dense circuit, consisting of three groups of heads that are responsible for (i) detecting and encoding plurality signal, (ii) routing this informa-tion to the last token position, (iii) identifying the antecedents and producing a plural pronoun to refer to them. A summary of the responsible heads and their functions is provided below. • Pronoun Selection Heads function at the last token position. They attend to all of the dis-course entities to be referenced by the plu-ral/singular pronoun and directly affect the model’s decision. • Plurality Formation Heads identify the en-tities that form a plural entity and send infor-mation to the Pronoun Selection heads. • Pronoun Interpretation Heads act as a rep-resentation for coreference information where tokens referring to the same entity attend to each other. We also derive the following observations about how LLMs encode referential information and use it to refer back to previous entities: (1) LLMs’ at-tention concentrates on the entities that they refer to; (2) In accordance with previous psycholinguis-tic experiments, there are constraints on whether a set of entities is a good candidate for plural ref-erence for LLMs. Firstly, LLMs prefer entities with similar ontological properties. For example, the conjoined noun phrase John and Mary is more likely to be represented as a plural entity than John and his bike . Secondly, preference for plurality is also affected by the linking conjunction. A plural entity is available if the conjunction is and (John and Mary ) and less preferred when with is used (John with Mary ). 
+
+2 Background and Related Work 
+
+In this section, we first survey literature on corefer-ence resolution and, more specifically, plural refer-ence . We then introduce mechanistic interpretabil-ity , on which our methodology is based. Finally, we provide a brief explanation about the Multi-Head Self-Attention mechanism, the component that we investigate throughout the paper. 
+
+2.1 Coreference Resolution 
+
+Identifying previously mentioned entities and re-ferring to them is crucial in language interpretation (Poesio et al., 2023). There is an extensive body of research on building coreference resolution al-gorithms (Lee et al., 2017; Yu et al., 2020; Bohnet et al., 2023; Martinelli et al., 2024), benchmarking coreference systems (Pradhan et al., 2011; Luo and Pradhan, 2016; Recasens and Pradhan, 2016), and evaluating the capabilities of LLMs in resolving coreference (Le and Ritter, 2023; Upadhye et al., 2020; Schuster and Linzen, 2022; Lam et al., 2023; Gan et al., 2024). However, most work on evalu-ating coreference resolution systems is behavioral and mainly focuses on singular reference (Chen and Choi, 2016; Pradhan et al., 2011). Much less is known about how modern language models track plural entities throughout the discourse and retrieve them (Yu et al., 2020; Paun et al., 2023). In this paper, we track LLMs’ decision making process when they have to decide whether to pre-dict a singular or plural pronoun using datasets built on previous psycholinguistic findings on plu-ral reference processing. In the next section, we introduce the structure of plural entities and sur-vey studies on how humans formulate and process plural reference. 
+
+2.2 Plural Reference 
+
+Plural reference is when a plural noun phrase refers to one or more entities. In the example mentioned above (i.e., John and Mary came to the shop. They bought some milk. ), the pronoun they is used be-cause the antecedents John and Mary are in a plu-ral construction, created by linking the two men-tions using the conjunction and . This is one way in which a plural entity can be established in dis-course. However, the presence of the conjunction 
+
+and does not always make a plural entity salient, and its absence does not always prevent the plu-ral entity from being created. For example, it is possible to rephrase the above sentence as John came to the store with Mary. They bought some milk while still allowing plural reference (Clifton and Ferreira, 2016). (Cases where antecedents of a plural pronoun are not mentioned together within a conjunction are called split-antecedent plural refer-ence.) On the other hand, there are also several prefer-ences as to whether the entities within a plural con-struction can be considered a plural entity. One of those is ontological similarity (Koh and Clifton Jr, 2002). If the entities in the plural construction belong to the same ontological category, they are more likely to be referred to as a plural entity, as found in psycholinguistic experiments. For exam-ple, consider the sentence Mary and her dog came to the shop . While the conjunction and is present and the two mentions are perfectly within a plural construction, it is cognitively easier to continue the sentence with She rather than They . The forma-tion of a plural entity is more difficult when the two mentions are not ontologically similar. In this paper, we focus only on plural constructions that are conjoined noun phrases (e.g., John and Mary ), where the two antecedents are connected by a con-junction and are in the same noun phrase. In NLP, not much research has been done on how LLMs process plural reference. With respect to coreference ambiguity, Anh et al. (2025) use behavioral methods to study whether LLMs can recognize that a pronoun is ambiguous, meaning that there are multiple candidate referents. They found that LLMs’ responses are very sensitive to prompting approaches when they have to specify a referent for a pronoun or decide whether the pro-noun is ambiguous, which suggests potential incon-sistency in their internal knowledge and the ability to verbalize it. Liu et al. (2023) also find that LLMs are incapable of capturing the ambiguity of the pro-noun. Given the gap in our understanding about whether LLMs actually recognize ambiguity and represent it, a natural next question would be: How do LLMs represent entities that they want to refer to, especially when a plural construction is intro-duced? We thus study the inner states of LLMs when they have to predict a pronoun to refer to entities in the plural construction using mechanis-tic interpretability methods, introduced in the next section. 
+
+2.3 Mechanistic Interpretability 
+
+Mechanistic interpretability (MI) is a very active line of work aiming to rigorously explain the inner workings of LLMs (Olah et al., 2020; Elhage et al., 2021). In high-level terms, it seeks to reverse en-gineer the computations of language models into human interpretable processes by attributing the prediction of the model to a sparse set of compo-nents at different levels of granularity (e.g., layers, attention heads, neurons). Activation patching or causal mediation analysis (Vig et al., 2020; Wang et al., 2022; Geva et al., 2023; Goldowsky-Dill et al., 2023; Meng et al., 2022; Geiger et al., 2021; Mueller et al., 2024) is one of the foundational techniques in MI. It is a method that allows for estimating the effect of a specific component on models’ prediction. Given an input sequence, by exchanging the activation of certain tokens that are critical for prediction with a corrupted activa-tion and measuring how much the prediction has changed, activation patching can locate the com-ponents that directly or indirectly affect the output. This technique has been used to investigate a range of processes, from low-level behaviors such as fac-tual knowledge retrieval (Meng et al., 2022; Geva et al., 2023), indirect object identification (Wang et al., 2022), entity tracking (Dai et al., 2024, 2026; Prakash et al., 2024), truthfulness representations (Marks and Tegmark, 2023), and the greater-than 
+
+computation (Hanna et al., 2023) to more complex reasoning processes such as question-answering (Basu et al., 2025; Wiegreffe et al., 2025). MI tech-niques allow intervention on a wide range of model components. In this paper, we study the activity of attention heads, the component that is found to be responsible for capturing entity relations in previous studies. We briefly explain the attention mechanism in the next section. 
+
+2.4 Self-Attention Mechanism 
+
+We provide background on the architectural detail of the self-attention mechanism, the component that we exclusively focus on in this paper. We in-vestigate auto-regressive Transformer-based LLMs (Vaswani et al., 2017). Given a sequence of input 
+
+X consisting of n tokens T = ( t0, t 1, ..., t n−1), the model builds the representations xi of each token ti
+
+at each layer l: Xl = ( xl
+
+> 0
+
+, xl
+
+> 1
+
+, ..., xln−1). At layer l,the representation Xl is processed by a Multi-head self-attention module (MHSA) and an MLP mod-ule. The output resulting from both operations is written in the residual stream (Elhage et al., 2021), which serves as the channel of information flow across the model components. The MHSA modules weigh the importance of each token to each other. Each head assigns a set of attention weights for each pair of tokens. The output of a head is computed using the Key (K), 
+
+Query (Q) and Value (V ) vectors (Elhage et al., 2021). For a pair of tokens ( ti, t j ), the attention weight from the current token tj to a previous token 
+
+ti is computed using the QK matrix. The OV 
+
+matrix at token tj decides what information of xj
+
+is written to the residual stream. The QK and OV 
+
+circuits operate independently from each other. Recent LLMs such as the Qwen3 (Yang et al., 2025) and Llama3.2 (Grattafiori et al., 2024) model families are trained using grouped-query at-tention (Ainslie et al., 2023). In the original MHSA architecture, every query head has distinct key and value matrices. GQA reduces the computation cost by having multiple query heads share the same key-value head. Since we focus on these model families in our paper, we use GQA in our explanation of the MHSA module. Let h denote the attention ( Q) head and k de-note the key-value ( KV ) head. Under GQA, each query head h is assigned to a KV head. The pro-jection matrices are defined as follows: WhQ ∈
+
+Rdmodel ×dhead and WhO ∈ Rdhead ×dmodel are unique to each query head h, while WkK ∈ Rdmodel ×dhead 
+
+and WkV ∈ Rdmodel ×dhead are shared across all query heads assigned to KV head k. The Key ( kki ), Query (qhj ), and Value ( vki ) vectors are calculated as fol-lows. 
+
+vki = WkV xi, kki = WkK xi, qhj = WhQxj
+
+The model calculates the attention weight from the current token tj to a previous token ti, denoted by 
+
+αtj ,t i , by passing the dot product of the query ( Q)at tj and key ( K) vector at ti through a softmax. 
+
+αji = softmax x⊤ 
+
+> j
+
+W⊤
+
+> Q
+
+WK xi
+
+√dhead 
+
+!
+
+The intermediate output of the query head h at tj ,denoted by zhj , is the linear combination of value vectors and the attention pattern across all attended positions: 
+
+zhj =
+
+> j
+
+X
+
+> i=0
+
+αhji vki
+
+Through the OV circuit, zhj is projected and written to the residual stream. 
+
+ohj = zhj WhO
+
+The output of the attention module alj is the sum of ohj across all attention heads. 
+
+3 Dataset and Evaluation 
+
+3.1 Task Description 
+
+We design a pronoun prediction task to trigger LLMs’ mechanism for plural reference resolution. Given the sentence prefix When John saw Mary and her sister, he waved at __ . The model may produce her to refer to Mary or Mary’s sister . Or the pronoun them can be used to refer to the group of Mary and her sister .
+
+3.2 Dataset 
+
+We generate two synthetic datasets of sentence pre-fixes for our experiment. The first dataset ( Dpl )includes sentence prefixes that introduce plural en-tities and expect the LLMs to predict a plural pro-noun [1]. The second dataset ( Dsg ) also introduces a plural construction, but a plural pronoun is dis-preferred [2]: [1] When John saw Mary and her sister , he waved at __. [2] When John saw Mary and her bike , he waved at __. For each sentence prefix spl ∈ Dpl , there are sev-eral discourse entities, namely the subject John (s), 
+
+Mary (e1), and her sister (e2). The plural construc-tion consists of three elements, which are Mary 
+
+(e1) and her sister (e2) and is formed by the con-junction and (c). The plural construction can be formalized as a tuple of (e1, c, e 2). Since e1 and e2
+
+form a plural entity, the plural pronoun them (rpl )is more likely to be used. However, it should be noted that in this context, a singular pronoun (e.g., 
+
+her ) is also a plausible continuation. In Dsg , we expect LLMs to predict a singular pronoun while retaining the original structure. We replace the second element of the plural construc-tion ( e2) with an inanimate entity e′ 
+
+> 2
+
+(her bike )while keeping the rest of the sentence prefix un-changed. We carefully select a set of verbs that are not compatible with inanimate entities (e.g., laughed at , nodded at ) so that it is semantically in-felicitous to produce a plural pronoun. As such, the model is expected to generate a singular reference (rsg ), referring only to Mary (e1). We generated 300 prefixes for each dataset. All entities are single-token and all prefixes are equal in length. The gender of the entities is always ran-domized. For example, the subject s can be either male or female and e1 and e2 may have the same or different gender. See Table 4 for information on our templates. 
+
+3.3 Evaluation 
+
+Before finding the mechanism for plural reference resolution, we test how LLMs perform the pronoun prediction task. We are particularly interested in their preference in choosing the pronoun when a plural construction is present, especially with differ-ent gender, ontological similarity (Clifton and Fer-reira, 2016), and also linking conjunctions (Moxey et al., 2012). We use Dpl −sg to indicate the prob-ability difference between the plural and singular pronoun, and introduce three variables: • Gender: e1 and e2 can have the same or dif-ferent gender: (Mary, and, Emma), (Mary, and, John) • Ontological Similarity : e1 and e2 an-tecedents have the same or different ontologi-cal properties. We consider here three levels of similarity, based on noun type (proper or common) and animacy (animate or inanimate): (Mary, and, Emma) > (Mary, and, her sister) > (Mary, and, her bike) • Conjunction : The conjunction linking e1 and 
+
+e2 can be and (Mary, and, Emma) or with 
+
+(Mary, with, Emma). Previous psycholinguis-tic studies show that the conjunction with 2
+
+decreases the preference for choosing a plu-ral pronoun over a singular one (Moxey et al., 2004, 2012; Albrecht and Clifton, 1998; San-ford and Lockhart, 1990). Fitting Linear Mixed-Effect Regression mod-els to estimate the effect of these three variables on the probability difference between rsg and rpl 
+
+(Dpl −sg ), we replicate the effects of ontological similarity and conjunction that are expected from          
+
+> 2By definition, with is a preposition, not a conjunction. We chose to use the conjunction-like function of with for the purpose of constructing the counterfactual pairs for the patching experiments 0510 15 20 25 Layer 80
+> 70
+> 60
+> 50
+> 40
+> 30
+> 20
+> 10
+> 0Change in  M
+> Attention
+
+Figure 2: Layer-wise direct effect of MHSA modules on M
+
+the psycholinguistic literature. The less ontologi-cally similar the two antecedents are, the less likely they are to be referred to as a plural entity. In addition, a plural pronoun is less preferred when the antecedents are linked by with , compared to 
+
+and . (See Appendix B for detailed results for all investigated models.) This analysis guided our patching experiment, as we chose the type of plural construction that does not always trigger the formation of plural reference. The motivation behind our choice is the similarity in structure and token length between spl and ssg .As such, to ensure the validity of the patching re-sults, we extract the prediction for Dpl and only retain the prompts where the model predicts the plural pronoun. 
+
+4 Experimental Setup 
+
+Experiment We use a combination of activation patching and path patching in our experiment. Acti-vation patching intervenes on a component C while allowing all downstream components to be affected. It measures the indirect effect of C on the output. 
+
+Path patching involves another step, restoring the activations of all downstream components to their original values (Wang et al., 2022; Goldowsky-Dill et al., 2023; Meng et al., 2022). The goal is to isolate the direct effect of that component. If path patching causes a decrease in Ppl , the direct effect can be attributed to that component (Pearl, 2022). To perform path patching on the component C,which can be high-level units such as the residual stream of a specific layer ( xli) or lower-level ones such as the value vector of a specific token at a head ( vhi ), we perform the following steps. • Original Run Pass spl to the model and record the original probability of the plural 0 2 4 6 8 10 12 14 Head 0246810 12 14 16 18 20 22 24 26 Layer a. Indirect effect         
+
+> When John saw Mary and her sister ,he waved at Key When John saw Mary and her sister ,he waved at Query b. ( e1,and ,e2), L23H12
+> When John saw Mary and her sister ,he waved at Key When John saw Mary and her sister ,he waved at Query c. ( e1,and ,e2), L23H13
+> When John saw Mary and her bike ,he waved at Key When John saw Mary and her bike ,he waved at Query d. ( e1,and ,e′
+> 2), L23H12
+> When John saw Mary and her bike ,he waved at Key When John saw Mary and her bike ,he waved at Query e. ( e1,and ,e′
+> 2), L23H13
+> 20
+> 10
+> 010 20
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Figure 3: Overview of intervention results and attention pattern visualizations of major heads. (a) Indirect effect of individual head intervention across layers. Brown values denote negative change in Ppl . (b) and (c) Attention pattern of Pronoun Selection heads for Dpl (brown). (d) and (e) Attention pattern of Pronoun Selection heads ( L23H12 and L23H13) for Dsg (blue). 
+
+pronoun Ppl,ori .• Corrupted Run Run a forward pass through 
+
+ssg then cache the activations of all token po-sitions at each layer ( Xl). • Intervened Run Replace the activation of C
+
+at position i with that at the corresponding position of ssg , restore the activations of all upstream components to their clean values to block any indirect propagation of the cor-rupted signal through the network, run the for-ward pass through spl again, and recompute 
+
+Ppl,inter .By patching, we intentionally replace the atten-tion output of the patched token with that of the corrupted prompt ( e2), where the second mention is an entity that is less likely to be referred to to-gether with the first. If there is a set of heads that is responsible for searching for the antecedent to be referenced, intervening on its attention output would lead to a change in prediction. As such, if intervening on a specific head causes Ppl to de-crease after intervention, it can be causally inferred that it is one of the heads responsible for pronoun resolution. 
+
+Constructing Corrupted Prompts Our regres-sion models show that ontological similarity and conjunction significantly affect the preference to choose a plural pronoun. We treat them as crucial factors that either enhance or corrupt the plurality signal. As such, we use two corrupted prompts, manipulating either e2 or c: ( e1, c, e′
+
+2) and ( e1, c′,
+
+e2). 
+
+Intervening Location For each component, we run the intervention at multiple positions, spanning from the last token up to the position of the cor-rupted token. We find that only the intervention on the last token and corrupted token (e2 and c)show a considerable effect. As such, all the find-ings presented in the following sections arise from intervening on these two positions. 
+
+Metrics We measure the effect of the interven-tion by calculating how much Ppl changes after the intervention. We define the evaluation metric M
+
+as the percentage of probability difference between 
+
+Ppl,ori and Ppl,inter . Negative values of M mean that the intervention suppresses the plurality signal and thus decreases Ppl .
+
+M =
+
+ Ppl, inter − Ppl, ori 
+
+Ppl, ori 
+
+
+
+× 100 
+
+Models We patch on different sizes of the Qwen3 
+
+family ( Qwen3-0.6B, Qwen3-1.7B ) and GPT2 (GPT2-medium ). We present in the main text the circuit of Qwen3-1.7B . Comparable results of other models can be found in Appendix E. 
+
+5 The Plural Reference Circuit 
+
+In this section, we present our findings of the coref-erence circuit, including the core components and their functionalities. We first performed path patch-ing on the MHSA module at the layer level to find the layers that directly affect Ppl (Figure 2). We then proceed to patch the components comprising them, namely the individual attention heads. We run activation patching on each attention head to es-timate their indirect effects on the MHSA module at Layer 23. As we patch at each position, we select the set of heads that cause the largest decrease in probability of the plural pronoun (Figure 3a). 
+
+Pronoun Selection Heads identify candidate an-tecedents Figure 2 shows that the MHSA mod-ule at Layer 23 is the only one that directly affects the output. With activation patching, we find that heads 12 and 13 of layer 23 (hereafter L23H12 and 
+
+L23H13 ) have the strongest effect on M and are both responsible for the prediction process of the pronoun. As the first step toward understanding the function of these heads, we investigate their atten-tion weights. Figure 3b (top, middle) shows the mean attention weight of L23H12 across all prefixes in Dpl . It can be seen that the last token ( at ) attends the most to the first ( e1) and second entity ( e2) in the plural condition, which implies that they are considered to be the antecedents of rpl . Notably, we observe that e2 receives more attention than e1.In Dsg ( Figure 3d), we observe that the attention weight is given to e1, which is the antecedent of the singular pronoun. On the other hand, at L23H13 (Figure 3c), while the attention to both antecedents is still present, we also see a very high attention weight between the conjunction and and e1. These attention pat-terns at these heads suggest a strong focus on the elements that are crucial for plural reference reso-lution, namely antecedents and conjunctions. These attention patterns suggest that L23H12 and 
+
+L23H13 might be called the Pronoun Selection 
+
+heads: they identify the antecedents to be referred to by the pronoun. In a correlation experiment (Ap-pendix C), we found that the amount of attention difference between e1 and e2 positively correlates with the probability difference between Psg and 
+
+Ppl , such that the larger the attention on e2 com-pared to e1, the larger the difference between Ppl 
+
+and Psg . This type of head is similar to the Name Mover Head found in Wang et al. (2022) and other MI studies (Prakash et al., 2024; Kim et al., 2025; Lieberum et al., 2023), which identifies and en-codes the decisive information for prediction. 
+
+Plurality Formation Heads send information about the plural entity to Pronoun Selection Heads We just saw how the Pronoun Selection Heads affect the prediction by attending to the dis-course entities that are the candidate antecedents of the predicted pronoun. We now ask what makes the model attend more to e2 in spl . To answer this question, we decompose the effect of the K, Q, and 
+
+V vectors of the Pronoun Selection head. Since the attention weight is computed using the dot product of the vectors K and Q, we first identify which is more crucial for prediction. We run separate in-terventions on these vectors and measure M . For the Q vector, we patch at the last token position, because here it decides which token it needs to at-tend to. For the K and V vectors, we patch at e2,where information is offered to the query vector. We found that the Q vector does not affect the pre-diction, while patching the K and V vectors causes a strong drop in Ppl .Next, we ask which head affects the Value vector of the Pronoun Selection head. We intervene on the path between the V vector of the Pronoun Selection head and other K/V heads. The value vector at e2
+
+(vke2 ) is replaced with v′ke′ 
+
+> 2
+
+from Dsg . The output 
+
+o′hj of head h after the intervention is updated as follows. 
+
+z′hj =
+
+> j
+
+X
+
+> i=0
+
+αhj,e 2 v′ke′ 
+
+> 2
+
+; o′hj = z′hj WhO
+
+Figure 5 shows that some K/V heads at layers 15, 17, 19, and 21 directly affect the Value vector of 
+
+e2 at the Pronoun Selection head, which suggests that it reads information from these components. Figure 3 shows that these heads also indirectly affect Ppl . We inspect the attention pattern of the attention heads that are associated with these K/V 
+
+heads to find what information they offer to the 
+
+V vector of e2. Among these heads, L17H9 has the strongest effect on the Pronoun Selection head. Figure 4 shows the attention pattern of L17H9 for 
+
+Dpl,a , Dsg,a and Dpl,w . For the sake of compari-son, we incorporate the type of conjunction into the datasets, a stands for and and w stands for with .When John saw Mary and her sister ,he waved at Key When John saw Mary and her sister ,he waved at Query a. ( e1, and , e2)        
+
+> When John saw Mary and her bike ,he waved at Key When John saw Mary and her bike ,he waved at Query b. ( e1,and ,e′
+> 2)
+> When John saw Mary with her sister ,he waved at Key When John saw Mary with her sister ,he waved at Query c. ( e1,with ,e2)
+> e1cpp e2
+> Token 0.00 0.05 0.10 0.15 0.20 0.25 0.30 Attention Weight d. attention around plural construction
+> Dpl
+> Dsg
+> Dpl ,with
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Figure 4: Attention Pattern of Plurality Formation Head for Dpl,a , Dsg,a , and Dpl,w (a), (b) and (c): Attention pattern of the Plurality Formation head for Dpl,a , Dsg,a , and Dpl,w . (d) Numerical values of attention weights on each token in the plural construction, where e1 and e2 are the two entities, c is the conjunction and pp is the possessive pronoun of e20 1 2 3 4 5 6 7Head 0246810 12 14 16 18 20 22 Layer Direct effect of K/V heads on Pronoun Selection head 
+
+> 6
+> 4
+> 2
+> 0246
+
+Figure 5: Direct effect of K/V heads on Pronoun Selec-tion head, measured by change in M
+
+In the case of Dpl,a , the last token at attends to the whole plural construction, with slightly more attention on c and e2 (Figure 4a). This behav-ior is quite different from the attention pattern of the Pronoun Selection head, where the attention weights are only dominant at e1 and the second token of e2. For Dsg,a (Figure 4b), it only assigns attention weights up to the possessive pronoun of 
+
+e2 (her ). Interestingly, when the conjunction with 
+
+is present, the attention is only on e1 and c. The attention weight amount on e2 is almost negligi-ble (Figure 4c). This result is compatible with our earlier statistical analysis of the conjunction effect, which shows that the LLMs are much more likely to establish a plural entity from a plural con-struction when the conjunction is and rather than 
+
+with . Taken together, these patterns suggest that this head is trying to find the set of entities to be ref-erenced by selectively attending to the tokens that When John saw Mary and her sister ,he waved at Key When John saw Mary and her sister ,he waved at Query a. without 'them' 
+
+> When John saw Mary and her sister ,he waved at them Key When John saw Mary and her sister ,he waved at them Query b. with 'them'
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Figure 6: Attention Pattern of Pronoun Interpreta-tion head . (a) attention pattern of L13H6 for spl , (b) attention pattern of head L13H6 for spl + them 
+
+fit the constraints for a plural entity. It attends to the whole plural construction when it is a qualified plural entity. We hypothesize that it is responsible for constructing, representing, and writing the in-formation about the plural entity to the Pronoun Selection heads. In addition, in Figures 4a and 4b, where the con-junction and is used, it attends to e1, similar to what we observe in one of the Pronoun Selection heads. This behavior is not present when with is used (Figure 4c). In Figure 7, we compare the attention pattern of Dpl,w at the Pronoun Selection head (Figure 7a) and the Plurality Formation head (Figure 7b). We found that while with does not attend to e1 at the Plurality Formation head, it still attends to e1 at the Pronoun Selection head. There is evidence that some attention heads encode gram-matical dependencies (Voita et al., 2019; Htut et al., 2019; Clark et al., 2019). Therefore, we speculate that the attention from with to e1 is purely syntactic at the Pronoun Selection head and is not directly related to the process of identifying plural entities. 
+
+Pronoun Interpretation Heads encode corefer-ence information of previous tokens Finally, we When John saw Mary with her sister ,he waved at Key When John saw Mary with her sister ,he waved at Query a. L23H13 
+
+> When John saw Mary with her sister ,he waved at Key When John saw Mary with her sister ,he waved at Query b. L17H9
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Figure 7: Comparing attention pattern of the Pro-noun Selection head and the Plurality Formation head . (a) attention pattern of L23H13 for spl,w , (b) at-tention pattern of head L17H9 for spl,w 
+
+find a head that encodes coreference information. This head affects around 25% of the probability dif-ference. When the token is a pronoun, it attends to the antecedent of the pronoun that was mentioned earlier in the input. In Figure 6a, it can be seen that her attends to Mary and he attends to John . To verify how this head behaves when there is a plural pronoun, we add them to the prompt and inspect the attention pattern (Figure 6b). It can be seen that them attends to the whole plural construction (Mary, and, her sister), with much stronger atten-tion on e2 (sister) and the conjunction and . We hypothesize that while this head may not play a direct role in predicting the pronoun, it functions as a coreference map, where every entity attends to its previous mentions. This head was also discov-ered in earlier studies on the attention pattern of language models (Clark et al., 2019; Tenney et al., 2019). 
+
+Generalization to other models We validate our circuit across other sentence templates and observe the same attention pattern across all heads in the circuit for the variant. We also extract the circuit for other models and find that the circuit generalizes within the Qwen3 family and also to GPT2-medium 
+
+(Appendix E). 
+
+6 Discussion 
+
+Our patching experiments reveal a mechanism for performing the plural pronoun prediction task. In the middle layers, the model first builds up the rep-resentation for an entity or a group of entities that it needs to refer back to. At the Plurality Forma-tion head, the last token before reference produc-tion assigns attention weights spanning the phrase that contains the candidate entities. If the entities align with the model’s preference for plural enti-ties (being ontologically related and connected by a preferred conjunction), they will be attended to. After deciding on the entity or a set of entities to be referenced, the Plurality Formation heads write this information into the residual stream. The Pronoun Selection head receives this information, attends to the known entities, and uses it for making deci-sions. In addition, the models dedicate a head for encoding coreference information of all mentioned entities. 
+
+7 Conclusion 
+
+In this paper, we investigate how LLMs represent and use coreference information for pronoun pre-diction, especially in the case of plural reference. We find the constraints that LLMs use to decide whether to use a singular or a plural pronoun when a plural construction is present. We then use mech-anistic interpretability methods, complemented by attention pattern analysis, to extract a circuit that is responsible for identifying the entities to be re-ferred to and propagating such information across components to generate the correct pronoun. 
+
+Limitations 
+
+Our study only focuses on the most basic and common type of plural reference (conjoined noun phrases) and plural constructions that have two ele-ments. In actual language use, plural reference is often more complex and the antecedents may not be linked by a conjunction (e.g., split-antecedent reference). Psycholinguistic studies have shown that it is possible and preferred to use a singular pronoun to refer to a plural entity when the an-tecedents create a new and unified object (Cokal et al., 2023). It would be interesting to study the model’s circuit behavior in these cases. In addition, since our goal is to understand the high-level mechanism behind the process of pro-noun prediction, we focus more on analyzing the function of each component than extracting a com-plete circuit for coreference. As such, there is still uncertainty about whether the circuit is fully unique to coreference. We also do not thoroughly inves-tigate the function of MLPs. Although we show that intervening on the MLP module at the late layer strongly affects Ppl , we know little about its functionality in the circuit. 
+
+8 Ethical Considerations 
+
+The study only uses synthetic datasets generated by LLMs. It does not include any personal data from human participants. 
+
+9 Statement of AI Usage 
+
+During the project, AI was used for coding as-sistance, dataset generation, and spelling check. Project ideas, experimental setup, interpretation, and writing were done by the authors. 
+
+10 Acknowledgments 
+
+We would like to thank three anonymous reviewers for their insightful comments and suggestions. This project is funded by the Dutch Research Council (NWO) through the AiNed Fellowship Grant (Deal-ing with Meaning Variation, NGF.1607.22.002) to Massimo Poesio. 
+
+References 
+
+Joshua Ainslie, James Lee-Thorp, Michiel De Jong, Yury Zemlyanskiy, Federico Lebrón, and Sumit Sang-hai. 2023. Gqa: Training generalized multi-query transformer models from multi-head checkpoints. In Proceedings of the 2023 Conference on Empir-ical Methods in Natural Language Processing , pages 4895–4901. Jason E Albrecht and Charles Clifton. 1998. Accessing singular antecedents in conjoined phrases. Memory & cognition , 26(3):599–610. Dang Thi Thao Anh, Rick Nouwen, and Massimo Poe-sio. 2025. Can llms detect ambiguous plural ref-erence? an analysis of split-antecedent and mereo-logical reference. In Proceedings of the 8th Black-boxNLP Workshop: Analyzing and Interpreting Neu-ral Networks for NLP , pages 263–275. Samyadeep Basu, Vlad Morariu, Zichao Wang, Ryan Rossi, Cherry Zhao, Soheil Feizi, and Varun Manjunatha. 2025. On mechanistic circuits for extractive question-answering. arXiv preprint arXiv:2502.08059 .Leonard Bereska and Efstratios Gavves. 2024. Mech-anistic interpretability for ai safety–a review. arXiv preprint arXiv:2404.14082 .Bernd Bohnet, Chris Alberti, and Michael Collins. 2023. Coreference resolution through a seq2seq transition-based system. Transactions of the Association for Computational Linguistics , 11:212–226. Yu-Hsin Chen and Jinho D Choi. 2016. Character identi-fication on multiparty conversation: Identifying men-tions of characters in tv shows. In Proceedings of the 17th annual meeting of the special interest group on discourse and dialogue , pages 90–100. Kevin Clark, Urvashi Khandelwal, Omer Levy, and Christopher D Manning. 2019. What does bert look at? an analysis of bert’s attention. In Proceedings of the 2019 ACL workshop BlackboxNLP: analyz-ing and interpreting neural networks for NLP , pages 276–286. Charles Clifton and Fernanda Ferreira. 2016. Discourse structure and anaphora: Some experimental results. In Attention and performance XII , pages 635–654. Routledge. Derya Cokal, Ruth Filik, Patrick Sturt, and Massimo Poesio. 2023. Anaphoric reference to mereological entities. Discourse Processes , 60(3):202–223. Qin Dai, Benjamin Heinzerling, and Kentaro Inui. 2024. Representational analysis of binding in language models. In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing ,pages 17468–17493. Qin Dai, Benjamin Heinzerling, and Kentaro Inui. 2026. Cell-based representation of relational binding in language models. In Proceedings of the 64th An-nual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 47464– 47524. Nelson Elhage, Neel Nanda, Catherine Olsson, Tom Henighan, Nicholas Joseph, Ben Mann, Amanda Askell, Yuntao Bai, Anna Chen, Tom Conerly, and 1 others. 2021. A mathematical framework for transformer circuits. Transformer Circuits Thread ,1(1):12. Javier Ferrando, Gabriele Sarti, Arianna Bisazza, and Marta R Costa-Jussà. 2024. A primer on the in-ner workings of transformer-based language models. 
+
+arXiv preprint arXiv:2405.00208 .Yujian Gan, Massimo Poesio, and Juntao Yu. 2024. As-sessing the capabilities of large language models in coreference: An evaluation. In Proceedings of the 2024 Joint International Conference on Computa-tional Linguistics, Language Resources and Eval-uation (LREC-COLING 2024) , pages 1645–1665, Torino, Italia. ELRA and ICCL. Atticus Geiger, Hanson Lu, Thomas Icard, and Christo-pher Potts. 2021. Causal abstractions of neural net-works. Advances in neural information processing systems , 34:9574–9586. Mor Geva, Jasmijn Bastings, Katja Filippova, and Amir Globerson. 2023. Dissecting recall of factual associa-tions in auto-regressive language models. In Proceed-ings of the 2023 Conference on Empirical Methods in Natural Language Processing , pages 12216–12235. Nicholas Goldowsky-Dill, Chris MacLeod, Lucas Sato, and Aryaman Arora. 2023. Localizing model behavior with path patching. arXiv preprint arXiv:2304.05969 .Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, and 1 others. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783 .Michael Hanna, Ollie Liu, and Alexandre Variengien. 2023. How does gpt-2 compute greater-than?: In-terpreting mathematical abilities in a pre-trained lan-guage model. Advances in Neural Information Pro-cessing Systems , 36:76033–76060. Phu Mon Htut, Jason Phang, Shikha Bordia, and Samuel R Bowman. 2019. Do attention heads in bert track syntactic dependencies? arXiv preprint arXiv:1911.12246 .Geonhee Kim, Marco Valentino, and André Freitas. 2025. Reasoning circuits in language models: A mechanistic interpretation of syllogistic inference. In 
+
+Findings of the Association for Computational Lin-guistics: ACL 2025 , pages 10074–10095. Sungryong Koh and Charles Clifton Jr. 2002. Resolu-tion of the antecedent of a plural pronoun: Ontolog-ical categories and predicate symmetry. Journal of Memory and Language , 46(4):830–844. Suet-Ying Lam, Qingcheng Zeng, Kexun Zhang, Chenyu You, and Rob Voigt. 2023. Large language models are partially primed in pronoun interpretation. In Findings of the Association for Computational Linguistics: ACL 2023 , pages 9493–9506. Nghia T Le and Alan Ritter. 2023. Are large language models robust coreference resolvers? arXiv preprint arXiv:2305.14489 .Kenton Lee, Luheng He, Mike Lewis, and Luke S. Zettlemoyer. 2017. End-to-end neural coreference resolution. In Proc. of EMNLP .Tom Lieberum, Matthew Rahtz, János Kramár, Neel Nanda, Geoffrey Irving, Rohin Shah, and Vladimir Mikulik. 2023. Does circuit analysis interpretability scale? evidence from multiple choice capabilities in chinchilla. arXiv preprint arXiv:2307.09458 .Alisa Liu, Zhaofeng Wu, Julian Michael, Alane Suhr, Peter West, Alexander Koller, Swabha Swayamdipta, Noah A Smith, and Yejin Choi. 2023. We’re afraid language models aren’t modeling ambiguity. In Pro-ceedings of the 2023 conference on empirical meth-ods in natural language processing , pages 790–807. Xiaoqiang Luo and Sameer Pradhan. 2016. Evaluation metrics. In Massimo Poesio, Roland Stuckardt, and Yannick Versley, editors, Anaphora Resolution: Algo-rithms, Resources and Applications , pages 147–170. Springer. Samuel Marks and Max Tegmark. 2023. The geometry of truth: Emergent linear structure in large language model representations of true/false datasets. arXiv preprint arXiv:2310.06824 .Giuliano Martinelli, Edoardo Barba, and Roberto Nav-igli. 2024. Maverick: Efficient and accurate corefer-ence resolution defying recent trends. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) ,pages 13380–13394. Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov. 2022. Locating and editing factual associa-tions in gpt. Advances in neural information process-ing systems , 35:17359–17372. Linda M Moxey, Anthony J Sanford, Patrick Sturt, and Lorna I Morrow. 2004. Constraints on the formation of plural reference objects: The influence of role, con-junction, and type of description. Journal of Memory and Language , 51(3):346–364. Linda M Moxey, Anthony J Sanford, and Karen Tonks. 2012. Representing characters in a scenario: What makes two individuals a set? Language and cognitive processes , 27(9):1405–1424. Aaron Mueller, Jannik Brinkmann, Millicent Li, Samuel Marks, Koyena Pal, Nikhil Prakash, Can Rager, Aruna Sankaranarayanan, Arnab Sen Sharma, Jiud-ing Sun, and 1 others. 2024. The quest for the right mediator: A history, survey, and theoretical ground-ing of causal interpretability. arXiv e-prints , pages arXiv–2408. Chris Olah, Nick Cammarata, Ludwig Schubert, Gabriel Goh, Michael Petrov, and Shan Carter. 2020. Zoom in: An introduction to circuits. Distill , 5(3):e00024– 001. Nikole D Patson. 2014. The processing of plural expres-sions. Language and Linguistics Compass , 8(8):319– 329. Silviu Paun, Juntao Yu, Nafise Sadat Moosavi, and Mas-simo Poesio. 2023. Scoring coreference chains with split-antecedent anaphors. Dialogue & Discourse ,14:1–48. Judea Pearl. 2022. Direct and indirect effects. In Prob-abilistic and causal inference: the works of Judea Pearl , pages 373–392. Massimo Poesio, Juntao Yu, Silviu Paun, Abdulrahman Aloraini, Pengcheng Lu, Janosch Haber, and Derya Cokal. 2023. Computational models of anaphora. 
+
+Annual Review of Linguistics , 9:561–587. Sameer Pradhan, Lance Ramshaw, Mitch Marcus, Martha Palmer, Ralph Weischedel, and Nianwen Xue. 2011. Conll-2011 shared task: Modeling unrestricted coreference in ontonotes. In Proceedings of the fif-teenth conference on computational natural language learning: shared task , pages 1–27. Nikhil Prakash, Tamar Rott Shaham, Tal Haklay, Yonatan Belinkov, and David Bau. 2024. Fine-tuning enhances existing mechanisms: A case study on en-tity tracking. arXiv preprint arXiv:2402.14811 .Marta Recasens and Sameer Pradhan. 2016. Evaluation campaigns. In Massimo Poesio, Roland Stuckardt, and Yannick Versley, editors, Anaphora Resolution: Algorithms, Resources and Applications , chapter 6, pages 165–208. Springer. Anthony J Sanford and F Lockhart. 1990. Description types and method of conjoining as factors influenc-ing plural anaphora: A continuation study of focus. 
+
+Journal of Semantics , 7(4):365–378. Sebastian Schuster and Tal Linzen. 2022. When a sentence does not introduce a discourse entity, transformer-based models still sometimes refer to it. In Proceedings of the 2022 Conference of the North American Chapter of the Association for Computa-tional Linguistics: Human Language Technologies ,pages 969–982. Ian Tenney, Dipanjan Das, and Ellie Pavlick. 2019. Bert rediscovers the classical nlp pipeline. In Proceedings of the 57th annual meeting of the association for computational linguistics , pages 4593–4601. Curt Tigges, Oskar John Hollinsworth, Atticus Geiger, and Neel Nanda. 2023. Linear representations of sentiment in large language models. arXiv preprint arXiv:2310.15154 .Shiva Upadhye, Leon Bergen, and Andrew Kehler. 2020. Predicting reference: What do language models learn about discourse models? In Proceedings of the 2020 Conference on Empirical Methods in Natural Lan-guage Processing (EMNLP) , pages 977–982. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. Advances in neural information processing systems , 30. Jesse Vig, Sebastian Gehrmann, Yonatan Belinkov, Sharon Qian, Daniel Nevo, Yaron Singer, and Stuart Shieber. 2020. Investigating gender bias in language models using causal mediation analysis. Advances in neural information processing systems , 33:12388– 12401. Elena Voita, David Talbot, Fedor Moiseev, Rico Sen-nrich, and Ivan Titov. 2019. Analyzing multi-head self-attention: Specialized heads do the heavy lifting, the rest can be pruned. In Proceedings of the 57th annual meeting of the association for computational linguistics , pages 5797–5808. Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob Steinhardt. 2022. In-terpretability in the wild: a circuit for indirect ob-ject identification in gpt-2 small. arXiv preprint arXiv:2211.00593 .Sarah Wiegreffe, Oyvind Tafjord, Yonatan Belinkov, Hanna Hajishirzi, and Ashish Sabharwal. 2025. An-swer, assemble, ace: Understanding how lms answer multiple choice questions. In International Con-ference on Learning Representations , volume 2025, pages 78293–78318. An Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao, Chengen Huang, Chenxu Lv, and 1 others. 2025. Qwen3 technical report. arXiv preprint arXiv:2505.09388 .Juntao Yu, Nafise Sadat Moosavi, Silviu Paun, and Mas-simo Poesio. 2020. Free the plural: Unrestricted split-antecedent anaphora resolution. In Proceedings of the 28th International Conference on Computa-tional Linguistics , pages 6113–6125. A Model Configuration 
+
+We find the coreference circuit for a range of model families and sizes. We use two recent and widely-used LLM collections, namely Qwen3 and GPT2 .These models are the standard choices for most mechanistic interpretability research (Wang et al., 2022; Meng et al., 2022). Table 1 shows the config-urations of the models, including model size, num-ber of layers, number of attention heads, number of key-value heads and the size of hidden activations. 
+
+B Statistical Analysis 
+
+In this section, we report details about our statis-tical analysis, which studies the effect of gender, ontological similarity, and conjunction preference for choosing plural pronouns. See Table 3 for details about our dataset. We generate a total of 349 prompts and ensure a balanced distribution between the variables. We fit Linear Mixed-Effects Regression mod-els with Restricted Maximum Likelihood (REML) with the verbs as random effects. The models are run using the lme4 package in R. Our dependent variable is the probability difference between the plural and singular pronoun. 
+
+prob − dif f = Pplur − Psing 
+
+The independent variables include the following. • Gender : same, different • Ontological (Ont. Sim.) : N + N (proper name + proper name), N + R (proper name + relation), N + O (proper name + object) • Conjunction : and, with The results of the analysis can be found in Table 2. 
+
+C Preference for Plural Pronoun is Reflected in Attention Pattern of the Pronoun Selection Head 
+
+In the previous section, we show that the Pronoun Selection heads attend to the antecedents for the plural pronoun. To test how the activity of this head differs when the model gives a higher probability to the singular or plural pronoun, we investigate the relationship between the attention weight from the last token to e1 and e2 and the probability assigned to Psg and Ppl in Dpl and Dsg . We hereby refer to the last token position as i. Let αi,e 1 and αi,e 2
+
+be the attention weight between the last token i
+
+and the first ( e1) and between i and the second ( e2)antecedent of the plural construction. We define 
+
+αdif f as the difference between the values of these attention weights. If αdif f is negative, e2 receives more attention than e1.
+
+αdif f = αi,e 2 − αi,e 1
+
+We also define Pdif f as the probability differ-ence between the plural ( rpl ) and singular ( rsg )pronoun. 
+
+Pdif f = Ppl − Psg 
+
+We run Pearson’s r correlation on αdif f and 
+
+Pdif f . If the attention weight difference between 
+
+e1 and e2 is a part of the model’s decision on the probability of the singular and plural pronoun (Fig-ure 8), we expect that the larger the difference between αi,e 2 and αi,e 1 , the larger the difference between Ppl and Psg .We found that there is a possible correlation be-tween αdif f and Pdif f for both L23H12 (r = .78, 
+
+p < .001) and L23H13 (r = .77, p < .001). This suggests that when the Pronoun Selection heads attend more strongly to e2 relative to e1, the model assigns a higher probability to the plural pronoun over the singular. This provides further evidence that the attention pattern of the Pronoun Selection head toward the two entities is a direct reflection of the model’s pronoun choice. 1.00 0.75 0.50 0.25 0.00 0.25 0.50 0.75 1.00 
+
+> Pdiff
+> 0.6
+> 0.4
+> 0.2
+> 0.0 0.2 0.4 0.6
+> diff
+> L23H12
+> D_{pl} D_{sg}
+
+(a) L23H12 1.00 0.75 0.50 0.25 0.00 0.25 0.50 0.75 1.00  
+
+> Pdiff
+> 0.4
+> 0.2
+> 0.0 0.2 0.4
+> diff
+> L23H12
+> D_{pl} D_{sg}
+
+(b) L23H13 
+
+Figure 8: Scatter plots illustrating the relationship be-tween attention weight difference between e1 and e2
+
+and difference between Psg and Ppl . Blue dots repre-sent data from Dsg and brown dots represent data from 
+
+Dpl .
+
+D Generalization to Other Templates 
+
+Table 4 shows the original prompt template and its variant. Figure 9 shows the attention patterns for the variant at all heads in the circuit. Model num_layers num_key_value_heads num_attention_heads hidden_size 
+
+Qwen3-0.6B 28 8 16 1024 Qwen3-1.7B 28 8 16 2048 GPT2-medium 24 16 16 1024 
+
+> Table 1: Configurations for LLMs in the Qwen3 and GPT2 families
+
+Predictor ˆβ SE df t p
+
+Fixed Effects Intercept 0.328 0.055 130.74 5.984 < . 001 *** Gender [same] 0.092 0.052 323.11 1.751 .081 .Conjunction [with] -0.669 0.064 322.99 -10.423 < . 001 *** Ont. Sim. [N + O] -0.855 0.070 324.43 -12.282 < . 001 *** Ont. Sim. [N + R] -0.199 0.053 325.93 -3.771 < . 001 *** Gender [same] × Conjunction [with] -0.154 0.074 323.57 -2.083 .038 *Conjunction [with] × Ont. sim. [N + O] 0.570 0.099 327.55 5.739 < . 001 *** Conjunction [with] × Ont. sim. [N + R] 0.081 0.075 326.21 1.086 .278 
+
+Random Effects 
+
+VP2 (Intercept) variance 0.024 SD = 0.155 Residual variance 0.092 SD = 0.304 
+
+Model Fit 
+
+Observations 350 Groups (VP2) 27 REML criterion 224.4     
+
+> Note: Reference categories: Gender = different ; Conjunction = and ;Ontological similarity = N + N
+> Table 2: Linear Mixed-Effects Model Predicting Probability Difference ( prob_diff )
+
+E Generalization to Other Models 
+
+Figures 10 and 11 show the attention patterns for the Plural Reference Circuit of Qwen3-0.6B and 
+
+GPT2-medium .Conjunction Gender Ontological Similarity Prompt 
+
+and same N + N When John saw Mary and Emma, he waved at __ N + R When John saw Mary and her sister, he waved at __ different N + N When John saw Mary and David, he waved at __ N + R When John saw Mary and her brother, he waved at __ different N + O When John saw Mary and her bike, he waved at __ with same N + N When John saw Mary with Emma, he waved at __ N + R When John saw Mary with her sister, he waved at __ different N + N When John saw Mary with David, he waved at __ N + R When John saw Mary with her brother, he waved at __ different N + O When John saw Mary with her bike, he waved at __ 
+
+Table 3: Summary of the dataset used in the statistical analysis. The table shows examples of the three independent variables: Gender (same, different), Ontological Similarity (N+N (name + name), N+R (name + relation), N+O (name + object)), and Conjunction (and, with) 
+
+ID Template Example prompt 
+
+Original When [S] + [ V1] + [ A1] and [ A2], [S] + [ V2] When John saw Mary and her sister, he waved at __ Var. 1 Yesterday, [S] + [ V1] + [ A1] and [ A2] and [ V2] Yesterday, John saw Mary and her sister and waved at __ 
+
+Table 4: Sentence templates used for generating Dpl and Dsg , with one example per template. Yesterday ,Tom recognized Emma and her sister and waved at Key Yesterday ,Tom recognized Emma and her sister and waved at Query a. ( e1, and , e2), L23H12 
+
+> Yesterday ,Tom recognized Emma and her sister and waved at
+
+Key Yesterday ,Tom recognized Emma and her sister and waved at Query b. ( e1, and , e2), L23H13 
+
+> Yesterday ,Tom recognized Emma and her bike and waved at
+
+Key Yesterday ,Tom recognized Emma and her bike and waved at Query c. ( e1, and , e′
+
+> 2
+
+), L23H12 
+
+> Yesterday ,Tom recognized Emma and her bike and waved at
+
+Key Yesterday ,Tom recognized Emma and her bike and waved at Query d. ( e1, and , e′
+
+> 2
+
+), L23H13 
+
+> Yesterday ,Tom recognized Emma and her sister and waved at
+
+Key Yesterday ,Tom recognized Emma and her sister and waved at Query e. ( e1, and , e2), L17H9 
+
+> Yesterday ,Tom recognized Emma and her sister and waved at
+
+Key Yesterday ,Tom recognized Emma and her sister and waved at Query f. ( e1, and , e2), L13H6 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 Figure 9: Attention pattern visualizations of major heads for Qwen3-1.7B (Var. 1). (a) and (b) Attention pattern of Pronoun Selection head for Dpl (brown). (c) and (d) Attention pattern of Pronoun Selection heads for Dsg (blue). (e) Attention pattern of Plurality Formation head for Dpl (brown). (f) Attention pattern of Pronoun Interpretation head for Dpl (brown). 0 2 4 6 8 10 12 14 Head 0246810 12 14 16 18 20 22 24 26 Layer a. Indirect effect 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query b. ( e1, and , e2), L23H12 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query c. ( e1, and , e2), L23H13 
+
+> When John saw Mary and her bike ,he waved at
+
+Key When John saw Mary and her bike ,he waved at Query d. ( e1, and , e′
+
+> 2
+
+), L23H12 
+
+> When John saw Mary and her bike ,he waved at
+
+Key When John saw Mary and her bike ,he waved at Query e. ( e1, and , e′
+
+> 2
+
+), L23H13 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query f. ( e1, and , e2), L17H9 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query g. ( e1, and , e2), L13H6 
+
+30 
+
+20 
+
+10 
+
+010 20 30 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 Figure 10: Overview of intervention results and attention pattern visualizations of major heads for Qwen3-0.6B .
+
+(a) Indirect effect of individual head intervention across layers. Brown values denote negative change in Ppl . (b) and (c) Attention pattern of Pronoun Selection heads for Dpl (brown). (d) and (e) Attention pattern of Pronoun Selection heads for Dsg (blue). (f) Attention pattern of Plurality Formation head for Dpl (brown). (g) Attention pattern of Pronoun Interpretation head for Dpl (brown). 0 2 4 6 8 10 12 14 Head 0246810 12 14 16 18 20 22 Layer a. Indirect effect 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query b. ( e1, and , e2), L18H2 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query c. ( e1, and , e2), L15H8 
+
+> When John saw Mary and her bike ,he waved at
+
+Key When John saw Mary and her bike ,he waved at Query d. ( e1, and , e′
+
+> 2
+
+), L18H2 
+
+> When John saw Mary and her bike ,he waved at
+
+Key When John saw Mary and her bike ,he waved at Query e. ( e1, and , e′
+
+> 2
+
+), L15H8 
+
+> When John saw Mary and her sister ,he waved at
+
+Key When John saw Mary and her sister ,he waved at Query f. ( e1, and , e2), L14H14 
+
+> When John saw Mary and her bike ,he waved at
+
+Key When John saw Mary and her bike ,he waved at Query g. ( e1, and , e2), L14H14 
+
+20 
+
+10 
+
+010 20 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+0.0 0.2 0.4 0.6 0.8 1.0 Figure 11: Overview of intervention results and attention pattern visualizations of major heads for 
+
+GPT2-medium . (a) Indirect effect of individual head intervention across layers. Brown values denote negative change in Ppl . (b) and (c) Attention pattern of Pronoun Selection heads for Dpl (brown). (d) and (e) Attention pattern of Pronoun Selection head for Dsg (blue). (f) and (g) Attention pattern of Plurality Formation head for Dpl 
+
+(brown) and Dsg (blue).

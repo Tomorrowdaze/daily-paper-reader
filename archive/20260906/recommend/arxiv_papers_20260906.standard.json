@@ -1,0 +1,99 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-06T20:53:15.675536+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.00858v1",
+      "source": "arxiv",
+      "title": "Verifiable Disaster Storylines and Causal Knowledge Graphs: A Citation-Grounded Pipeline from Heterogeneous Humanitarian Sources",
+      "abstract": "Effective humanitarian response depends on the rapid synthesis of heterogeneous, high-volume information sources - a task that routinely exceeds human analytical capacity in the critical early hours of a crisis. We present a pipeline that combines structured disaster records from EM-DAT with unstructured documents from ReliefWeb and the European Media Monitor (EMM) to produce source-grounded disaster storylines and causal knowledge graphs supporting situational awareness for responders and analysts. Using Retrieval-Augmented Generation, the pipeline extracts structured storylines - tabular event profiles covering 17 fields, from severity and key drivers to child-sensitive impact indicators - and constructs causal knowledge graphs where each node and edge is enriched with citation-grounded explanatory narratives, enabling full traceability back to primary sources. We evaluate the system on three diverse crisis use cases through a human evaluation involving 9 domain expert and 9 non-expert evaluators. Results confirm high retrieval precision, strong faithfulness of extracted causal relations, and a clear expert preference for citation-grounded components over ungrounded alternatives. The pipeline is designed to scale to the full EM-DAT catalogue, with the goal of publicly releasing a narrative-enriched version of the database.",
+      "authors": [
+        "Ivan Decostanzi",
+        "Michele Ronco",
+        "Sergio Consoli",
+        "Christina Corbane",
+        "Lorenzo Bertolini",
+        "Indaco Biazzo",
+        "Daria Mihaila",
+        "Manuel Garcia-Herranz",
+        "Felix Schwebel",
+        "Yelena Mejova",
+        "Kyriaki Kalimeri"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-09-01T07:56:12+00:00",
+      "link": "https://arxiv.org/pdf/2609.00858v1",
+      "tags": [
+        "query:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Causal knowledge graphs for humanitarian crises and disaster drivers",
+      "llm_evidence_cn": "用于人道主义危机和灾害驱动因素的因果知识图谱",
+      "llm_evidence": "用于人道主义危机和灾害驱动因素的因果知识图谱",
+      "canonical_evidence": "用于人道主义危机和灾害驱动因素的因果知识图谱",
+      "llm_tldr_en": "Extracts causal knowledge graphs from humanitarian sources to analyze disaster drivers and impact.",
+      "llm_tldr_cn": "从人道主义资源中提取因果知识图谱，用于分析灾害驱动因素和影响。",
+      "llm_tldr": "从人道主义资源中提取因果知识图谱，用于分析灾害驱动因素和影响。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.03687v1",
+      "source": "arxiv",
+      "title": "A Circuit for Plural Reference: How LLMs Represent and Retrieve Singular and Plural Entities",
+      "abstract": "Coreference resolution is an important task in contextual reasoning. In this paper, we investigate the mechanism for representing and retrieving singular and plural entities for plural reference. We use a combination of mechanistic interpretability and attention pattern analysis to study the process in which LLMs predict a pronoun to refer back to previously mentioned entities. Using a range of causal intervention techniques, we find a set of attention heads that are responsible for (1) representing coreference information in the input, (2) identifying entities that form a plural reference, (3) transferring the information to the component that is responsible for selecting the antecedents and predicting the pronoun. We also find that LLMs align with humans in preference for plural pronoun. Specifically, entities in a plural construction are more likely to be referred to as a plural entity if they are ontologically similar and are linked by the conjunction \"and\".",
+      "authors": [
+        "Anh Danh",
+        "Rick Nouwen",
+        "Massimo Poesio"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-03T11:23:11+00:00",
+      "link": "https://arxiv.org/pdf/2609.03687v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "mechanistic interpretability and causal intervention techniques",
+      "llm_evidence_cn": "机械可解释性和因果干预技术",
+      "llm_evidence": "机械可解释性和因果干预技术",
+      "canonical_evidence": "机械可解释性和因果干预技术",
+      "llm_tldr_en": "Uses causal intervention to interpret how LLMs represent and retrieve entities.",
+      "llm_tldr_cn": "利用因果干预技术解释大模型如何表示和检索实体信息。",
+      "llm_tldr": "利用因果干预技术解释大模型如何表示和检索实体信息。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
