@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-07",
+  "date": "2026-09-07",
+  "generated_at": "2026-09-07T21:57:53",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/07/2609.00858v1-verifiable-disaster-storylines-and-causal-knowledge-graphs-a-citation-grounded-pipeline-from-heterogeneous-humanitarian-sources",
+      "section": "quick",
+      "title_en": "Verifiable Disaster Storylines and Causal Knowledge Graphs: A Citation-Grounded Pipeline from Heterogeneous Humanitarian Sources",
+      "authors": "Ivan Decostanzi, Michele Ronco, Sergio Consoli, Christina Corbane, Lorenzo Bertolini, Indaco Biazzo, Daria Mihaila, Manuel Garcia-Herranz, Felix Schwebel, Yelena Mejova, Kyriaki Kalimeri",
+      "date": "2026-09-01",
+      "pdf": "https://arxiv.org/pdf/2609.00858v1",
+      "score": "7.0",
+      "evidence": "针对人道主义资源和灾难故事情节的因果知识图谱",
+      "tldr": "本研究面向突发灾害早期信息过载，构建将 EM-DAT 与 ReliefWeb/EMM 融合的检索增强生成管线，产出可溯源的灾害故事线与因果知识图谱（含17项结构化字段）并附引文；三起危机场景的人评显示高检索精度与因果忠实度，专家更偏好带引文组件，系统可扩展至全库并计划公开叙述增强版数据库。",
+      "tags": "query:q6",
+      "abstract_en": "Effective humanitarian response depends on the rapid synthesis of heterogeneous, high-volume information sources - a task that routinely exceeds human analytical capacity in the critical early hours of a crisis. We present a pipeline that combines structured disaster records from EM-DAT with unstructured documents from ReliefWeb and the European Media Monitor (EMM) to produce source-grounded disaster storylines and causal knowledge graphs supporting situational awareness for responders and analysts. Using Retrieval-Augmented Generation, the pipeline extracts structured storylines - tabular event profiles covering 17 fields, from severity and key drivers to child-sensitive impact indicators - and constructs causal knowledge graphs where each node and edge is enriched with citation-grounded explanatory narratives, enabling full traceability back to primary sources. We evaluate the system on three diverse crisis use cases through a human evaluation involving 9 domain expert and 9 non-expert evaluators. Results confirm high retrieval precision, strong faithfulness of extracted causal relations, and a clear expert preference for citation-grounded components over ungrounded alternatives. The pipeline is designed to scale to the full EM-DAT catalogue, with the goal of publicly releasing a narrative-enriched version of the database.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
