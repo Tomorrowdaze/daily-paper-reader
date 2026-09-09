@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-001.webp",
+      "caption": "Table 11: Variables Used in Analysis and AI Measurement",
+      "page": 43,
+      "index": 1,
+      "width": 964,
+      "height": 1217
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-002.webp",
+      "caption": "Table 8: Joint Four-Dimension AICOME Analysis",
+      "page": 25,
+      "index": 2,
+      "width": 764,
+      "height": 652
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-003.webp",
+      "caption": "Table 1: Correlation Between AI-Derived Measures and Observed CFPS Variables",
+      "page": 10,
+      "index": 3,
+      "width": 977,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-004.webp",
+      "caption": "Table 10 summarizes the role of each variable in the concept-specific feature sets. Entries are coded as:",
+      "page": 35,
+      "index": 4,
+      "width": 977,
+      "height": 654
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-005.webp",
+      "caption": "Table 9: Similarity of Joint Latent Results Across Prompting Strategies",
+      "page": 28,
+      "index": 5,
+      "width": 714,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-006.webp",
+      "caption": "Table 4: Single-Dimension Contextual Validation Using CFPSMeasured Dimensions",
+      "page": 13,
+      "index": 6,
+      "width": 818,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-007.webp",
+      "caption": "Figure 1: Conceptual framework for AICOME, AI COntextual MEasurement. Much of the existing literature focuses on recovering missing survey responses, imputing item nonresponse, or simulating respondent attributes. In contrast, AICOME views survey variables and AI-derived variables as alternative indicators of an underlying concept and evaluates whether respondentspecific AI measures support contextual analysis. AI-derived measures are decomposed into group means and individual components, allowing estimation of individual and group associations. Validation proceeds through response-level agreement, model-level validation, contextual validation, and boundary-condition analysis. The ultimate objective is not merely response recovery, but recovery of substantively meaningful contextual inferences.",
+      "page": 4,
+      "index": 7,
+      "width": 927,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2609.02821v1/fig-008.webp",
+      "caption": "Table 2: Sensitivity of Validation Correlations to CFPS Respondent Information",
+      "page": 12,
+      "index": 8,
+      "width": 980,
+      "height": 194
+    }
+  ]
+}

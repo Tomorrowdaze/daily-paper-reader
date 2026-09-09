@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-001.webp",
+      "caption": "Table 9: Held-out campaign by question group (descriptive; per-group cells are not hypothesis tests). The difficulty adjudication shows directional separation at modest power: hard and multi-hop questions cut mechanical reproduction by roughly 0.3–0.5 directionally (Fisher exact p=0.056 and p=0.058), each just outside the conventional threshold at the split’s small cell sizes.",
+      "page": 25,
+      "index": 1,
+      "width": 971,
+      "height": 295
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-002.webp",
+      "caption": "Table 2: Main results on the preliminary set (104 questions), with 95% Wilson intervals. CF and DPC-judge are the citation and semantic-accuracy signals; DPC-mech is the strict near-literal anchor (exact match or an overlap of at least eight characters).",
+      "page": 15,
+      "index": 2,
+      "width": 1008,
+      "height": 207
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-003.webp",
+      "caption": "Figure 6: A time-constrained query traced through Module C using the running example “Who served Wang Xifeng in the Garden before the investigation?” (1) The parser extracts a spatial constraint Qs = Garden and a temporal constraint Qt = before the investigation. (2) Index lookup maps Qt to a narrative-time interval and Qs to a location ID. (3) Slice retrieval fetches the temporal slice GQ and intersects it with the scene-to-entity spatial index. (4) Context assembly selects triples within the token budget, prioritizing shortest paths between the question’s entities so multi-hop chains survive truncation. (5) Grounded generation answers from the selected triples and returns provenance coordinates (tc, tn, σ). No graph query language statement (e.g., Cypher) is generated at any step (illustrative trace, no numeric results).",
+      "page": 30,
+      "index": 3,
+      "width": 1008,
+      "height": 873
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-004.webp",
+      "caption": "Figure 2: The neuro-symbolic constraint layer (NSCL). Candidate triples T from extraction are evaluated against the domain ontology O, which branches into hard rules (genealogical, master-servant, and title/gender consistency) and soft rules (atypical patterns). The filtering function C(T ) applies a binary reject/accept decision for hard rules and a penalty score against a fixed threshold for soft rules. Hard-rule rejections form a violation package carrying the offending rule and the evidence span, which feeds the dashed feedback loop back to extraction, capped at Rmax repair passes; hard violations still present after the cap are written to the uncertainty log and excluded from the graph G. Soft-rule penalties above the threshold mark the triple with a low-confidence attribute instead of excluding it (not depicted).",
+      "page": 7,
+      "index": 4,
+      "width": 941,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-005.webp",
+      "caption": "Figure 9: Dual iteration trajectories on the same development set: the window baseline’s five mechanism configurations (Table 5) and the system’s five recorded retrieval rounds (Table 7). The interventions differ by construction—window composition for the baseline, graph retrieval for the system; only the final configurations are frozen for the campaign, and the system’s frozen R5 context is about seven thousand tokens of graph-anchored neighborhoods against the baseline’s two-thousand-token window.",
+      "page": 33,
+      "index": 5,
+      "width": 973,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-006.webp",
+      "caption": "Figure 5: Citation-faithfulness failure taxonomy for the text-augmented baselines. MIXED (partially verbatim, partially paraphrased evidence) is the dominant failure class, showing that LLMs default to rewriting even under few-shot verbatim enforcement; NON-VERBATIM and ERROR complete the loss.",
+      "page": 18,
+      "index": 6,
+      "width": 969,
+      "height": 361
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-007.webp",
+      "caption": "Table 5: Mechanism pre-validation on the released development set (104 questions). The first three rows are the development trajectory (steps bundle component changes); the final two rows are a controlled ablation isolating the deterministic repair. Development-set diagnostics, not campaign results.",
+      "page": 19,
+      "index": 7,
+      "width": 793,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-008.webp",
+      "caption": "Figure 4: The dual-track divergence. Semantic correctness (DPC-judge, light bars) masks mechanicalverification failure: among answers with valid judge verdicts, the text-augmented baselines achieve DPC-judge rates of 0.87–0.92, while reproducing the golden fragments or evidence spans exactly on only 0.13–0.23 of questions (DPC-mech, dark bars). The oracle ceiling scores 1.0 on both tracks, sanity-checking the metric logic.",
+      "page": 17,
+      "index": 8,
+      "width": 969,
+      "height": 411
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-009.webp",
+      "caption": "Figure 8: The timeline-window diagnostic on TQ-3: the same retriever, with the timeline window on, returns the gold evidence neighborhood (Xiuyan asking Miaoyu to divine, Chapter 95); with the window off, it returns an unrelated earlier scene (the Grandmother Jia and Granny Liu visiting Green Lattice Nunnery). Same retriever, only the timeline window filter differs.",
+      "page": 32,
+      "index": 9,
+      "width": 1008,
+      "height": 756
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-010.webp",
+      "caption": "Figure 3: Dual temporal coordinate system. The top axis is the coarse chapter index tc with chapter markers (Ch 17, Ch 18, Ch 19); the dashed vertical lines mark chapter boundaries. The bottom axis is the fine narrative time tn with story events as intervals: Event B (the Imperial Consort’s Visit) is drawn as a semi-transparent block deliberately overlapping the Ch 17 / Ch 18 boundary, illustrating why chapter indices alone cannot locate events. Below the axes, a knowledge graph edge e (Baoyu attends the Visit) carries a validity interval τ(e) rendered as the red band; the dashed connectors anchor its endpoints to the narrative timeline so that τ(e) aligns exactly with Event B’s extent. This alignment is the mechanism by which time-constrained queries select their slice GQ.",
+      "page": 9,
+      "index": 10,
+      "width": 893,
+      "height": 507
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-011.webp",
+      "caption": "Figure 7: Diagnostic protocol for error attribution. The root node is a QA failure. Level 1 stratifies the failed question by category: time-constrained, space-constrained, or general. Level 2 attributes the failure to one of four buckets: a parser error (wrong constraint Qt or Qs extracted), a retrieval error (correct parse, wrong slice GQ, or budget truncation of an answer path), a generation error (correct slice, LLM hallucinated or failed to reason), or a constraint-filter over-rejection (a correct parse whose slice filter discards the answer path). Each bucket feeds its own metric, so a weak component cannot masquerade as another, and the H2/H3 conclusions remain attributable to the mechanism they test.",
+      "page": 31,
+      "index": 11,
+      "width": 912,
+      "height": 502
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-012.webp",
+      "caption": "Table 6: Development-set diagnostics on the constructed system. Retrieval width is the number of supporting triples selected under the token budget; CF is citation faithfulness. Six development questions (the three smoke questions of the mechanism pre-validation above and three time-constrained questions whose answers were source-verified before the runs, selected as the only dev questions with timeline-window triggers at selection time); configurations: v1 (entity-endpoint retrieval), v2 (the realized DSGR retriever), and timeline on/off for the time-constrained questions. Development diagnostics, not campaign results.",
+      "page": 20,
+      "index": 12,
+      "width": 943,
+      "height": 240
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-013.webp",
+      "caption": "Figure 1: Overview of the NS-ST-GraphRAG pipeline, organized into three swimlanes. Module A (OGE + NSCL): a chapter ck enters LLM extraction; candidate triples pass through the constraint layer C(T ); the dashed feedback arrow marks the bounded repair loop, which re-prompts extraction on violating spans at most Rmax times, and accepted triples leave the module. Module B (STGC): accepted triples undergo entity resolution, receive dual temporal coordinates (chapter index tc and narrative time tn), and are stored as versioned slices G. Module C (DSGR): a query Q is parsed into temporal and spatial constraints Qt, Qs by a lightweight parser; the matching slice GQ is retrieved by index lookup; LLM generation produces the grounded answer with provenance. Solid arrows carry data flow; dashed arrows carry feedback.",
+      "page": 5,
+      "index": 13,
+      "width": 955,
+      "height": 566
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-014.webp",
+      "caption": "Table 4: Citation-faithfulness failure taxonomy (104 answers per baseline). OK: fully verbatim; MIXED: at least one non-verbatim fragment (paraphrase or prefix contamination); NON-VERBATIM: no verbatim fragment; ERROR: malformed output.",
+      "page": 16,
+      "index": 14,
+      "width": 677,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2609.05139v1/fig-015.webp",
+      "caption": "Table 3: Long-context baseline by question group (descriptive; per-category cells are not hypothesis tests).",
+      "page": 16,
+      "index": 15,
+      "width": 579,
+      "height": 224
+    }
+  ]
+}

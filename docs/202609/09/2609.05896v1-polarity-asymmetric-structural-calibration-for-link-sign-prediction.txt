@@ -1,0 +1,604 @@
+Title: Polarity-Asymmetric Structural Calibration for Link Sign Prediction
+
+URL Source: https://arxiv.org/pdf/2609.05896v1
+
+Published Time: Wed, 09 Sep 2026 00:27:32 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+# Polarity-Asymmetric Structural Calibration for Link Sign Prediction 
+
+Qiqi Gao 
+
+Northeast Normal University Changchun, Jilin, China gaoqiqi777@nenu.edu.cn 
+
+Wenzhuo Song *
+
+Northeast Normal University Changchun, Jilin, China wzsong@nenu.edu.cn 
+
+Xueyan Liu 
+
+Jilin University Changchun, Jilin, China xueyanliu@jlu.edu.cn 
+
+Abstract —Link sign prediction (LSP) aims to infer the pos-itive or negative polarity of unobserved links in signed net-works. Signed Graph Neural Networks (SGNNs) usually rely on signed-graph structural priors, including structural balance and homophily-like similarity, to guide message passing and prediction. These priors describe population-level tendencies, not guarantees for individual target edges. Their failures are especially costly under severe sign imbalance, where errors on minority and locally conflicting relations are harder to detect and correct. We propose Polarity-Asymmetric Structural Calibration (PASC), a target-edge structural-prior calibration framework for signed link prediction. PASC constructs a structure-only prior representation, estimates a target-edge structural prior score, and compares this score with a local signed-context cue to derive a conflict residual. The residual calibrates signed attention aggrega-tion, target-edge gated fusion, and regime-adaptive optimization. Experiments on five real-world signed network datasets show that PASC consistently achieves the best Macro-F1 among representa-tive baselines, with competitive AUC, Binary-F1, and Micro-F1. Structural-shift experiments further suggest reduced dependence on dense-neighborhood and local-closure shortcuts. Source code is available at https://github.com/iqqGGGGGGG/PASC-for-LSP. 
+
+Index Terms —Signed Networks, Link Sign Prediction, Graph Neural Networks 
+
+I. I NTRODUCTION 
+
+Interactions between entities in real-world social networks often possess opposing polarities, such as trust/distrust and support/opposition [1], [2]. Such relations are modeled as signed networks, where edges encode positive or negative re-lational polarity rather than merely the existence of links. Link sign prediction (LSP) predicts the latent polarity of relations between node pairs, with applications in recommender systems [3], [4], sentiment analysis [5], and community detection [6]. Signed Graph Neural Networks (SGNNs) can capture complex signed topological patterns and have become the dominant approach to LSP [7]–[10]. Existing SGNNs often use recurring signed graph patterns as structural priors. Two examples are structural balance [11], [12], where triangle signs provide cues for the target edge, and homophily [13], [14], where similar nodes are more likely to form positive links. These priors are usually implemented through signed message passing, separate aggregation over positive and negative neighbors, or higher-order path and 
+
+> *
+
+Corresponding author: Wenzhuo Song. Trust     
+
+> Distrust
+> Trust
+> Distrust
+> Bob Bob Alice Alice Carol Carol
+> Structural prior
+> friend of friend
+> Bob Bob Alice Alice Carol Carol
+> Local signed-context Different signed communities Local signed-context Different signed communities
+> Prior Context Conflict Prior Context Conflict
+
+Fig. 1. Example of target-edge structural-prior unreliability. Alice and Carol share a positive neighbor Bob, so structural balance suggests a positive rela-tion. Their local signed context, however, may provide conflicting evidence. Structural priors capture population-level tendencies but need not be reliable for every target edge. 
+
+subgraph features [8], [9], [15], [16]. Such designs encode useful topological evidence beyond individual node features. However, structural priors describe recurring patterns across many edges rather than guarantees for every target edge. Figure 1 illustrates a case where a structural prior and local signed-context evidence point in different directions for the same target edge. Table I further shows that structural balance predictions do not always match actual edge polarities, follow-ing the analysis of Kim et al. [17]. When the prior signs are 
+
+(+ , −), balance theory predicts a negative posterior sign, yet 70.8% of the corresponding edges in Wiki-RfA are actually positive. The proportions are 63.5% and 53.5% on Bitcoin-Alpha and Epinions, respectively. Thus, the same structural pattern can map to different polarities. Structural priors remain useful, but their reliability varies across target edges. Polarity imbalance amplifies the impact of prior-related errors during learning and evaluation. As shown in Table II, positive edges are 3.4 to 14.7 times more frequent than negative edges across the five datasets. Under this imbalance, a model can fit structurally typical and majority-polarity rela-tions while errors on minority negative or locally conflicting target edges contribute less to the training objective and are less visible in global metrics such as AUC or Micro-F1. The key challenge is therefore to estimate when a structural prior should be trusted for a specific target edge and to calibrate its influence under the local signed context. Most existing methods either extract richer structural ev-idence through multi-hop propagation, motif modeling, or subgraph encoding, or reduce unreliable structures through arXiv:2609.05896v1 [cs.SI] 5 Sep 2026 TABLE I PRIOR -P OSTERIOR STATISTICS OF TRIANGLES IN SIGNED NETWORKS                                                   
+
+> Triads Prior (+ ,+) (+ ,−)/(−,+) (−,−)
+> Posterior +−+−+−
+> Datasets Bitcoin-Alpha 95.7% 4.3% 63.5% 36.5% 86.6% 13.4% Bitcoin-OTC 95.9% 4.1% 39.3% 60.7% 90.2% 9.8% Wiki-RfA 88.1% 11.9% 70.8% 29.2% 66.9% 33.1% Slashdot 94.9% 5.1% 46.5% 53.5% 68.5% 31.5% Epinions 96.5% 3.5% 53.5% 46.5% 69.7% 30.3%
+> Balanced? ⃝××⃝⃝×
+
+denoising, filtering, or reweighting [10], [15]–[19]. These strategies improve signed graph representation learning, but they mainly treat structural reliability as a property of patterns or edges to be extracted, suppressed, or reweighted. They do not directly decide how strongly each target edge should rely on a structural prior under its own local signed context. We propose Polarity-Asymmetric Structural Calibration (PASC) for link sign prediction. PASC treats signed-graph patterns as useful but imperfect priors and calibrates their reliability for each target edge under its local signed context. It first uses truncated singular value decomposition to construct a structure-only prior representation, from which target-edge structural prior scores are estimated. It then derives local signed-context cues from signed clustering [6] and computes the conflict residual between the prior score and the local signed-context cue. This residual guides signed attention ag-gregation [20] and calibrates neighbor message propagation according to the prior-context mismatch. PASC then fuses base and context representations through a target-edge gate, allowing each target edge to balance structural and contextual information. The same conflict residual also shapes the training objective through two variants suited to different graph scales. In small-scale graphs, where local signed-context evidence is limited, the soft variant PASC-S reweights training edges to emphasize larger prior-context mismatch. In large-scale graphs, where enough candidate edges are available for stronger supervision, the harder variant PASC-H pairs structurally matched but context-opposite edges as residual-contrastive supervision. On five real-world signed network datasets, PASC consistently achieves the best Macro-F1 while maintaining competitive AUC, Binary-F1, and Micro-F1. Under Degree-Shift and Structural-Shortcut-Shift, PASC also shows reduced depen-dence on structural shortcuts. Our contributions are summarized as follows:  
+
+> •
+
+Rather than encoding richer structure, we introduce a target-edge structural-prior calibration perspective for im-balanced signed link prediction, asking when a model should trust structural priors for each target edge and calibrating their influence under the local signed context.  
+
+> •
+
+We define the conflict residual, an observed-minus-expected measure between a structural-gradient-based prior score and a local signed-context cue, as the core signal that drives calibration. The structural gradient provides a lightweight, training-free structural signal for this calibration.  
+
+> •
+
+Driven by the same conflict residual, we instantiate the calibration consistently at three levels, namely residual-guided signed attention for aggregation, target-edge gated fusion for representation fusion, and regime-adaptive conflict-residual optimization for the training objective, realized as residual-aware reweighting (PASC-S) and residual-contrastive supervision (PASC-H).  
+
+> •
+
+Experiments on five benchmarks show the best Macro-F1 and competitive overall performance, with additional structural-shift evidence. II. R ELATED WORK 
+
+We review three lines of related work: signed graph neu-ral networks, higher-order and subgraph-based methods, and graph debiasing techniques. 
+
+A. Signed Graph Neural Networks 
+
+Signed graph representation learning often incorporates signed-graph structural priors into representation objectives or message-passing mechanisms. Early methods such as SiNE [21] and nSNE [7] encode social status and structural bal-ance theories through distance-based optimization objectives. Beyond Euclidean embedding methods, HSNE embeds signed networks in a Poincar´ e ball and combines structural balance theory with Riemannian optimization to capture latent hierar-chical structure [22]. SGCN [8] introduces dual-channel ag-gregation to separately model positive and negative neighbors. Subsequent models, including SiGAT [20] and SDGNN [9], further exploit attention mechanisms and directed closed-loop structures to capture richer signed relational patterns. These architectures are effective, but their aggregation mechanisms can still overemphasize dominant structural pat-terns under polarity asymmetry. Minority or structurally con-flicting edges are then harder to model [17], even when global ranking metrics remain high [23], [24]. 
+
+B. Subgraph and High-Order Heuristic Methods 
+
+Another line of work enhances signed graph representa-tions with higher-order or subgraph-level patterns, including multi-order adjacency matrices, motifs, and closed subgraphs [15], [16], [18], [25]. SPMF [15] quantifies multi-hop paths from structural equilibrium theory and uses multi-order signed adjacency matrices. SELO [18] extracts closed subgraphs through local breadth-first search and characterizes their bal-anced or unbalanced structures. CFSE [16] integrates global collaborative filtering signals with local subgraph features. Although these methods improve structural expressiveness, explicit higher-order or subgraph encoding adds computa-tional overhead and scalability challenges [26], especially when target-pair subgraphs must be repeatedly constructed. Minority-polarity or locally heterogeneous regions may also provide too few higher-order patterns. 
+
+C. Imbalanced Learning and Debiasing on Graphs 
+
+As signed graph representation learning moves to noisy or distribution-shifted settings, robustness has become a recurring concern [27]–[29]. In signed graphs, several methods reduce the influence of unreliable structures. RSGNN [10] filters edges that violate topological rules using a structural regular-izer grounded in structural balance theory. SE-SGformer [19] identifies positive and negative neighbors most relevant to the target node. TrustSGCN [17] assigns trust scores from local topological features and global statistical ratios, restricting propagation through low-scoring edges. These methods improve robustness by filtering, reweighting, or explaining structural information. In imbalanced signed networks, however, edges that deviate from common structural priors may be informative minority or locally conflicting relations rather than noise. Treating them mainly as unreli-able structures can weaken class-balanced prediction, which motivates our target-edge calibration perspective. III. M ETHODOLOGY 
+
+In this section, we present the PASC framework, as il-lustrated in Fig. 2. PASC calibrates target-edge reliance on signed-graph structural priors by estimating a target-edge structural prior score, comparing it with a local signed-context cue, and using the resulting conflict residual to guide message aggregation and feature fusion. The same conflict residual drives all components of PASC, applying one consistent cali-bration signal at the aggregation, fusion, and optimization lev-els. Throughout, PASC estimates its calibration signals at the edge level but injects them into node-level message passing, and the resulting node representations are then reassembled into target-edge representations for prediction. 
+
+A. Problem Definition 
+
+A signed graph is defined as G = (V, E+, E−), where 
+
+V = {v1, . . . , v N } is a collection of N nodes, and E+ and 
+
+E− are the sets of positive and negative links, respectively. For ease of analysis, we use an adjacency matrix A ∈ RN ×N
+
+to represent a signed graph, where Aij = 1 indicates a positive link, Aij = −1 indicates a negative link, and Aij = 0 indicates no observed link between nodes vi and vj . Given a signed graph G = ( V, E+, E−), the LSP task is to predict the link sign between a target node pair (u, v ). For datasets origi-nally provided as directed edges, the current implementation uses an undirected signed-graph representation: each observed signed edge is symmetrized before the adjacency matrix is constructed, and edge direction is not modeled. 
+
+B. Structural Prior Estimation and Residual-Guided Aggrega-tion 
+
+This part of PASC builds the conflict residual and uses it to calibrate message passing. We first estimate a structural prior score for each edge from structure-only features, which captures the population-level structural tendency of an edge. We then define the conflict residual as the gap between this prior score and the observed local signed context, and use it as an edge-level bias that guides positive and negative signed attention aggregation, so that message passing is adjusted according to where the structural prior is unreliable. 
+
+1) Structure-Only Prior Representation: To estimate the structural prior score of each target edge, we first construct structure-only node features X from the signed adjacency matrix, which serve as the substrate for the structural-gradient computation below. Here, structure-only means free of target-edge labels and local context, not free of edge signs. We approximate the signed adjacency matrix using trun-cated singular value decomposition: 
+
+A ≈ Ur Σr V⊤ 
+
+> r
+
+, (1) where r is the rank, Σr ∈ Rr×r is the diagonal matrix of the top singular values, and Ur , Vr ∈ RN ×r are the corresponding left and right singular matrices. We retain the top-r structural bases as the initial node feature matrix: 
+
+X = Ur Σ1/2 
+
+> r
+
+. (2) In practice, we exploit the sparsity of signed networks and compute the decomposition using Lanczos-based sparse solvers or randomized low-rank SVD. The resulting complex-ity scales approximately linearly with the number of observed edges, making the preprocessing practical for large graphs. The structure-only features X summarize each node’s po-sition in the dominant structure of the signed graph, but they do not directly express how sharply the local neighborhood changes around a node. To capture this local structural varia-tion, we compare the structure-only features aggregated from one-hop and two-hop neighborhoods, and define the structural gradient of each node as: 
+
+ZG = ˜A2X − ˜AX 
+
+= ( D−1|A|)2X − (D−1|A|)X, (3) where ˜A = D−1|A| denotes the row-normalized absolute adjacency matrix, |A| is the absolute signed adjacency matrix, and D is its degree matrix. We keep the signed adjacency for the SVD to preserve polarity-aware structural bases, while ˜A
+
+uses |A| to measure neighborhood smoothness independent of edge polarity. The structural gradient ZG describes local structural variation: ZG ≈ 0 indicates a locally smooth and stable neighborhood, whereas a large |ZG| indicates a structural transition region, such as a community boundary or a bridging node. Feature 𝚾 
+
+Truncated SVD 
+
+Matrix 𝐀 
+
+𝐙 final 
+
+⊕
+
+𝐙 base 
+
+𝐙 base 
+
+𝐙 ctx 
+
+𝐙 ctx 
+
+> Negative Agg
+> （K heads ）
+> Negative Agg
+> （K heads ）
+> Positive Agg
+> （K heads ）
+> ……
+
+G
+
+AT
+
+> Conflict Residual
+> ……
+
+Feature 𝚾 
+
+M
+
+LP
+
+# +
+
+Feature Δ
+
+M
+
+LP
+
+# +
+
+Feature ΔFeature 𝚾 
+
+M
+
+LP
+
+# +
+
+Feature Δ
+
+Signed Graph 𝒢 Signed Graph 𝒢 Signed Graph 𝒢 
+
+𝐙 G
+
+> Structural Gradient
+> -
+
+Ã𝚾 Ã𝚾 
+
+𝐙 G
+
+> Structural Gradient
+> -
+
+Ã𝚾 
+
+Conflict 
+
+Residual BCE 
+
+MLP 
+
+=
+
+PASC-S (Small-Scale Regime) 
+
+Main Path Original Path 
+
+Switching Path PASC-H (Large-Scale Regime)  
+
+> Prior-score net Prior-score net Fig. 2. Architecture of the PASC framework for link sign prediction. PASC estimates target-edge structural prior scores, derives conflict residuals from local signed-context cues, and uses residual-guided aggregation, regime-adaptive conflict-residual optimization (PASC-S and PASC-H), and target-edge gated fusion to calibrate structural reliance under different graph regimes.
+
+In such transition regions, neighborhoods are more diverse and balance- and homophily-type priors become less reliable across target edges. The structural gradient therefore serves as a lightweight proxy for where structural-prior reliability is less predictable.To estimate the structural prior score of a target edge (u, v ), we concatenate their structural-gradient representations and feed the joint representation into a prior-score network: 
+
+euv = σ(MLP prior ([ zGu ∥ zGv ])) , (4) where MLP prior is a multi-layer perceptron, and euv ∈ [0 , 1] 
+
+is a learnable target-edge structural prior score. It is computed only from structural features, without taking the observed local signed context or the target edge’s own sign label as input. MLP prior is trained end-to-end with the rest of PASC under the link sign prediction objective, with no separate supervision from T fuv .
+
+2) Residual-Guided Attention Aggregation: Residual-guided attention realizes this calibration during message passing. Graph attention typically weights neighbors by feature similarity. In signed graphs, this favors typical, structurally consistent neighbors and underweights the minority or sign-conflicting edges that are often the most informative for sign prediction. To calibrate this process, PASC computes a conflict residual for each edge and uses it as an edge-level attention bias during node-level message passing. The conflict residual contrasts the structural prior score euv estimated above with the edge’s observed local signed context, so that a large gap signals that the structural prior is unreliable for that edge. To obtain this observed context, we apply a signed graph clustering algorithm [6], which assigns a community label c(·) to each node. For a target edge (u, v ), we define the observed context as: 
+
+T fuv = ⊮[c(u) = c(v)] , (5) where ⊮[·] is the indicator function. Thus, T fuv = 1 if u and 
+
+v belong to the same community, and T fuv = 0 otherwise. We then compute the conflict residual between the local signed-context cue and the structural prior score: 
+
+Ruv = T fuv − euv . (6) During message passing, we evaluate this residual on each observed aggregation edge (i, j ) in the training graph, where 
+
+j is a signed neighbor of the center node i. The conflict residual Rij then acts as an attention bias: a value close to zero indicates that the local context is consistent with the structural expectation, whereas a larger absolute value indicates stronger mismatch. We use it as a calibration signal for attention aggregation: 
+
+α(k) 
+
+> ij
+
+= Softmax j
+
+
+
+aTk LeakyReLU  W(k)[zbase i ∥ zbase j ]
+
++ ϕbias (Rij )(k)
+
+,
+
+(7) where W(k) and ak are learnable parameters for the k-th attention head, and the scalar residual is mapped to a head-specific additive bias ϕbias (Rij ) = tanh( Wr Rij + cr ) ∈ RK ,whose k-th entry ϕbias (Rij )(k) biases head k. This calibrates the attention score according to the mismatch between the structural prior score and the local signed context. The base node representations zbase i and zbase j are encoded from the structure-only features by adding a small learnable perturba-tion ∆ before an MLP: 
+
+Zbase = MLP base (X + γ∆), (8) where γ is the scaling coefficient that controls the intensity of the learnable perturbation ∆.For each node i, we apply residual-guided attention aggre-gation on its positive and negative neighborhoods separately. The two aggregated messages are concatenated and projected to obtain the context representation of node i:
+
+zctx i = MLP ctx 
+
+h X  
+
+> j∈N +
+> i
+
+α+ 
+
+> ij
+
+(Wszbase j )
+
+∥ X 
+
+> j∈N −
+> i
+
+α− 
+
+> ij
+
+(Wszbase j )
+
+i 
+
+,
+
+(9) where N + 
+
+> i
+
+and N − 
+
+> i
+
+denote the sets of positive and negative neighbors of node i, respectively, α+ 
+
+> ij
+
+and α− 
+
+> ij
+
+are the residual-calibrated multi-head attention weights over the positive and negative neighborhoods, and Ws is a shared feature projection matrix. 
+
+C. Target-Edge Gated Fusion 
+
+The base representation zbase encodes the structural-prior view of a node, whereas the context representation zctx carries the residual-calibrated local signed context. How much a target edge should rely on its local context depends on whether its structural prior is reliable, which is exactly what the conflict residual measures. Rather than fixing this balance, PASC extends this calibration to the fusion level with a target-edge gate. Unlike the neighbor-normalized attention weights used above, the gate is a single scalar in (0 , 1) that scales the residual-calibrated context zctx before it is added to the structural representation. A larger gate injects more of the calibrated local context, whereas a smaller gate keeps the fused representation closer to the structural prior. For a target edge 
+
+(u, v ), the gate takes the base and context representations of both endpoints as input and computes the fusion weight: 
+
+wgate uv = σ(MLP gate ([ zbase u ∥ zbase v ∥ zctx u ∥ zctx v ])) . (10) Although wgate uv is computed for the target edge (u, v ), it controls how much context is injected into the base represen-tations of its two endpoint nodes. We first obtain the node-level final representations as: 
+
+zf inal u = zbase u + wgate uv · zctx u ,
+
+zf inal v = zbase v + wgate uv · zctx v . (11) The two node-level final representations are then concate-nated to form the edge-level prediction input: 
+
+zedge uv = [ zf inal u ∥ zf inal v ]. (12) 
+
+D. Regime-Adaptive Conflict-Residual Optimization 
+
+The aggregation and fusion modules above use the conflict residual to calibrate message passing and target-edge repre-sentation fusion. At the optimization level, PASC uses the same residual to decide which edges should receive stronger supervision. Edges with a large |Ruv | indicate a stronger mismatch between the structure-derived prior and the observed local signed context, and thus carry more informative signal for learning when structural priors should be trusted. We instantiate this idea through two strategies whose stability depends on the graph regime. In small-scale graphs, where local evidence is limited and strong calibration can amplify variance, PASC-S applies soft residual-aware reweighting. In large-scale graphs, where the abundance of edges provides enough structurally similar but context-opposite candidates, PASC-H adds residual-contrastive twin supervision. Graph scale therefore serves as a proxy for candidate availability, which determines which variant to use. 
+
+1) Soft Reweighting for Small-Scale Signed-Topology Regimes: For small-scale graphs, PASC-S performs sample reweighting with the structural prior score euv while keeping the graph topology unchanged. To avoid unstable weights when euv is close to 0 or 1, we first apply a truncation bound: 
+
+ˆeuv = max( ϵ, min( euv , 1 − ϵ)) , (13) where ϵ denotes the truncation boundary. Given the local signed-context cue T fuv , we compute the edge-level reweight-ing coefficient as: 
+
+wrw uv = T fuv 
+
+ˆeuv 
+
++ 1 − T fuv 
+
+1 − ˆeuv 
+
+. (14) The coefficient wrw uv implements a soft prior-context mis-match reweighting strategy. The predictor maps the edge-level prediction input to the predicted soft label: 
+
+ˆysof t uv = MLP (zedge uv ). (15) The weighted observation loss is defined as: 
+
+LSof t = 1
+
+|E train |
+
+X
+
+> (u,v )∈E train
+
+wrw uv · BCE (ˆ ysof t uv , Y fuv ), (16) where Etrain denotes the training edge set, Y fuv denotes the observed training label of edge (u, v ), and BCE (·) is the binary cross-entropy loss. In terms of the conflict residual, wrw uv grows monotonically with |Ruv |. When T fuv = 1 , a smaller ˆeuv gives a larger |Ruv | and a larger weight, and when T fuv = 0 , a larger 
+
+ˆeuv has the same effect. PASC-S can thus be interpreted as a soft residual-aware objective that emphasizes edges where the structural prior is less reliable. The reweighting does not treat T fuv as a ground-truth sign. It only uses the disagreement between the structural prior score and the signed-community context as an indicator of structural unreliability. 
+
+2) Residual-Contrastive Twin Supervision for Large-Scale Signed-Topology Regimes: In large-scale regimes, reweight-ing alone may produce highly uneven weights and unstable optimization. PASC-H instead adds auxiliary supervision built from structural twins, using the structural prior score as a matching anchor to find edges with a similar prior score but the opposite local context. For a target edge (u, v ) with local signed-context cue T fuv , we construct the candidate set: 
+
+Ccand = {(u′, v ′) | T fu′v′ = 1 −T fuv ∧| euv −eu′v′ | < δ }, (17) where (u′, v ′) is a candidate edge pair, euv and eu′v′ are the structural prior scores of the target edge and the candidate pair, respectively, and δ is the tolerance threshold for structural-prior matching. This candidate filtering restricts the search to pairs with similar structural prior score but opposite observed context. If no candidate satisfies the constraint, the target edge is used as its own fallback. Within the candidate set, we select the structural twin that is most similar to the target edge in both initial structural features and structural-gradient representations. We define the edge-level feature concatenations as Xuv = [ Xu ∥ Xv ] and 
+
+ZGuv = [ ZGu ∥ ZGv ], and compute the matched pair as: 
+
+(u′, v ′) = arg min 
+
+> (u′,v ′)∈C cand
+
+12
+
+
+
+d(Xuv , Xu′v′ ) + d(ZGuv , ZGu′v′ )
+
+
+
+,
+
+(18) where d(·, ·) denotes a distance function used to measure pairwise feature similarity. After obtaining the matched structural twin (u′, v ′), we use its observed polarity as the switched-context label Y fu′v′ .A conditional decoder Dϕ is then used to construct two auxiliary supervision paths that share the same endpoint base representations but differ in the context fed to the decoder and the supervised label. In the original-context path, the decoder uses the edge’s own context T fuv to predict its observed label Y fuv :
+
+LO = BCE (Dϕ([ zbase u ∥ zbase v ∥ T fuv ]) , Y fuv ). (19) In the switched-context path, the decoder is supervised by the twin label Y fu′v′ under the switched context T fu′v′ :
+
+LSW = BCE (Dϕ([ zbase u ∥ zbase v ∥ T fu′v′ ]) , Y fu′v′ ). (20) For the main prediction task, the edge-level prediction input is combined with the original context to predict the observed label: 
+
+Lmain = BCE (Dϕ([ zedge uv ∥ T fuv ]) , Y fuv ). (21) The total loss of PASC-H is: 
+
+LHard = Lmain + λ1LO + λ2LSW , (22) where λ1 and λ2 control the strengths of the original-context and switched-context auxiliary losses. By pairing samples with similar structural prior scores but opposite local contexts, PASC-H constructs a residual-contrastive supervision signal in which the prior estimate is approximately held fixed while the observed context changes. This encourages the decoder to model how edge polarity varies with prior–context mismatch, rather than relying on the structural prior alone, improving robustness in large-scale signed graphs. 
+
+Complexity. All structure-dependent preprocessing is per-formed on the training graph. With sparse adjacency, the trun-cated SVD and the structural gradient both cost O(r|E train |),where r is the rank. Residual-guided signed attention keeps the asymptotic cost of standard signed attention, adding only a scalar bias per aggregation edge, while PASC-H bounds candidate matching with the threshold δ using score buckets. IV. E XPERIMENTS 
+
+We evaluate PASC by answering the following five research questions:  
+
+> •
+
+RQ1: How does PASC perform in terms of overall per-formance and class-balanced prediction compared with representative signed link prediction methods?  
+
+> •
+
+RQ2: How do the two residual-optimization variants behave across small-scale and large-scale signed-graph regimes?  
+
+> •
+
+RQ3: How do residual-guided aggregation, target-edge gated fusion, and regime-adaptive optimization contribute to PASC?  
+
+> •
+
+RQ4: How sensitive is PASC-H to the weights of original-context and switched-context auxiliary supervision?  
+
+> •
+
+RQ5: How robust is PASC under structural-shift proto-cols? 
+
+A. Experimental Setup 
+
+Datasets . We use five real-world signed graph benchmarks. Bitcoin-Alpha and Bitcoin-OTC [30] are user trust networks from Bitcoin trading platforms, where edges denote trust (pos-itive) or distrust (negative) ratings. Wiki-RfA [31] is derived from the Wikipedia Request for Adminship process, where edges represent support (positive) or opposition (negative) votes. Slashdot and Epinions [1] are technology news and consumer review networks, respectively, where edges indicate explicit trust/friendship or distrust/enmity relations. As shown in Table II, these datasets vary substantially in graph scale and exhibit clear polarity imbalance, with positive-to-negative edge ratios ranging from 3.4:1 to 14.7:1. These properties let us evaluate PASC across different scales and degrees of polarity imbalance.                                
+
+> TABLE II STATISTICS OF THE DATASETS USED IN OUR EXPERIMENTS .
+> Dataset Nodes Edges Pos links Neg links Pos/Neg Bitcoin-Alpha 13,782 24,185 22,649 1,536 14.7:1 Bitcoin-OTC 15,881 35,591 32,028 3,563 9.0:1 Wiki-RfA 111,259 178,096 138,813 39,283 3.5:1 Slashdot 184,140 549,201 425,071 124,130 3.4:1 Epinions 1131,827 841,371 717,667 123,704 5.8:1
+> 1https://snap.stanford.edu/data/
+
+Baselines . We compare PASC with eight representative baselines (nSNE [7], SGCN [8], SNEA [32], SDGNN [9], RSGNN [10], SPMF [15], TrustSGCN [17], and CFSE [16]) that cover embedding-based methods, signed message-passing models, multi-hop and subgraph-enhanced methods, denoising-based robust SGNNs, and trustworthiness-based propagation. For a fair comparison, we follow the reported settings of the original papers when available and tune key hyperparameters on the validation set using the same splits. SE-SGformer requires a substantially different transformer-style training pipeline and a self-explanation module that is not directly compatible with our unified SGNN evaluation protocol, so we leave its direct comparison to future extended evaluation. 
+
+Evaluation Protocol . All datasets are split into training, validation, and test sets in an 8:1:1 ratio. The current evalua-tion follows a static and transductive setting: the node set is fixed across the training, validation, and test edge splits. We use polarity-stratified edge splits so that the positive/negative ratio is approximately preserved across training, validation, and test sets. Following [8], [9], we evaluate all methods on the link sign prediction task. We report AUC, Binary-F1, Micro-F1, and Macro-F1. AUC measures global ranking ability, but it can remain high even when minority-polarity edges are not well classified. Binary-F1 and Micro-F1 reflect overall classification performance and can be dominated by the majority polarity in highly imbalanced signed graphs. Macro-F1 computes the F1 score for each class separately and takes their unweighted average, making it more informative for class-balanced signed link prediction. For all methods, the positive/negative decision threshold used for the F1 metrics is selected on the validation set by Macro-F1. 
+
+Training Configuration . All experiments run on a single RTX 4090D GPU. For Bitcoin-Alpha and Bitcoin-OTC, the batch sizes are 2,048 and 4,096, with learning rates 2 × 10 −4
+
+and 5×10 −4 and an L2 coefficient of 1×10 −3. For Wiki-RfA, Slashdot, and Epinions, the batch sizes are 8,192, 16,384, and 16,384, with learning rates {1, 5, 5}× 10 −4 and L2 coefficients 
+
+{5, 5, 1}× 10 −3. For all datasets, we set δ = 1 ×10 −4, γ = 0 .2,the truncation bound ϵ = 0 .05 , the feature dimension and SVD rank to 128 , the number of attention heads to 4, dropout to 
+
+0.2, the number of signed clusters to 2, and a random edge-masking rate of 0.2. We train with Adam for up to 500 epochs and stop early on validation AUC with a patience of 30 , and average all reported results over five random seeds. On the above hardware, the average training time per run ranges from about 35 seconds on Bitcoin-OTC to roughly 20 minutes on Epinions. To avoid information leakage, all structure-dependent preprocessing, including truncated SVD, signed clustering, structural-gradient computation, and prior-score estimation, is fitted only on the training graph. Validation and test edges are held out from these steps and used only for model selection and final evaluation. 
+
+B. Overall Performance Comparison 
+
+For RQ1, Table III compares PASC with eight baselines on the LSP task. PASC achieves the best Macro-F1 on all datasets while remaining competitive on AUC, Binary-F1, and Micro-F1. This matches the goal of PASC, whose main benefit is not global ranking but class-balanced prediction under polarity asymmetry, where errors on minority-polarity and structurally conflicting edges are more visible in Macro-F1. The gains are clearest on the most imbalanced datasets. On Bitcoin-Alpha and Bitcoin-OTC, where positive edges outnumber negative ones by 14.7:1 and 9.0:1, PASC improves Macro-F1 over the second-best baseline by 1.55% and 1.59%. On Wiki-RfA the Macro-F1 gain reaches 2.54%, far above the corresponding Micro-F1 and Binary-F1 gains (0.47% and 0.01%), suggesting that the improvement comes mainly from class-balanced prediction rather than majority-dominated accuracy. Several baselines obtain high Binary-F1 or Micro-F1 but much lower Macro-F1, indicating that their overall perfor-mance is partly dominated by the majority polarity. For instance, SGCN obtains 59.93% Macro-F1 on Wiki-RfA, and nSNE reaches 57.76 ±9.71% Macro-F1 on Bitcoin-Alpha. Even CFSE, the strongest baseline, which slightly outperforms PASC in AUC on Slashdot, obtains lower Macro-F1 and relies on explicit closed-subgraph extraction for each target pair. In contrast, PASC keeps Macro-F1 stable across datasets, with standard deviations at most 0.55%, supporting target-edge structural-prior calibration for class-balanced signed link prediction. 
+
+C. Variant Adaptability Analysis Bitcoin-Alpha Bitcoin-OTC 85.0 87.5 90.0 92.5 95.0        
+
+> AUC (%)  93.61 94.98
+> 92.40 94.06
+> Small-Scale Regimes
+> Wiki-Rfa Slashdot Epinions 85 90 95 100 88.96 92.71 97.80
+> 89.28 93.22 97.88
+> Large-Scale Regimes
+> Bitcoin-Alpha Bitcoin-OTC 75 80 85
+> Macro-F1 (%) 81.30 86.68
+> 78.55 85.62 Wiki-Rfa Slashdot Epinions 75 80 85 90 95 78.21 83.25 91.63
+> 78.33 83.94 91.89
+> PASC-S PASC-H
+> Fig. 3. Variant Adaptability comparison of PASC-S and PASC-H under different signed-topology regimes.
+
+For RQ2, Figure 3 compares the two residual-optimization variants. PASC-S is best on the two small-scale Bitcoin networks on both AUC and Macro-F1, while PASC-H is best on Wiki-RfA, Slashdot, and Epinions. This matches the two designs. PASC-S applies soft residual-aware reweighting and is more stable when local evidence and matched candi-date pairs are limited, whereas PASC-H relies on residual-contrastive twin supervision, which needs enough structurally similar but context-opposite pairs and therefore benefits from larger graphs. The comparison also shows that PASC-H is not uniformly stronger. On small-scale graphs its stronger supervision can disturb limited evidence, giving 2.75% lower Macro-F1 than PASC-S on Bitcoin-Alpha, while on large-scale graphs the two variants stay within 0.69% Macro-F1. We therefore pre-select the variant from the training graph size alone, using PASC-S when |E train | < 5 × 10 4 and PASC-H otherwise. No dataset lies near this threshold, so the rule is insensitive to its exact value and uses no validation or test information. 
+
+D. Ablation Study 
+
+For RQ3, we evaluate three ablation variants and report their AUC and Macro-F1 degradation.  
+
+> •
+
+w/o Res-Guide removes the residual-guided attention aggregation mechanism TABLE III PERFORMANCE COMPARISON ON FIVE REAL -WORLD DATASETS (MEAN ± STANDARD DEVIATION ). T HE PASC COLUMN REPORTS THE VARIANT CHOSEN BY THE PRE -DEFINED TRAINING -GRAPH RULE USED IN FIG . 3. Dataset Metrics nSNE SGCN SNEA SDGNN RSGNN SPMF TrustSGCN CFSE PASC Bitcoin-Alpha AUC 84.25 ±2.72 88.57 ±0.19 89.20 ±1.60 90.29 ±1.27 79.68 ±0.71 90.15 ±0.28 86.72 ±0.93 93.37 ±0.40 93.61 ±0.53 
+
+Binary-F1 94.07 ±5.01 97.07 ±0.05 93.60 ±0.47 97.23 ±0.30 94.81 ±0.08 97.15 ±0.11 97.00 ±0.04 97.81 ±0.02 97.85 ±0.03 
+
+Micro-F1 89.37 ±8.30 94.35 ±0.11 88.55 ±0.81 94.75 ±0.58 90.56 ±0.15 94.61 ±0.21 94.30 ±0.06 95.84 ±0.04 95.95 ±0.06 
+
+Macro-F1 57.76 ±9.71 60.28 ±0.92 69.44 ±1.61 72.91 ±4.32 71.18 ±0.49 73.24 ±0.11 69.00 ±0.93 79.75 ±0.32 81.30 ±0.36 
+
+Bitcoin-OTC AUC 90.02 ±0.97 91.63 ±0.09 87.90 ±0.68 89.69 ±1.12 81.04 ±0.30 89.33 ±0.40 88.92 ±0.54 95.00 ±0.81 94.98 ±0.04 Binary-F1 96.25 ±0.42 96.21 ±0.13 92.31 ±0.57 95.97 ±0.33 92.69 ±0.27 95.77 ±0.03 95.57 ±0.28 97.34 ±0.11 97.53 ±0.13 
+
+Micro-F1 93.02 ±0.83 93.07 ±0.21 86.80 ±0.93 92.70 ±0.59 87.38 ±0.42 92.31 ±0.04 91.92 ±0.54 95.16 ±0.22 95.51 ±0.23 
+
+Macro-F1 73.44 ±5.85 78.01 ±0.18 72.85 ±1.35 78.48 ±1.92 73.22 ±0.35 76.41 ±0.11 75.14 ±2.18 85.09 ±0.71 86.68 ±0.55 
+
+Wiki-RfA AUC 87.32 ±0.35 84.45 ±0.32 86.87 ±0.17 84.66 ±1.82 68.11 ±0.78 84.33 ±0.03 84.57 ±0.09 88.21 ±0.23 89.28 ±0.04 
+
+Binary-F1 90.21 ±0.40 88.78 ±0.55 86.89 ±0.12 89.45 ±0.52 87.81 ±1.12 89.45 ±0.01 88.97 ±0.05 90.02 ±0.33 90.03 ±0.08 
+
+Micro-F1 83.95 ±0.85 80.71 ±1.22 80.72 ±0.18 82.91 ±0.95 80.52 ±1.37 82.78 ±0.01 82.14 ±0.08 84.16 ±0.43 84.63 ±0.11 
+
+Macro-F1 72.81 ±2.58 59.93 ±5.64 75.23 ±0.24 72.27 ±2.12 69.56 ±0.15 71.33 ±0.04 71.05 ±0.08 75.79 ±0.23 78.33 ±0.11 
+
+Slashdot AUC 88.26 ±1.19 88.43 ±0.16 88.98 ±0.35 87.22 ±0.60 78.35 ±0.12 89.13 ±0.03 88.01 ±0.21 93.28 ±0.96 93.22 ±0.03 Binary-F1 90.63 ±0.72 90.27 ±0.10 87.51 ±0.20 89.83 ±0.20 87.17 ±0.76 90.88 ±0.02 89.94 ±0.11 92.51 ±0.63 92.48 ±0.08 Micro-F1 84.62 ±1.32 83.84 ±0.23 81.91 ±0.26 84.13 ±0.34 81.14 ±0.89 85.62 ±0.02 84.14 ±0.16 88.35 ±0.91 88.48 ±0.08 
+
+Macro-F1 73.86 ±3.08 71.34 ±0.85 77.33 ±0.27 76.86 ±0.59 75.77 ±0.61 78.45 ±0.03 76.28 ±0.23 83.17 ±1.08 83.94 ±0.04 
+
+Epinions AUC 94.59 ±0.38 93.34 ±2.42 93.21 ±0.16 94.27 ±0.21 87.92 ±0.11 95.23 ±0.03 92.91 ±0.09 97.81 ±0.35 97.88 ±0.02 
+
+Binary-F1 96.23 ±0.22 95.65 ±1.07 93.59 ±0.06 96.41 ±0.35 94.84 ±0.06 96.74 ±0.05 95.84 ±0.06 97.62 ±0.21 97.71 ±0.03 
+
+Micro-F1 93.42 ±0.38 92.28 ±2.05 89.41 ±0.10 93.80 ±0.62 91.38 ±0.10 94.38 ±0.02 92.79 ±0.10 95.90 ±0.35 96.06 ±0.04 
+
+Macro-F1 85.14 ±0.87 80.47 ±7.47 81.59 ±0.09 86.69 ±1.42 84.39 ±0.16 88.18 ±0.05 84.47 ±0.26 91.48 ±0.75 91.89 ±0.07 Bitcoin-Alpha Bitcoin-OTC Wiki-Rfa Slashdot Epinions 0.0 0.5 1.0           
+
+> AUC Drop (  %)
+> 0.42
+> 0.93
+> 0.02 0.39 0.14 0.42 0.55
+> 0.34 0.50
+> 0.15
+> 0.77
+> 0.91 0.12 0.45
+> 0.17
+> (a) Impact on AUC
+> Bitcoin-Alpha Bitcoin-OTC Wiki-Rfa Slashdot Epinions 012
+> Macro-F1 Drop (  %)
+> 2.04 1.55 0.14 0.35 0.14 1.43 1.58 0.10
+> 0.66 0.33 2.11 1.97 0.15
+> 0.44 0.10
+> (b) Impact on Macro-F1 w/o Res-Guide w/o Aux-Sup w/o Fusion
+
+Fig. 4. Ablation study of PASC. Panels (a) and (b) report the degradation (∆% ) in AUC and Macro-F1 when each component is removed.  
+
+> •
+
+w/o Aux-Sup reduces each variant’s optimization loss to a plain BCE objective, dropping the residual-aware reweighting on the PASC-S datasets (Bitcoin-Alpha, Bitcoin-OTC) and the auxiliary supervision on the PASC-H datasets (Wiki-RfA, Slashdot, Epinions)  
+
+> •
+
+w/o Fusion replaces gated fusion with concatenation Figure 4 shows that removing each component causes non-zero degradation on all datasets, but its effect depends on the graph regime. On the small-scale PASC-S datasets, removing any component causes a clear drop, up to 2.11% in Macro-F1 on Bitcoin-Alpha while AUC falls by at most 0.77%. Since AUC can stay high under class imbalance, this gap links the components mainly to minority and structurally difficult edges rather than overall ranking. The large-scale PASC-H datasets have richer and more redundant structure, so the full model is robust and individual components matter less, with Macro-F1 drops staying below 0.7%. Even so, the auxiliary supervision remains the most influential component, giving the largest Macro-F1 drop on Slashdot (0.66%) and Epinions (0.33%). The three components therefore improve class-balanced prediction, matter most when local evidence is scarce, and leave residual-driven optimization as the dominant component in large-scale regimes. 
+
+E. Hyperparameter Sensitivity Analysis 
+
+For RQ4, we perform a grid search on two representa-tive PASC-H datasets, Wiki-RfA and Slashdot, with λ1 ∈{0.05 , 0.1, 0.2, 0.5} and λ2 ∈ {0.005 , 0.01 , 0.05 , 0.1}. As shown in Figure 5, PASC-H remains stable across the tested loss-weight settings, with AUC varying by at most 0.11% and Macro-F1 by at most 0.31% over the entire grid. The gain of PASC-H therefore does not depend on a finely tuned loss-weight combination, but holds across a reasonable range of auxiliary-loss weights. 
+
+F. Structural-Shift Robustness Analysis 
+
+For RQ5, we evaluate PASC under two structural-shift protocols, Degree-Shift and Structural-Shortcut-Shift, to test whether PASC remains robust when the structural properties of test edges differ from those of training edges. Degree-Shift tests robustness from dense, high-degree regions to sparse, low-degree regions. Structural-Shortcut-Shift tests whether models remain effective when test edges contain weaker local closure patterns, reducing the availability of common-neighbor-based structural shortcuts. 
+
+Degree-Shift . We define the edge density score as: 
+
+sdeg (u, v ) = d(u) · d(v), (23) TABLE IV PERFORMANCE COMPARISON UNDER THE DEGREE -S HIFT STRUCTURAL -SHIFT PROTOCOL . F OR SPACE , STRUCTURAL -SHIFT TABLES REPORT AUC AND 
+
+MACRO -F1. B INARY -F1 AND MICRO -F1 SHOW SIMILAR TRENDS AND ARE OMITTED .Dataset Metrics nSNE SGCN SNEA SDGNN RSGNN SPMF TrustSGCN CFSE PASC Bitcoin-Alpha AUC 69.53 ±2.93 80.60 ±1.58 83.10 ±0.70 80.71 ±0.81 74.31 ±0.04 83.40 ±0.54 79.89 ±0.23 77.94 ±1.39 84.52 ±0.17 
+
+Macro-F1 49.80 ±1.97 54.89 ±6.16 70.17 ±0.58 63.19 ±3.48 66.61 ±0.83 71.16 ±0.19 59.46 ±1.93 60.92 ±2.22 72.05 ±0.35 
+
+Bitcoin-OTC AUC 76.48 ±7.61 88.01 ±0.10 85.46 ±0.10 87.01 ±0.13 79.34 ±0.18 88.10 ±0.35 87.77 ±0.09 78.26 ±5.80 89.09 ±0.03 
+
+Macro-F1 53.46 ±7.69 75.71 ±0.14 74.66 ±0.28 75.67 ±0.11 71.61 ±0.28 76.75 ±0.25 74.26 ±0.20 68.10 ±3.47 80.06 ±0.26 
+
+Wiki-RfA AUC 69.46 ±1.30 78.81 ±1.19 79.36 ±0.16 77.27 ±0.87 66.62 ±1.17 78.84 ±0.15 77.08 ±3.01 72.25 ±4.89 79.70 ±0.13 
+
+Macro-F1 50.08 ±9.25 67.02 ±1.25 66.13 ±0.05 69.23 ±0.21 53.81 ±0.62 69.23 ±0.18 65.48 ±3.83 62.83 ±1.48 69.24 ±0.21 
+
+Slashdot AUC 72.27 ±3.78 83.29 ±0.45 80.23 ±1.07 78.63 ±0.37 73.71 ±0.81 79.62 ±0.16 82.11 ±1.19 85.30 ±0.33 85.15 ±0.04 Macro-F1 56.69 ±6.64 70.97 ±2.60 71.09 ±0.73 66.71 ±0.96 71.32 ±0.25 69.56 ±0.23 67.05 ±0.98 74.10 ±0.66 74.81 ±0.12 
+
+Epinions AUC 84.28 ±1.79 89.90 ±0.39 86.35 ±0.18 90.05 ±0.06 83.12 ±0.21 89.65 ±0.13 88.18 ±0.14 88.81 ±1.83 92.42 ±0.27 
+
+Macro-F1 72.30 ±6.78 76.80 ±3.61 73.26 ±0.85 81.28 ±0.02 76.19 ±0.24 80.12 ±0.04 74.77 ±0.72 81.61 ±0.79 82.38 ±0.72 
+
+TABLE V PERFORMANCE COMPARISON UNDER THE STRUCTURAL -S HORTCUT -S HIFT STRUCTURAL -SHIFT PROTOCOL . F OR SPACE , STRUCTURAL -SHIFT TABLES REPORT AUC AND MACRO -F1. B INARY -F1 AND MICRO -F1 SHOW SIMILAR TRENDS AND ARE OMITTED .Dataset Metrics nSNE SGCN SNEA SDGNN RSGNN SPMF TrustSGCN CFSE PASC Bitcoin-Alpha AUC 66.02 ±5.45 79.98 ±0.70 79.17 ±0.87 79.77 ±1.50 73.37 ±0.35 79.00 ±0.43 80.09 ±2.12 76.10 ±1.27 81.67 ±0.15 
+
+Macro-F1 49.44 ±1.68 60.74 ±1.07 65.82 ±0.62 62.49 ±3.51 62.19 ±0.11 65.48 ±0.49 60.38 ±2.60 59.48 ±1.97 67.53 ±0.38 
+
+Bitcoin-OTC AUC 73.00 ±2.18 83.86 ±0.21 82.79 ±2.38 83.87 ±0.21 76.38 ±0.02 83.20 ±0.95 84.05 ±0.21 80.66 ±1.99 85.33 ±0.10 
+
+Macro-F1 59.85 ±5.63 70.81 ±0.71 72.80 ±1.57 69.35 ±0.45 69.68 ±0.21 71.84 ±0.47 65.48 ±0.93 69.90 ±0.92 74.36 ±0.54 
+
+Wiki-RfA AUC 80.28 ±2.19 80.52 ±0.10 84.12 ±0.20 81.99 ±0.62 71.48 ±0.10 80.95 ±0.07 80.47 ±0.71 83.00 ±0.87 84.19 ±0.23 
+
+Macro-F1 44.53 ±4.91 69.06 ±2.20 75.08 ±0.28 71.66 ±0.68 71.91 ±0.32 73.66 ±0.07 64.89 ±0.39 73.95 ±0.82 75.28 ±0.51 
+
+Slashdot AUC 70.43 ±1.71 82.28 ±0.12 77.56 ±0.33 78.34 ±0.06 73.77 ±0.28 78.97 ±0.20 82.36 ±0.83 83.20 ±1.00 84.04 ±0.11 
+
+Macro-F1 61.09 ±0.41 65.96 ±3.41 69.28 ±0.26 66.59 ±0.12 70.98 ±0.39 69.00 ±0.03 68.20 ±1.46 73.42 ±2.19 74.07 ±0.17 
+
+Epinions AUC 83.53 ±0.73 87.59 ±0.07 85.05 ±0.38 89.02 ±0.16 80.13 ±0.42 88.69 ±0.12 87.94 ±0.16 89.89 ±0.74 91.93 ±0.12 
+
+Macro-F1 68.28 ±11.75 61.18 ±2.02 77.40 ±0.48 80.59 ±0.31 79.14 ±0.23 80.75 ±0.02 73.97 ±0.01 82.51 ±0.38 84.42 ±0.08 0.05 0.1 0.2 0.5                                                          
+
+> 1
+> 0.005  0.01  0.05  0.1
+> 2
+> 89.21 89.20 89.17 89.19 89.18 89.21 89.19 89.18 89.19 89.16 89.17 89.18 89.18 89.15 89.20 89.18
+> Wiki-RfA: AUC Sensitivity
+> 0.05 0.1 0.2 0.5
+> 1
+> 0.005  0.01  0.05  0.1
+> 2
+> 78.11 77.99 78.16 78.24 78.19 78.08 78.07 78.24 78.27 78.05 78.11 78.25 78.16 78.12 78.30 78.09
+> Wiki-RfA: Macro-F1 Sensitivity
+> 0.05 0.1 0.2 0.5
+> 1
+> 0.005  0.01  0.05  0.1
+> 2
+> 92.83 92.83 92.83 92.86 92.82 92.84 92.84 92.86 92.77 92.81 92.81 92.85 92.75 92.80 92.77 92.80
+> Slashdot: AUC Sensitivity
+> 0.05 0.1 0.2 0.5
+> 1
+> 0.005  0.01  0.05  0.1
+> 2
+> 83.56 83.64 83.41 83.59 83.51 83.67 83.53 83.59 83.39 83.52 83.52 83.58 83.41 83.57 83.37 83.54
+> Slashdot: Macro-F1 Sensitivity
+> 89.15 89.16 89.17 89.18 89.19 89.20 89.21
+> AUC Score (%)
+> 78.00 78.05 78.10 78.15 78.20 78.25 78.30
+> Macro-F1 Score (%)
+> 92.76 92.78 92.80 92.82 92.84 92.86
+> AUC Score (%)
+> 83.40 83.45 83.50 83.55 83.60 83.65
+> Macro-F1 Score (%)
+
+Fig. 5. Sensitivity analysis of λ1 and λ2 on Wiki-RfA and Slashdot, showing stable AUC and Macro-F1 across loss-weight settings. 
+
+where d(·) denotes node degree. After sorting sdeg in descend-ing order, we use the top 40%, middle 10%, and bottom 50% as the training, validation, and test sets, respectively. 
+
+Structural-Shortcut-Shift . We define the local closure score as: 
+
+scn (u, v ) = |N (u) ∩ N (v)|, (24) where scn (·, ·) counts the number of common neighbors. Edges with scn ≥ 3, scn = 2 , and scn ≤ 1 are used for training, validation, and testing, respectively. If the middle bucket is too small for validation, we sample additional validation edges from the training domain without using any test-domain edges. Under Degree-Shift, Table IV shows that most baselines degrade substantially when test edges move to lower-degree regions with fewer aggregation signals. PASC achieves the best Macro-F1 on all five datasets and the best or comparable AUC. For example, on Bitcoin-Alpha nSNE drops to 49.80% Macro-F1 while PASC keeps 72.05%, and on Epinions PASC reaches 82.38% Macro-F1, 0.77% above the second-best CFSE. PASC therefore shows reduced dependence on dense local neighbor-hoods under the tested Degree-Shift protocol. Structural-Shortcut-Shift more directly tests reliance on local-closure shortcuts, and here PASC shows a clearer ad-vantage. As shown in Table V, when test edges have weaker common-neighbor closure, PASC obtains the best AUC and Macro-F1 on all five datasets (for example, 84.42% Macro-F1 on Epinions versus 82.51% for CFSE). This supports the claim that calibrating target-edge structural reliance helps when local-closure shortcuts become less available. These protocols change the structural properties of test edges and may also shift the polarity distribution, so we use Macro-F1 as the primary metric to limit majority-polarity dominance. V. C ONCLUSION 
+
+We proposed PASC, a target-edge structural-prior calibra-tion framework for link sign prediction in polarity-asymmetric signed networks. PASC estimates structural prior scores, com-pares them with local signed-context cues, and uses the re-sulting conflict residuals to guide signed attention aggregation, gated fusion, and regime-adaptive optimization. By calibrating the reliance on signed-graph structural priors for each target edge, PASC improves robustness to unreliable priors while preserving useful local context. Experiments on five real-world signed networks show consistent Macro-F1 gains with competitive overall performance. Structural-shift experiments further suggest reduced dependence on dense-neighborhood and local-closure shortcuts under the tested protocols. Future work will explore more efficient residual estimation and extend PASC to heterogeneous and dynamic signed networks. ACKNOWLEDGMENTS 
+
+This work was supported by the National Natural Science Foundation of China under Grant 62307006 and 62676166. REFERENCES [1] J. Leskovec, D. Huttenlocher, and J. Kleinberg, “Predicting positive and negative links in online social networks,” in Proc. Int. Conf. World Wide Web (WWW) , 2010, pp. 641–650. [2] J. Leskovec and A. Krevl, “SNAP Datasets: Stanford large network dataset collection,” 2014, accessed: Sep. 4, 2026. [Online]. Available: https://snap.stanford.edu/data/ [3] P. Massa and P. Avesani, “Trust-aware recommender systems,” in Proc. ACM Conf. Recommender Syst. (RecSys) , 2007, pp. 17–24. [4] Z. Wang, S. Chen, and W. Song, “Signed-graph recommendation as structural consistency maximization,” 2026, arXiv:2607.05952. [5] K. Cheng, J. Li, J. Tang, and H. Liu, “Unsupervised sentiment analysis with signed social networks,” in Proc. AAAI Conf. Artif. Intell. , 2017, pp. 3429–3435. [6] Y. He, G. Reinert, S. Wang, and M. Cucuringu, “SSSNET: Semi-supervised signed network clustering,” in Proc. SIAM Int. Conf. Data Mining (SDM) , 2022, pp. 244–252. [7] W. Song, S. Wang, B. Yang, Y. Lu, X. Zhao, and X. Liu, “Learning node and edge embeddings for signed networks,” Neurocomputing , vol. 319, pp. 42–54, 2018. [8] T. Derr, Y. Ma, and J. Tang, “Signed graph convolutional networks,” in 
+
+Proc. IEEE Int. Conf. Data Mining (ICDM) , 2018, pp. 929–934. [9] J. Huang, H. Shen, L. Hou, and X. Cheng, “SDGNN: Learning node representation for signed directed networks,” in Proc. AAAI Conf. Artif. Intell. , 2021, pp. 196–203. [10] Z. Zhang, J. Liu, X. Zheng, Y. Wang, P. Han, Y. Wang, K. Zhao, and Z. Zhang, “RSGNN: A model-agnostic approach for enhancing the robustness of signed graph neural networks,” in Proc. ACM Web Conf. ,2023, pp. 60–70. [11] F. Heider, “Attitudes and cognitive organization,” J. Psychol. , vol. 21, no. 1, pp. 107–112, 1946. [12] D. Cartwright and F. Harary, “Structural balance: A generalization of heider’s theory,” Psychol. Rev. , vol. 63, no. 5, pp. 277–293, 1956. [13] M. McPherson, L. Smith-Lovin, and J. M. Cook, “Birds of a feather: Homophily in social networks,” Annu. Rev. Sociol. , vol. 27, pp. 415–444, 2001. [14] G. Kossinets and D. J. Watts, “Origins of homophily in an evolving social network,” Amer. J. Sociol. , vol. 115, no. 2, pp. 405–450, 2009. [15] P. Xu, W. Hu, J. Wu, W. Liu, Y. Yang, and P. S. Yu, “Signed network representation by preserving multi-order signed proximity,” IEEE Trans. Knowl. Data Eng. , vol. 35, no. 3, pp. 3087–3100, 2023. [16] Z. Fang, S. Tan, Z. Li, Q. Fang, and Y. Chen, “Collaborative filtering enhanced subgraph embedding for link direction and sign prediction,” 
+
+Neurocomputing , vol. 659, p. 131840, 2026. [17] M.-J. Kim, Y.-C. Lee, D. Y. Kang, and S.-W. Kim, “Trustworthiness-driven graph convolutional networks for signed network embedding,” 
+
+ACM Trans. Knowl. Discov. Data , vol. 18, no. 9, pp. 219:1–219:26, 2024. [18] Z. Fang, S. Tan, and Y. Wang, “A signed subgraph encoding approach via linear optimization for link sign prediction,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 35, no. 10, pp. 14 659–14 670, 2024. [19] L. Li, J. Liu, X. Ji, M. Wang, and Z. Zhang, “Self-explainable graph transformer for link sign prediction,” in Proc. AAAI Conf. Artif. Intell. ,2025, pp. 12 084–12 092. [20] J. Huang, H. Shen, L. Hou, and X. Cheng, “Signed graph attention networks,” in Proc. Int. Conf. Artif. Neural Netw. (ICANN) , 2019, pp. 566–577. [21] S. Wang, J. Tang, C. C. Aggarwal, Y. Chang, and H. Liu, “Signed network embedding in social media,” in Proc. SIAM Int. Conf. Data Mining (SDM) , 2017, pp. 327–335. [22] W. Song, H. Chen, X. Liu, H. Jiang, and S. Wang, “Hyperbolic node embedding for signed networks,” Neurocomputing , vol. 421, pp. 329– 339, 2021. [23] J. Liu, M. He, G. Wang, Q. V. H. Nguyen, X. Shang, and H. Yin, “Imbalanced node classification beyond homophilic assumption,” in 
+
+Proc. Int. Joint Conf. Artif. Intell. (IJCAI) , 2023, pp. 7206–7214. [24] M. Imani, M. Joudaki, A. Bagheri, and H. R. Arabnia, “Why ROC-AUC is misleading for highly imbalanced data: In-depth evaluation of MCC, F2-Score, H-Measure, and AUC-based metrics across diverse classifiers,” Technologies , vol. 14, no. 1, p. 54, 2026. [25] X. Chen, R. Cai, Y. Fang, M. Wu, Z. Li, and Z. Hao, “Motif graph neural network,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 35, no. 10, pp. 14 833–14 847, 2024. [26] B. Zhang, C. Fan, S. Liu, K. Huang, X. Zhao, J. Huang, and Z. Liu, “The expressive power of graph neural networks: A survey,” IEEE Trans. Knowl. Data Eng. , vol. 37, no. 3, pp. 1455–1474, 2025. [27] C. Li, Y. Zhang, R. Liu, Q. Song, Z. Zhao, and Q. Zeng, “Handling distribution shifts on dynamic graphs via causal invariance principles,” 
+
+Neural Networks , vol. 200, p. 108854, 2026. [28] Z. Liu, T.-K. Nguyen, and Y. Fang, “Tail-GNN: Tail-node graph neural networks,” in Proc. ACM SIGKDD Int. Conf. Knowl. Discovery Data Mining (KDD) , 2021, pp. 1109–1119. [29] W. Jin, Y. Li, H. Xu, Y. Wang, S. Ji, C. C. Aggarwal, and J. Tang, “Adversarial attacks and defenses on graphs,” SIGKDD Explor. Newsl. ,vol. 22, no. 2, pp. 19–34, 2021. [30] S. Kumar, F. Spezzano, V. S. Subrahmanian, and C. Faloutsos, “Edge weight prediction in weighted signed networks,” in Proc. IEEE Int. Conf. Data Mining (ICDM) , 2016, pp. 221–230. [31] R. West, H. S. Paskov, J. Leskovec, and C. Potts, “Exploiting social network structure for person-to-person sentiment analysis,” Trans. Assoc. Comput. Linguistics , vol. 2, pp. 297–310, 2014. [32] Y. Li, Y. Tian, J. Zhang, and Y. Chang, “Learning signed network embedding via graph attention,” in Proc. AAAI Conf. Artif. Intell. , 2020, pp. 4772–4779.
