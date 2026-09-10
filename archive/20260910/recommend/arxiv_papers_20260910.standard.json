@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-10T21:53:58.012754+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.08554v1",
+      "source": "arxiv",
+      "title": "Not All Variables Agree: Reliability-Aware Variable-Wise Gradient Surgery for Multivariate Time-Series Forecasting",
+      "abstract": "In data-driven training, multivariate time-series forecasting is usually optimized with a scalar loss averaged over samples, variables, and horizons. This averaging is convenient, but the optimizer sees only the aggregated gradient, which does not reveal whether the variable-wise contributions align or oppose one another. To quantify how often this disagreement arises, we measure the variable-wise gradients directly and find that 30.6% of their pairwise cosine similarities are negative on average across seven datasets. However, conflict and harm are not the same thing. Under shared training 35 of the 64 variables do worse than a full-input single-target oracle, and the harmed fraction is not reliably predicted by how often gradients conflict. We propose Per-Variable Surgery (PV-Surgery), an optimizer-side training strategy for backbones with cache-compatible layers. One backward pass builds variable-wise gradient proxies from output-side signals and keeps the pointwise forecasting loss. Reliability-aware selection targets layers whose proxy sums closely approximate their shared-gradient slices. Conditional pooling forms anchor and conflict pools without dropping variables. Common-direction surgery aligns variable or pooled gradients with their normalized mean and restores input norms to avoid reweighting. In experiments across five backbones, seven datasets, and four horizons, PV-Surgery lowers MSE by 3.61% and MAE by 2.93% on average. For multivariate forecasting, this indicates that the variable-wise structure hidden by mean-loss training is a usable optimization signal.",
+      "authors": [
+        "Jinwoo Park",
+        "Hyeongwon Kang",
+        "Pilsung Kang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-08T10:38:13+00:00",
+      "link": "https://arxiv.org/pdf/2609.08554v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Variable-wise gradient analysis for multivariate time-series forecasting improves model interpretability.",
+      "llm_evidence_cn": "多变量时间序列预测的变量级梯度分析提高了模型的可解释性。",
+      "llm_evidence": "多变量时间序列预测的变量级梯度分析提高了模型的可解释性。",
+      "canonical_evidence": "多变量时间序列预测的变量级梯度分析提高了模型的可解释性。",
+      "llm_tldr_en": "Proposes a gradient surgery method for multivariate time-series forecasting to improve reliability and interpretability.",
+      "llm_tldr_cn": "提出一种多变量时间序列预测的梯度手术方法，旨在提高预测的可靠性与可解释性。",
+      "llm_tldr": "提出一种多变量时间序列预测的梯度手术方法，旨在提高预测的可靠性与可解释性。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

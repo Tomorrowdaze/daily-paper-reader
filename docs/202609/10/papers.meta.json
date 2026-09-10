@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-10",
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T21:55:40",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/10/2609.08554v1-not-all-variables-agree-reliability-aware-variable-wise-gradient-surgery-for-multivariate-time-series-forecasting",
+      "section": "quick",
+      "title_en": "Not All Variables Agree: Reliability-Aware Variable-Wise Gradient Surgery for Multivariate Time-Series Forecasting",
+      "authors": "Jinwoo Park, Hyeongwon Kang, Pilsung Kang",
+      "date": "2026-09-08",
+      "pdf": "https://arxiv.org/pdf/2609.08554v1",
+      "score": "6.5",
+      "evidence": "多变量时间序列预测的变量级梯度分析提高了模型的可解释性。",
+      "tldr": "多变量预测常用均值损失，隐藏变量梯度冲突。测得约30.6%成对相似度为负，提出可靠性感知的PV-Surgery，在优化器端以梯度代理、层选择与方向对齐进行变量级手术，于多骨干与数据集上显著降MSE/MAE。",
+      "tags": "query:q4",
+      "abstract_en": "In data-driven training, multivariate time-series forecasting is usually optimized with a scalar loss averaged over samples, variables, and horizons. This averaging is convenient, but the optimizer sees only the aggregated gradient, which does not reveal whether the variable-wise contributions align or oppose one another. To quantify how often this disagreement arises, we measure the variable-wise gradients directly and find that 30.6% of their pairwise cosine similarities are negative on average across seven datasets. However, conflict and harm are not the same thing. Under shared training 35 of the 64 variables do worse than a full-input single-target oracle, and the harmed fraction is not reliably predicted by how often gradients conflict. We propose Per-Variable Surgery (PV-Surgery), an optimizer-side training strategy for backbones with cache-compatible layers. One backward pass builds variable-wise gradient proxies from output-side signals and keeps the pointwise forecasting loss. Reliability-aware selection targets layers whose proxy sums closely approximate their shared-gradient slices. Conditional pooling forms anchor and conflict pools without dropping variables. Common-direction surgery aligns variable or pooled gradients with their normalized mean and restores input norms to avoid reweighting. In experiments across five backbones, seven datasets, and four horizons, PV-Surgery lowers MSE by 3.61% and MAE by 2.93% on average. For multivariate forecasting, this indicates that the variable-wise structure hidden by mean-loss training is a usable optimization signal.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,310 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-001.webp",
+      "caption": "Table 16: Core component ablation on Weather, averaged over 20 matched backbone–predictionlength settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 25,
+      "index": 1,
+      "width": 828,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-002.webp",
+      "caption": "Table 15: Core component ablation on ETTm2, averaged over 20 matched backbone–predictionlength settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 25,
+      "index": 2,
+      "width": 828,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-003.webp",
+      "caption": "Table 14: Core component ablation on ETTm1, averaged over 20 matched backbone–predictionlength settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 25,
+      "index": 3,
+      "width": 827,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-004.webp",
+      "caption": "Table 18: Core component ablation on ILI, averaged over 20 matched backbone–prediction-length settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 26,
+      "index": 4,
+      "width": 828,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-005.webp",
+      "caption": "Table 17: Core component ablation on Exchange, averaged over 20 matched backbone–predictionlength settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 26,
+      "index": 5,
+      "width": 827,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-006.webp",
+      "caption": "Figure 8: A representative ETTm2 run from the variable-wise gradient-cosine diagnostic at prediction length 96. (a) Distribution of the post-warmup pairwise cosines, of which 29.9% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 15,
+      "index": 6,
+      "width": 794,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-007.webp",
+      "caption": "Figure 6: A representative ETTh2 run from the variable-wise gradient-cosine diagnostic at prediction length 96. (a) Distribution of the post-warmup pairwise cosines, of which 30.4% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 15,
+      "index": 7,
+      "width": 794,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-008.webp",
+      "caption": "Figure 7: A representative ETTm1 run from the variable-wise gradient-cosine diagnostic at prediction length 96. (a) Distribution of the post-warmup pairwise cosines, of which 30.8% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 15,
+      "index": 8,
+      "width": 794,
+      "height": 210
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-009.webp",
+      "caption": "Figure 16: Descent violations and conflict mass before and after surgery over the 140 matched settings. (a) shows the descent-violation ratio, and (b) shows conflict mass. Each point is one run, with the horizontal and vertical axes giving the values before and after surgery. Points below the diagonal indicate a reduction.",
+      "page": 30,
+      "index": 9,
+      "width": 776,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-010.webp",
+      "caption": "Figure 17: Test-set evidence for the effect of PV-Surgery. (a) reports changes in the oracle gap. (b) reports PV-Surgery MSE minus baseline MSE on fixed variable-pair subsets. Positive values in (b) favor the baseline.",
+      "page": 30,
+      "index": 10,
+      "width": 779,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-011.webp",
+      "caption": "Figure 1: Conceptual illustration of variable-wise gradient conflict. (a) Different variables can require corrections in different directions over the same forecast horizon. (b) These corrections translate into variable-wise gradients that disagree in parameter space, while the mean-loss update shown here coincides with none of them.",
+      "page": 2,
+      "index": 11,
+      "width": 797,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-012.webp",
+      "caption": "Figure 15: Cosine similarity between reconstructed proxy rows and exact per-variable gradients for each benchmark. Each bar first averages logged steps within a run and then averages the available runs for that benchmark. Each benchmark contributes 20 runs from five backbones and four prediction lengths. Output-boundary and all-parameter bars use all 20 runs. Selected-subspace bars use 17 Exchange runs, 18 ILI runs, and all 20 runs elsewhere after conditioning on nonzero proxy entries. The smaller counts occur when every logged selected-slice proxy in a run has zero norm, leaving no defined selected-subspace cosine.",
+      "page": 29,
+      "index": 12,
+      "width": 743,
+      "height": 267
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-013.webp",
+      "caption": "Table 6: Backbone comparison between standard MSE training and PV-Surgery on Weather and ILI. Within each backbone and metric, the better value between MSE and +PV is bolded using unrounded scores. The protocol and horizons follow Table 1.",
+      "page": 22,
+      "index": 13,
+      "width": 830,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-014.webp",
+      "caption": "Table 20: Training cost of PV-Surgery against standard MSE training over the 140 matched settings of Table 1. Epochs and seconds per epoch are means over the 28 settings of each backbone. The ratio columns are computed per setting and then aggregated, so they are not the quotient of the two preceding columns.",
+      "page": 34,
+      "index": 14,
+      "width": 828,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-015.webp",
+      "caption": "Table 4: Dataset statistics and conflict-oriented diagnostics. T is the number of timestamps and D is the number of target variables. Neg. cos. is the percentage of negative pairwise variable-gradient cosines and Mean cos. is their average. Both follow the protocol of Section 3 and are computed after dropping the warmup half of the recorded checkpoints. Harmed vars. is the percentage of variables for which shared training is worse than the full-input single-target oracle on the held-out test split.",
+      "page": 14,
+      "index": 15,
+      "width": 648,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-016.webp",
+      "caption": "Figure 21: DLinear on ETTh2. Panel titles report the direction cosine for standard MSE training and PV-Surgery. The final panel collects the same values.",
+      "page": 33,
+      "index": 16,
+      "width": 827,
+      "height": 403
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-017.webp",
+      "caption": "Figure 14: Weather at the six tested group sizes k ∈ {2, 3, 4, 5, 8, 11}, using seed 42. Bars show the mean higher- versus lower-alignment MSE contrast across 11 targets, and error bars show the standard error across targets. Negative values favor the higher-alignment group. The contrast does not change monotonically with group size.",
+      "page": 18,
+      "index": 17,
+      "width": 555,
+      "height": 335
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-018.webp",
+      "caption": "Figure 13: Percentage difference between the higher- and lower-alignment partner groups’ test MSE, taken relative to the lower-alignment group and averaged over the targets of each benchmark. Negative means the higher-alignment group did better. Vertical ranges differ across panels. The grey band is that benchmark’s seed noise and the error bars are the standard error across its targets.",
+      "page": 18,
+      "index": 18,
+      "width": 826,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-019.webp",
+      "caption": "Table 7: Loss-baseline comparison on DLinear for all seven benchmarks. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 23,
+      "index": 19,
+      "width": 825,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-020.webp",
+      "caption": "Table 8: Loss-baseline comparison on iTransformer for all seven benchmarks. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 23,
+      "index": 20,
+      "width": 824,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-021.webp",
+      "caption": "Table 9: Loss-baseline comparison on MICN for all seven benchmarks. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 23,
+      "index": 21,
+      "width": 825,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-022.webp",
+      "caption": "Table 10: Loss-baseline comparison on SCINet for all seven benchmarks. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 23,
+      "index": 22,
+      "width": 825,
+      "height": 201
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-023.webp",
+      "caption": "Table 19: Native multi-task gradient operators on MICN over seven benchmarks and four prediction lengths. Each native row receives the same unpooled variable-wise proxies on the selected subspace and retains its own aggregation rule. PV-Surgery uses the unchanged full configuration. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 28,
+      "index": 23,
+      "width": 828,
+      "height": 227
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-024.webp",
+      "caption": "Table 1: Backbone comparison between standard MSE training and PV-Surgery on five of the seven benchmarks. Within each backbone and metric, the better value between MSE and +PV is bolded using unrounded scores. Weather and ILI use the same protocol and are reported in Table 6.",
+      "page": 8,
+      "index": 24,
+      "width": 830,
+      "height": 504
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-025.webp",
+      "caption": "Figure 2: A representative ETTh1 run from the variable-wise gradient-cosine diagnostic. (a) Distribution of the post-warmup pairwise cosines, of which 30.6% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 4,
+      "index": 25,
+      "width": 794,
+      "height": 210
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-026.webp",
+      "caption": "Figure 3: (a) Fraction of variables for which shared training is worse than the target-specific oracle. (b) Across 162 target-and-size cells, the relative MSE difference between the two alignment groups versus the pairwise-alignment gap. Negative values favor higher alignment. The shaded ±1.1% band summarizes repeated-fit variation for fixed target-partner groups (Appendix C).",
+      "page": 4,
+      "index": 26,
+      "width": 794,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-027.webp",
+      "caption": "Figure 19: iTransformer on ETTm2. Panel titles report the direction cosine for standard MSE training and PV-Surgery. The final panel collects the same values.",
+      "page": 32,
+      "index": 27,
+      "width": 827,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-028.webp",
+      "caption": "Figure 20: MICN on ETTh1. Panel titles report the direction cosine for standard MSE training and PV-Surgery. The final panel collects the same values.",
+      "page": 32,
+      "index": 28,
+      "width": 813,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-029.webp",
+      "caption": "Table 11: Loss-baseline comparison on TimeXer for all seven benchmarks. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 24,
+      "index": 29,
+      "width": 824,
+      "height": 204
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-030.webp",
+      "caption": "Table 13: Core component ablation on ETTh2, averaged over 20 matched backbone–predictionlength settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 24,
+      "index": 30,
+      "width": 828,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-031.webp",
+      "caption": "Table 12: Core component ablation on ETTh1, averaged over 20 matched backbone–predictionlength settings. ∆ is the relative change against the full configuration. Bold indicates the best score and underlining the second best using unrounded averages.",
+      "page": 24,
+      "index": 31,
+      "width": 828,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-032.webp",
+      "caption": "Table 3: Core component ablation on MICN–Exchange, averaged over four horizons. ∆ is the relative change against the full recipe. Appendix H reports the same table for every dataset.",
+      "page": 9,
+      "index": 32,
+      "width": 827,
+      "height": 239
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-033.webp",
+      "caption": "Table 2: Comparison of PV-Surgery with four forecasting-specific methods on iTransformer for five of the seven benchmarks. The MSE row denotes standard MSE training. Best results are bolded and second-best results are underlined using unrounded scores.",
+      "page": 9,
+      "index": 33,
+      "width": 829,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-034.webp",
+      "caption": "Figure 18: MICN on ETTm2. Panel titles report the direction cosine for standard MSE training and PV-Surgery. The final panel collects the same values.",
+      "page": 31,
+      "index": 34,
+      "width": 812,
+      "height": 307
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-035.webp",
+      "caption": "Figure 4: Overview of PV-Surgery. Step 1: Output-cache variable-wise gradient proxy reconstructs variable-wise proxy gradients from a single sum-loss backward pass and cached layer signals. Step 2: Reliability-aware layer selection selects slices by normalized proxy-sum error with output fallback. Step 3: Conditional variable-gradient pooling forms anchor and conflict pool gradients without dropping variables. Step 4: Magnitude-preserving common-direction surgery aligns variable or pooled gradients while restoring their pre-surgery norms to avoid reweighting.",
+      "page": 5,
+      "index": 35,
+      "width": 814,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-036.webp",
+      "caption": "Figure 11: A representative ILI run from the variable-wise gradient-cosine diagnostic at prediction length 24. (a) Distribution of the post-warmup pairwise cosines, of which 15.9% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 16,
+      "index": 36,
+      "width": 794,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-037.webp",
+      "caption": "Figure 9: A representative Weather run from the variable-wise gradient-cosine diagnostic at prediction length 96. (a) Distribution of the post-warmup pairwise cosines, of which 37.5% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 16,
+      "index": 37,
+      "width": 795,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2609.08554v1/fig-038.webp",
+      "caption": "Figure 10: A representative Exchange run from the variable-wise gradient-cosine diagnostic at prediction length 96. (a) Distribution of the post-warmup pairwise cosines, of which 39.3% fall below zero for this run. (b) An early checkpoint, which lies inside the discarded warmup half and is shown only to expose the change over training. (c) A late checkpoint. Both heatmaps show that conflict is structured across variable pairs rather than being uniform, so one summary number would hide which pairs disagree.",
+      "page": 16,
+      "index": 38,
+      "width": 794,
+      "height": 209
+    }
+  ]
+}
