@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-001.webp",
+      "caption": "Figure 2: In Qwen natural questions, route strengthening precedes a later causal window while fitted content is still forming. (a) The absolute natural route coefficient is shown on a logarithmic scale. (b) Dividing that coefficient by the root-mean-square full-state length removes a simple whole-state scale explanation. (c) The fraction of questions whose fitted fact score favors the correct continent rises gradually rather than appearing only after the route is complete. (d) Squares mark layers whose pointwise country-pair bootstrap interval passes the stated comparison; circles mark the first run of three consecutive passing layers. Route strength first has a three-layer run at layer 21, fitted-content deletion affects answers from layer 27, and route deletion or reversal affects the fixed layer-36 fact from layer 28. The route-to-fact windows end at layers 31 and 32 rather than continuing to the model output. This is a diagnostic reanalysis of the 24 frozen validation pairs.",
+      "page": 11,
+      "index": 1,
+      "width": 959,
+      "height": 712
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-002.webp",
+      "caption": "Figure 12: Expanded depth profiles on 24 new country pairs. Top: paired routing correct-pointing fractions and target-knowledge correct-pointing fractions. Middle: routing answer effects. Bottom: targetknowledge answer effects. Shading gives pointwise 95% country-pair bootstrap intervals; it differs from the two-partition ranges in Figure 8. Each column uses its model’s full decoder depth and separately fitted components. Routing and knowledge effects have separate vertical scales.",
+      "page": 43,
+      "index": 2,
+      "width": 956,
+      "height": 758
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-003.webp",
+      "caption": "Figure 10: Adjective-format lifecycle. Layout and measurements follow Figure 8. Lines average the two validation results; shading is their range, not a confidence interval. The bottom row expands the routing scale without normalization. Dashed orange lines show the transferred selection candidate, including unqualified layers. Stable effects require the additional criteria in Section A; readable or positive values alone do not qualify a layer.",
+      "page": 38,
+      "index": 3,
+      "width": 958,
+      "height": 749
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-004.webp",
+      "caption": "Figure 11: Code-format lifecycle. Layout and measurements follow Figure 8. Gemma’s gray column is diagnostic because this model–format combination failed behavioral qualification. Within that column, solid, dashed, and dotted lines denote parameter routing, hidden-state routing, and target knowledge, respectively. Shading is the range of the two validation results, not a confidence interval. Diagnostic values are retained rather than treated as confirming the main conclusions.",
+      "page": 39,
+      "index": 4,
+      "width": 958,
+      "height": 758
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-005.webp",
+      "caption": "Figure 6: Deletion of the fitted global request direction causes less answer damage in fixed later layer sets, while fitted-content deletion remains consequential. All three models use the same 24 new country pairs but model-specific layer sets fixed before this evaluation: Qwen {29, 31} versus {32, 34}, Gemma {24} versus {25, 30}, and Llama {15, 24} versus {28}. Request states remain separable along the late global direction. Bars show 95% country-pair bootstrap intervals; a hollow marker denotes an interval spanning zero. The figure concerns this global fitted direction, not all request representations or a shared processing boundary.",
+      "page": 22,
+      "index": 5,
+      "width": 955,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-006.webp",
+      "caption": "Table 4: Stable 1-based layers and peak answer-margin effects. All three peak entries are answer effects: parameter routing / transferred object selection / target content. They may be compared within a model–format row, but raw magnitudes are not pooled or ranked across models. “—” means that no layer has a positive effect in the screening split and both validation splits. The peak column still reports the largest validation mean, including non-stable layers; selection stability additionally requires marker-task calibration. ∗Gemma code answers fail the behavioral gate in one split and are diagnostic only.",
+      "page": 34,
+      "index": 6,
+      "width": 806,
+      "height": 303
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-007.webp",
+      "caption": "Figure 3: Transferred selection has a task-dependent layerwise effect. Top: the paired-request correctpointing fraction of the transferred selection direction. Bottom: its deletion effect on the answer margin relative to eight matched random changes. Lines average the two validation partitions; shading spans their values. Filled dots identify layers passing both auxiliary calibration and positive-effect checks in all three evaluated partitions. Other values are retained, including negative values. Gray dotted Gemma code curves are diagnostic because baseline qualification failed. These are effects after transfer to continent questions, not the marker-calibration switching rates.",
+      "page": 14,
+      "index": 7,
+      "width": 955,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-008.webp",
+      "caption": "Figure 7: Qwen controls test request specificity and repeated deletion. (a) The true request direction exceeds the strongest of nine balanced wrong-label directions, averaged over layers 29 and 31. (b) Repeated routing-deletion effects use random paths matched to the actual lengths after numerical rounding. (c) Repeated late content deletion exceeds repeated late routing deletion. Points and 95% intervals use the same 24 country pairs. The single-versus-repeated comparison concerns the measured direction, not every possible representation of a request.",
+      "page": 23,
+      "index": 8,
+      "width": 956,
+      "height": 268
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-009.webp",
+      "caption": "Figure 13: The paired-country records contain related ingredients but not one cross-model route-first schedule. Columns show Qwen, Llama, and Gemma for continent-name answers. (a) The unmodified state’s signed coordinate along the global request direction, normalized by the fitted request half-separation; values are interpreted within a model and are not whole-state percentages. (b) Answer-margin effects of deleting the global request coordinate or fitted continent content, each relative to eight random changes matched to its actual deletion length. Squares mark layers passing the same split-level stability rule in both validation partitions. (c) The effect of deleting the global route at each source layer on a fixed later fittedfact score; the receivers are layers 34, 28, and 33 for Qwen, Llama, and Gemma. No continent-name source layer passes the fixed-later-fact stability rule in both partitions. The figure is a diagnostic reanalysis of an existing paired-question protocol, not a direct replication of the Qwen natural-question timing experiment.",
+      "page": 45,
+      "index": 9,
+      "width": 960,
+      "height": 746
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-010.webp",
+      "caption": "Figure 8: Three-component profiles on continent-name questions. Top: correct-pointing fractions. Middle: random-corrected deletion effects on the answer. Bottom: the same routing effects with an expanded vertical scale, without normalization. Lines average validation A and B; shading spans their two values. Orange dashed selection curves include unqualified layers. The presence of a curve does not assert a stable effect.",
+      "page": 36,
+      "index": 10,
+      "width": 958,
+      "height": 749
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-011.webp",
+      "caption": "Figure 4: Answers become sensitive to deleting fitted continent content, and that sensitivity persists in late layers. Top: the fraction of questions whose projected state is closer to the requested continent reference than to the paired alternative. Bottom: mean answer-margin damage from deleting that projection, corrected by matched random changes. Each model, layer, and answer format has its own fitted two-dimensional space. Lines and shading show the mean and range of validation A and B, not confidence intervals; filled dots require positive effects in screening and both validation splits. Gemma code results are diagnostic and shown in gray. In the original final-layer point, reading occurs after final normalization but intervention occurs before it; Appendix C provides location-aligned block-output profiles, and the original final drop is not interpreted as content disappearance.",
+      "page": 19,
+      "index": 11,
+      "width": 955,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-012.webp",
+      "caption": "Figure 1: A readable pair-conditioned request distinction and detectable answer dependence have different depth profiles in Qwen. Every model input is a single-country question; two countries are paired only for analysis. Template A constructs one direction per pair, and two held-out phrasings evaluate it on 24 new pairs. (a) Correct pointing is the fraction of questions for which the coefficient sign identifies the queried pair member. (b) Answer effect is the mean correct-versus-paired margin loss minus the largest mean loss among eight random changes matched to the actual intervention length. Lines show estimates; bands show 95% country-pair bootstrap intervals. (c) Color shows the similarly corrected loss of the fitted continent score at a later layer after source-layer deletion. Black dots mark individual layer pairs whose 95% interval lies above zero, not a simultaneous matrix test. The circle marks source layer 32 and receiver layer 36, fixed before validation. Deletion at that pair has an interval spanning zero for later knowledge, whereas reversal passes. Values use float32 and are not compared in magnitude with the bfloat16 pairedtask experiments.",
+      "page": 9,
+      "index": 12,
+      "width": 954,
+      "height": 817
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-013.webp",
+      "caption": "Figure 9: Paired-task parameter-routing deletion affects later knowledge. Columns show the continentname task in each model. Color is the mean random-corrected knowledge loss across the two validation partitions. Black dots mark layer pairs positive in selection and both validation partitions, not statistical significance. Blank cells have no later receiving layer. Model color scales differ because raw knowledge scores are not directly comparable.",
+      "page": 37,
+      "index": 13,
+      "width": 958,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2609.11859v1/fig-014.webp",
+      "caption": "Figure 5: A fixed noun-derived knowledge change transfers to adjective answers. Both bars use references fitted only on continent-name questions. Heights average the corrected shifts of the two validation partitions; no statistical confidence interval is asserted for these bars. Panels identify the model and the layer fixed before this test. The same direction did not generally transfer to arbitrary codes: only 1/5 baselinequalified mappings passed in Qwen, 0/4 in Llama, and 0/2 in Gemma.",
+      "page": 20,
+      "index": 14,
+      "width": 955,
+      "height": 262
+    }
+  ]
+}

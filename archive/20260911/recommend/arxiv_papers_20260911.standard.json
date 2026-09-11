@@ -1,0 +1,175 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-11T21:37:35.177243+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.10722v1",
+      "source": "arxiv",
+      "title": "CMNIE: An Information Extraction Benchmark for Chinese Military News",
+      "abstract": "Structured extraction from Chinese military news supports intelligence analysis, decision-making, and knowledge base construction. However, existing resources provide limited support for joint informa?tion extraction in this domain, especially when events, event arguments, entities, and relations must be modeled together. We present CMNIE, an information extraction benchmark for Chinese military news. Extend?ing military-domain resources beyond document-level event annotations, CMNIE jointly annotates event triggers, event arguments, named enti?ties, and entity relations under a unified domain schema. The dataset contains 13,000 instances collected from public Chinese military news, with manual annotations for 7 event types, 10 argument roles, 7 entity types, and 8 relation types. We evaluate supervised IE models, zero-shot large language models, and fine-tuned LLM-based extraction methods on a shared test set. Experimental results show that CMNIE remains chal?lenging, especially for relation extraction and exact matching of event?argument spans; zero-shot LLMs often identify relevant semantic units but fail to match gold span boundaries exactly. CMNIE provides a stan?dardized benchmark for studying schema adherence, exact span match?ing, and joint structured extraction in specialized Chinese news.",
+      "authors": [
+        "Yan Yu",
+        "Mengna Zhu",
+        "Zhenyu Song",
+        "Hao Yang",
+        "Haiwen Chen",
+        "Mao Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-09T18:16:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.10722v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "information extraction benchmark for Chinese military news and intelligence analysis",
+      "llm_evidence_cn": "中国军事新闻和情报分析的信息抽取基准",
+      "llm_evidence": "中国军事新闻和情报分析的信息抽取基准",
+      "canonical_evidence": "中国军事新闻和情报分析的信息抽取基准",
+      "llm_tldr_en": "Presents CMNIE, a benchmark for joint information extraction from Chinese military news to support intelligence.",
+      "llm_tldr_cn": "提出了CMNIE，一个用于从中国军事新闻中进行联合信息抽取的基准，以支持情报分析。",
+      "llm_tldr": "提出了CMNIE，一个用于从中国军事新闻中进行联合信息抽取的基准，以支持情报分析。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.06968v1",
+      "source": "arxiv",
+      "title": "Tracing Query Expansion Effects through Sparse Autoencoder Features",
+      "abstract": "Query expansion (QE) is a critical technique in information retrieval that enriches underspecified queries with additional textual context. However, its effect is often unreliable in modern dense retrieval, especially for strong off-the-shelf retrievers without retraining. Existing studies mainly examine expansion quality, semantic drift, or retrieval outcomes, but rarely explain how QE changes dense retrievers internally. In this work, we trace QE effects through sparse autoencoder (SAE) features. Using paired original and expanded queries, we decompose layer-wise retriever representations into sparse latent activations, identify QE-related latents from expansion-induced activation shifts, and interpret them with natural-language descriptions and retrieval cases. Our analysis shows that effective QE induces layer-concentrated changes in sparse latents aligned with retrieval intent and entity attributes, rather than only perturbing final query embeddings. SAE-based activation steering further validates these latents improve retrieval more consistently than random interventions or vanilla QE across four benchmarks, suggesting that SAEs can explain QE effects and offer a lightweight option for precise retrieval behavior modulation without query rewriting or retriever fine-tuning.",
+      "authors": [
+        "Fangan Dong",
+        "Weiran Shi",
+        "Zhiwei Xu",
+        "Xuri Ge",
+        "Ben He",
+        "Xin Xin",
+        "Zhumin Chen",
+        "Ying Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-09-07T03:07:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.06968v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpreting dense retrievers internally using sparse autoencoder features",
+      "llm_evidence_cn": "使用稀疏自编码器特征解释稠密检索器的内部机制",
+      "llm_evidence": "使用稀疏自编码器特征解释稠密检索器的内部机制",
+      "canonical_evidence": "使用稀疏自编码器特征解释稠密检索器的内部机制",
+      "llm_tldr_en": "Traces query expansion effects through sparse autoencoder features to interpret internal retriever changes.",
+      "llm_tldr_cn": "通过稀疏自编码器特征追踪查询扩展效果，以解释检索器的内部变化。",
+      "llm_tldr": "通过稀疏自编码器特征追踪查询扩展效果，以解释检索器的内部变化。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.03687v1",
+      "source": "arxiv",
+      "title": "A Circuit for Plural Reference: How LLMs Represent and Retrieve Singular and Plural Entities",
+      "abstract": "Coreference resolution is an important task in contextual reasoning. In this paper, we investigate the mechanism for representing and retrieving singular and plural entities for plural reference. We use a combination of mechanistic interpretability and attention pattern analysis to study the process in which LLMs predict a pronoun to refer back to previously mentioned entities. Using a range of causal intervention techniques, we find a set of attention heads that are responsible for (1) representing coreference information in the input, (2) identifying entities that form a plural reference, (3) transferring the information to the component that is responsible for selecting the antecedents and predicting the pronoun. We also find that LLMs align with humans in preference for plural pronoun. Specifically, entities in a plural construction are more likely to be referred to as a plural entity if they are ontologically similar and are linked by the conjunction \"and\".",
+      "authors": [
+        "Anh Danh",
+        "Rick Nouwen",
+        "Massimo Poesio"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-03T11:23:11+00:00",
+      "link": "https://arxiv.org/pdf/2609.03687v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "causal intervention techniques to study mechanistic interpretability in LLMs",
+      "llm_evidence_cn": "使用因果干预技术研究大语言模型的机械可解释性",
+      "llm_evidence": "使用因果干预技术研究大语言模型的机械可解释性",
+      "canonical_evidence": "使用因果干预技术研究大语言模型的机械可解释性",
+      "llm_tldr_en": "Uses causal interventions and mechanistic interpretability to study how LLMs represent and retrieve entities.",
+      "llm_tldr_cn": "利用因果干预和机械可解释性研究大语言模型如何表示和检索实体。",
+      "llm_tldr": "利用因果干预和机械可解释性研究大语言模型如何表示和检索实体。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.11859v1",
+      "source": "arxiv",
+      "title": "From Parameters to Answers: How LLMs Retrieve and Use Their Internal Knowledge",
+      "abstract": "How does a language model's dependence on query-routing information and target knowledge change as it answers a question? We study this question through layerwise interventions on the hidden state at the end of the question. Across Qwen, Llama, and Gemma, we compare country-continent questions with noun, adjective, and code answers while keeping several fitted measurements distinct. A pair-conditioned request direction describes which country is queried in natural single-country questions; a global request direction describes first- versus second-country requests in paired questions; separate selection candidates test control among contents already available in the hidden state. A diagnostic reanalysis of frozen Qwen natural-question states shows that the pair-conditioned direction grows stronger before interventions on it begin to alter later fitted knowledge, with this causal window opening while answer-supporting content is still forming. The paired three-model trajectories are not uniform: Gemma shows a partially overlapping mid-layer routing-content profile, whereas Llama has no sustained routing-effect window under the same gates. In the paired protocol, dependence on the global request direction decreases from fixed earlier to later layer sets while dependence on fitted content persists. A matched Qwen comparison shows that the pair-conditioned direction retains a late effect, so this operational handoff concerns the global fitted direction rather than all request information. These results separate early readability, natural strength, causal steering, and later content dependence.",
+      "authors": [
+        "Wenkang Wei",
+        "Yuan Fang",
+        "Renhe Jiang",
+        "Hong Cheng",
+        "Xingtong Yu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-10T17:39:55+00:00",
+      "link": "https://arxiv.org/pdf/2609.11859v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "layerwise interventions to study how LLMs retrieve and use internal knowledge",
+      "llm_evidence_cn": "通过层级干预研究大语言模型如何检索和使用内部知识",
+      "llm_evidence": "通过层级干预研究大语言模型如何检索和使用内部知识",
+      "canonical_evidence": "通过层级干预研究大语言模型如何检索和使用内部知识",
+      "llm_tldr_en": "Investigates how LLMs retrieve internal knowledge through layerwise interventions on hidden states.",
+      "llm_tldr_cn": "通过对隐藏状态的层级干预，研究大语言模型如何检索内部知识。",
+      "llm_tldr": "通过对隐藏状态的层级干预，研究大语言模型如何检索内部知识。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
