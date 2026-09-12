@@ -1,0 +1,137 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-12T21:17:05.473585+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.06222v1",
+      "source": "arxiv",
+      "title": "Relevance is not enough: A Communication-Oriented Retrieval System for Consequential Scientific Question Answering",
+      "abstract": "AI systems increasingly answer scientific questions about health, safety, and the environment. But most retrieval-augmented generation systems are tuned to provide factually correct, on-topic answers rather than to help non-experts understand what those answers mean for their lives and decisions. We focus on consequential scientific questions whose results directly shape people's lives and study them through a public water-quality communication system, where residents and community leaders interpret the findings and choose actions. Their experiences show that on-topic answers can still be insufficient without explanation and context and that the emotional weight of risk information cannot be ignored. Our system first classifies each question by reasoning type (for example, causal versus policy-based), then generates follow-up questions to identify missing evidence and retrieve it. One component clearly distinguishes between what is known and what is uncertain, while another rewrites scientific details into accessible language, using persona-based styles, such as a caring neighbor or an administrative official, to adapt tone and readability. Ablations on over $160$ questions show that the system uses $\\textit{an order of magnitude less context}$ and, in several configurations, improves human-rated completeness. A completeness metric co-designed with community members and a fine-tuned learned judge reveal that standard relevance scores explain about $1\\%$ of variation in human completeness ratings, and even the tuned judge only moderately aligns with humans, indicating that completeness is a distinct human-centered objective that current metrics do not reliably capture.",
+      "authors": [
+        "Avina Nakarmi",
+        "Naga Datha Saikiran Battula",
+        "Anthony Diaz",
+        "Aritra Dasgupta"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-09-05T18:41:09+00:00",
+      "link": "https://arxiv.org/pdf/2609.06222v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explanation and context for consequential risk information",
+      "llm_evidence_cn": "针对重大风险信息的解释和背景",
+      "llm_evidence": "针对重大风险信息的解释和背景",
+      "canonical_evidence": "针对重大风险信息的解释和背景",
+      "llm_tldr_en": "A retrieval system focusing on providing explanations and context for high-stakes scientific questions.",
+      "llm_tldr_cn": "一种专注于为高风险科学问题提供解释和背景信息的检索系统。",
+      "llm_tldr": "一种专注于为高风险科学问题提供解释和背景信息的检索系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.06968v1",
+      "source": "arxiv",
+      "title": "Tracing Query Expansion Effects through Sparse Autoencoder Features",
+      "abstract": "Query expansion (QE) is a critical technique in information retrieval that enriches underspecified queries with additional textual context. However, its effect is often unreliable in modern dense retrieval, especially for strong off-the-shelf retrievers without retraining. Existing studies mainly examine expansion quality, semantic drift, or retrieval outcomes, but rarely explain how QE changes dense retrievers internally. In this work, we trace QE effects through sparse autoencoder (SAE) features. Using paired original and expanded queries, we decompose layer-wise retriever representations into sparse latent activations, identify QE-related latents from expansion-induced activation shifts, and interpret them with natural-language descriptions and retrieval cases. Our analysis shows that effective QE induces layer-concentrated changes in sparse latents aligned with retrieval intent and entity attributes, rather than only perturbing final query embeddings. SAE-based activation steering further validates these latents improve retrieval more consistently than random interventions or vanilla QE across four benchmarks, suggesting that SAEs can explain QE effects and offer a lightweight option for precise retrieval behavior modulation without query rewriting or retriever fine-tuning.",
+      "authors": [
+        "Fangan Dong",
+        "Weiran Shi",
+        "Zhiwei Xu",
+        "Xuri Ge",
+        "Ben He",
+        "Xin Xin",
+        "Zhumin Chen",
+        "Ying Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-09-07T03:07:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.06968v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpreting internal mechanisms of retrieval using sparse autoencoder features",
+      "llm_evidence_cn": "使用稀疏自动编码器特征解释检索的内部机制",
+      "llm_evidence": "使用稀疏自动编码器特征解释检索的内部机制",
+      "canonical_evidence": "使用稀疏自动编码器特征解释检索的内部机制",
+      "llm_tldr_en": "Explains how query expansion affects dense retrievers internally using sparse autoencoder features.",
+      "llm_tldr_cn": "利用稀疏自动编码器特征解释了查询扩展如何从内部影响稠密检索器。",
+      "llm_tldr": "利用稀疏自动编码器特征解释了查询扩展如何从内部影响稠密检索器。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.10722v1",
+      "source": "arxiv",
+      "title": "CMNIE: An Information Extraction Benchmark for Chinese Military News",
+      "abstract": "Structured extraction from Chinese military news supports intelligence analysis, decision-making, and knowledge base construction. However, existing resources provide limited support for joint informa?tion extraction in this domain, especially when events, event arguments, entities, and relations must be modeled together. We present CMNIE, an information extraction benchmark for Chinese military news. Extend?ing military-domain resources beyond document-level event annotations, CMNIE jointly annotates event triggers, event arguments, named enti?ties, and entity relations under a unified domain schema. The dataset contains 13,000 instances collected from public Chinese military news, with manual annotations for 7 event types, 10 argument roles, 7 entity types, and 8 relation types. We evaluate supervised IE models, zero-shot large language models, and fine-tuned LLM-based extraction methods on a shared test set. Experimental results show that CMNIE remains chal?lenging, especially for relation extraction and exact matching of event?argument spans; zero-shot LLMs often identify relevant semantic units but fail to match gold span boundaries exactly. CMNIE provides a stan?dardized benchmark for studying schema adherence, exact span match?ing, and joint structured extraction in specialized Chinese news.",
+      "authors": [
+        "Yan Yu",
+        "Mengna Zhu",
+        "Zhenyu Song",
+        "Hao Yang",
+        "Haiwen Chen",
+        "Mao Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-09T18:16:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.10722v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Information extraction from military news supports intelligence analysis and conflict modeling.",
+      "llm_evidence_cn": "从军事新闻中提取信息，支持情报分析和冲突建模。",
+      "llm_evidence": "从军事新闻中提取信息，支持情报分析和冲突建模。",
+      "canonical_evidence": "从军事新闻中提取信息，支持情报分析和冲突建模。",
+      "llm_tldr_en": "Introduces CMNIE, a benchmark for joint information extraction from Chinese military news.",
+      "llm_tldr_cn": "发布了CMNIE，一个用于中文军事新闻联合信息提取的基准数据集。",
+      "llm_tldr": "发布了CMNIE，一个用于中文军事新闻联合信息提取的基准数据集。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

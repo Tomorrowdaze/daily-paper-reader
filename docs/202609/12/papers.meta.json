@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-12",
+  "date": "2026-09-12",
+  "generated_at": "2026-09-12T21:18:11",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/12/2609.06222v1-relevance-is-not-enough-a-communication-oriented-retrieval-system-for-consequential-scientific-question-answering",
+      "section": "quick",
+      "title_en": "Relevance is not enough: A Communication-Oriented Retrieval System for Consequential Scientific Question Answering",
+      "authors": "Avina Nakarmi, Naga Datha Saikiran Battula, Anthony Diaz, Aritra Dasgupta",
+      "date": "2026-09-05",
+      "pdf": "https://arxiv.org/pdf/2609.06222v1",
+      "score": "6.0",
+      "evidence": "针对重大风险信息的解释和背景",
+      "tldr": "面向关乎民众决策的科学问答，提出沟通导向检索系统：先按推理类型分类并生成追问补证，区分已知与不确定，配合人格化通俗改写。于水质场景160+问评测，显著减少上下文用量并提升人评完整性，且相关性难解释完整性。",
+      "tags": "query:q5",
+      "abstract_en": "AI systems increasingly answer scientific questions about health, safety, and the environment. But most retrieval-augmented generation systems are tuned to provide factually correct, on-topic answers rather than to help non-experts understand what those answers mean for their lives and decisions. We focus on consequential scientific questions whose results directly shape people's lives and study them through a public water-quality communication system, where residents and community leaders interpret the findings and choose actions. Their experiences show that on-topic answers can still be insufficient without explanation and context and that the emotional weight of risk information cannot be ignored. Our system first classifies each question by reasoning type (for example, causal versus policy-based), then generates follow-up questions to identify missing evidence and retrieve it. One component clearly distinguishes between what is known and what is uncertain, while another rewrites scientific details into accessible language, using persona-based styles, such as a caring neighbor or an administrative official, to adapt tone and readability. Ablations on over $160$ questions show that the system uses $\\textit{an order of magnitude less context}$ and, in several configurations, improves human-rated completeness. A completeness metric co-designed with community members and a fine-tuned learned judge reveal that standard relevance scores explain about $1\\%$ of variation in human completeness ratings, and even the tuned judge only moderately aligns with humans, indicating that completeness is a distinct human-centered objective that current metrics do not reliably capture.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/12/2609.06968v1-tracing-query-expansion-effects-through-sparse-autoencoder-features",
+      "section": "quick",
+      "title_en": "Tracing Query Expansion Effects through Sparse Autoencoder Features",
+      "authors": "Fangan Dong, Weiran Shi, Zhiwei Xu, Xuri Ge, Ben He, Xin Xin, Zhumin Chen, Ying Zhou",
+      "date": "2026-09-07",
+      "pdf": "https://arxiv.org/pdf/2609.06968v1",
+      "score": "6.0",
+      "evidence": "使用稀疏自动编码器特征解释检索的内部机制",
+      "tldr": "针对密集检索中查询扩展（QE）效果不稳的问题，本文用稀疏自编码器（SAE）分解检索器层内表示，追踪扩展引发的稀疏潜变量变化，发现有效QE在特定层激活与意图/实体属性对齐，并通过SAE激活操控稳定提升检索、无需改写或微调。",
+      "tags": "query:q5",
+      "abstract_en": "Query expansion (QE) is a critical technique in information retrieval that enriches underspecified queries with additional textual context. However, its effect is often unreliable in modern dense retrieval, especially for strong off-the-shelf retrievers without retraining. Existing studies mainly examine expansion quality, semantic drift, or retrieval outcomes, but rarely explain how QE changes dense retrievers internally. In this work, we trace QE effects through sparse autoencoder (SAE) features. Using paired original and expanded queries, we decompose layer-wise retriever representations into sparse latent activations, identify QE-related latents from expansion-induced activation shifts, and interpret them with natural-language descriptions and retrieval cases. Our analysis shows that effective QE induces layer-concentrated changes in sparse latents aligned with retrieval intent and entity attributes, rather than only perturbing final query embeddings. SAE-based activation steering further validates these latents improve retrieval more consistently than random interventions or vanilla QE across four benchmarks, suggesting that SAEs can explain QE effects and offer a lightweight option for precise retrieval behavior modulation without query rewriting or retriever fine-tuning.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/12/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news",
+      "section": "quick",
+      "title_en": "CMNIE: An Information Extraction Benchmark for Chinese Military News",
+      "authors": "Yan Yu, Mengna Zhu, Zhenyu Song, Hao Yang, Haiwen Chen, Mao Wang",
+      "date": "2026-09-09",
+      "pdf": "https://arxiv.org/pdf/2609.10722v1",
+      "score": "6.0",
+      "evidence": "从军事新闻中提取信息，支持情报分析和冲突建模。",
+      "tldr": "为支撑情报与决策，本研究发布中文军事新闻信息抽取基准CMNIE，在统一域模式下联合标注事件、论元、实体与关系，含13,000实例（7类事件等），并评测监督与大模型；结果显示关系与跨度匹配最难，零样本LLM边界对齐不足。",
+      "tags": "query:profile-1",
+      "abstract_en": "Structured extraction from Chinese military news supports intelligence analysis, decision-making, and knowledge base construction. However, existing resources provide limited support for joint informa?tion extraction in this domain, especially when events, event arguments, entities, and relations must be modeled together. We present CMNIE, an information extraction benchmark for Chinese military news. Extend?ing military-domain resources beyond document-level event annotations, CMNIE jointly annotates event triggers, event arguments, named enti?ties, and entity relations under a unified domain schema. The dataset contains 13,000 instances collected from public Chinese military news, with manual annotations for 7 event types, 10 argument roles, 7 entity types, and 8 relation types. We evaluate supervised IE models, zero-shot large language models, and fine-tuned LLM-based extraction methods on a shared test set. Experimental results show that CMNIE remains chal?lenging, especially for relation extraction and exact matching of event?argument spans; zero-shot LLMs often identify relevant semantic units but fail to match gold span boundaries exactly. CMNIE provides a stan?dardized benchmark for studying schema adherence, exact span match?ing, and joint structured extraction in specialized Chinese news.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
