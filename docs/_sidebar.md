@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-14 <!--dpr-date:20260914-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/14/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news" data-sidebar-item="{&quot;title&quot;: &quot;CMNIE: An Information Extraction Benchmark for Chinese Military News&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;profile-1&quot;}], &quot;evidence&quot;: &quot;用于情报分析的中文军事新闻信息抽取&quot;}">CMNIE: An Information Extraction Benchmark for Chinese Military News</a>
   * 2026-09-12 <!--dpr-date:20260912-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/12/2609.06222v1-relevance-is-not-enough-a-communication-oriented-retrieval-system-for-consequential-scientific-question-answering" data-sidebar-item="{&quot;title&quot;: &quot;Relevance is not enough: A Communication-Oriented Retrieval System for Consequential Scientific Question Answering&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.06222v1-relevance-is-not-enough-a-communication-oriented-retrieval-system-for-consequential-scientific-question-answering&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;针对重大风险信息的解释和背景&quot;}">Relevance is not enough: A Communication-Oriented Retrieval System for Consequential Scientific Question Answering</a>

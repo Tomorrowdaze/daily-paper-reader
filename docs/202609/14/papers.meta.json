@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-14",
+  "date": "2026-09-14",
+  "generated_at": "2026-09-14T22:27:25",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/14/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news",
+      "section": "quick",
+      "title_en": "CMNIE: An Information Extraction Benchmark for Chinese Military News",
+      "authors": "Yan Yu, Mengna Zhu, Zhenyu Song, Hao Yang, Haiwen Chen, Mao Wang",
+      "date": "2026-09-09",
+      "pdf": "https://arxiv.org/pdf/2609.10722v1",
+      "score": "6.0",
+      "evidence": "用于情报分析的中文军事新闻信息抽取",
+      "tldr": "本文提出中文军事新闻信息抽取基准CMNIE，在统一领域模式下联合标注事件触发词、论元、实体与关系，含1.3万实例（7类事件、10类论元、7类实体、8类关系）；评测监督式与大模型（零样本/微调）方法，发现关系抽取与精确跨度匹配挑战突出，零样本模型易偏离金标边界，提供标准平台。",
+      "tags": "query:profile-1",
+      "abstract_en": "Structured extraction from Chinese military news supports intelligence analysis, decision-making, and knowledge base construction. However, existing resources provide limited support for joint informa?tion extraction in this domain, especially when events, event arguments, entities, and relations must be modeled together. We present CMNIE, an information extraction benchmark for Chinese military news. Extend?ing military-domain resources beyond document-level event annotations, CMNIE jointly annotates event triggers, event arguments, named enti?ties, and entity relations under a unified domain schema. The dataset contains 13,000 instances collected from public Chinese military news, with manual annotations for 7 event types, 10 argument roles, 7 entity types, and 8 relation types. We evaluate supervised IE models, zero-shot large language models, and fine-tuned LLM-based extraction methods on a shared test set. Experimental results show that CMNIE remains chal?lenging, especially for relation extraction and exact matching of event?argument spans; zero-shot LLMs often identify relevant semantic units but fail to match gold span boundaries exactly. CMNIE provides a stan?dardized benchmark for studying schema adherence, exact span match?ing, and joint structured extraction in specialized Chinese news.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
