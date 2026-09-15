@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-15",
+  "date": "2026-09-15",
+  "generated_at": "2026-09-15T22:34:12",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/15/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news",
+      "section": "quick",
+      "title_en": "CMNIE: An Information Extraction Benchmark for Chinese Military News",
+      "authors": "Yan Yu, Mengna Zhu, Zhenyu Song, Hao Yang, Haiwen Chen, Mao Wang",
+      "date": "2026-09-09",
+      "pdf": "https://arxiv.org/pdf/2609.10722v1",
+      "score": "7.0",
+      "evidence": "从军事新闻中提取信息用于情报分析",
+      "tldr": "为支撑情报分析与知识构建，本文推出中文军事新闻信息抽取基准CMNIE，统一标注事件触发词、论元、实体与关系，涵盖13000条样本与7/10/7/8类；并评测监督式模型、零样本大模型与微调大模型。结果表明关系抽取与论元精确边界困难，基准促研。",
+      "tags": "query:profile-1",
+      "abstract_en": "Structured extraction from Chinese military news supports intelligence analysis, decision-making, and knowledge base construction. However, existing resources provide limited support for joint informa?tion extraction in this domain, especially when events, event arguments, entities, and relations must be modeled together. We present CMNIE, an information extraction benchmark for Chinese military news. Extend?ing military-domain resources beyond document-level event annotations, CMNIE jointly annotates event triggers, event arguments, named enti?ties, and entity relations under a unified domain schema. The dataset contains 13,000 instances collected from public Chinese military news, with manual annotations for 7 event types, 10 argument roles, 7 entity types, and 8 relation types. We evaluate supervised IE models, zero-shot large language models, and fine-tuned LLM-based extraction methods on a shared test set. Experimental results show that CMNIE remains chal?lenging, especially for relation extraction and exact matching of event?argument spans; zero-shot LLMs often identify relevant semantic units but fail to match gold span boundaries exactly. CMNIE provides a stan?dardized benchmark for studying schema adherence, exact span match?ing, and joint structured extraction in specialized Chinese news.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/15/2609.08554v1-not-all-variables-agree-reliability-aware-variable-wise-gradient-surgery-for-multivariate-time-series-forecasting",
+      "section": "quick",
+      "title_en": "Not All Variables Agree: Reliability-Aware Variable-Wise Gradient Surgery for Multivariate Time-Series Forecasting",
+      "authors": "Jinwoo Park, Hyeongwon Kang, Pilsung Kang",
+      "date": "2026-09-08",
+      "pdf": "https://arxiv.org/pdf/2609.08554v1",
+      "score": "6.0",
+      "evidence": "多变量时间序列预测与变量梯度分析",
+      "tldr": "多变量时序预测常以均值损失训练，掩盖变量间梯度冲突；实测7数据集平均30.6%成对余弦为负且冲突不等于伤害。提出PV-Surgery：一次反传构造变量梯度代理，进行可靠性选择、条件池化与共向对齐，保持点式损失。跨5骨干/7数据集/4地平线，MSE降3.61%、MAE降2.93%，表明变量结构是可用优化信号。",
+      "tags": "query:q4",
+      "abstract_en": "In data-driven training, multivariate time-series forecasting is usually optimized with a scalar loss averaged over samples, variables, and horizons. This averaging is convenient, but the optimizer sees only the aggregated gradient, which does not reveal whether the variable-wise contributions align or oppose one another. To quantify how often this disagreement arises, we measure the variable-wise gradients directly and find that 30.6% of their pairwise cosine similarities are negative on average across seven datasets. However, conflict and harm are not the same thing. Under shared training 35 of the 64 variables do worse than a full-input single-target oracle, and the harmed fraction is not reliably predicted by how often gradients conflict. We propose Per-Variable Surgery (PV-Surgery), an optimizer-side training strategy for backbones with cache-compatible layers. One backward pass builds variable-wise gradient proxies from output-side signals and keeps the pointwise forecasting loss. Reliability-aware selection targets layers whose proxy sums closely approximate their shared-gradient slices. Conditional pooling forms anchor and conflict pools without dropping variables. Common-direction surgery aligns variable or pooled gradients with their normalized mean and restores input norms to avoid reweighting. In experiments across five backbones, seven datasets, and four horizons, PV-Surgery lowers MSE by 3.61% and MAE by 2.93% on average. For multivariate forecasting, this indicates that the variable-wise structure hidden by mean-loss training is a usable optimization signal.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
