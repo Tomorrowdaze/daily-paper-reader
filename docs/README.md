@@ -6,29 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-15
-- 运行时间：2026-09-15 22:33:53 UTC
+- 最新运行日期：2026-09-16
+- 运行时间：2026-09-16 22:22:40 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：0
-- 速读区：2
+- 本次总论文数：1
+- 精读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-- 今日共生成 2 篇推荐（精读 0 篇，速读 2 篇）
-- 速读：《CMNIE: An Information Extraction Benchmark for Chinese Military News》（7.0/10）, 《Not All Variables Agree: Reliability-Aware Variable-Wise Gradient Surgery for Multivariate Time-Series Forecasting》（6.0/10）
+- 今日共生成 1 篇推荐（精读 1 篇，速读 0 篇）
+- 精读：《CMNIE: An Information Extraction Benchmark for Chinese Military News》（8.5/10）
 - 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202609/15/README](/202609/15/README)
+- 详情：[/202609/16/README](/202609/16/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [CMNIE: An Information Extraction Benchmark for Chinese Military News](/202609/16/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news)  
+   标签：评分：8.5/10、query:profile-1
+   evidence：军事新闻与情报分析的信息抽取基准
 
 ### 速读区论文标签
-1. [CMNIE: An Information Extraction Benchmark for Chinese Military News](/202609/15/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news)  
-   标签：评分：7.0/10、query:profile-1
-   evidence：从军事新闻中提取信息用于情报分析
-2. [Not All Variables Agree: Reliability-Aware Variable-Wise Gradient Surgery for Multivariate Time-Series Forecasting](/202609/15/2609.08554v1-not-all-variables-agree-reliability-aware-variable-wise-gradient-surgery-for-multivariate-time-series-forecasting)  
-   标签：评分：6.0/10、query:q4
-   evidence：多变量时间序列预测与变量梯度分析
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

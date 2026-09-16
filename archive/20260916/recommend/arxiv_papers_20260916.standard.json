@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-16T22:21:19.943130+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2609.10722v1",
+      "source": "arxiv",
+      "title": "CMNIE: An Information Extraction Benchmark for Chinese Military News",
+      "abstract": "Structured extraction from Chinese military news supports intelligence analysis, decision-making, and knowledge base construction. However, existing resources provide limited support for joint informa?tion extraction in this domain, especially when events, event arguments, entities, and relations must be modeled together. We present CMNIE, an information extraction benchmark for Chinese military news. Extend?ing military-domain resources beyond document-level event annotations, CMNIE jointly annotates event triggers, event arguments, named enti?ties, and entity relations under a unified domain schema. The dataset contains 13,000 instances collected from public Chinese military news, with manual annotations for 7 event types, 10 argument roles, 7 entity types, and 8 relation types. We evaluate supervised IE models, zero-shot large language models, and fine-tuned LLM-based extraction methods on a shared test set. Experimental results show that CMNIE remains chal?lenging, especially for relation extraction and exact matching of event?argument spans; zero-shot LLMs often identify relevant semantic units but fail to match gold span boundaries exactly. CMNIE provides a stan?dardized benchmark for studying schema adherence, exact span match?ing, and joint structured extraction in specialized Chinese news.",
+      "authors": [
+        "Yan Yu",
+        "Mengna Zhu",
+        "Zhenyu Song",
+        "Hao Yang",
+        "Haiwen Chen",
+        "Mao Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-09T18:16:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.10722v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 8.5,
+      "llm_evidence_en": "information extraction benchmark for military news and intelligence analysis",
+      "llm_evidence_cn": "军事新闻与情报分析的信息抽取基准",
+      "llm_evidence": "军事新闻与情报分析的信息抽取基准",
+      "canonical_evidence": "军事新闻与情报分析的信息抽取基准",
+      "llm_tldr_en": "A benchmark for extracting events and relations from military news, crucial for conflict prediction data.",
+      "llm_tldr_cn": "一个从军事新闻中提取事件和关系的基准，对冲突预测数据构建至关重要。",
+      "llm_tldr": "一个从军事新闻中提取事件和关系的基准，对冲突预测数据构建至关重要。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-16 <!--dpr-date:20260916-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/16/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news" data-sidebar-item="{&quot;title&quot;: &quot;CMNIE: An Information Extraction Benchmark for Chinese Military News&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news&quot;, &quot;score&quot;: &quot;8.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;profile-1&quot;}], &quot;evidence&quot;: &quot;军事新闻与情报分析的信息抽取基准&quot;}">CMNIE: An Information Extraction Benchmark for Chinese Military News</a>
   * 2026-09-15 <!--dpr-date:20260915-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/15/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news" data-sidebar-item="{&quot;title&quot;: &quot;CMNIE: An Information Extraction Benchmark for Chinese Military News&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.10722v1-cmnie-an-information-extraction-benchmark-for-chinese-military-news&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;profile-1&quot;}], &quot;evidence&quot;: &quot;从军事新闻中提取信息用于情报分析&quot;}">CMNIE: An Information Extraction Benchmark for Chinese Military News</a>
