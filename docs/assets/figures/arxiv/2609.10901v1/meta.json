@@ -1,0 +1,166 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-001.webp",
+      "caption": "Table 1: Graph statistics of search agents across datasets. Nodes, edges, depth, and branching are trajectory-level medians. Branching is the average unique-child count of the two widest non-Q0 nodes in each trajectory, excluding failure-derived edges. Multi-source query rate is the mean percentage of query nodes per trajectory that rely on multiple earlier queries. Nodes, edges, and depth are rounded to integers; branching is reported to at most two decimal places.",
+      "page": 6,
+      "index": 1,
+      "width": 477,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-002.webp",
+      "caption": "Table 21: Single-module diagnostic results, macro-averaged across models. The PK column reports the signed PK-risk signal used by the additive score, not the raw amount of PK. The table shows that individual modules are associated with answer outcomes, but also that no single module is uniformly sufficient across regimes.",
+      "page": 25,
+      "index": 2,
+      "width": 591,
+      "height": 214
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-003.webp",
+      "caption": "Table 23: Per-model numerical values underlying Table 2. Every AUC is computed within one fixed model and benchmark-regime, comparing only that model’s correct and incorrect trajectories; no cross-model trajectory pair enters an individual AUC. The columns report cumulative held-out AUC after adding the three modules. For sequential regimes, the modules are answer-backbone concentration, backbone constraint share, and sequential PK penalty; for parallel regimes, they are answer-path directness, direct constraint coverage, and parallel PK score. Acc. is the empirical answer accuracy for that benchmark-regime and model.",
+      "page": 26,
+      "index": 3,
+      "width": 763,
+      "height": 498
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-004.webp",
+      "caption": "Table 6: Condensed human annotation rules for canonical DAG construction. The full internal guideline uses the same principle throughout: visible contribution, not possible relevance.",
+      "page": 15,
+      "index": 4,
+      "width": 950,
+      "height": 492
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-005.webp",
+      "caption": "Figure 1: SearchAtlas transforms a raw search trajectory into an evidential query DAG. (a) The chronological event log hides repeated clues, verbose searches unrelated to the final answer, a potentially retried failure, query terms with no visible source, and the searches that eventually support the answer. (b) SEARCHATLAS deterministically parses the log, attributes each part of a new query to an earlier source, prunes redundant parents, and grounds answer facts. The resulting DAG keeps every query while exposing evidence flow to the final answer and turns each flagged problem into explicit typed edges.",
+      "page": 2,
+      "index": 5,
+      "width": 917,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-006.webp",
+      "caption": "Figure 4: SEARCHATLAS visualizes trajectories of five agents on a parallel question (WebWalker-017, a–e) and a sequential question (BrowseComp-77, f–j). Query nodes shown in darker shades contribute to the final answer. The values of the three diagnostics defined in section 4 are shown below each panel; green indicates favorable values, whereas red color flags values indicating a potential process failure. The correct runs (c), (f), (g), (i) match the expected shape per question constraint type. The failed ones scatter evidence, leave constraints uncovered, or draw the answer from prior knowledge (illustrated as purple edges pointing to A).",
+      "page": 7,
+      "index": 6,
+      "width": 902,
+      "height": 319
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-007.webp",
+      "caption": "Table 30: Per-model ordered-query-list judge results. AUC and AP use the judge’s confidence-oriented score. Values are percentages except N .",
+      "page": 29,
+      "index": 7,
+      "width": 596,
+      "height": 498
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-008.webp",
+      "caption": "Figure 6: Worked example of a SEARCHATLAS DAG for one trajectory. The figure shows how query nodes, evidence-use query-to-query edges, prior-knowledge attribution, and answer-support edges are represented in a concrete case.",
+      "page": 14,
+      "index": 8,
+      "width": 919,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-009.webp",
+      "caption": "Table 28: Trajectory-level comparison between the thresholded DAG-derived score and non-DAG LLM-judge baselines on all three benchmarks (BrowseComp 150 questions sequential, WebWalker-Hard 70 questions parallel, DeepSearchQA 25 sequential and 25 parallel questions; all crossed with five agents). Values are percentages except N . Precision, recall, and F1 treat correct trajectories as the positive class. AUC and AP in this table use binary predictions so that all rows share the same thresholded-decision protocol.",
+      "page": 28,
+      "index": 9,
+      "width": 871,
+      "height": 248
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-010.webp",
+      "caption": "Table 4: Constraint-grounding localization. Each cell reports macro-AUC/AP of the grounding signal alone; both columns use the same constraint units and differ only in where a deployment counts.",
+      "page": 8,
+      "index": 10,
+      "width": 462,
+      "height": 743
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-011.webp",
+      "caption": "Table 2: Macro AUC after adding each diagnostic and full-score AUC for each agent. Every AUC is computed within one agent; the Macro column averages the five agent-level results. Complete agent-level AUCs for all three stages are reported in Appendix A.12.",
+      "page": 8,
+      "index": 11,
+      "width": 852,
+      "height": 323
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-012.webp",
+      "caption": "Table 18: Direct GPT-5.2 DAG baseline by agent and by question. P, R, F1, and Jac. denote micro precision, micro recall, micro F1, and repeat-to-repeat edge Jaccard. Recall remains low across both agents and validation questions, showing that direct prompting is not a substitute for the structured attribution pipeline.",
+      "page": 19,
+      "index": 12,
+      "width": 864,
+      "height": 278
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-013.webp",
+      "caption": "Table 17: Overall direct GPT-5.2 DAG-construction baseline. Direct generation obtains moderate precision but extremely low recall and F1, indicating that it misses most GT edges.",
+      "page": 19,
+      "index": 13,
+      "width": 950,
+      "height": 492
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-014.webp",
+      "caption": "Table 10: GT-aligned graph reconstruction and run stability for the 100 human-adjudicated canonical DAGs. Precision, recall, and Graph F1 are computed per DAG and macro-averaged separately within each dataset–model group.",
+      "page": 17,
+      "index": 14,
+      "width": 658,
+      "height": 383
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-015.webp",
+      "caption": "Table 27: Pooled trajectory-level comparison on all 1,350 trajectories. Values are percentages.",
+      "page": 27,
+      "index": 15,
+      "width": 950,
+      "height": 752
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-016.webp",
+      "caption": "Figure 8: Boxplots of depth and width metrics for sequential and parallel constraint questions.",
+      "page": 24,
+      "index": 16,
+      "width": 928,
+      "height": 420
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-017.webp",
+      "caption": "Figure 9: Boxplots of three trajectory-level metrics for sequential and parallel constraint questions: multi-incoming node count, efficiency ratio, and evidence-reuse span.",
+      "page": 24,
+      "index": 17,
+      "width": 935,
+      "height": 279
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-018.webp",
+      "caption": "Figure 5: The top block gives the cleaned outlier distribution by score–accuracy disagreement type (N = 100). Panels (a)–(d) show premature target binding with unresolved contradictions, missed correct evidence, oversearch success, and shortcut success.",
+      "page": 9,
+      "index": 18,
+      "width": 458,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-019.webp",
+      "caption": "Figure 2: Ideal structures for the two question constraint types from successful TYDP runs (WebWalker-004 and BrowseComp-77). In the parallel run, every supporting query connects directly to the answer; in the sequential run, evidence concentrates in a focused chain.",
+      "page": 5,
+      "index": 19,
+      "width": 616,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2609.10901v1/fig-020.webp",
+      "caption": "Figure 3: Illustration of constraint grounding. Constraint units are highlighted in the question examples. Four DAGs illustrate how the units are grounded on query nodes under high versus low direct constraint coverage (parallel) and high versus low backbone constraint share (sequential).",
+      "page": 5,
+      "index": 20,
+      "width": 461,
+      "height": 319
+    }
+  ]
+}

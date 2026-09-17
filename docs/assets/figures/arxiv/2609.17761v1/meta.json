@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.17761v1/fig-001.webp",
+      "caption": "Figure 1. Stationary strike participation S∗ as a function of the residual activity P for different values of the direct suppression parameter ν. The remaining parameters are λ = 0.15, µ = 0.60, η = 0.80, θ = 0.30 and ω = 0.60, yielding the compensation threshold νc = 0.96, from Eq. (13). For ν = 0.40 < νc, S∗ increases with P, corresponding to the resilience-paradox regime. At ν = νc = 0.96, the direct and indirect mechanisms exactly compensate and S∗ becomes independent of P. For ν = 1.40 > νc, the conventional behavior is recovered and S∗ decreases with increasing P.",
+      "page": 6,
+      "index": 1,
+      "width": 486,
+      "height": 339
+    },
+    {
+      "url": "assets/figures/arxiv/2609.17761v1/fig-002.webp",
+      "caption": "Figure 3. Mechanism underlying the resilience paradox. (a) Stationary institutional functionality U∗ as a function of the residual activity P. (b) Direct, Fdir = νPS∗ (Eq. (15)), and response-mediated, Fresp = µA∗S∗ (Eq. (16)), contributions to the suppression of strike participation as functions of P. Results are shown in the resilience-paradox regime, with ν = 0.40 < νc = 0.96. The remaining parameters are λ = 0.15, µ = 0.60, η = 0.80, θ = 0.30 and ω = 0.60. Increasing residual activity improves institutional functionality, thereby weakening the institutional response and reducing the response-mediated suppression Fresp, while simultaneously strengthening the direct suppression Fdir. The competition between these opposing effects constitutes the mechanism underlying the resilience paradox.",
+      "page": 8,
+      "index": 2,
+      "width": 767,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2609.17761v1/fig-003.webp",
+      "caption": "Figure 2. Strike-response susceptibility χP as a function of the direct suppression parameter ν, for different values of P. The remaining parameters are λ = 0.15, µ = 0.60, η = 0.80, θ = 0.30 and ω = 0.60. The vertical dashed line indicates the compensation threshold νc = 0.96, given by Eq. (13), at which the direct suppressive effect of residual activity exactly balances the indirect resilience-mediated feedback. All curves cross χP = 0 at the same threshold, independently of P. For ν < νc, χP > 0, corresponding to the resilience-paradox regime, in which increasing residual activity increases stationary strike participation. For ν > νc, χP < 0, and the conventional response is recovered, with increasing residual activity reducing stationary strike participation.",
+      "page": 7,
+      "index": 3,
+      "width": 492,
+      "height": 336
+    }
+  ]
+}

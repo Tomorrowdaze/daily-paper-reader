@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-001.webp",
+      "caption": "Table 9: Performance on METAQA (n-hop) with hop budget N = 3. Mean ± std over three trials. Higher is better for MRR and Hits@1. Per-hop results are obtained from the same mixed-hop model. Best valid results are bolded within each model group.",
+      "page": 25,
+      "index": 1,
+      "width": 823,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-002.webp",
+      "caption": "Table 11: Model sizes. For KGQA models, parameter counts are reported after instantiating each model on MQUAKE-ST. Language encoders and LLMs are kept frozen throughout our experiments. For LLM baselines, parameter counts and weight formats follow the Ollama checkpoints used for inference.",
+      "page": 26,
+      "index": 2,
+      "width": 740,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-003.webp",
+      "caption": "Table 1: Structural KG statistics.",
+      "page": 7,
+      "index": 3,
+      "width": 590,
+      "height": 208
+    },
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-004.webp",
+      "caption": "Table 4: Hits@1 and path edit distance (PED) performance under question rephrasing. Models are trained on the canonical questions and evaluated on their rephrased variants, using the settings reported in Tab. 3. Higher is better for Hits@1; lower is better for PED. Best valid results are bolded within each model group.",
+      "page": 10,
+      "index": 4,
+      "width": 822,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-005.webp",
+      "caption": "Figure 1: Taxonomy of KG Navigation settings. THESEUS lies at the intersection of KGQA and path-based KG reasoning, extending explicit KG navigation to natural-language questions and pathlevel evaluations.",
+      "page": 3,
+      "index": 5,
+      "width": 627,
+      "height": 368
+    },
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-006.webp",
+      "caption": "Table 5: Representative KINSHIP paraphrase-template families.",
+      "page": 19,
+      "index": 6,
+      "width": 810,
+      "height": 208
+    },
+    {
+      "url": "assets/figures/arxiv/2609.14528v1/fig-007.webp",
+      "caption": "Table 3: Main performance results across KINSHIP and MQUAKE-ST (n-hop). Mean ± std over three trials. The answer-oracle shortest-path reference is deterministic and is reported as a single value. Higher is better for MRR, Hits@1, F1Rel, and F1SG; lower is better for RED and PED. Best valid results are bolded within each model group and dataset setting.",
+      "page": 9,
+      "index": 7,
+      "width": 827,
+      "height": 728
+    }
+  ]
+}
