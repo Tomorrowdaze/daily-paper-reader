@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-19 <!--dpr-date:20260919-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/19/2609.14528v1-theseus-in-the-graph-towards-traceable-multi-hop-graph-navigation" data-sidebar-item="{&quot;title&quot;: &quot;Theseus in the Graph: Towards Traceable Multi-Hop Graph Navigation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.14528v1-theseus-in-the-graph-towards-traceable-multi-hop-graph-navigation&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;显式建模中间推理步骤以实现可追溯性&quot;}">Theseus in the Graph: Towards Traceable Multi-Hop Graph Navigation</a>
   * 2026-09-17 <!--dpr-date:20260917-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/17/2609.14528v1-theseus-in-the-graph-towards-traceable-multi-hop-graph-navigation" data-sidebar-item="{&quot;title&quot;: &quot;Theseus in the Graph: Towards Traceable Multi-Hop Graph Navigation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.14528v1-theseus-in-the-graph-towards-traceable-multi-hop-graph-navigation&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;可追溯的多跳推理与证据搜索&quot;}">Theseus in the Graph: Towards Traceable Multi-Hop Graph Navigation</a>

@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-19T21:23:28.844811+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.14528v1",
+      "source": "arxiv",
+      "title": "Theseus in the Graph: Towards Traceable Multi-Hop Graph Navigation",
+      "abstract": "Multi-Hop Knowledge Graph Question Answering (KGQA) tasks require models to assemble relational evidence along paths in a KG to answer natural-language questions. However, existing KGQA systems typically focus on predicting the final answer without explicitly modeling or validating the intermediate reasoning steps, obscuring whether the correct answers arise from faithful multi-hop reasoning. To address this limitation, we re-frame multi-hop KGQA as a question-conditioned graph navigation problem. We refer to this formulation as THESEUS - Traceable Hop-wise Evidence SEarch in a Unified Semantics. In this setting, an agent receives a KG, a question, and a topic entity, and traverses a sequence of relations towards the answer, making the reasoning path explicit. To systematically study this formulation, we provide three key contributions. (i) We augment the existing KINSHIP and MQuAKE resources into navigation-ready KGQA datasets with annotated evidence paths and paraphrased questions. (ii) We design evaluation protocols to measure path fidelity, robustness to linguistic variation, and performance across multi-hop and multi-answer questions. (iii) We adapt established path-based KG completion agents - MINERVA, MultiHopKG, and SQUIRE - to operate on full question embeddings rather than symbolic single-relation queries, enabling their trajectories to be guided by natural-language semantics. Together, these contributions advance KGQA research toward systems where traceability is fundamental: answers are accompanied by explicit reasoning paths whose agreement with reference evidence can be systematically evaluated.",
+      "authors": [
+        "Eduin E. Hernandez",
+        "Luis F. Garcia",
+        "Nurassyl Askar",
+        "Sergio A. Diaz",
+        "Stefano Rini"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-13T14:06:43+00:00",
+      "link": "https://arxiv.org/pdf/2609.14528v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explicitly modeling intermediate reasoning steps for traceability",
+      "llm_evidence_cn": "显式建模中间推理步骤以实现可追溯性",
+      "llm_evidence": "显式建模中间推理步骤以实现可追溯性",
+      "canonical_evidence": "显式建模中间推理步骤以实现可追溯性",
+      "llm_tldr_en": "Reframes KGQA as traceable graph navigation to make reasoning paths explicit and verifiable.",
+      "llm_tldr_cn": "将知识图谱问答重构为可追溯的图导航问题，使推理路径显式化且可验证。",
+      "llm_tldr": "将知识图谱问答重构为可追溯的图导航问题，使推理路径显式化且可验证。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
