@@ -1,0 +1,629 @@
+Title: Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code
+
+URL Source: https://arxiv.org/pdf/2609.19199v1
+
+Published Time: Fri, 18 Sep 2026 00:03:19 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+# Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code 
+
+# Jisoo Kim 
+
+Sungkyunkwan University Suwon, Republic of Korea clrdln@g.skku.edu 
+
+# Taeyoon Kwack 
+
+Sungkyunkwan University Suwon, Republic of Korea njj05043@g.skku.edu 
+
+# Jinwoo Jang 
+
+Sungkyunkwan University Suwon, Republic of Korea jinustar@g.skku.edu 
+
+# Woo Kyung Kim 
+
+Sungkyunkwan University Suwon, Republic of Korea kwk2696@g.skku.edu 
+
+# Honguk Woo ∗
+
+Sungkyunkwan University Suwon, Republic of Korea hwoo@skku.edu 
+
+## Abstract 
+
+Large Language Models (LLMs) are increasingly adopted for compli-ance and legal reasoning tasks, yet their outputs often lack explicit grounding in legal logic and evidence. We present Code-as-Auditor, an LLM-based framework that extends the model’s reasoning ca-pability toward structured and evidence-grounded compliance as-sessment. The framework translates regulatory information into (1) formalized checklists and executable decision trees, encoding regulations and conditions as interpretable code structures. Dur-ing inference, each checklist item is (2) dynamically expanded into factual and counterfactual questions, guiding the model to reason over case-specific evidence and potential violations. This process establishes a reasoning pipeline that proceeds from evidence identi-fication, through rule application, to final decision-making, while a self-verification loop improves the logical consistency of the gener-ated code and the traceability of outcomes. Experiments on privacy and data protection scenarios demonstrate that Code-as-Auditor delivers more accurate and evidence-backed evaluations, enabling automated compliance regulation checking grounded in explicit regulatory criteria. 
+
+## CCS Concepts 
+
+• Computing methodologies → Knowledge representation and reasoning ; • Applied computing → Law ; • Security and privacy 
+
+→ Privacy protections. 
+
+## Keywords 
+
+Large Language Models, Automated Compliance Checking, Regu-latory Compliance, Code Generation, Legal Reasoning 
+
+ACM Reference Format: 
+
+Jisoo Kim, Taeyoon Kwack, Jinwoo Jang, Woo Kyung Kim, and Honguk Woo. 2026. Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code. In Proceedings of the 35th ACM International Conference on Information 
+
+> ∗Corresponding author.
+> This work is licensed under a Creative Commons Attribution 4.0 International License.
+> CIKM ’26, Rome, Italy.
+> © 2026 Copyright held by the owner/author(s). ACM ISBN 979-8-4007-2539-5/2026/11 https://doi.org/10.1145/3799682.3840569
+
+Figure 1: An example of false compliance determined by an LLM, where legality is concluded from disclosure alone, missing the regulation’s temporal conditions. 
+
+and Knowledge Management (CIKM ’26), November 7–11, 2026, Rome, Italy. 
+
+ACM, New York, NY, USA, 12 pages. https://doi.org/10.1145/3799682.3840569 
+
+## 1 Introduction 
+
+Large language model (LLM)-powered regulatory compliance sys-tems have rapidly emerged in recent years, reflecting a broader shift toward automated support for interpreting, organizing, and apply-ing legal and regulatory knowledge [6, 52]. This moved compliance analysis beyond static rule lookup, enabling models to assist with complex documents, evolving requirements, and case-specific judg-ments at a scale difficult to achieve through manual review alone. This trend has expanded into contextual privacy analysis, where LLMs are incorporated into systems for assessing privacy-sensitive actions and information flows under specific social and regulatory contexts [24, 34]. It has also extended to broader legal-assistance arXiv:2609.19199v1 [cs.SE] 16 Sep 2026 CIKM ’26, November 7–11, 2026, Rome, Italy. Jisoo Kim, Taeyoon Kwack, Jinwoo Jang,Woo Kyung Kim, & Honguk Woo (i) Regulation-to-Code Reformulation  1
+2
+3
+4
+5
+6
+
+72
+73
+74
+75
+76
+
+
+# Self-verification Loop 
+
+# Regulation  Template 
+
+# Applica ble Condition
+Effect
+Compliance Condition 
+
+# Code
+Verifier 
+
+# Code
+Generator Article 26 (2) 
+
+# (ii) Case-Grounded Checklist Refinement  Checklist  Were data subjects able to access the outsourced information anytime? 
+
+Agency *** outsourced 170M facial images to 24 companies on June 2020. They transparently disclosed the outsourcing details on their website on October 20, 2021. 
+
+👤  Personal  Is Agency *** data controller? 
+
+📋 ⏱️ 
+
+🌍  Violation of Article 26 (2)          
+
+> A # subject == data_controller
+> B # OUTSOURCE(subject, personal_data_processing) == True
+> C # DISCLOSED(outsourcing_details) == True D # DISCLOSED(contractor_information) == True
+> E # ACCESS(outsourced_information) == Anytime
+> F # disclosed_information.ACCESSIBILITY == Easy
+> if A and B:
+> Article26_2[‘applicable’] = True
+> # No Dependencies with other provision
+> if not C and D and E and F:
+> Article26_2[‘compliance’] = False
+
+# Code          
+
+> D# DISCLOSED(contracto
+> E# ACCESS(outsourced
+> E_M #DISCLOSED(subject
+> E_P #agency ==data_co
+> E_T #DISCLOSED(subject
+> E_S #unlimited
+
+# Code 
+
+> 4
+> 5
+> 6
+> 7
+> 8
+> -
+> +
+> +
+> +
+> +
+
+Material  Did Agency *** disclose the details of the outsourcing information? 
+
+Temporal  Did the agency disclose the outsourcing details on June 2020? 
+
+Spatial  Unlimited 
+
+Figure 2: Overview of Code-as-Auditor with empirical results, showing successful detection of the temporal violation missed by LLM in Figure 1. 
+
+systems, where LLMs support practical workflows for consultation, legal-domain reasoning, and data-compliance analysis [50, 61]. Despite this progress, approaches based primarily on open-ended natural-language reasoning remain difficult to rely on for complex regulatory compliance. Prior analyses distinguish several limita-tions: legal knowledge may be inaccurate or fabricated [8]; inter-mediate reasoning may be unsound even when presented step by step [42]; and final explanations may fail to reflect expert legal rea-soning or provide faithful grounding for the decision [7, 18]. These uncertainties arise from implicit rule selection, factual grounding, and inferential steps in natural language form. As shown in Fig-ure 1, such systems can therefore produce seemingly plausible yet possibly incorrect legal outputs, while leaving the basis of the compliance decision unverifiable. Recent neuro-symbolic approaches combine LLMs with explicit symbolic representations and reasoning procedures. The LLM in-duces candidate rules, which are then encoded in symbolic form and executed by a reasoning engine supporting verifiable decision-making [34, 35, 37, 52]. These approaches have demonstrated the ability of structured compliance reasoning with minimal expert effort. However, several limitations remain. First, despite continued improvements in LLM capability, translating natural language pro-visions into symbolic rules is still error-prone, frequently pro-ducing inconsistencies and logical mistakes [36]. Second, most symbolic representations used in practice lack the expressiveness needed to faithfully model complex regulatory logic, including cross-provision dependencies and extensive exception structures [12, 23, 27]. Lastly, a longstanding semantic gap problem persists be-tween abstract symbolic representations and the ambiguous reali-ties of practical contexts [47, 51]. We present Code-as-Auditor , a compliance reasoning frame-work that converts regulatory provisions into executable code, building on LLMs’ capabilities in code reasoning, generation, and evaluation [33, 39, 44, 60]. The framework formulates regulatory reasoning as LLM-based code generation, translating regulations into a novel, executable code representation, and applying an iter-ative self-verification loop to improve both logical and syntactic completeness. The generated code also includes a case-agnostic checklist–a generic set of questions that concretizes the reasoning procedure. Then, given a specific case, the framework instantiates the checklist by expanding each question through Hans Kelsen’s theory of normative validity [29]. This refinement enables compli-ance reasoning via case-adaptive symbolic execution, systematically aligning abstract regulatory conditions with concrete case facts. We evaluate Code-as-Auditor across three regulatory frame-works: the European Union Artificial Intelligence Act [11], the Gen-eral Data Protection Regulation [10], and the Personal Information Protection Act (PIPA) of the Republic of Korea [48]. Code-as-Auditor achieves the highest F1-scores across all frameworks, outperform-ing competing approaches by 3.1 to 12.3 points, demonstrating the effectiveness of executable reasoning for complex compliance assessment. We additionally evaluate Code-as-Auditor against state-of-the-art reasoning models and generalizable neuro-symbolic base-lines in two additional regulatory contexts, the FTC Telemarketing Sales Rule [13] and U.S. Federal Tax Law [54], where it achieves 1.3 and 1.4 accuracy-point gains. Overall, Code-as-Auditor empirically demonstrates the effectiveness of structured, executable regulatory reasoning for complex compliance assessment. Our main contributions are as follows: 
+
+(1) A novel code-based formalization of regulatory compliance reasoning that operationalizes legal conditions and obliga-tions as executable decision logic. 
+
+(2) A verifier-guided regulation-to-code reformulation that im-proves the structural completeness and logical consistency of the generated decision procedures. 
+
+(3) A normatively principled grounding method that aligns ab-stract regulatory predicates with case-specific facts through Kelsen’s normative validity. 
+
+(4) A real-world PIPA dataset for evaluating structurally and logically complex compliance reasoning. Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code CIKM ’26, November 7–11, 2026, Rome, Italy. 
+
+## 2 Related Work 
+
+Compliance Reasoning. Prior work on compliance reasoning has explored a range of training-based methods, each learning different aspects of the legal reasoning process. One approach uses synthetic fine-tuning on legal instruction data, either constructed via legal syllogism prompting [57], or augmented with synthetic scenarios grounded in contextual integrity theory for privacy statutes [12]. Others teach procedural reasoning patterns directly, learning explicit syllogistic structure under reinforcement learning [58]. A comple-mentary line trains input-shaping modules , such as a deficiency detector that solicits clarifying questions before reasoning, to miti-gate underspecified user queries [55]. However, empirical studies highlight persistent shortcomings of such language-mediated ap-proaches in regulatory tasks. Profiling of LLM legal outputs reports hallucination rates that rise sharply with case complexity, with models often presenting incorrect outputs as confidently as correct ones [8]. Even with chain-of-thought prompting, models retain alignment gaps between surface fluency and expert legal reasoning, leaving misclassifications uncorrected [7], and step-by-step error analyses reveal frequent failures in the soundness and correctness of intermediate reasoning [42]. Meanwhile, neuro-symbolic approaches integrate structured symbolic representations to organize regulatory requirements, en-abling compliance reasoning without expert intervention. Contex-tual integrity theory is used to represent privacy norms as a checklist of information-flow attributes for violation detection [34], followed by a benchmark that evaluates LLM compliance against the same pa-rameters [35]. Other work structures regulatory knowledge into an 
+
+eventic graph and combines it with retrieval-augmented generation to verify business processes against regulations [52]. A complemen-tary direction encodes regulatory logic as formal representations: tax statutes are translated into the Catala domain-specific language for executable verification [37], and privacy norms are converted into first-order logic predicates through a three-stage pipeline of semantic-role extraction, hierarchical graph construction, and for-mula synthesis [59]. However, such formalization remains limited in capturing the structural and logical complexity of legal texts and is prone to hallucinations [23, 27]. 
+
+Code-Based Reasoning. In contrast, recent progress in LLM cod-ing capability builds on the scaling of code-specific training: pre-training on large multilingual code corpora [20, 49], and instruction tuning over evolved code-instruction data [38]. Beyond data, scaling has extended to post-training, where reinforcement learning with execution-derived rewards refines coding capability [19, 32]. Bench-marks have grown correspondingly, moving toward more complex tasks drawn from real-world software engineering [2, 9, 26]. Enabled by these advances, recent studies demonstrate that rea-soning through executable code improves logical consistency by externalizing intermediate reasoning steps. One approach uses Python-based reasoning—delegating computational steps to an interpreter—and achieves substantial gains on mathematical [16] and numerical or financial QA [5] benchmarks. Another approach extends code execution with LM-simulated steps, supporting logical, arithmetic, and semantic reasoning tasks [33]. A complementary line interleaves reasoning with environmental actions to ground de-cisions in observable feedback, reducing hallucinations in knowledge-intensive QA and improving success rates in interactive decision-making [56]. We build on this idea by formulating compliance reasoning as executable code generation. 
+
+Structured Normative Representations. Our framework draws on two complementary theoretical traditions. The IRAC frame-work [53] provides a principled sequential structure for legal rea-soning, decomposing legal analysis into four ordered stages: (1) the 
+
+Issue articulates the legal question at stake in the case; (2) the Rule 
+
+specifies the law—statutes, doctrines, or precedents—applicable to that issue; (3) the Application applies the rule to the specific facts of the case; and (4) the Conclusion states the legal outcome that follows from the application. This form of structure is widely employed in computational compliance systems ranging from business process compliance [21] and semantic web-based checking [14] to recent LLM-based legal compliance [17, 25]. We adopt this structure as the basis for our code template. While IRAC captures the deductive structure of compliance rea-soning, bridging abstract regulatory conditions and concrete case facts remains a challenge. Kelsen’s theory of norms [29] provides a principled framework for this bridging, positing that a norm’s valid-ity is fully characterized only when four dimensions are specified: the Personal Sphere (addressee), Material Sphere (action), Tem-poral Sphere (timing), and Spatial Sphere (territory). Formally, a norm 𝑝 decomposes into four sphere boundaries 
+
+𝑝 =  𝑉 𝑃 𝑝 , 𝑉 𝑀 𝑝 , 𝑉 𝑇 𝑝 , 𝑉 𝑆 𝑝 
+
+, (1) and is valid for a case 𝜔 iff every sphere is either unlimited or contains 𝜔 :Valid (𝑝, 𝜔 ) ⇐⇒ 
+
+Û  
+
+> 𝑑 ∈ { 𝑃, 𝑀,𝑇 , 𝑆 }
+
+ 𝑉 𝑑 𝑝 = unlimited ∨ 𝜔 ∈ 𝑉 𝑑 𝑝 
+
+. (2) Our framework leverages these four spheres as a theoretically grounded ontology, decomposing abstract norms into structured boundaries against which the entailment of a norm by a concrete case is determined. 
+
+## 3 Code-as-Auditor 
+
+We present Code-as-Auditor, a compliance reasoning framework that reconceptualizes regulatory assessment as the execution of explicit regulatory logic over grounded case evidence. The key idea is to direct recent advances in LLMs’ code generation and reasoning capabilities toward automated legal interpretation, shifting com-pliance assessment from implicit natural-language inference to an executable process in which legal conditions, exceptions, and ef-fects are represented as code. This design separates two central requirements of regulatory assessment: faithfully modeling the abstract structure of regulation and grounding that structure in concrete case facts. As illustrated in Figure 2, Code-as-Auditor real-izes this design through (i) regulation-to-code reformulation and (ii) case-grounded checklist refinement. 
+
+Regulation-to-code reformulation turns regulatory interpre-tation into an executable reasoning artifact. It translates regulatory provisions into a novel code template that separates applicability, compliance, and legal effect, thereby making the structure of legal CIKM ’26, November 7–11, 2026, Rome, Italy. Jisoo Kim, Taeyoon Kwack, Jinwoo Jang,Woo Kyung Kim, & Honguk Woo 
+
+Figure 3: Illustrative examples of the template based on Arti-cles 15(1), 15(3) and 26(2) of the Personal Information Protec-tion Act. Article 15(3) represents an exception to the consent requirement in Article 15(1). 
+
+reasoning explicit prior to case-specific evaluation. Since such for-malization must preserve conditions, exceptions, and dependencies in complex regulations, Code-as-Auditor builds on the self-verifying generation paradigm [39, 60], through a loop between the code generator (𝑓 gen ) and the code verifier (𝑓 vrf ). The resulting template embeds the IRAC reasoning sequence into executable code and is later instantiated for individual cases through the code executor 
+
+(𝑓 exe ). 
+
+Algorithm 1 Self-verification Loop 
+
+Require: Regulation 𝑅  
+
+> 1:
+
+Initialize checklist Γ ← ∅  
+
+> 2:
+
+Initialize code set Π ← ∅  
+
+> 3:
+
+for 𝑝 ∈ 𝑅 do  
+
+> 4:
+
+Initialize candidate set C ← ∅  
+
+> 5:
+
+Initialize code and feedback 𝜋 (𝑝 ) 
+
+> 0
+
+← ∅ , 𝜂 0 ← ∅  
+
+> 6:
+
+for 𝑖 = 1 to 𝑁 do  
+
+> 7:
+
+(𝜋 (𝑝 ) 
+
+> 𝑖
+
+, ΔΓ 𝑖 ) ← 𝑓 gen (𝑝, 𝜋 (𝑝 )  
+
+> 𝑖 −1
+
+, 𝜂 𝑖 −1) 
+
+> 8:
+
+𝜂 𝑖 ← 𝑓 vrf (𝑝, 𝜋 (𝑝 ) 
+
+> 𝑖
+
+, ΔΓ 𝑖 ) 
+
+> 9:
+
+C ← C ∪ {( 𝜋 (𝑝 ) 
+
+> 𝑖
+
+, 𝜂 𝑖 )}  
+
+> 10:
+
+end for  
+
+> 11:
+
+𝜋 ∗( 𝑝 ) ← arg max     
+
+> (𝜋 (𝑝 )
+> 𝑖 ,𝜂 𝑖 ) ∈ C
+
+score (𝜂 𝑖 ) 
+
+> 12:
+
+Γ ← Γ ∪ ΔΓ  
+
+> 13:
+
+Π ← Π ∪ { 𝜋 (𝑝 )∗ } 
+
+> 14:
+
+end for  
+
+> 15:
+
+return Π, Γ
+
+Algorithm 2 Code Executor Ψexe (𝜋 (𝑝 ) , 𝜔 )
+
+Require: 𝜋 (𝑝 ) = (𝜏 (𝑝 ) , Γ, {𝜋 (𝑞 ) }𝑞 ∈child (𝑝 ) ), case 𝜔  
+
+> 1:
+
+𝑟 (𝑝 ) ← (¬ 𝛼, 𝜙 ) ⊲ initialize return value  
+
+> 2:
+
+if 𝐶 app then  
+
+> 3:
+
+𝑟 (𝑝 ) ← ( 𝛼, 𝜙 ) ⊲ provision is applicable  
+
+> 4:
+
+Execute 𝜀  
+
+> 5:
+
+for each 𝑞 ∈ child (𝑝 ) do  
+
+> 6:
+
+Ψexe (𝜋 (𝑞 ) , 𝜔 ) ⊲ execute child provision  
+
+> 7:
+
+end for  
+
+> 8:
+
+if ¬𝐶 com then  
+
+> 9:
+
+𝑟 (𝑝 ) ← ( 𝛼, ¬𝜙 ) ⊲ provision not complied  
+
+> 10:
+
+end if  
+
+> 11:
+
+end if  
+
+> 12:
+
+return 𝑟 (𝑝 )
+
+Case-grounded checklist refinement provides the ground-ing interface between executable regulatory logic and concrete case evidence. While regulation-to-code reformulation captures the abstract structure of a provision, compliance assessment depends on whether the facts of a given case entail the regulatory condi-tions encoded in the executable code. The checklist refiner (𝑓 ref )therefore expands checklist variables into case-specific questions structured by Kelsen’s four spheres of validity [29], aligning each condition with the relevant personal, material, temporal, and spa-tial dimensions of the case. This normatively structured grounding reduces the semantic gap between abstract regulatory predicates and concrete factual contexts, enabling Code-as-Auditor to evaluate regulatory entailment over case evidence. 
+
+## 3.1 Regulation-to-Code Reformulation 
+
+Code template. We introduce the code template 𝜏 that encodes a principled compliance reasoning path of IRAC [53] directly into code structure: 
+
+𝜏 = (𝐶 app , 𝐶 com , 𝜀 ) (3) Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code CIKM ’26, November 7–11, 2026, Rome, Italy. 
+
+Figure 4: Case-grounded checklist reformulation based on Kelsen’s four spheres of validity. 
+
+where 𝐶 app is the applicable condition , 𝐶 com is the compliance condi-tion , and 𝜀 is the effect . The applicable condition and the compliance condition are boolean statements that determine whether the regula-tion applies to a given case and whether the case complies with the regulation, respectively. The effect captures executable interactions with other provisions, enabling the representation of complex and multi-dimensional regulatory outcomes. An illustrative example of the resulting template is provided in Figure 3. 
+
+Checklist. Our framework introduces checklists as the mech-anism for grounding symbolic regulatory components in case-specific facts. Each checklist item 𝛾 ∈ Γ serves as an interface that binds abstract predicates in 𝐶 app , 𝐶 com , and 𝜀 to concrete evidence at test time. Since these variables are defined at the predicate level, the same 𝛾 may be reused across provisions sharing common con-ditions, thereby capturing inter-provision dependencies through shared bindings. The cumulative set Γ thus encodes both fact-to-rule and rule-to-rule mappings within the regulatory structure. The checklist is accumulated through verifier-guided optimization, with the generator proposing candidate variables and the verifier se-lecting those that best preserve regulatory logic while supporting case-level grounding. 
+
+Executable code. Together with the code template 𝜏 and the exe-cutable code of its child provisions, the executable code 𝜋 (𝑝 ) for a provision 𝑝 is defined as 
+
+𝜋 (𝑝 ) = (𝜏 (𝑝 ) , Γ, {𝜋 (𝑞 ) }𝑞 ∈child (𝑝 ) ) (4) where child (𝑝 ) indicates sub-provisions of 𝑝 . This recursive defini-tion reflects the hierarchical structure of regulation. Let 𝑅 denote a regulation consisting of a hierarchy of provisions. The complete executable code 𝜋 (𝑅 ) is then obtained by composing the executable codes of all provisions, forming a tree structure rooted at the top-level provisions. 
+
+Self-verification loop. We propose the self-verification loop for structured code generation. This loop iteratively refines the gen-erated code through the code generator (𝑓 gen ) and the code verifier 
+
+(𝑓 vrf ). Let Π(𝑝 ) denote the set of candidate codes generated over 𝑁 
+
+iterations for provision 𝑝 . The optimal code is selected as: 
+
+𝜋 ∗( 𝑝 ) = arg max   
+
+> 𝜋 ∈Π(𝑝 )
+
+score (𝑓 vrf (𝑝, 𝜋 )) (5) where score (·) quantifies the outcome of self-verification, serving as the objective for deriving the most complete code through repeated verification. The code generator (𝑓 gen ) takes a regulatory provision 𝑝 , the prior code 𝜋 (𝑝 )  
+
+> 𝑖 −1
+
+, and previous feedback 𝜂 𝑖 −1 given from the code verifier 
+
+described below, producing both a refined code and newly proposed checklist variables: 
+
+𝑓 gen : (𝑝, 𝜋 (𝑝 )  
+
+> 𝑖 −1
+
+, 𝜂 𝑖 −1) ↦ → ( 𝜋 (𝑝 ) 
+
+> 𝑖
+
+, ΔΓ 𝑖 ). (6) The code verifier (𝑓 vrf ) evaluates how accurately the code and pro-posed checklist represent the regulatory logic returning a feedback 
+
+𝜂 𝑖 including both a numerical score and an explanation: 
+
+𝑓 vrf : (𝑝, 𝜋 (𝑝 ) 
+
+> 𝑖
+
+, ΔΓ 𝑖 ) ↦ → 𝜂 𝑖 . (7) The iteration starts from 𝜋 (𝑝 ) 
+
+> 0
+
+= ∅ and 𝜂 0 = ∅. The verifier scores each candidate code along five criteria: 
+
+• Necessity : whether each newly introduced checklist vari-able is essential or can be replaced by existing variables. 
+
+• Atomicity : whether each condition is concrete and binary-answerable, avoiding vague vernacular. 
+
+• Hierarchical Integrity : whether the code respects hierar-chical structure of regulation. 
+
+• Logical Completeness : whether the code faithfully repre-sents regulatory logic and handles None (unspecified) values. 
+
+• Syntactic Validity : whether the code is syntactically valid and references only defined variables. Each criterion is scored on a 0-5 scale, and the loop terminates when all criteria reach the maximum score or further iterations no longer improve the scores, up to a maximum of 𝑁 iterations. By default, we set 10 verification loops following the empirical findings in Section 5.3.2. Algorithm 1 summarizes the full procedure, including the accumulation of checklist variables. The resulting code-form symbolic representation of the regula-tion serves as an externalized deductive reasoning path that, once generated, is repeatedly reused across cases for evaluation. 
+
+Code executor and Compliance decision tree. To evaluate compli-ance systematically, we organize the executable codes 𝜋 (𝑅 ) into a hierarchical structure termed the compliance decision tree , where the 
+
+code executor (𝑓 exe ) traverses recursively and executes each provi-sion code 𝜋 (𝑝 ) , realizing compliance assessment as a tree-structured decision process. For each provision code 𝜋 (𝑝 ) , the executor pro-duces a compliance evaluation result 𝑟 (𝑝 ) of the case 𝜔 :
+
+𝑓 exe : (𝜋 (𝑝 ) , 𝜔 ) ↦ → 𝑟 (𝑝 ) , 𝑟 (𝑝 ) ∈ A × P (8) CIKM ’26, November 7–11, 2026, Rome, Italy. Jisoo Kim, Taeyoon Kwack, Jinwoo Jang,Woo Kyung Kim, & Honguk Woo 
+
+where A = {𝛼, ¬𝛼 } and P = {𝜙, ¬𝜙 }, 𝛼 denotes applicability and 𝜙 
+
+denotes compliance. The executor recursively transitions each node to 𝛼 if its applicable condition is satisfied, and subsequently to ¬𝜙 if its compliance condition is not met. The full execution procedure is described in Algorithm 2. After executing the complete executable code 𝜋 (𝑅 ) , any provision with an execution result of (𝛼, ¬𝜙 )—indicating that the provision is applicable but not complied with—is judged as violated, where Violation (𝑝, 𝜔 ) denotes whether provision 𝑝 is determined to be violated for the case 𝜔 by code execution: Violation (𝑝, 𝜔 ) ⇔ 𝑓 exe (𝜋 (𝑝 ) , 𝜔 ) = (𝛼, ¬𝜙 ). (9) Violations are then propagated upward along the provision hierar-chy to the regulation 𝑅 , which is considered compliant if and only if no violated provision exists. 
+
+## 3.2 Case-Grounded Checklist Refinement 
+
+The checklist refiner (𝑓 ref ) rewrites the original checklist Γ based on the case 𝜔 to produce a case-grounded checklist Γ′:
+
+𝑓 ref : (Γ, 𝜔 ) ↦ → Γ′ . (10) This refinement proceeds in two stages, as illustrated in Fig-ure 4: abstract decomposition , which breaks each checklist item into normatively grounded sub-conditions, followed by contextual grounding , which grounds each sub-condition to the specific entities and context of the case. In the abstract decomposition stage, each checklist item 𝛾 is decomposed into four sub-conditions according to Kelsen’s four spheres of validity: the responsible party (personal), required action (material), time constraint (temporal), and applicable jurisdiction (spatial). In the contextual grounding stage, each decomposed sub-condition is rewritten regarding the case 𝜔 , yielding case-specific questions for each of the four normative dimensions. To handle evidentiary uncertainty, we adopt a ternary evaluation logic, where each sub-question evaluates to True (support), False (contradict), and None 
+
+(absent). This design reflects record-bound adjudication: absent facts are treated as unavailable evidence rather than contradiction. In application of automated regulatory auditing systems, None can function as a signal of unresolved information required for compli-ance judgment. Through this two-stage process, each 𝛾 is refined into a conjunc-tion of case-specific inquiries, and a checklist is deemed entailed by the case only when all of its sub-conditions evaluate to True 
+
+within their respective normative scopes. 
+
+## 3.3 Implementation Prompts 
+
+Table 1 specifies the implementation prompts for the code generator 
+
+(𝑓 gen ) and code verifier (𝑓 vrf ), introduced in the regulation-to-code reformulation of Section 3.1. 
+
+## 4 PIPA Evaluation Dataset 
+
+As shown in Figure 5, we construct an evaluation dataset of real-world compliance cases that requires reasoning over a regulation of substantial structural complexity. We build the dataset on the Personal Information Protection Act (PIPA) of the Republic of Korea, which exhibits comparatively higher structural complexity (Table 2) 
+
+Table 1: Abbreviated prompts for ( 𝑓 gen ) and ( 𝑓 vrf ). Code Generator (𝑓 gen )You encode each article of {LAW} as a JSON schema that detects whether the subject complies. 
+
+Objectives. 
+
+• Generate a logically consistent JSON schema for the tar-get legal unit. 
+
+• Prefer existing variables and add only necessary variables for evaluation. 
+
+Rules. 
+
+• Each unit is encoded with applicable_condition ,
+
+effect_code , and compliance_condition .
+
+• If applicable_condition is False , the unit is skipped. 
+
+• Use effect for cross-article side effects or exceptions. 
+
+• Added variables must be atomic, observable, and handle 
+
+None explicitly. 
+
+Code Verifier (𝑓 vrf )You score a generated JSON encoding of one article of {LAW}. 
+
+Criteria (each scored 0–5). 
+
+• Necessity -added variables are needed and not duplicates. 
+
+• Specificity -descriptions are concrete, declarative, and Yes/No-answerable. 
+
+• Logic -conditions reflect the article, exceptions, and None 
+
+handling. 
+
+• Code -Python is syntactically valid and references only defined names. 
+
+• Hierarchy -higher-level units do not depend on lower-level states. 
+
+• For scores below 5, identify specific issues and one-line fixes. 
+
+Table 2: Article counts and internal cross-references per reg-ulation. PIPA shows the highest cross-reference density. EU AI Act GDPR PIPA 
+
+Total Articles 113 99 76 Cross-References 69 79 85 
+
+Cross-References / Articles 0.61 0.80 1.12 
+
+Table 3: Deontic statements and conditional branches per regulation, with PIPA exhibiting the highest density. EU AI Act GDPR PIPA 
+
+Deontic 1,683 986 353 Conditional 696 592 952 
+
+Conditional / Deontic 0.41 0.60 2.70 and logical complexity (Table 3). The dataset comprises 406 publicly Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code CIKM ’26, November 7–11, 2026, Rome, Italy. 
+
+Figure 5: Distribution of the real-world PIPA evaluation dataset, across respondent types (top) and violation cate-gories (bottom). 
+
+available deliberation decisions issued by the Personal Information Protection Commission (PIPC). 1
+
+## 4.1 Preprocessing and Verification 
+
+Every collected document was first manually inspected to con-firm that personally identifiable information had been properly anonymized. We then used GPT-5 [45] to compress each decision into a concise case description containing central legal points at issue in the case. Compliance labels are taken directly from the Commission’s adjudications. To maintain high data quality, authors cross-checked every summary against its source to ensure factual consistency with the original deliberation decision. 
+
+## 5 Experiments 5.1 Experimental Settings 
+
+Datasets. We evaluate on three regulatory frameworks: the EU AI Act [11], GDPR [10], and PIPA [48]. For the EU AI Act and GDPR, we utilize benchmarks from PrivaCI-Bench [35], which comprises real court cases, privacy policies, and synthetic vignettes built from official compliance toolkits. For PIPA, evaluation is conducted on 
+
+> 1https://www.pipc.go.kr/np/
+
+the dataset we construct in Section 4. We arrange the evaluation across the EU AI Act, GDPR, and PIPA as an ordered spectrum of complexity. 
+
+Metrics. We evaluate compliance reasoning at the article level across all test cases. We report micro-averaged recall and F1-score, evaluated over three trials, defining a true positive as a correctly identified violation of a specific article within a given case. 
+
+Baselines. We compare Code-as-Auditor against five baseline methods that utilize LLM-generated symbolic representations for compliance reasoning: (1) Direct Prompting , a basic baseline with-out intermediate representations; (2) CI Parameter [34], which models information flows as 5-tuples based on Contextual Integrity [43]; (3) Deontic Triplet [52], which parses regulations into ⟨agent, deontic operator, action ⟩ triplets structured via an eventic knowledge graph; (4) PolicyLR [22], which represents policies as valuations over atomic formulae; and (5) Semantic FOL [59] encoding regu-lations as first-order logic predicates. 
+
+Implementation Details. We employ GPT-5 [45] to generate the symbolic representations for all baselines and Code-as-Auditor. For the inference stage, Qwen2.5-7B [46] serves as the default backbone to evaluate compliance across all methods. 
+
+## 5.2 Overall Performance 
+
+As shown in Table 4, tuple-based methods such as CI Parameter and Deontic Triplet perform well on simpler regulations but suf-fer substantial degradation as complexity increases (CI Parameter: 
+
+−45.6; Deontic Triplet: −39.6), whereas logic-based representations maintain comparatively stronger performance even under higher complexity, achieving 40.1 (PolicyLR) and 43.0 (Semantic FOL) F1-scores on PIPA. Code-as-Auditor achieves the highest F1-scores across all frameworks, surpassing the second-best methods by +3.1 on the EU AI Act, +3.4 on GDPR, and +12.3 on PIPA, demonstrating its well-structured hierarchical design and high expressive capacity consistently leading to high performance under increasing com-plexity. 
+
+## 5.3 Analysis 
+
+5.3.1 Inference Model Scale. To examine the sensitivity of sym-bolic representations to inference model capacity, we evaluate tuple-based (CI Parameter, Deontic Triplet) and logic-based methods (Poli-cyLR, Semantic FOL) using smaller inference models (Qwen2.5-1.5B and 0.5B), with results summarized in Table 5. The effect is particu-larly pronounced for logic-based representations, where reduced inference capacity widens the semantic gap between formalized rules and case facts, leading to larger performance degradation. In comparison, Code-as-Auditor externalizes the reasoning path and reduces inference to evaluating only atomic conditions, resulting in greater robustness to model scaling. Code-as-Auditor preserves the highest F1-score while exhibiting the smallest degradation com-pared to the 7B model in the EU AI Act ( −4.7) and PIPA ( −12.8). 
+
+5.3.2 Self-Verification Loop Scale. To analyze the effect of the self-verification loop, we experiment by varying the number of ver-ification iterations, with the results shown in Figure 6. Overall CIKM ’26, November 7–11, 2026, Rome, Italy. Jisoo Kim, Taeyoon Kwack, Jinwoo Jang,Woo Kyung Kim, & Honguk Woo 
+
+Table 4: Overall performance comparison across three regulatory frameworks evaluated with the Qwen2.5-7B model. 
+
+EU AI Act GDPR PIPA Methods Recall F1-score Recall F1-score Recall F1-score Direct Prompting 96.0±0.2 46.0±0.1 72.8±0.2 43.5±0.1 87.5±1.9 29.4±0.6 CI Parameter [34] 87.4±0.5 77.3±0.7 55.9±0.5 57.8±0.3 27.6±0.0 31.7±0.4 Deontic Triplet [52] 80.4±0.4 69.0±0.4 43.8±0.1 43.0±0.1 32.7±1.0 29.4±0.9 PolicyLR [22] 51.3±0.1 48.0±0.1 48.6±10.7 47.0±5.7 60.8±5.5 40.1±2.2 Semantic FOL [59] 82.9±0.8 87.6±0.1 54.2±1.5 51.9±1.6 60.5±1.0 43.0±0.7 Code-as-Auditor (Ours) 84.5±1.4 90.7 ±0.5 74.7±4.0 61.2 ±0.9 80.0±5.1 55.3 ±3.6 
+
+Table 5: The overall F1 score across three regulatory frame-works with Qwen2.5-1.5B and 0.5B model. Regulation Method 1.5B 0.5B 
+
+EU AI Act Tuple 63.5±0.2 49.4±0.6 Logic 39.1±0.1 27.2±0.2 Ours 89.9±0.8 86.0±0.2 GDPR Tuple 32.3±1.5 25.9±1.0 Logic 21.6±0.6 14.2±0.3 Ours 48.7±2.1 47.8±1.6 PIPA Tuple 20.7±0.2 18.3±0.1 Logic 16.0±0.5 9.6±0.4 Ours 53.8±1.1 42.5±1.0 
+
+Figure 6: Performance comparison across maximum self-verification loop depth. 
+
+performance improves as iteration increases and saturates around 10 iterations, achieving F1-scores in all frameworks. This saturation behavior demonstrates that self-verification ef-fectively guides the model toward logically and syntactically com-plete code generation. However, additional iterations lead to perfor-mance degradation across datasets (AI Act −1.5, GDPR −12.7, PIPA 
+
+−16.3 at 14 iterations). Consistent with prior work on iterative self-refinement [3], additional iterations in our legal setting encourage overly deductive compliance reasoning, increasing the semantic gap between symbolic representations and real-world contexts. 
+
+5.3.3 Analysis of Checklist Refinement. We analyze alternative approaches to ground case evidence on real-world PIPA deliberation cases. We compare Kelsen’s four spheres of validity [29] against four baselines: Claim-Element analysis [40], a requirement-based legal decomposition, and three factual grounding methods—5W1H, FActScore [41], and ClaimDecomp [4]. Results are illustrated in Figure 7 Claim-Element achieves comparatively high precision through legal requirement-based de-composition (37.44), yet its limited alignment with case evidence constrains overall reasoning performance. Among fact-oriented methods, FActScore attains high evidence coverage, achieving the second-strongest recall (76.90) and the second-best overall perfor-mance (50.21), though its atomic fact decomposition remains weakly aligned with normative rule constraints. Kelsen’s validity (ours) 
+
+achieves the best performance across all metrics by decomposing regulatory conditions into normatively principled dimensions, en-abling precise rule application while maintaining broad evidence coverage. 
+
+5.3.4 Ablation Study. We systematically evaluate the contribution of each component by removing it from the full framework. Figure 8 reports the mean and standard deviation over three randomized trials. 
+
+Checklist refinement. Without checklist refinement, recall drops substantially across GDPR ( −18.65) and PIPA ( −37.91). This indi-cates that the symbolic rules fail to bridge the semantic gap between abstract predicates and concrete case facts—a capacity uniquely provided by Kelsen’s four spheres of validity. 
+
+Code template. The impact of removing the code template scales with regulatory complexity: the F1 drop is modest on the EU AI Act (−1.57) but severe on PIPA ( −30.86). This highlights its effectiveness, particularly under complex conditions. 
+
+Self-verification loop. Removing the self-verification loop resulted in syntactically invalid code across all three regulatory domains, yielding zero scores on every metric. This indicates that the self-verification loop is essential for ensuring executable code genera-tion, serving as a structural prerequisite for the compliance reason-ing pipeline. 
+
+## 5.4 Framework Generality 
+
+To examine whether Code-as-Auditor generalizes as a methodol-ogy beyond privacy-specific compliance, we re-instantiate the full pipeline on two tasks from LegalBench [17] drawn from regula-tions disjoint from our primary benchmark: Telemarketing , a rule-application task that evaluates violations of the FTC Telemarketing Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code CIKM ’26, November 7–11, 2026, Rome, Italy. 100 
+
+## 80 
+
+> F1 Score (%)
+
+## 60 
+
+## 40 
+
+## 20 
+
+## 0
+
+## Precision 
+
+## Claim-Element  5W1H  FAct Score  Claim Decomp 
+
+## Kelsen's Validity 
+
+## Recall 
+
+## F1-score 
+
+Figure 7: Performance comparison across checklist refine-ment methods on real-world PIPA cases. 
+
+Figure 8: Ablation analysis of Code-as-Auditor. Removing Self-reflection loop resulted in a syntax error. 
+
+Sales Rule [13], and SARA Entailment , a statutory entailment task grounded in U.S. Federal Tax Law [54]. The framework is compared against two baseline families: general-purpose SOTA reasoning models (GPT-5 [45], Claude 4 [1]) and generalizable neuro-symbolic methods (Deontic Triplet [52], Semantic FOL [59]). Results are sum-marized in Table 6. Code-as-Auditor’s gains over both backbone models clarify the source of its performance. By outperforming GPT-5, it shows that structured regulatory reasoning improves upon direct reasoning by the artifact-construction model. By outperforming Qwen2.5-7B, it shows that the test-time model benefits from structured neuro-symbolic guidance. Its superiority over other generalizable baselines further demonstrates that the proposed formulation provides a more effective representation for regulatory compliance reasoning. Together, these results demonstrate the broader applicability of Code-as-Auditor to regulatory entailment reasoning across diverse domains and task settings. 
+
+## 6 Qualitative Evaluation 
+
+Figure 9 illustrates three recurring challenges in compliance rea-soning, and shows how Code-as-Auditor addresses each. 
+
+Multi-granular logical reasoning. Provisions with hierarchical structure and enumerated mandatory items are challenging, as they 
+
+Table 6: Comparison of state-of-the-art reasoning mod-els, generalizable neuro-symbolic approaches, and Code-as-Auditor on the SARA and Telemarketing benchmarks. Aver-aged accuracy (%) is reported over three runs. 
+
+Reasoning Approach Telemarketing SARA GPT-5 [45] 90.7±1.2 78.8±0.7 GPT-5 Mini [45] 73.0±3.2 81.3±1.1 Claude Sonnet 4.5 [1] 85.1±5.6 63.8±0.2 Claude Opus 4.5 [1] 84.2±5.1 57.6±2.3 Qwen2.5-7B [46] 44.6±9.1 40.3±1.6 Deontic Triplet [52] 56.0±3.6 54.9±1.7 Semantic FOL [59] 59.6±0.0 56.3±1.0 Code-as-Auditor (Ours) 92.0±0.4 82.7±3.1 
+
+require both holistic and fine-grained evaluation. A single compli-ance signal can mask the absence of other required elements. In Case 1 (left panel), a consent form was obtained from employees but omitted the retention period and the right to refuse, both required under Article 15(2). Code-as-Auditor decomposed each provision into atomic checklist variables, ensuring that every mandatory item is independently verified. 
+
+Multi-dimensional assessment. Obligations carry implicit validity dimensions: not only what must be done but also when , by whom ,and where . Reducing compliance reasoning to a single sequential reasoning path may obscure these dimensions by collapsing them. In Case 2 (center panel), data subjects were notified shortly after investigation results arrived, yet the ‘without delay’ obligation of Article 34(1) had already been triggered four months earlier when the breach was first reported by police. Code-as-Auditor grounds each checklist item in its relevant validity dimension, successfully binding temporal conditions to the legally defined trigger point. 
+
+Context-robust evaluation. LLMs frequently exhibit variability depending on prompt formulation and contextual framing [15, 62]. When a case has a dominant narrative framing, attention may concentrate on provisions that fit that frame while upstream prohi-bitions go unexamined. In Case 3 (right panel), the case is framed as a data breach incident, drawing attention to safety measure violations. Article 24-2(1), which prohibits processing resident reg-istration numbers without a legal exception, falls outside that frame and was not identified. Code-as-Auditor evaluates each provision by executing its compliance condition code independently. The result is determined by whether the coded conditions are satisfied, not by the narrative context. 
+
+## 7 Conclusion 
+
+We introduced Code-as-Auditor, which reconceptualizes legal rea-soning as code generation and structured reasoning. By external-izing reasoning into interpretable code, the approach addresses limitations of language-based compliance and further mitigates several limitations previously observed in neuro-symbolic com-pliance systems. Beyond addressing these limitations, structuring compliance reasoning as interpretable and executable code offers a promising pathway toward systematic regulatory auditing. CIKM ’26, November 7–11, 2026, Rome, Italy. Jisoo Kim, Taeyoon Kwack, Jinwoo Jang,Woo Kyung Kim, & Honguk Woo 
+
+Figure 9: Three challenging compliance reasoning scenarios where GPT-5 misinterprets the legal basis, while Code-as-Auditor correctly identifies the violation. 
+
+## 8 Discussion 
+
+Analogical Reasoning. Real-world legal reasoning rests on both deductive rule application and analogical inference from precedent and expert judgment. This work lays the groundwork for structured reasoning in deductive legal inference, upon which future studies can align reasoning traces with expert preferences [31] and refine the executable code via precedent-grounded verifiable rewards [44]. 
+
+Verifiable Logic. Our self-verification loop certifies that a provi-sion is encoded as a well-formed decision procedure, but not that the encoding preserves the meaning of the statutory text. Future work may close this gap by yielding executable regulatory logic that is principled and verifiable [28, 30]. 
+
+Missing Evidence. Following the record-bound maxim quod non est in actis, non est in mundo , our ternary logic resolves unproven conditions against violation as the burden of proof dictates, though it does not distinguish genuine record silence from facts that ground-ing fails to extract. Since each None is bound to an atomic checklist question, the None set enumerates the information still required for a judgment, enabling targeted review in deployment. 
+
+Dataset Bias. The PIPA dataset is collected from publicly released PIPC deliberation decisions, with compliance labels taken directly from the Commission’s adjudications and every summary cross-checked by the authors against its source record. However, as the case descriptions are GPT-5 summaries of already-adjudicated de-cisions, they may smooth the distractors and buried facts of raw records and underrepresent borderline situations. 
+
+## Acknowledgments 
+
+This work was supported by the TIPS(Tech Incubator Program for Startup) R&D Program (RS-2024-00508880), funded by the Ministry of SMEs, Republic of Korea, Institute of Information & communica-tions Technology Planning & Evaluation(IITP) grant funded by the Korea government(MSIT) (RS-2019-II190421, AI Graduate School Support Program(Sungkyunkwan University), RS-2022-II221045 (2022-0-01045), Self-directed multi-modal Intelligence for solving unknown, open domain problems, RS2022-II220043, Adaptive Per-sonality for Intelligent Agents, No.RS-2025-25442569, AI Star Fel-lowship Support Program(Sungkyunkwan Univ.), RS-2025-02218768, Accelerated Insight Reasoning via Continual Learning), Samsung Electronics Co., Ltd, Institute of Information & Communications Technology Planning & Evaluation(IITP)-ITRC(Information Tech-nology Research Center) grant funded by the Korea government(MSIT) (IITP-2026-RS-2024-00437633), National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (No. RS-2026-25474409). Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code CIKM ’26, November 7–11, 2026, Rome, Italy. 
+
+## GenAI Usage Disclosure 
+
+Beyond their role within the proposed methodology, the GPT-5 and Claude 4 model families were used solely for clarity improvements in writing and functional suggestions in code. All results were reviewed, verified, and finalized by the authors. 
+
+## References 
+
+[1] Anthropic. 2025. Claude 4 System Card: Claude Opus 4 and Claude Sonnet 4. https://www.anthropic.com/claude-4-system-card. [2] Jacob Austin, Augustus Odena, Maxwell Nye, Maarten Bosma, Henryk Michalewski, David Dohan, Ellen Jiang, Carrie Cai, Michael Terry, Quoc Le, et al. 2021. Program synthesis with large language models. arXiv preprint arXiv:2108.07732 (2021). [3] Justin Chen, Archiki Prasad, Swarnadeep Saha, Elias Stengel-Eskin, and Mohit Bansal. 2025. MAgICoRe: Multi-Agent, Iterative, Coarse-to-Fine Refinement for Reasoning. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , Christos Christodoulopoulos, Tanmoy Chakraborty, Carolyn Rose, and Violet Peng (Eds.). Association for Computational Linguistics, Suzhou, China, 32663–32686. doi:10.18653/v1/2025.emnlp-main.1660 [4] Jifan Chen, Aniruddh Sriram, Eunsol Choi, and Greg Durrett. 2022. Generat-ing Literal and Implied Subquestions to Fact-check Complex Claims. In Pro-ceedings of the 2022 Conference on Empirical Methods in Natural Language Pro-cessing , Yoav Goldberg, Zornitsa Kozareva, and Yue Zhang (Eds.). Association for Computational Linguistics, Abu Dhabi, United Arab Emirates, 3495–3516. doi:10.18653/v1/2022.emnlp-main.229 [5] Wenhu Chen, Xueguang Ma, Xinyi Wang, and William W. Cohen. 2023. Pro-gram of Thoughts Prompting: Disentangling Computation from Reasoning for Numerical Reasoning Tasks. Trans. Mach. Learn. Res. 2023 (2023). https: //openreview.net/forum?id=YfZ4ZPt8zd [6] Dasol Choi, DongGeon Lee, Brigitta Jesica Kartono, Helena Berndt, Taeyoun Kwon, Joonwon Jang, Haon Park, Hwanjo Yu, and Minsuk Kahng. 2026. COM-PASS: A Framework for Evaluating Organization-Specific Policy Alignment in LLMs. In Proceedings of the 64th Annual Meeting of the Association for Computa-tional Linguistics (Volume 1: Long Papers) . Association for Computational Linguis-tics, San Diego, California, United States, 46087–46133. doi:10.18653/v1/2026.acl-long.2139 [7] Yu Ying Chu, Sieh-chuen Huang, and Hsuan-Lei Shao. 2025. Unpacking Legal Reasoning in LLMs: Chain-of-Thought as a Key to Human-Machine Alignment in Essay-Based NLU Tasks. In Proceedings of the 5th Workshop on Natural Logic Meets Machine Learning (NALOMA) , Lasha Abzianidze and Valeria de Paiva (Eds.). Association for Computational Linguistics, Bochum, Germany, 1–7. https: //aclanthology.org/2025.naloma-1.1/ [8] Matthew Dahl, Varun Magesh, Mirac Suzgun, and Daniel E Ho. 2024. Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models. Journal of Legal Analysis 16, 1 (06 2024), 64–93. arXiv:https://academic.oup.com/jla/article-pdf/16/1/64/58336922/laae003.pdf doi:10.1093/jla/laae003 [9] Xueying Du, Mingwei Liu, Kaixin Wang, Hanlin Wang, Junwei Liu, Yixuan Chen, Jiayi Feng, Chaofeng Sha, Xin Peng, and Yiling Lou. 2024. Evaluating Large Language Models in Class-Level Code Generation. In Proceedings of the 46th IEEE/ACM International Conference on Software Engineering, ICSE 2024, Lisbon, Portugal, April 14-20, 2024 . ACM, 81:1–81:13. doi:10.1145/3597503.3639219 [10] European Union. 2016. Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (General Data Protection Regulation). OJ L 119, 4.5.2016, pp. 1–88. [11] European Union. 2024. Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). OJ L, 2024/1689, 12.7.2024. [12] Wei Fan, Haoran Li, Zheye Deng, Weiqi Wang, and Yangqiu Song. 2024. GoldCoin: Grounding Large Language Models in Privacy Laws via Contextual Integrity Theory. In Proceedings of the 2024 Conference on Empirical Methods in Natu-ral Language Processing , Yaser Al-Onaizan, Mohit Bansal, and Yun-Nung Chen (Eds.). Association for Computational Linguistics, Miami, Florida, USA, 3321– 3343. doi:10.18653/v1/2024.emnlp-main.195 [13] Federal Trade Commission. 2024. Telemarketing Sales Rule. 16 C.F.R. Part 310. Federal Trade Commission regulation governing telemarketing practices. https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-310 [14] Enrico Francesconi and Guido Governatori. 2023. Patterns for legal compliance checking in a decidable framework of linked open data. Artif. Intell. Law 31, 3 (2023), 445–464. doi:10.1007/S10506-022-09317-8 [15] Isabel O. Gallegos, Ryan A. Rossi, Joe Barrow, Md Mehrab Tanjim, Sungchul Kim, Franck Dernoncourt, Tong Yu, Ruiyi Zhang, and Nesreen K. Ahmed. 2024. Bias and Fairness in Large Language Models: A Survey. Computational Linguistics 50, 3 (Sept. 2024), 1097–1179. https://aclanthology.org/2024.cl-3.8/ [16] Luyu Gao, Aman Madaan, Shuyan Zhou, Uri Alon, Pengfei Liu, Yiming Yang, Jamie Callan, and Graham Neubig. 2023. PAL: Program-aided Language Models. In International Conference on Machine Learning, ICML 2023, 23-29 July 2023, Hon-olulu, Hawaii, USA (Proceedings of Machine Learning Research, Vol. 202) , Andreas Krause, Emma Brunskill, Kyunghyun Cho, Barbara Engelhardt, Sivan Sabato, and Jonathan Scarlett (Eds.). PMLR, 10764–10799. https://proceedings.mlr.press/ v202/gao23f.html [17] Neel Guha, Julian Nyarko, Daniel E. Ho, Christopher Re, Adam Chilton, Aditya Narayana, Alex Chohlas-Wood, Austin Peters, Brandon Waldon, Daniel Rock-more, Diego Zambrano, Dmitry Talisman, Enam Hoque, Faiz Surani, Frank Fagan, Galit Sarfaty, Gregory M. Dickinson, Haggai Porat, Jason Hegland, Jessica Wu, Joe Nudell, Joel Niklaus, John J Nay, Jonathan H. Choi, Kevin Tobia, Margaret Hagan, Megan Ma, Michael Livermore, Nikon Rasumov-Rahe, Nils Holzenberger, Noam Kolt, Peter Henderson, Sean Rehaag, Sharad Goel, Shang Gao, Spencer Williams, Sunny Gandhi, Tom Zur, Varun Iyer, and Zehua Li. 2023. LegalBench: A Collab-oratively Built Benchmark for Measuring Legal Reasoning in Large Language Models. In Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track . https://openreview.net/forum?id=WqSPQFxFRC [18] Haoyang Gui, Thales Bertaglia, Taylor Annabell, Catalina Goanta, Tjomme Dooper, and Gerasimos Spanakis. 2025. Evaluating LLM-Generated Legal Explana-tions for Regulatory Compliance in Social Media Influencer Marketing. In Proceed-ings of the Natural Legal Language Processing Workshop 2025 . Association for Com-putational Linguistics, Suzhou, China, 157–171. doi:10.18653/v1/2025.nllp-1.12 [19] Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang, Shirong Ma, Xiao Bi, et al. 2025. Deepseek-r1: Incen-tivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948 (2025). [20] Daya Guo, Qihao Zhu, Dejian Yang, Zhenda Xie, Kai Dong, Wentao Zhang, Guant-ing Chen, Xiao Bi, Y. Wu, Y. K. Li, Fuli Luo, Yingfei Xiong, and Wenfeng Liang. 2024. DeepSeek-Coder: When the Large Language Model Meets Programming - The Rise of Code Intelligence. CoRR abs/2401.14196 (2024). arXiv:2401.14196 doi:10.48550/ARXIV.2401.14196 [21] Mustafa Hashmi, Guido Governatori, and Moe Thandar Wynn. 2016. Normative requirements for regulatory compliance: An abstract formal framework. Inf. Syst. Frontiers 18, 3 (2016), 429–455. doi:10.1007/S10796-015-9558-1 [22] Ashish Hooda, Rishabh Khandelwal, Prasad Chalasani, Kassem Fawaz, and Somesh Jha. 2024. PolicyLR: A Logic Representation For Privacy Policies. CoRR 
+
+abs/2408.14830. arXiv:2408.14830 doi:10.48550/ARXIV.2408.14830 [23] Elias Horner, Cristinel Mateis, Guido Governatori, and Agata Ciabattoni. 2025. Toward Robust Legal Text Formalization into Defeasible Deontic Logic using LLMs. arXiv preprint arXiv:2506.08899 (2025). [24] Wenbin Hu, Haoran Li, Huihao Jing, Qi Hu, Ziqian Zeng, Sirui Han, Xu Heli, Tian-shu Chu, Peizhao Hu, and Yangqiu Song. 2025. Context Reasoner: Incentivizing Reasoning Capability for Contextualized Privacy and Safety Compliance via Rein-forcement Learning. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , Christos Christodoulopoulos, Tanmoy Chakraborty, Carolyn Rose, and Violet Peng (Eds.). Association for Computational Linguistics, Suzhou, China, 865–883. doi:10.18653/v1/2025.emnlp-main.44 [25] Cong Jiang and Xiaolei Yang. 2023. Legal Syllogism Prompting: Teaching Large Language Models for Legal Judgment Prediction. In Proceedings of the Nineteenth International Conference on Artificial Intelligence and Law (Braga, Portugal) (ICAIL ’23) . Association for Computing Machinery, New York, NY, USA, 417–421. doi:10. 1145/3594536.3595170 [26] Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik R. Narasimhan. 2024. SWE-bench: Can Language Models Resolve Real-world Github Issues?. In The Twelfth International Conference on Learning Representations, ICLR 2024, Vienna, Austria, May 7-11, 2024 . OpenReview.net. https://openreview.net/forum?id=VTF8yNQM66 [27] Manuj Kant, Sareh Nabi, Manav Kant, Roland Scharrer, Megan Ma, and Marzieh Nabi. 2025. Towards Robust Legal Reasoning: Harnessing Logical LLMs in Law. 
+
+CoRR abs/2502.17638 (2025). arXiv:2502.17638 doi:10.48550/ARXIV.2502.17638 [28] Mehran Kazemi, Najoung Kim, Deepti Bhatia, Xin Xu, and Deepak Ramachan-dran. 2023. LAMBADA: Backward Chaining for Automated Reasoning in Natural Language. In Proceedings of the 61st Annual Meeting of the Association for Com-putational Linguistics (Volume 1: Long Papers) . Association for Computational Linguistics, Toronto, Canada, 6547–6568. doi:10.18653/v1/2023.acl-long.361 [29] Hans Kelsen. 1967. Pure theory of law . Univ of California Press. [30] Tushar Khot, Harsh Trivedi, Matthew Finlayson, Yao Fu, Kyle Richardson, Peter Clark, and Ashish Sabharwal. 2023. Decomposed Prompting: A Modular Ap-proach for Solving Complex Tasks. In The Eleventh International Conference on Learning Representations . https://openreview.net/forum?id=_nGgzQjzaRy [31] Salem Lahlou, Abdalgader Abubaker, and Hakim Hacid. 2025. PORT: Prefer-ence Optimization on Reasoning Traces. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) . Associa-tion for Computational Linguistics, Albuquerque, New Mexico, 10989–11005. doi:10.18653/v1/2025.naacl-long.549 CIKM ’26, November 7–11, 2026, Rome, Italy. Jisoo Kim, Taeyoon Kwack, Jinwoo Jang,Woo Kyung Kim, & Honguk Woo 
+
+[32] Hung Le, Yue Wang, Akhilesh Deepak Gotmare, Silvio Savarese, and Steven C.H. Hoi. 2022. CodeRL: mastering code generation through pretrained models and deep reinforcement learning. In Proceedings of the 36th International Conference on Neural Information Processing Systems (New Orleans, LA, USA) (NIPS ’22) .[33] Chengshu Li, Jacky Liang, Andy Zeng, Xinyun Chen, Karol Hausman, Dorsa Sadigh, Sergey Levine, Li Fei-Fei, Fei Xia, and Brian Ichter. 2024. Chain of Code: Reasoning with a Language Model-Augmented Code Emulator. (2024). https://openreview.net/forum?id=vKtomqlSxm [34] Haoran Li, Wei Fan, Yulin Chen, Cheng Jiayang, Tianshu Chu, Xuebing Zhou, Peizhao Hu, and Yangqiu Song. 2025. Privacy Checklist: Privacy Violation De-tection Grounding on Contextual Integrity Theory. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computa-tional Linguistics: Human Language Technologies (Volume 1: Long Papers) , Luis Chiruzzo, Alan Ritter, and Lu Wang (Eds.). Association for Computational Linguis-tics, Albuquerque, New Mexico, 1748–1766. doi:10.18653/v1/2025.naacl-long.86 [35] Haoran Li, Wenbin Hu, Huihao Jing, Yulin Chen, Qi Hu, Sirui Han, Tianshu Chu, Peizhao Hu, and Yangqiu Song. 2025. PrivaCI-Bench: Evaluating Privacy with Contextual Integrity and Legal Compliance. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) ,Wanxiang Che, Joyce Nabende, Ekaterina Shutova, and Mohammad Taher Pile-hvar (Eds.). Association for Computational Linguistics, Vienna, Austria, 10544– 10559. doi:10.18653/v1/2025.acl-long.518 [36] Fang Liu, Yang Liu, Lin Shi, Zhen Yang, Li Zhang, Xiaoli Lian, Zhongqi Li, and Yuchi Ma. 2026. Beyond Functional Correctness: Exploring Hallucinations in LLM-Generated Code. IEEE Transactions on Software Engineering (2026). [37] Gabriele Lorenzo, Aldo Pietromatera, and Nils Holzenberger. 2025. Translat-ing Tax Law to Code with LLMs: A Benchmark and Evaluation Framework. In 
+
+Proceedings of the Natural Legal Language Processing Workshop 2025 , Nikolaos Ale-tras, Ilias Chalkidis, Leslie Barrett, Cătălina Goant ,ă, Daniel Preot ,iuc-Pietro, and Gerasimos Spanakis (Eds.). Association for Computational Linguistics, Suzhou, China, 31–47. doi:10.18653/v1/2025.nllp-1.4 [38] Ziyang Luo, Can Xu, Pu Zhao, Qingfeng Sun, Xiubo Geng, Wenxiang Hu, Chongyang Tao, Jing Ma, Qingwei Lin, and Daxin Jiang. 2024. WizardCoder: Em-powering Code Large Language Models with Evol-Instruct. In The Twelfth Inter-national Conference on Learning Representations, ICLR 2024, Vienna, Austria, May 7-11, 2024 . OpenReview.net. https://openreview.net/forum?id=UnUwSIgK5W [39] Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha Dziri, Shrimai Prabhumoye, Yiming Yang, Shashank Gupta, Bodhisattwa Prasad Majumder, Katherine Hermann, Sean Welleck, Amir Yazdanbakhsh, and Peter Clark. 2023. Self-Refine: Iterative Refinement with Self-Feedback. In Advances in Neural Information Processing Systems 36: Annual Conference on Neural Information Processing Systems 2023, NeurIPS 2023, New Orleans, LA, USA, December 10 - 16, 2023 . http://papers.nips.cc/paper_files/paper/ 2023/hash/91edff07232fb1b55a505a9e9f6c0ff3-Abstract-Conference.html [40] Dieter Medicus and Jens Petersen. 2019. Bürgerliches Recht: Eine nach Anspruchs-grundlagen geordnete Darstellung zur Examensvorbereitung. In Academia Iuris .Vahlen. [41] Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike Lewis, Wen-tau Yih, Pang Koh, Mohit Iyyer, Luke Zettlemoyer, and Hannaneh Hajishirzi. 2023. FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , Houda Bouamor, Juan Pino, and Kalika Bali (Eds.). Association for Computational Linguistics, Singapore, 12076–12100. doi:10.18653/v1/2023.emnlp-main.741 [42] Venkatesh Mishra, Bimsara Pathiraja, Mihir Parmar, Sat Chidananda, Jayanth Srinivasa, Gaowen Liu, Ali Payani, and Chitta Baral. 2025. Investigating the Shortcomings of LLMs in Step-by-Step Legal Reasoning. In Findings of the Asso-ciation for Computational Linguistics: NAACL 2025 , Luis Chiruzzo, Alan Ritter, and Lu Wang (Eds.). Association for Computational Linguistics, Albuquerque, New Mexico, 7810–7841. doi:10.18653/v1/2025.findings-naacl.435 [43] Helen Nissenbaum. 2009. Privacy in context: Technology, policy, and the integrity of social life. In Privacy in context . Stanford University Press. [44] Alexander Novikov, Ngân Vu, Marvin Eisenberger, Emilien Dupont, Po-Sen Huang, Adam Zsolt Wagner, Sergey Shirobokov, Borislav Kozlovskii, Francisco J. R. Ruiz, Abbas Mehrabian, M. Pawan Kumar, Abigail See, Swarat Chaudhuri, George Holland, Alex Davies, Sebastian Nowozin, Pushmeet Kohli, and Matej Balog. 2025. AlphaEvolve: A coding agent for scientific and algorithmic discovery. 
+
+CoRR abs/2506.13131 (2025). arXiv:2506.13131 doi:10.48550/ARXIV.2506.13131 [45] OpenAI. 2025. Introducing GPT-5. https://openai.com/index/introducing-gpt-5/. Accessed: 2025-12-17. [46] Qwen, :, An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tianyi Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, and Zihan Qiu. 2025. Qwen2.5 Technical Report. arXiv:2412.15115 [cs.CL] https://arxiv.org/abs/2412.15115 [47] Xuhui Ren, Tong Chen, Quoc Viet Hung Nguyen, Lizhen Cui, Zi Huang, and Hongzhi Yin. 2024. Explicit Knowledge Graph Reasoning for Conversational Recommendation. ACM Trans. Intell. Syst. Technol. 15, 4 (2024), 86:1–86:21. doi:10. 1145/3637216 [48] Republic of Korea. 2011. Personal Information Protection Act. https://www.law. go.kr/LSW/lsInfoP.do?lsId=011357 [49] Baptiste Rozière, Jonas Gehring, Fabian Gloeckle, Sten Sootla, Itai Gat, Xiao-qing Ellen Tan, Yossi Adi, Jingyu Liu, Romain Sauvestre, Tal Remez, Jérémy Rapin, Artyom Kozhevnikov, Ivan Evtimov, Joanna Bitton, Manish Bhatt, Cristian Can-ton Ferrer, Aaron Grattafiori, Wenhan Xiong, Alexandre Défossez, Jade Copet, Faisal Azhar, Hugo Touvron, Louis Martin, Nicolas Usunier, Thomas Scialom, and Gabriel Synnaeve. 2023. Code Llama: Open Foundation Models for Code. 
+
+CoRR abs/2308.12950 (2023). arXiv:2308.12950 doi:10.48550/ARXIV.2308.12950 [50] Dong Shu, Haoran Zhao, Xukun Liu, David Demeter, Mengnan Du, and Yongfeng Zhang. 2024. LawLLM: Law Large Language Model for the US Legal System. In Proceedings of the 33rd ACM International Conference on Information and Knowledge Management, CIKM 2024, Boise, ID, USA, October 21-25, 2024 . ACM, 4882–4889. doi:10.1145/3627673.3680020 [51] Elias Stengel-Eskin, Kyle Rawlins, and Benjamin Van Durme. 2024. Zero and Few-shot Semantic Parsing with Ambiguous Inputs. (2024). https://openreview. net/forum?id=qL9gogRepu [52] Jingyun Sun, Zhongze Luo, and Yang Li. 2025. A Compliance Checking Frame-work Based on Retrieval Augmented Generation. In Proceedings of the 31st In-ternational Conference on Computational Linguistics , Owen Rambow, Leo Wan-ner, Marianna Apidianaki, Hend Al-Khalifa, Barbara Di Eugenio, and Steven Schockaert (Eds.). Association for Computational Linguistics, Abu Dhabi, UAE, 2603–2615. https://aclanthology.org/2025.coling-main.178/ [53] Lawrence J Trautman, Mark Edwin Burge, Nanci Carr, Michael Conklin, II Foster, and D Larry. 2025. Legal Analysis: A Template To Analyze and Brief Any Legal Issue. Available at SSRN 5094733 (2025). [54] United States Congress. 2024. Internal Revenue Code (Title 26, United States Code). https://www.law.cornell.edu/uscode/text/26. U.S. Federal Tax Law. [55] Rujing Yao, Yiquan Wu, Tong Zhang, Xuhui Zhang, Yuting Huang, Yang Wu, Jiayin Yang, Changlong Sun, Fang Wang, and Xiaozhong Liu. 2025. Intelligent Legal Assistant: An Interactive Clarification System for Legal Question Answer-ing. In Companion Proceedings of the ACM on Web Conference 2025, WWW 2025, Sydney, NSW, Australia, 28 April 2025 - 2 May 2025 , Guodong Long, Michale Blumestein, Yi Chang, Liane Lewin-Eytan, Zi Helen Huang, and Elad Yom-Tov (Eds.). ACM, 2935–2938. doi:10.1145/3701716.3715204 [56] Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik R. Narasimhan, and Yuan Cao. 2023. ReAct: Synergizing Reasoning and Acting in Language Models. In The Eleventh International Conference on Learning Representations, ICLR 2023, Kigali, Rwanda, May 1-5, 2023 . OpenReview.net. https://openreview. net/forum?id=WE_vluYUL-X [57] Shengbin Yue, Wei Chen, Siyuan Wang, Bingxuan Li, Chenchen Shen, Shujun Liu, Yuxuan Zhou, Yao Xiao, Song Yun, Xuanjing Huang, and Zhongyu Wei. 2023. DISC-LawLLM: Fine-tuning Large Language Models for Intelligent Legal Services. 
+
+CoRR abs/2309.11325 (2023). arXiv:2309.11325 doi:10.48550/ARXIV.2309.11325 [58] Kepu Zhang, Weijie Yu, Zhongxiang Sun, and Jun Xu. 2025. SyLeR: A Framework for Explicit Syllogistic Legal Reasoning in Large Language Models. In Proceedings of the 34th ACM International Conference on Information and Knowledge Man-agement, CIKM 2025, Seoul, Republic of Korea, November 10-14, 2025 , Meeyoung Cha, Chanyoung Park, Noseong Park, Carl Yang, Senjuti Basu Roy, Jessie Li, Jaap Kamps, Kijung Shin, Bryan Hooi, and Lifang He (Eds.). ACM, 4117–4127. doi:10.1145/3746252.3761120 [59] Yunwei Zhao, Varun Chandrasekaran, Thomas Wies, and Lakshminarayanan Subramanian. 2025. The Privacy Quagmire: Where Computer Scientists and Lawyers May Disagree. In Proceedings of the 24th ACM Workshop on Hot Topics in Networks, HotNets 2025, UMD Campus, College Park, MD, USA, November 17-18, 2025 , Alan Zaoxing Liu, Philip Brighten Godfrey, and Barath Raghavan (Eds.). ACM, 77–84. doi:10.1145/3772356.3772422 [60] Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, and Ion Stoica. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. (2023). http://papers.nips.cc/paper_files/paper/2023/hash/ 91f18a1287b398d378ef22505bf41832-Abstract-Datasets_and_Benchmarks.html [61] Linkai Zhu, Lu Yang, Chaofan Li, Shanwen Hu, Lu Liu, and Bin Yin. 2024. LegiLM: A Fine-Tuned Legal Language Model for Data Compliance. CoRR abs/2409.13721 (2024). arXiv:2409.13721 doi:10.48550/ARXIV.2409.13721 [62] Jingming Zhuo, Songyang Zhang, Xinyu Fang, Haodong Duan, Dahua Lin, and Kai Chen. 2024. ProSA: Assessing and Understanding the Prompt Sensitivity of LLMs. In Findings of the Association for Computational Linguistics: EMNLP 2024 .Association for Computational Linguistics.

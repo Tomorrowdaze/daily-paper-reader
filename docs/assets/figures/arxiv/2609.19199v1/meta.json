@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-001.webp",
+      "caption": "Figure 1: An example of false compliance determined by an LLM, where legality is concluded from disclosure alone, missing the regulation’s temporal conditions.",
+      "page": 1,
+      "index": 1,
+      "width": 506,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-002.webp",
+      "caption": "Table 1: Abbreviated prompts for (𝑓gen) and (𝑓vrf ).",
+      "page": 6,
+      "index": 2,
+      "width": 483,
+      "height": 719
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-003.webp",
+      "caption": "Figure 2: Overview of Code-as-Auditor with empirical results, showing successful detection of the temporal violation missed by LLM in Figure 1.",
+      "page": 2,
+      "index": 3,
+      "width": 1048,
+      "height": 341
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-004.webp",
+      "caption": "Figure 5: Distribution of the real-world PIPA evaluation dataset, across respondent types (top) and violation categories (bottom).",
+      "page": 7,
+      "index": 4,
+      "width": 382,
+      "height": 665
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-005.webp",
+      "caption": "Figure 9: Three challenging compliance reasoning scenarios where GPT-5 misinterprets the legal basis, while Code-as-Auditor correctly identifies the violation.",
+      "page": 10,
+      "index": 5,
+      "width": 994,
+      "height": 602
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-006.webp",
+      "caption": "Table 4: Overall performance comparison across three regulatory frameworks evaluated with the Qwen2.5-7B model.",
+      "page": 8,
+      "index": 6,
+      "width": 718,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-007.webp",
+      "caption": "Figure 6: Performance comparison across maximum selfverification loop depth.",
+      "page": 8,
+      "index": 7,
+      "width": 506,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-008.webp",
+      "caption": "Figure 3: Illustrative examples of the template based on Articles 15(1), 15(3) and 26(2) of the Personal Information Protection Act. Article 15(3) represents an exception to the consent requirement in Article 15(1).",
+      "page": 4,
+      "index": 8,
+      "width": 506,
+      "height": 948
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-009.webp",
+      "caption": "Figure 8: Ablation analysis of Code-as-Auditor. Removing Self-reflection loop resulted in a syntax error.",
+      "page": 9,
+      "index": 9,
+      "width": 506,
+      "height": 266
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-010.webp",
+      "caption": "Figure 7: Performance comparison across checklist refinement methods on real-world PIPA cases.",
+      "page": 9,
+      "index": 10,
+      "width": 500,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19199v1/fig-011.webp",
+      "caption": "Figure 4: Case-grounded checklist reformulation based on Kelsen’s four spheres of validity.",
+      "page": 5,
+      "index": 11,
+      "width": 482,
+      "height": 542
+    }
+  ]
+}
