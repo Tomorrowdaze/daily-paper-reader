@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-22 <!--dpr-date:20260922-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/22/2609.24098v1-a2safe-counterfactual-evidence-aligned-adaptive-agent-collaboration-for-safe-and-effective-visual-question-answering" data-sidebar-item="{&quot;title&quot;: &quot;A$^2$Safe: Counterfactual Evidence-Aligned Adaptive Agent Collaboration for Safe and Effective Visual Question Answering&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.24098v1-a2safe-counterfactual-evidence-aligned-adaptive-agent-collaboration-for-safe-and-effective-visual-question-answering&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q5&quot;}], &quot;evidence&quot;: &quot;反事实证据对齐的安全决策与风险溯源&quot;}">A$^2$Safe: Counterfactual Evidence-Aligned Adaptive Agent Collaboration for Safe and Effective Visual Question Answering</a>
   * 2026-09-21 <!--dpr-date:20260921-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/21/2609.19199v1-code-as-auditor-executable-compliance-reasoning-via-regulation-to-code" data-sidebar-item="{&quot;title&quot;: &quot;Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.19199v1-code-as-auditor-executable-compliance-reasoning-via-regulation-to-code&quot;, &quot;score&quot;: &quot;6.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;用于合规推理的可解释代码结构和决策树&quot;}">Code-as-Auditor: Executable Compliance Reasoning via Regulation-to-Code</a>
