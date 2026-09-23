@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-001.webp",
+      "caption": "FIG. 4: Temporal correlations of local changes in 7-day moving-average conflict activity, ∆mt. (a) Autocorrelation functions ρ(k) as a function of lag k for YEM, IRQ, JOR, and PSE. (b) Integrated correlation time τint [Eq. (11)] for all 14 countries. (c) Integrated correlation time τint versus the first zero-crossing point k∗. Significant positive correlations are observed for both Pearson (rp = 0.71) and Spearman (ρs = 0.71) measures, with p < 0.05 for both. (d) Integrated correlation time τint versus the mean GDP per capita at PPP over 2017–2024. The GDP comparison includes 12 countries with complete data over the analysis period. Significant negative correlations are observed for both Pearson (rp = −0.61) and Spearman (ρs = −0.71) measures, with p < 0.05 for both. The dashed lines and shaded regions represent the linear trends and its 95% confidence intervals, respectively.",
+      "page": 6,
+      "index": 1,
+      "width": 485,
+      "height": 1061
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-002.webp",
+      "caption": "TABLE III: Integrated correlation time τint (days), first zerocrossing point k∗ (days), and mean GDP per capita at PPP (103 constant 2021 international dollars) over 2017–2024. The GDP values are reported for the 12 countries; SYR and YEM are excluded due to a lack of complete data for GDP. They are sorted in terms of τint.",
+      "page": 6,
+      "index": 2,
+      "width": 339,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-003.webp",
+      "caption": "FIG. C.3: Autocorrelation functions ρ(k) of the local changes ∆mt for all 14 countries. The shaded region denotes the piecewiselinear area integrated from k = 0 to the linearly interpolated first zero-crossing point k∗, corresponding to the integrated correlation time τint defined in Eq. (11). The dashed vertical line indicates k∗. Countries are ordered by decreasing τint.",
+      "page": 11,
+      "index": 3,
+      "width": 1031,
+      "height": 1077
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-004.webp",
+      "caption": "FIG. C.2: Prediction results for all countries obtained from ARIMA, sorted by RMSE from largest to smallest. Only parameter sets that pass the Ljung–Box test are shown. The shaded areas represent the 95% confidence intervals from HQIC and are omitted when the HQIC-selected parameter set fails the Ljung–Box test.",
+      "page": 10,
+      "index": 4,
+      "width": 1019,
+      "height": 1156
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-005.webp",
+      "caption": "TABLE A.1: Country codes used in this study and their corresponding country names.",
+      "page": 8,
+      "index": 5,
+      "width": 513,
+      "height": 521
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-006.webp",
+      "caption": "FIG. 2: Optimal parameters (p, q) for a given d for IRQ obtained using (a) AIC, (b) BIC, and (c) HQIC. The colors correspond to the values of the information criteria, and the yellow circles indicate the optimal points. (d) Results for all 14 countries except KWT. The bar height corresponds to p + q, and the lower and upper boxes represent p and q, respectively. The open and filled circles indicate d = 0 and d = 1, respectively. The numbers of (p, q) are listed in Table I. Parameter sets that are not adequate according to the statistical test (see details in Appendix. B) are marked by cross symbols.",
+      "page": 4,
+      "index": 6,
+      "width": 1056,
+      "height": 728
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-007.webp",
+      "caption": "TABLE I: The optimal parameters for the ARIMA model. The differencing order d is determined by the ADF and KPSS tests. The orders p and q of past observations and errors are obtained by minimizing the three information criteria AIC, BIC, and HQIC. Models that are not adequate according to the statistical test (see details in Appendix. B) are marked by cross symbols.",
+      "page": 5,
+      "index": 7,
+      "width": 437,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2609.26296v1/fig-008.webp",
+      "caption": "FIG. 3: Evaluation results for 2025 obtained from the selected ARIMA parameter sets. (a) Distributions of the prediction errors between the empirical xt and the weighted-average prediction x̂t,avg in Eq. (8), measured by RMSE and MAE. (b–d) Three representative evaluation results for the original conflict-frequency series xt. For each country, the three dashed lines represent predictions from the ARIMA(p, d, q) models selected by AIC, BIC, and HQIC, and the solid line represents their weighted-average prediction. The shaded area indicates the 95% confidence interval obtained from the HQIC-selected model, which is used here as a representative prediction interval.",
+      "page": 5,
+      "index": 8,
+      "width": 503,
+      "height": 517
+    }
+  ]
+}

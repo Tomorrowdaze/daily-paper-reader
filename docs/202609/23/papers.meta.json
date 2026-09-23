@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-23",
+  "date": "2026-09-23",
+  "generated_at": "2026-09-23T22:26:30",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/23/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries",
+      "section": "deep",
+      "title_en": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "authors": "Hyuntae Ahn, Mi Jin Lee",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.26296v1",
+      "score": "9.0",
+      "evidence": "使用ARIMA框架对冲突活动进行预测建模",
+      "tldr": "研究以中东冲突事件为对象，采用ARIMA检验线性时间结构并预测趋势，结合首个过零点和积分相关时间衡量短期持久性，发现多数国家的线性依赖可被捕捉，k*约2–6天、积分相关时间约0.6–1.7天，且与人均GDP均值负相关。",
+      "tags": "query:q4",
+      "abstract_en": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/23/2609.24098v1-a2safe-counterfactual-evidence-aligned-adaptive-agent-collaboration-for-safe-and-effective-visual-question-answering",
+      "section": "quick",
+      "title_en": "A$^2$Safe: Counterfactual Evidence-Aligned Adaptive Agent Collaboration for Safe and Effective Visual Question Answering",
+      "authors": "Quanxing Xu, Ling Zhou, Xian Zhong, Jinyu Tian, Xiaohua Huang, Rubing Huang, Chia-Wen Lin",
+      "date": "2026-09-21",
+      "pdf": "https://arxiv.org/pdf/2609.24098v1",
+      "score": "6.5",
+      "evidence": "使用反事实证据对齐代理来确定视觉问答中的安全决策和风险。",
+      "tldr": "为解决MLLM在VQA中安全决策缺乏证据支撑与表面相关性偏差，提出A^2Safe：以反事实证据对齐与自适应代理协作为核心，借助扎根安全证据板整合视觉-文本-风险线索，稳健切换安全状态与响应模式，实现可解释且安全有效的VQA。",
+      "tags": "query:q5",
+      "abstract_en": "Visual Question Answering (VQA) with Multimodal Large Language Models (MLLMs) requires not only producing safe and effective responses, but also grounding safety decisions in the multimodal evidence that determines risk. Recent safety-alignment methods improve refusal behavior and contextual risk awareness, yet correct safety outcomes may still rely on superficial textual or visual correlations, particularly when risk emerges from interactions between individually benign image and question content. To address this issue, we propose A$^2$Safe, a counterfactual evidence-aligned adaptive agent collaboration framework for safe and effective VQA. A$^2$Safe organizes localized visual observations, textual intent, and cross-modal risk relations through a Grounded Safety Evidence Board, making the basis of safety decisions explicit. Counterfactual safety evidence alignment enforces invariance to safety-irrelevant changes while requiring appropriate safety-state and response-mode transitions when risk-critical evidence is minimally altered. The resulting evidence state further supports adaptive collaboration, enabling direct answering when grounded evidence is sufficient and invoking policy critique and response revision when evidence is risky, uncertain, or conflicting. Under complementary safety-critical and general VQA protocols, A$^2$Safe achieves a 95.72 SIUO safety score, reduces the benign refusal rate on MOSSBench to 14.67%, and maintains an average general VQA score of 78.34 with 27.8% token overhead. These results support counterfactual evidence-aligned adaptive collaboration for safe and effective multimodal question answering.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/23/2609.17761v1-why-some-strikes-last-longer-the-resilience-paradox-of-partially-functional-institutions",
+      "section": "quick",
+      "title_en": "Why Some Strikes Last Longer: The Resilience Paradox of Partially Functional Institutions",
+      "authors": "Nuno Crokidakis",
+      "date": "2026-09-15",
+      "pdf": "https://arxiv.org/pdf/2609.17761v1",
+      "score": "6.0",
+      "evidence": "劳工罢工与机构响应机制的动力学模型",
+      "tldr": "本文研究部分运作的机构中罢工为何更持久：提出最简动力学模型耦合参与、响应与功能，揭示剩余活动的双重作用，并解析出“韧性悖论”与精确阈值；数值验证表明，机构吸收冲击虽抑制参与，却降低解决压力，反而延长冲突。",
+      "tags": "query:q6",
+      "abstract_en": "Labor strikes do not necessarily lead to complete institutional disruption, particularly when non-striking sectors maintain part of normal activities. We propose a minimal dynamical model to investigate how such residual activity affects the persistence of labor conflicts. The model couples strike participation, institutional response, and overall functionality through two competing mechanisms: a direct suppressive effect of residual activity on strike participation and an indirect effect arising from the reduced institutional pressure to resolve the conflict. Analytical calculations reveal a counterintuitive regime in which increasing residual activity increases, rather than decreases, stationary strike participation. We characterize this behavior through a strike-response susceptibility and derive an exact compensation threshold separating the conventional regime from a resilience-paradox regime. At the threshold, the two mechanisms exactly balance, making stationary strike participation independent of residual activity. Numerical results confirm the analytical predictions and illustrate the underlying mechanism. Our results show that institutional resilience can have an unintended dynamical consequence: by absorbing part of the disruption generated by a strike, continued operation may reduce the urgency of institutional response and thereby favor conflict persistence. This provides a simple example of how individually stabilizing processes can collectively generate counterintuitive outcomes in complex social systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

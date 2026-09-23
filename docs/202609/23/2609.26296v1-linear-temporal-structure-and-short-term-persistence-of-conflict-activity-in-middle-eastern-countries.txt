@@ -1,0 +1,523 @@
+Title: Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries
+
+URL Source: https://arxiv.org/pdf/2609.26296v1
+
+Published Time: Wed, 23 Sep 2026 01:13:55 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+## Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries 
+
+Hyuntae Ahn and Mi Jin Lee ∗
+
+Department of Physics, Pusan National University, Busan 46241, Republic of Korea 
+
+Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the tempo-ral dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point k∗, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time τint , which additionally reflects its strength and decay. The resulting k∗ values are approximately 2–6 days, while τint ranges from approximately 0.6 to 1.7 days. The significant negative association of τint with mean GDP per capita suggests a pos-sible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East. 
+
+> PACS numbers: Keywords: temporal dependence; conflict events; ARIMA; persistence
+
+I. INTRODUCTION 
+
+Conflict activity changes irregularly over time under the influence of complex historical, political, and social factors. Empirical studies have reported temporal depen-dence in conflict dynamics. Examples include temporal dependence in conflict events during the Bosnian war [1], positive temporal autocorrelation in daily fatalities dur-ing the Syrian conflict [2], persistent increases in event occurrence following violent incidents in Iraq described by self-exciting point-process models [3], and spatiotem-porally connected chains of conflict events [4]. Such tem-poral information has also been exploited for prediction: early-warning systems for political violence have been de-veloped [5], while more recent studies have identified pre-dictive information in past conflict levels and temporal patterns [6, 7]. These findings suggest that conflict dy-namics can retain information from their recent past de-spite highly irregular fluctuations. Quantifying such tem-poral dependence may therefore help characterize the dy-namics and the predictability of conflict activity. The Armed Conflict Location & Event Data (ACLED) [8, 9] provide detailed event-level information on individual conflict events, including their occurrence dates, locations, actors, and event types. Such event-based data have also been used to compare conflict dy-namics across countries and regions [10]. Here, we fo-cus on Middle Eastern countries, where conflict events have been persistently recorded across multiple countries during the study period, making the region suitable for comparing country-level temporal patterns of conflict ac- 
+
+> ∗Electronic address: mijinlee@pusan.ac.kr
+
+tivity. We aggregate conflict events over fixed time inter-vals to construct a conflict-frequency time series for each country. Although this representation simplifies the de-tailed context of individual events, it provides a common observable for comparing the macroscopic temporal vari-ation of conflict activity across countries. As a baseline, we employ the autoregressive integrated moving average (ARIMA) framework [11] to examine the linear temporal structure of these conflict-frequency time series. ARIMA and related models have previously been applied to conflict- and protest-event time series primar-ily for modeling and forecasting [10, 12]. These applica-tions mainly focus on constructing and validating pre-dictive models. Here, we instead use ARIMA as a diag-nostic baseline to ask how much of the observed tempo-ral variation can be described by linear combinations of past observations and past errors. Despite this simple lin-ear assumption, our results show that substantial linear temporal structure is present across most Middle East-ern countries. The resulting predictions also reproduce the overall temporal behavior to some extent, although their accuracy varies across countries and abrupt changes remain difficult to reproduce. The linear temporal structure, however, does not di-rectly provide a characteristic time scale over which changes in conflict activity persist. Previous studies have examined temporal dependence in conflict occurrence, fa-talities, and sequences of individual events [1–4], whereas the persistence of increases and decreases in conflict ac-tivity itself has received relatively less attention. We therefore examine the autocorrelation of local changes in conflict frequency and characterize their short-term persistence using the first zero-crossing time and the in-tegrated correlation time. The former measures the du-ration of the initial positive temporal correlation, while arXiv:2609.26296v1 [physics.soc-ph] 22 Sep 2026 2the latter additionally reflects its strength and decay. We find that the initial positive temporal correlation persists only over a few days, with the corresponding time scales varying across countries. We further examine the rela-tion between the integrated correlation time and country-level socioeconomic conditions and find a significant neg-ative association with mean GDP per capita, suggesting a possible connection between the persistence of conflict-activity changes and broader socioeconomic conditions. The rest of this paper is organized as follows. The conflict-event data are described in Sec. II. Section III in-troduces the ARIMA model and presents the correspond-ing analysis. The short-term correlation time is analyzed in Sec. IV. Finally, Sec. V provides further discussion. 
+
+II. DATA AND CONSTRUCTION OF CONFLICT-FREQUENCY TIME SERIES 
+
+We analyze time series of conflict events in 15 Middle Eastern countries using data curated by the Armed Con-flict Location & Event Data (ACLED) [8, 9]. We include all event records contained in the ACLED dataset used in this study. The countries are ARE, BHR, IRN, IRQ, ISR, JOR, KWT, LBN, OMN, PSE, QAT, SAU, SYR, TUR, and YEM, with their full names listed in Table A.1 in Appendix A. The dataset contains a total of 536 433 conflict events recorded from January 1, 2015 to July 11, 2025. Each record corresponds to an individual conflict event and includes 31 types of metadata, such as the event date, event type, and number of fatalities. We use the event date recorded for each ACLED event to con-struct the temporal series. For visualization, the monthly aggregated time series over all 15 countries is shown in Fig. 1(a). Conflict activity across the Middle East shows distinct temporal patterns, including abrupt jumps (e.g., in 2016, 2017, and late 2023) and deviations from the average be-havior. In particular, the temporal average behavior re-mains relatively stable from 2017 until late 2023. Based on these observations, we consider the period from Jan-uary 1, 2017 to December 31, 2024, which contains a total of 459 616 events across the 15 countries. The subsequent period from January 1 to June 30, 2025 contains a total of 34 423 events and is used for model evaluation. For the time-series construction, intervals with no recorded conflict events within the common analysis period are assigned a value of zero. The time-series data for the in-dividual countries are summarized in Fig. 1(b), where only nonzero event records are displayed for visualiza-tion. KWT is excluded from the 2025 evaluation because no conflict events are recorded during this period, leading to 14 countries for analysis. Daily aggregation provides a large number of data points but exhibits strong day-to-day fluctuations, whereas monthly aggregation produces a smoother time series at the cost of substantially fewer data points. We also tested the ARIMA analysis with ∆ T = 1 day, but 2015 2017 2019 2021 2023 2025 
+
+Year 
+
+> 02,000 4,000 6,000 8,000 10,000
+> Monthly counts
+
+(a) Empirical data Temporal average             
+
+> 10 210 310 410 510 010 110 210 3
+> 2017 2019 2021 2023
+> SYR YEM PSE IRQ TUR LBN IRN ISR BHR JOR SAU KWT OMN QAT ARE
+> Country
+> 136,762 79,351 64,751 50,701 37,537 29,981 27,642 16,427 9,983 3,813 2,380 117 66 61 44
+> Jan Apr Jul
+> 5,743 6,687 9,482 3,600 2,944 1,976 2,479 1,021 400 73 13 0131
+
+(b) Training events Evaluation events 
+
+Date 2025 
+
+FIG. 1: Time series of conflict events. (a) Monthly aggregated time series over 15 Middle Eastern countries from January 2015 to June 2025. The black line represents the empirical data. The red solid lines and shaded areas indicate the tem-poral averages and standard deviations, respectively, over the corresponding periods. (b) Training and evaluation periods for each country. The left and right bars indicate the training and evaluation periods, respectively, while the colors represent the corresponding numbers of conflict events. KWT is excluded from the ARIMA evaluation because no conflict events are recorded during the 2025 evaluation period. 3the model did not perform adequately for the daily se-ries. We therefore adopt ∆ T = 1 week, which reduces short-term fluctuations while retaining sufficient tempo-ral resolution, and construct a weekly aggregated time series for each country. We define the daily conflict count in country c on day t as n(c) 
+
+> t
+
+. The weekly aggregated conflict count is then given by 
+
+x(c) 
+
+> t
+
+= 
+
+> t+∆ T−1
+
+X 
+
+> τ=t
+
+n(c) 
+
+> τ
+
+, (1) where t = t0, t 0 +∆ T, t 0 +2∆ T, · · · . Thus, x(c) 
+
+> t
+
+represents the number of events that initially occur in country c
+
+within the non-overlapping interval [ t, t + ∆ T ).   
+
+> III. LINEAR TEMPORAL STRUCTURE AND PREDICTION WITH ARIMA A. Model and selection procedure
+
+To quantify the linear temporal dependence described above, we employ the autoregressive integrated moving average (ARIMA) model [11], which represents the cur-rent state in terms of past observations and past errors. ARIMA requires the time series to be stationary after appropriate differencing. When the original series is non-stationary, differencing is performed until stationarity is achieved, with the number of differencing operations defining the order d.Stationarity is assessed using the augmented Dickey– Fuller (ADF) [13, 14] and Kwiatkowski–Phillips– Schmidt–Shin (KPSS) [15] tests. The ADF test examines whether the effect of a shock persists over time, whereas the KPSS test examines whether fluctuations remain sta-ble around the overall level of the series. Because the two tests assess stationarity from complementary view-points, we use them together to determine whether dif-ferencing is required. Depending on the stationarity of xt
+
+in Eq. (1), differencing of order d is applied: e.g., xt for 
+
+d = 0, x′ 
+
+> t
+
+= xt − xt−∆T for d = 1, and x′′  
+
+> t
+
+= x′ 
+
+> t
+
+− x′
+
+> t−∆T
+
+for d = 2. Let yt denote the stationary series obtained after dif-ferencing. The ARIMA model assumes 
+
+yt = μd +
+
+> p
+
+X
+
+> i=1
+
+ϕiyt−i +
+
+> q
+
+X
+
+> j=1
+
+θj ϵt−j + ϵt, (2) where μd denotes the constant term, with μd = 0 for 
+
+d = 1 in the present implementation, ϕi and θj weight past observations and errors, respectively, and ϵt is a ran-dom error. The orders p and q specify how many past observations and past errors are taken into account, re-spectively and are measured in units of ∆ T = 1 week. For a given set of ( p, d, q ), the coefficients μd, ϕi, and 
+
+θj are estimated from the training data using maxi-mum likelihood estimation. The resulting model is de-noted by ARIMA( p, d, q ). For example, ARIMA(0 , 0, 0) and ARIMA(0 , 1, 0) correspond to white noise and a ran-dom walk, respectively. Let s denote the forecast origin and h the forecast hori-zon. The h-step-ahead forecast is given by ˆys+h|s = μd +
+
+> p
+
+X
+
+> i=1
+
+ϕi ˜ys+h−i|s +
+
+> q
+
+X
+
+> j=1
+
+θj ˜ϵs+h−j|s, (3) where ˜yr|s =
+
+(
+
+yr , r ≤ s, 
+
+ˆyr|s, r > s, ˜ϵr|s =
+
+(
+
+ˆϵr|r−1, r ≤ s, 
+
+0, r > s. (4) The error with empirical yt is defined as ˆϵt|s = yt − ˆyt|s. (5) Within the training period, setting s = t − 1 and h = 1 gives the one-step-ahead fitted value ˆ yt|t−1 and the corre-sponding residual ˆ ϵt|t−1. For prediction beyond the train-ing period, we set s = T , where T is the last training time, and evaluate ˆ yT +h|T recursively for h = 1 , 2, · · · .Then, how do we determine the optimal ARIMA( p, d, q )? For a given d, the optimal p and 
+
+q are selected using the Akaike information criterion (AIC) [16], Bayesian information criterion (BIC) [17], and Hannan–Quinn information criterion (HQIC) [18]. These criteria balance model fit and model complexity, with AIC placing relatively more emphasis on fit, BIC imposing a stronger complexity penalty, and HQIC providing an intermediate penalty (see Appendix B). The optimal p and q are determined by minimizing each criterion (see Fig. 2). If the linear ARIMA model adequately captures the temporal dependence in the data, no systematic structure should remain in the residuals ˆ ϵt|t−1 [24]. We verify this using a statistical test for residual autocorrelation (see Appendix B).  
+
+> B. Selection and adequacy of ARIMA model
+
+Applying the procedure described above to the weekly conflict-count series from 2017 to 2024, we determine the ARIMA orders ( p, d, q ) for each country, using Eqs. (3)– (5) and the relevent statistical tests described in Sec. III. Four countries (JOR, QAT, OMN, and ARE) show sta-tionary behavior in the original series ( d = 0), whereas the remaining countries require first-order differencing (d = 1), as shown in Table I. Accordingly, yt = xt is used for the former four countries, whereas yt = x′ 
+
+> t
+
+is used for the remaining countries. For each stationary series yt, we evaluate AIC, BIC, and HQIC over the p-q plane and identify the mini-mum of each criterion. The results for IRQ are illus-trated in Figs. 2(a)–2(c), where AIC and HQIC select (p, q ) = (3 , 4), while BIC selects ( p, q ) = (1 , 1). The se-lected ( p, q ) values for all countries are listed in Table I 4036912       
+
+> p036912
+> q
+> 3810 3820 3830 3840 3850 3860 3870
+> Optimal: (p,q) = (3, 4)
+> (a) AIC
+> 036912
+> p036912
+> q
+> 3840 3860 3880 3900 3920
+> Optimal: (p,q) = (1, 1)
+> (b) BIC
+> 036912
+> p036912
+> q
+> 3820 3830 3840 3850 3860 3870
+> Optimal: (p,q) = (3, 4)
+> (c) HQIC
+> LBN ISR TUR SAU IRQ BHR PSE JOR IRN SYR YEM QAT OMN ARE 0246810 12
+> p + q
+
+(d) AIC p AIC q BIC p BIC q HQIC p HQIC qd = 0  
+
+> d= 1
+
+FIG. 2: Optimal parameters ( p, q ) for a given d for IRQ obtained using (a) AIC, (b) BIC, and (c) HQIC. The colors correspond to the values of the information criteria, and the yellow circles indicate the optimal points. (d) Results for all 14 countries except KWT. The bar height corresponds to p + q, and the lower and upper boxes represent p and q, respectively. The open and filled circles indicate d = 0 and d = 1, respectively. The numbers of ( p, q ) are listed in Table I. Parameter sets that are not adequate according to the statistical test (see details in Appendix. B) are marked by cross symbols. 
+
+and visualized in Fig. 2(d). For eight of the fourteen coun-tries, AIC, BIC, and HQIC select the same pair of ( p, q ), indicating that the selected parameter set is robust to the choice of information criterion. For the remaining coun-tries, including IRQ, the selected orders vary across cri-teria, indicating a stronger dependence of the parameter selection on how model complexity is penalized. To evaluate the adequacy of the selected ARIMA pa-rameter sets, we examine the one-step-ahead residuals defined in Eq. (5). The residual autocorrelations for ARIMA(3 , 1, 4) selected by AIC for IRQ are statistically insignificant (see Fig. B.1), indicating that no systematic temporal correlation remains and that this parameter set adequately captures the linear temporal dependence. The residual distribution is approximately normal, although some extreme fluctuations with large |ˆϵt|t−1| deviate from the normal distribution. While normality is not required for the residuals to be temporally uncorrelated, this de-viation indicates that the Gaussian approximation is less accurate for extreme fluctuations (see Appendix B for details). Most of the other selected parameter sets also show no significant residual autocorrelation, except for a few cases as marked by × symbols in Fig. 2(d) and Table I. These few exceptions, excluded from subsequent analysis, indicate that some linear temporal dependence remains unexplained for the corresponding parameter sets. 
+
+C. Evaluation results for 2025 
+
+As an additional examination of the linear temporal structure identified from the 2017–2024 training data, we apply the selected ARIMA models to 2025 using the h-step-ahead prediction in Eqs. (3)–(5). For d = 0, the pre-dicted stationary series directly corresponds to the orig-inal series xt. For d = 1, the ARIMA model predicts the first difference yt = xt − xt−1, and the predictions are transformed back to the original scale by cumulative summation, i.e., ˆ xT +h|T = xT + Phr=1 ˆyT +r|T .When different information criteria select different (p, q ), they produce different prediction curves. To ob-tain a representative curve from these parameter sets, we follow the general idea of performance-based forecast 5
+
+TABLE I: The optimal parameters for the ARIMA model. The differencing order d is determined by the ADF and KPSS tests. The orders p and q of past observations and errors are obtained by minimizing the three information criteria AIC, BIC, and HQIC. Models that are not adequate according to the statistical test (see details in Appendix. B) are marked by cross symbols. Country d AIC ( p, q ) BIC ( p, q ) HQIC ( p, q )ISR 1 (2 , 8) (1 , 1) × (1 , 1) ×
+
+SAU 1 (4 , 3) (1 , 2) × (6 , 0) IRQ 1 (3 , 4) (1 , 1) (3 , 4) BHR 1 (1 , 6) (1 , 1) × (0 , 6) TUR 1 (1 , 8) (1 , 1) × (3 , 3) SYR 1 (1 , 1) (1 , 1) (1 , 1) PSE 1 (1 , 2) (1 , 2) (1 , 2) JOR 0 (2 , 1) (2 , 1) (2 , 1) IRN 1 (1 , 2) (1 , 2) (1 , 2) LBN 1 (10 , 1) (1 , 1) × (1 , 1) ×
+
+YEM 1 (1 , 1) (1 , 1) (1 , 1) QAT 0 (1 , 0) (1 , 0) (1 , 0) OMN 0 (0 , 1) (0 , 1) (0 , 1) ARE 0 (1 , 0) (1 , 0) (1 , 0) TABLE II: RMSE and MAE between the inverse-RMSE weighted-average prediction ˆ xavg [Eq. (8)] and the empirical series x for the 2025 evaluation period. Countries are ordered by decreasing RMSE. Country RMSE MAE LBN 275.60 243.30 SYR 143.58 129.29 YEM 111.70 90.80 PSE 98.20 79.92 IRN 75.33 42.27 ISR 70.00 66.13 IRQ 41.14 35.47 TUR 41.02 30.83 BHR 9.72 8.03 JOR 5.44 5.05 SAU 0.84 0.56 QAT 0.59 0.25 OMN 0.23 0.19 ARE 0.21 0.13 
+
+combination [19]. For each obtained parameter set i, the prediction error on the original scale is measured by the root-mean-square-error (RMSE) defined as RMSE i =
+
+vuut 1
+
+N (c) 
+
+> T0+N(c)−1
+
+X
+
+> t=T0
+
+ xt − ˆxt|T,i 
+
+2, (6) where T0 denotes the beginning of the evaluation period and N (c) is the number of evaluation points, and the 0 60 120 180 240 300       
+
+> Error
+> 0246810
+> Histogram
+> (a) Error distribution
+> RMSE MAE
+> Jan Mar May 0150 300 450
+> xt
+> (b) YEM
+> Jan Mar May 080 160 240
+> xt
+> (c) IRQ
+> Jan Mar May 015
+> xt
+> (d) JOR
+> Empirical data Weighted average AIC BIC HQIC
+
+FIG. 3: Evaluation results for 2025 obtained from the se-lected ARIMA parameter sets. (a) Distributions of the predic-tion errors between the empirical xt and the weighted-average prediction ˆ xt, avg in Eq. (8), measured by RMSE and MAE. (b–d) Three representative evaluation results for the original conflict-frequency series xt. For each country, the three dashed lines represent predictions from the ARIMA( p, d, q ) models se-lected by AIC, BIC, and HQIC, and the solid line represents their weighted-average prediction. The shaded area indicates the 95% confidence interval obtained from the HQIC-selected model, which is used here as a representative prediction in-terval. 
+
+normalized inverse-RMSE weight is 
+
+wi = (RMSE i)−1
+
+P  
+
+> j∈J (c)
+
+(RMSE j )−1 , (7) where J (c) denotes the set of distinct ARIMA param-eter sets for country c that show no significant resid-ual autocorrelation. If different information criteria se-lect the same ( p, d, q ), the corresponding parameter set is included only once. The weighted-average prediction is then ˆxt, avg = X 
+
+> j∈J (c)
+
+wj ˆxt|T,j . (8) Because the weights are obtained from the same predic-tion period, this weighted curve is an ex-post combina-tion used only as a representative prediction rather than a purely prospective forecast. The RMSE and mean absolute error (MAE) of ˆ xt, avg 
+
+are listed in Table II, and their distributions are shown 6
+
+TABLE III: Integrated correlation time τint (days), first zero-crossing point k∗ (days), and mean GDP per capita at PPP (10 3 constant 2021 international dollars) over 2017–2024. The GDP values are reported for the 12 countries; SYR and YEM are excluded due to a lack of complete data for GDP. They are sorted in terms of τint .Country τint k∗ Mean GDP LBN 1.721 6.019 13.18 PSE 1.578 4.707 5.70 SYR 1.344 4.950 –BHR 1.283 4.147 56.09 JOR 1.253 4.871 10.18 OMN 1.159 4.241 38.28 IRQ 1.007 5.179 13.59 ISR 0.881 4.594 45.43 TUR 0.873 5.229 31.44 IRN 0.817 3.256 16.07 YEM 0.739 3.680 –QAT 0.723 2.158 113.16 ARE 0.680 2.450 70.43 SAU 0.586 3.548 62.11 
+
+in Fig. 3(a). Representative results for YEM, IRQ, and JOR are shown in Figs. 3(b)–3(d), with RMSE values of 111.7, 41.14, and 5.44, respectively; results for all 14 countries are presented in Fig. C.2 in Appendix C. Since the weighted-average curve does not have a directly as-sociated prediction interval, we show the 95% confidence interval of the HQIC-selected ARIMA model as a repre-sentative uncertainty range. The prediction results provide an additional view of how far the linear temporal structure identified in the training data persists into the subsequent period. For sev-eral countries, the empirical observations remain broadly consistent with the predicted level, particularly when the RMSE is relatively small, whereas detailed fluctuations and some abrupt changes are not reproduced. Such lim-itations are expected because ARIMA extrapolates lin-ear temporal dependence inferred from past observations and cannot anticipate changes absent from the training data. Thus, these results are intended as a supplementary examination of the identified linear temporal structure rather than a demonstration of accurate forecasting. 
+
+IV. TEMPORAL PERSISTENCE OF CONFLICT-ACTIVITY CHANGES 
+
+ARIMA characterizes linear temporal dependence and predictability but does not directly provide a character-istic time scale of temporal persistence. Previous studies have examined temporal dependence in conflict occur-rence, fatalities, and sequences of individual events [1–4]. Here, we focus instead on how long short-term changes in conflict activity remain correlated. Rather than the per-0 5 10 15 20                     
+
+> k(day)
+> −0.5 0.0 0.5 1.0
+> ρ(k)
+> (a)
+> YEM IRQ JOR PSE 0.0 0.5 1.0 1.5 2.0
+> τint
+> LBN PSE SYR BHR JOR OMN IRQ ISR TUR IRN YEM QAT ARE SAU
+> 1.721 1.578 1.344 1.283 1.253 1.159 1.007 0.881 0.873 0.817 0.739 0.723 0.680 0.586
+> (b)
+> 3456
+> k*
+> 0.5 1.0 1.5
+> τint
+> (c)
+> rP= 0.71
+> ρS= 0.71
+> N= 14 025 50 75 100 125
+> Mean GDP per Capita
+> 0.5 1.0 1.5
+> τint
+> ×10 3
+> (d)
+> rP= −0.61
+> ρS= −0.71
+> N= 12
+
+FIG. 4: Temporal correlations of local changes in 7-day moving-average conflict activity, ∆ mt. (a) Autocorrelation functions ρ(k) as a function of lag k for YEM, IRQ, JOR, and PSE. (b) Integrated correlation time τint [Eq. (11)] for all 14 countries. (c) Integrated correlation time τint versus the first zero-crossing point k∗. Significant positive correlations are observed for both Pearson ( rp = 0 .71) and Spearman (ρs = 0 .71) measures, with p < 0.05 for both. (d) Integrated correlation time τint versus the mean GDP per capita at PPP over 2017–2024. The GDP comparison includes 12 countries with complete data over the analysis period. Significant neg-ative correlations are observed for both Pearson ( rp = −0.61) and Spearman ( ρs = −0.71) measures, with p < 0.05 for both. The dashed lines and shaded regions represent the lin-ear trends and its 95% confidence intervals, respectively. 7sistence of the conflict-frequency level itself, we examine the persistence of increases and decreases, because this captures whether the direction of recent changes in con-flict activity continues over short time scales. Using the daily conflict count n(c) 
+
+> s
+
+, we construct a 7-day moving av-erage of conflict activity and shift the window in one-day increments, s = s0, s 0 + 1 , s 0 + 2 , . . . . The local change in conflict activity is defined as the difference between two successive 7-day moving averages, ∆m(c) 
+
+> s
+
+= n(c) 
+
+> s+4
+
+− n(c)
+
+> s−3
+
+7 , (9) where the two 7-day windows are separated by one day and overlap over six days. We calculate the autocorrelation function ρ(k) of ∆ mt
+
+for all countries, with representative cases shown in Fig. 4(a) and the full results in Fig. C.3 in Appendix C. In all cases, ρ(k) is positive over the first few lags and subsequently becomes negative. We define the first zero-crossing point k∗ by 
+
+ρ(k∗) = 0 , (10) following the common use of the first zero crossing as a practical cutoff for the initial positive-correlation regime in autocorrelation-based time-scale analyses [20, 21]. We estimate k∗ by linear interpolation between the two con-secutive daily lags across which ρ(k) changes sign. The integrated correlation time is then 
+
+τint =
+
+Z k∗
+
+> 0
+
+ρ(k) dk. (11) As shown in Fig. 4(b), τint ranges from approximately 0.6 to 1.7 days, indicating that changes in weekly-scale conflict activity remain correlated only over a few days. The first zero-crossing point k∗ and the integrated cor-relation time τint characterize different aspects of short-term temporal persistence. While k∗ measures the extent of the positive-correlation regime, τint reflects both its extent and the magnitude and decay of ρ(k) within this regime. Therefore, a nearly perfect correlation between the two quantities is not expected, and Fig. 4(c) indeed shows some variation in τint for similar values of k∗. Nev-ertheless, they exhibit a clear positive correlation. This relation is natural because τint integrates the positive cor-relation up to k∗, so a longer positive-correlation regime generally contributes to a larger τint .As an exploratory comparison with a macroscopic so-cioeconomic indicator, we examine the relation between 
+
+τint and the mean GDP per capita at purchasing-power parity (PPP) over 2017–2024, obtained from the World Bank World Development Indicators [22]. Due to insuffi-cient data, SYR and YEM are excluded from this anal-ysis, resulting in 12 countries. GDP is used as an ex-ternal socioeconomic indicator because commonly used political-stability indices already incorporate conflict-related information [23]. The resulting k∗ and τint values, together with GDP, are listed in Table III. Figure 4(d) shows a significant negative correlation between τint and GDP, indicating that changes in conflict activity decor-relate more rapidly in countries with higher GDP. This suggests a possible association between short-term con-flict persistence and broader socioeconomic conditions, without implying causality.  
+
+> V. DISCUSSION
+
+In this study, we have investigated the linear temporal structure of conflict events in Middle Eastern countries using the ARIMA framework as a simple linear base-line. We have used three information criteria to select the ARIMA parameter sets and found that the linear temporal dependence is largely captured for most coun-tries. Despite the presence of such structure in past ob-servations, predictions beyond the training period repro-duce the overall temporal behavior only to some extent, while detailed or abrupt changes remain difficult to pre-dict. We have further examined the characteristic time scales of changes in conflict activity using the first zero-crossing point k∗ and the integrated correlation time τint .The former ranges from approximately 2 to 6 days, while 
+
+τint ranges from approximately 0.6 to 1.7 days. The two quantities are positively correlated, and τint further shows a negative association with mean GDP per capita PPP, suggesting a possible relation between short-term conflict persistence and broader socioeconomic conditions. Unlike more flexible nonlinear prediction approaches, such as reservoir computing and recurrent neural net-works, ARIMA is based on a simple linear assumption and therefore has intrinsic limitations in reproducing complex temporal fluctuations. Nevertheless, our results show that a simple linear structure captures a substan-tial part of the temporal dependence in most cases, de-spite the apparently complex temporal fluctuations of conflict activity. Identifying such linear structure in seem-ingly complicated conflict phenomena may provide a use-ful baseline for developing more refined, system-specific models that incorporate additional nonlinear or external effects. Despite the rich information provided by ACLED, our analysis has several limitations. First, the present time series represents the frequency of dated ACLED event records rather than the duration of underlying conflict episodes. Thus, the duration of conflicts, despite being an important quantity of interest, cannot be directly characterized from the present data, and the correla-tion time obtained here should not be interpreted as the duration of individual conflicts. Second, all events are treated equally, although their impacts may differ sub-stantially. Fatality information could be used to weight event magnitude, but it is incomplete for some records. More complete fatality data would allow magnitude-weighted time series and a more quantitative characteri-zation of conflict intensity. Finally, events are assigned to 8the locations where they occur, so cross-country interac-tions are not directly represented. Constructing country-level conflict networks would require systematic mapping between organization-level actors and countries, which could be addressed in future work using entity-matching approaches, including large language models. 
+
+Acknowledgement 
+
+This work was supported by the National Research Foundation (NRF) of Korea through Grant Number RS-2024-00341317 (M.J.L.). 
+
+[1] N. B. Weidmann and M. D. Ward, Journal of Conflict Resolution 54 , 883–901 (2010). [2] K. Fujita, S. Shinomoto, and L. E. C. Rocha, Scientific Reports 7, 15737 (2017). [3] E. Lewis, G. Mohler, P. J. Brantingham, and A. L. Bertozzi, Security Journal 25 , 244–264 (2012). [4] N. Kushwaha and E. D. Lee, PNAS Nexus 2, pgad228 (2023). [5] H. Hegre, M. Allansson, M. Basedau, M. Colaresi, M. Croicu, H. Fjelde, F. Hoyles, L. Hultman, S. H¨ ogbladh, R. Jansen, N. Mouhleb, S. A. Muhammad, D. Nilsson, H. M. Nyg˚ ard, G. Olafsdottir, K. Petrova, D. Randahl, E. G. Rød, G. Schneider, N. von Uexkull, and J. Vestby, 
+
+Journal of Peace Research 56 , 155–174 (2019). [6] T. Chadefaux and T. Schincariol, EPJ Data Science 14 ,82 (2025). [7] T. Schincariol, H. Frank, and T. Chadefaux, Journal of Peace Research 62 , 2052–2069 (2025). [8] ACLED, Armed Conflict Location & Event Data (ACLED) , https://acleddata.com/conflict-data/ download-data (accessed July 11, 2025). [9] C. Raleigh, R. Kishi, and A. Linke, Humanities and So-cial Sciences Communications 10 , 74 (2023). [10] R. Browning, H. Patten, J. Rousseau, and K. Mengersen, 
+
+Journal of the Royal Statistical Society Series A: Statis-tics in Society qnag039 (2026). [11] G. E. P. Box, G. M. Jenkins, G. C. Reinsel, and G. M. Ljung, Time Series Analysis: Forecasting and Control ,5th ed. (John Wiley & Sons, Hoboken, NJ, 2015). [12] N. Rodr´ ıguez and D. White, Crime Science 12 , 17 (2023). [13] S. E. Said and D. A. Dickey, Biometrika 71 , 599–607 (1984). [14] D. A. Dickey and W. A. Fuller, Journal of the American Statistical Association 74 , 427–431 (1979). [15] D. Kwiatkowski, P. C. B. Phillips, P. Schmidt, and Y. Shin, Journal of Econometrics 54 , 159–178 (1992). [16] H. Akaike, IEEE Transactions on Automatic Control 19 ,716–723 (1974). [17] G. Schwarz, The Annals of Statistics 6, 461–464 (1978). [18] E. J. Hannan and B. G. Quinn, Journal of the Royal Statistical Society: Series B (Methodological) 41 , 190–195 (1979). [19] J. M. Bates and C. W. J. Granger, Journal of the Oper-ational Research Society 20 , 451–468 (1969). [20] M. Andersson, K. A. Orvik, J. H. LaCasce, I. Kosza-lka, and C. Mauritzen, Journal of Geophysical Research: Oceans 116 , C08032 (2011). [21] N.-H. Chi, E. J. Thompson, H. Chen, A. Shcherbina, F. Bingham, and L. Rainville, Journal of Geophysical Re-search: Oceans 128 , e2022JC019599 (2023). [22] World Bank, World Development Indicators (World Bank, Washington, DC, 2026), accessed September 19, TABLE A.1: Country codes used in this study and their cor-responding country names. Country code Country name ARE United Arab Emirates BHR Bahrain IRN Iran IRQ Iraq ISR Israel JOR Jordan KWT Kuwait LBN Lebanon OMN Oman PSE Palestine QAT Qatar SAU Saudi Arabia SYR Syria TUR T¨ urkiye YEM Yemen 2026. [23] D. Kaufmann and A. Kraay, The Worldwide Governance Indicators: Methodology and 2024 Update , Technical Re-port 10952 (World Bank, 2024). [24] G. M. Ljung and G. E. P. Box, Biometrika 65 , 297–303 (1978). 
+
+Appendix A: Country code and name 
+
+The country code and names are listed in Table A.1. 
+
+Appendix B: MODEL SELECTION AND RESIDUAL DIAGNOSTICS 
+
+In this section, we briefly describe some statistical tests. 
+
+B.1. Information criteria 
+
+For a model with k parameters fitted to N data points, let ˆL denote the maximized likelihood. The three infor-mation criteria, which are widely used for model selection by balancing goodness of fit and model complexity, are 92018 2019 2020 2021 2022 2023 2024                  
+
+> Year
+> −50 050 100
+> Residual
+> (a)
+> IRQ ARIMA(3,1,4)
+> 0510 15 20 25 30
+> Lag (weeks)
+> −0.10 −0.05 0.00 0.05 0.10
+> Autocorrelation
+> (b)
+> Ljung--Box: p= 0.869
+> −50 050 100
+> Residual
+> 0.000 0.005 0.010 0.015 0.020
+> Density
+> (c)
+> Normal reference
+> −3 −2 −1 0123
+> Theoretical quantiles
+> −50 050 100
+> Ordered residuals
+> (d)
+
+FIG. B.1: Residual diagnostics for the AIC-selected ARIMA(3 , 1, 4) model of IRQ fitted to the 2017–2024 training data. (a) Residual time series. (b) Autocorrelation function of residuals. The Ljung–Box test was evaluated at lag h = 20 with the model degrees of freedom adjusted by p+q. (c) Resid-ual distribution with a normal reference, and (d) Normal Q–Q plot. 
+
+given by AIC = 2 k − 2 ln ˆL, 
+
+BIC = k ln N − 2 ln ˆL, 
+
+HQIC = 2 k ln(ln N ) − 2 ln ˆL. 
+
+All three criteria balance goodness of fit, represented by the likelihood term, against model complexity, rep-resented by the penalty term. AIC imposes a relatively weak penalty on model complexity and thus places more emphasis on goodness of fit, whereas BIC imposes a stronger penalty and tends to favor simpler models. HQIC provides an intermediate balance between AIC and BIC, with a complexity penalty generally stronger than that of AIC but weaker than that of BIC. 
+
+B.2. Temporal correlation of residuals 
+
+If the fitted ARIMA( p, d, q ) adequately captures the linear temporal dependence in the training data, its resid-uals ˆ ϵt should show no systematic temporal correlation. This is examined using the Ljung–Box test [24], whose null hypothesis is that the residuals have no signifi-cant autocorrelation over the considered range of time lags. As an example, Fig. B.1(a) shows the residuals of ARIMA(3 , 1, 4) selected by AIC for IRQ, fitted to the 2017–2024 training data, and Fig. B.1(b) shows their au-tocorrelation. The residual autocorrelations lie within the 95% confidence interval, and the Ljung–Box test gives 
+
+p = 0 .869, providing no evidence of remaining temporal correlation. The residual distribution is approximately Gaussian around its central region, but deviations are visible in the tails, as seen in the histogram and Q–Q plot in Figs. B.1(c) and B.1(d). This deviation does not necessarily indicate model inadequacy, but rather sug-gests that extreme fluctuations are not fully described by a Gaussian error distribution. We performed the same residual diagnostics for all countries. Most selected parameter sets pass the Ljung– Box test, while the few exceptions with p < 0.05 are marked by cross symbols in Table I. 
+
+Appendix C: Results for all countries 
+
+In this section, we show all respective curves for all 14 countries. The prediction results by ARIMA( p, d, q ) are plotted in Fig. C.2, and the autocorrelation functions are plotted in Fig. C.3. 10 Jan Mar May 0150 300 450 
+
+> xt
+
+(a) LBN   
+
+> Jan Mar May 0200 400 600
+> xt
+
+(b) SYR   
+
+> Jan Mar May 0150 300 450
+> xt
+
+(c) YEM   
+
+> Jan Mar May 0200 400 600
+> xt
+
+(d) PSE   
+
+> Jan Mar May 0150 300
+> xt
+
+(e) IRN   
+
+> Jan Mar May 040 80 120
+> xt
+
+(f) ISR   
+
+> Jan Mar May 080 160 240
+> xt
+
+(g) IRQ   
+
+> Jan Mar May 080 160 240
+> xt
+
+(h) TUR   
+
+> Jan Mar May −30 030 60
+> xt
+
+(i) BHR   
+
+> Jan Mar May 015
+> xt
+
+(j) JOR   
+
+> Jan Mar May −8 08
+> xt
+
+(k) SAU   
+
+> Jan Mar May 02
+> xt
+
+(l) QAT   
+
+> Jan Mar May −1 01
+> xt
+
+(m) OMN   
+
+> Jan Mar May 01
+> xt
+
+(n) ARE 
+
+Empirical data Weighted average AIC BIC HQIC 
+
+FIG. C.2: Prediction results for all countries obtained from ARIMA, sorted by RMSE from largest to smallest. Only parameter sets that pass the Ljung–Box test are shown. The shaded areas represent the 95% confidence intervals from HQIC and are omitted when the HQIC-selected parameter set fails the Ljung–Box test. 11 0 5 10 15 20 −0.5 0.0 0.5 1.0 
+
+(a) LBN     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(b) PSE     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(c) SYR     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(d) BHR     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(e) JOR     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(f) OMN     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(g) IRQ     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(h) ISR     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(i) TUR     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(j) IRN     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(k) YEM     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(l) QAT     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(m) ARE     
+
+> 0510 15 20 −0.5 0.0 0.5 1.0
+
+(n) SAU 
+
+k (day) 
+
+> ρ(k)
+
+Autocorrelation Integrated area [0, k * ] First zero crossing k *
+
+FIG. C.3: Autocorrelation functions ρ(k) of the local changes ∆ mt for all 14 countries. The shaded region denotes the piecewise-linear area integrated from k = 0 to the linearly interpolated first zero-crossing point k∗, corresponding to the integrated correlation time τint defined in Eq. (11). The dashed vertical line indicates k∗. Countries are ordered by decreasing τint .
