@@ -1,0 +1,91 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-24T22:06:02.511092+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.26296v1",
+      "source": "arxiv",
+      "title": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "abstract": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "authors": [
+        "Hyuntae Ahn",
+        "Mi Jin Lee"
+      ],
+      "primary_category": "physics.soc-ph",
+      "categories": [
+        "physics.soc-ph"
+      ],
+      "published": "2026-09-22T12:09:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.26296v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 7.5,
+      "llm_evidence_en": "conflict-frequency time series prediction using ARIMA framework",
+      "llm_evidence_cn": "使用ARIMA框架对冲突频率时间序列进行预测",
+      "llm_evidence": "使用ARIMA框架对冲突频率时间序列进行预测",
+      "canonical_evidence": "使用ARIMA框架对冲突频率时间序列进行预测",
+      "llm_tldr_en": "This paper evaluates the linear temporal structure and predictability of conflict activity in Middle Eastern countries using the ARIMA framework.",
+      "llm_tldr_cn": "该论文使用ARIMA框架评估了中东国家冲突活动的线性时间结构和可预测性。",
+      "llm_tldr": "该论文使用ARIMA框架评估了中东国家冲突活动的线性时间结构和可预测性。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.19306v1",
+      "source": "arxiv",
+      "title": "Laplacian U-Processes for Multiple Change-Point Detection in Dependent Text Networks: An Application to Historical Chinese Articles",
+      "abstract": "We propose a two-view weighted-concordance operator (WCO) framework for offline change-point detection in weakly dependent text networks. Weighted word-co-occurrence graphs yield first-order direct-co-occurrence and second-order shared-context views, projected into paired Euclidean observations using maps learned from an independent pilot corpus. A WCO scan detects changes in cross-view dependence. A dependent multiplier bootstrap tests for a change, while a segment-wise block bootstrap gives a descriptive stability interval for its location. We establish null weak convergence, bootstrap validity, asymptotic size control, consistent localization under a single identifiable change, and perturbation bounds for token-level errors. CUSUM and Gaussian-kernel MMD scans provide complementary benchmarks. In the 1915-1921 New Youth corpus, the method detects a change in November 1919, with a descriptive 95 percent stability interval from April 1919 to June 1920, consistent with the linguistic transition surrounding China's May Fourth and New Culture movements.",
+      "authors": [
+        "Fanghua Chen",
+        "Yizhou Cai",
+        "Lu zhou",
+        "Ting Fung Ma"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "math.ST"
+      ],
+      "published": "2026-09-16T18:14:09+00:00",
+      "link": "https://arxiv.org/pdf/2609.19306v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "change-point detection in historical text networks for analyzing political/social shifts",
+      "llm_evidence_cn": "用于分析政治/社会转变的历史文本网络变点检测",
+      "llm_evidence": "用于分析政治/社会转变的历史文本网络变点检测",
+      "canonical_evidence": "用于分析政治/社会转变的历史文本网络变点检测",
+      "llm_tldr_en": "Proposes a framework for detecting structural changes in historical text networks using word co-occurrence graphs.",
+      "llm_tldr_cn": "提出了一个利用词共现图检测历史文本网络结构变化的框架。",
+      "llm_tldr": "提出了一个利用词共现图检测历史文本网络结构变化的框架。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

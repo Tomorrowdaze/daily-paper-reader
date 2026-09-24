@@ -1,0 +1,1865 @@
+Title: Laplacian U-Processes for Multiple Change-Point Detection in Dependent Text Networks: An Application to Historical Chinese Articles
+
+URL Source: https://arxiv.org/pdf/2609.19306v1
+
+Published Time: Fri, 18 Sep 2026 00:08:41 GMT
+
+Number of Pages: 32
+
+Markdown Content:
+# Laplacian U -Processes for Multiple Change-Point Detection in Dependent Text Networks: An Application to Historical Chinese Articles 
+
+Fanghua Chen *, Yizhou Cai †
+
+, Lu Zhou ‡& Ting Fung Ma §
+
+September 18, 2026 
+
+Abstract 
+
+We develop a two-view weighted-concordance operator (WCO) framework for offline change-point detection in weakly dependent text networks. Each time-indexed text corpus is represented by a weighted word-co-occurrence graph and its trace-normalized graph Laplacian. From the same graph, we construct two complementary representations. The first-order view records normalized direct word co-occurrences, whereas the second-order view records shared-context relationships through normalized two-step network paths. Fixed dimension reduction and whitening maps, estimated from an independent pilot corpus, transform these graph representations into paired Euclidean observations (Xi, Y i). For each candidate boundary, coordinatewise weighted-concordance kernels define segmentwise WCO U -statistics, and an 
+
+Lq aggregation of their between-segment differences measures changes in the relationship between direct co-occurrence and shared-context structure. The estimated change-point maximizes this aggregated scan statistic. A dependent multiplier bootstrap accounts for short-range temporal dependence and provides a test for the existence of a change, while a segmentwise block bootstrap gives a descriptive stability interval for its estimated location. The theoretical analysis treats the two representation maps as fixed and formulates primitive conditions on the common vocabulary, document length, co-occurrence-window weights, trace mass, node degrees, pilot dimension reduction, temporal mixing, moments, and change-point identifiability. Under the no-change hypothesis, we establish weak convergence of the WCO U -process and consistency of its dependent multiplier bootstrap, yielding asymptotic size control. Under a single identifiable change, uniform convergence of the scan contrast gives consistency of the estimated change-point fraction and localization of the corresponding boundary. We also derive deterministic perturbation bounds for token insertions, deletions, substitutions, and related text-recording errors. These bounds propagate the original text perturbation through the co-occurrence matrix, trace-normalized Laplacian, first- and second-order representations, pilot projections, WCO kernels, and the final scan statistic, thereby giving explicit conditions under which the estimated change-point remains stable. Mean Cumulative Sum (CUSUM) and 
+
+> *
+
+fanghua@email.sc.edu, Department of Statistics, University of South Carolina 
+
+> †
+
+yizhouc@txstate.edu, Department of Mathematics, Texas State University 
+
+> ‡
+
+lz12@email.sc.edu, Department of Statistics, University of South Carolina 
+
+> §
+
+tingfung@mailbox.sc.edu, Department of Statistics, University of South Carolina 
+
+1arXiv:2609.19306v1 [stat.ME] 16 Sep 2026 Gaussian-kernel Maximum Mean Discrepancy (MMD) procedures applied to the first-order, second-order, and concatenated views are included as complementary benchmark methods. The simulation study evaluates these complementary components under multiple change types and data-generating mechanisms. In an analysis of the historical New Youth corpus from 1915–1921, the proposed procedure identifies a linguistic change in November 1919 and gives a descriptive 95% segment-centered bootstrap stability interval from April 1919 to June 1920. The detected period is consistent with the linguistic transition surrounding the May Fourth and New Culture movements in China. 
+
+Keywords: CUSUM; Graph Laplacian; Kernel; Structural breaks; U-statistics. 
+
+# 1 Introduction 
+
+Change-point analysis concerns the detection and localization of structural breaks in an ordered sequence of observations. Classical procedures often target a specified parametric feature, as in tests for changes in regression coefficients (Fisher, 1970), or accumulate centered observations, as in the cumulative sum (CUSUM) principle (Page, 1954). Sequential likelihood methods have subsequently been developed for multi-sensor and dependent time-series settings (Xie and Siegmund, 2013; Leung et al., 2017). These approaches are effective when the relevant model or changing feature is known, but modern applications increasingly involve structured observations for which a single mean, variance, or regression parameter does not adequately describe the change. This limitation is especially consequential for temporally ordered text corpora. Linguistic change may be expressed not only through shifts in word frequencies, but also through changes in which words co-occur directly, which words are linked through shared contexts, and how these direct and indirect structures relate to one another. A mean CUSUM applied to word-frequency vectors can detect a location shift, but it does not directly characterize a reorganization of lexical associations. Likewise, an omnibus comparison of a single text representation may establish that two periods differ without identifying whether the break arose from direct co-occurrence, shared-context structure, or their relationship. The problem is further complicated because consecutive corpora may be dependent, each time period contains only a finite document, and the object supplied to the change-point procedure is itself an estimated linguistic representation. Word-co-occurrence networks provide a natural bridge between text analysis and network statistics: words form a common node set and weighted edges record their co-occurrences within a prescribed textual window. Severn et al. (2022) formalized this representation for corpus linguistics by identifying each document with a graph Laplacian and developing means, principal component analysis, regression, and two-sample inference for samples of networks. Related nonparametric regression methodology describes smooth temporal trends in graph-Laplacian-valued observations, including email and linguistic networks (Severn et al., 2021). This line of work builds on broader non-Euclidean analysis of positive semidefinite matrices (Dryden et al., 2009) and distance-based inference for covariance operators (Pigoli et al., 2014). These contributions provide important geometric and operator-valued foundations, but they do not by themselves furnish an offline change-point test for a weakly dependent sequence of finite-document text networks. The difficulty is related to, but distinct from, change-point detection in dynamic networks. One branch of this literature is model based. Regularized procedures have been developed to detect structural breaks and estimate segment-specific parameters in high-dimensional vector autoregressions (Safikhani and Shojaie, 2022), and unified frameworks cover mean-shift, regression, vector-autoregressive, and Gaussian graphical models (Bai and Safikhani, 2023). More recently, node-specific network autoregressive models have been used to detect multiple structural breaks while allowing heterogeneous temporal dynamics across nodes (Lin and Safikhani, 2026). Such methods provide interpretable changes in model parameters or network-driven dynamics, but require a specified regression, graphical, or autoregressive structure. 2A second branch compares observed graph snapshots more directly. Existing methods include graph-based scans constructed from similarities among observations (Chen and Zhang, 2015), Fr´ echet procedures for general metric-space-valued data (Dubey and M¨ uller, 2020), and minimax detection and localization theory for sparse dynamic networks (Wang et al., 2021). For graph-Laplacian-valued sequences, spectral procedures compare short- and long-term graph behavior and aggregate information across multiple network views (Huang et al., 2024), whereas Log-Euclidean Fr´ echet statistics compare the location and dispersion of dynamic social networks (Luo and Krishnamurthy, 2024). Learned graph-similarity functions provide another approach to online change detection (Sulem et al., 2024). Recent work also aggregates graph kernels for dynamic-network change detection (Sun and Chen, 2026). These methods establish the value of graph geometry, spectral summaries, and learned or kernel-based graph comparisons, but they primarily target a single graph representation, changes in metric location or dispersion, spectral anomalies, parametric dynamics, or an aggregate measure of graph similarity. Nonparametric distributional discrepancies offer a complementary route beyond a prespecified parametric alternative. Energy statistics compare probability laws through expectations of pairwise distances (Sz´ ekely and Rizzo, 2004; Sz´ ekely and Rizzo, 2005) and have been used for multiple change-point analysis of multivariate sequences (Matteson and James, 2014). Maximum mean discrepancy (MMD) compares kernel mean embeddings in a reproducing kernel Hilbert space (Gretton et al., 2012). The equivalence between energy and kernel statistics for semimetrics of negative type (Sejdinovic et al., 2013), together with high-dimensional generalizations (Chakraborty and Zhang, 2021), provides a broad framework for omnibus two-sample comparison. Kernel costs have also led to flexible multiple-change algorithms based on model selection (Arlot et al., 2019), and recent work applies kernel change-point methods to fixed sentence embeddings (Jia and Diaz-Rodriguez, 2026). Although these discrepancies can detect general distributional changes, an omnibus scalar discrepancy need not reveal the linguistic mechanism responsible for a detected break. The preceding developments leave a specific inferential gap. What remains less developed is a representation-aware framework for detecting abrupt changes in the relationship between complementary views of temporally dependent text networks. A word-co-occurrence network is observed through only finitely many tokens, and its sampling error propagates nonlinearly through Laplacian normalization, higher-order graph maps, and dimension reduction. Moreover, two views constructed from the same document inherit correlated representation errors. Existing single-view comparisons do not directly determine whether direct lexical associations and shared-context structure have changed in relation to one another, while treating empirical views as fixed, error-free inputs obscures the conditions under which graph-level change-point inference is valid. We address this gap by developing a representation-aware two-view weighted-concordance operator (WCO) framework for offline change-point detection in weakly dependent text networks. For each time period, an aligned vocabulary and a prespecified co-occurrence window produce a weighted co-occurrence matrix and its trace-normalized graph Laplacian. The normalized direct network forms the first-order view, while normalized two-step paths form the second-order shared-context view. Fixed dimension-reduction and whitening maps, estimated from an independent pilot corpus, transform these views into paired Euclidean observations (Xi, Y i). This construction makes it possible to trace finite-document error through the complete representation pipeline and clarifies how document length, vocabulary and word-frequency stability, window weights, trace mass, node degrees, and pilot maps determine representation accuracy. Our primary inferential target is more specific than an arbitrary distributional change. Coordinatewise weighted-concordance kernels compare pairwise odd-power differences across the first- and second-order views, and their segmentwise WCO U -statistics measure changes in the relationship between direct co-occurrence and shared-context structure. The resulting operator contrast is sensitive to changes in scatter, monotone association, and cross-view dependence, while its leading singular directions provide a route back to influential projected coordinates, edges, and words. In scalar special cases, the construction includes 3Kendall, Gini, and covariance-type pairwise kernels (Kendall, 1938). This mechanism-specific interpretation also defines the method’s boundary: a marginal shift or another distributional change that leaves the targeted cross-view functional unchanged need not be detected by the WCO scan. We therefore adopt an asymmetric combination of general detection and mechanism-specific diagnosis. Characteristic Gaussian-kernel MMD, applied to the first-order, second-order, and concatenated views, serves as an omnibus anchor for evidence of a general distributional change. The WCO scan then assesses whether that evidence is accompanied by a change in cross-view concordance. Mean CUSUM procedures provide complementary benchmarks for location changes. Thus, MMD asks whether the represented text-network distribution changed, whereas WCO asks whether the relationship between direct lexical links and shared contextual structure changed. This separation avoids assigning omnibus power to a deliberately targeted functional. Temporal dependence is incorporated at both the modeling and calibration stages. We formulate a complete state-and-document-noise process and impose a global absolute-regularity coefficient over every time cut, including cuts that straddle a change. Oracle graphs, empirical graphs, feature maps, and first Hoeffding projections then inherit this coefficient by measurability; mixing is therefore derived from a primitive temporal driver rather than postulated only at the oracle-graph level. The directional statistics are finite-dimensional operator-valued U -processes, connecting the construction to classical U -statistics (Hoeffding, 1948; Serfling, 1980) and to change-point theory for dependent and functional U -statistics (Dehling et al., 2015; Giraudo, 2024; Wegner and Wendler, 2024). We calibrate the full-sample single-change WCO scan with a dependent multiplier bootstrap, following the dependent wild and multiplier-bootstrap literature (Shao, 2010; B¨ ucher and Kojadinovic, 2016). Method-specific dependence bandwidths may be selected using the relevant long-run covariance estimates, in the spirit of Rice and Shang (2017), rather than being mechanically shared across statistics. For multiple changes, recursive or interval-based procedures such as the narrowest-over-threshold principle (Baranowski et al., 2019) provide natural extensions. We describe this direction at a high level, while our formal inferential guarantees concern the single-change problem. The main contributions are organized around five claims. First, we give a primitive finite-document perturbation analysis. Checkable conditions on token dependence, document length, vocabulary and word-frequency stability, co-occurrence-window weights, trace mass, node degrees, and the fixed pilot maps propagate text-recording error through the two graph views and the final scan. Second, we establish oracle joint weak convergence of the WCO scan coordinates under weak temporal dependence. Third, we prove validity of full-sample dependent multiplier calibration for the single-change test under the null. Fourth, under an explicit population separation condition, we establish single-change detection, consistency of the estimated change fraction, and localization of the corresponding boundary. This condition is stated explicitly because mixed-segment U -functionals do not automatically attain their maximum at the true boundary. Fifth, we describe multiple-change analysis as a high-level extension rather than claim a recovery theorem not established by the present theory. The simulation study investigates finite-sample size, power, localization, and population identification under scalar, dynamic-network, and text-generated designs. It compares the WCO scan, the asymmetric omnibus anchor plus WCO diagnostic, and CUSUM- and MMD-based competitors using method-specific dependence calibration. We also analyze the historical New Youth corpus from 1915–1921 to illustrate how changes in direct co-occurrence, shared-context structure, and their relationship can be linked to a historically interpretable transition in language use. The remainder of the paper is organized as follows. Section 2 reviews distance- and kernel-based formulations of distributional change. Section 3 presents the two text-network views, the WCO scan, its multiplier calibration, and the complementary CUSUM and MMD procedures. Section 4 gives the finite-document perturbation, oracle weak-convergence, bootstrap, detection, and localization theory for a single change, followed by the high-level multiple-change extension. Sections 5 and 6 report the simulation and empirical studies, respectively, and Section 7 concludes. Detailed proofs are available upon request. 42 Background 
+
+Change-point detection can be formulated as the identification of changes in the data-generating law of an ordered sequence. Rather than specifying in advance a particular changing coefficient, modern nonparametric procedures compare distributions across candidate segments. A prominent line of work is based on distance measures. Given X, X ′ ∼ P and Y, Y ′ ∼ Q, with the primed variables denoting independent copies, the energy distance is 
+
+ED( P, Q ) = 2 E∥X − Y ∥ − E∥X − X′∥ − E∥Y − Y ′∥.
+
+Under finite first moments in Euclidean space, this quantity is nonnegative and equals zero if and only if 
+
+P = Q (Sz´ ekely and Rizzo, 2004; Sz´ ekely and Rizzo, 2005). The corresponding sample energy statistic is a two-sample U - or V -statistic. Matteson and James (2014) embed such segmentwise discrepancies in a divisive procedure for multiple change-point analysis of multivariate sequences. Kernel methods provide a closely related formulation. For a positive definite kernel k, the squared maximum mean discrepancy (MMD) is 
+
+MMD 2(P, Q ) = E{k(X, X ′)} + E{k(Y, Y ′)} − 2E{k(X, Y )}.
+
+It is the squared distance between the kernel mean embeddings of P and Q in a reproducing kernel Hilbert space (Gretton et al., 2012). When k is characteristic, MMD( P, Q ) = 0 if and only if P = Q. Sejdinovic et al. (2013) show that energy distance and MMD are equivalent under the correspondence between semimetrics of negative type and positive definite kernels. This result places distance- and kernel-based tests within a common framework, with extensions available for high-dimensional settings (Chakraborty and Zhang, 2021). Kernel costs can also be combined with penalized model selection to estimate multiple changes (Arlot et al., 2019). These discrepancies provide an omnibus reference point for the present paper. A characteristic-kernel MMD applied to a text representation can detect any fixed alternative identified by that representation, rather than only a change in its mean. Nevertheless, the resulting scalar discrepancy does not necessarily explain which linguistic structure changed. In particular, it does not directly distinguish a change in direct lexical co-occurrence from a change in shared context or in the relationship between these two structures. This distinction motivates the use of MMD as an omnibus anchor and the weighted-concordance operator (WCO) as a targeted cross-view diagnostic. 
+
+2.1 Text-network representations and graph change-points 
+
+A corpus can be represented as a sequence of weighted networks by taking a common vocabulary as the node set and using within-window word co-occurrence counts as edge weights. This construction retains relational information that is not available from word frequencies alone. The graph Laplacian supplies a matrix-valued representation of each document, but the space of Laplacians is constrained and non-Euclidean. Earlier work on positive semidefinite matrices developed power-Euclidean and Procrustes geometries (Dryden et al., 2009), while distance-based inference for covariance operators provided a broader operator-valued perspective (Pigoli et al., 2014). For corpus linguistics, Severn et al. (2022) use graph Laplacians to develop means, principal component analysis, regression, and two-sample inference for samples of word-co-occurrence networks. Related nonparametric regression methods estimate smooth trends in graph-Laplacian-valued responses and have been illustrated with email and linguistic networks (Severn et al., 2021). These methods establish that temporal text data can be studied through network geometry. Their primary goals, however, are cross-sectional comparison or smooth regression rather than testing for and localizing an abrupt distributional change under temporal dependence. 5The broader dynamic-network change-point literature follows two main routes. Model-based proce-dures characterize a break through a change in an explicit temporal or network parameter. For example, Safikhani and Shojaie (2022) jointly detect structural breaks and estimate segment-specific parameters in high-dimensional vector autoregressions. Bai and Safikhani (2023) provide a unified framework covering mean-shift, regression, vector-autoregressive, and Gaussian graphical models, while Lin and Safikhani (2026) consider multiple changes in network autoregressive models with node-specific dynamics. These approaches yield interpretable parameter changes but require the relevant parametric structure to be specified. Graph-snapshot procedures instead compare networks more directly. Graph-based scans can be con-structed from similarities among observations (Chen and Zhang, 2015), and Fr´ echet statistics extend change-point analysis to general metric-space-valued random objects (Dubey and M¨ uller, 2020). Minimax theory is available for changes in sparse dynamic networks (Wang et al., 2021). For Laplacian-valued sequences, Huang et al. (2024) compare graph spectra over short and long temporal windows and aggregate multiple network views. Luo and Krishnamurthy (2024) use a Log-Euclidean geometry and Fr´ echet location and dispersion, whereas Sulem et al. (2024) learn a graph-similarity function for online detection. Kernel aggre-gation provides another distribution-free strategy for dynamic networks (Sun and Chen, 2026), and kernel change-point methods have recently been applied to fixed sentence embeddings (Jia and Diaz-Rodriguez, 2026). These methods address important changes in graph parameters, spectra, metric location or dispersion, learned similarity, or an aggregated graph distribution. Our target is different. The two views are derived from the same text network but have distinct linguistic meanings: the first records normalized direct co-occurrences, while the second records shared-context relations through normalized two-step paths. The inferential question is whether the relationship between these views changes. Moreover, because both views are estimated from the same finite document, their representation errors are neither negligible by definition nor independent across views. 
+
+2.2 WCO U -processes and dependent calibration 
+
+The WCO is a segment-level operator formed from pairwise transformations of the two views. Its empirical version is therefore a WCO U -statistic, placing the method within the theory initiated by Hoeffding (1948) and developed systematically by Serfling (1980). Scalar members of the kernel family are related to classical rank concordance (Kendall, 1938); other choices produce covariance- or Gini-type contrasts. Unlike an omnibus MMD, the WCO targets a specified cross-view functional. This restriction enables a direct interpretation of the detected mechanism, but it also implies that a purely marginal change can be invisible when it leaves the target unchanged. For each candidate boundary, the proposed scan contrasts the WCO U -statistics computed from the two candidate segments and aggregates their coordinatewise differences. Under weak temporal dependence, its leading stochastic term is governed by the sequential first Hoeffding projections. Existing results for dependent and Hilbert-valued U -statistics supply the relevant weak-convergence tools (Dehling et al., 2015; Giraudo, 2024; Wegner and Wendler, 2024). The present setting also requires joint control of the scan coordinates and uniform treatment of candidate boundaries because the test statistic maximizes over the full trimmed interval. Temporal dependence must also be reproduced during calibration. Independent resampling generally fails to recover the long-run covariance of the sequential first-order projection. Dependent wild and multiplier bootstraps instead use a correlated multiplier sequence to approximate that covariance (Shao, 2010; B¨ ucher and Kojadinovic, 2016). The multiplier bandwidth determines the range of dependence retained by the bootstrap and may be selected through long-run covariance estimation (Rice and Shang, 2017). Because the WCO, MMD, and mean CUSUM statistics have different projection processes, their dependence bandwidths are calibrated separately rather than mechanically shared. 62.3 Inferential scope and the remaining gap 
+
+The preceding literatures separately provide omnibus distributional discrepancies, geometric methods for text and dynamic networks, and asymptotic tools for dependent U -statistics. They do not directly resolve their combination in the present problem: paired linguistic views estimated from the same finite text, an operator-valued target describing their relationship, and dependent scan calibration after representation error. The methodology below links the observed documents to oracle two-view coordinates, propagates finite-document perturbations through the complete graph construction, and builds a WCO scan for testing and localization under a single change. The roles of the procedures are therefore deliberately asymmetric. Characteristic-kernel MMD serves as the omnibus anchor, mean CUSUM provides a location-change benchmark, and WCO diagnoses changes in cross-view concordance. A rejection by MMD without corresponding WCO evidence indicates that the distri-bution changed without detectable movement in the targeted cross-view functional; WCO evidence supports the more specific conclusion that direct co-occurrence and shared-context structure changed in relation to one another. The formal theory concerns the full-sample single-change test and localization problem. Recursive or interval-based segmentation, including narrowest-over-threshold procedures (Baranowski et al., 2019), remains a high-level multiple-change extension. 
+
+# 3 Methodology 
+
+Considering a time-ordered collection of texts Dn = {(xi, Ti) : i = 1 , . . . , n }, x 1 < · · · < x n, where xi is the time associated with the ith observation and Ti is the text collected over that time period. A text may be a single article or speech, all documents collected during a fixed day, week, or month, or a consecutive block of a longer corpus. The number of tokens in Ti is denoted by Ni and may vary with i. Our construction first maps every text to a trace-normalized graph Laplacian using the power–Euclidean framework of Severn et al. (2022). It then extracts two aligned graph views: a first-order view of direct word co-occurrence and a second-order view of shared lexical context. These views are compared over time through matrix-valued weighted-concordance U -statistics. The final part of this section records how finite-text errors propagate through every stage of the construction. 
+
+3.1 From time-indexed texts to Laplacian coordinates 
+
+The same preprocessing rule is applied to all texts. After lowercasing, tokenization, and any prespecified removal or lemmatization operations, write the token sequence of Ti as Ti = ( wi1, . . . , w iN i ). A common ordered vocabulary V = {v1, . . . , v m} is fixed before the change-point scan. Here m is the number of retained words, and node a represents the same word va at every time point. The vocabulary may be obtained from an external corpus or a nonoverlapping training period. A pooled top-m vocabulary may also be used if it is conditioned upon in the subsequent analysis or if its selection stability is established separately. Function words need not be removed, because their co-occurrence patterns can carry information about writing style and collective language use. Let h ≥ 1 be a fixed co-occurrence span and let ρ1, . . . , ρ h be fixed nonnegative lag weights. Taking 
+
+ρℓ = 1 gives an unweighted window. For distinct vocabulary indices a and b, define 
+
+Wi,ab = X
+
+> 1≤r<s ≤Ni
+> s−r≤h
+
+ρs−r
+
+h
+
+1{wir = va, w is = vb} + 1{wir = vb, w is = va}
+
+i
+
+.
+
+Tokens outside V retain their original positions but make no contribution to this sum. Set Wi,aa = 0 and let Wi = ( Wi,ab )ma,b =1 . Thus Wi is a symmetric, nonnegative adjacency matrix whose entries are weighted 7direct co-occurrence counts. The weighted degree of word va and the corresponding degree matrix are di,a = Pmb=1 Wi,ab , D i =diag( di, 1, . . . , d i,m ). The combinatorial graph Laplacian is Li = Di − Wi. The matrix is symmetric and positive semidefinite, satisfying Li1m = 0 , and has off-diagonal entries (Li)ab = −Wi,ab . We next define 
+
+ci = tr( Li) = Pma=1 di,a = 2 P 
+
+> 1≤a<b ≤m
+
+Wi,ab . Thus, for ci > 0, the trace-normalized Laplacian could be eLi = Li/c i, tr( eLi) = 1 . This normalization removes the mechanical multiplication of all edge weights caused by document length. A text with ci = 0 contains no usable co-occurrence edge and is either combined with an adjacent time period or assigned a prespecified zero representation. Let eLi = QiΛiQ⊤ 
+
+> i
+
+be a spectral decomposition, where Qi is orthogonal and Λi = diag( λi1, . . . , λ im )
+
+contains the nonnegative eigenvalues. For a fixed power α > 0, define 
+
+eLαi = QiΛαi Q⊤ 
+
+> i
+
+and Λαi = diag( λαi1, . . . , λ αim ).
+
+Let Hm ∈ R(m−1) ×m be a Helmert submatrix satisfying HmH⊤ 
+
+> m
+
+= Im−1, H ⊤
+
+> m
+
+Hm = Im − m−11m1⊤
+
+> m
+
+.
+
+For a symmetric matrix, vech ∗ denotes the half-vectorization that retains the diagonal and multiplies every off-diagonal coordinate by √2. The power–Euclidean coordinate of the ith text network is 
+
+Z(α) 
+
+> i
+
+= vech ∗ 
+
+Hm eLαi H⊤
+
+> m
+
+
+
+∈ Rp and p = m(m − 1) 2 . (1) Equation (1) is the Euclidean coordinate convention of Severn et al. (2022). Because Hm removes exactly the zero-row-sum constraint and vech ∗ preserves the Frobenius norm, we have ∥Z(α) 
+
+> i
+
+− Z(α) 
+
+> j
+
+∥2 = ∥eLαi − eLαj ∥F.
+
+The main methodology fixes α = 1 . In that case the off-diagonal entries of eLi remain proportional to the direct edge weights, and no spectral nonlocality is introduced. The square-root choice α = 1 /2 is useful as a sensitivity analysis, but its entries combine the full eigensystem and should not be interpreted as individual direct edges. 
+
+3.2 First- and second-order graph representations 
+
+The separation between direct lexical links and distributional context is motivated by joint multi-graph word representations such as Daix-Moreux and Gall´ e (2019) and by the distinction between first- and second-order network proximity in Tang et al. (2015). Our construction is deterministic and is applied separately to every time-indexed graph. It does not split the coordinates of Z(α) 
+
+> i
+
+into two subsets. Instead, both views are constructed from the same adjacency matrix Wi.Define the Moore–Penrose inverse of the degree matrix by 
+
+D† 
+
+> i
+
+= diag( d†
+
+> i, 1
+
+, . . . , d †
+
+> i,m
+
+), where d† 
+
+> i,a
+
+=
+
+(
+
+d−1 
+
+> i,a
+
+, di,a > 0,
+
+0, di,a = 0 .
+
+Then its positive square root will be 
+
+(D† 
+
+> i
+
+)1/2 = diag( δi, 1, . . . , δ i,m ), where δi,a =
+
+(
+
+d−1/2 
+
+> i,a
+
+, di,a > 0,
+
+0, di,a = 0 .
+
+The degree-normalized adjacency matrix is Si = ( D† 
+
+> i
+
+)1/2Wi(D† 
+
+> i
+
+)1/2.
+
+For di,a di,b > 0, we have (Si)ab = Wi,ab /pdi,a di,b , and (Si)ab = 0 otherwise. Hence Si preserves the support of the direct co-occurrence graph while reducing the influence of high-degree words. It is also invariant to multiplying all entries of Wi by the same positive constant, so the trace normalization used 8in the Laplacian branch and the degree normalization used here address compatible but distinct aspects of document-size variation. For a symmetric m × m matrix M , let vech off (M ) collect its m(m − 1) /2
+
+upper-triangular off-diagonal entries in the common vocabulary order. The first-order raw representation is G(1)  
+
+> i
+
+= vech off (Si) ∈ Rp. Each coordinate of G(1)  
+
+> i
+
+therefore corresponds to the normalized direct co-occurrence strength of one fixed word pair. Since the matrix S2 
+
+> i
+
+has entries (S2 
+
+> i
+
+)ab = Pmc=1 (Si)ac (Si)cb . For a̸ = b, this quantity aggregates the normalized two-step paths va → vc → vb and is large when va and vb have many strongly weighted common neighbors. Define off( M ) = M −diag {diag( M )} and set C(2)  
+
+> i
+
+= off( S2 
+
+> i
+
+). The diagonal is removed because 
+
+(S2 
+
+> i
+
+)aa measures the strength of two-step returns to va rather than a relation between two distinct words. Hence, the second-order raw representation is G(2)  
+
+> i
+
+= vech off (C(2)  
+
+> i
+
+) ∈ Rp. Thus G(2)  
+
+> i
+
+records shared-context structure even when two words do not co-occur directly. We do not normalize each C(2)  
+
+> i
+
+by its own Frobenius norm, because doing so would remove changes in the overall strength of second-order organization. When p is too large for direct analysis, the two raw views are reduced separately. Let {G(1) 
+
+> r, tr
+
+, G (2)  
+
+> r, tr
+
+: r =1, . . . , n tr } be representations from an external or nonoverlapping training collection, where ntr is its number of texts. Define the training centers 
+
+μX = 1
+
+ntr 
+
+> ntr
+
+X
+
+> r=1
+
+G(1)  
+
+> r, tr
+
+and μY = 1
+
+ntr 
+
+> ntr
+
+X
+
+> r=1
+
+G(2) 
+
+> r, tr
+
+.
+
+Let pXa and λXa > 0 be the ath retained eigenvector and eigenvalue of the training covariance of G(1) 
+
+> r, tr
+
+, and let pY b and λY b > 0 be their second-order counterparts. For fixed retained dimensions dX and dY , define the whitened PCA maps 
+
+PX =
+
+
+
+p⊤
+
+> X1
+
+/√λX1
+
+...
+
+p⊤ 
+
+> Xd X
+
+/pλXd X
+
+ ∈ RdX ×p and PY =
+
+
+
+p⊤ 
+
+> Y1
+
+/√λY 1
+
+...
+
+p⊤ 
+
+> Y d Y
+
+/pλY d Y
+
+ ∈ RdY ×p.
+
+The final two-view observations are 
+
+Xi = PX {G(1)  
+
+> i
+
+− μX } ∈ RdX and Yi = PY {G(2)  
+
+> i
+
+− μY } ∈ RdY . (2) The matrices and centers in (2) are fixed throughout the change-point scan and every bootstrap replication. If dimension reduction is unnecessary, one may set PX = PY = Ip, dX = dY = p, and use fixed centers. PCA signs do not affect the norm-based detection statistic, although they should be anchored to fixed reference loadings when individual change directions are interpreted. 
+
+3.3 Weighted-concordance U-statistics 
+
+Write Zi = ( Xi, Y i) for the paired first- and second-order observation at time xi. For β > 0, define the scalar odd-power map ψβ (z) = |z|β sign( z), and apply it componentwise to vectors. The parameters β and 
+
+γ weight first- and second-order differences, respectively, and are distinct from the Laplacian power α. The matrix-valued weighted-concordance kernel is 
+
+Wβ,γ (Zi, Zj ) = ψβ (Xi − Xj )ψγ (Yi − Yj )⊤ ∈ RdX ×dY . (3) Both odd-power factors in (3) change sign when i and j are interchanged. Their outer product is therefore symmetric in the two observations, as required for a second-order U -statistic (Hoeffding, 1948; Serfling, 1980). 9For a distribution P of Z = ( X, Y ), define Θβ,γ (P ) = E {W β,γ (Z, Z′)} , where Z and Z′ are independent draws from P . The main specification uses β = γ = 1 , for which 
+
+W1,1(Zi, Zj ) = ( Xi − Xj )( Yi − Yj )⊤ and Θ1,1(P ) = 2 Cov P (X, Y ).
+
+The target is therefore the cross-covariance between direct co-occurrence and shared-context representations. More general values of β and γ produce nonlinear weighted-concordance functionals, but none of these within-distribution pairwise-difference functionals is omnibus for all distributional changes. In particular, a common translation of one view is not detected unless it also changes the cross-view functional. Let ε ∈ (0 , 1/2) be a fixed trimming proportion and define the candidate set Kn = {⌈ nε ⌉, . . . , ⌊n(1 −
+
+ε)⌋} . For k ∈ K n, the left- and right-segment U -statistics are 
+
+bΘβ,γ  
+
+> 1: k
+
+=
+
+k
+
+2
+
+−1 X
+
+> 1≤i<j ≤k
+
+Wβ,γ (Zi, Zj ) and bΘβ,γ k+1: n =
+
+n − k
+
+2
+
+−1 X
+
+> k<i<j ≤n
+
+Wβ,γ (Zi, Zj ). (4) The normalizing constants in (4) are the numbers of unordered pairs within the two segments. Under temporal weak dependence, these all-pairs statistics estimate the corresponding independent-copy functional because pairs at any fixed finite collection of lags form a vanishing proportion of all pairs. Their asymptotic treatment follows the theory of U -statistics under dependence and change-point alternatives (Dehling et al., 2015). For u = k/n , define the matrix-valued weighted-concordance process 
+
+Dn,β,γ (u) = √n knn − kn
+
+ bΘβ,γ  
+
+> 1: k
+
+− bΘβ,γ k+1: n
+
+
+
+. (5) The factors k/n and (n − k)/n in (5) balance the two segment sizes, and √n gives the process its null asymptotic scale. Let Ω = ( ωab ) ∈ RdX ×dY be a fixed matrix of nonnegative weights satisfying PdX
+
+> a=1
+
+PdY 
+
+> b=1
+
+ωab = 1 . For 
+
+q ≥ 1, define 
+
+∥M ∥Ω,q =
+
+( dXX
+
+> a=1
+> dY
+
+X
+
+> b=1
+
+ωab |Mab |q
+
+)1/q 
+
+.
+
+When both views are whitened, the default choice is q = 2 , ω ab = 1 /(dX dY ). This gives ∥M ∥Ω,2 = ∥M ∥F√dX dY
+
+.
+
+The local scan statistic, global test statistic, and estimated change-point are 
+
+Tn(k) = ∥Dn,β,γ (k/n )∥Ω,q , Tn = max 
+
+> k∈K n
+
+Tn(k), and bk = min 
+
+
+
+arg max 
+
+> k∈K n
+
+Tn(k)
+
+
+
+. (6) The minimum in (6) resolves ties. The normalized and calendar-time estimates are bτ = bk/n, bx0 = xbk.
+
+For β = γ = 1 , each segment statistic in (4) equals twice the sample cross-covariance matrix between X
+
+and Y . Consequently, the default scan detects changes in the cross-covariance linking direct co-occurrence and shared-context structure. A population separation condition is imposed in the theory to ensure that the criterion in (6) has its unique maximum at the true change point; this is not automatic for a mixed-segment 
+
+U -functional. 
+
+3.4 Text errors and perturbation propagation 
+
+To separate structural temporal variation from finite-text contamination, let T ◦ 
+
+> i
+
+denote the latent error-free text and let bTi denote the observed text. Superscript ◦ is used for every oracle object constructed from T ◦ 
+
+> i
+
+,10 whereas a hat is used for the corresponding object constructed from bTi. Thus W ◦ 
+
+> i
+
+and cWi are the oracle and observed adjacency matrices, and the same convention defines L◦ 
+
+> i
+
+, bLi, S◦ 
+
+> i
+
+, bSi, X◦ 
+
+> i
+
+, bXi, and Y ◦ 
+
+> i
+
+, bYi.Let bi be the number of token insertions, deletions, substitutions, OCR errors, or other local token corruptions in the ith text. One corrupted token can alter only edge contributions whose other endpoint lies within the fixed span h. Consequently, the entrywise adjacency perturbation is of order hb i. Define 
+
+Ei = cWi − W ◦ 
+
+> i
+
+, ∥Ei∥1,ent = Pma=1 
+
+Pmb=1 |Ei,ab |. The deterministic local-error accounting used in the theory takes the form ∥Ei∥1,ent ≤ Chbi, where Ch depends on the span and on whether an error removes, adds, or replaces an existing token. The Laplacian perturbation is computed directly from the adjacency perturbation bLi−L◦ 
+
+> i
+
+= diag( Ei1m)−
+
+Ei. So we let c◦ 
+
+> i
+
+= tr( L◦ 
+
+> i
+
+), bci = tr( bLi). Then the exact trace-normalization decomposition is 
+
+beLi − eL◦ 
+
+> i
+
+= bLi − L◦
+
+> i
+
+c◦
+
+> i
+
+− bLi
+
+bci − c◦
+
+> i
+
+bcic◦
+
+> i
+
+.
+
+This decomposition separates the direct edge error from the error introduced by estimating the graph-wide normalization. For the main choice α = 1 , the Helmert and vech ∗ maps are linear and norm preserving on the centered subspace, so the same perturbation order is inherited by Z(1)  
+
+> i
+
+. For 0 < α < 1, the spectral power is generally only H¨ older continuous at zero unless a positive lower bound is imposed on the nonzero eigenvalues; this is why the main theory uses α = 1 (Bhatia, 1997; Higham, 2008). The degree-normalized branch additionally depends on the stability of the node degrees. Define the oracle and observed normalization factors by B◦ 
+
+> i
+
+= {(D◦ 
+
+> i
+
+)†}1/2, bBi = ( bD† 
+
+> i
+
+)1/2. The normalized-adjacency error has the exact expansion 
+
+bSi − S◦ 
+
+> i
+
+= ( bBi − B◦ 
+
+> i
+
+)cWi bBi + B◦ 
+
+> i
+
+(cWi − W ◦ 
+
+> i
+
+) bBi + B◦ 
+
+> i
+
+W ◦ 
+
+> i
+
+( bBi − B◦ 
+
+> i
+
+).
+
+Thus a lower bound on every active normalized degree is imposed in the theory. Without such a bound, the map d 7 → d−1/2 can amplify a small word-count error near degree zero. The second-order error satisfies 
+
+bC(2)  
+
+> i
+
+− C(2) ,◦ 
+
+> i
+
+= off 
+
+n
+
+( bSi − S◦ 
+
+> i
+
+) bSi + S◦ 
+
+> i
+
+( bSi − S◦ 
+
+> i
+
+)
+
+o
+
+.
+
+This identity shows that squaring the normalized adjacency changes the error constant but not its order when the operator norms of the normalized adjacency matrices are bounded. If PX and PY are fixed from an external training corpus, the final view errors are 
+
+bXi − X◦ 
+
+> i
+
+= PX { bG(1)  
+
+> i
+
+− G(1) ,◦ 
+
+> i
+
+} and bYi − Y ◦ 
+
+> i
+
+= PY { bG(2)  
+
+> i
+
+− G(2) ,◦ 
+
+> i
+
+}.
+
+If PCA is estimated from contaminated training representations, its loading error is also included. For 
+
+r ∈ { 1, 2}, let G◦ 
+
+> r
+
+∈ Rntr ×p be the centered oracle training matrix and write bGr = G◦ 
+
+> r
+
++ Br, where Br
+
+contains both representation and centering errors. The training covariance perturbation is 
+
+bΣr − Σ◦ 
+
+> r
+
+= 1
+
+ntr 
+
+n
+
+(G◦ 
+
+> r
+
+)⊤Br + B⊤ 
+
+> r
+
+G◦ 
+
+> r
+
++ B⊤ 
+
+> r
+
+Br
+
+o
+
+.
+
+The resulting loading perturbation is controlled by this operator-norm error divided by the relevant PCA eigengap. This is the matrix form of the first-order eigenvector perturbation expansion and is the additional term that disappears when PX and PY are externally fixed. For the default kernel, define eXi = bXi − X◦ 
+
+> i
+
+, e Yi = bYi − Y ◦ 
+
+> i
+
+, and ∆X◦ 
+
+> ij
+
+= X◦ 
+
+> i
+
+− X◦ 
+
+> j
+
+, ∆Y ◦ 
+
+> ij
+
+= Y ◦ 
+
+> i
+
+− Y ◦ 
+
+> j
+
+,
+
+11 ∆eXij = eXi − eXj , ∆eYij = eYi − eYj . The observed-minus-oracle kernel difference is 
+
+W1,1( bZi, bZj ) − W 1,1(Z◦ 
+
+> i
+
+, Z◦ 
+
+> j
+
+) = ∆ eXij (∆ Y ◦ 
+
+> ij
+
+)⊤ + ∆ X◦ 
+
+> ij
+
+(∆ eYij )⊤ + ∆ eXij (∆ eYij )⊤. (7) Averaging (7) over the left and right pairs gives the corresponding perturbation of the segment U -statistics and of the scan process. For concise rate statements, define 
+
+ϵn = max 
+
+> 1≤i≤n
+
+∥Ei∥1,ent 
+
+c◦
+
+> i
+
+and rn = max 
+
+> 1≤i≤n
+
+ ∥eXi ∥2 + ∥eYi ∥2
+
+ .
+
+When the total oracle edge mass is proportional to hN i, the first rate is of the same order as max i bi/N i.The subsequent theory uses ϵn to control graph construction and rn to compare the observed and oracle weighted-concordance processes. Detection consistency requires rn to be smaller than the population change signal, whereas root-n oracle equivalence for inference requires a correspondingly stronger rate. 
+
+# 4 Theoretical Properties 
+
+This section establishes the theoretical properties of the two-view weighted-concordance procedure defined in Section 3. The main results are stated for fixed vocabulary size m, fixed reduced dimensions dX and dY , and the Laplacian power α = 1 . This is the setting in which the first-order representation retains its direct-edge interpretation and the text-to-representation map has a linear perturbation rate. We first relate observed texts to their error-free oracle counterparts, then derive the null limit and dependent multiplier calibration, and finally establish detection and localization under a single change. Extensions with growing vocabulary or spectral powers 0 < α < 1 require additional dimension and spectral-floor conditions and are stated only where the required rate is explicit. 
+
+4.1 Oracle process and primitive assumptions 
+
+Let Z◦ 
+
+> i,n
+
+= ( X◦
+
+> i,n
+
+, Y ◦
+
+> i,n
+
+) denote the oracle two-view observation obtained from the error-free text at time xi,and let bZi,n = ( bXi,n , bYi,n ) be its observed counterpart. The row index n is retained in the theory to allow the document lengths and change signal to vary with the number of time points, but it is suppressed when no ambiguity arises. Let Ui,n contain the latent document state, all token-level innovations, and all text-corruption vari-ables used to generate the oracle and observed texts. For sigma fields A and C, write β(A, C) for their absolute-regularity coefficient and define βU ,n (r) = sup s∈Z β {σ(Ui,n : i ≤ s), σ (Ui,n : i ≥ s + r)} . We have following assumptions: 
+
+Assumption 1 (Primitive temporal dependence) . For every n, the row {Ui,n : i ∈ Z} is jointly defined, and its restriction to each regime is a segment of a strictly stationary extension. For some δ > 0,
+
+sup 
+
+> n
+> ∞
+
+X
+
+> r=1
+
+r2βU ,n (r)δ/ (4+ δ) < ∞. (8) 
+
+The oracle and observed graph and representation maps are measurable functions of the corresponding local driver. 
+
+Assumption 1 allows serial dependence both within regimes and across a regime boundary. It avoids separately assuming mixing for tokens, graphs, PCA scores, and U -kernel evaluations, because these 12 processes inherit the dependence envelope through measurable transformations. The summability requirement is recorded in (8). Let N n = min 1≤i≤n Ni be the minimum text length. Let bi be the number of locally corrupted to-kens in the ith text and let Ei = cWi − W ◦ 
+
+> i
+
+be the adjacency difference between the observed graph and the chosen oracle graph. Recall that c◦ 
+
+> i
+
+= tr( L◦ 
+
+> i
+
+) is the oracle total graph mass. Define ϵn =max 1≤i≤n ∥Ei∥1,ent /c ◦ 
+
+> i
+
+, ∥A∥1,ent = P 
+
+> a,b
+
+|Aab |. We have assumption: 
+
+Assumption 2 (Text construction and local corruption) . The common vocabulary V , its node ordering, the co-occurrence span h, and the lag weights ρ1, . . . , ρ h are fixed before the change-point scan. The vocabulary is externally fixed, selected on an independent training corpus, or satisfies an exact-recovery event with probability tending to one. Conditional on the document state, the error-free token sequence is stationary and satisfies a uniform Bernstein-type concentration inequality for its word frequencies and fixed-window edge contributions. Moreover, 
+
+N n −→ ∞ , max 
+
+> i≤n
+
+bi
+
+Ni
+
+−→ p 0,ϵn = Op
+
+
+
+aN,n + max 
+
+> i≤n
+
+bi
+
+Ni
+
+
+
+= op(1) , and aN,n ≤ C
+
+(s 
+
+log nN n
+
++ log nN n
+
+)
+
+. (9) In assumption 2, aN,n is the finite-document approximation error. It is set to zero when W ◦ 
+
+> i
+
+is the graph constructed from the realized error-free finite text, which is the oracle used in the corruption analysis. The displayed upper bound applies when W ◦ 
+
+> i
+
+instead denotes the conditional infinite-document edge target. The remaining term is the additional local-corruption error. Fixed-memory token chains and geometrically contracting Bernoulli shifts provide standard sufficient conditions for the required concentration (Wu, 2005; Merlev` ede et al., 2011). For an oracle nonisolated word, define its trace-normalized degree by ¯d◦ 
+
+> i,a
+
+= d◦
+
+> i,a
+> c◦
+> i
+
+. Let P ◦ 
+
+> X
+
+, P ◦ 
+
+> Y
+
+and 
+
+μ◦ 
+
+> X
+
+, μ ◦ 
+
+> Y
+
+denote the target projection matrices and centers. If they are fixed from an external training corpus, their estimation error is zero. Otherwise define 
+
+aP,n = ∥ bPX − P ◦ 
+
+> X
+
+∥op + ∥ bPY − P ◦ 
+
+> Y
+
+∥op + ∥bμX − μ◦ 
+
+> X
+
+∥2 + ∥bμY − μ◦ 
+
+> Y
+
+∥2.
+
+where ∥ · ∥ op is the matrix operator norm and ∥ · ∥ 2 is the Euclidean vector norm. The Frobenius matrix norm is written ∥ · ∥ F below. 
+
+Assumption 3 (Normalization and projection stability) . There are deterministic sequences cn > 0 and 
+
+dn > 0 such that min i≤n c◦ 
+
+> i
+
+≥ cn with probability tending to one, and every oracle node is either isolated in both the oracle and observed graphs or satisfies ¯d◦ 
+
+> i,a
+
+≥ dn. The fixed target maps satisfy 
+
+∥P ◦ 
+
+> X
+
+∥op + ∥P ◦ 
+
+> Y
+
+∥op ≤ C. 
+
+If the maps are estimated, then aP,n = op(1) and the retained PCA eigenvalues are bounded away from zero. 
+
+The active-degree condition is needed because d 7 → d−1/2 is not stable near zero. With a fixed common high-frequency vocabulary and time-aggregated documents, it requires every retained active word to have a nonnegligible share of the total edge mass. Externally fixed projection maps remove the PCA-loading contribution aP,n entirely. The null process is formulated for fixed target maps P ◦ 
+
+> X
+
+and P ◦ 
+
+> Y
+
+. A map estimated from an independent training corpus may be conditioned upon and treated as fixed. A map estimated from the analyzed time row is handled only through the observed-to-oracle transfer rate below; it is not itself assumed to be a local measurable transform. Let d = dX dY be the number of entries in the matrix-valued kernel. For a matrix A, let vec( A) ∈ Rd
+
+stack its columns. Let Wβ,γ be the kernel in (3) and define its envelope by H◦ 
+
+> i,j,n
+
+= Wβ,γ (Z◦
+
+> i,n
+
+, Z◦
+
+> j,n
+
+) F .
+
+13 Assumption 4 (Kernel regularity) . The dimensions m, d X , d Y , the parameters β, γ, q , and the weight matrix 
+
+Ω are fixed. The weights satisfy ωab ≥ 0 and P 
+
+> a,b
+
+ωab = 1 . Uniformly over actual time pairs, within-regime stationary extensions, and independent marginal copies, sup n sup i̸=j E(H◦
+
+> i,j,n
+
+)4+ δ < ∞. For observed-to-oracle transfer, there is a deterministic modulus ωW (r) ↓ 0 such that a representation perturbation of size at most r changes the kernel in mean square by at most Cω W (r)2. For the main choice β = γ = 1 , ωW (r) = r
+
+under the displayed moment condition. 
+
+Assumption 4 is automatic under uniformly bounded whitened scores. It is stated in moment form to permit unbounded PCA scores. The modulus separates the general nonlinear signed-power kernel from the default bilinear kernel. Under a fixed stationary distribution P , let Z and Z′ be independent draws from P and define Θ(P ) = 
+
+E{W β,γ (Z, Z′)}. The first Hoeffding projection is W1(z; P ) = E{W β,γ (z, Z′)} − Θ(P ), and the canonical second-order kernel is W2(z, z ′; P ) = Wβ,γ (z, z ′) − Θ(P ) − W 1(z; P ) − W 1(z′; P ).
+
+Assumption 5 (Fixed stationary null) . Under the null hypothesis, {Z ◦ 
+
+> i
+
+: i ∈ Z} is strictly stationary with marginal distribution P and satisfies Assumptions 1 and 4. The long-run covariance matrix 
+
+Σ = 4 X
+
+> r∈Z
+
+Cov [vec {W 1(Z◦ 
+
+> 0
+
+; P )}, vec {W 1(Z◦ 
+
+> r
+
+; P )}]
+
+exists, is finite, and is not identically zero on the coordinates receiving positive weight in Ω.
+
+The factor four in Σ is the square of the coefficient two in the Hoeffding decomposition of a symmetric order-two U -statistic. This assumption permits a singular covariance matrix; it rules out only a wholly degenerate scan on all weighted coordinates. For the single-change alternative, let k0 = ⌊nτ 0⌋, τ0 ∈ [ε, 1 − ε], and let P1,n and P2,n be the oracle marginal distributions before and after k0. For r, s ∈ { 1, 2}, define 
+
+Θrs,n = E Wβ,γ (Zr,n , Z′
+
+> s,n
+
+) ,
+
+where Zr,n ∼ Pr,n , Z′ 
+
+> s,n
+
+∼ Ps,n , and the two variables are independent. Kernel symmetry gives Θ12 ,n =
+
+Θ21 ,n . Define the within-regime signal κn = ∥Θ11 ,n − Θ22 ,n ∥Ω,q .
+
+For u ∈ [ε, 1 − ε], define the limiting left- and right-segment functionals as follows. When u < τ 0, put 
+
+a−(u) = τ0 − u
+
+1 − u , b−(u) = 1 − τ0
+
+1 − u , ΘL(u) = Θ11 ,n ,
+
+and 
+
+ΘR(u) = a−(u)2Θ11 ,n + 2 a−(u)b−(u)Θ12 ,n + b−(u)2Θ22 ,n .
+
+When u > τ 0, put 
+
+a+(u) = τ0
+
+u , b+(u) = u − τ0
+
+u ,
+
+ΘL(u) = a+(u)2Θ11 ,n + 2 a+(u)b+(u)Θ12 ,n + b+(u)2Θ22 ,n ,
+
+and 
+
+ΘR(u) = Θ22 ,n .
+
+At u = τ0, set ΘL(τ0) = Θ11 ,n , ΘR(τ0) = Θ22 ,n . The population scan matrix and its scalar criterion are 
+
+Mn(u) = u(1 − u){ΘL(u) − ΘR(u)}, Q n(u) = ∥M n(u)∥Ω,q .
+
+14 Assumption 6 (Single-change identification) . The signal satisfies κn > 0, and Qn(u) has its unique maximum at u = τ0. There are constants c0 > 0, ν ≥ 1, and r0 > 0, independent of n, such that 
+
+Qn(τ0) − Qn(u) ≥ c0κn|u − τ0|ν whenever |u − τ0| ≤ r0. (10) 
+
+Outside this neighborhood, the same difference is bounded below by c0κnrν 
+
+> 0
+
+.
+
+Assumption 6 is essential for a within-segment U -functional. A candidate split different from k0 mixes the two regimes, and its expectation contains Θ12 ,n as shown above. Consequently, Θ11 ,n ̸ = Θ22 ,n alone does not prove that the scan is maximized at the true boundary. The explicit margin condition makes the required population geometry transparent rather than hiding it in the localization proof. 
+
+4.2 Dependence inheritance and representation error 
+
+Proposition 1 (Temporal inheritance) . Under Assumption 1, the oracle and observed adjacency matrices, Laplacians, normalized adjacencies, two-view representations, kernel evaluations, and first Hoeffding projections are piecewise stationary measurable transforms of the primitive driver whenever their projection maps are fixed or independently trained. Their finite-row absolute-regularity coefficients satisfy 
+
+βT,n (r) ≤ βU ,n (r)
+
+for every one of these derived processes T . If the time index i < j lie in regimes r and s, respectively, then 
+
+L(Z◦
+
+> i,n
+
+, Z◦
+
+> j,n
+
+) − Pr,n ⊗ Ps,n TV ≤ 2βU ,n (j − i).
+
+Proposition 1 transfers one primitive mixing condition through the complete deterministic graph pipeline. Its total-variation bound, where ∥ · ∥ TV denotes total-variation distance between probability laws, also shows that the independent-copy quantities Θrs,n approximate averages of sufficiently separated actual time pairs. When the projection is estimated from the analyzed row, the proposition is applied to its fixed target and the estimated-map error is handled by Corollary 1. For the next result, let Cd,n = 1 + d−2 
+
+> n
+
+. The power d−2 
+
+> n
+
+is a conservative Lipschitz factor for the two occurrences of the inverse square-root degree matrix in Si.
+
+Theorem 1 (Text-to-view representation stability) . Under Assumptions 2 and 3, 
+
+max  
+
+> i≤n
+
+∥beLi − eL◦ 
+
+> i
+
+∥F = Op(ϵn), max  
+
+> i≤n
+
+∥ bZ(1)  
+
+> i
+
+− Z(1) ,◦ 
+
+> i
+
+∥2 = Op(ϵn). (11) 
+
+Moreover, 
+
+max 
+
+> i≤n
+
+n
+
+∥ bG(1)  
+
+> i
+
+− G(1) ,◦ 
+
+> i
+
+∥2 + ∥ bG(2)  
+
+> i
+
+− G(2) ,◦ 
+
+> i
+
+∥2
+
+o
+
+= Op(Cd,n ϵn), (12) 
+
+and 
+
+rn := max 
+
+> i≤n
+
+n
+
+∥ bXi − X◦ 
+
+> i
+
+∥2 + ∥ bYi − Y ◦ 
+
+> i
+
+∥2
+
+o
+
+= Op(Cd,n ϵn + aP,n ). (13) 
+
+If 0 < α < 1 is used in the Ian representation without a positive lower bound on its nonzero spectrum, the second rate in (11) is replaced by Op(ϵαn). It remains Op(ϵn) when the reduced nonzero spectrum is uniformly bounded away from zero. 
+
+Theorem 1 formalizes the propagation token error → Wi → (Li, S i, S 2 
+
+> i
+
+) → (G(1)  
+
+> i
+
+, G (2)  
+
+> i
+
+) −→ (Xi, Y i).
+
+The raw-view rate is stated in (12). The first-order and second-order views have the same perturbation order; the second-order product changes only the constant because normalized adjacency matrices have uniformly bounded operator norm. 15 The PCA term in (13) can be related directly to the training covariance perturbation. For r ∈ { 1, 2}, let 
+
+G◦ 
+
+> r
+
+∈ Rntr ×p be the centered oracle training matrix and define 
+
+bGr = G◦ 
+
+> r
+
++ Br and ∆Σ r = 1
+
+ntr 
+
+n
+
+(G◦ 
+
+> r
+
+)⊤Br + B⊤ 
+
+> r
+
+G◦ 
+
+> r
+
++ B⊤ 
+
+> r
+
+Br
+
+o
+
+.
+
+Lemma 1 (PCA loading perturbation) . Suppose that every retained training eigenvalue is simple, bounded away from zero, and separated from every other eigenvalue by at least gr,n > 0. If ∥∆Σ r∥op = op(gr,n ),then, after an admissible sign alignment, 
+
+∥ bPr − P ◦ 
+
+> r
+
+∥op = Op
+
+ ∥∆Σ r∥op 
+
+gr,n 
+
+
+
+, r ∈ { 1, 2}. (14) 
+
+The perturbation of the whitening factors is of the same order after adding the corresponding eigenvalue perturbation. 
+
+Lemma 1 is the matrix version of the first-order expansion with denominators λj − λk. It explains why a nonvanishing PCA eigengap is necessary when the projections are estimated from contaminated data; the resulting rate is displayed in (14) (Bhatia, 1997). For externally fixed maps, this entire term is absent. Define ρn = ωW (rn). For the default bilinear kernel, ρn = rn. Let D◦ 
+
+> n,β,γ
+
+denote the process in (5) computed from the oracle views. 
+
+Corollary 1 (Observed-to-oracle scan transfer) . Under Assumptions 1– 4, 
+
+sup 
+
+> u∈[ε, 1−ε]
+
+Dn,β,γ (u) − D◦ 
+
+> n,β,γ
+
+(u) Ω,q = Op(√n ρ n). (15) 
+
+Consequently, observed and oracle scans have the same first-order null limit whenever √nρ n → 0.
+
+Corollary 1 distinguishes two inferential targets. If the finite observed texts themselves define the target process, no vanishing-error condition is required. If inference is intended for the error-free oracle text process, root-n equivalence requires the stronger condition √nρ n → 0 rather than merely ρn → 0, as quantified by (15). 
+
+4.3 Null limit of the weighted-concordance process 
+
+For an integer interval [a, b ] containing at least two observations, define the oracle canonical U -statistic 
+
+U ◦ 
+
+> 2; a:b
+
+=
+
+b − a + 1 2
+
+−1 X
+
+> a≤i<j ≤b
+
+W2(Z◦ 
+
+> i
+
+, Z◦ 
+
+> j
+
+; P ).
+
+Lemma 2 (Uniform canonical remainder) . Under Assumptions 1, 4, and 5, 
+
+1
+
+√n max  
+
+> 2≤k≤n
+
+k∥U ◦
+
+> 2;1: k
+
+∥F = op(1) ,
+
+and 1
+
+√n max 
+
+> 0≤k≤n−2
+
+(n − k)∥U ◦
+
+> 2; k+1: n
+
+∥F = op(1) .
+
+Lemma 2 shows that the order-two degenerate term is uniformly negligible over the trimmed scan. The first Hoeffding projections therefore determine the process limit, as in the classical theory of dependent 
+
+U -statistics (Yoshihara, 1976; Dehling and Wendler, 2010). 16 Let WΣ be a d-dimensional Brownian motion with covariance matrix Σ, and define its bridge BΣ(u) = 
+
+WΣ(u) − uWΣ(1) . For a vector v ∈ Rd, let mat( v) ∈ RdX ×dY be the inverse of vec . The space C([ ε, 1 −
+
+ε]; Rd) consists of continuous Rd-valued functions on the trimmed interval and is equipped with the uniform norm. All scan processes are linearly interpolated between the grid points k/n when they are regarded as elements of this space. 
+
+Theorem 2 (Fixed-law null limit) . Under Assumptions 1, 4, and 5, 
+
+vec  D◦ 
+
+> n,β,γ
+
+(u) : u ∈ [ε, 1 − ε] ⇒ { BΣ(u) : u ∈ [ε, 1 − ε]} (16) 
+
+in C([ ε, 1 − ε]; Rd). Hence 
+
+Tn ⇒ sup 
+
+> u∈[ε, 1−ε]
+
+∥ mat {BΣ(u)}∥ Ω,q .
+
+If the oracle is the inferential target and √nρ n → 0, the same limits hold for the observed process and statistic. 
+
+Theorem 2 gives one joint Gaussian bridge for all entries of the cross-view change matrix. The covariance between entries is retained in Σ; treating the matrix entries as independently calibrated statistics would generally be incorrect. The joint weak convergence is stated in (16). 
+
+4.4 Dependent multiplier calibration 
+
+Let {ξ∗ 
+
+> i,n
+
+: i = 1 , . . . , n } be centered Gaussian multipliers, independent of the data, satisfying E∗(ξ∗
+
+> i,n
+
+) = 0, E∗{(ξ∗
+
+> i,n
+
+)2} = 1 , and E∗(ξ∗
+
+> i,n
+
+ξ∗
+
+> j,n
+
+) = ϖ
+
+ |i−j|
+
+> ℓn
+
+
+
+. Here E∗ denotes conditional expectation given the data, 
+
+ϖ is a fixed compactly supported positive-definite taper, and ℓn is the multiplier dependence bandwidth. Define the full-sample U -statistic bΘ1: n =  n
+
+> 2
+
+−1 P 
+
+> 1≤i<j ≤n
+
+Wβ,γ ( bZi, bZj ) and the jackknife estimate of the first Hoeffding projection cW1,i = 1
+
+> n−1
+
+P  
+
+> j̸=i
+
+Wβ,γ ( bZi, bZj ) − bΘ1: n. The symbols L and L∗ below denote unconditional law and conditional law given the data, respectively; P∗ has the analogous conditional-probability meaning. For u = k/n , define the multiplier process 
+
+D∗
+
+> n
+
+(u) = 2
+
+√n
+
+( kX
+
+> i=1
+
+ξ∗ 
+
+> i,n
+
+cW1,i − kn
+
+> n
+
+X
+
+> i=1
+
+ξ∗ 
+
+> i,n
+
+cW1,i 
+
+)
+
+. (17) The factor two in (17) is the coefficient of the first projection in the Hoeffding decomposition. Define 
+
+T ∗ 
+
+> n
+
+= sup 
+
+> u∈[ε, 1−ε]
+
+∥D∗
+
+> n
+
+(u)∥Ω,q .
+
+Assumption 7 (Multiplier bandwidth) . The taper ϖ is symmetric, nonnegative, positive definite, Lipschitz at zero, supported on [−1, 1] , and satisfies ϖ(0) = 1 . For some ϵξ ∈ ((6 + 2 δ)−1, 1/2) ,
+
+ℓn −→ ∞ , ℓn = O(n1/2−ϵξ ).
+
+The bandwidth range in Assumption 7 balances the reproduction of serial dependence against the replacement error in the jackknife projections. It is the standard regime for dependent multiplier bootstrap approximations of nondegenerate U -statistics (Shao, 2010; B¨ ucher and Kojadinovic, 2016). 17 Lemma 3 (Jackknife projection consistency) . Under the fixed stationary null, 
+
+1
+
+n
+
+> n
+
+X
+
+> i=1
+
+cW◦ 
+
+> 1,i
+
+− W 1(Z◦ 
+
+> i
+
+; P ) 2F = Op(n−1).
+
+For observed inputs, the right-hand side becomes Op(n−1 + ρ2
+
+> n
+
+).
+
+Lemma 3 proves rather than assumes that the computed pseudo-observations recover the first Hoeffding projections. The additional observed-data term is the same representation error that appears in Corollary 1. Here cW◦ 
+
+> 1,i
+
+denotes the same jackknife formula with every observed input bZj replaced by its oracle input Z◦ 
+
+> j
+
+.
+
+Theorem 3 (Dependent multiplier validity) . Under Assumptions 1, 4, 5, and 7, conditionally on the data, 
+
+dBL [L∗{vec( D∗
+
+> n
+
+)}, L{ BΣ}] −→ p 0, (18) 
+
+where dBL is the bounded-Lipschitz metric on C([ ε, 1 − ε]; Rd). If the limiting supremum has a continuous distribution function, then 
+
+sup 
+
+> z∈R
+
+|P∗(T ∗ 
+
+> n
+
+≤ z) − P(Tn ≤ z)| −→ p 0.
+
+When calibration is required for the oracle rather than the observed-text process, the same conclusion additionally requires ℓnρ2 
+
+> n
+
+→ 0 and √nρ n → 0.
+
+Theorem 3 preserves both serial dependence over time and contemporaneous dependence among all entries of the two-view change matrix. One common multiplier sequence must therefore be used for the entire matrix in each bootstrap replication. Its conditional process approximation is given in (18). 
+
+Corollary 2 (Asymptotic size) . Let c∗ 
+
+> 1−α0,n
+
+be the conditional (1 − α0) quantile of T ∗ 
+
+> n
+
+for a fixed significance level α0 ∈ (0 , 1) . Under Theorem 3, 
+
+P(Tn > c ∗
+
+> 1−α0,n
+
+) −→ α0.
+
+If the quantile is estimated using Bn independent multiplier replications, the same conclusion holds when 
+
+Bn → ∞ .
+
+The corollary gives asymptotically correct type-I error for the global scan. The notation α0 is used for the test level to distinguish it from the Laplacian power parameter α.
+
+4.5 Detection consistency and localization 
+
+Define the unscaled observed and oracle scan matrices by 
+
+cMn(u) = Dn,β,γ (u)
+
+√n and cM◦
+
+> n
+
+(u) = D◦ 
+
+> n,β,γ
+
+(u)
+
+√n .
+
+Lemma 4 (Uniform scan approximation) . Under Assumptions 1, 4, and 6, there is a deterministic sequence 
+
+ζn → 0 such that 
+
+sup 
+
+> u∈[ε, 1−ε]
+
+∥ cM◦
+
+> n
+
+(u) − M n(u)∥Ω,q = Op(ζn).
+
+For fixed dX , d Y , bounded kernels, and geometric absolute regularity, one may take 
+
+ζn = C
+
+r log nn .
+
+18 For the observed process, 
+
+sup 
+
+> u∈[ε, 1−ε]
+
+∥ cMn(u) − M n(u)∥Ω,q = Op(ζn + ρn).
+
+Lemma 4 separates ordinary temporal sampling fluctuation, represented by ζn, from text and representa-tion error, represented by ρn. The logarithmic rate is a convenient uniform rate; sharper local rates require a separate local U -process argument. Under an alternative, the multiplier critical value computed from the full sample need not remain Op(1) 
+
+because the global jackknife projections are not regime centered. The following conservative bound is sufficient for power. 
+
+Lemma 5 (Alternative multiplier order) . Suppose Assumptions 4 and 7 hold and 
+
+1
+
+n
+
+> n
+
+X
+
+> i=1
+
+∥ cW1,i ∥2F = Op(1) .
+
+Then 
+
+c∗ 
+
+> 1−α0,n
+
+= Op(pℓn).
+
+The bound permits the bootstrap distribution to be computed exactly as under the null, without assigning a stationary interpretation to globally centered jackknife quantities under an alternative. 
+
+Theorem 4 (Single-change detection) . Suppose there is one change at k0 = ⌊nτ 0⌋ and Assumptions 1– 4, 6, and 7 hold. Suppose also that the empirical second-moment condition in Lemma 5 holds. If 
+
+√n κ n
+
+1 + √ℓn + √n ρ n
+
+−→ ∞ , (19) 
+
+then 
+
+P(Tn > c ∗
+
+> 1−α0,n
+
+) −→ 1.
+
+Condition (19) has three distinct requirements. The represented change must dominate ordinary root-n
+
+sampling noise, the possible √ℓn inflation of the multiplier critical value under the alternative, and the observed-to-oracle transfer error. For a fixed observable-text alternative, ρn = 0 because the observable distribution itself is the target. Let bτ = bkn be the maximizer defined in (6). 
+
+Theorem 5 (Single-change localization) . Under Assumptions 1– 4, and 6, if 
+
+ζn + ρn
+
+κn
+
+−→ 0,
+
+then 
+
+bτ −→ p τ0.
+
+Under the margin condition (10) ,
+
+|bτ − τ0| = Op
+
+" ζn + ρn
+
+κn
+
+1/ν #
+
+. (20) 
+
+For the linear-margin case ν = 1 , fixed nonzero signal, geometric absolute regularity, and fixed externally 
+
+19 trained projections, this becomes 
+
+|bτ − τ0| = Op
+
+(r log nn + ρn
+
+)
+
+.
+
+Theorem 5 is a robust global argmax rate, with its explicit bound in (20). It does not claim the sharper 
+
+Op(κ−2 
+
+> n
+
+) index error familiar from some mean-change models, because that rate requires a local expansion of the mixed-segment U -process beyond the uniform approximation used here. 
+
+Corollary 3 (Consequences of text-error rates) . Under Theorem 1, the conclusions of Theorems 4 and 5 hold with 
+
+ρn = ωW [Op{Cd,n ϵn + aP,n }] .
+
+For the default bilinear kernel and fixed externally trained projections, this reduces to 
+
+ρn = Op(Cd,n ϵn).
+
+Hence Cd,n ϵn = op(κn) is sufficient for oracle localization consistency, while √nC d,n ϵn = op(1) is sufficient for the oracle null limit and bootstrap calibration. 
+
+This corollary makes clear that consistency and oracle-level inference impose different requirements on text quality. A vanishing error rate may be small enough to preserve a fixed change signal but still too large to be negligible on the root-n inference scale. The preceding results concern one change-point, matching the estimator in (6). Recursive or penalized multiple-change procedures can be built from the same local statistic, but their exact recovery requires additional spacing, interval-wise calibration, and population-identification conditions. No multiple-change recovery theorem is asserted without those additional arguments. 
+
+# 5 Simulation Study 
+
+We organize the numerical evaluation around four complementary experiments. Experiments I and II are the registered Monte Carlo studies implemented in the accompanying HPC package. They respectively isolate the weighted-concordance statistic and evaluate the two-view graph representation. Experiment III is the planned end-to-end text-to-inference study, and Experiment IV is a small-sample descriptive LLM benchmark. The latter two experiments are reported only when their separate data-generation and audit pipelines have been completed. The registered WCO specification is β = γ = 1 , q = 2 , ωab = ( dX dY )−1, and dX = dY = 5 .
+
+Consequently, Two-view WCO detects changes in 2 Cov( Xt, Y t), the cross-covariance between the direct co-occurrence and shared-context coordinates. Candidate splits are Kn = {⌈ 0.1n⌉, . . . , ⌊0.9n⌋} and B = 1999 .
+
+The main analysis uses dimensions dX = dY = 5 ; a separate sensitivity analysis uses dX = dY = 10 .Vocabulary rules, graph construction, PCA centers and loadings, and whitening factors are learned from independent pilot samples and then frozen. We compare six procedures: Two-view WCO, a mean CUSUM on (X⊤ 
+
+> t
+
+, Y ⊤ 
+
+> t
+
+)⊤, Gaussian-MMD scans on the first, second, and concatenated views, and an asymmetric Omnibus-anchor+WCO procedure. Gaussian MMD is computed through 300 fixed random Fourier features unless stated otherwise. The composite procedure jointly calibrates the maximum of MMD–First, MMD–Second, MMD–Joint, and Two-view WCO. Each component is divided by its own marginal multiplier critical scale before maximization. The test therefore retains sensitivity to both omnibus distributional changes and WCO-targeted cross-view changes. Its estimated location is supplied by the most significant standardized MMD component, rather than by the 20 WCO scan. The WCO component is reported separately as a directional diagnostic, including its p-value, rejection indicator, and leading operator direction. This asymmetric construction prevents a mixed-segment WCO population criterion from determining localization when its maximizer differs from the physical regime boundary. For each method, let Gt denote its full-sample influence vector or feature vector. After centering Gt, we estimate the lag correlation by 
+
+bρG(h) = 
+
+Pn−ht=1 ⟨Gt, G t+h⟩
+
+Pnt=1 ∥Gt∥2 .
+
+Among lags up to min {50 , ⌊4n1/3⌋, n − 2}, let bhG be the largest lag satisfying |bρG(h)| > 1.96 /√n, with 
+
+bhG = 0 if no lag passes the threshold. The component bandwidth is 
+
+bℓG = max 
+
+n
+
+1, min 
+
+hl 
+
+1.5( bhG + 1) 
+
+m
+
+, ⌊n1/2⌋
+
+io 
+
+.
+
+Moving-average Gaussian multipliers with bandwidth bℓG are then used for that component. Although bandwidths are method-specific, all component multiplier sequences are constructed from the same underlying Gaussian innovations. This preserves cross-component dependence for the composite calibration. We report the selected bandwidth for every method and replication. 
+
+5.1 Experiment: paired-view diagnostics 
+
+Experiment I removes graph and text approximation and isolates the matrix-valued weighted-concordance statistic. Let 
+
+ξt = φξ t−1 + p1 − φ2 et and ηt = φη t−1 + p1 − φ2 ft,
+
+where et, f t i.i.d.
+
+∼ N (0 , I d) are independent. With k0 = ⌊nτ 0⌋ and regime index j(t), we generate 
+
+Xt = ξt + μX,j (t) and Yt = C⊤
+
+> j(t)
+
+ξt + ( Id − C⊤
+
+> j(t)
+
+Cj(t))1/2ηt + μY,j (t),
+
+where ∥Cj ∥op < 1. Both marginal covariance matrices are Id, while Cov( Xt, Y t) = Cj(t). The registered WCO signal is therefore known exactly. P1 is the no-change design. P2 changes two entries of Cj and represents a sparse cross-view alternative. P3 adds a prespecified rank-one perturbation with alternating signs and represents a dense low-rank alternative. P2 and P3 are the principal WCO power designs. P4-location changes only the marginal means, while P4-nonlinear introduces a centered quadratic relationship with zero linear cross-covariance. These P4 designs are target-orthogonal stress tests: they illustrate that WCO is not an omnibus detector, while the MMD and CUSUM components respond to the changes they target. The baseline is n = 500 , d = 5 , φ = 0 .3, τ0 = 0 .5, and signal parameter 0.35 . One-factor-at-a-time variations use n ∈ { 200 , 500 , 1000 }, d ∈ { 2, 5, 10 }, φ ∈ { 0, 0.3, 0.6}, τ0 ∈ { 0.25 , 0.5, 0.75 }, and signal parameter {0.10 , 0.20 , 0.35 , 0.50 }. The null uses 2000 Monte Carlo replications and each alternative uses 1000. A standardized t3 innovation design may be reported separately as an explicitly out-of-theorem heavy-tail stress test; it is not part of the registered Gaussian run. 
+
+5.2 Evaluation and presentation 
+
+For P1 and G1 we report rejection probabilities with exact binomial 95% Monte Carlo intervals. For alternatives we report power, unconditional and rejection-conditional localization error, and Pr( |bk −k0| ≤ h0)
+
+for h0 ∈ { 2, 5, ⌈0.05 n⌉} . Localization metrics are not interpreted under the null. Power comparisons are accompanied by the matching-null rejection rate for the same method and design cell. 21 Figures use the publication labels Omnibus anchor + WCO, Two-view WCO, Mean CUSUM, MMD– First, MMD–Second, and MMD–Joint. Legends are placed below the panels, and exact 95% Monte Carlo intervals are shown as vertical bars. Every power figure includes a matching-null panel and states the nominal level in its footer. The population identification curves for Experiment II are saved in a separate multipage PDF. 
+
+5.3 Results for Experiment 
+
+Table 1 summarizes the empirical rejection probabilities under the baseline setting, and Figure 1 displays the power curves for the target-aligned P2 and P3 alternatives. Table 2 further reports the detection and localization performance under the strongest targeted alternatives. Table 1: Simulation I results under the baseline setting n = 500 , d = 5 , φ = 0 .3, and τ0 = 0 .5. Entries are empirical rejection probabilities. P1 evaluates null calibration; P2 and P3 are targeted cross-view covariance alternatives; P4 contains target-orthogonal location and nonlinear changes.                                                                                         
+
+> P1 P2: sparse cross-view change P3: low-rank cross-view change P4: negative controls Method Null κ= 0 .0447 κ= 0 .0894 κ= 0 .1565 κ= 0 .2236 κ= 0 .0400 κ= 0 .0800 κ= 0 .1400 κ= 0 .2000 Location Nonlinear Omnibus anchor + WCO 0.1530 0.1610 0.2660 0.5550 0.9040 0.1620 0.2430 0.4470 0.7810 1.0000 0.7040 Two-view WCO 0.0905 0.1310 0.2620 0.6400 0.9390 0.1230 0.2260 0.5430 0.8460 0.0730 0.1030 Mean CUSUM 0.1630 0.1540 0.1740 0.1520 0.1530 0.1580 0.1800 0.1540 0.1610 1.0000 0.1680 MMD–First 0.1480 0.1490 0.1520 0.1550 0.1460 0.1490 0.1520 0.1550 0.1470 0.9870 0.1570 MMD–Second 0.1480 0.1390 0.1560 0.1440 0.1680 0.1310 0.1610 0.1380 0.1630 1.0000 0.8260 MMD–Joint 0.0685 0.0650 0.0850 0.0830 0.1180 0.0650 0.0790 0.0820 0.0970 0.6890 0.3100
+
+Notes: P2 changes a sparse set of entries in the cross-view covariance operator, whereas P3 introduces a dense rank-one perturbation with alternating signs. P4-location changes the marginal means without changing the centered WCO target. P4-nonlinear changes the second-view distribution through a centered quadratic relationship while preserving zero linear cross-covariance. The nominal level is 0.05. The elevated null rejection rates under φ = 0 .3 indicate that the dependence-bandwidth calibration requires further adjustment. Consequently, raw rejection probabilities should be interpreted together with the matching-null results. 
+
+Table 2: Detection and localization under the strongest targeted alternatives in Simulation I. Conditional MAE is the mean value of |bτ − τ0| among rejected replications, and the final column gives Pr( |bk − k0| ≤ 0.05 n).
+
+Scenario Method κ Power Conditional MAE Within 0.05 n
+
+P2 Omnibus anchor + WCO 0.2236 0.9040 0.0638 0.4920 P2 Two-view WCO 0.2236 0.9390 0.0287 0.7930 P3 Omnibus anchor + WCO 0.2000 0.7810 0.0670 0.4580 P3 Two-view WCO 0.2000 0.8460 0.0344 0.7370 
+
+The targeted P2 and P3 designs clearly distinguish Two-view WCO from procedures based only on marginal means or marginal distributions. Under P2, the rejection probability of Two-view WCO increases monotonically from 0.1310 at κ = 0 .0447 to 0.9390 at κ = 0 .2236 . Under P3, it increases from 0.1230 at 
+
+κ = 0 .0400 to 0.8460 at κ = 0 .2000 . These increases are substantial relative to the WCO null rejection probability of 0.0905. In contrast, Mean CUSUM, MMD–First, and MMD–Second remain close to their corresponding null rejection probabilities throughout the P2 and P3 signal ranges. MMD–Joint exhibits only a modest increase under the strongest signals, reaching 0.1180 in P2 and 0.0970 in P3. This pattern is expected because P2 and P3 preserve the marginal means and marginal covariance matrices while changing the cross-view covariance targeted by the WCO U -statistic. The results illustrate the main advantage of the proposed WCO construction. Rather than searching for an arbitrary marginal discrepancy, WCO aggregates pairwise products of changes across the two views and therefore concentrates its power on changes in the cross-view covariance operator. This targeted construction 22 0.05 0.10 0.15 0.20 0.0  0.2  0.4  0.6  0.8  1.0 
+
+P2 alternative    
+
+> kappa Power 0.05 0.10 0.15 0.20 0.00  0.05  0.10  0.15  0.20
+
+P2 matching null    
+
+> kappa Matching−null rejection rate 0.05 0.10 0.15 0.20 0.0  0.2  0.4  0.6  0.8  1.0
+
+P3 alternative    
+
+> kappa Power 0.05 0.10 0.15 0.20 0.00  0.05  0.10  0.15  0.20
+
+P3 matching null 
+
+> kappa Matching−null rejection rate Nominal level = 0.05; vertical bars are exact 95% Monte Carlo intervals. Omnibus anchor + WCO Two−view WCO Mean CUSUM MMD−First MMD−Second MMD−Joint
+
+Figure 1: Empirical rejection probabilities under the targeted P2 and P3 alternatives of Simulation I, plotted against the population WCO signal κ. The left panels show empirical power, and the right panels show the corresponding rejection probabilities under matching null cells. Vertical bars are exact 95% binomial Monte Carlo intervals, and the horizontal dotted line denotes the nominal level 0.05. is effective for both the sparse entrywise perturbation in P2 and the dense rank-one perturbation in P3. The increasing power curves also show that the WCO statistic responds systematically to the population signal κ,rather than merely exploiting an isolated simulation configuration. The asymmetric Omnibus anchor + WCO procedure also gains substantial power under the targeted alternatives. Its rejection probability reaches 0.9040 in the strongest P2 cell and 0.7810 in the strongest P3 cell. These values are lower than the corresponding WCO rejection probabilities of 0.9390 and 0.8460. 23 Part of this difference is expected because the composite procedure requires joint calibration over several components, whereas WCO alone concentrates on the functional changed by P2 and P3. A more consequential difference appears in localization. In the strongest P2 cell, Two-view WCO has a conditional change-fraction MAE of 0.0287, compared with 0.0638 for the composite procedure. The corresponding probabilities of localization within 0.05 n are 0.7930 and 0.4920. Under P3, WCO has a conditional MAE of 0.0344 and a within-0.05 n probability of 0.7370, whereas the composite procedure has a conditional MAE of 0.0670 and a within-0.05 n probability of 0.4580. Thus, when the true change is aligned with the WCO target, the WCO scan provides both higher detection probability and substantially more accurate localization. The weaker localization of the composite procedure follows from its deliberately asymmetric construction. Although its rejection can be driven by a strong WCO component, its reported location is anchored by the most significant standardized MMD component. In P2 and P3, the MMD components have relatively weak population signals because the marginal distributions are preserved. The composite procedure is therefore useful as a robust general detector, but its MMD-based location need not be as accurate as the WCO maximizer under a specifically cross-view alternative. This distinction supports reporting the omnibus detection result and the WCO diagnostic, including its own estimated location and leading operator direction, separately. The P4 designs clarify the scope and specificity of WCO. Under the location alternative, Mean CUSUM and the marginal MMD procedures have rejection probabilities close to one, whereas Two-view WCO rejects with probability 0.0730, below its P1 rejection probability of 0.0905. Under the centered nonlinear alternative, MMD–Second rejects with probability 0.8260, while WCO rejects with probability 0.1030. Relative to the WCO null rejection probability, the latter increase is small. These findings confirm that the default WCO statistic is a targeted detector of linear cross-view covariance change, rather than an omnibus detector of arbitrary distributional change. The low WCO rejection rates in P4 are therefore an expected specificity property rather than a loss of power against the registered target. The omnibus anchor complements this specificity. It rejects with probability 1.0000 under the location alternative and 0.7040 under the nonlinear alternative, demonstrating that the composite procedure retains sensitivity to changes outside the WCO target. Taken together, the P2–P4 results support the intended division of labor: the omnibus component detects broad distributional changes, while WCO determines whether the change involves the relationship between direct co-occurrence and shared-context representations. The calibration results nevertheless require caution. Under the baseline dependence level φ = 0 .3, the empirical P1 rejection probabilities are 0.1530 for the composite procedure, 0.1630 for Mean CUSUM, and 0.1480 for both marginal MMD scans. Two-view WCO is more stable than these procedures but still over-rejects, with empirical size 0.0905. Only MMD–Joint is comparatively close to the nominal level, with rejection probability 0.0685. Accordingly, the raw power values cannot be interpreted as fully size-adjusted comparisons. The strongest evidence in favor of WCO is instead the combination of its pronounced signal-dependent power increase, the lack of corresponding increases for the marginal competitors, and its superior localization under P2 and P3. The final simulation analysis will therefore use a more conservative method-specific dependence-bandwidth calibration and will continue to report matching-null results alongside every power curve. 
+
+# 6 Real Data Analysis 
+
+We illustrate the proposed method using a historical text corpus from the journal New Youth , published between 1915 and 1921. New Youth played a central role in the Chinese New Culture Movement, which marked a major intellectual and linguistic transformation in modern Chinese history. One of the defining features of this period was the movement away from classical written Chinese toward vernacular language. This transition was closely associated with the May Fourth Movement of 1919, which is widely regarded as 24 an important cultural and linguistic turning point. Our objective is to determine whether the corpus contains a statistically detectable structural change and, if so, to estimate its timing directly from the evolving lexical network. Rather than representing each text only by a word-frequency vector, we construct time-indexed word-co-occurrence networks and examine both direct lexical associations and shared-context structure. The analysis uses a common vocabulary consisting of the m = 200 retained words. For each time-indexed text Tt, two retained words are treated as co-occurring when they appear within a textual span of h = 10 token positions. Applying this rule produces a symmetric weighted co-occurrence matrix Wt.Let Dt be the diagonal degree matrix associated with Wt. We form the degree-normalized adjacency ma-trix St = ( D† 
+
+> t
+
+)1/2Wt(D† 
+
+> t
+
+)1/2. The first-order representation records normalized direct word co-occurrences 
+
+G(1)  
+
+> t
+
+= vech off (St). The second-order representation records shared lexical contexts through normalized two-step paths: G(2)  
+
+> t
+
+= vech off 
+
+off( S2 
+
+> t
+
+) . Thus, the first view describes which words occur together directly, whereas the second view describes which words are connected through common lexical neighbors. The two high-dimensional graph representations are centered, projected, and whitened separately using the fixed PCA maps described in Section 3. We retain three coordinates from each view, so that dX = dY = 3 .The resulting paired observations are 
+
+Xt = PX {G(1)  
+
+> t
+
+− μX } ∈ R3 and Yt = PY {G(2)  
+
+> t
+
+− μY } ∈ R3.
+
+The centers, projection directions, and whitening factors are held fixed throughout the change-point scan and all bootstrap replications. The Two-view WCO procedure consequently tests for a change in the relationship between the three retained direct-co-occurrence coordinates and the three retained shared-context coordinates, rather than for a change in a single two-dimensional PCA trajectory. The transformed observations {Zt} form a time-ordered sequence. As shown in Figure 2, the data exhibit a clear trajectory over time, suggesting a gradual but structured change in the underlying distribution. 
+
+Figure 2: Two-dimensional PCA representation of the New Youth dataset. Each point corresponds to a document ordered in time, forming a trajectory that reflects linguistic evolution. To further illustrate temporal dynamics, Figure 3 presents a three-dimensional visualization with time as an additional axis. A noticeable shift in the trajectory can be observed in the later stage. We apply the proposed jointly calibrated scan to the sequence {Zt} and use its characteristic-kernel 25 Figure 3: Three-dimensional trajectory of the data with time as the third axis. A structural shift is visible in the later period. component as the localization anchor. The resulting combined statistic is shown in Figure 4, where a clear peak is observed. 
+
+Figure 4: Jointly calibrated scan for change-point detection. The peak corresponds to the estimated change-point. The detected change-point corresponds to November 1919. A segment-centered 95% bootstrap stability interval is April 1919 and June 1920. Because the present theory establishes test calibration and localization 26 but not coverage of this interval construction, we report it descriptively and do not label it a confidence interval. The detected change-point aligns closely with the historical timeline of the May Fourth Movement. This period corresponds to a rapid shift toward vernacular Chinese, accompanied by substantial changes in writing style, syntax, and vocabulary. Notably, the detected change-point is obtained purely from the data without incorporating any historical information, yet it closely matches a well-known cultural turning point. These results indicate that the proposed method captures both distributional and structural linguistic changes, demonstrating its applicability beyond controlled simulation settings. The real data analysis demonstrates that: (i) the proposed method effectively detects meaningful structural changes in high-dimensional data; (ii) the estimated change-point is consistent with known historical events; (iii) the jointly calibrated combination gives a clearer signal in this application. 
+
+# 7 Conclusion 
+
+We have developed a representation-aware framework for offline change-point detection in weakly dependent text networks. Each time-indexed text is represented by a weighted word-co-occurrence network constructed on a common vocabulary. From the degree-normalized adjacency matrix, we form two complementary linguistic views: a first-order view describing normalized direct word co-occurrences and a second-order view describing shared-context relations through normalized two-step paths. Fixed projection and whitening maps transform these representations into paired Euclidean coordinates. The proposed weighted-concordance operator (WCO) U -statistic then measures changes in the relationship between the two views. Under the primary specification β = γ = 1 , its population target is twice the cross-covariance between the direct-co-occurrence and shared-context coordinates. The targeted nature of WCO is central to its interpretation. WCO is not intended to detect every possible distributional change. A marginal location shift, a purely nonlinear change preserving linear cross-covariance, or another alternative that leaves the WCO functional unchanged need not produce a strong WCO signal. We therefore distinguish general detection from mechanism-specific diagnosis. Characteristic Gaussian-kernel maximum mean discrepancy procedures applied to the first-order, second-order, and concatenated views provide omnibus evidence of distributional change, while mean cumulative sum procedures provide benchmarks for location changes. In the asymmetric composite procedure, the MMD components serve as the omnibus anchor, whereas WCO determines whether the detected change involves the relationship between direct lexical links and shared-context structure. The leading singular directions of the segment-level WCO contrast further identify the projected coordinates most responsible for that change. A second contribution is to account explicitly for the fact that the network representations are estimated from finite texts. Primitive conditions on document length, token perturbations, vocabulary stability, co-occurrence-window weights, graph mass, active node degrees, and fixed pilot maps propagate text-recording error through the co-occurrence matrix, the first- and second-order graph representations, the projected coordinates, and the final WCO scan. This analysis provides an explicit empirical-to-oracle representation rate instead of treating the constructed network features as error-free observations. On this basis, we establish oracle joint weak convergence of the WCO scan coordinates under weak temporal dependence, validity of full-sample dependent multiplier calibration under the no-change hypothesis, and asymptotic size control. Under a single identifiable change and an explicit population separation condition, we further establish detection consistency, consistency of the estimated change fraction, and localization of the corresponding boundary. The separation condition is essential because a mixed-segment WCO functional need not attain its population maximum at the physical regime boundary. The paired-view simulation study illustrates both the advantages and the scope of the proposed statistic. Under sparse and dense low-rank changes in cross-view covariance, Two-view WCO exhibits a pronounced 27 increase in power as the population WCO signal grows, while procedures based only on marginal means or marginal distributions show little corresponding increase. Under the strongest targeted alternatives, WCO also provides more accurate localization than the omnibus composite procedure. Conversely, under target-orthogonal location and centered nonlinear changes, WCO remains close to its null rejection level, whereas the appropriate CUSUM or MMD procedures retain high power. These findings support the intended division of labor between omnibus detection and WCO-based structural diagnosis. They also show that valid dependence calibration is critical: under the baseline dependent design, several procedures over-reject, so power must be interpreted together with matching-null rejection rates and method-specific bandwidth calibration. The historical application to the New Youth corpus provides a substantive illustration of the framework. Using a common vocabulary of m = 200 retained words, a co-occurrence span of h = 10 , and three projected coordinates for each view, the analysis detects a linguistic change in November 1919. The descriptive segment-centered bootstrap stability interval extends from April 1919 to June 1920. This period is consistent with the linguistic transformation surrounding the May Fourth and New Culture movements. Beyond identifying a date, the two-view analysis distinguishes changes in direct word co-occurrence from changes in shared-context structure and assesses whether the relationship between these linguistic structures changed. Several extensions remain open. First, the present formal theory concerns a single change. Recursive, interval-based, or penalized segmentation provides a natural route to multiple-change analysis, but uniform recovery guarantees for the resulting procedure require separate theoretical development. Second, the vocabulary dimension and retained projection dimensions are treated as fixed. A growing-vocabulary theory would require dimension-dependent concentration, degree-stability conditions, and control of the pilot projection maps. Third, oracle equivalence requires the finite-document representation error to vanish sufficiently quickly relative to the number of time periods. A noise-aware limit theory is needed when finite-document error remains first-order rather than asymptotically negligible. Fourth, the present default WCO targets linear cross-view covariance. Developing and calibrating a richer family of nonlinear concordance operators could extend diagnostic sensitivity while preserving a clear population interpretation. Finally, extending the framework from offline analysis to sequential monitoring, in the spirit of Xie and Siegmund (2013) and Leung et al. (2017), is an important direction for future work. Overall, the proposed framework connects finite-text network construction, two-view graph representa-tions, dependent U -process inference, and change-point analysis. Its principal contribution is not an omnibus statistic that replaces all existing procedures, but a structured inferential strategy that separates three questions: whether the represented text distribution changed, where that change occurred, and whether it involved the relationship between direct co-occurrence and shared-context structure. This separation between omnibus detection, mechanism-specific diagnosis, and representation uncertainty is potentially useful beyond text corpora whenever the time-ordered objects supplied to a change-point procedure are themselves estimated structured representations. 
+
+# 8 Detailed Proof 
+
+Detailed proof consists of proofs for every proposition, lemma, corollary, and theorem. And it is available upon request. 
+
+# References 
+
+Sylvain Arlot, Alain Celisse, and Za¨ ıd Harchaoui. A kernel multiple change-point algorithm via model selection. Journal of Machine Learning Research , 20(162):1–56, 2019. URL https://www.jmlr. 
+
+28 org/papers/v20/16-155.html .Yue Bai and Abolfazl Safikhani. A unified framework for change point detection in high-dimensional linear models. Statistica Sinica , 33(2):1721–1748, 2023. doi: 10.5705/ss.202021.0309. URL https: //doi.org/10.5705/ss.202021.0309 .Rafal Baranowski, Yining Chen, and Piotr Fryzlewicz. Narrowest-over-threshold detection of multiple change points and change-point-like features. Journal of the Royal Statistical Society: Series B , 81(3):649–672, 2019. doi: 10.1111/rssb.12322. Rajendra Bhatia. Matrix Analysis , volume 169 of Graduate Texts in Mathematics . Springer, New York, 1997. ISBN 978-1-4612-6857-4. doi: 10.1007/978-1-4612-0653-8. Axel B¨ ucher and Ivan Kojadinovic. Dependent multiplier bootstraps for non-degenerate U-statistics under mixing conditions with applications. Journal of Statistical Planning and Inference , 170:83–105, 2016. URL https://arxiv.org/abs/1412.5875 .Shubhadeep Chakraborty and Xianyang Zhang. A new framework for distance and kernel-based metrics in high dimensions. Electronic Journal of Statistics , 15(2), January 2021. ISSN 1935-7524. doi: 10.1214/21-ejs1889. URL http://dx.doi.org/10.1214/21-EJS1889 .Hao Chen and Nancy R. Zhang. Graph-based change-point detection. The Annals of Statistics , 43(1):139–176, 2015. doi: 10.1214/14-AOS1269. Pierre Daix-Moreux and Matthias Gall´ e. Joint semantic and distributional word representations with multi-graph embeddings. In Proceedings of the Thirteenth Workshop on Graph-Based Methods for Natural Language Processing (TextGraphs-13) , page 118–123. Association for Computational Linguistics, 2019. doi: 10.18653/v1/d19-5314. URL http://dx.doi.org/10.18653/v1/D19-5314 .Herold Dehling and Martin Wendler. Law of the iterated logarithm for U-statistics of weakly dependent observations. In Istv´ an Berkes, Richard C. Bradley, Herold Dehling, Magda Peligrad, and Robert F. Tichy, editors, Dependence in Probability, Analysis and Number Theory , pages 177–194. Kendrick Press, Heber City, UT, 2010. Herold Dehling, Roland Fried, Isabel Garcia, and Martin Wendler. Change-point detection under dependence based on two-sample U-statistics. In Donald Dawson, Rafał Kulik, Marouane Ould Haye, Barbara Szyszkowicz, and Yimin Zhao, editors, Asymptotic Laws and Methods in Stochastics , volume 76 of Fields Institute Communications . Springer, New York, 2015. doi: 10.1007/978-1-4939-3076-0 \ 12. Ian L. Dryden, Alexey Koloydenko, and Diwei Zhou. Non-euclidean statistics for covariance matrices, with applications to diffusion tensor imaging. The Annals of Applied Statistics , 3(3), 2009. ISSN 1932-6157. doi: 10.1214/09-aoas249. URL http://dx.doi.org/10.1214/09-AOAS249 .Paromita Dubey and Hans-Georg M¨ uller. Fr´ echet change-point detection. The Annals of Statistics , 48(6): 3312–3335, 2020. doi: 10.1214/19-AOS1930. Franklin M. Fisher. Tests of equality between sets of coefficients in two linear regressions: An expository note. Econometrica , 38(2):361, March 1970. ISSN 0012-9682. doi: 10.2307/1913018. URL http: //dx.doi.org/10.2307/1913018 .Davide Giraudo. Functional central limit theorem and marcinkiewicz strong law of large numbers for hilbert-valued U-statistics of absolutely regular data. Brazilian Journal of Probability and Statistics , 38(2), 2024. doi: 10.1214/24-BJPS607. 29 Arthur Gretton, Karsten M. Borgwardt, Malte J. Rasch, Bernhard Sch¨ olkopf, and Alexander Smola. A kernel two-sample test. Journal of Machine Learning Research , 13:723–773, 2012. Nicholas J. Higham. Functions of Matrices: Theory and Computation , volume 104 of Other Titles in Applied Mathematics . Society for Industrial and Applied Mathematics, Philadelphia, 2008. ISBN 978-0-898716-46-7. doi: 10.1137/1.9780898717778. Wassily Hoeffding. A class of statistics with asymptotically normal distribution. The Annals of Mathematical Statistics , 19(3):293–325, September 1948. ISSN 0003-4851. doi: 10.1214/aoms/1177730196. URL 
+
+http://dx.doi.org/10.1214/aoms/1177730196 .Shenyang Huang, Samy Coulombe, Yasmeen Hitti, Reihaneh Rabbany, and Guillaume Rabusseau. Laplacian change point detection for single and multi-view dynamic graphs. ACM Transactions on Knowledge Discovery from Data , 18(3), 2024. URL https://arxiv.org/abs/2302.01204 .Mumin Jia and Jairo Diaz-Rodriguez. Unsupervised text segmentation via kernel change-point detection on sentence embeddings. arXiv:2601.18788, 2026. URL https://arxiv.org/abs/2601.18788 .M. G. Kendall. A new measure of rank correlation. Biometrika , 30(1/2):81, June 1938. ISSN 0006-3444. doi: 10.2307/2332226. URL http://dx.doi.org/10.2307/2332226 .Sze Him Leung, Wai Leong Ng, and Chun Yip Yau. Sequential change-point detection in time series models based on pairwise likelihood. Statistica Sinica , 27(2):575–605, 2017. ISSN 1017-0405. Ruishan Lin and Abolfazl Safikhani. Multiple change point detection for nonstationary network autoregressive models with node-level dynamics. Environmetrics , 37(6):e70130, 2026. doi: 10.1002/env.70130. URL 
+
+https://doi.org/10.1002/env.70130 .Rui Luo and Vikram Krishnamurthy. Fr´ echet-statistics-based change point detection in dynamic social networks. IEEE Transactions on Computational Social Systems , 11(2):2863–2871, 2024. doi: 10.1109/ TCSS.2023.3297233. URL https://doi.org/10.1109/TCSS.2023.3297233 .David S. Matteson and Nicholas A. James. A nonparametric approach for multiple change point analysis of multivariate data. Journal of the American Statistical Association , 109(505):334–345, January 2014. ISSN 1537-274X. doi: 10.1080/01621459.2013.849605. URL http://dx.doi.org/10.1080/ 01621459.2013.849605 .Florence Merlev` ede, Magda Peligrad, and Emmanuel Rio. A Bernstein type inequality and moderate deviations for weakly dependent sequences. Probability Theory and Related Fields , 151(3–4):435–474, 2011. doi: 10.1007/s00440-010-0304-9. E. S. Page. Continuous inspection schemes. Biometrika , 41(1/2):100, June 1954. ISSN 0006-3444. doi: 10.2307/2333009. URL http://dx.doi.org/10.2307/2333009 .D. Pigoli, J. A. D. Aston, I. L. Dryden, and P. Secchi. Distances and inference for covariance operators. 
+
+Biometrika , 101(2):409–422, April 2014. ISSN 1464-3510. doi: 10.1093/biomet/asu008. URL http: //dx.doi.org/10.1093/biomet/asu008 .Gregory Rice and Han Lin Shang. A plug-in bandwidth selection procedure for long-run covariance estimation with stationary functional time series. Journal of Time Series Analysis , 38(4):591–609, 2017. doi: 10.1111/jtsa.12209. 30 Abolfazl Safikhani and Ali Shojaie. Joint structural break detection and parameter estimation in high-dimensional nonstationary VAR models. Journal of the American Statistical Association , 117(537):251– 264, 2022. doi: 10.1080/01621459.2020.1770097. URL https://doi.org/10.1080/01621459. 2020.1770097 .Dino Sejdinovic, Bharath Sriperumbudur, Arthur Gretton, and Kenji Fukumizu. Equivalence of distance-based and rkhs-based statistics in hypothesis testing. The Annals of Statistics , 41(5), October 2013. ISSN 0090-5364. doi: 10.1214/13-aos1140. URL http://dx.doi.org/10.1214/13-AOS1140 .Robert J. Serfling. Approximation Theorems of Mathematical Statistics . Wiley, November 1980. ISBN 9780470316481. doi: 10.1002/9780470316481. URL http://dx.doi.org/10.1002/ 9780470316481 .Katie E. Severn, Ian L. Dryden, and Simon P. Preston. Non-parametric regression for networks. Stat , 10(1): e373, 2021. doi: 10.1002/sta4.373. URL https://doi.org/10.1002/sta4.373 .Katie E. Severn, Ian L. Dryden, and Simon P. Preston. Manifold valued data analysis of samples of networks, with applications in corpus linguistics. The Annals of Applied Statistics , 16(1), March 2022. ISSN 1932-6157. doi: 10.1214/21-aoas1480. URL http://dx.doi.org/10.1214/21-AOAS1480 .Xiaofeng Shao. The dependent wild bootstrap. Journal of the American Statistical Association , 105(489): 218–235, 2010. doi: 10.1198/jasa.2009.tm08744. D´ eborah Sulem, Henry Kenlay, Mihai Cucuringu, and Xiaowen Dong. Graph similarity learning for change-point detection in dynamic networks. Machine Learning , 113(1):1–44, 2024. doi: 10.1007/ s10994-023-06405-x. URL https://doi.org/10.1007/s10994-023-06405-x .Mingxuan Sun and Hao Chen. KAP-CPD: Kernel aggregation for change-point detection in dynamic networks. arXiv:2605.14463, 2026. URL https://arxiv.org/abs/2605.14463 .G´ abor J. Sz´ ekely and Maria L. Rizzo. Testing for equal distributions in high dimension. InterStat , 5, 2004. G´ abor J. Sz´ ekely and Maria L. Rizzo. A new test for multivariate normality. Journal of Multivariate Analysis , 93(1):58–80, March 2005. ISSN 0047-259X. doi: 10.1016/j.jmva.2003.12.002. URL http: //dx.doi.org/10.1016/j.jmva.2003.12.002 .Jian Tang, Meng Qu, Mingzhe Wang, Ming Zhang, Jun Yan, and Qiaozhu Mei. LINE: Large-scale information network embedding. In Proceedings of the 24th International Conference on World Wide Web , pages 1067–1077. International World Wide Web Conferences Steering Committee, 2015. doi: 10.1145/2736277. 2741093. Daren Wang, Yi Yu, and Alessandro Rinaldo. Optimal change point detection and localization in sparse dynamic networks. The Annals of Statistics , 49(1):203–232, 2021. doi: 10.1214/20-AOS1953. Lea Wegner and Martin Wendler. Robust change-point detection for functional time series based on U-statistics and dependent wild bootstrap. Statistical Papers , 65:4767–4810, 2024. doi: 10.1007/ s00362-024-01577-7. Wei Biao Wu. Nonlinear system theory: Another look at dependence. Proceedings of the National Academy of Sciences of the United States of America , 102(40):14150–14154, 2005. doi: 10.1073/pnas.0506715102. URL https://doi.org/10.1073/pnas.0506715102 .31 Yao Xie and David Siegmund. Sequential multi-sensor change-point detection. The Annals of Statistics , 41 (2), April 2013. ISSN 0090-5364. doi: 10.1214/13-aos1094. URL http://dx.doi.org/10.1214/ 13-AOS1094 .Ken-ichi Yoshihara. Limiting behavior of U-statistics for stationary, absolutely regular processes. Zeitschrift f¨ ur Wahrscheinlichkeitstheorie und Verwandte Gebiete , 35:237–252, 1976. doi: 10.1007/BF00532676. 32

@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.19306v1/fig-001.webp",
+      "caption": "Figure 4: Jointly calibrated scan for change-point detection. The peak corresponds to the estimated changepoint.",
+      "page": 26,
+      "index": 1,
+      "width": 590,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19306v1/fig-002.webp",
+      "caption": "Figure 3: Three-dimensional trajectory of the data with time as the third axis. A structural shift is visible in the later period.",
+      "page": 26,
+      "index": 2,
+      "width": 590,
+      "height": 569
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19306v1/fig-003.webp",
+      "caption": "Figure 2: Two-dimensional PCA representation of the New Youth dataset. Each point corresponds to a document ordered in time, forming a trajectory that reflects linguistic evolution.",
+      "page": 25,
+      "index": 3,
+      "width": 590,
+      "height": 422
+    },
+    {
+      "url": "assets/figures/arxiv/2609.19306v1/fig-004.webp",
+      "caption": "Table 1: Simulation I results under the baseline setting n = 500, d = 5, φ = 0.3, and τ0 = 0.5. Entries are empirical rejection probabilities. P1 evaluates null calibration; P2 and P3 are targeted cross-view covariance alternatives; P4 contains target-orthogonal location and nonlinear changes.",
+      "page": 22,
+      "index": 4,
+      "width": 972,
+      "height": 274
+    }
+  ]
+}

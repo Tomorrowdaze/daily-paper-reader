@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-24",
+  "date": "2026-09-24",
+  "generated_at": "2026-09-24T22:07:32",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/24/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries",
+      "section": "quick",
+      "title_en": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "authors": "Hyuntae Ahn, Mi Jin Lee",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.26296v1",
+      "score": "7.5",
+      "evidence": "使用ARIMA框架对冲突频率时间序列进行预测",
+      "tldr": "研究以中东冲突事件为对象，以ARIMA检验线性时间结构，并以k*与τ_int评估短期持续性；多数国家的时间依赖可被ARIMA刻画，但突发变化难以预测；k*为2–6天、τ_int为0.6–1.7天，且τ_int与人均GDP显著负相关。",
+      "tags": "query:q4",
+      "abstract_en": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/24/2609.19306v1-laplacian-u-processes-for-multiple-change-point-detection-in-dependent-text-networks-an-application-to-historical-chinese-articles",
+      "section": "quick",
+      "title_en": "Laplacian U-Processes for Multiple Change-Point Detection in Dependent Text Networks: An Application to Historical Chinese Articles",
+      "authors": "Fanghua Chen, Yizhou Cai, Lu zhou, Ting Fung Ma",
+      "date": "2026-09-16",
+      "pdf": "https://arxiv.org/pdf/2609.19306v1",
+      "score": "6.5",
+      "evidence": "用于分析政治/社会转变的历史文本网络变点检测",
+      "tldr": "针对弱依赖文本网络的离线变点检测，提出基于加权词共现图的双视角WCO框架，以独立语料学习映射将一、二阶视角投影为配对欧式观测，借助WCO扫描与依赖乘子及分段区块自助法检验与定位，提供理论保证，并在《新青年》中识别1919年11月变点。",
+      "tags": "query:q4",
+      "abstract_en": "We propose a two-view weighted-concordance operator (WCO) framework for offline change-point detection in weakly dependent text networks. Weighted word-co-occurrence graphs yield first-order direct-co-occurrence and second-order shared-context views, projected into paired Euclidean observations using maps learned from an independent pilot corpus. A WCO scan detects changes in cross-view dependence. A dependent multiplier bootstrap tests for a change, while a segment-wise block bootstrap gives a descriptive stability interval for its location. We establish null weak convergence, bootstrap validity, asymptotic size control, consistent localization under a single identifiable change, and perturbation bounds for token-level errors. CUSUM and Gaussian-kernel MMD scans provide complementary benchmarks. In the 1915-1921 New Youth corpus, the method detects a change in November 1919, with a descriptive 95 percent stability interval from April 1919 to June 1920, consistent with the linguistic transition surrounding China's May Fourth and New Culture movements.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
