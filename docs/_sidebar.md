@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-25 <!--dpr-date:20260925-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/25/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries" data-sidebar-item="{&quot;title&quot;: &quot;Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用ARIMA模型分析和预测中东国家的冲突活动和频率。&quot;}">Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries</a>
   * 2026-09-24 <!--dpr-date:20260924-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/24/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries" data-sidebar-item="{&quot;title&quot;: &quot;Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries&quot;, &quot;score&quot;: &quot;7.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用ARIMA框架对冲突频率时间序列进行预测&quot;}">Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries</a>
