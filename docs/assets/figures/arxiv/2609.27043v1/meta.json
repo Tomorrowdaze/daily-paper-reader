@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.27043v1/fig-001.webp",
+      "caption": "Figure 1. Fire rate (fraction of teacher utterances where that assertion is true) versus cross-model agreement for each assertion. Fire rate is averaged across the five annotators. Construct-derived (top-down) assertions are colored in blue while Corpus-derived (bottom-up) assertions are colored in red.",
+      "page": 8,
+      "index": 1,
+      "width": 729,
+      "height": 545
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27043v1/fig-002.webp",
+      "caption": "Figure 2. Average Macro-F1 of the TalkMoves classifiers with a growing set of assertions. Black line is an average across all runs and annotators.",
+      "page": 9,
+      "index": 2,
+      "width": 729,
+      "height": 509
+    }
+  ]
+}

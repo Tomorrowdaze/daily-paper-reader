@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-26",
+  "date": "2026-09-26",
+  "generated_at": "2026-09-26T22:19:55",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/26/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries",
+      "section": "deep",
+      "title_en": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "authors": "Hyuntae Ahn, Mi Jin Lee",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.26296v1",
+      "score": "8.5",
+      "evidence": "使用ARIMA模型分析中东国家的冲突活动时间序列并进行预测。",
+      "tldr": "研究以中东国家冲突事件为对象，采用ARIMA评估线性时序结构，并用k*与τ_int刻画短期持续性。结果显示多数国家时间依赖可被捕捉，k*约2–6天、τ_int约0.6–1.7天，且τ_int与人均GDP负相关，揭示社会经济与冲突动力的关联。",
+      "tags": "query:q4",
+      "abstract_en": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/26/2609.27043v1-edubehaviors-assertion-based-schemas-for-auditable-coding-of-educational-dialogues",
+      "section": "quick",
+      "title_en": "EduBehaviors: Assertion-based Schemas for Auditable Coding of Educational Dialogues",
+      "authors": "Julian Bernado, Ana Trindade Ribeiro, Xander Beberman, Susanna Loeb",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.27043v1",
+      "score": "6.5",
+      "evidence": "可解释的数据标注方法和对模型选择的机制性见解",
+      "tldr": "为解决LLM标注教育对话的可解释性与可审计性不足，论文提出EduBehaviors：用LLM度量可重复的可观察行为并据此训练构念分类器；在TalkMoves上预测Teacher TalkMoves，宏F1 0.673、κ 0.688，性能可与直接提示媲美，并发布两款Toolkit工具以便复用。",
+      "tags": "query:q6",
+      "abstract_en": "Large language models have allowed the rapid deployment of pedagogical annotations corresponding to constructs of interest, allowing a natural language interface for generating classifications on a conversational dataset. However due to the opaque nature of LLM reasoning, we have no verifiable, mechanistic insight into why a model chose a label for an utterance. We introduce the EduBehaviors framework, an interpretable, scalable approach to annotating educational data that uses LLMs to measure repeated observable behaviors relevant to many constructs of interest and then learns a classifier for the construct based on these observable behaviors. We evaluate the framework on the TalkMoves dataset, predicting the Teacher TalkMoves labels. Our best configuration results in a macro-F1 of 0.673 and 0.688 Cohen's kappa, proving competitive with direct prompting approaches. In addition, we release EduBehaviors Toolkit, two tools allowing researchers to operationalize the EduBehaviors framework in their own data.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/26/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints",
+      "section": "quick",
+      "title_en": "ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints",
+      "authors": "Sriram Kannan, Swetha Saseendran, Vishnu Vardhan Reddy Kandi, Leslie Barrett, Madhavan Seshadri, Enrico Santus",
+      "date": "2026-09-24",
+      "pdf": "https://arxiv.org/pdf/2609.30184v1",
+      "score": "6.0",
+      "evidence": "具有因果结构的法律投诉事件知识图谱",
+      "tldr": "ARGUS面向美国就业歧视诉状，结合5W1H方案、法律域模型与LLM，抽取事实并构建文档级事件知识图谱；经人评与多模型评估，图结构分类优于原始与线性化基线，EKG仅用检索提升文档内QA，但开放检索受首阶段召回限制。",
+      "tags": "query:q6",
+      "abstract_en": "U.S. employment-discrimination complaints describe complex event sequences that are not explicitly captured by lexical or embedding-based representations alone. We present ARGUS, a source-grounded pipeline that combines a 5W1H-inspired schema, legal-domain models, and LLM-based structured generation to construct document-level Event Knowledge Graphs (EKGs) from CourtListener complaints. ARGUS extracts fact-bearing statements, builds chunk-level event graphs with participant, temporal, and causal structure, and merges them into document-level representations. We evaluate graph quality through human and multi-model assessment and test downstream utility on claim classification and legal QA. The graph-structured classifier outperforms raw and linearized baselines on the held-out set, and EKG-only retrieval improves document-scoped QA, while open-retrieval gains remain limited by low first-stage candidate recall. These results suggest that EKGs are most useful for organizing and reasoning over evidence once relevant material has been retrieved.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

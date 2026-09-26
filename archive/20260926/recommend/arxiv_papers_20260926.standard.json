@@ -1,0 +1,132 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-26T22:15:24.809834+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2609.26296v1",
+      "source": "arxiv",
+      "title": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "abstract": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "authors": [
+        "Hyuntae Ahn",
+        "Mi Jin Lee"
+      ],
+      "primary_category": "physics.soc-ph",
+      "categories": [
+        "physics.soc-ph"
+      ],
+      "published": "2026-09-22T12:09:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.26296v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 8.5,
+      "llm_evidence_en": "Predicts conflict activity in Middle Eastern countries using ARIMA models for temporal structure analysis.",
+      "llm_evidence_cn": "使用ARIMA模型分析中东国家的冲突活动时间序列并进行预测。",
+      "llm_evidence": "使用ARIMA模型分析中东国家的冲突活动时间序列并进行预测。",
+      "canonical_evidence": "使用ARIMA模型分析中东国家的冲突活动时间序列并进行预测。",
+      "llm_tldr_en": "Analyzes and predicts conflict frequency in the Middle East using linear temporal ARIMA models.",
+      "llm_tldr_cn": "利用ARIMA模型分析并预测中东地区的冲突频率及其时间演化特征。",
+      "llm_tldr": "利用ARIMA模型分析并预测中东地区的冲突频率及其时间演化特征。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.27043v1",
+      "source": "arxiv",
+      "title": "EduBehaviors: Assertion-based Schemas for Auditable Coding of Educational Dialogues",
+      "abstract": "Large language models have allowed the rapid deployment of pedagogical annotations corresponding to constructs of interest, allowing a natural language interface for generating classifications on a conversational dataset. However due to the opaque nature of LLM reasoning, we have no verifiable, mechanistic insight into why a model chose a label for an utterance. We introduce the EduBehaviors framework, an interpretable, scalable approach to annotating educational data that uses LLMs to measure repeated observable behaviors relevant to many constructs of interest and then learns a classifier for the construct based on these observable behaviors. We evaluate the framework on the TalkMoves dataset, predicting the Teacher TalkMoves labels. Our best configuration results in a macro-F1 of 0.673 and 0.688 Cohen's kappa, proving competitive with direct prompting approaches. In addition, we release EduBehaviors Toolkit, two tools allowing researchers to operationalize the EduBehaviors framework in their own data.",
+      "authors": [
+        "Julian Bernado",
+        "Ana Trindade Ribeiro",
+        "Xander Beberman",
+        "Susanna Loeb"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CY",
+        "cs.LG"
+      ],
+      "published": "2026-09-22T20:38:54+00:00",
+      "link": "https://arxiv.org/pdf/2609.27043v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable approach to annotating data and mechanistic insight into model choices",
+      "llm_evidence_cn": "可解释的数据标注方法和对模型选择的机制性见解",
+      "llm_evidence": "可解释的数据标注方法和对模型选择的机制性见解",
+      "canonical_evidence": "可解释的数据标注方法和对模型选择的机制性见解",
+      "llm_tldr_en": "Introduces EduBehaviors for interpretable and auditable classification using LLMs.",
+      "llm_tldr_cn": "引入EduBehaviors框架，利用大模型实现可解释且可审计的分类标注。",
+      "llm_tldr": "引入EduBehaviors框架，利用大模型实现可解释且可审计的分类标注。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.30184v1",
+      "source": "arxiv",
+      "title": "ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints",
+      "abstract": "U.S. employment-discrimination complaints describe complex event sequences that are not explicitly captured by lexical or embedding-based representations alone. We present ARGUS, a source-grounded pipeline that combines a 5W1H-inspired schema, legal-domain models, and LLM-based structured generation to construct document-level Event Knowledge Graphs (EKGs) from CourtListener complaints. ARGUS extracts fact-bearing statements, builds chunk-level event graphs with participant, temporal, and causal structure, and merges them into document-level representations. We evaluate graph quality through human and multi-model assessment and test downstream utility on claim classification and legal QA. The graph-structured classifier outperforms raw and linearized baselines on the held-out set, and EKG-only retrieval improves document-scoped QA, while open-retrieval gains remain limited by low first-stage candidate recall. These results suggest that EKGs are most useful for organizing and reasoning over evidence once relevant material has been retrieved.",
+      "authors": [
+        "Sriram Kannan",
+        "Swetha Saseendran",
+        "Vishnu Vardhan Reddy Kandi",
+        "Leslie Barrett",
+        "Madhavan Seshadri",
+        "Enrico Santus"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-24T17:29:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.30184v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Event Knowledge Graphs with causal structure for legal complaints",
+      "llm_evidence_cn": "具有因果结构的法律投诉事件知识图谱",
+      "llm_evidence": "具有因果结构的法律投诉事件知识图谱",
+      "canonical_evidence": "具有因果结构的法律投诉事件知识图谱",
+      "llm_tldr_en": "Constructs Event Knowledge Graphs with causal structure to improve legal claim classification.",
+      "llm_tldr_cn": "构建具有因果结构的事件知识图谱，以提升法律索赔分类的性能。",
+      "llm_tldr": "构建具有因果结构的事件知识图谱，以提升法律索赔分类的性能。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
