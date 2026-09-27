@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-27",
+  "date": "2026-09-27",
+  "generated_at": "2026-09-27T21:41:51",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/27/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries",
+      "section": "deep",
+      "title_en": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "authors": "Hyuntae Ahn, Mi Jin Lee",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.26296v1",
+      "score": "8.5",
+      "evidence": "使用ARIMA模型预测中东国家的冲突活动",
+      "tldr": "本研究以中东国家冲突事件频次为对象，采用ARIMA检验线性时序结构，并以零穿越点k*与积分相关时间τ_int量化短期持续性；结果显示多数国家的线性依赖可被ARIMA捕捉但突发难测，短期相关约2–6天、τ_int约0.6–1.7天，且τ_int与人均GDP显著负相关，揭示冲突活动的可测线性结构及其与社会经济条件的潜在关联。",
+      "tags": "query:q4",
+      "abstract_en": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
