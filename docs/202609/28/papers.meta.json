@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-28",
+  "date": "2026-09-28",
+  "generated_at": "2026-09-28T23:35:32",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/28/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries",
+      "section": "deep",
+      "title_en": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "authors": "Hyuntae Ahn, Mi Jin Lee",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.26296v1",
+      "score": "8.5",
+      "evidence": "使用ARIMA模型预测冲突活动，捕捉时间结构和持续性。",
+      "tldr": "研究以中东国家冲突事件为对象，采用ARIMA检验线性时间结构，并以k*与τ_int刻画短期持续性；结果显示多数国家的时间依赖可被捕捉，k*约2–6天、τ_int约0.6–1.7天，且τ_int与人均GDP负相关，揭示可测的线性结构与跨国差异。",
+      "tags": "query:q4",
+      "abstract_en": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/28/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints",
+      "section": "quick",
+      "title_en": "ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints",
+      "authors": "Sriram Kannan, Swetha Saseendran, Vishnu Vardhan Reddy Kandi, Leslie Barrett, Madhavan Seshadri, Enrico Santus",
+      "date": "2026-09-24",
+      "pdf": "https://arxiv.org/pdf/2609.30184v1",
+      "score": "7.0",
+      "evidence": "具有参与者、时间和因果结构的法律投诉事件知识图谱",
+      "tldr": "本文提出ARGUS，结合5W1H架构、法律域模型与LLM结构化生成，从CourtListener起诉状构建文档级事件知识图；流程涵盖事实抽取、分块事件图构建与参与者/时间/因果合并；人评与多模型评测验证其质量，图结构分类优于基线，EKG检索提升文档内法问答，开放检索受初始召回限制。",
+      "tags": "query:q6",
+      "abstract_en": "U.S. employment-discrimination complaints describe complex event sequences that are not explicitly captured by lexical or embedding-based representations alone. We present ARGUS, a source-grounded pipeline that combines a 5W1H-inspired schema, legal-domain models, and LLM-based structured generation to construct document-level Event Knowledge Graphs (EKGs) from CourtListener complaints. ARGUS extracts fact-bearing statements, builds chunk-level event graphs with participant, temporal, and causal structure, and merges them into document-level representations. We evaluate graph quality through human and multi-model assessment and test downstream utility on claim classification and legal QA. The graph-structured classifier outperforms raw and linearized baselines on the held-out set, and EKG-only retrieval improves document-scoped QA, while open-retrieval gains remain limited by low first-stage candidate recall. These results suggest that EKGs are most useful for organizing and reasoning over evidence once relevant material has been retrieved.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/28/2609.24098v1-a2safe-counterfactual-evidence-aligned-adaptive-agent-collaboration-for-safe-and-effective-visual-question-answering",
+      "section": "quick",
+      "title_en": "A$^2$Safe: Counterfactual Evidence-Aligned Adaptive Agent Collaboration for Safe and Effective Visual Question Answering",
+      "authors": "Quanxing Xu, Ling Zhou, Xian Zhong, Jinyu Tian, Xiaohua Huang, Rubing Huang, Chia-Wen Lin",
+      "date": "2026-09-21",
+      "pdf": "https://arxiv.org/pdf/2609.24098v1",
+      "score": "6.0",
+      "evidence": "反事实证据对齐的风险意识与安全决策",
+      "tldr": "本文提出A^2Safe框架，面向多模态VQA的安全与有效作答；通过“安全证据看板”显式组织局部视觉、文本意图与跨模态风险关系，并以反事实证据对齐确保对无关变化保持不变、对关键风险触发状态与模式切换；依据证据进行自适应协作，在可答时直接作答，风险或不确定时进行策略批判与回应修订，显著提升安全性同时保持通用性能。",
+      "tags": "query:q5",
+      "abstract_en": "Visual Question Answering (VQA) with Multimodal Large Language Models (MLLMs) requires not only producing safe and effective responses, but also grounding safety decisions in the multimodal evidence that determines risk. Recent safety-alignment methods improve refusal behavior and contextual risk awareness, yet correct safety outcomes may still rely on superficial textual or visual correlations, particularly when risk emerges from interactions between individually benign image and question content. To address this issue, we propose A$^2$Safe, a counterfactual evidence-aligned adaptive agent collaboration framework for safe and effective VQA. A$^2$Safe organizes localized visual observations, textual intent, and cross-modal risk relations through a Grounded Safety Evidence Board, making the basis of safety decisions explicit. Counterfactual safety evidence alignment enforces invariance to safety-irrelevant changes while requiring appropriate safety-state and response-mode transitions when risk-critical evidence is minimally altered. The resulting evidence state further supports adaptive collaboration, enabling direct answering when grounded evidence is sufficient and invoking policy critique and response revision when evidence is risky, uncertain, or conflicting. Under complementary safety-critical and general VQA protocols, A$^2$Safe achieves a 95.72 SIUO safety score, reduces the benign refusal rate on MOSSBench to 14.67%, and maintains an average general VQA score of 78.34 with 27.8% token overhead. These results support counterfactual evidence-aligned adaptive collaboration for safe and effective multimodal question answering.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
