@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.27225v1/fig-001.webp",
+      "caption": "Figure 5: Per-hop conditional meet accuracy 𝑃 (correct | chain reaches hop 𝑘) on the MuSiQue tune pool (𝑛 = 2,175),",
+      "page": 11,
+      "index": 1,
+      "width": 472,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27225v1/fig-002.webp",
+      "caption": "Figure 1: LatWeave in two stages. Build time (offline, one-off): an LLM extracts typed predicates from question-blind documents",
+      "page": 3,
+      "index": 2,
+      "width": 703,
+      "height": 214
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27225v1/fig-003.webp",
+      "caption": "Figure 2: A product-lattice slice (species × habitat mini-example): (a) value hierarchies of the two dimensions; (b) an instance as a point in the product lattice; (c) onemeet in three deterministic steps—a hit requires the descendant check on every dimension,",
+      "page": 4,
+      "index": 3,
+      "width": 764,
+      "height": 220
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27225v1/fig-004.webp",
+      "caption": "Table 12: Failure attribution matrix.",
+      "page": 12,
+      "index": 4,
+      "width": 449,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27225v1/fig-005.webp",
+      "caption": "Table 1: Datasets, structure, and role in this paper’s argument.",
+      "page": 5,
+      "index": 5,
+      "width": 498,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27225v1/fig-006.webp",
+      "caption": "Table 2: 2WikiMultihopQA main results (held-out 𝑛 = 1,258).",
+      "page": 5,
+      "index": 6,
+      "width": 431,
+      "height": 304
+    }
+  ]
+}

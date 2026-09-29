@@ -1,0 +1,132 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-29T23:28:58.825017+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2609.26296v1",
+      "source": "arxiv",
+      "title": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "abstract": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "authors": [
+        "Hyuntae Ahn",
+        "Mi Jin Lee"
+      ],
+      "primary_category": "physics.soc-ph",
+      "categories": [
+        "physics.soc-ph"
+      ],
+      "published": "2026-09-22T12:09:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.26296v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 8.5,
+      "llm_evidence_en": "predicting conflict activity using ARIMA models",
+      "llm_evidence_cn": "使用ARIMA模型预测冲突活动",
+      "llm_evidence": "使用ARIMA模型预测冲突活动",
+      "canonical_evidence": "使用ARIMA模型预测冲突活动",
+      "llm_tldr_en": "Analyzes linear temporal structures in Middle Eastern conflict data using ARIMA for prediction.",
+      "llm_tldr_cn": "利用ARIMA模型分析中东冲突数据的线性时间结构并进行预测。",
+      "llm_tldr": "利用ARIMA模型分析中东冲突数据的线性时间结构并进行预测。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.25189v1",
+      "source": "arxiv",
+      "title": "GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings",
+      "abstract": "Generative search systems rank products and services for consequential decisions, and publishers can cheaply make candidate text look relevant. Yet evidence status is not a text property but a claim-evidence relation: text-only rankers and defenses cannot separate honest detailed content from fabricated detail, creating an identifiability gap. We audit this gap with an evidence-paired benchmark (50 e-commerce queries, 1,950 cases) and a claim-level reranker, GroundedGEO, that penalizes query-relevant claims lacking support in a supplied packet. Matched rich variants control format and volume; packet twins add attestations at fixed text, while thinned packets withdraw them. On the frozen listwise ranker Qwen2.5-7B, unsupported-rich variants show significant normalized rank gain over clean candidates (+0.065 to +0.092 across claim profiles, Holm-corrected), while supported and neutral controls do not; the effect is model-dependent (marginal on MiMo-v2.5, absent on GLM-5.3-Flash). On a frozen pointwise scorer, oracle evidence labels cut the unsupported-rich top-3 rate from 0.65 to 0.43 (laundering from 0.61 to 0.39) at lambda=40 with zero false suppression; packet twins restore the original rates without changing text. Against a 370-claim human gold, all tested automatic judges fail the preregistered reliability gate, although the best local judge retains 79-100% of oracle suppression with zero measured false suppression on protected arms. Separately, stripping attestation coverage increases false suppression by 0.307. These diagnostic effects identify two limits on the evidence channel: label quality and packet coverage. They do not validate an automatic defense, and interpretation of the adverse human-gold arm remains pending adjudication.",
+      "authors": [
+        "Yihan Xia",
+        "Huiling Fan",
+        "Kangrong Zhong",
+        "Taotao Wang"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-09-21T17:07:10+00:00",
+      "link": "https://arxiv.org/pdf/2609.25189v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "auditing claim-evidence relations and penalizing unsupported claims",
+      "llm_evidence_cn": "审计主张-证据关系并惩罚无支持的主张",
+      "llm_evidence": "审计主张-证据关系并惩罚无支持的主张",
+      "canonical_evidence": "审计主张-证据关系并惩罚无支持的主张",
+      "llm_tldr_en": "GroundedGEO audits generative search by verifying claim-evidence relations to ensure factual grounding.",
+      "llm_tldr_cn": "GroundedGEO通过验证主张与证据的关系来审计生成式搜索，确保事实根据。",
+      "llm_tldr": "GroundedGEO通过验证主张与证据的关系来审计生成式搜索，确保事实根据。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.27225v1",
+      "source": "arxiv",
+      "title": "Meet, Compare, or Abstain: LatWeave for Deterministic Multi-Hop Question Answering on Knowledge Lattices",
+      "abstract": "Probabilistic question-answering systems -- whether large language models (LLMs) themselves, retrieval-augmented generation (RAG), or trained multi-hop retrievers -- conflate \"what is known\" and \"how to reason\" into a single probabilistic computation: hallucination cannot be eradicated, evidence chains cannot be audited, and the system answers even when it does not know. We present LatWeave, which organizes knowledge into a multidimensional knowledge lattice and compiles multi-hop QA into three deterministic operators -- meet (constraint intersection), compare (lattice-order comparison), and abstain (structural abstention); LLMs appear only on the construction side (one-shot extraction) and the query-planning side, while the answer-generation path is zero-LLM, zero-task-training, and auditable end to end -- so that question answering over Web-published knowledge becomes reproducible item by item. Rather than claiming across-the-board SOTA, we characterize the operating envelope of this paradigm on six public benchmarks: when knowledge is complete (MetaQA, 39,093 questions) meet chains are near-lossless over three hops (any-hit 0.9975, on par with fully supervised KBQA); on templated multi-hop home ground (2WikiMultihopQA held-out n=1,258) EM 0.865, well above published structure-augmented RAG reproductions; on open-text deep composition (MuSiQue) and extraction-coverage gaps (HotpotQA) we report degradation honestly and attribute it to causes outside the lattice-algebra layer; and when information is incomplete (IIRC) we achieve structural abstention with abstain accuracy 0.971 and leak rate 0.029. Within the operating envelope, deterministic execution pays no performance penalty, and every step on the answer path can be recomputed -- precisely the source of end-to-end auditability.",
+      "authors": [
+        "Yuze Ren",
+        "Shaoheng Fan",
+        "Tao Wang",
+        "Yabo Yan",
+        "Han Han"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "published": "2026-09-23T01:45:23+00:00",
+      "link": "https://arxiv.org/pdf/2609.27225v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "auditable evidence chains and deterministic operators for reasoning",
+      "llm_evidence_cn": "可审计的证据链和确定性推理算子",
+      "llm_evidence": "可审计的证据链和确定性推理算子",
+      "canonical_evidence": "可审计的证据链和确定性推理算子",
+      "llm_tldr_en": "LatWeave uses knowledge lattices and deterministic operators to create auditable and hallucination-free QA systems.",
+      "llm_tldr_cn": "LatWeave利用知识格和确定性算子构建可审计且无幻觉的问答系统。",
+      "llm_tldr": "LatWeave利用知识格和确定性算子构建可审计且无幻觉的问答系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

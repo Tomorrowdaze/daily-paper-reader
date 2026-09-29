@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-29",
+  "date": "2026-09-29",
+  "generated_at": "2026-09-29T23:32:28",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/29/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries",
+      "section": "deep",
+      "title_en": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "authors": "Hyuntae Ahn, Mi Jin Lee",
+      "date": "2026-09-22",
+      "pdf": "https://arxiv.org/pdf/2609.26296v1",
+      "score": "8.5",
+      "evidence": "使用ARIMA模型预测冲突活动",
+      "tldr": "本文以中东国家冲突事件频率为对象，采用ARIMA检验其线性时间结构，并用零穿越点k*与积分相关时间τ_int刻画短期持续性。结果显示大多数国家的线性依赖可被捕捉，k*约2–6天、τ_int约0.6–1.7天，且τ_int与人均GDP显著负相关。",
+      "tags": "query:q4",
+      "abstract_en": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/29/2609.25189v1-groundedgeo-auditing-the-evidence-gap-in-generative-search-rankings",
+      "section": "quick",
+      "title_en": "GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings",
+      "authors": "Yihan Xia, Huiling Fan, Kangrong Zhong, Taotao Wang",
+      "date": "2026-09-21",
+      "pdf": "https://arxiv.org/pdf/2609.25189v1",
+      "score": "6.0",
+      "evidence": "审计主张-证据关系并惩罚无支持的主张",
+      "tldr": "GroundedGEO通过验证主张与证据的关系来审计生成式搜索，确保事实根据。",
+      "tags": "query:q5",
+      "abstract_en": "Generative search systems rank products and services for consequential decisions, and publishers can cheaply make candidate text look relevant. Yet evidence status is not a text property but a claim-evidence relation: text-only rankers and defenses cannot separate honest detailed content from fabricated detail, creating an identifiability gap. We audit this gap with an evidence-paired benchmark (50 e-commerce queries, 1,950 cases) and a claim-level reranker, GroundedGEO, that penalizes query-relevant claims lacking support in a supplied packet. Matched rich variants control format and volume; packet twins add attestations at fixed text, while thinned packets withdraw them. On the frozen listwise ranker Qwen2.5-7B, unsupported-rich variants show significant normalized rank gain over clean candidates (+0.065 to +0.092 across claim profiles, Holm-corrected), while supported and neutral controls do not; the effect is model-dependent (marginal on MiMo-v2.5, absent on GLM-5.3-Flash). On a frozen pointwise scorer, oracle evidence labels cut the unsupported-rich top-3 rate from 0.65 to 0.43 (laundering from 0.61 to 0.39) at lambda=40 with zero false suppression; packet twins restore the original rates without changing text. Against a 370-claim human gold, all tested automatic judges fail the preregistered reliability gate, although the best local judge retains 79-100% of oracle suppression with zero measured false suppression on protected arms. Separately, stripping attestation coverage increases false suppression by 0.307. These diagnostic effects identify two limits on the evidence channel: label quality and packet coverage. They do not validate an automatic defense, and interpretation of the adverse human-gold arm remains pending adjudication.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/29/2609.27225v1-meet-compare-or-abstain-latweave-for-deterministic-multi-hop-question-answering-on-knowledge-lattices",
+      "section": "quick",
+      "title_en": "Meet, Compare, or Abstain: LatWeave for Deterministic Multi-Hop Question Answering on Knowledge Lattices",
+      "authors": "Yuze Ren, Shaoheng Fan, Tao Wang, Yabo Yan, Han Han",
+      "date": "2026-09-23",
+      "pdf": "https://arxiv.org/pdf/2609.27225v1",
+      "score": "6.0",
+      "evidence": "可审计的证据链和确定性推理算子",
+      "tldr": "LatWeave将Web知识组织为多维知识格，以“相交-比较-弃答”三算子实现确定性多跳问答：构建与规划用LLM，推理零LLM零训练、可审计；在MetaQA、2Wiki等任务达强基线，在MuSiQue、Hotpot受覆盖限制下降，并在IIRC实现高精度结构性弃答。",
+      "tags": "query:q5",
+      "abstract_en": "Probabilistic question-answering systems -- whether large language models (LLMs) themselves, retrieval-augmented generation (RAG), or trained multi-hop retrievers -- conflate \"what is known\" and \"how to reason\" into a single probabilistic computation: hallucination cannot be eradicated, evidence chains cannot be audited, and the system answers even when it does not know. We present LatWeave, which organizes knowledge into a multidimensional knowledge lattice and compiles multi-hop QA into three deterministic operators -- meet (constraint intersection), compare (lattice-order comparison), and abstain (structural abstention); LLMs appear only on the construction side (one-shot extraction) and the query-planning side, while the answer-generation path is zero-LLM, zero-task-training, and auditable end to end -- so that question answering over Web-published knowledge becomes reproducible item by item. Rather than claiming across-the-board SOTA, we characterize the operating envelope of this paradigm on six public benchmarks: when knowledge is complete (MetaQA, 39,093 questions) meet chains are near-lossless over three hops (any-hit 0.9975, on par with fully supervised KBQA); on templated multi-hop home ground (2WikiMultihopQA held-out n=1,258) EM 0.865, well above published structure-augmented RAG reproductions; on open-text deep composition (MuSiQue) and extraction-coverage gaps (HotpotQA) we report degradation honestly and attribute it to causes outside the lattice-algebra layer; and when information is incomplete (IIRC) we achieve structural abstention with abstain accuracy 0.971 and leak rate 0.029. Within the operating envelope, deterministic execution pays no performance penalty, and every step on the answer path can be recomputed -- precisely the source of end-to-end auditability.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
