@@ -1,0 +1,169 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-30T23:08:15.980671+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2609.26296v1",
+      "source": "arxiv",
+      "title": "Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries",
+      "abstract": "Conflict events in Middle Eastern countries exhibit complex temporal fluctuations. As a simple baseline, we examine whether their conflict-frequency time series contain measurable linear temporal structure using the autoregressive integrated moving average (ARIMA) framework, which assumes linear dependence on past observations and errors. Despite this simple linear assumption, the temporal dependence is largely captured for most countries by ARIMA. Predictions based on the selected ARIMA models reproduce the overall temporal behavior to some extent, although abrupt changes remain difficult to predict. We further examine the short-term persistence of changes in conflict activity using the first zero-crossing point $k^*$, which characterizes the duration of the initial positive temporal correlation, and the integrated correlation time $τ_{\\mathrm{int}}$, which additionally reflects its strength and decay. The resulting $k^*$ values are approximately 2--6 days, while $τ_{\\mathrm{int}}$ ranges from approximately 0.6 to 1.7 days. The significant negative association of $τ_{\\mathrm{int}}$ with mean GDP per capita suggests a possible relation between short-term conflict persistence and broader socioeconomic conditions. These results reveal measurable linear temporal structure and country-dependent short-term persistence in the temporal patterns of conflict activity across the Middle East.",
+      "authors": [
+        "Hyuntae Ahn",
+        "Mi Jin Lee"
+      ],
+      "primary_category": "physics.soc-ph",
+      "categories": [
+        "physics.soc-ph"
+      ],
+      "published": "2026-09-22T12:09:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.26296v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 9.5,
+      "llm_evidence_en": "Predictive modeling of conflict activity in Middle Eastern countries using ARIMA time series analysis.",
+      "llm_evidence_cn": "使用ARIMA时间序列分析对中东国家的冲突活动进行预测建模。",
+      "llm_evidence": "使用ARIMA时间序列分析对中东国家的冲突活动进行预测建模。",
+      "canonical_evidence": "使用ARIMA时间序列分析对中东国家的冲突活动进行预测建模。",
+      "llm_tldr_en": "Analyzes linear temporal structures in Middle Eastern conflict data to predict future activity using ARIMA models.",
+      "llm_tldr_cn": "分析中东冲突数据的线性时间结构，并使用ARIMA模型预测未来的冲突活动。",
+      "llm_tldr": "分析中东冲突数据的线性时间结构，并使用ARIMA模型预测未来的冲突活动。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.34736v1",
+      "source": "arxiv",
+      "title": "SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing",
+      "abstract": "Large language model (LLM) routing aims to select the most suitable model for each incoming query. Most existing routers learn this decision directly from query embeddings, model representations, preference data, or clusters of similar examples. Such approaches can be effective, yet the representation used for routing rarely states what a query actually requires. We introduce SeLMRoute, a routing framework that separates the extraction of candidate-independent semantic evidence from the learning of candidate performance and the application of deployment objectives. A decision model first evaluates a set of interpretable questions about the query, such as its reasoning requirements and use of external knowledge, with each judgment retained as a probability distribution. The resulting probabilistic semantic state is used by a lightweight supervised router to estimate candidate model performance. Routing objectives are applied after performance estimation, which allows the same semantic state to support performance-oriented and cost-aware decisions. On the LLMRouterBench (15 datasets, 20 candidate models, 11,481 queries), SeLMRoute achieves an average accuracy of $72.08\\% \\pm 0.45$, while grouped five-fold out-of-fold evaluation reaches $72.64\\%$, compared with $69.23\\%$ for the strongest fixed candidate. The representation achieves the highest mean performance among the evaluated semantic, dense, lexical, and domain-level representations. In a separate 13-model performance-cost setting, SeLMRoute improves performance in all five grouped splits, with a mean PerfGain of $2.66\\%$. Our code is available at https://github.com/Indigma-Innovations/SeLMRoute.",
+      "authors": [
+        "Vasilis Perifanis",
+        "Nikolaos Pavlidis",
+        "Symeon Symeonidis"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-28T09:31:45+00:00",
+      "link": "https://arxiv.org/pdf/2609.34736v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "interpretable questions and semantic evidence for decision making",
+      "llm_evidence_cn": "用于决策的可解释问题和语义证据",
+      "llm_evidence": "用于决策的可解释问题和语义证据",
+      "canonical_evidence": "用于决策的可解释问题和语义证据",
+      "llm_tldr_en": "SeLMRoute uses interpretable semantic evidence to improve LLM routing decisions.",
+      "llm_tldr_cn": "SeLMRoute利用可解释的语义证据来优化大语言模型的路由决策。",
+      "llm_tldr": "SeLMRoute利用可解释的语义证据来优化大语言模型的路由决策。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.35370v1",
+      "source": "arxiv",
+      "title": "A decision-support system applied to Law: Reasoning and explainability of the decision",
+      "abstract": "The emergence of the digital transition brought an increasing need to control the processing of digital information, including in Law Enforcement Agencies (LEAs). At the EU level, in recent years, many regulations have emerged to control data processing and exchange. Texts other than the GDPR, such as the ''Law Enforcement Directive (LED)'', appeared to regulate specifically how Law Enforcement Agencies (LEAs) could process data. A formal representation of these regulations can be part of decision systems that support LEAs in processing data in compliance with the regulations. Although many new formalisms have emerged to represent legal norms and rules, few are provided with a reasoning mechanism. Furthermore, systems used in decision-making processes in critical contexts such as medical diagnoses or legal decisions cannot be fully automated, and the explainability of their results is essential to ensure user confidence in decisions. This explainability aspect, while crucial, is lacking in most modern approaches that rely on machine learning. This paper describes a framework to operate formal rules from regulations, by focusing on explainability of the decision. After describing the general architecture of the proposed decision support framework, the paper showcases how symbolic AI and the SPARQL query language can support legal reasoning. It then describes an algorithm to generate a justification for the reasoning results, and outlines the procedure to be followed when the reasoning does not lead to a satisfactory conclusion. We notably focus on a method based on decision trees to determine what additional information to request from the user.",
+      "authors": [
+        "Jeremy Bouche-Pillon",
+        "Pascale Zarat{é}",
+        "Yannick Chevalier",
+        "Nathalie Aussenac-Gilles"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-28T15:10:55+00:00",
+      "link": "https://arxiv.org/pdf/2609.35370v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Decision-support system for law enforcement with a focus on reasoning and explainability.",
+      "llm_evidence_cn": "针对执法机构的决策支持系统，重点关注推理和可解释性。",
+      "llm_evidence": "针对执法机构的决策支持系统，重点关注推理和可解释性。",
+      "canonical_evidence": "针对执法机构的决策支持系统，重点关注推理和可解释性。",
+      "llm_tldr_en": "Develops a decision-support system for law enforcement that emphasizes formal reasoning and explainability.",
+      "llm_tldr_cn": "开发了一个强调形式化推理和可解释性的执法决策支持系统。",
+      "llm_tldr": "开发了一个强调形式化推理和可解释性的执法决策支持系统。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.27987v1",
+      "source": "arxiv",
+      "title": "PCQC: Privileged Counterfactual Question Credit for Multi-Turn Medical Dialogue",
+      "abstract": "Large language models (LLMs) have made substantial progress on medical question-answering, yet effective medical dialogue also requires learning to ask questions that uncover relevant patient information. To train such dialogue policies, a common pipeline combines supervised fine-tuning with reinforcement learning (RL) based on final diagnostic correctness. However, this outcome-based supervision does not directly distinguish the contributions of individual questions and provides no question-level feedback for unexecuted alternatives. To address this gap, we introduce PCQC (Privileged Counterfactual Question Credit), which uses privileged patient information during training to learn from questions never asked. During training, PCQC makes alternative questions directly comparable at the same dialogue state by using privileged patient facts to construct their answers. A frozen diagnostic scorer evaluates the diagnostic utility of each resulting question-answer pair by how strongly it supports the correct diagnosis. PCQC turns these comparisons into relative question credit that teaches the policy which questions to favor, directly supervising both executed and unexecuted questions alongside outcome-based RL without requiring complete rollouts for the unexecuted alternatives. Extensive experiments across four medical benchmarks demonstrate that PCQC achieves 63.10% mean diagnostic accuracy, outperforming GRPO and ATPO by 4.38 and 4.21 percentage points, respectively. These gains are achieved with 33.1% fewer inquiry turns than GRPO.",
+      "authors": [
+        "Chenxuan Li",
+        "Jiayi Wan",
+        "Xinrong Chen",
+        "Zhongyu Zhao",
+        "Xuecheng Shang",
+        "Peixing Wan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-23T12:15:10+00:00",
+      "link": "https://arxiv.org/pdf/2609.27987v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "counterfactual reasoning for credit assignment in complex dialogue",
+      "llm_evidence_cn": "复杂对话中信用分配的因果反事实推理",
+      "llm_evidence": "复杂对话中信用分配的因果反事实推理",
+      "canonical_evidence": "复杂对话中信用分配的因果反事实推理",
+      "llm_tldr_en": "PCQC uses counterfactual reasoning to improve question-level feedback in medical dialogues.",
+      "llm_tldr_cn": "PCQC利用反事实推理来改进医疗对话中的问题级反馈。",
+      "llm_tldr": "PCQC利用反事实推理来改进医疗对话中的问题级反馈。",
+      "llm_tags": [
+        "query:q6"
+      ],
+      "matched_query_tag": "query:q6",
+      "matched_query_text": "检索使用因果推断或解释性算法分析内战爆发机制的学术研究",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

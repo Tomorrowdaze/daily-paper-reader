@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-001.webp",
+      "caption": "Table 1: Fine-grained semantic probes used by SeLMRoute. Noul probes return a probability for a binary judgment. Score probes return probability mass over four ordered levels.",
+      "page": 6,
+      "index": 1,
+      "width": 998,
+      "height": 619
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-002.webp",
+      "caption": "Figure 4: Decision model comparison. Best Single is the strongest fixed candidate. JEV-SeLMRoute and Laya-SeLMRoute use the same semantic schema and downstream performance learner under the grouped five-fold OOF protocol.",
+      "page": 11,
+      "index": 2,
+      "width": 465,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-003.webp",
+      "caption": "Figure 3: Performance-learner ablation with the ProbabilityMass semantic state held fixed.",
+      "page": 11,
+      "index": 3,
+      "width": 467,
+      "height": 312
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-004.webp",
+      "caption": "Figure 2: Representation ablation. ProbabilityMass contains the 40 raw semantic probability features. Full contains 88 fine-grained semantic and derived features. Hard contains one discrete value per semantic probe.",
+      "page": 10,
+      "index": 4,
+      "width": 465,
+      "height": 353
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-005.webp",
+      "caption": "Figure 6: Generalization under distribution shift. Dataset-OOD holds out one dataset at a time, while Domain-OOD excludes all datasets belonging to one task domain.",
+      "page": 14,
+      "index": 5,
+      "width": 465,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-006.webp",
+      "caption": "Table 5: Leave-one-probe-out results under grouped evaluation. Positive drop indicates lower AvgAcc after removing the probe.",
+      "page": 13,
+      "index": 6,
+      "width": 302,
+      "height": 403
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-007.webp",
+      "caption": "Figure 7: Routing accuracy and observed semantic-extraction latency for JEV-SeLMRoute and Laya-SeLMRoute. Accuracy is measured using grouped five-fold OOF evaluation. JEV latency includes remote API and network overhead, whereas Laya is measured locally. The latency measurements reflect the evaluated deployment environments and are not hardware-normalized model benchmarks.",
+      "page": 17,
+      "index": 7,
+      "width": 465,
+      "height": 352
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-008.webp",
+      "caption": "Figure 5: Probe-selection stability in the nested Lite-12 experiment. Each outer fold selects twelve probes using only its inner training data.",
+      "page": 12,
+      "index": 8,
+      "width": 467,
+      "height": 482
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-009.webp",
+      "caption": "Table 3: Grouped performance-oriented evaluation. Results are mean ± standard deviation over five 70/30 grouped splits.",
+      "page": 9,
+      "index": 9,
+      "width": 802,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2609.34736v1/fig-010.webp",
+      "caption": "Figure 1: Overview of SeLMRoute. A query is first transformed into an interpretable probabilistic semantic state by a typed decision model. A learned performance model maps the semantic state to predicted candidate model performance. The routing objective then selects a model according to user-defined preferences such as predicted quality or a quality-cost trade-off.",
+      "page": 5,
+      "index": 10,
+      "width": 818,
+      "height": 191
+    }
+  ]
+}

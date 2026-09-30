@@ -6,32 +6,35 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-29
-- 运行时间：2026-09-29 23:32:10 UTC
+- 最新运行日期：2026-09-30
+- 运行时间：2026-09-30 23:12:07 UTC
 - 运行状态：成功
-- 本次总论文数：3
+- 本次总论文数：4
 - 精读区：1
-- 速读区：2
+- 速读区：3
 
 ### 今日简报（AI）
-- 今日共生成 3 篇推荐（精读 1 篇，速读 2 篇）
-- 精读：《Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries》（8.5/10）
-- 速读：《GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings》（6.0/10）, 《Meet, Compare, or Abstain: LatWeave for Deterministic Multi-Hop Question Answering on Knowledge Lattices》（6.0/10）
+- 今日共生成 4 篇推荐（精读 1 篇，速读 3 篇）
+- 精读：《Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries》（9.5/10）
+- 速读：《SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing》（6.5/10）, 《A decision-support system applied to Law: Reasoning and explainability of the decision》（6.5/10）, 《PCQC: Privileged Counterfactual Question Credit for Multi-Turn Medical Dialogue》（6.0/10）
 - 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202609/29/README](/202609/29/README)
+- 详情：[/202609/30/README](/202609/30/README)
 
 ### 精读区论文标签
-1. [Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries](/202609/29/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries)  
-   标签：评分：8.5/10、query:q4
-   evidence：使用ARIMA模型预测冲突活动
+1. [Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries](/202609/30/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries)  
+   标签：评分：9.5/10、query:q4
+   evidence：使用ARIMA时间序列分析对中东国家的冲突活动进行预测建模。
 
 ### 速读区论文标签
-1. [GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings](/202609/29/2609.25189v1-groundedgeo-auditing-the-evidence-gap-in-generative-search-rankings)  
-   标签：评分：6.0/10、query:q5
-   evidence：审计主张-证据关系并惩罚无支持的主张
-2. [Meet, Compare, or Abstain: LatWeave for Deterministic Multi-Hop Question Answering on Knowledge Lattices](/202609/29/2609.27225v1-meet-compare-or-abstain-latweave-for-deterministic-multi-hop-question-answering-on-knowledge-lattices)  
-   标签：评分：6.0/10、query:q5
-   evidence：可审计的证据链和确定性推理算子
+1. [SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing](/202609/30/2609.34736v1-selmroute-probabilistic-semantic-evidence-for-large-language-model-routing)  
+   标签：评分：6.5/10、query:q5
+   evidence：用于决策的可解释问题和语义证据
+2. [A decision-support system applied to Law: Reasoning and explainability of the decision](/202609/30/2609.35370v1-a-decision-support-system-applied-to-law-reasoning-and-explainability-of-the-decision)  
+   标签：评分：6.5/10、query:q5
+   evidence：针对执法机构的决策支持系统，重点关注推理和可解释性。
+3. [PCQC: Privileged Counterfactual Question Credit for Multi-Turn Medical Dialogue](/202609/30/2609.27987v1-pcqc-privileged-counterfactual-question-credit-for-multi-turn-medical-dialogue)  
+   标签：评分：6.0/10、query:q6
+   evidence：复杂对话中信用分配的因果反事实推理
 
 
 <div class="dpr-home-promo-card">

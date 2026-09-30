@@ -1,0 +1,683 @@
+Title: PCQC: Privileged Counterfactual Question Credit for Multi-Turn Medical Dialogue
+
+URL Source: https://arxiv.org/pdf/2609.27987v1
+
+Published Time: Thu, 24 Sep 2026 01:07:13 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+# PCQC: Privileged Counterfactual Question Credit for Multi-Turn Medical Dialogue 
+
+Chenxuan Li 1 Jiayi Wan 2 Xinrong Chen 1
+
+Zhongyu Zhao 1 Xuecheng Shang 1 Peixing Wan 2∗
+
+> 1
+
+Peking University, Beijing, China 
+
+> 2
+
+Department of Medical Bioinformatics, School of Basic Medical Sciences, Peking University, Beijing, China 
+
+Abstract 
+
+Large language models (LLMs) have made substantial progress on medical question-answering, yet effective medical dialogue also requires learning to ask questions that uncover relevant patient information. To train such dialogue policies, a common pipeline combines supervised fine-tuning with reinforcement learning (RL) based on final diagnostic correctness. However, this outcome-based supervision does not directly distinguish the contributions of individual questions and provides no question-level feedback for unexecuted alternatives. To address this gap, we introduce PCQC (Privileged Counterfactual Question Credit), which uses privileged patient information during training to learn from questions never asked . During training, PCQC makes alternative questions directly comparable at the same dialogue state by using privileged patient facts to construct their answers. A frozen diagnostic scorer evaluates the diagnostic utility of each resulting question–answer pair by how strongly it supports the correct diagnosis. PCQC turns these comparisons into relative question credit that teaches the policy which questions to favor, directly supervising both executed and unexecuted ques-tions alongside outcome-based RL without requiring complete rollouts for the unexecuted alternatives. Extensive experiments across four medical benchmarks demonstrate that PCQC achieves 63.10% mean diagnostic accuracy, outperforming GRPO and ATPO by 4.38 and 4.21 percentage points, respectively. These gains are achieved with 33.1% fewer inquiry turns than GRPO. 
+
+## 1 Introduction 
+
+In real-world clinical consultations, patients often come with incomplete information, and accurate diagnosis depends on follow-up questions that progressively uncover relevant symptoms and medical history. Large language models (LLMs) have demonstrated strong performance on medical examina-tions and case-based diagnosis (Singhal et al., 2023; 2025). Building on these capabilities, recent approaches use prompting (Li et al., 2024) and supervised fine-tuning (Tu et al., 2025) to extend medical language models to interactive consultations. However, effective medical dialogue requires more than the ability to conduct multi-turn interactions: models must learn which questions to ask to acquire diagnostically useful information. Each question determines which patient information becomes available for subsequent inquiries and the final diagnosis, making question selection central to the consultation. Learning such a question-selection policy requires supervision that can distinguish the value of individual inquiry decisions. Supervised fine-tuning provides the basic capability for interactive consultation, while reinforcement learning (RL) can further optimize question selection through interaction and diagnostic feedback (Lai et al., 2026; Cao et al., 2026). Yet supervision based on final diagnostic correctness evaluates the consultation as a whole, without directly distinguishing the contribution of each question. Recent work therefore introduces finer-grained feedback by rewarding the information acquired during the dialogue (Ding et al., 2026; Wang et al., 2026; Xie et al., 2026). 
+
+> ∗
+
+Corresponding author: peixing@bjmu.edu.cn 
+
+1arXiv:2609.27987v1 [cs.LG] 23 Sep 2026 Learning from questions never asked  
+
+> Same dialogue state 𝑂
+
+Terminal-reward RL  PCQC               
+
+> Which question
+> helped?
+> Same actor
+> initialization
+> Same actor
+> initialization
+> Questions Patient answers
+> How long? Four days.
+> Any fever? ?
+> Any sputum? ?
+> Current
+> medicines? ?
+> Unasked alternatives
+> ··· Final
+> diagnosis
+> Outcome reward
+> Terminal outcome feedback
+> Patient facts 𝑧
+> Available during training
+> Construct candidate answers Questions
+> How long? Four days.
+> Any fever? No.
+> Any sputum? Dry cough.
+> Current
+> medicines? Lisinopril.
+> ··· Final
+> diagnosis
+> Compare
+> diagnostic
+> evidence
+> Question-level
+> credit
+> How long?
+> Any fever?
+> Any sputum?
+> Current
+> medicines?
+> Outcome reward Higher diagnostic accuracy
+> 𝑡
+> No fever Dry cough Lisinopril Four days
+> I have a cough.
+
+Figure 1: Learning from questions never asked. Terminal-reward RL (left) learns from final diagnoses. PCQC (right) additionally uses patient facts to answer unexecuted questions at the same dialogue state, turning comparisons of candidate question–answer pairs into relative question credit. Alternative questions can be evaluated through branch rollouts, but the computational cost grows rapidly with dialogue depth. ATPO reduces this cost through adaptive tree expansion, using candidate value estimates to guide exploration and the resulting trajectories to train the policy (Cao et al., 2026). Questions whose branches are not retained, however, do not directly contribute to these policy updates. This leaves an untapped source of supervision: the diagnostic evidence that alternative questions could reveal at the same dialogue state, before any further rollout. We exploit this untapped supervision by learning from questions never asked (Figure 1). During training, patient facts beyond the observed dialogue provide privileged information about what each candidate question would reveal. A patient responder uses these facts to answer candidate questions at the same dialogue state, including those that are never selected for rollout. This produces same-state counterfactual question–answer pairs that expose the diagnostic evidence associated with both executed and unexecuted questions, without further dialogue rollouts. We turn these counterfactual comparisons into learning signals with Privileged Counterfactual Question Credit (PCQC). A frozen diagnostic scorer evaluates how strongly each candidate question– answer pair supports the correct diagnosis, and their utilities are compared within the same dialogue state to derive relative question credit. This credit directly supervises question selection across both executed and unexecuted candidates, extending learning beyond the branches explored during rollout. We combine this question-level supervision with terminal GRPO, enabling the policy to learn both which information to acquire and how to use it for the final diagnosis. At deployment, the learned policy requires neither full patient information nor the diagnostic scorer. Extensive experiments on MedQA, MedicalExam, MedMCQA, and iCRAFT-MD demonstrate that PCQC outperforms GRPO and ATPO on all four medical dialogue benchmarks. Across these benchmarks, PCQC achieves 63.10% mean diagnostic accuracy, surpassing GRPO (58.72%) and ATPO (58.89%) while requiring 33.1% fewer inquiry turns than GRPO. Further analyses show that directly supervising unexecuted candidates provides gains beyond executed-question feedback from the same diagnostic scorer, while diagnostic utility identifies candidates with higher downstream diagnostic success. The main contributions of this work are as follows: • We introduce learning from questions never asked for medical dialogue policies. Privi-leged patient information exposes the diagnostic evidence elicited by unexecuted questions, enabling question-level supervision without further dialogue rollouts. • We propose PCQC, which compares the diagnostic utilities of candidate question–answer pairs at the same dialogue state to derive relative question credit. This credit directly supervises both executed and unexecuted questions and complements terminal GRPO to jointly train question selection and final diagnosis. 2• Extensive experiments demonstrate that PCQC outperforms GRPO and ATPO on all four medical dialogue benchmarks, achieving 63.10% mean diagnostic accuracy while requiring 33.1% fewer inquiry turns than GRPO. Further analyses establish the benefit of supervising unexecuted questions and connect diagnostic utility to downstream diagnostic success. 
+
+## 2 Related Work 
+
+2.1 Medical Dialogue Agents 
+
+Recent work has extended medical LLMs from static question answering to interactive clinical consultation. MediQ studies question asking under incomplete information, while AMIE and Agent-Clinic investigate diagnostic agents that acquire information through sequential patient interactions (Li et al., 2024; Tu et al., 2025; Schmidgall et al., 2026). Building on these interactive settings, DoctorAgent-RL learns questioning policies through simulated consultations, and Doctor-R1 jointly optimizes clinical inquiry and decision making with reinforcement learning (Feng et al., 2025b; Lai et al., 2026). ALFA instead aligns question asking with fine-grained attributes such as clarity, answerability, medical accuracy, and diagnostic relevance (Li et al., 2025). These studies establish question selection as a learnable component of medical dialogue. PCQC addresses a complementary question: how to assign diagnostic credit among alternative inquiries available at the same dialogue state, including those that are never executed in the consultation. 
+
+2.2 Fine-Grained Credit Assignment 
+
+A central challenge in multi-turn agent training is assigning credit to individual decisions when supervision is dominated by delayed trajectory outcomes. One line of work addresses this prob-lem through finer-grained value estimation and structured comparisons of intermediate decisions. VinePPO estimates intermediate state values from Monte Carlo continuations, while GiGPO groups actions associated with the same anchor state across collected trajectories to construct step-level relative advantages (Kazemnejad et al., 2025; Feng et al., 2025a). In medical dialogue, ATPO uses adaptive tree expansion and critic-based value estimates to guide branch exploration and propagate supervision through the search tree (Cao et al., 2026). IGRPO similarly uses the informativeness of intermediate states to allocate rollout budget within tree-structured exploration (Zhang et al., 2026). These approaches obtain finer-grained learning signals from future returns, repeated states, or selectively expanded trajectories. A complementary line of work constructs dense supervision from the information revealed during interaction. ProMed rewards newly acquired patient information according to its Shapley-weighted diagnostic value (Ding et al., 2026). IGPO measures turn-level information gain through changes in the policy’s likelihood of the correct answer, while TIPS uses a teacher model to construct analogous likelihood-based rewards (Wang et al., 2026; Xie et al., 2026). InfoPO instead measures how observed feedback changes the agent’s subsequent action distribution relative to a masked-feedback counterfactual (Kong et al., 2026). These methods derive fine-grained supervision from information obtained through realized or explicitly explored interactions. PCQC extends this supervision to alternative questions that are never executed: privileged patient information allows a responder to answer multiple candidates at the same dialogue state, so their diagnostic utilities can directly supervise question selection without further dialogue rollouts. This use of richer training-time information is related to asymmetric learning approaches (Pinto et al., 2018; Chen et al., 2020), while the deployed PCQC policy acts only on the observed dialogue. 
+
+## 3 Privileged Counterfactual Question Credit 
+
+Figure 2 summarizes the PCQC training framework. The following subsections formalize the clinical inquiry setting, construct and evaluate same-state candidate interactions, derive relative question credit, and define the joint optimization with terminal GRPO. 3PCQC training framework 
+
+> Doctor policy
+
+πθ 
+
+> Rollout snapshot
+> πold
+> Behavior rollouts ·
+> GT= 4
+
+O0
+
+Ot
+
+q1
+
+a 1··· ··· Final diagnosis ŷ Diagnostic correctness     
+
+> Rterminal
+> 1. Sample candidate questions 2. Construct patient answers 3. Score diagnostic utility 4. Assign relative credit
+> Observed dialogue
+> K = 4
+
+q1 How long? 
+
+q2 Any fever? 
+
+q3 Any sputum? 
+
+q4 
+
+> Current medicines?
+> Executed question Unexecuted questions
+> Patient facts
+
+� 
+
+> Four days No fever Dry cough Lisinopril
+> Frozen patient responder Qwen3-8B
+
+a1 Four days. 
+
+a2 No. 
+
+a3 Dry cough. 
+
+a4 Lisinopril. Input: 
+
+> Frozen diagnostic scorer Qwen3-14B
+> Option probabilities
+> A B C D
+> Correct-option readout
+> Correct label
+> y
+
+u1
+
+u2
+
+u3
+
+u4          
+
+> Within-state normalization
+> A1
+> Q
+> A2
+> Q
+> A3
+> Q
+> A4
+> Q
+> Question-token supervision
+> Per-candidate credit
+> For all candidate questions
+> How long ?... Four days .... (�ᵢquestion tokens) (�ᵢpatient answer)
+> Terminal GRPO
+> Clipped question loss
+> Joint policy optimization
+> Update doctor policy
+
+Ot
+
+> *
+> Policy
+
+Figure 2: PCQC training framework. The policy samples candidate questions at Ot. A frozen patient responder answers them using patient facts z, and a frozen diagnostic scorer assigns diagnostic utilities ui. Within-state normalization yields relative question credit AQi for candidate question tokens, alongside terminal GRPO. Only (q1, a 1) continues the consultation. 
+
+3.1 Clinical Inquiry as Selective Information Acquisition 
+
+We formulate clinical inquiry as sequential information acquisition for diagnosis. For each consul-tation, z denotes the full set of patient facts recorded in the case, which remains fixed throughout the dialogue. At turn t, the doctor policy πθ observes the dialogue state Ot, consisting of the initial patient information and all preceding question–answer exchanges. The clinical task and answer options are also provided to the policy and diagnostic scorer but are omitted from the notation for brevity. Given Ot, the agent either asks a follow-up question or makes a final diagnosis. When it asks a question qt, a patient responder E generates an answer at conditioned on the patient facts z:
+
+qt ∼ πθ (· | Ot), at ∼ E (· | z, q t),Ot+1 = Ot ⊕ (qt, a t). (1) Here, ⊕ appends the question–answer pair to the dialogue state. At the end of the consultation, the final diagnosis ˆy is evaluated against the reference answer y∗ to determine the terminal reward. 
+
+3.2 Learning from Questions Never Asked 
+
+During training, patient facts in z that have not yet been revealed in Ot provide privileged patient information . The doctor policy conditions only on Ot, whereas a frozen patient responder can use the complete case facts z to answer candidate questions. This allows PCQC to construct multiple question–answer interactions from the same observed dialogue state, including questions that are never executed in the continued consultation. At each supervised state, the rollout policy πold samples K = GQ ≥ 2 actor responses xi, from which we extract candidate questions qi. One sampled response, x1, is used to continue the consultation and defines the executed question q1; the remaining responses provide unexecuted candidates q2: K .The patient responder answers every candidate using the same patient facts z, forming the same-state comparison group 
+
+xi ∼ πold (· | Ot),ai ∼ E (· | z, q i), i = 1 , . . . , K, 
+
+GQ(Ot) = {(Ot, q i, a i)}Ki=1 .
+
+(2) 4Only (q1, a 1) is appended to the dialogue state and advances the consultation. The remaining pairs 
+
+(qi, a i)Ki=2 are counterfactual interactions : they provide answers to the unexecuted questions without requiring further dialogue rollouts. Appendix B.4 provides details of candidate construction and question-token supervision. To quantify the diagnostic value of these interactions, a frozen diagnostic scorer sϕ maps each augmented dialogue Ot ⊕ (qi, a i) to a distribution over answer options. We define the probability assigned to the correct option y∗ as the candidate’s diagnostic utility :
+
+ui = sϕ(y∗ | Ot ⊕ (qi, a i)) . (3) 
+
+3.3 Relative Privileged Question Credit 
+
+Given the diagnostic utilities in Eq. 3, PCQC compares candidates within each dialogue state. The group mean and sample standard deviation are 
+
+μQ = 1
+
+K
+
+> K
+
+X
+
+> j=1
+
+uj , σQ =
+
+vuut 1
+
+K − 1
+
+> K
+
+X
+
+> j=1
+
+(uj − μQ)2. (4) The relative question credit for candidate i is 
+
+AQi =
+
+
+
+ui − μQ
+
+σQ + ϵnorm 
+
+, σQ ≥ τ, 
+
+0, σQ < τ, 
+
+(5) where ϵnorm = 10 −6 stabilizes normalization and τ = 10 −4 suppresses credit when candidate utilities are nearly indistinguishable. For groups with σQ ≥ τ , candidates above the group mean receive positive credit, whereas those below it receive negative credit. 
+
+Relative diagnostic gain. Because all candidates share the same pre-interaction dialogue state Ot,the same credit can equivalently be computed from diagnostic gains relative to a common baseline. Let 
+
+b(Ot) = sϕ(y∗ | Ot), ∆i = ui − b(Ot). (6) Since the baseline is shared across candidates, ¯∆ = μQ − b(Ot) and σ∆ = σQ. For σQ ≥ τ , Eq. 5 therefore becomes 
+
+AQi = ∆i − ¯∆
+
+σ∆ + ϵnorm 
+
+= 1
+
+K(σQ + ϵnorm )
+
+> K
+
+X
+
+> j=1
+
+(ui − uj ).
+
+(7) Thus, PCQC compares each candidate’s diagnostic gain with those of the other questions sam-pled at the same dialogue state. The implementation uses this equivalent diagnostic-gain form (Appendix B.3). 
+
+Information-theoretic interpretation. The relative comparison also connects question credit to the scorer’s reduction in correct-option surprisal. For positive correct-option probabilities, this reduction after candidate i is 
+
+gi = − log b(Ot) + log ui = log ui
+
+b(Ot) . (8) Since all candidates share b(Ot), for σQ ≥ τ ,
+
+AQi > A Qj ⇐⇒ ui > u j ⇐⇒ gi > g j . (9) Relative question credit therefore preserves the ordering induced by reductions in correct-option surprisal, while its magnitude is determined by normalized diagnostic gains on the probability scale. The full derivation is given in Appendix C. 53.4 Joint Optimization of Inquiry and Diagnosis 
+
+PCQC combines supervision at two levels. Terminal GRPO provides trajectory-level feedback from 
+
+GT complete consultations for the same patient case, whereas the relative credit in Eq. 5 provides question-level supervision at individual dialogue states. The latter is applied only to tokens generated by the doctor policy for candidate questions; patient responses provide scoring context and receive no policy gradient. Both the question credit AQi and rollout policy πold are fixed during each policy update. Let BQ index candidate actor responses in an update batch, with xi = ( wi, 1, . . . , w i,L i ) sampled at 
+
+Ot(i). The binary mask mi,ℓ selects the tokens that receive question credit (Appendix B.4). For each token, the policy probability ratio is 
+
+ri,ℓ (θ) = πθ (wi,ℓ | Ot(i), w i,<ℓ )
+
+πold (wi,ℓ | Ot(i), w i,<ℓ ) . (10) We optimize these tokens with a PPO-style clipped objective: 
+
+Lquestion = − 1
+
+NQ
+
+X
+
+> i∈B Q
+> Li
+
+X
+
+> ℓ=1
+
+mi,ℓ min 
+
+n
+
+ri,ℓ (θ)AQi ,
+
+clip( ri,ℓ (θ), 1 − ϵclip , 1 + ϵclip ) AQi
+
+o
+
+,
+
+(11) where NQ = P
+
+> i∈B Q
+
+PLi 
+
+> ℓ=1
+
+mi,ℓ is the number of selected tokens in the update and ϵclip = 0 .2
+
+(Schulman et al., 2017). The loss is zero when NQ = 0 . The same objective applies to both executed and unexecuted candidates; their additive decomposition is given in Appendix D.2. We combine this question-level objective with terminal GRPO (Shao et al., 2024): 
+
+LPCQC = Lterminal -GRPO + β Lquestion . (12) The coefficient β balances trajectory-level outcome supervision and question-level credit, with each objective normalized by its own selected-token count. Reference-policy KL regularization is included in the actor update (Appendix A.2). Together, the two objectives train the policy to acquire diagnostically useful information while optimizing the final diagnostic outcome. At deployment, the policy requires only the observed dialogue, clinical task, and answer options, without privileged patient information, counterfactual candidate construction, or the diagnostic scorer. 
+
+## 4 Experiments 
+
+4.1 Experimental Setup Task and interaction environment. We evaluate medical dialogue policies in the interactive setting defined in Section 3.1. Each case provides initial patient information, fixed patient facts, and a clinical decision question with answer options. A Qwen3-8B doctor policy acquires information through interaction with a frozen Qwen3-8B patient responder before making its final diagnosis. Each consultation allows at most 10 dialogue turns, including the final-answer turn. 
+
+Training data and evaluation benchmarks. Following ATPO’s released training pipeline (Cao et al., 2026), all RL methods use the same 14,256-case training set, comprising 9,400 MEDIQ/MedQA cases and 4,856 MedMCQA cases. We likewise follow ATPO’s released evaluation protocol and use its MedQA dialogue split (1,268 cases) as the development benchmark for method development and checkpoint selection. The selected checkpoints are then evaluated on MedicalExam (150 cases), MedMCQA (536 cases), and iCRAFT-MD (139 cases) without further checkpoint selection. The iCRAFT-MD cases come from an independent clinical-case source released with MEDIQ (Li et al., 2024). Dataset details are provided in Appendix A.1. 6Table 1: Diagnostic accuracy (%) across four medical dialogue benchmarks. Per-benchmark results for GRPO, ATPO, and PCQC are reported as mean ± sample standard deviation over three independent RL runs. Avg. denotes the unweighted mean across benchmarks. Best results are bold .
+
+Method MedQA MedicalExam MedMCQA iCRAFT-MD Avg. 
+
+Shared SFT 46 .69 52 .67 41 .23 57 .55 49.54 GRPO 56 .28 ± 0.66 61 .56 ± 0.38 49 .19 ± 0.47 67 .87 ± 4.22 58.72 ATPO 56 .70 ± 1.04 61 .11 ± 4.07 50 .12 ± 3.61 67 .63 ± 1.25 58.89 
+
+PCQC (ours) 62 .54 ± 1.64 61 .78 ± 1.54 54 .48 ± 1.13 73 .62 ± 0.83 63.10 
+
+Table 2: Mean inquiry turns per consultation (Q/ep.) across four medical dialogue benchmarks. 
+
+Per-benchmark results for GRPO, ATPO, and PCQC are reported as mean ± sample standard deviation over three independent RL runs. Avg. denotes the unweighted mean across benchmarks. 
+
+Method MedQA MedicalExam MedMCQA iCRAFT-MD Avg. 
+
+Shared SFT 1.519 1.373 1.466 1.482 1.460 GRPO 2.280 ± 0.237 2.358 ± 0.311 2.142 ± 0.228 2.228 ± 0.206 2.252 ATPO 1.196 ± 0.088 1.162 ± 0.086 1.098 ± 0.069 1.173 ± 0.092 1.157 
+
+PCQC (ours) 1.508 ± 0.074 1.549 ± 0.048 1.560 ± 0.047 1.410 ± 0.123 1.507 
+
+Methods and training configuration. We compare S HARED SFT, GRPO, ATPO, and PCQC under the same interaction and evaluation protocol. All RL methods initialize from the same Shared SFT policy. GRPO learns from terminal diagnostic outcomes over complete consultations, whereas ATPO derives action-level supervision through adaptive tree expansion and value traceback. PCQC augments terminal GRPO with same-state relative question credit for both executed and unexecuted questions. GRPO samples GT = 32 complete consultations per case; PCQC uses GT = 4 terminal rollouts together with GQ = 4 candidate responses at each supervised dialogue state and sets β = 1 .A frozen Qwen3-14B model serves as the diagnostic scorer for PCQC. Further training details are provided in Appendices A and B, with full-system training costs reported in Appendix A.4. 
+
+Evaluation and metrics. Each policy produces one complete consultation for each evaluation case. We report diagnostic accuracy as the percentage of consultations with a correct final diagnosis and 
+
+mean inquiry turns (Q/ep.) as the average number of non-final interaction attempts per consultation. Diagnostic accuracy and inquiry turns for GRPO, ATPO, and PCQC are reported as the mean and sample standard deviation across three independent RL training runs. All methods are evaluated under the same interaction protocol; decoding, action parsing, and metric computation are specified in Appendix A.3. 
+
+4.2 Diagnostic Performance and Inquiry Efficiency 
+
+PCQC achieves the highest mean diagnostic accuracy on all four benchmarks (Table 1). Across benchmarks, it reaches 63.10% mean accuracy, improving over GRPO (58.72%) and ATPO (58.89%) by 4.38 and 4.21 percentage points, respectively. These higher mean accuracies show that question-level counterfactual supervision strengthens diagnostic performance beyond both terminal outcome optimization and tree-based action supervision. Compared with terminal GRPO, these accuracy gains come with shorter consultations. PCQC uses 33.1% fewer inquiry turns on average, with reductions of 27.2–36.7% across the four benchmarks (Table 2). Figure 3 summarizes this joint improvement: PCQC achieves higher mean diagnostic accuracy while using fewer inquiry turns than GRPO across all four benchmarks. Per-run results and paired comparisons are provided in Appendix D.1. 
+
+Independent-source evaluation. PCQC retains this pattern on iCRAFT-MD, which comes from an independent clinical-case source. PCQC achieves (73 .62 ± 0.83)% diagnostic accuracy, compared 72.5 2.0 1.5 1.0 40 50 60 70 
+
+(a) MedQA    
+
+> +6.26 pp accuracy 33.9% fewer turns 2.5 2.0 1.5 1.0
+
+(b) MedicalExam    
+
+> +0.22 pp accuracy 34.3% fewer turns 2.5 2.0 1.5 1.0
+
+(c) MedMCQA    
+
+> +5.29 pp accuracy 27.2% fewer turns 2.5 2.0 1.5 1.0
+
+(d) iCRAFT-MD 
+
+> +5.75 pp accuracy 36.7% fewer turns
+> Diagnostic accuracy (%)
+
+Mean inquiry turns (Q/ep.)    
+
+> Shared SFT GRPO ATPO PCQC (±1 SD)
+
+Figure 3: Diagnostic accuracy versus inquiry efficiency across four benchmarks. Arrows connect GRPO to PCQC; upward indicates higher diagnostic accuracy and rightward indicates fewer inquiry turns. RL results are means over three independent runs; error bars show one sample standard deviation for PCQC. Table 3: Ablation of question-level supervision with matched terminal group size ( GT = 4 ). 
+
+Executed-local and PCQC use the same frozen diagnostic scorer but supervise the executed question and all candidates, respectively; Terminal-only uses no question-level objective. PCQC reports mean 
+
+± sample standard deviation over three independent RL runs. 
+
+MedQA MedicalExam MedMCQA Avg. Method Acc. (%) ↑ Q/ep. Acc. (%) ↑ Q/ep. Acc. (%) ↑ Q/ep. Acc. (%) ↑
+
+Terminal-only 52.92 2.241 49.33 2.273 45.90 2.047 49.38 Executed-local 57.18 2.142 56.67 2.220 48.88 2.183 54.24 
+
+PCQC 62 .54 
+
+> ±1.64
+
+1.508 
+
+> ±0.074
+
+61 .78 
+
+> ±1.54
+
+1.549 
+
+> ±0.048
+
+54 .48 
+
+> ±1.13
+
+1.560 
+
+> ±0.047
+
+59 .60 
+
+> ±1.25
+
+with (67 .87 ± 4.22)% for GRPO and (67 .63 ± 1.25)% for ATPO, while reducing inquiry turns by 36.7% relative to GRPO (2.228 to 1.410). These results extend the observed accuracy–inquiry improvements beyond the primary ATPO evaluation benchmarks. 
+
+4.3 Value of Counterfactual Candidate Supervision Candidate comparisons beyond executed feedback. Table 3 compares three configurations with the same terminal group size ( GT = 4 complete consultations per case). Terminal-only training uses final diagnostic correctness ( β = 0 ). Executed-local additionally uses diagnostic gain from the same frozen Qwen3-14B scorer to supervise the executed question, while PCQC derives relative credit from same-state candidate groups and applies it to both executed and unexecuted questions. Both question-supervised variants use β = 1 .Across MedQA, MedicalExam, and MedMCQA, executed-local raises mean diagnostic accuracy from 49.38% to 54.24%, showing that local question-level feedback already improves over terminal supervision. PCQC further increases mean accuracy to (59 .60 ± 1.25)% , a gain of 5.36 percentage points over executed-local and 10.22 points over terminal-only training. PCQC improves accuracy on all three benchmarks while requiring fewer inquiry turns than either control. Full objective definitions and training settings are provided in Appendices B.4–B.5 and A.2. 
+
+Direct supervision of unexecuted questions. To separate the value of the same-state comparison from the value of directly training on unexecuted candidates, Same-State-Q1 computes PCQC credit from all GQ = 4 candidates but applies the question loss only to the executed question. In the 8Table 4: Continuation-based validation of diagnostic utility. Four candidates are evaluated at each of 128 MedQA initial states, with eight continuations generated per candidate under PCQC Run A. Success is the correct-diagnosis rate across continuations; gains are paired differences with 95% case-bootstrap confidence intervals.                           
+
+> Question selection Success (%) ↑
+> Uniform selection 60 .94
+> Executed question q159 .67
+> Highest-utility selection 65 .14
+> Paired comparison Gain (pp) 95% CI Highest-utility −uniform selection +4 .20 [+1 .42 ,+6 .96]
+> Highest-utility −executed question q1+5 .47 [+1 .76 ,+9 .18] Highest-utility selection Gain [95% CI]
+> All candidates
+> · 128 cases
+> Grounded candidates
+> · 113 cases
+> vs. uniform selection vs. executed question q1
+> vs. uniform selection
+> 0246810
+> +4.20 [+1.42, +6.96] +5.47 [+1.76, +9.18] +3.52 [+1.06, +6.07]
+> Diagnostic success gain (pp)
+
+Figure 4: Downstream diagnostic gains from highest-utility candidate selection. Markers show gains in downstream diagnostic success (pp), with bars denoting paired 95% case-bootstrap confidence intervals. Success is estimated from eight continuations per candidate under PCQC Run A; results are shown for all candidates (128 MedQA states) and grounded candidates (113 states). matched Run A comparison at the same 222-update training budget, PCQC reaches 61.59% MedQA accuracy versus 58.20% for Same-State-Q1, while reducing inquiry turns from 2.096 to 1.574. Across all four benchmarks, direct supervision raises mean diagnostic accuracy from 59.95% to 63.02% and reduces mean inquiry turns from 2.153 to 1.573. These results show that unexecuted candidates provide useful training signals beyond their role in estimating relative credit for the executed question. Appendix D.2 reports the full cross-benchmark comparison. 
+
+4.4 Diagnostic Utility Predicts Downstream Success Candidate-selection evaluation. Using the PCQC policy from Run A, we sample four candidate questions at the initial dialogue state of each of 128 MedQA cases. Each candidate is answered and scored by diagnostic utility, after which we generate eight independent continuations from the resulting question–answer pair, yielding 4,096 continuation trajectories. We define a candidate’s 
+
+downstream diagnostic success as the fraction of its continuations that reach the correct final diagnosis. We compare selecting the highest-utility candidate with uniform selection and with the executed question q1. Selection rules and paired statistical analyses are detailed in Appendix D.3. 
+
+Downstream diagnostic success. Selecting the highest-utility candidate (Table 4 and Figure 4) yields 65.14% downstream diagnostic success, compared with 60.94% under uniform selection, an improvement of 4.20 percentage points (95% CI [+1 .42 , +6 .96] ). It also exceeds the 59.67% success rate obtained from the executed question by 5.47 percentage points (95% CI [+1 .76 , +9 .18] ). Thus, diagnostic utility computed from a single question–answer interaction identifies candidates that are more likely to support successful downstream diagnosis. 9Grounded candidate answers. The advantage persists after restricting to grounded candidates. Across 113 eligible cases, highest-utility selection improves downstream diagnostic success by 3.52 percentage points over uniform selection (95% CI [+1 .06 , +6 .07] ). See Appendix D.4 for details. 
+
+## 5 Conclusion 
+
+We introduced Privileged Counterfactual Question Credit (PCQC), a framework for learning from 
+
+questions never asked in interactive medical diagnosis. PCQC uses privileged patient information during training to compare candidate question–answer interactions at the same dialogue state and derive relative question credit for both executed and unexecuted questions, without requiring further dialogue rollouts. Across four medical dialogue benchmarks, PCQC achieves 63.10% mean diagnostic accuracy, outperforming GRPO and ATPO while requiring 33.1% fewer inquiry turns than GRPO. Controlled experiments further show that the gains extend beyond feedback on executed questions, and that diagnostic utility identifies questions associated with higher downstream diagnostic success. More broadly, PCQC shows how training-time patient information can supervise not only the final diagnostic outcome, but also the information-acquisition decisions that lead to it. 
+
+## Reproducibility Statement 
+
+The experimental setup and evaluation protocol are described in Section 4.1, with further details provided in the appendix, including model and training configurations, data provenance, sampling budgets, checkpoint selection, patient-responder and diagnostic-scorer prompts, information access, action parsing, question-token supervision, and statistical procedures. To facilitate reproducibility, we will publicly release the training and evaluation code, experiment configurations, data-processing and evaluation adapters, model prompts, checkpoint-selection scripts, and analysis code used to reproduce the reported tables and figures. We will also release the derived evaluation artifacts and per-run outputs supporting the reported results where permitted by the licenses of the underlying datasets. 
+
+## Ethics Statement 
+
+PCQC is studied in benchmark-based simulated medical dialogue and is not evaluated for clinical deployment. Our experiments use existing clinical benchmark cases and involve no prospective patient interaction or collection of new patient data. The reported results characterize diagnostic accuracy and inquiry behavior within these experimental settings and should not be interpreted as evidence of clinical safety or effectiveness. The appendix documents the information available to the doctor policy, patient responder, and diagnostic scorer. 
+
+## AI Use Statement 
+
+Generative AI tools were used to assist with manuscript writing and editing, literature discovery, and selected research and coding tasks. They were also used as model judges in the answer-grounding analysis described in Appendix D.4. All AI-assisted outputs used in this work were reviewed by the authors, who take responsibility for the scientific claims, experimental results, and final manuscript. 
+
+## References 
+
+Ruike Cao, Shaojie Bai, Fugen Yao, Liang Dong, Jian Xu, and Li Xiao. ATPO: Adaptive tree policy optimization for multi-turn medical dialogue. In The Fourteenth International Conference on Learning Representations , 2026. URL https://arxiv.org/abs/2603.02216 .arXiv:2603.02216. Dian Chen, Brady Zhou, Vladlen Koltun, and Philipp Krähenbühl. Learning by cheating. In 
+
+Proceedings of the Conference on Robot Learning , volume 100 of Proceedings of Machine Learning Research , pp. 66–75. PMLR, 2020. 10 Hongxin Ding, Baixiang Huang, Yue Fang, Weibin Liao, Xinke Jiang, Jinyang Zhang, Yinghao Zhu, Zheng Li, Liantao Ma, Junfeng Zhao, and Yasha Wang. ProMed: Shapley information gain guided reinforcement learning for proactive medical LLMs. In Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pp. 32481–32515. Association for Computational Linguistics, 2026. doi: 10.18653/v1/2026.acl-long.1500. URL 
+
+https://aclanthology.org/2026.acl-long.1500/ .Lang Feng, Zhenghai Xue, Tingcong Liu, and Bo An. Group-in-group policy optimization for LLM agent training. In Advances in Neural Information Processing Systems , volume 38, pp. 46375–46408. Curran Associates, Inc., 2025a. doi: 10.52202/085713-1544. URL https: //proceedings.neurips.cc/paper_files/paper/2025/hash/420c9f777c0 b4f78d515e53cf74d58b2-Abstract-Conference.html .Yichun Feng, Jiawei Wang, Lu Zhou, and Yixue Li. DoctorAgent-RL: A multi-agent collaborative reinforcement learning system for multi-turn clinical dialogue, 2025b. URL https://arxiv. org/abs/2505.19630v1 . Preliminary version accepted at ICASSP 2026. Shreya Johri, Jaehwan Jeong, Benjamin A. Tran, Daniel I. Schlessinger, Shannon Wongvibulsin, Leandra A. Barnes, Hong-Yu Zhou, Zhuo Ran Cai, Eliezer M. Van Allen, David Kim, Roxana Daneshjou, and Pranav Rajpurkar. An evaluation framework for clinical use of large language models in patient interaction tasks. Nature Medicine , 31:77–86, 2025. doi: 10.1038/s41591-024-0 3328-5. Amirhossein Kazemnejad, Milad Aghajohari, Eva Portelance, Alessandro Sordoni, Siva Reddy, Aaron Courville, and Nicolas Le Roux. VinePPO: Refining credit assignment in RL training of LLMs. In Proceedings of the 42nd International Conference on Machine Learning , volume 267 of 
+
+Proceedings of Machine Learning Research , pp. 29557–29590. PMLR, 2025. Fanqi Kong, Jiayi Zhang, Mingyi Deng, Chenglin Wu, Yuyu Luo, and Bang Liu. InfoPO: Information-driven policy optimization for user-centric agents, 2026. URL https://arxiv.org/abs/ 2603.00656 .Yunghwei Lai, Kaiming Liu, Ziyue Wang, Weizhi Ma, and Yang Liu. Doctor-R1: Mastering clinical inquiry with experiential agentic reinforcement learning. In The Fourteenth International Conference on Learning Representations , 2026. URL https://arxiv.org/abs/2510.0 4284 . arXiv:2510.04284. Shuyue Stella Li, Vidhisha Balachandran, Shangbin Feng, Jonathan S. Ilgen, Emma Pierson, Pang Wei Koh, and Yulia Tsvetkov. MediQ: Question-asking LLMs and a benchmark for reliable interactive clinical reasoning. In Advances in Neural Information Processing Systems , volume 37, pp. 28858–28888. Curran Associates, Inc., 2024. doi: 10.52202/079017-0908. URL https: //proceedings.neurips.cc/paper_files/paper/2024/hash/32b80425554 e081204e5988ab1c97e9a-Abstract-Conference.html .Shuyue Stella Li, Jimin Mun, Faeze Brahman, Pedram Hosseini, Bryceton G. Thomas, Jessica M. Sin, Bing Ren, Jonathan S. Ilgen, Yulia Tsvetkov, and Maarten Sap. ALFA: Aligning LLMs to ask good questions a case study in clinical reasoning. In Second Conference on Language Modeling ,2025. URL https://openreview.net/forum?id=12u7diwku0 .Lerrel Pinto, Marcin Andrychowicz, Peter Welinder, Wojciech Zaremba, and Pieter Abbeel. Asym-metric actor critic for image-based robot learning. In Robotics: Science and Systems XIV , 2018. doi: 10.15607/RSS.2018.XIV.008. Samuel Schmidgall, Rojin Ziaei, Carl Harris, Ji Woong Kim, Eduardo Pontes Reis, Jeffrey Jopling, and Michael Moor. AgentClinic: A multimodal benchmark for tool-using clinical AI agents. npj Digital Medicine , 9:499, 2026. doi: 10.1038/s41746-026-02674-7. John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms, 2017. URL https://arxiv.org/abs/1707.06347 .Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. DeepSeekMath: Pushing the limits of mathematical reasoning in open language models, 2024. URL https://arxiv.org/abs/ 2402.03300 .11 Karan Singhal, Shekoofeh Azizi, Tao Tu, S. Sara Mahdavi, Jason Wei, Hyung Won Chung, Nathan Scales, Ajay Tanwani, Heather Cole-Lewis, Stephen Pfohl, et al. Large language models encode clinical knowledge. Nature , 620:172–180, 2023. doi: 10.1038/s41586-023-06291-2. Karan Singhal, Tao Tu, Juraj Gottweis, Rory Sayres, Ellery Wulczyn, Mohamed Amin, Le Hou, Kevin Clark, Stephen R. Pfohl, Heather Cole-Lewis, et al. Toward expert-level medical question answering with large language models. Nature Medicine , 31:943–950, 2025. doi: 10.1038/s41591 -024-03423-7. Tao Tu, Mike Schaekermann, Anil Palepu, Khaled Saab, Jan Freyberg, Ryutaro Tanno, Amy Wang, Brenna Li, Mohamed Amin, Yong Cheng, Elahe Vedadi, Nenad Tomasev, Shekoofeh Azizi, Karan Singhal, Le Hou, Albert Webson, Kavita Kulkarni, S. Sara Mahdavi, Christopher Semturs, Juraj Gottweis, Joelle Barral, Katherine Chou, Greg S. Corrado, Yossi Matias, Alan Karthikesalingam, and Vivek Natarajan. Towards conversational diagnostic artificial intelligence. Nature , 642: 442–450, 2025. doi: 10.1038/s41586-025-08866-7. Guoqing Wang, Sunhao Dai, Guangze Ye, Zeyu Gan, Wei Yao, Yong Deng, Xiaofeng Wu, and Zhenzhe Ying. Information gain-based policy optimization: A simple and effective approach for multi-turn search agents. In The Fourteenth International Conference on Learning Representations ,2026. URL https://openreview.net/forum?id=qkWP6phrvZ .Yutao Xie, Nathaniel Thomas, Nicklas Hansen, Yang Fu, Li Erran Li, and Xiaolong Wang. TIPS: Turn-level information-potential reward shaping for search-augmented LLMs. In The Fourteenth International Conference on Learning Representations , 2026. URL https://arxiv.org/ab s/2603.22293 . arXiv:2603.22293. Yijun Zhang, Fan Xu, Jiaxin Ding, Yule Xie, Shiqing Gao, Xin Ding, Haoxiang Zhang, Luoyi Fu, and Xinbing Wang. Information gain-based rollout policy optimization: An adaptive tree-structured rollout approach for multi-turn LLM agents, 2026. URL https://arxiv.org/abs/2607 .06223 .12 A Datasets and Experimental Setup 
+
+A.1 Datasets Training data. All methods use the released ATPO collection (Cao et al., 2026): 4,157 conversa-tions for supervised initialization and 14,256 RL cases, comprising 9,400 MEDIQ/MedQA and 4,856 MedMCQA cases. Conversion preserves the source messages and target responses. 
+
+Evaluation data. The ATPO dialogue sets contain 1,268 MedQA, 150 MedicalExam, and 536 MedMCQA cases. We use the complete released MedQA and MedicalExam test sets and the released MedMCQA held-out split. Conversion preserves initial patient information, decision questions, options, labels, and atomic patient facts. iCRAFT-MD supplies an independent dermatology case source released with MEDIQ (Li et al., 2024), based on CRAFT-MD (Johri et al., 2025). We retain 139 of its 140 cases, excluding one with conflicting answer text and option index before evaluation. The case set and evaluated policies are fixed before iCRAFT-MD evaluation, which uses the same patient responder and interaction protocol. 
+
+Training–evaluation overlap. Comparing the RL cases with the three ATPO evaluation sets finds no normalized full-prompt matches, two MedQA case-and-problem matches, and lexical near-duplicate candidates involving 50 evaluation cases. For iCRAFT-MD, comparison against both the SFT conversations and RL cases finds no exact matches or lexical matches above the specified retrieval thresholds (character 5-gram cosine 0.85 and word 1–2 gram cosine 0.90 ). 
+
+A.2 Training Configuration 
+
+Table 5 summarizes the models and sampling settings. Table 5: Core experimental configuration. Model identities and sampling groups for the reported comparisons.                 
+
+> Item Setting Actor backbone Qwen3-8B Actor initialization Shared protocol-SFT, 3 epochs / step 96 Patient responder Frozen Qwen3-8B protocol-SFT, 1 epoch / step 32 PCQC diagnostic scorer Frozen Qwen3-14B Maximum dialogue turns 10, including the final answer Cases per RL update 128 GRPO terminal group GT32 PCQC terminal group GT4PCQC question group GQ4; question states in the first consultation trajectory PCQC question-loss weight β1Independent RL training runs GRPO, ATPO, and PCQC: three per method
+
+Supervised initialization. The shared Qwen3-8B actor receives assistant-token supervision for three epochs (96 updates), with BF16 precision, batch size 128, learning rate 10 −5, and weight decay 
+
+0.01 . The frozen patient responder is a separate Qwen3-8B checkpoint trained for one epoch (32 updates) on the same conversations. 
+
+Policy optimization. GRPO and PCQC use full-parameter BF16 training, learning rate 10 −6,weight decay 0.01 , one PPO epoch per update, clipping ratio 0.2, token-mean losses, and reference-policy KL coefficient 0.001 . PCQC uses AdamW with a constant learning rate and gradient clipping at 1.0. Terminal rewards are binary diagnostic correctness; PCQC additionally optimizes question credit with β = 1 . Candidate construction and token masks are specified in Appendix B.4. ATPO follows the U1+U2 configuration (Cao et al., 2026), with tree budget M = 128 , four candidates, variance threshold 1.2, and pruning. Its critic uses learning rate 10 −5, four warmup updates, and GAE with γ = λ = 1 . Actor learning uses rate 10 −6, KL coefficient 0.01 , clipping bounds 0.20 /0.28 , and per-sequence token-mean losses. Rewards are +3 for a correct final answer, 0 for an incorrect valid answer, and −1 without a valid final answer. 13 Development and evaluation protocol. Following ATPO’s released RL pipeline (Cao et al., 2026), we use the released MedQA dialogue set for method development and checkpoint selection. This split originates from the MEDIQ test set (Li et al., 2024) and is also configured as the validation stream in ATPO’s released training code. We treat MedQA as the development benchmark and evaluate the selected checkpoints on MedicalExam, MedMCQA, and iCRAFT-MD without further checkpoint selection. GRPO, ATPO, and PCQC each use three independent RL training runs. PCQC Run A supplies paired comparisons, continuation experiments, and costs. 
+
+Question-supervision controls. The controls in Table 3 retain PCQC’s initialization, data, and 
+
+GT = 4 . Terminal-only sets β = 0 and reports update 75. Executed-local retains the same responder, scorer, GQ = 4 , β = 1 , and Run A training configuration; it is trained for 222 updates and reports the update-100 checkpoint under the same selection criterion. All candidates are generated, answered, and scored, but only the executed question receives local supervision. Appendices B.5 and D.2 define executed-local credit and Same-State-Q1, respectively. 
+
+A.3 Evaluation and Metrics 
+
+Each policy produces one consultation per case, using the complete option set, including Medi-calExam’s 4–8 options. Actor decoding uses temperature 1.0, top-p 0.8, no top-k truncation, thinking enabled, and a 512-token action limit. Prompt and rollout-response limits are 1,024 and 4,096 tokens. Case-level sampling schedules are shared across methods. A valid final answer takes precedence over a question and must belong to the case’s option set. Diagnostic accuracy measures correct final labels; missing or invalid answers count as incorrect. Evaluation does not use the diagnostic scorer. Q/ep. is the mean number of non-final interaction attempts per consultation. Mean actor-generated tokens measure generation length. 
+
+Statistical analysis. For GRPO, ATPO, and PCQC, means and sample standard deviations of diagnostic accuracy and inquiry turns summarize three RL runs. Paired 95% confidence intervals use 10,000 percentile bootstrap resamples of cases, preserving both methods’ outcomes within each case. Exact two-sided McNemar tests use discordant predictions. These intervals describe case-level uncertainty at fixed checkpoints. 
+
+A.4 Full-System Training Cost 
+
+GPU-hours in Table 6 equal recorded RL training time multiplied by all eight allocated H800 GPUs through the reported checkpoint, including policy optimization and rollout, patient responses, and diagnostic scoring. Shared SFT and separate benchmark evaluations are excluded. On MedQA, PCQC Run A ( GT = 4 ) achieves 61.59% diagnostic accuracy at 70.62 H800 GPU-hours, compared with 56.07% at 72.68 GPU-hours for terminal GRPO ( GT = 32 ). The 5.52-percentage-point improvement comes with 44.5% fewer complete consultation trajectories: 113,664 versus 204,800. Table 6: Diagnostic accuracy and full-system training cost on MedQA. Results use one fixed checkpoint per method: PCQC Run A with GT = 4 and GRPO with GT = 32 . GPU-hours include all allocated devices for policy training, patient responses, and diagnostic scoring.             
+
+> Method Acc. (%) ↑H800 GPU-hours Complete trajectories Q/ep. GRPO 56.07 72.68 204,800 2.483
+> PCQC 61 .59 70 .62 113 ,664 1.574
+
+14 B Question-Credit Implementation 
+
+B.1 Information Access 
+
+Table 7 summarizes the inputs to the policy, patient responder, and diagnostic scorer. The correct label indexes the scorer’s output probability when constructing credit. Table 7: Information access during question-credit construction. Patient facts supply candidate answers; the scorer evaluates observed question–answer evidence. The correct label indexes its output probabilities. 
+
+Component Ot qi Patient facts z Task y∗
+
+Actor Yes Generates No Yes No Patient responder No Yes Yes No No Diagnostic scorer Yes Yes No Yes No Utility extraction — — — — Index Task denotes the clinical decision question and answer options. The patient responder receives the patient facts and candidate question; the scorer receives Ot ⊕ (qi, a i) and the clinical task. After scoring, y∗ selects the correct-option probability. 
+
+B.2 Interaction Protocol and Prompts 
+
+The actor receives initial patient information, the clinical decision question, answer options, and the observed dialogue. It responds with Question: [question text] or Final Answer: [option label] .The frozen Qwen3-8B patient responder receives the question and fixed patient facts, using the following instruction:                                                                                              
+
+> You are amedical information assistant. Your role is to help doctors by providing information strictly from patient data. INSTRUCTIONS: 1. Search through the provided atomic facts for information that directly answers the doctor’ squestion 2. If you find relevant atomic facts, provide the answer using ONLY that information 3. Do NOT add any medical analysis, inference, interpretation, or external knowledge 4. Do NOT make assumptions or draw conclusions beyond what is explicitly stated 5. If no atomic fact directly answers the question, respond with exactly this phrase: "The patient cannot answer this question." Patient atomic facts: {atomic facts joined by newline} Doctor’s question: {doctor question} Your response:
+
+Patient decoding uses temperature 0.8, top-p 1.0, a 256-token limit, and disabled thinking. The generated response supplies the patient answer. 
+
+B.3 Diagnostic Utility Construction 
+
+The frozen Qwen3-14B scorer receives the initial information, observed exchanges, and the candidate question–answer pair in the clinical-evidence field below. Each exchange uses the fields Doctor question: and Patient response: .          
+
+> Clinical evidence: {initial information and observed exchanges} Question: {clinical decision question} Options: {label}. {option text} ... Answer:
+
+15 Let Y denote the answer-option labels. For each appended label c ∈ Y , the scorer reads its final token log probability ℓc and normalizes across options: 
+
+sϕ(c | O) = exp( ℓc)
+
+P 
+
+> d∈Y
+
+exp( ℓd) . (13) Our training cases use Y = {A, B, C, D }. The correct-option probability defines diagnostic utility. The implementation subtracts the shared pre-exchange probability b(Ot) before normalization; this gives the same relative question credit as Equation 5, as shown in Appendix C. 
+
+B.4 Candidate Construction and Question-Token Optimization Actions and rewards. The actor either asks a question or provides a final answer. A correct valid final answer receives terminal reward 1; other terminal outcomes receive 0.
+
+Candidate groups. The first of the GT = 4 consultations per case supplies supervised states. The actor samples GQ = 4 responses at each state, retaining a group when the first response parses as a question. The same (q1, a 1) pair is used for scoring and continuing the consultation; the other candidates do not advance it. Utilities are normalized across the sampled responses. A response without a parsed question supplies no question text to the responder. 
+
+Question-token masks. Question credit applies to actor tokens following the first Question: 
+
+marker; responses without this marker have a zero question mask. The marker, preceding tokens, and patient answers receive no question credit. Terminal and question losses are normalized separately by their selected token counts across the update batch, then combined at β = 1 with reference-policy KL regularization. 
+
+B.5 Executed-Question Local Credit 
+
+Executed-local retains PCQC’s candidate generation and frozen scorer. For every valid executed-question event e in the current update, its diagnostic gain is 
+
+de = sϕ(y∗ 
+
+> e
+
+| Oe ⊕ (qe, 1, a e, 1)) − sϕ(y∗ 
+
+> e
+
+| Oe). (14) The gains are standardized across these events, including different cases and dialogue states, using the same sample-standard-deviation threshold and normalization constant as PCQC. Credit is zero for fewer than two events or standard deviation below 10 −4. It supervises executed-question tokens with the mask above. Unexecuted candidates are still generated, answered, and scored, but receive no local gradient and do not enter the executed-local normalization. The clipped local objective follows Equation 11, normalized by its own selected executed-question tokens, and is combined with terminal GRPO at β = 1 .
+
+## C Properties of Relative Question Credit 
+
+Shared-baseline invariance. For a fixed dialogue state, let ∆i = ui − b(Ot) be the diagnostic gain of candidate i. Subtracting the shared baseline shifts the mean but preserves the sample variance: 
+
+¯∆ = μQ − b(Ot),σ2∆ = 1
+
+K − 1
+
+> K
+
+X
+
+> i=1
+
+(∆ i − ¯∆) 2 = σ2
+
+> Q
+
+. (15) Utilities and gains therefore give identical threshold decisions and normalized credit. For σQ ≥ τ ,
+
+AQi = ∆i − ¯∆
+
+σQ + ϵnorm 
+
+= ui − K−1 PKj=1 uj
+
+σQ + ϵnorm 
+
+= 1
+
+K(σQ + ϵnorm )
+
+> K
+
+X
+
+> j=1
+
+(ui − uj ).
+
+(16) 16 This is the normalized mean of pairwise utility differences; positive credit indicates an above-average diagnostic gain. 
+
+Correct-option cross-entropy and surprisal. Let δy∗ be the point-mass distribution on the correct option. For positive correct-option probabilities, 
+
+hϕ(O) = H(δy∗ , s ϕ(· | O)) = − log sϕ(y∗ | O)= DKL (δy∗ ∥ sϕ(· | O)) , (17) where H(δy∗ ) = 0 gives the equality with KL divergence. Taking b(Ot) = sϕ(y∗ | Ot) > 0, define the correct-option surprisal reduction after the candidate question–answer exchange as 
+
+gi = hϕ(Ot) − hϕ(Ot ⊕ (qi, a i)) = log ui − log b(Ot) = log ui
+
+b(Ot) . (18) Equivalently, ui = b(Ot)egi , so the diagnostic gain satisfies 
+
+∆i = b(Ot)( egi − 1) , d∆ i
+
+dgi
+
+= b(Ot)egi > 0. (19) Thus, for σQ ≥ τ , group normalization preserves the ordering by correct-option surprisal reduction: 
+
+AQi > A Qj ⇐⇒ ui > u j ⇐⇒ gi > g j . (20) Credit magnitudes are determined by normalized probability-scale diagnostic gains. 
+
+## D Additional Results and Question-Selection Analyses 
+
+D.1 Benchmark Results and Interaction Metrics Independent RL training runs. Table 8 reports diagnostic accuracy for the three update-222 PCQC checkpoints under the same case-level decoding schedule. The main comparison averages all four benchmarks, yielding 63.10% mean diagnostic accuracy. For the question-supervision comparisons on MedQA, MedicalExam, and MedMCQA, the per-run means are 59.33%, 58.50%, and 60.96%, yielding (59 .60 ± 1.25)% . Within each averaging scope, we first average benchmark accuracies for each run and then compute the across-run mean and sample standard deviation. Table 8: Diagnostic accuracy (%) across independent PCQC training runs. All update-222 checkpoints preserve the same performance pattern across the three primary benchmarks and the independent iCRAFT-MD evaluation.                                           
+
+> Benchmark Run A Run B Run C Mean ±sample SD MedQA 61.59 61.59 64.43 62 .54 ±1.64
+> MedicalExam 62.67 60.00 62.67 61 .78 ±1.54
+> MedMCQA 53.73 53.92 55.78 54 .48 ±1.13
+> Mean (3 benchmarks) 59.33 58.50 60.96 59 .60 ±1.25
+> iCRAFT-MD 74.10 74.10 72.66 73 .62 ±0.83
+> Mean (4 benchmarks) 63.02 62.40 63.89 63 .10 ±0.74
+
+Paired diagnostic comparisons. Table 9 compares PCQC Run A with one fixed baseline checkpoint per method using the case-level statistical protocol in Appendix A.3. 17 Table 9: Paired diagnostic accuracy comparisons. Point estimates use PCQC Run A and one fixed baseline checkpoint per method; uncertainty is computed over paired evaluation cases.                                                                               
+
+> Benchmark Comparison ∆Acc. (pp) Paired 95% CI / McNemar p
+> MedQA PCQC −GRPO +5.52 [+2 .29 ,+8 .68] / 0.00083 MedQA PCQC −ATPO +4.50 [+1 .34 ,+7 .65] / 0.0060 MedicalExam PCQC −GRPO +1.33 [−6.67 ,+9 .33] / 0.875 MedicalExam PCQC −ATPO +6.00 [−2.00 ,+14 .00] / 0.200 MedMCQA PCQC −GRPO +4.48 [−0.56 ,+9 .51] / 0.091 MedMCQA PCQC −ATPO −0.56 [−5.41 ,+4 .29] / 0.882 iCRAFT-MD PCQC −GRPO +1.44 [−5.76 ,+8 .63] / 0.8450 PCQC −ATPO +5.76 [−2.16 ,+13 .67] / 0.2153 PCQC −Terminal-only +4.32 [−3.60 ,+12 .23] / 0.3616 PCQC −Executed-local +4.32 [−2.88 ,+11 .51] / 0.3449 Executed-local −Terminal-only 0.00 [−7.91 ,+8 .63] / 1.0000 Paired statistical methods follow Appendix A.3; the resampling unit is the evaluation case.
+
+Generation length. Table 10 supplements the inquiry results in Table 2 with mean actor-generated tokens per consultation. PCQC reduces this mean relative to terminal GRPO across MedQA, MedicalExam, and MedMCQA. Table 10: Mean actor-generated tokens per consultation. PCQC entries are averaged over three independent RL training runs; GRPO uses one fixed checkpoint. Reductions are relative to GRPO.             
+
+> Benchmark GRPO PCQC Reduction MedQA 473.0 321.1 32.1% MedicalExam 483.1 321.4 33.5% MedMCQA 459.1 317.9 30.8%
+
+Question-supervision controls. Table 11 reports the paired MedQA comparisons using PCQC Run A and the controls in Table 3. The comparisons use the same 1,268 cases and the paired statistical protocol in Appendix A.3. Mean actor-generated tokens per consultation for executed-local are 353.85 on MedQA, 348.67 on MedicalExam, and 350.85 on MedMCQA. The corresponding three-run PCQC means are 321.06, 321.43, and 317.93. Table 11: Paired MedQA comparisons for question supervision. The PCQC comparison uses Run A.                   
+
+> Comparison ∆Acc. (pp) Paired 95% CI McNemar p
+> PCQC −Executed-local +4 .42 [+1 .26 ,+7 .49] 0.0067
+> Executed-local −Terminal-only ( β= 0 )+4 .26 [+1 .10 ,+7 .33] 0.0083
+
+D.2 Decomposing Candidate Question Supervision 
+
+Same-State-Q1 retains all four candidates when computing relative question credit but directly supervises only the executed question. Splitting Equation 11 by executed and unexecuted tokens gives Lquestion = Lexec  
+
+> Q
+
++ Lunexec  
+
+> Q
+
+. The control keeps the executed-question terms and averages them over their token count Nexec ; PCQC averages over all candidate question tokens NQ. It shares PCQC Run A’s initialization, case order, optimizer, sampling budgets, patient responder, and scorer, retaining β = 1 , terminal GRPO, and the original KL objective. Table 12 compares both methods at 222 training updates across all four benchmarks. 18 Table 12: Candidate supervision at a matched training budget. PCQC Run A and Same-State-Q1 each use one training run and 222 updates. The mean equally weights all four benchmarks.                          
+
+> Accuracy (%) Q/ep. Benchmark PCQC Same-State-Q1 PCQC Same-State-Q1 MedQA 61.59 58.20 1.574 2.096 MedicalExam 62.67 62.67 1.580 2.207 MedMCQA 53.73 51.31 1.590 2.136 iCRAFT-MD 74.10 67.63 1.547 2.173 Mean 63.02 59.95 1.573 2.153
+
+D.3 Downstream Evaluation of Candidate Questions 
+
+The study uses 128 MedQA initial states, each with four valid candidate questions selected before continuation generation. The frozen PCQC Run A policy generates both the candidates and eight continuations from each fixed question–answer pair, yielding 4,096 trajectories. A candidate’s downstream diagnostic success is its fraction of correct final diagnoses. We compare the highest-utility candidate, the executed question q1, and uniform selection, whose expected success averages all four candidates. The paired bootstrap in Appendix A.3 resamples cases after aggregating each candidate’s eight outcomes. 
+
+D.4 Answer Grounding and Continuation Sensitivity 
+
+We compare selection rules after restricting each continuation-study candidate set to answers sup-ported by patient facts, confined to the requested information, and free of decision-target disclosure. Manual review of prioritized candidates and model-judge agreement for the remainder identify 395 eligible candidates. Selection comparisons reuse the original eight continuations per candidate. Among 113 cases with at least two eligible candidates, highest-utility selection improves downstream diagnostic success by 3.52 percentage points over uniform selection from the same eligible set (95% CI [+1 .06 , +6 .07] ). Table 13 also compares selection with the executed question q1 on the corresponding eligible case sets. Table 13: Question selection with grounded answers. Success uses eight continuations per candidate under PCQC Run A; ∆ is selected minus comparator success (pp). Eligibility is defined in Appendix D.4.                            
+
+> Comparison N
+> cases Selected success (%) Comparator success (%) ∆(pp) 95% CI Original highest-utility selection vs. executed question q1
+> 108 66.44 61.11 +5.32 [+2 .08 ,+8 .68]
+> Highest-utility vs. uniform selection (eligible candidates) 113 65.82 62.30 +3.52 [+1 .06 ,+6 .07]
+> Highest-utility selection vs. executed question q1(eligible candidates) 104 67.07 61.42 +5.65 [+2 .28 ,+9 .13]
+> Row 1 preserves the original highest-utility selection and executed question q1and includes cases where both candidates are eligible. Row 2 includes cases with at least two eligible candidates; uniform selection is the mean success of all candidates in that eligible set. Row 3 further requires the executed question q1to be eligible and compares the highest-utility eligible candidate with q1.The paired bootstrap in Appendix A.3 resamples the eligible cases in each row, with one dialogue state per case. Success rates and differences are rounded independently.
+
+19

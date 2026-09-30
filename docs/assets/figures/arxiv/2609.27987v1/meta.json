@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-001.webp",
+      "caption": "Figure 1: Learning from questions never asked. Terminal-reward RL (left) learns from final diagnoses. PCQC (right) additionally uses patient facts to answer unexecuted questions at the same dialogue state, turning comparisons of candidate question–answer pairs into relative question credit.",
+      "page": 2,
+      "index": 1,
+      "width": 818,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-002.webp",
+      "caption": "Table 9: Paired diagnostic accuracy comparisons. Point estimates use PCQC Run A and one fixed baseline checkpoint per method; uncertainty is computed over paired evaluation cases.",
+      "page": 18,
+      "index": 2,
+      "width": 828,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-003.webp",
+      "caption": "Table 5: Core experimental configuration. Model identities and sampling groups for the reported comparisons.",
+      "page": 13,
+      "index": 3,
+      "width": 827,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-004.webp",
+      "caption": "Table 3: Ablation of question-level supervision with matched terminal group size (GT = 4). Executed-local and PCQC use the same frozen diagnostic scorer but supervise the executed question and all candidates, respectively; Terminal-only uses no question-level objective. PCQC reports mean ± sample standard deviation over three independent RL runs.",
+      "page": 8,
+      "index": 4,
+      "width": 827,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-005.webp",
+      "caption": "Figure 3: Diagnostic accuracy versus inquiry efficiency across four benchmarks. Arrows connect GRPO to PCQC; upward indicates higher diagnostic accuracy and rightward indicates fewer inquiry turns. RL results are means over three independent runs; error bars show one sample standard deviation for PCQC.",
+      "page": 8,
+      "index": 5,
+      "width": 800,
+      "height": 346
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-006.webp",
+      "caption": "Figure 2: PCQC training framework. The policy samples candidate questions at Ot. A frozen patient responder answers them using patient facts z, and a frozen diagnostic scorer assigns diagnostic utilities ui. Within-state normalization yields relative question credit AQ i for candidate question tokens, alongside terminal GRPO. Only (q1, a1) continues the consultation.",
+      "page": 4,
+      "index": 6,
+      "width": 810,
+      "height": 369
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-007.webp",
+      "caption": "Table 4: Continuation-based validation of diagnostic utility. Four candidates are evaluated at each of 128 MedQA initial states, with eight continuations generated per candidate under PCQC Run A. Success is the correct-diagnosis rate across continuations; gains are paired differences with 95% case-bootstrap confidence intervals.",
+      "page": 9,
+      "index": 7,
+      "width": 828,
+      "height": 192
+    },
+    {
+      "url": "assets/figures/arxiv/2609.27987v1/fig-008.webp",
+      "caption": "Figure 4: Downstream diagnostic gains from highest-utility candidate selection. Markers show gains in downstream diagnostic success (pp), with bars denoting paired 95% case-bootstrap confidence intervals. Success is estimated from eight continuations per candidate under PCQC Run A; results are shown for all candidates (128 MedQA states) and grounded candidates (113 states).",
+      "page": 9,
+      "index": 8,
+      "width": 804,
+      "height": 252
+    }
+  ]
+}
