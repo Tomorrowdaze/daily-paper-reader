@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-10-01 <!--dpr-date:20261001-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202610/01/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints" data-sidebar-item="{&quot;title&quot;: &quot;ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;具有因果结构的法律投诉事件知识图谱&quot;}">ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints</a>
   * 2026-09-30 <!--dpr-date:20260930-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/30/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries" data-sidebar-item="{&quot;title&quot;: &quot;Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.26296v1-linear-temporal-structure-and-short-term-persistence-of-conflict-activity-in-middle-eastern-countries&quot;, &quot;score&quot;: &quot;9.5&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q4&quot;}], &quot;evidence&quot;: &quot;使用ARIMA时间序列分析对中东国家的冲突活动进行预测建模。&quot;}">Linear Temporal Structure and Short-Term Persistence of Conflict Activity in Middle Eastern Countries</a>

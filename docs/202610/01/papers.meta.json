@@ -1,0 +1,24 @@
+{
+  "label": "2026-10-01",
+  "date": "2026-10-01",
+  "generated_at": "2026-10-01T23:21:52",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/01/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints",
+      "section": "quick",
+      "title_en": "ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints",
+      "authors": "Sriram Kannan, Swetha Saseendran, Vishnu Vardhan Reddy Kandi, Leslie Barrett, Madhavan Seshadri, Enrico Santus",
+      "date": "2026-09-24",
+      "pdf": "https://arxiv.org/pdf/2609.30184v1",
+      "score": "6.0",
+      "evidence": "具有因果结构的法律投诉事件知识图谱",
+      "tldr": "本文提出ARGUS，用于从CourtListener就业歧视诉状构建角色感知事件知识图谱；系统结合5W1H架构、法律域模型与LLM结构化生成，提取事实并构建含参与者、时间与因果的事件图并合并为文档级表示；在人评与多模型评测中，图结构分类器优于基线，EKG检索提升文档内法律问答。",
+      "tags": "query:q6",
+      "abstract_en": "U.S. employment-discrimination complaints describe complex event sequences that are not explicitly captured by lexical or embedding-based representations alone. We present ARGUS, a source-grounded pipeline that combines a 5W1H-inspired schema, legal-domain models, and LLM-based structured generation to construct document-level Event Knowledge Graphs (EKGs) from CourtListener complaints. ARGUS extracts fact-bearing statements, builds chunk-level event graphs with participant, temporal, and causal structure, and merges them into document-level representations. We evaluate graph quality through human and multi-model assessment and test downstream utility on claim classification and legal QA. The graph-structured classifier outperforms raw and linearized baselines on the held-out set, and EKG-only retrieval improves document-scoped QA, while open-retrieval gains remain limited by low first-stage candidate recall. These results suggest that EKGs are most useful for organizing and reasoning over evidence once relevant material has been retrieved.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
