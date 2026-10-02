@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2610.00947v1/fig-001.webp",
+      "caption": "Figure 1. ABDA-NL on Popov v. Hayashi [5]: the ASPIC- scenario explorer with corpus-grounded chat.",
+      "page": 2,
+      "index": 1,
+      "width": 735,
+      "height": 354
+    },
+    {
+      "url": "assets/figures/arxiv/2610.00947v1/fig-002.webp",
+      "caption": "Figure 2. Interactive explanation via the discussion game (left) and natural-language rule authoring (right).",
+      "page": 5,
+      "index": 2,
+      "width": 727,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2610.00947v1/fig-003.webp",
+      "caption": "Figure 3. Creating a scenario in the Guided view, with its labels computed by ABDA in the preview (left), and the sources reader showing a quotation verified against the saved document (right).",
+      "page": 7,
+      "index": 3,
+      "width": 727,
+      "height": 321
+    }
+  ]
+}

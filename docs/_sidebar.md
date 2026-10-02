@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-10-02 <!--dpr-date:20261002-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202610/02/2610.00947v1-abda-nl-a-natural-language-scenario-explorer-for-argument-based-reasoning" data-sidebar-item="{&quot;title&quot;: &quot;ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2610.00947v1-abda-nl-a-natural-language-scenario-explorer-for-argument-based-reasoning&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;基于论证的推理和情景探索，解释结论为何被接受&quot;}">ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning</a>
   * 2026-10-01 <!--dpr-date:20261001-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202610/01/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints" data-sidebar-item="{&quot;title&quot;: &quot;ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;q6&quot;}], &quot;evidence&quot;: &quot;具有因果结构的法律投诉事件知识图谱&quot;}">ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints</a>

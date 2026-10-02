@@ -6,8 +6,8 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-10-01
-- 运行时间：2026-10-01 23:21:31 UTC
+- 最新运行日期：2026-10-02
+- 运行时间：2026-10-02 22:51:28 UTC
 - 运行状态：成功
 - 本次总论文数：1
 - 精读区：0
@@ -15,17 +15,17 @@
 
 ### 今日简报（AI）
 - 今日共生成 1 篇推荐（精读 0 篇，速读 1 篇）
-- 速读：《ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints》（6.0/10）
+- 速读：《ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning》（6.0/10）
 - 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202610/01/README](/202610/01/README)
+- 详情：[/202610/02/README](/202610/02/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [ARGUS: Role-Aware Event Knowledge Graphs for U.S. Employment-Discrimination Complaints](/202610/01/2609.30184v1-argus-role-aware-event-knowledge-graphs-for-us-employment-discrimination-complaints)  
+1. [ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning](/202610/02/2610.00947v1-abda-nl-a-natural-language-scenario-explorer-for-argument-based-reasoning)  
    标签：评分：6.0/10、query:q6
-   evidence：具有因果结构的法律投诉事件知识图谱
+   evidence：基于论证的推理和情景探索，解释结论为何被接受
 
 
 <div class="dpr-home-promo-card">
