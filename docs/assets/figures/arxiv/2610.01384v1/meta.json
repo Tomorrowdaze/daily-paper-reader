@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-001.webp",
+      "caption": "Figure 2: Comparison of nine uncertainty-estimation methods across MNIST→FashionMNIST, CIFAR10→CIFAR100, Oxford Flowers→Deep Weeds, and ImageNet→CUB. Rows show ID–OOD vs ID–Adv. AUROC (top) and ID vs Adv. coverage (bottom). Marker size denotes mean inference time, and the black star marks the ideal operating point.",
+      "page": 6,
+      "index": 1,
+      "width": 826,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-002.webp",
+      "caption": "Figure 11: Qualitative visualisation of CLEAR’s latent perturbation views for representative Oxford Flowers ID and DeepWeeds OOD inputs. For each input x, two covariance-shaped latent views h1 and h2 are visualised through feature inversion. The reconstructed views preserve the dominant semantic content of the input, while the corresponding raw conflict scores are substantially larger for the shown OOD examples than for the ID examples.",
+      "page": 26,
+      "index": 2,
+      "width": 748,
+      "height": 285
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-003.webp",
+      "caption": "Figure 12: Example images and tables from the datasets used in our experimental evaluation.",
+      "page": 29,
+      "index": 3,
+      "width": 829,
+      "height": 1124
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-004.webp",
+      "caption": "Table 5: Mean accuracy, OOD detection, and adversarial attack detection performance with standard deviation of the comparative approaches across a variety of uncertainty thresholding types for the MNIST → FashionMNIST setting. For compactness, we denote adversarial AUROC as AAUROC.",
+      "page": 22,
+      "index": 4,
+      "width": 825,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-005.webp",
+      "caption": "Table 7: Uncertainty quality on clean CelebA detections. Pearson’s r is reported between predictive uncertainty and localisation error (1−IoU), such that higher correlation indicates that poorly localised detections receive greater uncertainty.",
+      "page": 23,
+      "index": 5,
+      "width": 827,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-006.webp",
+      "caption": "Figure 1: CLEAR architecture overview. A pretrained evidential model produces a latent representation and evidential output. CLEAR uses calibration-derived latent geometry to generate perturbed views, computes pairwise latent conflict, and aggregates this into the final conflict score C(x). This score is used to down-weight unsupported evidential strength post-hoc while preserving the original prediction. The illustrative ID and OOD examples are drawn from Oxford Flowers and DeepWeeds.",
+      "page": 4,
+      "index": 6,
+      "width": 788,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-007.webp",
+      "caption": "Figure 4: Hyperparameter sensitivity of CLEAR to the perturbation magnitude τ . Each line denotes a dataset. From left to right, panels report ID coverage, OOD coverage, adversarial coverage, ID–OOD AUROC, and ID–adversarial AUROC. All other CLEAR hyperparameters are held fixed at their default values.",
+      "page": 19,
+      "index": 7,
+      "width": 826,
+      "height": 664
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-008.webp",
+      "caption": "Figure 9: Pearson correlation between predictive uncertainty and localisation error under covariate corruption on CelebA. Higher correlation indicates that detections with larger localisation error receive greater uncertainty.",
+      "page": 24,
+      "index": 8,
+      "width": 829,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2610.01384v1/fig-009.webp",
+      "caption": "Figure 3: Qualitative object detection comparison of EMM and CLEAR uncertainty under a covariate Gaussian noise on CelebA.",
+      "page": 9,
+      "index": 9,
+      "width": 333,
+      "height": 404
+    }
+  ]
+}

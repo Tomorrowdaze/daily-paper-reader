@@ -1,0 +1,39 @@
+{
+  "label": "2026-10-03",
+  "date": "2026-10-03",
+  "generated_at": "2026-10-03T22:12:58",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202610/03/2610.01384v1-robust-evidential-learning-through-latent-consistency",
+      "section": "quick",
+      "title_en": "Robust Evidential Learning Through Latent Consistency",
+      "authors": "Charmaine Barker, Daniel Bethell, Simos Gerasimou",
+      "date": "2026-10-01",
+      "pdf": "https://arxiv.org/pdf/2610.01384v1",
+      "score": "6.5",
+      "evidence": "高风险环境下的不确定性量化与证据鲁棒性",
+      "tldr": "为应对高风险场景中模型对OOD与对抗样本的过度自信，提出无需重训的后处理CLEAR：以校准集拟合类别条件潜空间几何，推断时在潜空间生成扰动并测量冲突，选择性下调不受支持证据并保留潜一致样本；在ImageNet→CUB等上提升OOD/对抗AUROC（+8.29/+5.01），较竞品快17.4倍且不损性能。",
+      "tags": "query:q5",
+      "abstract_en": "Reliable uncertainty quantification is essential for deploying deep learning models in high-stakes settings, where out-of-distribution and adversarial inputs can induce confident but unreliable predictions. Evidential Deep Learning provides efficient uncertainty estimates in a single forward pass, but can still assign high evidential strength to inputs that are poorly supported by the learned representation, such as adversarial inputs. We introduce CLEAR, a lightweight, task-agnostic post-hoc method that improves evidential robustness without retraining or altering the base prediction. Using held-out calibration data, CLEAR characterises the group-conditioned geometry of the model's latent space. At inference, it efficiently generates perturbation views directly in the latent space and measures their conflict relative to the calibrated geometry of the predicted group. High latent conflict indicates unsupported evidence, which CLEAR uses to selectively reduce evidential strength while retaining evidence for latent-consistent inputs. On ImageNet$\\rightarrow$CUB, CLEAR improves OOD and adversarial AUROC by $+8.29$ and $+5.01$ while running 17.4$\\times$ faster than competing post-hoc methods while preserving predictive performance across classification, regression, and object detection benchmarks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/03/2610.00587v1-comparison-of-common-crawl-news--gdelt",
+      "section": "quick",
+      "title_en": "Comparison of Common Crawl News & GDELT",
+      "authors": "Ameir El Ouadi, David Beskow",
+      "date": "2026-09-30",
+      "pdf": "https://arxiv.org/pdf/2610.00587v1",
+      "score": "6.0",
+      "evidence": "比较了GDELT数据集，这是冲突和事件预测研究的主要数据源",
+      "tldr": "本文比较GDELT与Common Crawl News两大新闻数据集，动因是全球新闻语料对NLP、知识图谱与LLM至关重要。通过对内容与覆盖面的系统分析，揭示各自来源渠道、优势与局限，并发现两者在新闻来源地域与类型上存在显著差异。",
+      "tags": "query:profile-1",
+      "abstract_en": "The corpus of worldwide news is important for natural language processing, knowledge graphs, large language models, and other technical efforts. Additionally, this corpus is important for understanding the people, places, organizations, and events that interact in real-time every day. This paper compares two news datasets used for these tasks today, namely the Global Database of Events, Language, and Tone (GDELT) and Common Crawl News. Our research highlights the strengths and limitations of each dataset, analyzing their content and coverage. Notably, while GDELT relies on broadcasts, prints, and web news from across the globe, Common Crawl focuses on news sites from around the world gathered through web crawling. Our analysis revealed considerable differences in where the two datasets gather their news sources.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
