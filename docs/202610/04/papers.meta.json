@@ -1,0 +1,24 @@
+{
+  "label": "2026-10-04",
+  "date": "2026-10-04",
+  "generated_at": "2026-10-04T22:34:26",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/04/2610.00947v1-abda-nl-a-natural-language-scenario-explorer-for-argument-based-reasoning",
+      "section": "quick",
+      "title_en": "ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning",
+      "authors": "Shawn Bowers, Martin Caminada, Haoyang Liu, Bertram Ludäscher",
+      "date": "2026-10-01",
+      "pdf": "https://arxiv.org/pdf/2610.00947v1",
+      "score": "6.5",
+      "evidence": "基于论证的推理和情景探索，用于理解结论被接受或拒绝的原因",
+      "tldr": "ABDA-NL为ABDA论证推理系统加入自然语言界面，借助大语言模型在文本与ASPIC-形式化之间翻译并答疑，同时保留由确定性引擎在grounded语义下给出的论证、攻击与接受结论，支持交互式讨论溯源、“假如”探索、文档问答及用英文新增知识。",
+      "tags": "query:q4",
+      "abstract_en": "ABDA-NL adds a natural-language interface to ABDA, a system for argument-based discussion using ASPIC- knowledge bases under grounded semantics. Users see which conclusions are accepted, rejected, or undecided, open an interactive rendering of the grounded discussion game to learn why, explore what-if alternatives by suspending assumptions and rules or changing preferences, ask questions that are answered from a scenario's reference documents, and author new facts, assumptions, and rules in plain English. A large language model provides the bridge between language and formalism: it answers questions from the documents and the current state of the scenario, and it translates plain-English edits into candidate formal statements. The deterministic ABDA engine remains the sole source of arguments, attacks, and acceptance labels, and every proposal of the model is validated and confirmed by the user before it takes effect.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

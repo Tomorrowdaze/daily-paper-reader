@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-04T22:33:13.213454+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2610.00947v1",
+      "source": "arxiv",
+      "title": "ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning",
+      "abstract": "ABDA-NL adds a natural-language interface to ABDA, a system for argument-based discussion using ASPIC- knowledge bases under grounded semantics. Users see which conclusions are accepted, rejected, or undecided, open an interactive rendering of the grounded discussion game to learn why, explore what-if alternatives by suspending assumptions and rules or changing preferences, ask questions that are answered from a scenario's reference documents, and author new facts, assumptions, and rules in plain English. A large language model provides the bridge between language and formalism: it answers questions from the documents and the current state of the scenario, and it translates plain-English edits into candidate formal statements. The deterministic ABDA engine remains the sole source of arguments, attacks, and acceptance labels, and every proposal of the model is validated and confirmed by the user before it takes effect.",
+      "authors": [
+        "Shawn Bowers",
+        "Martin Caminada",
+        "Haoyang Liu",
+        "Bertram Ludäscher"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.HC"
+      ],
+      "published": "2026-10-01T02:29:16+00:00",
+      "link": "https://arxiv.org/pdf/2610.00947v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Argument-based reasoning and scenario exploration for understanding why conclusions are accepted or rejected",
+      "llm_evidence_cn": "基于论证的推理和情景探索，用于理解结论被接受或拒绝的原因",
+      "llm_evidence": "基于论证的推理和情景探索，用于理解结论被接受或拒绝的原因",
+      "canonical_evidence": "基于论证的推理和情景探索，用于理解结论被接受或拒绝的原因",
+      "llm_tldr_en": "A natural-language interface for argument-based reasoning that helps users explore why conclusions are reached.",
+      "llm_tldr_cn": "一种基于论证推理的自然语言接口，帮助用户探索结论得出的原因。",
+      "llm_tldr": "一种基于论证推理的自然语言接口，帮助用户探索结论得出的原因。",
+      "llm_tags": [
+        "query:q4"
+      ],
+      "matched_query_tag": "query:q4",
+      "matched_query_text": "查找关于内战或政治冲突的可解释预测模型的学术论文",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
