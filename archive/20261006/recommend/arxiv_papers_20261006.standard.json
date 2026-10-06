@@ -1,0 +1,169 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-06T00:26:03.103485+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2610.00587v1",
+      "source": "arxiv",
+      "title": "Comparison of Common Crawl News & GDELT",
+      "abstract": "The corpus of worldwide news is important for natural language processing, knowledge graphs, large language models, and other technical efforts. Additionally, this corpus is important for understanding the people, places, organizations, and events that interact in real-time every day. This paper compares two news datasets used for these tasks today, namely the Global Database of Events, Language, and Tone (GDELT) and Common Crawl News. Our research highlights the strengths and limitations of each dataset, analyzing their content and coverage. Notably, while GDELT relies on broadcasts, prints, and web news from across the globe, Common Crawl focuses on news sites from around the world gathered through web crawling. Our analysis revealed considerable differences in where the two datasets gather their news sources.",
+      "authors": [
+        "Ameir El Ouadi",
+        "David Beskow"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-09-30T18:52:19+00:00",
+      "link": "https://arxiv.org/pdf/2610.00587v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Compares GDELT, a key dataset for conflict and event analysis, with Common Crawl News.",
+      "llm_evidence_cn": "比较了GDELT（冲突和事件分析的关键数据集）与Common Crawl News。",
+      "llm_evidence": "比较了GDELT（冲突和事件分析的关键数据集）与Common Crawl News。",
+      "canonical_evidence": "比较了GDELT（冲突和事件分析的关键数据集）与Common Crawl News。",
+      "llm_tldr_en": "Analyzes GDELT and Common Crawl News datasets, which are foundational for global event and conflict research.",
+      "llm_tldr_cn": "分析了GDELT和Common Crawl News数据集，这些是全球事件和冲突研究的基础。",
+      "llm_tldr": "分析了GDELT和Common Crawl News数据集，这些是全球事件和冲突研究的基础。",
+      "llm_tags": [
+        "query:profile-1:composite"
+      ],
+      "matched_query_tag": "query:profile-1:composite",
+      "matched_query_text": "Papers central to 查找可解释的内战预测相关论文, especially work that connects or combines: d; a; C; 查找关于内战或政治冲突的可解释预测模型的学术论文; 探索应用可解释人工智能进行冲突和战争风险预测的相关研究; 检索使用因果推断或解释性算法分析内战爆发机制的学术研究.",
+      "matched_requirement_id": "req-composite-profile-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.00947v1",
+      "source": "arxiv",
+      "title": "ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning",
+      "abstract": "ABDA-NL adds a natural-language interface to ABDA, a system for argument-based discussion using ASPIC- knowledge bases under grounded semantics. Users see which conclusions are accepted, rejected, or undecided, open an interactive rendering of the grounded discussion game to learn why, explore what-if alternatives by suspending assumptions and rules or changing preferences, ask questions that are answered from a scenario's reference documents, and author new facts, assumptions, and rules in plain English. A large language model provides the bridge between language and formalism: it answers questions from the documents and the current state of the scenario, and it translates plain-English edits into candidate formal statements. The deterministic ABDA engine remains the sole source of arguments, attacks, and acceptance labels, and every proposal of the model is validated and confirmed by the user before it takes effect.",
+      "authors": [
+        "Shawn Bowers",
+        "Martin Caminada",
+        "Haoyang Liu",
+        "Bertram Ludäscher"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.HC"
+      ],
+      "published": "2026-10-01T02:29:16+00:00",
+      "link": "https://arxiv.org/pdf/2610.00947v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "argument-based reasoning and what-if alternatives for explaining conclusions",
+      "llm_evidence_cn": "基于论证的推理和假设性替代方案，用于解释结论",
+      "llm_evidence": "基于论证的推理和假设性替代方案，用于解释结论",
+      "canonical_evidence": "基于论证的推理和假设性替代方案，用于解释结论",
+      "llm_tldr_en": "A natural-language interface for argument-based reasoning that explains why conclusions are accepted or rejected.",
+      "llm_tldr_cn": "一种用于基于论证推理的自然语言接口，可解释结论被接受或拒绝的原因。",
+      "llm_tldr": "一种用于基于论证推理的自然语言接口，可解释结论被接受或拒绝的原因。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.01384v1",
+      "source": "arxiv",
+      "title": "Robust Evidential Learning Through Latent Consistency",
+      "abstract": "Reliable uncertainty quantification is essential for deploying deep learning models in high-stakes settings, where out-of-distribution and adversarial inputs can induce confident but unreliable predictions. Evidential Deep Learning provides efficient uncertainty estimates in a single forward pass, but can still assign high evidential strength to inputs that are poorly supported by the learned representation, such as adversarial inputs. We introduce CLEAR, a lightweight, task-agnostic post-hoc method that improves evidential robustness without retraining or altering the base prediction. Using held-out calibration data, CLEAR characterises the group-conditioned geometry of the model's latent space. At inference, it efficiently generates perturbation views directly in the latent space and measures their conflict relative to the calibrated geometry of the predicted group. High latent conflict indicates unsupported evidence, which CLEAR uses to selectively reduce evidential strength while retaining evidence for latent-consistent inputs. On ImageNet$\\rightarrow$CUB, CLEAR improves OOD and adversarial AUROC by $+8.29$ and $+5.01$ while running 17.4$\\times$ faster than competing post-hoc methods while preserving predictive performance across classification, regression, and object detection benchmarks.",
+      "authors": [
+        "Charmaine Barker",
+        "Daniel Bethell",
+        "Simos Gerasimou"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-10-01T09:50:47+00:00",
+      "link": "https://arxiv.org/pdf/2610.01384v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Uncertainty quantification for high-stakes settings and evidential learning robustness",
+      "llm_evidence_cn": "高风险环境下的不确定性量化与证据学习鲁棒性",
+      "llm_evidence": "高风险环境下的不确定性量化与证据学习鲁棒性",
+      "canonical_evidence": "高风险环境下的不确定性量化与证据学习鲁棒性",
+      "llm_tldr_en": "Improves evidential deep learning robustness for reliable uncertainty quantification in high-stakes settings.",
+      "llm_tldr_cn": "通过潜在一致性提高证据深度学习的鲁棒性，为高风险决策提供可靠的不确定性量化。",
+      "llm_tldr": "通过潜在一致性提高证据深度学习的鲁棒性，为高风险决策提供可靠的不确定性量化。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.33195v1",
+      "source": "arxiv",
+      "title": "ReVR: Dual-Path Concept Reasoning for Multimodal Fake News Detection",
+      "abstract": "Vision-language models (VLMs) support multimodal fake news detection (FND) by producing explicit analyses. Recent methods further improve interpretability by organizing verification knowledge into explicit concepts. However, two questions remain: how to improve the reliability and applicability of verification concepts, and how to effectively apply reusable concepts to verify unseen news. We propose \\textbf{ReVR}, a dual-path reasoning framework that constructs and applies reusable verification concepts for multimodal fake news detection. An agentic workflow grounds and consolidates candidate concepts, while statistical profiles characterize their historical behavior. During inference, a coverage-oriented path aggregates evidence from the complete concept library using a trainable encoder, while a query-focused path prompts a frozen VLM to reason over selected concepts and their observations. A learned conflict resolver selects between the two predictions when they disagree. Experiments on fake news benchmarks demonstrate the effectiveness of the method regarding detection performance and generalizability.",
+      "authors": [
+        "Zhikai Tan",
+        "Yuzhou Yang",
+        "Qichao Ying",
+        "Pinjie Xu",
+        "Sheng Li",
+        "Zhenxing Qian",
+        "Xinpeng Zhang"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-09-27T04:24:25+00:00",
+      "link": "https://arxiv.org/pdf/2609.33195v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interpretability through explicit concepts and evidence aggregation for risk detection",
+      "llm_evidence_cn": "通过显式概念和证据聚合实现风险检测的可解释性",
+      "llm_evidence": "通过显式概念和证据聚合实现风险检测的可解释性",
+      "canonical_evidence": "通过显式概念和证据聚合实现风险检测的可解释性",
+      "llm_tldr_en": "Uses dual-path concept reasoning to improve interpretability and reliability in fake news detection.",
+      "llm_tldr_cn": "采用双路径概念推理框架，提升了虚假新闻检测的可解释性与可靠性。",
+      "llm_tldr": "采用双路径概念推理框架，提升了虚假新闻检测的可解释性与可靠性。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

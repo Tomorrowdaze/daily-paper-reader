@@ -1,0 +1,727 @@
+REVR: DUAL-PATH CONCEPT REASONING FOR MULTIMODAL FAKE NEWS
+DETECTION
+Zhikai Tan⋆, Yuzhou Yang⋆, Qichao Ying⋆, Pinjie Xu†, Sheng Li⋆, Zhenxing Qian⋆and Xinpeng Zhang⋆
+⋆Fudan University, † China University of Mining and Technology - Beijing
+ABSTRACT
+Vision-language models (VLMs) support multimodal fake
+news detection (FND) by producing explicit analyses. Re-
+cent methods further improve interpretability by organizing
+verification knowledge into explicit concepts. However, two
+questions remain: how to improve the reliability and applica-
+bility of verification concepts, and how to effectively apply
+reusable concepts to verify unseen news. We propose ReVR,
+a dual-path reasoning framework that constructs and applies
+reusable verification concepts for multimodal fake news de-
+tection. An agentic workflow grounds and consolidates can-
+didate concepts, while statistical profiles characterize their
+historical behavior.
+During inference, a coverage-oriented
+path aggregates evidence from the complete concept library
+using a trainable encoder, while a query-focused path prompts
+a frozen VLM to reason over selected concepts and their
+observations.
+A learned conflict resolver selects between
+the two predictions when they disagree.
+Experiments on
+fake news benchmarks demonstrate the effectiveness of the
+method regarding detection performance and generalizability.
+Index Terms— Multimodal Fake News Detection, Vision-
+Language Models, Concept Bottlenecks
+1. INTRODUCTION
+Multimodal fake news detection aims to determine news ve-
+racity by jointly analyzing textual and visual content. The
+task involves assessing both the authenticity of each modality
+and the consistency of their content.
+Existing approaches
+learn multimodal representations through text-image fu-
+sion [1, 2] and model cross-modal consistency or ambigu-
+ity [3]. More fine-grained analysis examines image and text
+manipulation cues [4], local cross-modal correlations [5, 6],
+and alignment of entities, events, and temporal informa-
+tion [7]. However, individual verification cues can vary in
+relevance and reliability across news items, and inaccurate
+intermediate assessments may affect the final prediction.
+This motivates characterizing their behavior across samples
+and studying how to apply them effectively to unseen news.
+Although news items differ in topic and presentation, ver-
+ification often relies on recurring questions about text-image
+consistency, entity agreement, and factual support. Thus, be-
+yond producing free-form rationales, a growing line of work
+converts recurring verification cues into explicit intermedi-
+ate knowledge that can be inspected by human and reused
+by models [8]. These studies extend feature-based predic-
+tion toward explicit reasoning over human-interpretable con-
+cepts and their relations, building on concept bottlenecks [9]
+and learned logical rules [10]. TELLER [11] uses large lan-
+guage models to evaluate expert-defined fact-checking pred-
+icates and learns interpretable logical rules. MiRAGe [12]
+combines object-level visual concepts and automatically dis-
+covered textual concepts with embedding-based classifiers.
+PCGR [13] discovers interrogative concepts from high-loss
+multimodal samples, organizes them into an evolving layered
+graph, and performs hierarchical probabilistic reasoning.
+Despite improved interpretability and performance of
+the literature works, two questions remain: 1) How can we
+improve the reliability and applicability of proposed verifica-
+tion concepts? Both predefined predicates and automatically
+discovered concepts may be biased or limited in scope, and
+VLM-generated analyses may contain hallucinations.
+As
+simple filtering, such as deduplication, may leave these issues
+unresolved, grounding concepts in source evidence and build-
+ing historical statistical profiles are important for assessing
+their reliability and applicability. 2) How can we further im-
+prove the effectiveness of applying reusable concepts to verify
+unseen news? Assessing many concepts may include weakly
+relevant cues, whereas detailed reasoning over a selected
+subset may overlook complementary evidence. So beyond
+modeling concept dependencies, effective verification must
+balance broad assessment with contextual reasoning,
+We propose ReVR, a dual-path reasoning framework that
+constructs and applies reusable verification concepts for mul-
+timodal fake news detection. We first build a reusable con-
+cept library by prompting a frozen VLM to propose candi-
+dates from training news, ground their analyses in source evi-
+dence, and consolidate related candidates into canonical con-
+cepts. We check each canonical concept against its associated
+samples and summarize its historical behavior in a statistical
+profile. For unseen news, the query-focused path prompts the
+same frozen VLM to reason over selected concepts, while the
+coverage-oriented path uses a trainable encoder and classi-
+fier to aggregate evidence from the full library with historical
+profiles. A trainable conflict resolver retains the paths’ com-
+arXiv:2609.33195v1  [cs.MM]  27 Sep 2026
+
+
+(a) Concept Proposal and Consolidation
+(b) Dual-Path Concept Verification
+Training
+News
+Dataset
+Concept 
+Proposal & 
+Grounding
+Candidate 
+Consolidation
+& Assessment
+Unseen
+News
+Joint Concept Reasoning
+Observation Generation
+Concept Retrieval
+Query-Focused Path
+Evidence & Prediction
+Evidence Encoding
+Concept-wise Assessment
+Coverage-Oriented Path
+Final Prediction
+Tunable Conflict Resolver
+Score real/fake support
+Retrieve most relevant concepts
+If override
+OUTPUT: concept-conditioned 
+observations
+OUTPUT: rationale 𝑟𝑎, prediction ƶ𝑦𝑎
+OUTPUT: coverage representation
+OUTPUT: probability 𝑝𝑔, prediction ƶ𝑦𝑔
+Conflict Resolution
+Candidates & Assessments
+Sample Candidate
+Grounding
+Tendency
+001
+Match
+Supports real
+002
+Publisher Reliability Mismatch
+Supports fake
+Source 
+Trustworthiness
+...
+...
+...
+...
+003
+Cross-modal Entity 
+Alignment
+Match
+Supports fake
+Concept
+Profiling
+Concept Library
+Authenticity tendency
+Label agreement    /    Ambiguity
+Summarize historical
+behavior for concepts
+Source
+Credibility
+Entity
+Consistency…
+: Trainable
+Real / Fake & Rationale
+Rationale Generation
+Default
+Summarize evidence for flipping
+Fig. 1.
+Framework overview of ReVR. (a) We construct a reusable concept library through grounded proposal, iterative
+consolidation, and historical profiling. (b) Query-focused and coverage-oriented verification assess unseen news, with learned
+conflict resolution selecting between disagreeing predictions.
+mon verdict or selects between them on disagreement. Exper-
+iments on multimodal fake news benchmarks demonstrate the
+effectiveness of the method regarding detection performance
+and generalizability.
+2. PROPOSED METHOD
+Figure 1 presents the two stages of ReVR, i.e., the Concept
+Proposal and Consolidation stage, and the Dual-path Concept
+Verification stage.
+2.1. Concept Proposal and Consolidation
+Given training news items x = (T, I) with text T, image I,
+and veracity label y, we generate and ground raw candidate
+concepts ˜c. We consolidate related candidates into M canoni-
+cal concepts {cm}M
+m=1 and profile their historical behavior to
+obtain a reusable concept library C.
+Candidate Concept Proposal & Grounding. A lightweight
+agentic workflow prompts a frozen VLM to construct con-
+cepts in three steps. 1) Thinking: For each training item x,
+it proposes distinct raw candidate concepts ˜c. Each candidate
+contains a stance-neutral verification angle, a sample-specific
+analysis, and an assessment of whether the evidence favors
+real news, fake news, or neither. 2) Inspecting: It invokes
+local tools as needed, including text-span inspection, OCR,
+and image cropping, to locate supporting text spans or image
+regions. The thinking and inspecting steps repeat until the
+VLM emits an exit status. 3) Grounding: The VLM checks
+whether the located evidence supports the analysis and is rel-
+evant to the proposed angle, and it can directly reject candi-
+dates that it claims unsupported. The retained candidates’ se-
+mantic content is used for consolidation, while their real/fake
+assessments are retained for profiling.
+Concept Consolidation & Assessment. To construct reusable
+verification angles with consistent cross-instance applicabil-
+ity, ReVR consolidates the generated candidates in two it-
+erative stages. 1) Grouping: The VLM groups semantically
+similar retained candidates and removes duplicates.
+Each
+group is represented by a canonical concept cm. 2) Assessing
+and refining: The VLM checks each canonical concept cm
+against its group members, and refines and rechecks con-
+cepts with member recall below an empirical threshold of
+0.7. Accordingly, concepts whose cluster center fails the re-
+call requirement after three modifications are released again
+to the candidate pool and we redo the consolidation. After
+iterative consolidation and assessment, we let VLM assign
+each retained group a concise canonical name and verification
+scope for cm, and the retained canonical concepts are then
+used for profiling and inference.
+Concept Profiling. For each canonical concept cm, we pro-
+file three complementary historical properties. Specifically,
+πm = [bm, ρm, um].
+1) Authenticity tendency bm is the
+average signed direction, with positive values favoring fake
+news and negative values favoring real news. 2) Label agree-
+ment ρm, the fraction of applicable assessments matching the
+ground-truth labels, provides a reliability prior. 3) Ambiguity
+um, measured as the frequency of non-directional assess-
+ments, enables uncertainty-aware weighting. The complete
+library is C = {(cm, πm)}M
+m=1 , where M is the number of
+retained canonical concepts and πm is the historical profile
+of cm. Profiles are computed from training data and fixed
+during testing.
+2.2. Dual-path Concept Verification
+Given an unseen news item x and library C, ReVR obtains
+predictions through query-focused (a) reasoning over selected
+concepts and coverage-oriented (g) evidence encoding across
+the full library.
+We retain their common verdict or select
+between disagreeing predictions using a learned conflict re-
+
+
+solver, and return the final prediction by with a corresponding
+rationale for interpretation.
+Query-Focused Concept Reasoning. To capture instance-
+specific evidence, the frozen VLM performs three steps. 1)
+Retrieving: A retrieval prompt sequentially selects k distinct
+concepts from C that are most relevant to x. 2) Observing: An
+observation prompt examines the news text and image under
+each selected concept’s verification scope. And 3) Aggregat-
+ing: An aggregation prompt jointly reasons over the resulting
+concept-observation pairs to produce a natural-language ra-
+tionale and prediction bya. This path is fully prompt-driven
+without tunable parameters.
+Coverage-Oriented Concept Reasoning.
+To get comple-
+mentary evidences over all discovered concepts, the coverage-
+oriented path assesses x under every concept in C, preserving
+evidence for both veracity hypotheses [14,15]:
+(sR
+m, sF
+m) = CA(x, cm).
+(1)
+Here, CA denotes coverage-oriented assessing:
+a fixed-
+prompt call to the frozen VLM that separately returns real
+and fake support scores sR
+m and sF
+m for each concept m =
+1, . . . , M.
+Three trainable modules combine these scores
+with concept semantics and historical profiles:
+hg
+m = ϕg(sR
+m, sF
+m, cm, πm),
+zg = Encg
+ {hg
+m}M
+m=1
+
+,
+pg = Clsg(zg).
+(2)
+Here, ϕg is a shared projection forming concept-wise evi-
+dence tokens hg
+m, Encg is a Transformer encoder [16] ag-
+gregating them into the full-library evidence representation
+zg, and Clsg is a classification head producing the fake-news
+probability pg, from which prediction byg is obtained. These
+modules are trained against the ground-truth label y using bi-
+nary cross-entropy: Lg = −E[y log pg + (1 −y) log(1 −pg)] ,
+where E averages over training samples.
+Conflict Resolution with Conditional Reliability Estima-
+tion. On disagreement between the two paths, a trainable ℓ2-
+regularized logistic resolver Fcr estimates the probability q
+that the coverage-oriented prediction is correct:
+q = Fcr(pg, zg, bya).
+(3)
+Its continuous inputs are standardized before fitting.
+We
+train the resolver on disagreeing samples with the correct-
+ness target r = I[byg
+= y] using binary cross-entropy:
+Lcr
+=
+−Ebyg̸=bya[r log q + (1 −r) log(1 −q)] . Here, I[·]
+is the indicator function, and the expectation is restricted to
+disagreeing training samples. Because the labels are binary,
+r = 0 indicates that the query-focused prediction is correct.
+We retain the common verdict when the paths agree.
+On
+disagreement, the final verdict by is the coverage-oriented
+prediction when q ≥τ and the query-focused prediction
+otherwise. Here, τ is the override threshold.
+Table 1. Coarse-level accuracy and F1 (%). Best and second-
+best results are bold and underlined.
+Method
+MMFake
+Bench
+AMG
+MiRAGe
+News
+Acc.
+F1
+Acc.
+F1
+Acc.
+F1
+General VLMs
+GPT-5 [17]
+58.8
+57.2
+59.9
+57.9
+56.8
+54.0
+Qwen3.5-Plus [18]
+72.5
+71.2
+69.4
+69.4
+76.1
+75.7
+Multimodal Detectors
+MPFN [19]
+53.4
+49.6
+55.4
+52.7
+49.9
+45.5
+BMR [20]
+52.3
+48.8
+57.3
+55.4
+49.5
+44.8
+HAMMER [4]
+55.7
+51.7
+60.1
+57.2
+52.8
+50.4
+C3N [5]
+73.6
+70.3
+75.3
+72.6
+70.4
+66.0
+MGCA [7]
+74.1
+71.3
+78.2
+76.8
+72.3
+66.6
+PCGR [13]
+80.6
+73.5
+84.3
+79.8
+80.2
+70.9
+ReVR
+83.0
+78.7
+84.3
+83.1
+85.8
+85.2
+Finally, to improve human-readable interpretability, on a
+coverage-oriented override, we prompt the frozen VLM with
+both paths’ outputs, concept-wise real/fake support scores,
+and historical profiles to explain the evidence supporting that
+verdict. Otherwise, we return the selected concepts, their ob-
+servations, and the query-focused rationale.
+3. EXPERIMENTS AND RESULTS
+Experimental Setups. All VLM calls use Qwen3.5-Plus as
+backend [18] For each training instance, we generate three
+candidate concepts and encode them with frozen mpnet-v2 [21,
+22]. We apply average-linkage agglomerative clustering over
+cosine distances with threshold δ = 0.25 and retain clusters
+with no less than an empirical ten instances for each. The en-
+coder uses a 768-to-32 semantic projection and a two-layer,
+four-head Transformer and is trained with AdamW optimizer
+with learning rate 10−3, batch size 64, and 100 epochs. The
+query-focused path sequentially retrieves k = 3 non-repeated
+concepts. As for datasets, following the evaluation protocol
+of many baselines [13], we evaluate on MMFakeBench [23],
+AMG [7], and MiRAGeNews [12].
+Results and Case Studies.
+Table 1 first provides coarse-
+level accuracy and F1 score of multimodal FND. Also, we
+extend both paths to multi-class prediction on MMFakeBench
+and AMG, where the conflict resolution stage can also check
+misalignments between the two paths w.r.t the predicted sub-
+types. Fig. 2 illustrates the paths’ complementary roles. In
+(a), query-focused reasoning grounds the claim in decisive
+contextual details despite misleading library-wide evidence.
+In (b), local visual matches mislead that path, while coverage-
+oriented reasoning combines broader evidence with concepts’
+historical behavior. The conflict resolver chooses the correct
+path in each case. We see that ReVR consistently outperforms
+prior methods, supporting the generality of reusable verifica-
+
+
+(a) Music fans can find Rap Genius annotated lyrics on 
+Google again
+Dataset: MMFakeBench, Ground truth: Real
+Coverage-Oriented Path
+Prediction: Fake
+Real support
+Fake support
+Query-Focused Path
+Prediction: Real
+Selected:
+Object Identity
+Temporal Context
+Source Transparency
+Object Identity: ... a Rap Genius annotation pop-up is visible ...
+Temporal Context: ... the operational interface supports availability of …
+Source Transparency: ... branding and annotation UI establish the platform 
+provenance ...
+Aggregated rationale: ... the annotation page supports the claim ...
+q = 0.43 < τ = 0.50
+Final: Real
+(b) ‘Hey Joe, get up—we’re in trouble, man!’
+Dataset: AMG, Ground truth: Fake
+Coverage-Oriented Path
+Prediction: Fake
+Real support
+Fake support
+Query-Focused Path
+Prediction: Real
+Selected:
+Person Identity
+Visual Context Consistency
+Person Identity: ... Joe Biden is identifiable at the beach ...
+Visual Context Consistency: ... the beach setting matches the local ‘hits the 
+beach’ component ...
+Scene Context: ... with visual support for ‘hits the beach’ …
+Aggregated rationale: ... local matches dominate query-focused decision ...
+q = 0.56 > τ = 0.50
+Final: Fake
+Retain Query-Focused
+Override Query-Focused
+TIA
+VCC
+EI
+OI
+CS
+RF
+TIA
+PI
+VCC
+SC
+RF
+CR
+Scene Context
+Concept
+Concept
+Fig. 2. Case studies of ReVR. Tend., Agr., and Amb. denote historical tendency, label agreement, and ambiguity, with positive
+tendency favoring fake news. Radar plots show VLM-generated support scores for the real (blue, sR
+m) and fake (orange, sF
+m)
+hypotheses under each displayed concept. q and τ denote the override probability and threshold. Conflict-resolution rationales
+are omitted for space.
+Table 2. Fine-grained F1 (%) on MMFakeBench and AMG
+Method
+MMFakeBench
+AMG
+Micro-F1 Macro-F1 Micro-F1 Macro-F1
+GPT-5 [17]
+55.3
+54.9
+60.7
+55.5
+Qwen3.5-Plus [18]
+57.6
+58.0
+51.0
+57.1
+MGCA [7]
+60.3
+55.1
+72.8
+57.2
+PCGR [13]
+68.6
+56.9
+75.6
+59.9
+ReVR
+68.8
+62.3
+73.2
+62.1
+Table 3. Cross-dataset Macro-F1 (%). M, A, and N denote
+MMFakeBench, AMG, and MiRAGeNews.
+Method
+M→A M→N A→M A→N N→M N→A Avg.
+MPFN [19]
+32.5
+56.9
+27.2
+41.0
+53.3
+41.5
+42.1
+BMR [20]
+40.7
+46.1
+47.4
+61.5
+48.1
+44.6
+48.1
+HAMMER [4]
+43.0
+68.6
+42.5
+51.9
+49.0
+39.1
+49.0
+C3N [5]
+37.9
+55.1
+26.9
+32.5
+56.8
+42.5
+42.0
+PCGR [13]
+35.8
+51.0
+43.0
+55.1
+56.2
+44.0
+47.5
+ReVR
+73.5
+72.1
+53.8
+70.4
+76.4
+64.9
+68.5
+tion concepts across different FND benchmarks.
+Cross-dataset Generalization.
+We train each method on
+one source dataset and test it on the other two without target-
+dataset adaptation. ReVR ranks first in every direction and
+raises average Macro-F1 from 49.0 to 68.5, showing that
+we can successfully mine reusable verification concepts with
+generalizability beyond their source dataset.
+Ablation Studies. As shown in Table 4, we construct four
+variants while keeping all remaining settings unchanged.
+Table 4. Ablation results on the three benchmarks (%)
+MMFake
+Bench
+AMG
+MiRAGe
+News
+Variant
+Acc.
+F1
+Acc.
+F1
+Acc.
+F1
+w/o Coverage Path
+79.4 74.2 76.7 74.1 84.7 84.6
+w/o Query Path
+78.2 75.5 80.7 79.8 76.4 75.8
+w/o Concept Profiling 79.3 74.3 80.2 79.6 81.9 81.5
+w/o Conflict Resolver 80.3 76.2 82.4 81.2 83.4 82.8
+ReVR
+83.0 78.7 84.3 83.1 85.8 85.2
+Here, “w/o concept profiling” means letting the global path
+freely check all concepts similar to query-focused path, and
+“w/0 conflict resolver” means replacing the tunable resolver
+with a reasoning VLM for judgement.
+We see that every
+ablation underperforms the complete model, confirming that
+the four components play distinct rather than redundant roles.
+The library-wide encoding is particularly useful for diverse
+manipulation patterns, and the consistent degradation without
+profiles shows that historical behavior helps contextualize
+current evidence.
+4. CONCLUSION
+We propose ReVR, which consolidates VLM-generated anal-
+yses into reusable verification concepts.
+Complementary
+query-focused and coverage-oriented paths apply these con-
+cepts to unseen news, with a learned conflict resolver select-
+ing between their predictions when they disagree. Extensive
+experiments validate the effectiveness of the method.
+
+
+5. REFERENCES
+[1] Yaqing Wang, Fenglong Ma, Zhiwei Jin, Ye Yuan,
+Guangxu Xun, Kishlay Jha, Lu Su, and Jing Gao,
+“Eann: Event adversarial neural networks for multi-
+modal fake news detection,” in Proc. ACM KDD, 2018,
+p. 849–857.
+[2] Dhruv Khattar, Jaipal Singh Goud, Manish Gupta, and
+Vasudeva Varma, “Mvae: Multimodal variational au-
+toencoder for fake news detection,” in The world wide
+web conference, 2019, pp. 2915–2921.
+[3] Yixuan Chen, Dongsheng Li, Peng Zhang, Jie Sui, Qin
+Lv, Lu Tun, and Li Shang,
+“Cross-modal ambiguity
+learning for multimodal fake news detection,” in Proc.
+ACM Web Conf., 2022, pp. 2897–2905.
+[4] Rui Shao, Tianxing Wu, Jianlong Wu, Liqiang Nie, and
+Ziwei Liu, “Detecting and grounding multi-modal me-
+dia manipulation and beyond,” IEEE Transactions on
+Pattern Analysis and Machine Intelligence, vol. 46, no.
+8, pp. 5556–5574, 2024.
+[5] Jiao Qiao, Xianghua Li, Chao Gao, Lianwei Wu, Jun-
+wei Feng, and Zhen Wang, “Improving multimodal fake
+news detection by leveraging cross-modal content cor-
+relation,” Information Processing & Management, vol.
+62, no. 5, pp. 104120, 2025.
+[6] Yangming Zhou, Yuzhou Yang, Qichao Ying, Zhenx-
+ing Qian, and Xinpeng Zhang, “Multimodal fake news
+detection via clip-guided learning,” in 2023 IEEE inter-
+national conference on multimedia and expo (ICME).
+IEEE, 2023, pp. 2825–2830.
+[7] Hao Guo, Zihan Ma, Zhi Zeng, Minnan Luo, Weixin
+Zeng, Jiuyang Tang, and Xiang Zhao, “Each fake news
+is fake in its own way: An attribution multi-granularity
+benchmark for multimodal fake news detection,”
+in
+Proc. AAAI, 2025, vol. 39, pp. 228–236.
+[8] Yuzhou Yang, Qichao Ying, Sheng Li, Zhiyin Zhu,
+Zhenxing Qian, and Xinpeng Zhang, “Roe-fnd: Syn-
+ergizing llms with experiential learning for effective
+and generalizable evidence-based fake news detection,”
+arXiv preprint arXiv:2608.15210, 2026.
+[9] Pang Wei Koh, Thao Nguyen, Yew Siang Tang, Stephen
+Mussmann, Emma Pierson, Been Kim, and Percy Liang,
+“Concept bottleneck models,” in International confer-
+ence on machine learning. Pmlr, 2020, pp. 5338–5348.
+[10] Bimal Bhattarai, Ole-Christoffer Granmo, and Lei Jiao,
+“Explainable tsetlin machine framework for fake news
+detection with credibility score assessment,”
+in Pro-
+ceedings of the Thirteenth Language Resources and
+Evaluation Conference, 2022, pp. 4894–4903.
+[11] Hui Liu, Wenya Wang, Haoru Li, and Haoliang Li,
+“TELLER: A trustworthy framework for explainable,
+generalizable and controllable fake news detection,” in
+Findings of ACL, 2024, pp. 15556–15583.
+[12] Runsheng Huang, Liam Dugan, Yue Yang, and Chris
+Callison-Burch,
+“MiRAGeNews: Multimodal realis-
+tic AI-generated news detection,” in Findings of ACL:
+EMNLP, 2024, pp. 16436–16448.
+[13] Ruichao Yang, Wei Gao, Xiaobin Zhu, Jing Ma,
+Hongzhan Lin, Ziyang Luo, Bo-Wen Zhang, and Xu-
+Cheng Yin,
+“Probabilistic concept graph reasoning
+for multimodal misinformation detection,”
+in Proc.
+IEEE/CVF CVPR, 2026, pp. 19107–19118.
+[14] Xiaofan Zheng, Minnan Luo, and Xinghao Wang, “Un-
+veiling fake news with adversarial arguments generated
+by multimodal large language models,” in Proc. COL-
+ING, 2025, pp. 7862–7869.
+[15] Junyang Chen, Yueqian Li, Ka Chung Ng, Huan Wang,
+and Liang-Jie Zhang, “Toward multimodal fake news
+detection by multi-perspective rationale generation and
+verification,” in Proc. AAAI, 2026, vol. 40, pp. 66–74.
+[16] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob
+Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz
+Kaiser, and Illia Polosukhin, “Attention is all you need,”
+in NeurIPS, 2017, vol. 30, pp. 5998–6008.
+[17] OpenAI, “GPT-5 system card,” 2025.
+[18] Qwen Team,
+“Qwen3.5: Towards native multimodal
+agents,” February 2026.
+[19] Jing Jing, Hongchen Wu, Jie Sun, Xiaochang Fang, and
+Huaxiang Zhang, “Multimodal fake news detection via
+progressive fusion networks,” Information Processing
+& Management, vol. 60, no. 1, pp. 103120, 2023.
+[20] Qichao Ying, Xiaoxiao Hu, Yangming Zhou, Zhenx-
+ing Qian, Dan Zeng, and Shiming Ge, “Bootstrapping
+multi-view representations for fake news detection,” in
+Proc. AAAI, 2023, vol. 37, pp. 5384–5392.
+[21] Nils Reimers and Iryna Gurevych,
+“Sentence-BERT:
+Sentence embeddings using siamese BERT-networks,”
+in Proc. EMNLP-IJCNLP, 2019, pp. 3982–3992.
+[22] Kaitao Song, Xu Tan, Tao Qin, Jianfeng Lu, and Tie-
+Yan Liu, “MPNet: Masked and permuted pre-training
+for language understanding,” in NeurIPS, 2020, vol. 33,
+pp. 16857–16867.
+[23] Xuannan Liu, Zekun Li, Peipei Li, Huaibo Huang,
+Shuhan Xia, Xing Cui, Linzhi Huang, Weihong Deng,
+and Zhaofeng He, “MMFakeBench: A mixed-source
+multimodal misinformation detection benchmark for
+LVLMs,” in Proc. ICLR, 2025.

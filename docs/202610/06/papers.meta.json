@@ -1,0 +1,69 @@
+{
+  "label": "2026-10-06",
+  "date": "2026-10-06",
+  "generated_at": "2026-10-06T00:27:18",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202610/06/2610.00587v1-comparison-of-common-crawl-news--gdelt",
+      "section": "quick",
+      "title_en": "Comparison of Common Crawl News & GDELT",
+      "authors": "Ameir El Ouadi, David Beskow",
+      "date": "2026-09-30",
+      "pdf": "https://arxiv.org/pdf/2610.00587v1",
+      "score": "6.5",
+      "evidence": "比较了GDELT（冲突和事件分析的关键数据集）与Common Crawl News。",
+      "tldr": "全球新闻语料对NLP、知识图谱与LLM重要。本文系统比较GDELT与Common Crawl News，从采集渠道、内容与覆盖评估来源地域差异，指出GDELT整合广播/印刷/网络，CC News侧重爬取新闻站点，并总结各自优势与局限。",
+      "tags": "query:profile-1",
+      "abstract_en": "The corpus of worldwide news is important for natural language processing, knowledge graphs, large language models, and other technical efforts. Additionally, this corpus is important for understanding the people, places, organizations, and events that interact in real-time every day. This paper compares two news datasets used for these tasks today, namely the Global Database of Events, Language, and Tone (GDELT) and Common Crawl News. Our research highlights the strengths and limitations of each dataset, analyzing their content and coverage. Notably, while GDELT relies on broadcasts, prints, and web news from across the globe, Common Crawl focuses on news sites from around the world gathered through web crawling. Our analysis revealed considerable differences in where the two datasets gather their news sources.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/06/2610.00947v1-abda-nl-a-natural-language-scenario-explorer-for-argument-based-reasoning",
+      "section": "quick",
+      "title_en": "ABDA-NL: A Natural-Language Scenario Explorer for Argument-Based Reasoning",
+      "authors": "Shawn Bowers, Martin Caminada, Haoyang Liu, Bertram Ludäscher",
+      "date": "2026-10-01",
+      "pdf": "https://arxiv.org/pdf/2610.00947v1",
+      "score": "6.5",
+      "evidence": "基于论证的推理和假设性替代方案，用于解释结论",
+      "tldr": "ABDA-NL为采用grounded语义的ABDA论证系统增添自然语言界面：以大模型桥接文本与形式化，支持查看结论接受性、交互式讨论博弈溯因、通过暂停假设/规则或调整偏好进行“假如”探索、基于文档的问答与英文编写新知识，并由确定性引擎与用户确认把关。",
+      "tags": "query:q5",
+      "abstract_en": "ABDA-NL adds a natural-language interface to ABDA, a system for argument-based discussion using ASPIC- knowledge bases under grounded semantics. Users see which conclusions are accepted, rejected, or undecided, open an interactive rendering of the grounded discussion game to learn why, explore what-if alternatives by suspending assumptions and rules or changing preferences, ask questions that are answered from a scenario's reference documents, and author new facts, assumptions, and rules in plain English. A large language model provides the bridge between language and formalism: it answers questions from the documents and the current state of the scenario, and it translates plain-English edits into candidate formal statements. The deterministic ABDA engine remains the sole source of arguments, attacks, and acceptance labels, and every proposal of the model is validated and confirmed by the user before it takes effect.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/06/2610.01384v1-robust-evidential-learning-through-latent-consistency",
+      "section": "quick",
+      "title_en": "Robust Evidential Learning Through Latent Consistency",
+      "authors": "Charmaine Barker, Daniel Bethell, Simos Gerasimou",
+      "date": "2026-10-01",
+      "pdf": "https://arxiv.org/pdf/2610.01384v1",
+      "score": "6.5",
+      "evidence": "高风险环境下的不确定性量化与证据学习鲁棒性",
+      "tldr": "为应对高风险场景中EDL对OOD/对抗样本过度自信，提出无需重训且不改动基线预测的后处理CLEAR：用校准集建模类别条件潜在几何，推理时在潜在空间生成扰动度量冲突以抑制不可信证据；在ImageNet→CUB等显著提升OOD/对抗AUROC，17.4×更快且保持精度。",
+      "tags": "query:q5",
+      "abstract_en": "Reliable uncertainty quantification is essential for deploying deep learning models in high-stakes settings, where out-of-distribution and adversarial inputs can induce confident but unreliable predictions. Evidential Deep Learning provides efficient uncertainty estimates in a single forward pass, but can still assign high evidential strength to inputs that are poorly supported by the learned representation, such as adversarial inputs. We introduce CLEAR, a lightweight, task-agnostic post-hoc method that improves evidential robustness without retraining or altering the base prediction. Using held-out calibration data, CLEAR characterises the group-conditioned geometry of the model's latent space. At inference, it efficiently generates perturbation views directly in the latent space and measures their conflict relative to the calibrated geometry of the predicted group. High latent conflict indicates unsupported evidence, which CLEAR uses to selectively reduce evidential strength while retaining evidence for latent-consistent inputs. On ImageNet$\\rightarrow$CUB, CLEAR improves OOD and adversarial AUROC by $+8.29$ and $+5.01$ while running 17.4$\\times$ faster than competing post-hoc methods while preserving predictive performance across classification, regression, and object detection benchmarks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/06/2609.33195v1-revr-dual-path-concept-reasoning-for-multimodal-fake-news-detection",
+      "section": "quick",
+      "title_en": "ReVR: Dual-Path Concept Reasoning for Multimodal Fake News Detection",
+      "authors": "Zhikai Tan, Yuzhou Yang, Qichao Ying, Pinjie Xu, Sheng Li, Zhenxing Qian, Xinpeng Zhang",
+      "date": "2026-09-27",
+      "pdf": "https://arxiv.org/pdf/2609.33195v1",
+      "score": "6.0",
+      "evidence": "通过显式概念和证据聚合实现风险检测的可解释性",
+      "tldr": "ReVR用于多模态虚假新闻检测，针对概念可靠性与复用性，构建代理式概念库与统计画像，并以覆盖导向编码器和查询聚焦冻结VLM的双路径推理，配合冲突解析器裁决，在基准上提升准确率与泛化。",
+      "tags": "query:q5",
+      "abstract_en": "Vision-language models (VLMs) support multimodal fake news detection (FND) by producing explicit analyses. Recent methods further improve interpretability by organizing verification knowledge into explicit concepts. However, two questions remain: how to improve the reliability and applicability of verification concepts, and how to effectively apply reusable concepts to verify unseen news. We propose \\textbf{ReVR}, a dual-path reasoning framework that constructs and applies reusable verification concepts for multimodal fake news detection. An agentic workflow grounds and consolidates candidate concepts, while statistical profiles characterize their historical behavior. During inference, a coverage-oriented path aggregates evidence from the complete concept library using a trainable encoder, while a query-focused path prompts a frozen VLM to reason over selected concepts and their observations. A learned conflict resolver selects between the two predictions when they disagree. Experiments on fake news benchmarks demonstrate the effectiveness of the method regarding detection performance and generalizability.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
