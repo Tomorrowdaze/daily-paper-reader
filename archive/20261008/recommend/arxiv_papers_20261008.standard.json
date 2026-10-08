@@ -1,0 +1,131 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-08T23:48:20.726758+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2610.01384v1",
+      "source": "arxiv",
+      "title": "Robust Evidential Learning Through Latent Consistency",
+      "abstract": "Reliable uncertainty quantification is essential for deploying deep learning models in high-stakes settings, where out-of-distribution and adversarial inputs can induce confident but unreliable predictions. Evidential Deep Learning provides efficient uncertainty estimates in a single forward pass, but can still assign high evidential strength to inputs that are poorly supported by the learned representation, such as adversarial inputs. We introduce CLEAR, a lightweight, task-agnostic post-hoc method that improves evidential robustness without retraining or altering the base prediction. Using held-out calibration data, CLEAR characterises the group-conditioned geometry of the model's latent space. At inference, it efficiently generates perturbation views directly in the latent space and measures their conflict relative to the calibrated geometry of the predicted group. High latent conflict indicates unsupported evidence, which CLEAR uses to selectively reduce evidential strength while retaining evidence for latent-consistent inputs. On ImageNet$\\rightarrow$CUB, CLEAR improves OOD and adversarial AUROC by $+8.29$ and $+5.01$ while running 17.4$\\times$ faster than competing post-hoc methods while preserving predictive performance across classification, regression, and object detection benchmarks.",
+      "authors": [
+        "Charmaine Barker",
+        "Daniel Bethell",
+        "Simos Gerasimou"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-10-01T09:50:47+00:00",
+      "link": "https://arxiv.org/pdf/2610.01384v1",
+      "tags": [
+        "keyword:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Reliable uncertainty quantification for high-stakes settings and evidential deep learning",
+      "llm_evidence_cn": "高风险环境下的可靠不确定性量化与证据深度学习",
+      "llm_evidence": "高风险环境下的可靠不确定性量化与证据深度学习",
+      "canonical_evidence": "高风险环境下的可靠不确定性量化与证据深度学习",
+      "llm_tldr_en": "Introduces CLEAR to improve evidential robustness and uncertainty quantification in high-stakes AI applications.",
+      "llm_tldr_cn": "引入CLEAR方法以提高高风险AI应用中的证据鲁棒性和不确定性量化。",
+      "llm_tldr": "引入CLEAR方法以提高高风险AI应用中的证据鲁棒性和不确定性量化。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.02576v1",
+      "source": "arxiv",
+      "title": "Answering clinicians' questions over trial evidence tables with verifiable, feedback-driven language models",
+      "abstract": "Systematic reviews condense clinical trials into evidence tables, yet clinicians can interrogate these tables only through database queries, and many questions concern attributes that the table does not record, such as a drug's target class or a harmonised endpoint. Here we introduce FD-SCoPE, a language-model framework that answers both kinds of question, exposes the query, the selected trials and the derivation rule behind every answer, and learns from expert corrections. On an oncology evidence table of 159 immune checkpoint inhibitor trial records, FD-SCoPE completed all 140 clinician-style tasks (alternatives, 90.7-97.9%). For questions needing derived attributes it retrieved 99.3% of relevant trial records at a positive predictive value of 89.8% and outperformed four alternative approaches (derived-value F1 77.7% versus 64.8-73.4%). Corrections on 299 questions, simulated from reference answers, raised F1 on 1,201 unseen questions from 77.9% to 84.9%. Language models coupled with executable queries, verified programs and expert feedback can give clinicians auditable access to trial evidence.",
+      "authors": [
+        "Manan Roy Choudhury",
+        "Suparno Roy Chowdhury",
+        "Swastik Sahoo",
+        "Muhammad Ali Khan",
+        "Kaneez Zahra Rubab Khakwani",
+        "Mohamad Bassam Sonbol",
+        "Irbaz Bin Riaz",
+        "Vivek Gupta"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-01T23:12:22+00:00",
+      "link": "https://arxiv.org/pdf/2610.02576v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.5,
+      "llm_evidence_en": "Exposes derivation rules and verifiable evidence for answering complex questions",
+      "llm_evidence_cn": "揭示回答复杂问题的推导规则和可验证证据",
+      "llm_evidence": "揭示回答复杂问题的推导规则和可验证证据",
+      "canonical_evidence": "揭示回答复杂问题的推导规则和可验证证据",
+      "llm_tldr_en": "A framework for verifiable, feedback-driven answers over evidence tables with explicit derivation rules.",
+      "llm_tldr_cn": "一种具有显式推导规则的、基于反馈的可验证证据表问答框架。",
+      "llm_tldr": "一种具有显式推导规则的、基于反馈的可验证证据表问答框架。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.08894v1",
+      "source": "arxiv",
+      "title": "Trustworthy Domain-Specific AI for Structured Knowledge Retrieval and Reasoning",
+      "abstract": "This dissertation presents a scalable architecture for transforming unstructured, domain-specific text into structured knowledge for retrieval and reasoning. It integrates semi-automatic corpus curation, semantic structuring, retrieval, and inference into an interpretable pipeline.   The research introduces Binary Bleed, an adapted binary search method that reduces low-rank search complexity for Non-negative Matrix Factorization (NMF), and Hierarchical NMF with automatic latent feature selection (HNMFk), a depth-adaptive topic modeling method that produces interpretable taxonomies guided by subject matter experts. These representations populate a typed Knowledge Graph and a semantically aligned Vector Store containing extracted latent features, synchronized through an event-driven substrate.   Tensor-Structured Retrieval-Augmented Generation (T-SRAG) dynamically routes queries across retrieval paths. Contrastive alignment maps document and query embeddings to hierarchical topic structures to improve semantic fidelity and reduce hallucinations. Beyond retrieval, tensor-based link prediction identifies and completes missing links in the Knowledge Graph, supporting inference grounded in citation structure.   Applications across cybersecurity, law, materials science, and healthcare demonstrate improvements in retrieval precision, early trend detection, hypothesis generation, and hallucination mitigation. The dissertation provides a deployable, modular foundation for trustworthy, domain-specific AI systems that retrieve and reason over structured knowledge.",
+      "authors": [
+        "Ryan C. Barron"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-10-06T16:35:41+00:00",
+      "link": "https://arxiv.org/pdf/2610.08894v1",
+      "tags": [
+        "keyword:内战预测",
+        "query:内战预测"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable pipeline for domain-specific knowledge retrieval and reasoning",
+      "llm_evidence_cn": "用于特定领域知识检索和推理的可解释流水线",
+      "llm_evidence": "用于特定领域知识检索和推理的可解释流水线",
+      "canonical_evidence": "用于特定领域知识检索和推理的可解释流水线",
+      "llm_tldr_en": "Presents an interpretable AI architecture for structured knowledge retrieval from domain-specific text.",
+      "llm_tldr_cn": "提出了一种用于从特定领域文本中进行结构化知识检索的可解释人工智能架构。",
+      "llm_tldr": "提出了一种用于从特定领域文本中进行结构化知识检索的可解释人工智能架构。",
+      "llm_tags": [
+        "query:q5"
+      ],
+      "matched_query_tag": "query:q5",
+      "matched_query_text": "探索应用可解释人工智能进行冲突和战争风险预测的相关研究",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

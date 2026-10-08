@@ -1,0 +1,406 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-001.webp",
+      "caption": "Table 8.1: NM Constitutional Depth-0 H-Clusters",
+      "page": 154,
+      "index": 1,
+      "width": 840,
+      "height": 601
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-002.webp",
+      "caption": "Figure 9.2: Results for Dog Data across methods including BNMFkkmeans, NMFk, and WNMFk. Boolean thresholding is not used for NMFk and WNMFk. The first row presents violin plots visualizing the rank k predictions at different test-set size levels. The second row displays RMSE scores for the test set, demonstrating the missing link prediction performance. The results are reported for each rank k on the x-axis, with the dark/dashed vertical line across columns being the true rank k = 4.",
+      "page": 175,
+      "index": 2,
+      "width": 886,
+      "height": 405
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-003.webp",
+      "caption": "Figure 9.11: Relative-Std-to-Mean Ratio of Uncertainty plot provides a quantitative perspective on the behavior of uncertainty estimates across varying sparsity levels (or test set size) for each k true. The top figure shows the standard deviation (std) at test points divided by the overall average of certainty (UQ). The bottom figure investigates certainty saturation by normalizing the std-to-mean uncertainty ratio at the top plot with the correlation between the UQ and errors at test points.",
+      "page": 185,
+      "index": 3,
+      "width": 614,
+      "height": 357
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-004.webp",
+      "caption": "Figure 10.1: Two question types, document and topic, showing LLM percent attempts and correct with SMART-SLIC RAG and without RAG.",
+      "page": 197,
+      "index": 4,
+      "width": 779,
+      "height": 544
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-005.webp",
+      "caption": "Figure 8.10: 248 latent leaf topics from Supreme Court Cases.",
+      "page": 153,
+      "index": 5,
+      "width": 406,
+      "height": 407
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-006.webp",
+      "caption": "Figure 4.1: BUNIE’s distillation pipeline. Panel A: The SME selects specific papers, shown as a bag-of-words wordcloud. Panel B: The dataset expands through the citation network. The wordcloud of a selected subset shows how the vocabulary differs from the core. Panel C: Humanin-the-loop pruning removes data. The wordcloud begins to resemble the core. Panel D: An embedding heuristic removes papers far from the core. The dataset becomes more compact. The wordcloud approaches parity with the original. Panel E: NMFk topic modeling produces Hclustering factorization to remove clusters lacking a core paper. A dense, yet substantial set of documents indicates a successful distillation. The wordcloud closely resembles the original. As indicated by the Ellipse, iterations can be made for refinement or the data extracted in repose for downstream analysis.",
+      "page": 79,
+      "index": 6,
+      "width": 635,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-007.webp",
+      "caption": "Figure 9.7: The performance of each method on the Swimmer Data is shown. The first column features a violin plot displaying the distribution of k predictions for each method, with the y-axis representing the methods and the x-axis representing the predicted k values. The second through final columns present results at each k decomposition value, with the x-axis corresponding to the rank k. The dark dashed vertical lines indicate this dataset’s true rank of k = 16. The Boolean thresholding techniques are denoted with the subscripts of kmeans, otsu, and search (coordinate descent), while the uniform subscript refers to running BNMFk without Boolean thresholding on the latent factors. NMFk and WNMFk, without subscripts, are the results of not using Boolean techniques with these methods.",
+      "page": 180,
+      "index": 7,
+      "width": 887,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-008.webp",
+      "caption": "Figure 5.3: Vanilla: Part 1",
+      "page": 103,
+      "index": 8,
+      "width": 560,
+      "height": 234
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-009.webp",
+      "caption": "Figure 5.4: Vanilla: Part 2",
+      "page": 103,
+      "index": 9,
+      "width": 560,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-010.webp",
+      "caption": "Figure 8.11: Examination of ‘Estoppel’ relating to being a keyword in topics, vs bag of words vocabulary.",
+      "page": 161,
+      "index": 10,
+      "width": 868,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-011.webp",
+      "caption": "Figure 8.14: The KG schema. Images generated with DALL·E [170].",
+      "page": 166,
+      "index": 11,
+      "width": 802,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-012.webp",
+      "caption": "Table 8.4: NM Supreme Court Case Law Depth-0 H-Clusters",
+      "page": 157,
+      "index": 12,
+      "width": 840,
+      "height": 628
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-013.webp",
+      "caption": "Figure 9.12: Mean hit@1 and hit@3 scores (bars, annotated) of the BNMF+LMF ensemble after masking every known superconducting link and an equal number of random zeros for each of the four benchmark compounds",
+      "page": 189,
+      "index": 13,
+      "width": 944,
+      "height": 656
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-014.webp",
+      "caption": "Figure 8.1: NMFk (top row) and K-means (bottom row), Vanilla (Left) and Early stopping (Right). ∀koptimal = ktrue.",
+      "page": 142,
+      "index": 14,
+      "width": 898,
+      "height": 599
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-015.webp",
+      "caption": "Table 9.2: Performance comparison of BNMFk, RNMFk, WNMFk, and their LMF-based extensions across five protein–protein interaction datasets. Bold values indicate the best classical score per block; dashes indicate metrics not reported by uncertainty-quantified variants.",
+      "page": 194,
+      "index": 15,
+      "width": 952,
+      "height": 800
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-016.webp",
+      "caption": "Figure 1.1: End-to-end pipeline: SME-seeded corpus→ Binary Bleed rank search→ HNMFk topic tree → synchronised KG + vector store → hybrid RAG agent.",
+      "page": 33,
+      "index": 16,
+      "width": 898,
+      "height": 1016
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-017.webp",
+      "caption": "Figure 8.5: Distribution of the top ten document categories, based on the arXiv author assignments. Each topic corresponds to the word clouds from Figure 8.4. Selected topics from each level are shown in each row of the figure.",
+      "page": 149,
+      "index": 17,
+      "width": 622,
+      "height": 966
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-018.webp",
+      "caption": "Figure 8.12: 25 questions queried across five different LLM channels. “Attempts” indicate the percentage of responses that tried to answer the question, and “accuracy” represents the percentage of correct attempts.",
+      "page": 162,
+      "index": 18,
+      "width": 752,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-019.webp",
+      "caption": "Figure 9.4: Results for Dog Data across methods, including BNMFk, NMFk, and WNMFk, evaluated under different Boolean thresholding techniques. The Boolean thresholding techniques are denoted with the subscripts of kmeans, otsu, and search (coordinate descent). The first row presents the change in RMSE after making predictions on the non-abstained samples, where a negative change indicates improved performance (lower RMSE) for the given fraction of abstained samples. The second row illustrates the fraction of abstained predictions, representing the proportion of cases where the model opted not to make a prediction due to uncertainty. The results are reported for each rank k on the x-axis, with the dark and dashed vertical line across each column indicating the true rank k = 4.",
+      "page": 177,
+      "index": 19,
+      "width": 883,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-020.webp",
+      "caption": "Table 9.3: Predicted scores assigned to materials whose labels were fully masked during training. Known superconductors (top block) score significantly higher than non-superconductors (bottom block), with a clear separation near 0.5.",
+      "page": 192,
+      "index": 20,
+      "width": 518,
+      "height": 669
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-021.webp",
+      "caption": "Table 7.1: Summary of the notation styles used in the paper.",
+      "page": 119,
+      "index": 21,
+      "width": 719,
+      "height": 371
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-022.webp",
+      "caption": "Figure 10.2: MRR and top 10 hit rate percentage per data category over several embedding methods.",
+      "page": 205,
+      "index": 22,
+      "width": 789,
+      "height": 643
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-023.webp",
+      "caption": "Figure 9.8: Results for k predictions on Gaussian Data are shown for WNMFk and RNMFk methods across different data sparsity levels, represented by the increasing test-set size on the x-axis. The y-axis indicates the predicted k values. The results demonstrate that k predictions remain accurate for both methods until high levels of sparsity are reached, while WNMFk results in more accurate k predictions. Line color and style differentiate between different true k values. For instance, a solid line with circle markers represents decompositions where the matrix rank was k = 2.",
+      "page": 182,
+      "index": 23,
+      "width": 790,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-024.webp",
+      "caption": "Table 8.5: Neo4j Node and Edge Overview",
+      "page": 160,
+      "index": 24,
+      "width": 590,
+      "height": 484
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-025.webp",
+      "caption": "Figure 5.5: Binary Bleed Vanilla.",
+      "page": 104,
+      "index": 25,
+      "width": 718,
+      "height": 471
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-026.webp",
+      "caption": "Table 8.3: NM Appeals Court Case Law Depth-0 H-Clusters",
+      "page": 156,
+      "index": 26,
+      "width": 840,
+      "height": 1149
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-027.webp",
+      "caption": "Figure 8.15: Keyword ’cybercrime’ graph search. A single keyword (green) and linked documents (light blue) are returned. The documents also link affiliated institutions (yellow) and the country of the institutions (red).",
+      "page": 168,
+      "index": 27,
+      "width": 898,
+      "height": 619
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-028.webp",
+      "caption": "Figure 8.13: Comparison of metrics (ROUGEL, NLI entailment, SummaC, and FactCC) across models: Nemotron–70B-Instruct, Claude 3 Opus, GPT-4o, Gemini Pro, and our system.",
+      "page": 163,
+      "index": 28,
+      "width": 856,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-029.webp",
+      "caption": "Table 6.1: Core KG schema with provenance and monotone version properties.",
+      "page": 113,
+      "index": 29,
+      "width": 436,
+      "height": 717
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-030.webp",
+      "caption": "Figure 8.3: Binary Bleed reduction on distributed Rescal (Purple), and distributed NMF (Green).",
+      "page": 146,
+      "index": 30,
+      "width": 718,
+      "height": 463
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-031.webp",
+      "caption": "Figure 8.7: 10 latent topics from Constitutional Provisions.",
+      "page": 151,
+      "index": 31,
+      "width": 406,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-032.webp",
+      "caption": "Figure 8.6: New Mexico Supreme/Appeals case counts per year.",
+      "page": 151,
+      "index": 32,
+      "width": 768,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-033.webp",
+      "caption": "Table 5.1: Chunks Pre/Post Traversal Sorts on two resources",
+      "page": 96,
+      "index": 33,
+      "width": 694,
+      "height": 1149
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-034.webp",
+      "caption": "Figure 9.9: Link prediction performance on test-set sizes of 10% (red lines) and 50% (blue lines) is shown for WNMFk and RNMFk, with RMSE scores plotted on a log scale. The x-axis represents the k values, displaying results at different k decompositions. Line markers are used to differentiate between the true k values. For example, solid red lines with circle markers represent matrices with a true rank of k = 2 and a test-set size of 10%.",
+      "page": 183,
+      "index": 34,
+      "width": 881,
+      "height": 272
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-035.webp",
+      "caption": "Table 8.2: NM Statutory Depth-0 H-Clusters",
+      "page": 155,
+      "index": 35,
+      "width": 840,
+      "height": 927
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-036.webp",
+      "caption": "Figure 9.3: Results for Dog Data across methods, including BNMFk, NMFk, and WNMFk, evaluated under different Boolean thresholding techniques. The Boolean thresholding techniques are denoted with the subscripts of kmeans, otsu, and search (coordinate descent). The first row presents violin plots visualizing the rank k predictions at different test-set sizes. The second row displays RMSE scores for the test set, demonstrating the missing link prediction performance. The results are reported for each rank k on the x-axis, with the dark and dashed vertical line across each column representing the true rank k = 4.",
+      "page": 176,
+      "index": 36,
+      "width": 883,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-037.webp",
+      "caption": "Figure 8.2: Standard NMFk (left) and K-means (right), Vanilla, and Early Stop over Pre-order, and Post-order traversal sorting.",
+      "page": 144,
+      "index": 37,
+      "width": 876,
+      "height": 449
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-038.webp",
+      "caption": "Figure 5.6: Early Stop: Part 1",
+      "page": 105,
+      "index": 38,
+      "width": 560,
+      "height": 235
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-039.webp",
+      "caption": "Figure 5.7: Early Stop: Part 2",
+      "page": 105,
+      "index": 39,
+      "width": 560,
+      "height": 218
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-040.webp",
+      "caption": "Table 1: Acronyms used in this dissertation",
+      "page": 24,
+      "index": 40,
+      "width": 902,
+      "height": 792
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-041.webp",
+      "caption": "Figure 8.8: 985 latent topics from Statutory Sections.",
+      "page": 152,
+      "index": 41,
+      "width": 406,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-042.webp",
+      "caption": "Figure 8.9: 420 latent topics from Court of Appeals Cases.",
+      "page": 152,
+      "index": 42,
+      "width": 406,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-043.webp",
+      "caption": "Figure 8.4: Word cloud of selected topics and their interpreted labels. The method is hierarchically applied three times, selecting a topic to extract its subtopics at each level. Selected topics from each level are shown in each row of the figure.",
+      "page": 147,
+      "index": 43,
+      "width": 850,
+      "height": 398
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-044.webp",
+      "caption": "Figure 9.13: Split-violin plot of posterior probabilities for 24 superconducting edges (green). [See also Table 9.3.] 192 non-superconducting edges (blue) were added for comparison. (Note that these are identical for the four violins.) Lines denote the median and 25th/75th percentiles, with numbers showing cumulative counts. Superconductors concentrate near 1, non-superconductors near 0, indicating a clear separation.",
+      "page": 191,
+      "index": 44,
+      "width": 835,
+      "height": 387
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-045.webp",
+      "caption": "Figure 9.10: Pearson Correlation Coefficients with CI between UQ and errors at the test set are reported across different sparsity levels or test-set sizes that include 0.1, 0.5, and 0.9 (columns) and true matrix ranks k including k ∈ [2, 3] (rows). The shared x-axis differentiates between the methods WNMFk and RNMFk using hues, while the shared y-axis represents the Pearson correlation values. Bars with different colors correspond to results at various k decompositions.",
+      "page": 184,
+      "index": 45,
+      "width": 881,
+      "height": 523
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-046.webp",
+      "caption": "Figure 4.2: 2-dimensional representation of hypersphere pruning. Core papers are red dots, citations/ references are blue squares, and hyperspheres are dotted red circles.",
+      "page": 80,
+      "index": 46,
+      "width": 444,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-047.webp",
+      "caption": "Figure 5.2: Traversal sorts: preorder (red), inorder (green), postorder (blue).",
+      "page": 95,
+      "index": 47,
+      "width": 714,
+      "height": 295
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-048.webp",
+      "caption": "Figure 5.1: Primitive operations for asymptotic analysis.",
+      "page": 95,
+      "index": 48,
+      "width": 414,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-049.webp",
+      "caption": "Table 8.6: Labels for Topic Clusters",
+      "page": 164,
+      "index": 49,
+      "width": 786,
+      "height": 803
+    },
+    {
+      "url": "assets/figures/arxiv/2610.08894v1/fig-050.webp",
+      "caption": "Figure 9.6: Swimmer Dataset - Dataset of 16 swimmer images. The first and third rows are the images with real-valued intensities ranging from 0 to 19. The second and fourth rows display the Boolean versions obtained after applying Otsu thresholding. For analysis, the Boolean versions of the dataset are represented as a matrix of size 1024× 256.",
+      "page": 179,
+      "index": 50,
+      "width": 882,
+      "height": 391
+    }
+  ]
+}
